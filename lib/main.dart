@@ -1,24 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:moodish_mvp/screens/mainScreen.dart';
+import 'package:moodish_mvp/Authenticate/signIn.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    title: 'Food App',
+    home: SignIn(),
+  ));
 }
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      
-      theme: ThemeData(
-        
-        primarySwatch: Colors.blue,
-         
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MainScreen()
-    );
-  }
-}
-
