@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/Authenticate/loading.dart';
 import 'package:moodish_mvp/Services/authenticate.dart';
-import 'package:moodish_mvp/screens/loading.dart';
+//import 'package:moodish_mvp/authenticate/loading.dart'; 
 import 'package:moodish_mvp/screens/mainScreen.dart';
 
 class SignUp extends StatefulWidget {
@@ -219,7 +220,7 @@ class _SignUpState extends State<SignUp> {
 
 
 Widget getImageAsset() {
-  AssetImage assetImage = AssetImage('logo/snapinsightlogo.png');
+  AssetImage assetImage = AssetImage('assets/snapinsightlogo.png');
   Image image = Image(
     image: assetImage,
     width: 200.0,
