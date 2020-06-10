@@ -228,7 +228,7 @@ class _SignInState extends State<SignIn> {
 }
 
 Widget getImageAsset() {
-  AssetImage assetImage = AssetImage('logo/snapinsightlogo.png');
+  AssetImage assetImage = AssetImage('assets/snapinsightlogo.png');
   Image image = Image(
     image: assetImage,
     width: 200.0,
