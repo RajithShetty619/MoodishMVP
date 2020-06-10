@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/authenticate/signIn.dart';
 
 
 class MainScreen extends StatefulWidget {
@@ -11,15 +12,12 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
+  static  List<Widget> _widgetOptions = <Widget>[
     Text(
       'Index 0: Food',
       style: optionStyle,
     ),
-    Text(
-      'Index 1: Restaurant',
-      style: optionStyle,
-    ),
+    SignIn(),
     Text(
       'Index 2: Profile',
       style: optionStyle,
