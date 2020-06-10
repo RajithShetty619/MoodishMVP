@@ -1,6 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:moodish_mvp/Services//messageObject.dart';
+import 'package:moodish_mvp/models///messageObject.dart';
 //ADD IN FIREBASE CUSTOM DATA IN CLOUD MESSAGING
 //click_action: FLUTTER_NOTIFICATION_CLICK
 //REFER https://www.youtube.com/watch?v=wjJN1C9UxpY FOR ANY DOUBT
