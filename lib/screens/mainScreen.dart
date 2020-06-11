@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; 
 import 'package:moodish_mvp/Authenticate/signIn.dart';
-import 'package:moodish_mvp/screens/Profile/profil.dart';
-//import 'package:moodish_mvp/authenticate/signIn.dart';
+import 'package:moodish_mvp/screens/Profile/profil.dart'; 
 import 'package:moodish_mvp/screens/Restaurants/home.dart';
 
 
@@ -15,16 +14,9 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   static  TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static  List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Food',
-      style: optionStyle,
-    ),
-    SignIn(),
-    Text(
-      'Index 2: Profile',
-      style: optionStyle,
-    ),
+  static  List<Widget> _widgetOptions = <Widget>[ 
+    FoodHome(),
+    Restaurant(),
     profile(),
   ];
 
