@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:moodish_mvp/Services/authenticate.dart';
-import 'package:moodish_mvp/screens/loading.dart';
+import 'package:moodish_mvp/Authenticate/loading.dart';
+import 'package:moodish_mvp/Services/authenticate.dart'; 
 import 'package:moodish_mvp/screens/mainScreen.dart';
 import 'signUp.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -23,11 +23,12 @@ class _SignInState extends State<SignIn> {
   final Authenticate _auth = Authenticate();
   bool loading = false;
   bool _googleLoggedIn = false;
-  GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
+  GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email','https://www.googleapis.com/auth/contacts.readonly',]);
   _googleLogin ()async{
     try{
       setState(() => loading = true);
-      await _googleSignIn.signIn();
+      GoogleIdentity user  = await _googleSignIn.signIn();
+      print(user);
       setState(() {
         _googleLoggedIn = true;
       });
@@ -162,11 +163,15 @@ class _SignInState extends State<SignIn> {
                               SizedBox(height: 15.0,),
                               SignInButton(
                                 Buttons.Google,
-                                onPressed: () {
-                                  if(_googleLoggedIn)
-                                    return MainScreen();
-                                  else
-                                    return _googleLogin();
+                                onPressed: () async{
+                                  dynamic result = await _auth.googleSignIn();
+                                    if(result == null){
+                                          setState(() => error = 'Something went');
+                                          loading = false;}
+                                        else
+                                          Navigator.push(context, MaterialPageRoute(builder: (context){
+                                            return MainScreen();
+                                          }));
                                 },
                               ),
                               SizedBox(
