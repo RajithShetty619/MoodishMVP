@@ -18,7 +18,7 @@ class _MainScreenState extends State<MainScreen> {
       'Index 0: Food',
       style: optionStyle,
     ),
-    SignIn(),
+    Restaurant(),
     Text(
       'Index 2: Profile',
       style: optionStyle,
