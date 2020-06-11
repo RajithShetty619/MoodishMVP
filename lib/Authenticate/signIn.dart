@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:moodish_mvp/Services/authenticate.dart';
-import 'package:moodish_mvp/authenticate/loading.dart';
+import 'package:moodish_mvp/Authenticate/loading.dart';
+import 'package:moodish_mvp/Services/authenticate.dart'; 
 import 'package:moodish_mvp/screens/mainScreen.dart';
 import 'signUp.dart';
 import 'package:google_sign_in/google_sign_in.dart';
