@@ -15,14 +15,7 @@ class _MainScreenState extends State<MainScreen> {
   static  TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static  List<Widget> _widgetOptions = <Widget>[
-<<<<<<< HEAD
-    Text(
-      'Index 0: Food',
-      style: optionStyle,
-    ),
-=======
     FoodHome(),
->>>>>>> 8f623289f42c1aad7ed43121b1b5e083aae635e6
     Restaurant(),
     Text(
       'Index 2: Profile',
