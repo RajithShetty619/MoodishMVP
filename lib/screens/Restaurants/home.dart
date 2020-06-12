@@ -333,7 +333,6 @@ class _RestaurantState extends State<Restaurant> {
                     ),
                       textAlign: TextAlign.left,),
                     ListView.builder(
-                      scrollDirection: Axis.vertical,
                       shrinkWrap: true,
                       itemCount: rest.length,
                       itemBuilder: (context, index) {
