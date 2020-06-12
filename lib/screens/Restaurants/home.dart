@@ -26,7 +26,9 @@ class _RestaurantState extends State<Restaurant> {
                       gradient: LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
-                          colors: [Colors.white, Colors.blueAccent])),
+                          colors: [Colors.white, Colors.blueAccent]
+                          )
+                        ),
                   child: Column(
                     children: <Widget>[
                       Container(
