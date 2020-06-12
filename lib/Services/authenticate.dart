@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart'; 
-import 'package:google_sign_in/google_sign_in.dart'; 
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:moodish_mvp/Authenticate/signUp.dart';
+import 'package:moodish_mvp/Services/database.dart';
+import 'package:moodish_mvp/models/name.dart';
 import 'package:moodish_mvp/models/user.dart';
 
 class Authenticate{
@@ -18,6 +21,7 @@ class Authenticate{
     try{
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
+      await DatabaseService(uid: user.uid).updateUserData(Name().name);
       return _userFromFirebase(user);
 
     }catch(e){
@@ -67,4 +71,13 @@ class Authenticate{
       return null;
     }
   }
+
+  Future signOut() async {
+    try{
+      await _auth.signOut();
+    }
+    catch(e){
+      print(e.toString());
+    }
+  } 
 }

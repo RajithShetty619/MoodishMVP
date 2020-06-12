@@ -6,10 +6,9 @@ import 'package:moodish_mvp/screens/wrapper.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MaterialApp(
-    
-    
+  runApp(MaterialApp(  
     home: MyApp(),
+    debugShowCheckedModeBanner: false,
   ));
 }
 
@@ -18,12 +17,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamProvider<User>.value(
       value: Authenticate().onAuthChanged,
-      child: MaterialApp(
+      child: MaterialApp( 
         debugShowCheckedModeBanner: false,
         title: 'Moodish',
         home: Wrapper(),
-      ),
-      
+        
+      ), 
     );
   }
 }
