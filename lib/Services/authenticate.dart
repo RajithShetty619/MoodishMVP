@@ -67,4 +67,13 @@ class Authenticate{
       return null;
     }
   }
+
+  Future signOut() async {
+    try{
+      await _auth.signOut();
+    }
+    catch(e){
+      print(e.toString());
+    }
+  } 
 }

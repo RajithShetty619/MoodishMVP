@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/Services/authenticate.dart';
 //import 'main.dart';
 import 'Edit.dart';
 
@@ -131,16 +132,16 @@ class profile extends StatelessWidget {
                 
 
               //  SwitchListTile(
-                //  title: Text("Email Notifications"),
-                 // subtitle: Text("On"),
-                //  value: true,
-           //       onChanged: (val){},
-             //   ),
-            //    SwitchListTile(
-             //     title: Text("Push Notifications"),
+              //    title: Text("Email Notifications"),
+              //    subtitle: Text("On"),
+              //    value: true,
+              //    onChanged: (val){},
+              //  ),
+              //  SwitchListTile(
+              //    title: Text("Push Notifications"),
               //    subtitle: Text("Off"),
-               //   value: false,
-               //   onChanged: (val){},
+              //    value: false,
+              //    onChanged: (val){},
               //  ),
             Container(
                       height: 50,
@@ -168,10 +169,20 @@ class profile extends StatelessWidget {
                               ),
                               borderRadius: BorderRadius.circular(6),
                             ),
-                            child: Container(
-                              alignment: Alignment.center,
-                              constraints: BoxConstraints(minHeight: 50,maxWidth: double.infinity),
-                              child: Text("Logout",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),textAlign: TextAlign.left,),
+                            child: FlatButton(
+                                onPressed: () async {
+                                    await Authenticate().signOut();
+                                },
+                                child: Container(
+                                alignment: Alignment.center,
+                                constraints: BoxConstraints(minHeight: 50,maxWidth: double.infinity),
+                                child: Text("Logout",
+                                  style: TextStyle(fontWeight: FontWeight.bold,
+                                    color: Colors.white
+                                    ),
+                                  textAlign: TextAlign.left,
+                                  ),
+                              ),
                             ),
                           ),
                         ),
