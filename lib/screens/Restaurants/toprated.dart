@@ -51,8 +51,7 @@ class _TopRatedState extends State<TopRated> {
               child: Column(children: <Widget>[
                 SizedBox(
                   height: 30.0,
-                ),
-
+                ), 
                 Container(
                   decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -63,23 +62,18 @@ class _TopRatedState extends State<TopRated> {
                     children: <Widget>[
                       Center(
                           child: Row(
-                            children: <Widget>[
-                              SizedBox(
-                                width: 60.0,
-                              ),
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[ 
                               Container(
                                 child: Icon(
                                   Icons.stars,
-                                  size: 50.0,
+                                  size: 40.0,
                                 ),
-                              ),
-                              SizedBox(
-                                width: 10.0,
-                              ),
+                              ), 
                               Container(
                                 child: Text(
                                   'Top Rated',
-                                  style: TextStyle(fontSize: 50.0, fontWeight: FontWeight.bold),
+                                  style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
                                 ),
                               )
                             ],
