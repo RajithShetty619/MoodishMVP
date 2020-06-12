@@ -114,7 +114,7 @@ class _RestaurantState extends State<Restaurant> {
                                                 padding: EdgeInsets.only(top: 20.0),
                                                 child: Icon(
                                                   Icons.restaurant,
-                                                  size: 125.0,
+                                                  size: 75,
                                                   color: Colors.white,
                                                 ),
                                               ),
