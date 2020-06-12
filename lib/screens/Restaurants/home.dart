@@ -46,10 +46,12 @@ class _RestaurantState extends State<Restaurant> {
                           children: <Widget>[
                             SizedBox(width: 100.0,),
                             Container(
+                              alignment: AlignmentDirectional.center,
                               child: Icon(Icons.location_on),
                             ),
                             SizedBox(width: 5.0,),
                             Container(
+                              alignment: AlignmentDirectional.center,
                               child: Text(
                                 'Mumbai, Maharashtra',
                                 style: TextStyle(
@@ -88,8 +90,8 @@ class _RestaurantState extends State<Restaurant> {
                           padding: EdgeInsets.only(
                               top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-
                               Container(
                                   height: 200.0,
                                   width: 150.0,
@@ -106,6 +108,7 @@ class _RestaurantState extends State<Restaurant> {
                                           BorderRadius.circular(20.0)),
                                       child: Center(
                                           child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: <Widget>[
                                               Container(
                                                 padding: EdgeInsets.only(top: 20.0),
@@ -152,6 +155,7 @@ class _RestaurantState extends State<Restaurant> {
                                   borderRadius: BorderRadius.circular(20.0)),
                               child: Center(
                                   child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       Container(
                                         padding: EdgeInsets.only(top: 20.0),
@@ -189,7 +193,9 @@ class _RestaurantState extends State<Restaurant> {
                           padding: EdgeInsets.only(
                               top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
+
                               Container(
                                   height: 200.0,
                                   width: 150.0,
@@ -205,6 +211,7 @@ class _RestaurantState extends State<Restaurant> {
                                           BorderRadius.circular(20.0)),
                                       child: Center(
                                           child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: <Widget>[
                                               Container(
                                                 padding: EdgeInsets.only(top: 20.0),
@@ -252,6 +259,7 @@ class _RestaurantState extends State<Restaurant> {
                                   borderRadius: BorderRadius.circular(20.0)),
                               child: Center(
                                   child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       Container(
                                         padding: EdgeInsets.only(top: 20.0),

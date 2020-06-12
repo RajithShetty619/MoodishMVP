@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/Authenticate/loading.dart';
 import 'package:moodish_mvp/Services/authenticate.dart';
+import 'package:moodish_mvp/models/name.dart';
  
 import 'package:moodish_mvp/screens/mainScreen.dart';
 
@@ -21,6 +22,7 @@ class _SignUpState extends State<SignUp> {
   String pass1 , pass2;
   String _email = '' , _password = '' ;
   String error = '';
+  String _name = '';
   final Authenticate _auth = Authenticate();
   bool loading = false;
 
@@ -43,6 +45,7 @@ class _SignUpState extends State<SignUp> {
                           child: Column(
                             children: <Widget>[
                               TextFormField(
+                                controller: _controller,
                                 decoration: InputDecoration(
                                   labelText: 'USERNAME',
                                   labelStyle: TextStyle(color: Colors.blueGrey),
@@ -50,6 +53,12 @@ class _SignUpState extends State<SignUp> {
                                   focusedBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(color: Colors.lightBlue)),
                                 ),
+                                onChanged: (val) {setState(() {
+                                  _name = val ;
+                                  Name().name = _name;
+                                });
+
+                                },
                               ),
                               SizedBox(
                                 height: 10.0,
