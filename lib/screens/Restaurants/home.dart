@@ -31,7 +31,8 @@ class _RestaurantState extends State<Restaurant> {
                         ),
                   child: Column(
                     children: <Widget>[
-                      Container( 
+                      Container(
+                        alignment: Alignment(0.0, 0.0),
                         padding: EdgeInsets.only(top: 10.0),
                         child: Text(
                           'Hungry, Pradyum?',
@@ -47,10 +48,12 @@ class _RestaurantState extends State<Restaurant> {
                           children: <Widget>[
                             SizedBox(width: 100.0,),
                             Container(
+                              alignment: AlignmentDirectional.center,
                               child: Icon(Icons.location_on),
                             ),
                             SizedBox(width: 5.0,),
                             Container(
+                              alignment: AlignmentDirectional.center,
                               child: Text(
                                 'Mumbai, Maharashtra',
                                 style: TextStyle(
@@ -61,7 +64,8 @@ class _RestaurantState extends State<Restaurant> {
                           ],
                         ),
                       ),
-                      Container( 
+                      Container(
+//                          color: Colors.white,
                         padding: EdgeInsets.only(left: 20.0, right: 20.0),
                         child: TextField(
                           decoration: InputDecoration(
@@ -83,13 +87,16 @@ class _RestaurantState extends State<Restaurant> {
                     ),
                     Flexible(
                       flex: 1,
-                      child:  Container( 
+                      child:  Container(
+                          alignment: Alignment(1.0, 0.0),
                           padding: EdgeInsets.only(
                               top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-
-                              Container( 
+                              Container(
+                                  height: 200.0,
+                                  width: 150.0,
                                   child: RaisedButton(
                                       onPressed: () {
                                         Navigator.push(context, MaterialPageRoute(builder: (context){
@@ -109,7 +116,7 @@ class _RestaurantState extends State<Restaurant> {
                                                 padding: EdgeInsets.only(top: 20.0),
                                                 child: Icon(
                                                   Icons.restaurant,
-                                                  size: 75.0,
+                                                  size: 125.0,
                                                   color: Colors.white,
                                                 ),
                                               ),
@@ -136,7 +143,9 @@ class _RestaurantState extends State<Restaurant> {
                     ),
                     Flexible(
                       flex: 1,
-                      child: Container( 
+                      child: Container(
+                          height: 200.0,
+                          width: 150.0,
                           child: RaisedButton(
                               onPressed: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (context){
@@ -151,21 +160,17 @@ class _RestaurantState extends State<Restaurant> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       Container(
-                                        padding: EdgeInsets.only(
-                                          top: 10.0, left: 10.0, right: 10.0, bottom: 10.0
-                                        ),
+                                        padding: EdgeInsets.only(top: 20.0),
                                         child: Icon(
                                           Icons.calendar_today,
-                                          size: 75.0,
+                                          size: 125.0,
                                         ),
                                       ),
                                       Container(
                                         child: Text(
                                           'Booking',
                                           style: TextStyle(
-                                              fontSize: 20.0, 
-                                              color: Colors.white
-                                              ),
+                                              fontSize: 20.0, color: Colors.white),
                                         ),
                                       ),
                                       Container(
@@ -185,12 +190,17 @@ class _RestaurantState extends State<Restaurant> {
                     ),
                     Flexible(
                       flex: 1,
-                      child: Container( 
+                      child: Container(
+                          alignment: Alignment(1.0, 0.0),
                           padding: EdgeInsets.only(
                               top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              Container( 
+
+                              Container(
+                                  height: 200.0,
+                                  width: 150.0,
                                   child: RaisedButton(
                                       onPressed: () {
                                         Navigator.push(context, MaterialPageRoute(builder: (context){
@@ -205,11 +215,11 @@ class _RestaurantState extends State<Restaurant> {
                                           child: Column(
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             children: <Widget>[
-                                              Container( 
+                                              Container(
                                                 padding: EdgeInsets.only(top: 20.0),
                                                 child: Icon(
                                                   Icons.location_on,
-                                                  size: 75.0,
+                                                  size: 125.0,
                                                   color: Colors.green,
                                                 ),
                                               ),
@@ -236,7 +246,10 @@ class _RestaurantState extends State<Restaurant> {
                     ),
                     Flexible(
                       flex: 1,
-                      child: Container(  
+                      child: Container(
+                          alignment: Alignment(0.0, 2.0),
+                          height: 200.0,
+                          width: 150.0,
                           child: RaisedButton(
                               onPressed: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (context){
@@ -254,7 +267,7 @@ class _RestaurantState extends State<Restaurant> {
                                         padding: EdgeInsets.only(top: 20.0),
                                         child: Icon(
                                           Icons.stars,
-                                          size: 75.0,
+                                          size: 125.0,
                                           color: Colors.yellow,
                                         ),
                                       ),
@@ -268,7 +281,7 @@ class _RestaurantState extends State<Restaurant> {
                                       Container(
                                           child: Text(
                                             '5+ Options',
-                                            style: TextStyle(color: Colors.white), 
+                                            style: TextStyle(color: Colors.white),
                                           ))
                                     ],
                                   )))),
