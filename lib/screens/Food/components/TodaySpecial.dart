@@ -1,6 +1,6 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/screens/Food/components/shareDialog.dart';
+import 'package:moodish_mvp/screens/Food/components/stepSlider.dart';
 
 class TodaySpecial extends StatefulWidget {
   const TodaySpecial({
@@ -49,7 +49,7 @@ class _TodaySpecialState extends State<TodaySpecial> {
               )
             ),
             child: Padding(
-              padding: EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(10.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -57,8 +57,11 @@ class _TodaySpecialState extends State<TodaySpecial> {
                   Align(
                     alignment: Alignment.topRight,
                     child: IconButton(
-                      icon: Icon(Icons.favorite, color: Colors.white,),
-                      onPressed: () {},
+                      icon: Icon(Icons.favorite_border, color: Colors.white,),
+                      onPressed: () async {
+                        final action =
+                          await Dialogs.yesAbortDialog(context, 'My title', 'My Body');
+                      },
                     ),
                   ),
                   Column(
@@ -72,7 +75,9 @@ class _TodaySpecialState extends State<TodaySpecial> {
                         onPressed: () {},
                         child: IconButton(
                           icon: Icon(Icons.restaurant,color: Colors.white,size: 35,),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => IntroScreen() ));
+                          },
                         ), 
                         // label: Text(''),
                       ),
@@ -116,40 +121,125 @@ class _TodaySpecialState extends State<TodaySpecial> {
 
   void _onButtonPressed() {
     showModalBottomSheet(context: context,builder: (context) {
-      return Column(
-        children: <Widget>[
-          Container(
-            height: 300,
-            child: ListView.builder(
-              itemCount: data.length,
-              itemBuilder: (BuildContext context, int index) => EntryItem(
-                data[index],
+      return Container(
+        height: 200,
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: 200,
+              child: ListView.builder(
+                itemCount: data.length,
+                itemBuilder: (BuildContext context, int index) => EntryItem(
+                  data[index],
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    });
+  }
+}
+//items in the second Tite
+class ExpItem extends StatelessWidget {
+  const ExpItem({
+    Key key,
+    @required this.image,
+  }) : super(key: key);
+
+  final image;
+
+  @override
+  Widget build(BuildContext context) {
+    return AspectRatio(
+      aspectRatio: 1 / 1,
+      child: GestureDetector(
+        onTap: () {
+          
+        },
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+          decoration: BoxDecoration(
+            // borderRadius: BorderRadius.circular(500),
+            shape: BoxShape.circle,
+            image: DecorationImage(
+              image: AssetImage(image),
+              fit: BoxFit.cover,
+            )
+          ),
+          child: Container(
+            
+            decoration: BoxDecoration(
+              // borderRadius: BorderRadius.circular(500),
+              shape: BoxShape.circle,
+              gradient: LinearGradient(
+                begin: Alignment.bottomCenter,
+                stops: [.2, .9],
+                colors: [
+                  Colors.black.withOpacity(.5),
+                  Colors.black.withOpacity(.1),
+                ]
+              )
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(20.0),
+              
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  
+                  // Text(types, style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),)
+                ],
               ),
             ),
           ),
-        ],
-      );
-    });
+        ),
+      ),
+    );
   }
 }
 
 // Expansion List
 class Entry {
-  final title;
+  final Widget title;
   final List<Entry> 
       children;
-  Entry(this.title, [this.children = const <Entry>[] ]);
+  Entry(this.title, [this.children =const <Entry>[] ]);
 }
 
 final List<Entry> data = <Entry>[
   Entry(
-    'Title 1',
+    Text('Title 1'),
     <Entry>[
       Entry(
-        'descriptionnbvbdjvj\n bsdhbfh\n jbdvhb\n jdbhb',
+        Text('descriptionWoda\n wodafaq\n wakanda\n wakandashitissdis'),
+      ),
+    ]
+  ),
+  Entry(
+    Text('Title 2'),
+    <Entry>[
+      Entry(
+        Container(
+            height: 120,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              key: PageStorageKey('myScrollable'),
+              children: <Widget>[
+              ExpItem(image: 'assets/img.jpg'),
+              ExpItem(image: 'assets/img.jpg'),
+              ExpItem(image: 'assets/img.jpg'),
+              ExpItem(image: 'assets/img.jpg'),
+              ExpItem(image: 'assets/img.jpg'),
+              ExpItem(image: 'assets/img.jpg'),
+              ],
+            ),
+        ),
       )
     ]
-  )
+  ),
+
 ];
 
 // Widget for the row
@@ -160,12 +250,12 @@ class EntryItem extends StatelessWidget {
   Widget _buildTiles(Entry root) {
     if(root.children.isEmpty) {
       return ListTile(
-        title: Text(root.title),
+        title: root.title,
       );
     }
     return ExpansionTile(
       key: PageStorageKey<Entry>(root),
-      title: Text(root.title),
+      title: root.title,
       children: root.children.map<Widget>(_buildTiles).toList(),
     );
   }
