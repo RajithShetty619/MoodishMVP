@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(MaterialApp(  
     home: MyApp(),
+    debugShowCheckedModeBanner: false,
   ));
 }
 
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Moodish',
         home: Wrapper(),
+        
       ), 
     );
   }
