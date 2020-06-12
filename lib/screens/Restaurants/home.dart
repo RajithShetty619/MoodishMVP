@@ -43,8 +43,8 @@ class _RestaurantState extends State<Restaurant> {
                       ),
                       Center(
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            SizedBox(width: 100.0,),
                             Container(
                               alignment: AlignmentDirectional.center,
                               child: Icon(Icons.location_on),
@@ -79,10 +79,8 @@ class _RestaurantState extends State<Restaurant> {
                   ),
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    SizedBox(
-                      width: 5.0,
-                    ),
                     Flexible(
                       flex: 1,
                       child:  Container(
@@ -179,17 +177,16 @@ class _RestaurantState extends State<Restaurant> {
                                     ],
                                   )))),
                     ),
+                    SizedBox(width: 10.0,)
                   ],
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    SizedBox(
-                      width: 5.0,
-                    ),
+
                     Flexible(
                       flex: 1,
                       child: Container(
-                          alignment: Alignment(1.0, 0.0),
                           padding: EdgeInsets.only(
                               top: 10.0, left: 10.0, right: 10.0, bottom: 10.0),
                           child: Column(
@@ -245,7 +242,6 @@ class _RestaurantState extends State<Restaurant> {
                     Flexible(
                       flex: 1,
                       child: Container(
-                          alignment: Alignment(0.0, 2.0),
                           height: 200.0,
                           width: 150.0,
                           child: RaisedButton(
@@ -281,9 +277,11 @@ class _RestaurantState extends State<Restaurant> {
                                             '5+ Options',
                                             style: TextStyle(color: Colors.white),
                                           ))
+
                                     ],
                                   )))),
                     ),
+                    SizedBox(width: 10.0,)
 
                   ],
                 ),

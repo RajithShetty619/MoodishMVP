@@ -48,47 +48,47 @@ class _DineOutState extends State<DineOut> {
     return SafeArea(
         child: Scaffold(
             body: Container(
-      child: Flexible(
-        flex: 1,
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
 
-          SizedBox(
-            height: 30.0,
-          ),
+        SizedBox(
+          height: 30.0,
+        ),
 
-          Container(
+        Center(
+          child: Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [Colors.white, Colors.deepPurpleAccent])),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Center(
-                    child: Row(
-                      children: <Widget>[
-                        SizedBox(
-                          width: 60.0,
-                        ),
-                        Container(
-                          child: Icon(
-                            Icons.restaurant,
-                            size: 50.0,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10.0,
-                        ),
-                        Container(
-                          child: Text(
-                            'Dine Out',
-                            style: TextStyle(fontSize: 50.0, fontWeight: FontWeight.bold),
-                          ),
-                        )
-                      ],
-                    )),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(
+                      width: 60.0,
+                    ),
+                    Container(
+                      child: Icon(
+                        Icons.restaurant,
+                        size: 50.0,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    Container(
+                      child: Text(
+                        'Dine Out',
+                        style: TextStyle(fontSize: 50.0, fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  ],
+                ),
                 Container(
                   child: Text('Fun Fact:- The Aztecs used chocolate as currency.'),
                 ),
@@ -96,39 +96,39 @@ class _DineOutState extends State<DineOut> {
               ],
             ),
           ),
-          Expanded(
-            child: Container(
-              height: 100,
-              child: ListView(
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                children: <Widget>[
-                  ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: rest.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.only(top: 15.0),
-                          child: Card(
-                        child: ListTile(
-                        onTap: () {
-                          debugPrint('tappeed');
-                        },
-                        leading: CircleAvatar(
-                          backgroundImage:
-                              AssetImage('assets/${rest[index].image}'),
-                        ),
-                        title: Text(rest[index].name),
-                        subtitle: Text(rest[index].desc),
-                      )));
-                    },
-                  ),
-                ],
-              ),
+        ),
+        Expanded(
+          child: Container(
+            height: 100,
+            child: ListView(
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              children: <Widget>[
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: rest.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.only(top: 15.0),
+                        child: Card(
+                      child: ListTile(
+                      onTap: () {
+                        debugPrint('tappeed');
+                      },
+                      leading: CircleAvatar(
+                        backgroundImage:
+                            AssetImage('assets/${rest[index].image}'),
+                      ),
+                      title: Text(rest[index].name),
+                      subtitle: Text(rest[index].desc),
+                    )));
+                  },
+                ),
+              ],
             ),
           ),
-        ]),
-      ),
+        ),
+      ]),
     )));
   }
 }
