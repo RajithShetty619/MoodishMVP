@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart'; 
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:moodish_mvp/Authenticate/signUp.dart';
+import 'package:google_sign_in/google_sign_in.dart'; 
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/models/name.dart';
 import 'package:moodish_mvp/models/user.dart';
