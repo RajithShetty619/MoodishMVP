@@ -3,6 +3,7 @@ import 'package:moodish_mvp/screens//Restaurants/booking.dart';
 import 'package:moodish_mvp/screens//Restaurants/dineout.dart';
 import 'package:moodish_mvp/screens//Restaurants/pickup.dart';
 import 'package:moodish_mvp/screens//Restaurants/toprated.dart';
+import 'package:moodish_mvp/screens/Restaurants/restaurantCard/RestaurantHomePage.dart';
 
 class Restaurant extends StatefulWidget {
   @override
@@ -191,7 +192,7 @@ class _RestaurantState extends State<Restaurant> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       Container(
-                                          height: 200.0, 
+                                          height: 200.0,
                                           child: RaisedButton(
                                               onPressed: () {
                                                 Navigator.push(context,
@@ -283,9 +284,8 @@ class _RestaurantState extends State<Restaurant> {
                                         ],
                                       )))),
                             ),
-                             
                           ],
-                        ), 
+                        ),
                       ]),
                     ),
                   Padding(
@@ -293,7 +293,10 @@ class _RestaurantState extends State<Restaurant> {
                       child: Card(
                           child: ListTile(
                         onTap: () {
-                          debugPrint('tappeed');
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return HomePage();
+                          }));
                         },
                         leading: CircleAvatar(
                           backgroundImage:
