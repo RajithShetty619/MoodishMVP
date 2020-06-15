@@ -19,27 +19,12 @@ class Dialogs {
           title: Text(title),
           content: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[ 
-              IconButton(
-                  icon: Icon(
-                    Icons.share,
-                    size: 50,
-                  ),
-                  onPressed: () {}),
+            children: <Widget>[
+              IconButton(icon: Icon(Icons.share,size: 50,), onPressed: () {}),
               SizedBox(width: 10),
-              IconButton(
-                  icon: Icon(
-                    Icons.camera,
-                    size: 50,
-                  ),
-                  onPressed: () {}),
+              IconButton(icon: Icon(Icons.camera,size: 50,), onPressed: () {}),
               SizedBox(width: 10),
-              IconButton(
-                  icon: Icon(
-                    Icons.camera,
-                    size: 50,
-                  ),
-                  onPressed: () {}), 
+              IconButton(icon: Icon(Icons.camera,size: 50,), onPressed: () {}),
               SizedBox(width: 10),
             ],
           ),

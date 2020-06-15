@@ -274,7 +274,7 @@ packages:
       name: image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.12" 
+    version: "2.1.12"
   intl:
     dependency: transitive
     description:
@@ -282,7 +282,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.16.1"
- 
   intro_slider:
     dependency: "direct main"
     description:
