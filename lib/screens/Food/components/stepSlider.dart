@@ -19,7 +19,7 @@ class IntroScreenState extends State<IntroScreen> {
       new Slide(
         title:
             "A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE",
-        maxLineTitle: 2,
+        maxLineTitle: 2, 
         styleTitle: TextStyle(
           color: Colors.white,
           fontSize: 30.0,
@@ -35,7 +35,7 @@ class IntroScreenState extends State<IntroScreen> {
         marginDescription:
             EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 70.0),
         centerWidget: Text("Replace this with a custom widget",
-            style: TextStyle(color: Colors.white)),
+            style: TextStyle(color: Colors.white)), 
         colorBegin: Color(0xffFFDAB9),
         colorEnd: Color(0xff40E0D0),
         // backgroundImage: 'images/photo_eraser.png',
@@ -46,7 +46,7 @@ class IntroScreenState extends State<IntroScreen> {
     );
     slides.add(
       new Slide(
-        title: "MUSEUM",
+        title: "MUSEUM", 
         styleTitle: TextStyle(
           color: Color(0xffD02090),
           fontSize: 30.0,
@@ -58,7 +58,7 @@ class IntroScreenState extends State<IntroScreen> {
           color: Color(0xffD02090),
           fontSize: 20.0,
           fontStyle: FontStyle.italic,
-        ),
+        ), 
         // pathImage: "images/photo_museum.png",
         colorBegin: Color(0xffFFFACD),
         colorEnd: Color(0xffFF6347),
@@ -68,7 +68,7 @@ class IntroScreenState extends State<IntroScreen> {
     );
     slides.add(
       new Slide(
-        title: "COFFEE",
+        title: "COFFEE", 
         styleTitle: TextStyle(
           color: Color(0xffD02090),
           fontSize: 30.0,
@@ -80,7 +80,7 @@ class IntroScreenState extends State<IntroScreen> {
           color: Color(0xffD02090),
           fontSize: 20.0,
           fontStyle: FontStyle.italic,
-        ),
+        ), 
         // pathImage: "images/photo_coffee_shop.png",
         colorBegin: Color(0xffFFA500),
         colorEnd: Color(0xff7FFFD4),
@@ -93,11 +93,11 @@ class IntroScreenState extends State<IntroScreen> {
 
   void onDonePress() {
     // Do what you want
-    Navigator.pop(
+    Navigator.pop( 
         context,
         MaterialPageRoute(
           builder: (context) => FoodHome(),
-        ));
+        )); 
   }
 
   Widget renderNextBtn() {
@@ -152,4 +152,4 @@ class IntroScreenState extends State<IntroScreen> {
       backgroundColorAllSlides: Colors.grey,
     );
   }
-}
+} 

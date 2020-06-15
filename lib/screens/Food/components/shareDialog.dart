@@ -19,7 +19,7 @@ class Dialogs {
           title: Text(title),
           content: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
+            children: <Widget>[ 
               IconButton(
                   icon: Icon(
                     Icons.share,
@@ -39,7 +39,7 @@ class Dialogs {
                     Icons.camera,
                     size: 50,
                   ),
-                  onPressed: () {}),
+                  onPressed: () {}), 
               SizedBox(width: 10),
             ],
           ),

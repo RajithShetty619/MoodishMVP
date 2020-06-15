@@ -1,5 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart'; 
+import 'package:google_sign_in/google_sign_in.dart'; 
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/models/name.dart';
 import 'package:moodish_mvp/models/user.dart';
@@ -66,11 +66,13 @@ class Authenticate {
     }
   }
 
-  Future signOut() async {
-    try {
+  Future signOut() async { 
+    try{
       await _auth.signOut();
-    } catch (e) {
+    }
+    catch(e){
       print(e.toString());
     }
-  }
+  } 
+ 
 }

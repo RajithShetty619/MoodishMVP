@@ -52,13 +52,14 @@ class _TodaySpecialState extends State<TodaySpecial> {
                   Align(
                     alignment: Alignment.topRight,
                     child: IconButton(
+ 
                       icon: Icon(
                         Icons.favorite_border,
                         color: Colors.white,
                       ),
                       onPressed: () async {
                         final action = await Dialogs.yesAbortDialog(
-                            context, 'My title', 'My Body');
+                            context, 'My title', 'My Body'); 
                       },
                     ),
                   ),
@@ -83,6 +84,7 @@ class _TodaySpecialState extends State<TodaySpecial> {
                       FlatButton(
                         onPressed: () {},
                         child: IconButton(
+ 
                           icon: Icon(
                             Icons.restaurant,
                             color: Colors.white,
@@ -95,6 +97,7 @@ class _TodaySpecialState extends State<TodaySpecial> {
                                     builder: (context) => IntroScreen()));
                           },
                         ),
+ 
                         // label: Text(''),
                       ),
                       SizedBox(height: 10),
@@ -135,7 +138,7 @@ class _TodaySpecialState extends State<TodaySpecial> {
     );
   }
 
-  void _onButtonPressed() {
+  void _onButtonPressed() { 
     showModalBottomSheet(
         context: context,
         builder: (context) {
@@ -207,13 +210,72 @@ class ExpItem extends StatelessWidget {
           ),
         ),
       ),
+    ); 
+  }
+}
+//items in the second Tite
+class ExpItem extends StatelessWidget {
+  const ExpItem({
+    Key key,
+    @required this.image,
+  }) : super(key: key);
+
+  final image;
+
+  @override
+  Widget build(BuildContext context) {
+    return AspectRatio(
+      aspectRatio: 1 / 1,
+      child: GestureDetector(
+        onTap: () {
+          
+        },
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+          decoration: BoxDecoration(
+            // borderRadius: BorderRadius.circular(500),
+            shape: BoxShape.circle,
+            image: DecorationImage(
+              image: AssetImage(image),
+              fit: BoxFit.cover,
+            )
+          ),
+          child: Container(
+            
+            decoration: BoxDecoration(
+              // borderRadius: BorderRadius.circular(500),
+              shape: BoxShape.circle,
+              gradient: LinearGradient(
+                begin: Alignment.bottomCenter,
+                stops: [.2, .9],
+                colors: [
+                  Colors.black.withOpacity(.5),
+                  Colors.black.withOpacity(.1),
+                ]
+              )
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(20.0),
+              
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  
+                  // Text(types, style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),)
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
 
 // Expansion List
 class Entry {
-  final Widget title;
+  final Widget title; 
   final List<Entry> children;
   Entry(this.title, [this.children = const <Entry>[]]);
 }
@@ -242,7 +304,7 @@ final List<Entry> data = <Entry>[
         ),
       ),
     )
-  ]),
+  ]), 
 ];
 
 // Widget for the row

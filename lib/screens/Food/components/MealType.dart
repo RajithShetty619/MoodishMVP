@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/screens/Food/components/typeDetails.dart';
 
@@ -17,8 +18,9 @@ class MealType extends StatelessWidget {
       aspectRatio: 1 / 1,
       child: GestureDetector(
         onTap: () {
+ 
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => Detailed_Type()));
+              MaterialPageRoute(builder: (context) => Detailed_Type())); 
         },
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),

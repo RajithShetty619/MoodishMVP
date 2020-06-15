@@ -23,13 +23,14 @@ class _Detailed_TypeState extends State<Detailed_Type> {
           ),
           child: Container(
             decoration: BoxDecoration(
+ 
                 gradient: LinearGradient(begin: Alignment.bottomCenter, stops: [
               .2,
               .9
             ], colors: [
               Colors.black.withOpacity(.6),
               Colors.black.withOpacity(.2),
-            ])),
+            ])), 
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Column(
@@ -39,7 +40,7 @@ class _Detailed_TypeState extends State<Detailed_Type> {
                     children: <Widget>[
                       Align(
                         alignment: Alignment.topLeft,
-                        child: IconButton(
+                        child: IconButton(  
                             icon: Icon(
                               Icons.arrow_back,
                               size: 40,
@@ -47,17 +48,17 @@ class _Detailed_TypeState extends State<Detailed_Type> {
                             ),
                             onPressed: () {
                               Navigator.pop(context);
-                            }),
+                            }), 
                       ),
                       Align(
                         alignment: Alignment.topRight,
-                        child: IconButton(
+                        child: IconButton( 
                             icon: Icon(
                               Icons.favorite_border,
                               size: 40,
                               color: Colors.black,
                             ),
-                            onPressed: () {}),
+                            onPressed: () {}), 
                       ),
                     ],
                   ),
@@ -65,7 +66,7 @@ class _Detailed_TypeState extends State<Detailed_Type> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
+                    children: <Widget>[ 
                       Text(
                         'Food',
                         style: TextStyle(
@@ -79,18 +80,18 @@ class _Detailed_TypeState extends State<Detailed_Type> {
                       Text(
                         'description',
                         style: TextStyle(color: Colors.white, fontSize: 20),
-                      ),
+                      ), 
                       SizedBox(height: 20),
                       FlatButton(
                         onPressed: () {},
-                        child: IconButton(
+                        child: IconButton( 
                           icon: Icon(
                             Icons.restaurant,
                             color: Colors.white,
                             size: 40,
                           ),
                           onPressed: () {},
-                        ),
+                        ), 
                         // label: Text(''),
                       ),
                       SizedBox(height: 20),
@@ -98,7 +99,7 @@ class _Detailed_TypeState extends State<Detailed_Type> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
-                          FlatButton.icon(
+                          FlatButton.icon( 
                               onPressed: () {},
                               icon: Icon(
                                 Icons.info_outline,
@@ -117,7 +118,7 @@ class _Detailed_TypeState extends State<Detailed_Type> {
                               label: Text(
                                 'Filter',
                                 style: TextStyle(color: Colors.black),
-                              ))
+                              )) 
                         ],
                       ),
                     ],
@@ -126,7 +127,7 @@ class _Detailed_TypeState extends State<Detailed_Type> {
               ),
             ),
           ),
-        ),
+        ), 
       ),
     );
   }
@@ -152,5 +153,5 @@ class _Detailed_TypeState extends State<Detailed_Type> {
             ),
           );
         });
-  }
+  } 
 }
