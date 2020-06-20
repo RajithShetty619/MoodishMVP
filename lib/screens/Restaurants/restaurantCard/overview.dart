@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+//import 'package:rest/starfeedback.dart';
+
+import 'map.dart';
+import 'starfeedback.dart';
 //import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class About extends StatefulWidget {
+class OverView extends StatefulWidget {
   final Widget child;
 
-  About({Key key, this.child}) : super(key: key);
+  OverView({Key key, this.child}) : super(key: key);
 
-  _AboutState createState() => _AboutState();
+  _OverViewState createState() => _OverViewState();
 }
 
-class _AboutState extends State<About> {
+class _OverViewState extends State<OverView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,14 +61,28 @@ class _AboutState extends State<About> {
                               children: [
                                 SingleChildScrollView(
                                                             child: Container(
-                                    height: 100.0,
+                                    height: 500.0,
                                     width: 200.0,
                                     
                                                             child: Stack(
                                         children: <Widget>[
                                           Text("Today/'s Offers"),
-                                          //SizedBox(height: 50),
-                                         // Text("Today/'s Offers"),
+                                          Padding(
+                                            padding: EdgeInsets.fromLTRB(0, 80, 0, 0),
+                                              //SizedBox(height: 50),
+                                              child:Container(
+                                                height: 100,
+                                                width: 100,
+                                                color:Colors.blue,
+                                                child: Stack(
+                                                  children: <Widget>[
+                                                    Center(child: Icon(Icons.menu, size:20)),
+                                                  ]
+                                                )
+                                              )
+                                              
+                                          ),
+                                        
                                         ],
                                       ),
                                    
@@ -185,7 +203,181 @@ class _AboutState extends State<About> {
              ),
                             ),
              ),
-         ],
+           Padding(
+      padding: EdgeInsets.fromLTRB(
+          5,
+          150,
+          5,
+          0),
+      child: InkWell(
+        onTap: (){
+          Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => Maps(),
+    ),
+          );
+
+        },
+              child: Row(
+        //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Icon(Icons.location_on),
+            SizedBox(width: 10,),
+            Text(
+              'Location',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(width:220.0),
+            Icon(
+              Icons.arrow_forward,
+              color: Colors.black,
+            ),
+            Divider(color: Colors.black,height: 2,),
+          ],
+        ),
+      ),
+          ),
+           Padding(
+            padding: const EdgeInsets.fromLTRB(0, 180, 0, 0),
+            child: RaisedButton(
+    onPressed: () {
+        showDialog(
+                        context: context,
+                        builder: (BuildContext context){
+                          return AlertDialog(
+                            title: new Text("+91-01237-12372"),
+                            actions: <Widget>[
+                              FlatButton(
+                                child: Text("Call"),
+                                onPressed: (){},
+                              )
+                            ],
+                          );
+                        }
+                    );
+    },
+    color: Colors.white,
+    child: Padding(
+      padding: EdgeInsets.fromLTRB(
+          0,
+          0,
+          5,
+          0),
+      child: Row(
+      //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Icon(Icons.phone),
+          SizedBox(width: 10,),
+          Text(
+            '+91-02831-48912',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+              color: Colors.black,
+            ),
+          ),
+          SizedBox(width:115.0),
+          Icon(
+            Icons.arrow_forward,
+            color: Colors.black,
+          ),
+          Divider(color: Colors.black,height: 2,),
+        ],
+      ),
+    ),),),
+    Padding(
+            padding: const EdgeInsets.fromLTRB(0, 220, 0, 0),
+            child: RaisedButton(
+    onPressed: () {
+         /*       showDatePicker(
+                  context: context,
+                 // initialDate: _dateTime == null ? DateTime.now() : _dateTime,
+                  firstDate: DateTime(2001),
+                  lastDate: DateTime(2021)
+                ).then((date) {
+                  setState(() {
+                  //  _dateTime = date;
+                  });
+                });*/
+},
+    color: Colors.white,
+    child: Padding(
+     
+      padding: EdgeInsets.fromLTRB(
+          5,
+          0,
+          5,
+          0),
+      child: Row(
+      //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Icon(Icons.date_range),
+          SizedBox(width: 10,),
+          Text(
+            'Book-Table',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+              color: Colors.black,
+            ),
+          ),
+          SizedBox(width:175.0),
+          Icon(
+            Icons.arrow_forward,
+            color: Colors.black,
+          ),
+          Divider(color: Colors.black,height: 2,),
+        ],
+      ),
+    ),
+  ),
+          ),
+
+    Padding(
+            padding: const EdgeInsets.fromLTRB(0, 280, 0, 0),
+            child: RaisedButton(
+    onPressed: () {
+    },
+    color: Colors.white,
+    child: InkWell(
+      onTap: (){
+         Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => StarFeedback()),);
+      },
+          child: Padding(
+        padding: EdgeInsets.fromLTRB(
+            5,
+            0,
+            5,
+            50),
+        child: Row(
+        //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Icon(Icons.star,color: Colors.white,),
+            SizedBox(width: 10,),
+            Text(
+              'Ratting',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(width:200.0),
+            
+            Divider(color: Colors.black,height: 2,),
+          ],
+        ),
+      ),
+    ),
+  ),
+          ),
+            ],
           ),
            )
               ],
