@@ -31,7 +31,7 @@ class _FoodListState extends State<FoodList> {
   bool loadingData = false;
   bool dataExists = true;
   List<DocumentSnapshot> foodList = [];
-  final CollectionReference _ref = Firestore.instance.collection('data');
+  final CollectionReference _ref = Firestore.instance.collection('0');
   DocumentSnapshot _lastDocument;
   ScrollController _scrollController = ScrollController();
 
@@ -39,11 +39,12 @@ class _FoodListState extends State<FoodList> {
     setState(() {
       loadingData = true;
     });
-    Query q = _ref.orderBy("sr").limit(5);
+    Query q = _ref.where("Description",isGreaterThan: " " ).orderBy('Description').limit(10);
     QuerySnapshot snapshot = await q.getDocuments();
     foodList = snapshot.documents;
+    foodList.forEach((element) {print(element.data);});
     setState(() {
-      _lastDocument = foodList[foodList.length - 1];
+      _lastDocument = foodList[foodList.length - 1]; 
       print("$_lastDocument" + "doc");
       loadingData = false;
     });
@@ -56,7 +57,7 @@ class _FoodListState extends State<FoodList> {
       });
       print("getFood");
       Query q =
-          _ref.orderBy("sr").startAfter([_lastDocument.data["sr"]]).limit(5);
+          _ref.where("Description",isGreaterThan: " " ).startAfter([_lastDocument.data["Description"]]).orderBy('Description').limit(5);
       QuerySnapshot snapshot = await q.getDocuments();
       foodList.addAll(snapshot.documents);
       setState(() {
@@ -71,8 +72,7 @@ class _FoodListState extends State<FoodList> {
   }
 
   @override
-  void initState() {
-    // TODO: implement initState
+  void initState() { 
     super.initState();
     getFood();
 
@@ -103,18 +103,17 @@ class _FoodListState extends State<FoodList> {
                 elevation: 2.0,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(foodList[index].data["food_info"]),
+                  child: Text(foodList[index].data["Description"]),
                 ),
               );
             },
           ),
         ),
         if (loadingData)
-          Container(
-            color: Colors.brown[100],
+          Container( 
             child: Center(
-              child: SpinKitChasingDots(
-                color: Colors.brown,
+              child: SpinKitCircle(
+                color: Colors.blue[900],
                 size: 50.0,
               ),
             ),
