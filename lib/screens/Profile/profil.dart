@@ -223,16 +223,21 @@ class profile extends StatelessWidget {
                             ),
                             borderRadius: BorderRadius.circular(6),
                           ),
-                          child: Container(
-                            alignment: Alignment.center,
-                            constraints: BoxConstraints(
-                                minHeight: 50, maxWidth: double.infinity),
-                            child: Text(
-                              "Logout",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                              textAlign: TextAlign.left,
+                          child: FlatButton(
+                              onPressed: () async {
+                                await Authenticate().signOut();
+                              },
+                              child: Container(
+                              alignment: Alignment.center,
+                              constraints: BoxConstraints(
+                                  minHeight: 50, maxWidth: double.infinity),
+                              child: Text(
+                                "Logout",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                                textAlign: TextAlign.left,
+                              ),
                             ),
                           ),
                         ),
