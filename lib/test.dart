@@ -56,8 +56,7 @@ class _FoodListState extends State<FoodList> {
         loadingData = true;
       });
       print("getFood");
-      Query q =
-          _ref.where("Description",isGreaterThan: " " ).startAfter([_lastDocument.data["Description"]]).orderBy('Description').limit(5);
+      Query q = _ref.where("Description",isGreaterThan: " " ).startAfter([_lastDocument.data["Description"]]).orderBy('Description').limit(5);
       QuerySnapshot snapshot = await q.getDocuments();
       foodList.addAll(snapshot.documents);
       setState(() {
