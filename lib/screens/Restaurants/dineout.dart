@@ -39,13 +39,13 @@ class _DineOutState extends State<DineOut> {
 
   @override
   Widget build(BuildContext context) {
-        return Scaffold(
-            body: SafeArea(
-              child: Stack(
-                children: <Widget>[
-                  Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
+    return Scaffold(
+        body: SafeArea(
+          child: Stack(
+            children: <Widget>[
+              Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
 
                     SizedBox(
                       height: 30.0,
@@ -53,43 +53,43 @@ class _DineOutState extends State<DineOut> {
 
                     Center(
                       child: Container(
-                              decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors: [Colors.white, Colors.deepPurpleAccent])),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      SizedBox(
-                                        width: 60.0,
-                                      ),
-                                      Container(
-                                        child: Icon(
-                                          Icons.restaurant,
-                                          size: 50.0,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 10.0,
-                                      ),
-                                      Container(
-                                        child: Text(
-                                          'Dine Out',
-                                          style: TextStyle(fontSize: 50.0, fontWeight: FontWeight.bold),
-                                        ),
-                                      )
-                                    ],
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [Colors.white, Colors.deepPurpleAccent])),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                SizedBox(
+                                  width: 60.0,
+                                ),
+                                Container(
+                                  child: Icon(
+                                    Icons.restaurant,
+                                    size: 50.0,
                                   ),
-                                  Container(
-                                    child: Text('Fun Fact:- The Aztecs used chocolate as currency.'),
+                                ),
+                                SizedBox(
+                                  width: 10.0,
+                                ),
+                                Container(
+                                  child: Text(
+                                    'Dine Out',
+                                    style: TextStyle(fontSize: 50.0, fontWeight: FontWeight.bold),
                                   ),
-                                  SizedBox(height: 20.0,),
-                                ],
-                              ),
+                                )
+                              ],
+                            ),
+                            Container(
+                              child: Text('Fun Fact:- The Aztecs used chocolate as currency.'),
+                            ),
+                            SizedBox(height: 20.0,),
+                          ],
+                        ),
                       ),
                     ),
                     Expanded(
@@ -100,27 +100,27 @@ class _DineOutState extends State<DineOut> {
                           itemCount: rest.length,
                           itemBuilder: (context, index) {
                             return Padding(
-                              padding: EdgeInsets.only(top: 15.0),
+                                padding: EdgeInsets.only(top: 15.0),
                                 child: Card(
-                              child: ListTile(
-                              onTap: () {
-                                debugPrint('tappeed');
-                              },
-                              leading: CircleAvatar(
-                                backgroundImage:
-                                    AssetImage('assets/${rest[index].image}'),
-                              ),
-                              title: Text(rest[index].name),
-                              subtitle: Text(rest[index].desc),
-                            )));
+                                    child: ListTile(
+                                      onTap: () {
+                                        debugPrint('tappeed');
+                                      },
+                                      leading: CircleAvatar(
+                                        backgroundImage:
+                                        AssetImage('assets/${rest[index].image}'),
+                                      ),
+                                      title: Text(rest[index].name),
+                                      subtitle: Text(rest[index].desc),
+                                    )));
                           },
                         ),
                       ),
                     ),
                   ]),
-                ],
-              ),
-            ));
+            ],
+          ),
+        ));
   }
 }
 

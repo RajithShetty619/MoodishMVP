@@ -126,6 +126,7 @@ class EditProfileState extends State<EditProfile> {
     );
   }
   Widget Profile(){
+    return
     Container(
                          width: 120,
                             height: 120,

@@ -10,9 +10,9 @@ class TodaySpecial extends StatefulWidget {
     @required this.descrip2,
   }) : super(key: key);
 
-  final  image;
-  final  descrip1;
-  final  descrip2;
+  final image;
+  final descrip1;
+  final descrip2;
 
   @override
   _TodaySpecialState createState() => _TodaySpecialState();
@@ -24,30 +24,25 @@ class _TodaySpecialState extends State<TodaySpecial> {
     return AspectRatio(
       aspectRatio: 0.9 / 1.2,
       child: GestureDetector(
-        onTap: () {
-          
-        },
+        onTap: () {},
         child: Container(
           margin: EdgeInsets.only(right: 20),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            image: DecorationImage(
-              image: AssetImage(widget.image),
-              fit: BoxFit.cover,
-            )
-          ),
+              borderRadius: BorderRadius.circular(20),
+              image: DecorationImage(
+                image: AssetImage(widget.image),
+                fit: BoxFit.cover,
+              )),
           child: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              gradient: LinearGradient(
-                begin: Alignment.bottomCenter,
-                stops: [.1, .5],
-                colors: [
+                borderRadius: BorderRadius.circular(20),
+                gradient: LinearGradient(begin: Alignment.bottomCenter, stops: [
+                  .1,
+                  .5
+                ], colors: [
                   Colors.black.withOpacity(.6),
                   Colors.black.withOpacity(.3),
-                ]
-              )
-            ),
+                ])),
             child: Padding(
               padding: EdgeInsets.all(10.0),
               child: Column(
@@ -57,28 +52,52 @@ class _TodaySpecialState extends State<TodaySpecial> {
                   Align(
                     alignment: Alignment.topRight,
                     child: IconButton(
-                      icon: Icon(Icons.favorite_border, color: Colors.white,),
+ 
+                      icon: Icon(
+                        Icons.favorite_border,
+                        color: Colors.white,
+                      ),
                       onPressed: () async {
-                        final action =
-                          await Dialogs.yesAbortDialog(context, 'My title', 'My Body');
+                        final action = await Dialogs.yesAbortDialog(
+                            context, 'My title', 'My Body'); 
                       },
                     ),
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Text(widget.descrip1, style: TextStyle(color: Colors.white, fontSize: 35, fontWeight: FontWeight.bold),),
-                      SizedBox(height: 10,),
-                      Text(widget.descrip2, style: TextStyle(color: Colors.white, fontSize: 18),),
+                      Text(
+                        widget.descrip1,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 35,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        widget.descrip2,
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
                       SizedBox(height: 15),
                       FlatButton(
                         onPressed: () {},
                         child: IconButton(
-                          icon: Icon(Icons.restaurant,color: Colors.white,size: 35,),
+ 
+                          icon: Icon(
+                            Icons.restaurant,
+                            color: Colors.white,
+                            size: 35,
+                          ),
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => IntroScreen() ));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => IntroScreen()));
                           },
-                        ), 
+                        ),
+ 
                         // label: Text(''),
                       ),
                       SizedBox(height: 10),
@@ -87,25 +106,25 @@ class _TodaySpecialState extends State<TodaySpecial> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
                           FlatButton.icon(
-                            onPressed: () {}, 
-                            icon: Icon(Icons.info_outline,color: Colors.white,), 
-                            label: Text(
-                              'More info',
-                              style: TextStyle(
-                                color: Colors.white
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.info_outline,
+                                color: Colors.white,
                               ),
-                            )
-                          ),
+                              label: Text(
+                                'More info',
+                                style: TextStyle(color: Colors.white),
+                              )),
                           FlatButton.icon(
-                            onPressed: () => _onButtonPressed(), 
-                            icon: Icon(Icons.filter_center_focus,color: Colors.white,), 
-                            label: Text(
-                              'Filter',
-                              style: TextStyle(
-                                color: Colors.white
+                              onPressed: () => _onButtonPressed(),
+                              icon: Icon(
+                                Icons.filter_center_focus,
+                                color: Colors.white,
                               ),
-                            )
-                          )
+                              label: Text(
+                                'Filter',
+                                style: TextStyle(color: Colors.white),
+                              ))
                         ],
                       ),
                     ],
@@ -119,27 +138,30 @@ class _TodaySpecialState extends State<TodaySpecial> {
     );
   }
 
-  void _onButtonPressed() {
-    showModalBottomSheet(context: context,builder: (context) {
-      return Container(
-        height: 200,
-        child: Column(
-          children: <Widget>[
-            Container(
-              height: 200,
-              child: ListView.builder(
-                itemCount: data.length,
-                itemBuilder: (BuildContext context, int index) => EntryItem(
-                  data[index],
+  void _onButtonPressed() { 
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+            height: 200,
+            child: Column(
+              children: <Widget>[
+                Container(
+                  height: 200,
+                  child: ListView.builder(
+                    itemCount: data.length,
+                    itemBuilder: (BuildContext context, int index) => EntryItem(
+                      data[index],
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
-      );
-    });
+          );
+        });
   }
 }
+
 //items in the second Tite
 class ExpItem extends StatelessWidget {
   const ExpItem({
@@ -154,41 +176,33 @@ class ExpItem extends StatelessWidget {
     return AspectRatio(
       aspectRatio: 1 / 1,
       child: GestureDetector(
-        onTap: () {
-          
-        },
+        onTap: () {},
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           decoration: BoxDecoration(
-            // borderRadius: BorderRadius.circular(500),
-            shape: BoxShape.circle,
-            image: DecorationImage(
-              image: AssetImage(image),
-              fit: BoxFit.cover,
-            )
-          ),
-          child: Container(
-            
-            decoration: BoxDecoration(
               // borderRadius: BorderRadius.circular(500),
               shape: BoxShape.circle,
-              gradient: LinearGradient(
-                begin: Alignment.bottomCenter,
-                stops: [.2, .9],
-                colors: [
+              image: DecorationImage(
+                image: AssetImage(image),
+                fit: BoxFit.cover,
+              )),
+          child: Container(
+            decoration: BoxDecoration(
+                // borderRadius: BorderRadius.circular(500),
+                shape: BoxShape.circle,
+                gradient: LinearGradient(begin: Alignment.bottomCenter, stops: [
+                  .2,
+                  .9
+                ], colors: [
                   Colors.black.withOpacity(.5),
                   Colors.black.withOpacity(.1),
-                ]
-              )
-            ),
+                ])),
             child: Padding(
               padding: EdgeInsets.all(20.0),
-              
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  
                   // Text(types, style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),)
                 ],
               ),
@@ -196,50 +210,44 @@ class ExpItem extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ); 
   }
 }
+//items in the second Tite
+ 
 
 // Expansion List
 class Entry {
-  final Widget title;
-  final List<Entry> 
-      children;
-  Entry(this.title, [this.children =const <Entry>[] ]);
+  final Widget title; 
+  final List<Entry> children;
+  Entry(this.title, [this.children = const <Entry>[]]);
 }
 
 final List<Entry> data = <Entry>[
-  Entry(
-    Text('Title 1'),
-    <Entry>[
-      Entry(
-        Text('descriptionWoda\n wodafaq\n wakanda\n wakandashitissdis'),
-      ),
-    ]
-  ),
-  Entry(
-    Text('Title 2'),
-    <Entry>[
-      Entry(
-        Container(
-            height: 120,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              key: PageStorageKey('myScrollable'),
-              children: <Widget>[
-              ExpItem(image: 'assets/img.jpg'),
-              ExpItem(image: 'assets/img.jpg'),
-              ExpItem(image: 'assets/img.jpg'),
-              ExpItem(image: 'assets/img.jpg'),
-              ExpItem(image: 'assets/img.jpg'),
-              ExpItem(image: 'assets/img.jpg'),
-              ],
-            ),
+  Entry(Text('Title 1'), <Entry>[
+    Entry(
+      Text('descriptionWoda\n wodafaq\n wakanda\n wakandashitissdis'),
+    ),
+  ]),
+  Entry(Text('Title 2'), <Entry>[
+    Entry(
+      Container(
+        height: 120,
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          key: PageStorageKey('myScrollable'),
+          children: <Widget>[
+            ExpItem(image: 'assets/img.jpg'),
+            ExpItem(image: 'assets/img.jpg'),
+            ExpItem(image: 'assets/img.jpg'),
+            ExpItem(image: 'assets/img.jpg'),
+            ExpItem(image: 'assets/img.jpg'),
+            ExpItem(image: 'assets/img.jpg'),
+          ],
         ),
-      )
-    ]
-  ),
-
+      ),
+    )
+  ]), 
 ];
 
 // Widget for the row
@@ -248,7 +256,7 @@ class EntryItem extends StatelessWidget {
   final Entry entry;
 
   Widget _buildTiles(Entry root) {
-    if(root.children.isEmpty) {
+    if (root.children.isEmpty) {
       return ListTile(
         title: root.title,
       );
@@ -264,5 +272,4 @@ class EntryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return _buildTiles(entry);
   }
-  
 }

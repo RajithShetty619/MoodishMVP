@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart'; 
-import 'package:moodish_mvp/Authenticate/signIn.dart';
 import 'package:moodish_mvp/screens/Food/pages/foodHome.dart';
 import 'package:moodish_mvp/screens/Profile/profil.dart'; 
 import 'package:moodish_mvp/screens/Restaurants/home.dart';
@@ -13,8 +12,6 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
 
   int _selectedIndex = 0;
-  static  TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static  List<Widget> _widgetOptions = <Widget>[ 
     FoodHome(),
     Restaurant(),
