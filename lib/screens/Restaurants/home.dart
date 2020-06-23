@@ -122,235 +122,198 @@ class _RestaurantState extends State<Restaurant> {
                       ),
                       SizedBox(height: 10.0,),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
+                        padding: EdgeInsets.all(10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Flexible(
-                                  flex: 1,
-                                  child: Container(
-                                      alignment: Alignment(1.0, 0.0),
-                                      padding: EdgeInsets.only(
-                                        right: 4.0,
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          Container(
-                                              height: 200.0,
-                                              child: RaisedButton(
-                                                  onPressed: () {
-                                                    Navigator.push(context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) {
-                                                              return DineOut();
-                                                            }));
-                                                  },
-                                                  color: Colors.deepPurpleAccent,
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0)),
-                                                  child: Center(
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                        MainAxisAlignment.center,
-                                                        children: <Widget>[
-                                                          Container(
-                                                            padding: EdgeInsets.only(
-                                                                top: 20.0),
-                                                            child: Icon(
-                                                              Icons.restaurant,
-                                                              size: 75.0,
-                                                              color: Colors.white,
-                                                            ),
-                                                          ),
-                                                          Container(
-                                                            child: Text(
-                                                              'Dineout',
-                                                              style: TextStyle(
-                                                                  fontSize: 20.0,
-                                                                  color: Colors.white),
-                                                            ),
-                                                          ),
-                                                          Container(
-                                                              child: Text(
-                                                                '10+ Options',
-                                                                style: TextStyle(
-                                                                    color: Colors.white),
-                                                              ))
-                                                        ],
-                                                      )))),
-                                        ],
-                                      )),
-                                ),
-                                Flexible(
-                                  flex: 1,
-                                  child: Container(
-                                      height: 200.0,
-                                      child: RaisedButton(
-                                          onPressed: () {
-                                            Navigator.push(context,
-                                                MaterialPageRoute(
-                                                    builder: (context) {
-                                                      return Booking();
-                                                    }));
-                                          },
-                                          color: Colors.lightBlueAccent,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                              BorderRadius.circular(20.0)),
-                                          child: Center(
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                                children: <Widget>[
-                                                  Container(
-                                                    padding: EdgeInsets.only(top: 20.0),
-                                                    child: Icon(
-                                                      Icons.calendar_today,
-                                                      size: 75.0,
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    child: Text(
-                                                      'Booking',
-                                                      style: TextStyle(
-                                                          fontSize: 20.0,
-                                                          color: Colors.white),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                      child: Text(
-                                                        '9+ Options',
-                                                        style:
-                                                        TextStyle(color: Colors.white),
-                                                      ))
-                                                ],
-                                              )))),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Flexible(
-                                  flex: 1,
-                                  child: Container(
-                                      padding: EdgeInsets.only(
-                                        right: 4.0,
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          Container(
-                                              height: 200.0,
-                                              child: RaisedButton(
-                                                  onPressed: () {
-                                                    Navigator.push(context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) {
-                                                              return PickUp();
-                                                            }));
-                                                  },
-                                                  color: Colors.redAccent,
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0)),
-                                                  child: Center(
-                                                      child: Column(
-                                                        mainAxisAlignment:
-                                                        MainAxisAlignment.center,
-                                                        children: <Widget>[
-                                                          Container(
-                                                            padding: EdgeInsets.only(
-                                                                top: 20.0),
-                                                            child: Icon(
-                                                              Icons.location_on,
-                                                              size: 75.0,
-                                                              color: Colors.green,
-                                                            ),
-                                                          ),
-                                                          Container(
-                                                            child: Text(
-                                                              'Pick Up',
-                                                              style: TextStyle(
-                                                                  fontSize: 20.0,
-                                                                  color: Colors.white),
-                                                            ),
-                                                          ),
-                                                          Container(
-                                                              child: Text(
-                                                                '12+ Options',
-                                                                style: TextStyle(
-                                                                    color: Colors.white),
-                                                              ))
-                                                        ],
-                                                      )))),
-                                        ],
-                                      )),
-                                ),
-                                Flexible(
-                                  flex: 1,
-                                  child: Container(
-                                      height: 200.0,
-                                      child: RaisedButton(
-                                          onPressed: () {
-                                            Navigator.push(context,
-                                                MaterialPageRoute(
-                                                    builder: (context) {
-                                                      return TopRated();
-                                                    }));
-                                          },
-                                          color: Colors.deepOrange,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                              BorderRadius.circular(20.0)),
-                                          child: Center(
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                                children: <Widget>[
-                                                  Container(
-                                                    child: Icon(
-                                                      Icons.stars,
-                                                      size: 75.0,
-                                                      color: Colors.yellow,
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    child: Text(
-                                                      'Top Rated',
-                                                      style: TextStyle(
-                                                          fontSize: 20.0,
-                                                          color: Colors.white),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                      child: Text(
-                                                        '5+ Options',
-                                                        style:
-                                                        TextStyle(color: Colors.white),
-                                                      )),
-                                                ],
-                                              )))),
-                                ),
-                              ],
-                            ),
-                            Text(
-                              'Top Restaurants :',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20.0,
-                              ),
-                              textAlign: TextAlign.left,
-                            ),
+                            RaisedButton(
+                                onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context){
+                                    return DineOut();
+                                  }));
+
+                                },
+                                color: Colors.deepPurpleAccent,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                    BorderRadius.circular(20.0)),
+                                child: Center(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Container(
+                                          padding: EdgeInsets.only(top: 20.0),
+                                          child: Icon(
+                                            Icons.restaurant,
+                                            size: 75.0,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        Container(
+                                          child: Text(
+                                            'Dineout',
+                                            style: TextStyle(
+                                                fontSize: 20.0,
+                                                color: Colors.white),
+                                          ),
+                                        ),
+                                        Container(
+                                            child: Text(
+                                              '10+ Options',
+                                              style: TextStyle(color: Colors.white),
+                                            )),
+                                        SizedBox(height: 8.0,)
+                                      ],
+                                    ))),
+                            RaisedButton(
+                                onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context){
+                                    return Booking();
+                                  }));
+                                },
+                                color: Colors.lightBlueAccent,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0)),
+                                child: Center(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Container(
+                                          padding: EdgeInsets.only(top: 20.0),
+                                          child: Icon(
+                                            Icons.calendar_today,
+                                            size: 75.0,
+                                          ),
+                                        ),
+                                        Container(
+                                          child: Text(
+                                            'Booking',
+                                            style: TextStyle(
+                                                fontSize: 20.0, color: Colors.white),
+                                          ),
+                                        ),
+                                        Container(
+                                            child: Text(
+                                              '9+ Options',
+                                              style: TextStyle(color: Colors.white),
+                                            )),
+                                        SizedBox(height: 8.0,)
+                                      ],
+                                    ))),
+
+                            RaisedButton(
+                                onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context){
+                                    return PickUp();
+                                  }));
+                                },
+                                color: Colors.redAccent,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                    BorderRadius.circular(20.0)),
+                                child: Center(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Container(
+                                          padding: EdgeInsets.only(top: 20.0),
+                                          child: Icon(
+                                            Icons.location_on,
+                                            size: 75.0,
+                                            color: Colors.green,
+                                          ),
+                                        ),
+                                        Container(
+                                          child: Text(
+                                            'Pick Up',
+                                            style: TextStyle(
+                                                fontSize: 20.0,
+                                                color: Colors.white),
+                                          ),
+                                        ),
+                                        Container(
+                                            child: Text(
+                                              '12+ Options',
+                                              style: TextStyle(color: Colors.white),
+                                            )),
+                                        SizedBox(height: 8.0,)
+                                      ],
+                                    ))),
+
+
+
                           ],
                         ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            RaisedButton(
+                                onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context){
+                                    return TopRated();
+                                  }));
+                                },
+                                color: Colors.deepOrange,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0)),
+                                child: Center(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Container(
+                                          padding: EdgeInsets.only(top: 20.0),
+                                          child: Icon(
+                                            Icons.stars,
+                                            size: 70.0,
+                                            color: Colors.yellow,
+                                          ),
+                                        ),
+                                        Container(
+                                          child: Text(
+                                            'Top Rated',
+                                            style: TextStyle(
+                                                fontSize: 20.0, color: Colors.white),
+                                          ),
+                                        ),
+                                        Container(
+                                            child: Text(
+                                              '5+ Options',
+                                              style: TextStyle(color: Colors.white),
+                                            )),
+                                        SizedBox(height: 8.0,)
+
+                                      ],
+                                    ))),
+                            SizedBox(width: 30.0,),
+                            FlatButton(onPressed: null,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20.0)),
+                            ),
+                            FlatButton(onPressed: null,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20.0)),
+                            ),
+
+                          ],
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text('Top Restaurants -',
+                            textAlign: TextAlign.left,
+
+                            style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold
+                            ),),
+                        ),
                       )
+
 
                     ]),
                   Padding(

@@ -41,84 +41,123 @@ class _DineOutState extends State<DineOut> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-          child: Stack(
-            children: <Widget>[
-              Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-
-                    SizedBox(
-                      height: 30.0,
-                    ),
-
-                    Center(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [Colors.white, Colors.deepPurpleAccent])),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Row(
+          child: Expanded(
+            flex: 1,
+            child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemCount: rest.length,
+                itemBuilder: (context, index) {
+                  return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        if (index == 0)
+                          Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 SizedBox(
-                                  width: 60.0,
+                                  height: 30.0,
                                 ),
-                                Container(
-                                  child: Icon(
-                                    Icons.restaurant,
-                                    size: 50.0,
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: TextField(
+                                    autocorrect: true,
+                                    style: TextStyle(color: Colors.white),
+                                    decoration: InputDecoration(
+                                      hintText: 'Where do you want to go?',
+                                      hintStyle: TextStyle(color: Colors.white),
+                                      prefixIcon: Icon(
+                                        Icons.search,
+                                        color: Colors.white,
+                                      ),
+                                      filled: true,
+                                      fillColor: Colors.black,
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(30.0),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(30.0),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Center(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Icon(Icons.location_on),
+                                      Text('Mumbai,Maharashtra')
+                                    ],
                                   ),
                                 ),
                                 SizedBox(
-                                  width: 10.0,
+                                  height: 10.0,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(top: 10.0,left: 30.0,right: 30.0,bottom: 10.0),
+                                  child: Container(
+                                    width: double.maxFinite,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30.0),
+                                      color: Colors.deepPurpleAccent,
+                                    ),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Container(
+                                          padding: EdgeInsets.only(top: 20.0),
+                                          child: Icon(
+                                            Icons.restaurant,
+                                            size: 75.0,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        Container(
+                                          child: Text(
+                                            'Dineout',
+                                            style: TextStyle(
+                                                fontSize: 20.0,
+                                                color: Colors.white),
+                                          ),
+                                        ),
+                                        Container(
+                                            child: Text(
+                                              '10+ Options',
+                                              style: TextStyle(color: Colors.white),
+                                            )),
+                                        SizedBox(height: 10.0,)
+                                      ],
+                                    ),
+                                  ),
                                 ),
                                 Container(
-                                  child: Text(
-                                    'Dine Out',
-                                    style: TextStyle(fontSize: 50.0, fontWeight: FontWeight.bold),
+                                  alignment: Alignment.centerLeft,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text('Top Restaurants -',
+                                      textAlign: TextAlign.left,
+
+                                      style: TextStyle(
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.bold
+                                      ),),
                                   ),
                                 )
-                              ],
-                            ),
-                            Container(
-                              child: Text('Fun Fact:- The Aztecs used chocolate as currency.'),
-                            ),
-                            SizedBox(height: 20.0,),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        child: ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: rest.length,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                                padding: EdgeInsets.only(top: 15.0),
-                                child: Card(
-                                    child: ListTile(
-                                      onTap: () {
-                                        debugPrint('tappeed');
-                                      },
-                                      leading: CircleAvatar(
-                                        backgroundImage:
-                                        AssetImage('assets/${rest[index].image}'),
-                                      ),
-                                      title: Text(rest[index].name),
-                                      subtitle: Text(rest[index].desc),
-                                    )));
-                          },
-                        ),
-                      ),
-                    ),
-                  ]),
-            ],
+                              ]),
+                        Padding(
+                            padding: EdgeInsets.only(top: 15.0),
+                            child: Card(
+                                child: ListTile(
+                                  onTap: () {},
+                                  leading: CircleAvatar(
+                                    backgroundImage:
+                                    AssetImage('assets/${rest[index].image}'),
+                                  ),
+                                  title: Text(rest[index].name),
+                                  subtitle: Text(rest[index].desc),
+                                ))),
+                      ]);
+                }),
           ),
         ));
   }
@@ -131,4 +170,3 @@ class _Restaurants {
 
   _Restaurants({this.image, this.name, this.desc});
 }
-
