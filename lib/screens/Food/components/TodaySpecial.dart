@@ -32,7 +32,8 @@ class _TodaySpecialState extends State<TodaySpecial> {
               image: DecorationImage(
                 image: AssetImage(widget.image),
                 fit: BoxFit.cover,
-              )),
+              )
+            ),
           child: Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),

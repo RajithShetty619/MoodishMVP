@@ -288,11 +288,15 @@ class _RestaurantState extends State<Restaurant> {
                                       ],
                                     ))),
                             SizedBox(width: 30.0,),
-                            FlatButton(onPressed: null,
+                            FlatButton(
+                              child: null,
+                              onPressed: () {},
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20.0)),
                             ),
-                            FlatButton(onPressed: null,
+                            FlatButton(
+                              child: null,
+                              onPressed: () {},
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20.0)),
                             ),
