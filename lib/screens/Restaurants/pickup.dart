@@ -46,86 +46,129 @@ class _PickUpState extends State<PickUp> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-            body: Container(
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                SizedBox(
-                  height: 30.0,
-                ),
-
-                Center(
-                  child: Container(
-                    alignment: Alignment(0.0, 0.0),
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [Colors.white, Colors.redAccent])),
-                    child: Column(
+    return Scaffold(
+        body: SafeArea(
+          child: Expanded(
+            flex: 1,
+            child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemCount: rest.length,
+                itemBuilder: (context, index) {
+                  return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              child: Icon(
-                                Icons.location_on,
-                                size: 50.0,
-                              ),
-                            ),
-
-                            Container(
-                              child: Text(
-                                'Pick Up',
-                                style: TextStyle(fontSize: 50.0, fontWeight: FontWeight.bold),
-                              ),
-                            )
-                          ],
-                        ),
-                        Container(
-                          child: Text('Fun Fact:- The Aztecs used chocolate as currency.'),
-                        ),
-                        SizedBox(height: 20.0,),
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    height: 100,
-                    child: ListView(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      children: <Widget>[
-                        ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: rest.length,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                                padding: EdgeInsets.only(top: 15.0),
-                                child: Card(
-                                    child: ListTile(
-                                      onTap: () {
-                                        debugPrint('tappeed');
-                                      },
-                                      leading: CircleAvatar(
-                                        backgroundImage:
-                                        AssetImage('assets/${rest[index].image}'),
+                        if (index == 0)
+                          Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                SizedBox(
+                                  height: 30.0,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: TextField(
+                                    autocorrect: true,
+                                    style: TextStyle(color: Colors.white),
+                                    decoration: InputDecoration(
+                                      hintText: 'Where do you want to go?',
+                                      hintStyle: TextStyle(color: Colors.white),
+                                      prefixIcon: Icon(
+                                        Icons.search,
+                                        color: Colors.white,
                                       ),
-                                      title: Text(rest[index].name),
-                                      subtitle: Text(rest[index].desc),
-                                    )));
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ]),
-            )));
+                                      filled: true,
+                                      fillColor: Colors.black,
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(30.0),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(30.0),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Center(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Icon(Icons.location_on),
+                                      Text('Mumbai,Maharashtra')
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(top: 10.0,left: 30.0,right: 30.0,bottom: 10.0),
+                                  child: Container(
+                                    width: double.maxFinite,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30.0),
+                                      color: Colors.redAccent,
+                                    ),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Container(
+                                          padding: EdgeInsets.only(
+                                              top: 20.0),
+                                          child: Icon(
+                                            Icons.location_on,
+                                            size: 75.0,
+                                            color: Colors.green,
+                                          ),
+                                        ),
+                                        Container(
+                                          child: Text(
+                                            'Pick Up',
+                                            style: TextStyle(
+                                                fontSize: 20.0,
+                                                color: Colors.white),
+                                          ),
+                                        ),
+                                        Container(
+                                            child: Text(
+                                              '12+ Options',
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            )),
+                                        SizedBox(height: 10.0,)
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text('Top Restaurants -',
+                                      textAlign: TextAlign.left,
+
+                                      style: TextStyle(
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.bold
+                                      ),),
+                                  ),
+                                )
+                              ]),
+                        Padding(
+                            padding: EdgeInsets.only(top: 15.0),
+                            child: Card(
+                                child: ListTile(
+                                  onTap: () {},
+                                  leading: CircleAvatar(
+                                    backgroundImage:
+                                    AssetImage('assets/${rest[index].image}'),
+                                  ),
+                                  title: Text(rest[index].name),
+                                  subtitle: Text(rest[index].desc),
+                                ))),
+                      ]);
+                }),
+          ),
+        ));
   }
 }
 
@@ -136,4 +179,3 @@ class _Restaurants {
 
   _Restaurants({this.image, this.name, this.desc});
 }
-
