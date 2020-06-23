@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp( 
         debugShowCheckedModeBanner: false,
         title: 'Moodish',
-        home: Wrapper(),
+        home: Test(),
         
       ), 
     );
