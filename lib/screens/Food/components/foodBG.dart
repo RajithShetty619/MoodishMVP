@@ -5,14 +5,16 @@ class CurvePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     var paint = Paint();
     // TODO: Set properties to paint
-    paint.color = Colors.green[800];
+    paint.color = Colors.blue[300];
     paint.style = PaintingStyle.fill;
 
     var path = Path();
     // TODO: Draw your path
-    path.moveTo(0, size.height * 0.25);
+    path.moveTo(0, size.height * 0.375);
     path.quadraticBezierTo(
-        size.width / 2, size.height / 2, size.width, size.height * 0.25);
+        size.width * 0.25, size.height / 2, size.width * 0.65, size.height * 0.25);
+    path.quadraticBezierTo(
+        size.width * 0.77, size.height * 0.2, size.width * 1, size.height * 0.35);
     path.lineTo(size.width, 0);
     path.lineTo(0, 0);
 

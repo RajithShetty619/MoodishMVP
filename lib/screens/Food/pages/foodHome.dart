@@ -43,7 +43,6 @@ class _FoodHomeState extends State<FoodHome> {
               SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
