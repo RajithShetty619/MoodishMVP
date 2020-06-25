@@ -10,6 +10,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
   await Hive.initFlutter();
+  // await Hive.openBox('foodlist');
   Hive.registerAdapter<FoodListModel>(FoodListModelAdapter());
   runApp(MaterialApp(  
     home: MyApp(),

@@ -5,8 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Services/database.dart'; 
 import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart';
 import 'package:moodish_mvp/screens/Food/events/foodEvent.dart'; 
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-
+import 'package:flutter_spinkit/flutter_spinkit.dart'; 
 import 'models/foodListModel.dart';
 
 class Test extends StatefulWidget {
@@ -17,18 +16,18 @@ class Test extends StatefulWidget {
 class _TestState extends State<Test> {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Box<FoodListModel>>(
-      future: Hive.openBox<FoodListModel>('foodList'),
+    return FutureBuilder<Box>(
+      future: Hive.openBox('foodlist'),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Scaffold();
-        }
-        return BlocProvider<FoodBloc>(
+        if (snapshot.connectionState == ConnectionState.done) {
+          return  BlocProvider<FoodBloc>(
           create: (context) => FoodBloc(),
           child: Scaffold(
             body: FoodList(),
           ),
         );
+        }
+        return  Scaffold();
       },
     );
   }

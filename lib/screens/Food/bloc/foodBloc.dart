@@ -15,7 +15,7 @@ class FoodBloc extends Bloc<FoodEvent, List<FoodListModel>> {
         if (event.food != null) {
           print("addinf");
           newstate.addAll(event.food);
-          final _box = Hive.box('foodList');
+          final _box = Hive.box('foodlist');
           _box.put('0', newstate);
         }
         yield newstate;
