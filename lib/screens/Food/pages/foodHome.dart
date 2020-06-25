@@ -357,7 +357,7 @@ class CurvedShape extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 600,
+      height: 500,
       child: CustomPaint(
           painter: CurvePainter(),
       ), 
