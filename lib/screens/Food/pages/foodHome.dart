@@ -334,13 +334,13 @@ class _FoodHomeState extends State<FoodHome> {
                         ),
                         Container(
                           height: 300,
-                          child: BlocConsumer<FoodBloc, List<FoodListModel>>(
-                            buildWhen: (List<FoodListModel> previous,
-                                List<FoodListModel> current) {
+                          child: BlocConsumer<FoodBloc,Map<String, List<FoodListModel>>>(
+                            buildWhen: (Map<String, List<FoodListModel>> previous,
+                                Map<String, List<FoodListModel>> current) {
                               return true;
                             },
-                            listenWhen: (List<FoodListModel> previous,
-                                List<FoodListModel> current) {
+                            listenWhen: (Map<String, List<FoodListModel>> previous,
+                                Map<String, List<FoodListModel>> current) {
                               if (current.length > previous.length) {
                                 return true;
                               }
@@ -353,7 +353,7 @@ class _FoodHomeState extends State<FoodHome> {
                                     child: ListView.builder(
                                       controller: _scrollController,
                                       scrollDirection: Axis.vertical,
-                                      itemCount: foodList.length,
+                                      itemCount: foodList["0"].length,
                                       itemBuilder: (context, index) {
                                         return Card(
                                           margin: EdgeInsets.symmetric(
@@ -362,7 +362,7 @@ class _FoodHomeState extends State<FoodHome> {
                                           child: Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: Text(
-                                                foodList[index].description),
+                                                foodList['0'][index].description),
                                           ),
                                         );
                                       },
