@@ -13,7 +13,7 @@ import 'package:moodish_mvp/screens/Food/components/Food_Taste.dart';
 import 'package:moodish_mvp/screens/Food/components/MealType.dart';
 import 'package:moodish_mvp/screens/Food/components/TodaySpecial.dart';
 import 'package:moodish_mvp/screens/Food/components/foodBG.dart';
-import 'package:moodish_mvp/test.dart';
+import 'package:moodish_mvp/screens/Food/events/foodEvent.dart'; 
 
 // import 'package:intl/intl.dart';
 
@@ -33,7 +33,12 @@ class _FoodHomeState extends State<FoodHome> {
     if (!_getFoodCalled) {
       _dq
           .getFood(context)
-          .then((future) => _getFoodCalled = future);
+          .then((future){
+            BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future));
+            setState(() {
+              _getFoodCalled = true;
+            });
+          });
     }
     _scrollController.addListener(() {
       double _maxScroll = _scrollController.position.maxScrollExtent;
@@ -44,7 +49,12 @@ class _FoodHomeState extends State<FoodHome> {
         loadingData = true;
         _dq
             .getMoreFood(context)
-            .then((future) => loadingData);
+            .then((future) {
+               BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future));
+            setState(() {
+              loadingData = false;
+            });
+            });
         print(loadingData);
       }
     });
@@ -349,7 +359,7 @@ class _FoodHomeState extends State<FoodHome> {
                               }
                               return false;
                             },
-                            builder: (context, foodList) {
+                            builder: (BuildContext context, foodList) {
                               return Column(
                                 children: <Widget>[
                                   Expanded(
@@ -357,7 +367,7 @@ class _FoodHomeState extends State<FoodHome> {
                                       controller: _scrollController,
                                       scrollDirection: Axis.vertical,
                                       itemCount: foodList["0"].length,
-                                      itemBuilder: (context, index) {
+                                      itemBuilder: (BuildContext context,int index) {
                                         return Card(
                                           margin: EdgeInsets.symmetric(
                                               vertical: 5, horizontal: 10),
