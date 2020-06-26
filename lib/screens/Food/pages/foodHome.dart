@@ -43,7 +43,6 @@ class _FoodHomeState extends State<FoodHome> {
               SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
@@ -358,7 +357,7 @@ class CurvedShape extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 600,
+      height: 500,
       child: CustomPaint(
           painter: CurvePainter(),
       ), 
