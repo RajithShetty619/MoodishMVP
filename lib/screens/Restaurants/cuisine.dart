@@ -20,7 +20,7 @@ class _CuisineState extends State<Cuisine> {
 
   ];
   int i=0;
-  List<String> pref=['','','','','','','','',''];
+  List<String> pref=['','','','','','','','',''];//all the user preferences are saved here
   String err = '';
 
   @override
@@ -87,7 +87,7 @@ class _CuisineState extends State<Cuisine> {
                           });
 //                    for(int a=0;a<9;a++)
 //                    {
-//                      debugPrint(pref[a]);
+//                      debugPrint(pref[a]);//print elements in pref
 //                    }
                         },
                         child: Container(
