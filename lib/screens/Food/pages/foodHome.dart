@@ -34,7 +34,7 @@ class _FoodHomeState extends State<FoodHome> {
       _dq
           .getFood(context)
           .then((future){
-            BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future));
+            BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future,"0"));
             setState(() {
               _getFoodCalled = true;
             });
@@ -50,7 +50,7 @@ class _FoodHomeState extends State<FoodHome> {
         _dq
             .getMoreFood(context)
             .then((future) {
-               BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future));
+               BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future,"0"));
             setState(() {
               loadingData = false;
             });

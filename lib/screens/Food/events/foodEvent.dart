@@ -6,16 +6,17 @@ enum EventType{add,delete}
 
 class FoodEvent {
   List<FoodListModel> food;
-  int foodIndex;
+  String listName;
   EventType eventType;
 
-  FoodEvent.add(List<FoodListModel> food){
+  FoodEvent.add(List<FoodListModel> food , String listName){
     this.eventType = EventType.add;
-    this.food = food ;
+    this.food = food ; 
+    this.listName = listName ;
   }
 
-  FoodEvent.delete(int foodIndex){
+  FoodEvent.delete(String listName){
     this.eventType = EventType.delete;
-    this.foodIndex = foodIndex ;
+    this.listName = listName ;
   }
 }
