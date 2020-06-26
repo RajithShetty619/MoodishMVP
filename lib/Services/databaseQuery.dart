@@ -22,34 +22,34 @@ class DatabaseQuery {
       Query q = _ref
           .where("Description", isGreaterThan: " ")
           .orderBy('Description')
-          .limit(10);
+          .limit(5);
       QuerySnapshot snapshot = await q.getDocuments();
       List<FoodListModel> queryList =
           DatabaseService().listFromSnapshot(snapshot);
       BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(queryList));
 
-      print("$_lastDocument" + "doc");
+
       _lastDocument = queryList[queryList.length - 1].description;
+      print("$_lastDocument" + "doc");
     } else {
       List<FoodListModel> _foodList = _gfoodList.cast<FoodListModel>();
       BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(_foodList));
-
-      print("$_lastDocument" + "doc");
       _lastDocument = _foodList[_foodList.length - 1].description;
+      print("$_lastDocument" + "doc");
     }
     return true;
   }
 
   Future<bool> getMoreFood(BuildContext context) async {
-    print("getMoreFood");
-    if (dataExists) {
-      print("getFood");
-
+     
+    if (dataExists) { 
+      print("getMoreFood");
+      print("$_lastDocument");
       Query q = _ref
           .where("Description", isGreaterThan: " ")
           .startAfter([_lastDocument])
           .orderBy('Description')
-          .limit(5);
+          .limit(2);
       QuerySnapshot snapshot = await q.getDocuments();
       List<FoodListModel> queryList =
           DatabaseService().listFromSnapshot(snapshot);
