@@ -125,11 +125,11 @@ class _FoodListState extends State<FoodList> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<FoodBloc, List<FoodListModel>>(
-      buildWhen: (List<FoodListModel> previous, List<FoodListModel> current) {
+    return BlocConsumer<FoodBloc,Map<String,List<FoodListModel>>>(
+      buildWhen: (Map<String,List<FoodListModel>> previous, Map<String,List<FoodListModel>> current) {
         return true;
       },
-      listenWhen: (List<FoodListModel> previous, List<FoodListModel> current) {
+      listenWhen: (Map<String,List<FoodListModel>> previous, Map<String,List<FoodListModel>> current) {
         if (current.length > previous.length) {
           return true;
         }
@@ -141,14 +141,14 @@ class _FoodListState extends State<FoodList> {
             Expanded(
               child: ListView.builder(
                 controller: _scrollController,
-                itemCount: foodList.length,
+                itemCount: foodList["0"].length,
                 itemBuilder: (context, index) {
                   return Card(
                     margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     elevation: 2.0,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(foodList[index].description),
+                      child: Text(foodList["0"][index].description),
                     ),
                   );
                 },
