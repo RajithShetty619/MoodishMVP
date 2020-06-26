@@ -15,17 +15,12 @@ class FoodBloc extends Bloc<FoodEvent, Map<String, List<FoodListModel>>> {
         Map<String, List<FoodListModel>> newstate = state;
         if (event.food != null) {
           print("addinf");
-          newstate["0"].addAll(event.food);
+          newstate[event.listName].addAll(event.food);
           final _box = Hive.box('foodlist');
-          _box.put('0', newstate["0"]);
+          _box.put(event.listName, newstate[event.listName]);
         }
         yield newstate;
-        break;
-      case EventType.delete:
-        Map<String, List<FoodListModel>> newstate = state;
-        newstate[0].removeAt(event.foodIndex);
-        yield newstate;
-        break;
+        break; 
       default:
         throw Exception("event not found $event");
     }

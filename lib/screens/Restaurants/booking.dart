@@ -140,13 +140,24 @@ class _BookingState extends State<Booking> {
                                   alignment: Alignment.centerLeft,
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text('Top Restaurants -',
-                                      textAlign: TextAlign.left,
+                                    child: Container(
+                                      width: 175.0,
+                                      margin: EdgeInsets.all(10.0),
+                                      decoration: BoxDecoration(
+                                          border: Border.all(color: Colors.transparent),
+                                          color: Colors.grey[300]
 
-                                      style: TextStyle(
-                                          fontSize: 20.0,
-                                          fontWeight: FontWeight.bold
-                                      ),),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Text(
+                                          'Top Restaurants -',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontSize: 20.0, fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 )
                               ]),
@@ -155,12 +166,19 @@ class _BookingState extends State<Booking> {
                             child: Card(
                                 child: ListTile(
                                   onTap: () {},
-                                  leading: CircleAvatar(
-                                    backgroundImage:
-                                    AssetImage('assets/${rest[index].image}'),
+                                  leading: ClipRRect(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    child: Image(
+                                      image: AssetImage('assets/${rest[index].image}'),
+                                      width: 80.0,
+                                      height: 80.0,
+                                    ),
                                   ),
                                   title: Text(rest[index].name),
                                   subtitle: Text(rest[index].desc),
+                                    trailing: Text(
+                                        '\u{02605}4.2'
+                                    )
                                 ))),
                       ]);
                 }),

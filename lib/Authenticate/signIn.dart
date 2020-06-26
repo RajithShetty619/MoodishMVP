@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:moodish_mvp/Authenticate/loading.dart';
-import 'package:moodish_mvp/Services/authenticate.dart'; 
-import 'package:moodish_mvp/screens/mainScreen.dart';
+import 'package:moodish_mvp/Services/authenticate.dart';
+import 'package:moodish_mvp/screens/Restaurants/cuisine.dart';
 import 'signUp.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -142,7 +142,7 @@ class _SignInState extends State<SignIn> {
                                           loading = false;}
                                         else
                                           Navigator.push(context, MaterialPageRoute(builder: (context){
-                                            return MainScreen();
+                                            return Cuisine();
                                           }));
 
                                       }
@@ -169,7 +169,7 @@ class _SignInState extends State<SignIn> {
                                           loading = false;}
                                         else
                                           Navigator.push(context, MaterialPageRoute(builder: (context){
-                                            return MainScreen();
+                                            return Cuisine();
                                           }));
                                 },
                               ),
