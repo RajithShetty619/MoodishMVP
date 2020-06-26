@@ -12,7 +12,7 @@ class _TasteState extends State<Taste> {
     GridTileBuilder(image: 'Spicy.jpg',taste: 'Hot n Spicy'),
     GridTileBuilder(image: 'Coffee.jpg',taste: 'Aromatic'),
     GridTileBuilder(image: 'Savory.jpg',taste: 'Savory'),
-    GridTileBuilder(image: 'Salty.jpg',taste: 'Namkeen'),
+    GridTileBuilder(image: 'Salty.jpg',taste: 'Salty'),
   ];
   int i=0;
   List<String> pref=['','','','','',''];
