@@ -4,6 +4,8 @@ import 'package:moodish_mvp/models/name.dart';
 
 class DatabaseService { 
 
+  
+
   final String uid;
   DatabaseService({ this.uid });
   final CollectionReference userName = Firestore.instance.collection('Username');
