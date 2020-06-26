@@ -61,7 +61,7 @@ class _FoodListState extends State<FoodList> {
       QuerySnapshot snapshot = await q.getDocuments();
       List<FoodListModel> queryList =
           DatabaseService().listFromSnapshot(snapshot);
-      BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(queryList));
+      BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(queryList,"0"));
       setState(() {
         print("$_lastDocument" + "doc");
         loadingData = false;
@@ -69,7 +69,7 @@ class _FoodListState extends State<FoodList> {
       });
     } else {
       List<FoodListModel> _foodList = _gfoodList.cast<FoodListModel>();
-      BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(_foodList));
+      BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(_foodList,"0"));
       setState(() {
         print("$_lastDocument" + "doc");
         loadingData = false;
@@ -94,7 +94,7 @@ class _FoodListState extends State<FoodList> {
       QuerySnapshot snapshot = await q.getDocuments();
       List<FoodListModel> queryList =
           DatabaseService().listFromSnapshot(snapshot);
-      BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(queryList));
+      BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(queryList,"0"));
 
       setState(() {
         loadingData = false;
