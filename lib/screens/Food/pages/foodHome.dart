@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
+import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart';
@@ -25,11 +26,12 @@ class _FoodHomeState extends State<FoodHome> {
   ScrollController _scrollController = ScrollController();
   bool _getFoodCalled = false;
   bool loadingData = false;
+  DatabaseQuery _dq = new DatabaseQuery();
   @override
   void initState() {
     super.initState(); 
     if (!_getFoodCalled) {
-      DatabaseQuery()
+      _dq
           .getFood(context)
           .then((future) => _getFoodCalled = future);
     }
@@ -37,12 +39,13 @@ class _FoodHomeState extends State<FoodHome> {
       double _maxScroll = _scrollController.position.maxScrollExtent;
       double _currentScroll = _scrollController.position.pixels;
       double _delta = MediaQuery.of(context).size.height * .25;
-
       if (_maxScroll - _currentScroll < _delta && loadingData == false) {
+         print("scrool");
         loadingData = true;
-        DatabaseQuery()
+        _dq
             .getMoreFood(context)
-            .then((future) => loadingData = future);
+            .then((future) => loadingData);
+        print(loadingData);
       }
     });
   }
