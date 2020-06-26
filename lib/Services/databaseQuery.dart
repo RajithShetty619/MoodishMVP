@@ -1,10 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/cupertino.dart'; 
 import 'package:hive/hive.dart';
-import 'package:moodish_mvp/models/foodListModel.dart';
-import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart';
-import 'package:moodish_mvp/screens/Food/events/foodEvent.dart'; 
+import 'package:moodish_mvp/models/foodListModel.dart'; 
 import 'database.dart';
 
 class DatabaseQuery {
