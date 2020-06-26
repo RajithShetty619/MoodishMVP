@@ -2,6 +2,7 @@ import 'package:moodish_mvp/Authenticate/signIn.dart';
 import 'package:moodish_mvp/Services/authenticate.dart';
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/models/user.dart';
+import 'package:moodish_mvp/screens/Restaurants/cuisine.dart';
 import 'package:moodish_mvp/screens/mainScreen.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +14,7 @@ class Wrapper extends StatelessWidget {
       return SignIn();
     }
     else{
-      return MainScreen();
+      return Cuisine();
     }
   }
 }
