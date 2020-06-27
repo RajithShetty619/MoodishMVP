@@ -140,10 +140,7 @@ class _SignInState extends State<SignIn> {
                                         if(result == null){
                                           setState(() => error = 'Wrong password or Email');
                                           loading = false;}
-                                        else
-                                          Navigator.push(context, MaterialPageRoute(builder: (context){
-                                            return Cuisine();
-                                          }));
+                                         
 
                                       }
                                     },
@@ -167,10 +164,7 @@ class _SignInState extends State<SignIn> {
                                     if(result == null){
                                           setState(() => error = 'Something went');
                                           loading = false;}
-                                        else
-                                          Navigator.push(context, MaterialPageRoute(builder: (context){
-                                            return Cuisine();
-                                          }));
+                                         
                                 },
                               ),
                               SizedBox(

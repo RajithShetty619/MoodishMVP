@@ -261,42 +261,42 @@ class _RestaurantState extends State<Restaurant> {
                                 onPressed: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                        return PickUp();
-                                      }));
+                                    return PickUp();
+                                  }));
                                 },
                                 color: Colors.redAccent,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20.0)),
                                 child: Center(
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        Container(
-                                          padding: EdgeInsets.only(top: 20.0),
-                                          child: Icon(
-                                            Icons.location_on,
-                                            size: 75.0,
-                                            color: Colors.green,
-                                          ),
-                                        ),
-                                        Container(
-                                          child: Text(
-                                            'Pick Up',
-                                            style: TextStyle(
-                                                fontSize: 20.0,
-                                                color: Colors.white),
-                                          ),
-                                        ),
-                                        Container(
-                                            child: Text(
-                                              '12+ Options',
-                                              style: TextStyle(color: Colors.white),
-                                            )),
-                                        SizedBox(
-                                          height: 8.0,
-                                        )
-                                      ],
-                                    ))),
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Container(
+                                      padding: EdgeInsets.only(top: 20.0),
+                                      child: Icon(
+                                        Icons.location_on,
+                                        size: 75.0,
+                                        color: Colors.green,
+                                      ),
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        'Pick Up',
+                                        style: TextStyle(
+                                            fontSize: 20.0,
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                    Container(
+                                        child: Text(
+                                      '12+ Options',
+                                      style: TextStyle(color: Colors.white),
+                                    )),
+                                    SizedBox(
+                                      height: 8.0,
+                                    )
+                                  ],
+                                ))),
                           ],
                         ),
                       ),
@@ -308,7 +308,7 @@ class _RestaurantState extends State<Restaurant> {
                             width: 175.0,
                             margin: EdgeInsets.all(10.0),
                             decoration: BoxDecoration(
-                                border: Border.all(color: Colors.black),
+                              border: Border.all(color: Colors.black),
                               color: Colors.lightGreen[200],
                             ),
                             child: Padding(
@@ -317,7 +317,8 @@ class _RestaurantState extends State<Restaurant> {
                                 'Top Restaurants -',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontSize: 20.0, fontWeight: FontWeight.bold),
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
@@ -328,29 +329,27 @@ class _RestaurantState extends State<Restaurant> {
                       padding: EdgeInsets.only(top: 15.0),
                       child: Card(
                           child: ListTile(
-                        onTap: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return HomePage();
-                          }));
-                        },
-                        leading: ClipRRect(
-                          borderRadius: BorderRadius.circular(20.0),
-                          child: Image(
-                            image: AssetImage('assets/${rest[index].image}'),
-                            width: 50.0,
-                            height: 80.0,
-                          ),
-                        ),
-                        title: Text(rest[index].name,
-                        style: TextStyle(
-                          fontSize: 18.0
-                        ),),
-                        subtitle: Text(rest[index].desc),
-                        trailing: Text(
-                          '\u{02605}4.2'
-                        )
-                      ))),
+                              onTap: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return HomePage();
+                                }));
+                              },
+                              leading: ClipRRect(
+                                borderRadius: BorderRadius.circular(20.0),
+                                child: Image(
+                                  image:
+                                      AssetImage('assets/${rest[index].image}'),
+                                  width: 50.0,
+                                  height: 80.0,
+                                ),
+                              ),
+                              title: Text(
+                                rest[index].name,
+                                style: TextStyle(fontSize: 18.0),
+                              ),
+                              subtitle: Text(rest[index].desc),
+                              trailing: Text('\u{02605}4.2')))),
                 ],
               );
             },
