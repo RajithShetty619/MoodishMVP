@@ -46,6 +46,8 @@ dependencies:
   hive_flutter: ^0.3.0+2
   path_provider: ^1.6.5
   equatable: ^1.2.0
+  firebase_storage: ^3.1.6
+  cached_network_image: ^2.2.0+1
   
 
 dev_dependencies:

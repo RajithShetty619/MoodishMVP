@@ -1,11 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
-import 'package:moodish_mvp/Services/database.dart'; 
+import 'package:moodish_mvp/Services/database.dart';
+import 'package:moodish_mvp/Services/storage.dart';
 import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart';
-import 'package:moodish_mvp/screens/Food/events/foodEvent.dart'; 
-import 'package:flutter_spinkit/flutter_spinkit.dart'; 
+import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'models/foodListModel.dart';
 
 class Test extends StatefulWidget {
@@ -20,14 +22,14 @@ class _TestState extends State<Test> {
       future: Hive.openBox('foodlist'),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          return  BlocProvider<FoodBloc>(
-          create: (context) => FoodBloc(),
-          child: Scaffold(
-            body: FoodList(),
-          ),
-        );
+          return BlocProvider<FoodBloc>(
+            create: (context) => FoodBloc(),
+            child: Scaffold(
+              body: FoodList(),
+            ),
+          );
         }
-        return  Scaffold();
+        return Scaffold();
       },
     );
   }
@@ -61,7 +63,7 @@ class _FoodListState extends State<FoodList> {
       QuerySnapshot snapshot = await q.getDocuments();
       List<FoodListModel> queryList =
           DatabaseService().listFromSnapshot(snapshot);
-      BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(queryList,"0"));
+      BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(queryList, "0"));
       setState(() {
         print("$_lastDocument" + "doc");
         loadingData = false;
@@ -69,7 +71,7 @@ class _FoodListState extends State<FoodList> {
       });
     } else {
       List<FoodListModel> _foodList = _gfoodList.cast<FoodListModel>();
-      BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(_foodList,"0"));
+      BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(_foodList, "0"));
       setState(() {
         print("$_lastDocument" + "doc");
         loadingData = false;
@@ -94,7 +96,7 @@ class _FoodListState extends State<FoodList> {
       QuerySnapshot snapshot = await q.getDocuments();
       List<FoodListModel> queryList =
           DatabaseService().listFromSnapshot(snapshot);
-      BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(queryList,"0"));
+      BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(queryList, "0"));
 
       setState(() {
         loadingData = false;
@@ -108,8 +110,8 @@ class _FoodListState extends State<FoodList> {
   }
 
   @override
-  void initState()  {
-    super.initState(); 
+  void initState() {
+    super.initState();
     getFood();
 
     _scrollController.addListener(() {
@@ -125,17 +127,20 @@ class _FoodListState extends State<FoodList> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<FoodBloc,Map<String,List<FoodListModel>>>(
-      buildWhen: (Map<String,List<FoodListModel>> previous, Map<String,List<FoodListModel>> current) {
+    return BlocConsumer<FoodBloc, Map<String, List<FoodListModel>>>(
+      buildWhen: (Map<String, List<FoodListModel>> previous,
+          Map<String, List<FoodListModel>> current) {
         return true;
       },
-      listenWhen: (Map<String,List<FoodListModel>> previous, Map<String,List<FoodListModel>> current) {
+      listenWhen: (Map<String, List<FoodListModel>> previous,
+          Map<String, List<FoodListModel>> current) {
         if (current.length > previous.length) {
           return true;
         }
         return false;
       },
       builder: (context, foodList) {
+        List<String> urlList = Storage().listUrl(foodList["0"]);
         return Column(
           children: <Widget>[
             Expanded(
@@ -146,9 +151,44 @@ class _FoodListState extends State<FoodList> {
                   return Card(
                     margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     elevation: 2.0,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(foodList["0"][index].description),
+                    child: Column(
+                      children: <Widget>[
+                        Text(foodList["0"][index].foodName),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: FutureBuilder<String>(
+                            future:
+                                Storage().getUrl(foodList["0"][index].images),
+                            initialData: null,
+                            builder:
+                                (BuildContext context, AsyncSnapshot snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                return CachedNetworkImage(
+                                  imageUrl: snapshot.data,
+                                  imageBuilder: (context, imageProvider) { 
+                                    return Container(
+                                    height: 200,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: imageProvider,
+                                        fit: BoxFit.fill
+                                      ),
+                                    ),
+                                  );
+                                  },
+                                  placeholder: (context, url) =>
+                                      CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) =>
+                                      Icon(Icons.error),
+                                );
+                              } else {
+                                return Container();
+                              }
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   );
                 },
@@ -175,3 +215,19 @@ class _FoodListState extends State<FoodList> {
     );
   }
 }
+/* Image.network(
+                        urlList[index],
+                        fit: BoxFit.fill,
+                        loadingBuilder: (BuildContext context, Widget child,
+                            ImageChunkEvent loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return Center(
+                            child: CircularProgressIndicator(
+                              value: loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes
+                                  : null,
+                            ),
+                          );
+                        },
+                      ), */
