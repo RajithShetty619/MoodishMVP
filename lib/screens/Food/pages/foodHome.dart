@@ -13,6 +13,7 @@ import 'package:moodish_mvp/screens/Food/components/Food_Taste.dart';
 import 'package:moodish_mvp/screens/Food/components/MealType.dart';
 import 'package:moodish_mvp/screens/Food/components/TodaySpecial.dart';
 import 'package:moodish_mvp/screens/Food/components/foodBG.dart';
+import 'package:moodish_mvp/screens/Food/components/general.dart';
 import 'package:moodish_mvp/screens/Food/events/foodEvent.dart'; 
 
 // import 'package:intl/intl.dart';
@@ -182,15 +183,63 @@ class _FoodHomeState extends State<FoodHome> {
                         SizedBox(height: 20),
                         Container(
                           // color: Colors.grey[300],
-                          height: 200,
-                          child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: 5,
-                              itemBuilder: (BuildContext context, int index) {
-                                return MealType(
-                                    image: 'assets/img.jpg',
-                                    types: 'breakfast');
-                              }),
+                          height: 300,
+                          child: BlocConsumer<FoodBloc,Map<String, List<FoodListModel>>>(
+                            buildWhen: (Map<String, List<FoodListModel>> previous,
+                                Map<String, List<FoodListModel>> current) {
+                              return true;
+                            },
+                            listenWhen: (Map<String, List<FoodListModel>> previous,
+                                Map<String, List<FoodListModel>> current) {
+                              if (current.length > previous.length) {
+                                return true;
+                              }
+                              return false;
+                            },
+                            builder: (BuildContext context, foodList) {
+                              return Column(
+                                children: <Widget>[
+                                  Expanded(
+                                    child: ListView.builder(
+                                      controller: _scrollController,
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: foodList["0"].length,
+                                      itemBuilder: (BuildContext context,int index) {
+                                        return General(
+                                          image: 'assets/img1.jpg', 
+                                          title: foodList['0'][index].foodName, 
+                                          desc: foodList['0'][index].cuisine
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                  if (loadingData)
+                                    Container(
+                                      color: Colors.brown[100],
+                                      child: Center(
+                                        child: SpinKitChasingDots(
+                                          color: Colors.brown,
+                                          size: 50.0,
+                                        ),
+                                      ),
+                                    )
+                                ],
+                              );
+                            },
+                            listener: (context, foodList) {
+                              Scaffold.of(context).showSnackBar(
+                                SnackBar(content: Text('Added!')),
+                              );
+                            },
+                          ),
+                          // ListView.builder(
+                          //     scrollDirection: Axis.horizontal,
+                          //     itemCount: 5,
+                          //     itemBuilder: (BuildContext context, int index) {
+                          //       return General(
+                          //         image: 'assets/img1.jpg', title: 'food', desc: 'description'
+                          //       );
+                          //     }),
                           // child: ListView(
                           //   scrollDirection: Axis.horizontal,
                           //   children: <Widget>[
@@ -257,94 +306,94 @@ class _FoodHomeState extends State<FoodHome> {
                             ],
                           ),
                         ),
+                        // // SizedBox(height: 20),
+                        // Container(
+                        //   // color: Colors.grey[300],
+                        //   height: 300,
+                        //   child: ListView.builder(
+                        //       scrollDirection: Axis.horizontal,
+                        //       itemCount: 5,
+                        //       itemBuilder: (BuildContext context, int index) {
+                        //         return FoodEveryTaste(
+                        //             image: 'assets/img.jpg',
+                        //             title: 'food1',
+                        //             desc: 'description');
+                        //       }),
+                        //   // child: ListView(
+                        //   //   scrollDirection: Axis.horizontal,
+                        //   //   children: <Widget>[
+                        //   //     FoodEveryTaste(
+                        //   //         image: 'assets/img.jpg',
+                        //   //         title: 'food1',
+                        //   //         desc: 'description'),
+                        //   //     FoodEveryTaste(
+                        //   //         image: 'assets/img.jpg',
+                        //   //         title: 'food2',
+                        //   //         desc: 'description'),
+                        //   //     FoodEveryTaste(
+                        //   //         image: 'assets/img.jpg',
+                        //   //         title: 'food3',
+                        //   //         desc: 'description'),
+                        //   //     FoodEveryTaste(
+                        //   //         image: 'assets/img.jpg',
+                        //   //         title: 'food4',
+                        //   //         desc: 'description'),
+                        //   //   ],
+                        //   // ),
+                        // ),
                         // SizedBox(height: 20),
-                        Container(
-                          // color: Colors.grey[300],
-                          height: 300,
-                          child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: 5,
-                              itemBuilder: (BuildContext context, int index) {
-                                return FoodEveryTaste(
-                                    image: 'assets/img.jpg',
-                                    title: 'food1',
-                                    desc: 'description');
-                              }),
-                          // child: ListView(
-                          //   scrollDirection: Axis.horizontal,
-                          //   children: <Widget>[
-                          //     FoodEveryTaste(
-                          //         image: 'assets/img.jpg',
-                          //         title: 'food1',
-                          //         desc: 'description'),
-                          //     FoodEveryTaste(
-                          //         image: 'assets/img.jpg',
-                          //         title: 'food2',
-                          //         desc: 'description'),
-                          //     FoodEveryTaste(
-                          //         image: 'assets/img.jpg',
-                          //         title: 'food3',
-                          //         desc: 'description'),
-                          //     FoodEveryTaste(
-                          //         image: 'assets/img.jpg',
-                          //         title: 'food4',
-                          //         desc: 'description'),
-                          //   ],
-                          // ),
-                        ),
-                        SizedBox(height: 20),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20.0),
-                          child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 5),
-                            height: 30,
-                            width: 250,
-                            color: Colors.grey[350],
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                'Food for Every Situation',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              EverySituation(
-                                title: 'Happy',
-                                isActive: true,
-                                press: () {},
-                              ),
-                              EverySituation(
-                                title: 'Happy',
-                                isActive: false,
-                                press: () {},
-                              ),
-                              EverySituation(
-                                title: 'Happy',
-                                isActive: false,
-                                press: () {},
-                              ),
-                              EverySituation(
-                                title: 'Happy',
-                                isActive: false,
-                                press: () {},
-                              ),
-                              EverySituation(
-                                title: 'Happy',
-                                isActive: false,
-                                press: () {},
-                              ),
-                            ],
-                          ),
-                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.only(left: 20.0),
+                        //   child: Container(
+                        //     margin: EdgeInsets.symmetric(vertical: 5),
+                        //     height: 30,
+                        //     width: 250,
+                        //     color: Colors.grey[350],
+                        //     child: Align(
+                        //       alignment: Alignment.center,
+                        //       child: Text(
+                        //         'Food for Every Situation',
+                        //         style: TextStyle(
+                        //           fontSize: 20,
+                        //           fontWeight: FontWeight.bold,
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                        // SingleChildScrollView(
+                        //   scrollDirection: Axis.horizontal,
+                        //   child: Row(
+                        //     crossAxisAlignment: CrossAxisAlignment.start,
+                        //     children: <Widget>[
+                        //       EverySituation(
+                        //         title: 'Happy',
+                        //         isActive: true,
+                        //         press: () {},
+                        //       ),
+                        //       EverySituation(
+                        //         title: 'Happy',
+                        //         isActive: false,
+                        //         press: () {},
+                        //       ),
+                        //       EverySituation(
+                        //         title: 'Happy',
+                        //         isActive: false,
+                        //         press: () {},
+                        //       ),
+                        //       EverySituation(
+                        //         title: 'Happy',
+                        //         isActive: false,
+                        //         press: () {},
+                        //       ),
+                        //       EverySituation(
+                        //         title: 'Happy',
+                        //         isActive: false,
+                        //         press: () {},
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
                         Container(
                           height: 300,
                           child: BlocConsumer<FoodBloc,Map<String, List<FoodListModel>>>(
@@ -365,19 +414,24 @@ class _FoodHomeState extends State<FoodHome> {
                                   Expanded(
                                     child: ListView.builder(
                                       controller: _scrollController,
-                                      scrollDirection: Axis.vertical,
+                                      scrollDirection: Axis.horizontal,
                                       itemCount: foodList["0"].length,
                                       itemBuilder: (BuildContext context,int index) {
-                                        return Card(
-                                          margin: EdgeInsets.symmetric(
-                                              vertical: 5, horizontal: 10),
-                                          elevation: 2.0,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text(
-                                                foodList['0'][index].description),
-                                          ),
+                                        return FoodEverySituation(
+                                          image: 'assets/Coffee.jpg',
+                                          title: foodList['0'][index].foodName,
+                                          desc: foodList['0'][index].foodDeter,
                                         );
+                                        // return Card(
+                                        //   margin: EdgeInsets.symmetric(
+                                        //       vertical: 5, horizontal: 10),
+                                        //   elevation: 2.0,
+                                        //   child: Padding(
+                                        //     padding: const EdgeInsets.all(8.0),
+                                        //     child: Text(
+                                        //         foodList['0'][index].description),
+                                        //   ),
+                                        // );
                                       },
                                     ),
                                   ),
@@ -445,6 +499,7 @@ class _FoodHomeState extends State<FoodHome> {
     );
   }
 }
+
 
 class CurvedShape extends StatelessWidget {
   @override
