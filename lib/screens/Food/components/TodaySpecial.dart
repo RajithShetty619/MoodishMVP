@@ -67,12 +67,15 @@ class _TodaySpecialState extends State<TodaySpecial> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Text(
-                        widget.descrip1,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 35,
-                            fontWeight: FontWeight.bold),
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          widget.descrip1,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                       SizedBox(
                         height: 10,

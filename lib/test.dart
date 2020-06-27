@@ -10,10 +10,10 @@ import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'models/foodListModel.dart';
 
-// class Test extends StatefulWidget {
-//   @override
-//   _TestState createState() => _TestState();
-// }
+class Test extends StatefulWidget {
+  @override
+  _TestState createState() => _TestState();
+}
 
 class _TestState extends State<Test> {
   @override
@@ -35,18 +35,18 @@ class _TestState extends State<Test> {
   }
 }
 
-// class FoodList extends StatefulWidget {
-//   @override
-//   _FoodListState createState() => _FoodListState();
-// }
+class FoodList extends StatefulWidget {
+  @override
+  _FoodListState createState() => _FoodListState();
+}
 
-// class _FoodListState extends State<FoodList> {
-//   bool loadingData = false;
-//   bool dataExists = true;
-//   // List<DocumentSnapshot> foodList = [];
-//   final CollectionReference _ref = Firestore.instance.collection('0');
-//   String _lastDocument;
-//   ScrollController _scrollController = ScrollController();
+class _FoodListState extends State<FoodList> {
+  bool loadingData = false;
+  bool dataExists = true;
+  // List<DocumentSnapshot> foodList = [];
+  final CollectionReference _ref = Firestore.instance.collection('0');
+  String _lastDocument;
+  ScrollController _scrollController = ScrollController();
 
   getFood() async {
     setState(() {
@@ -80,13 +80,13 @@ class _TestState extends State<Test> {
     }
   }
 
-//   getMoreFood() async {
-//     print("getMoreFood");
-//     if (dataExists && !loadingData) {
-//       setState(() {
-//         loadingData = true;
-//       });
-//       print("getFood");
+  getMoreFood() async {
+    print("getMoreFood");
+    if (dataExists && !loadingData) {
+      setState(() {
+        loadingData = true;
+      });
+      print("getFood");
 
       Query q = _ref
           .where("Description", isGreaterThan: " ")
@@ -98,32 +98,32 @@ class _TestState extends State<Test> {
           DatabaseService().listFromSnapshot(snapshot);
       BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(queryList, "0"));
 
-//       setState(() {
-//         loadingData = false;
-//         _lastDocument = queryList[queryList.length - 1].description;
-//       });
-//       if (snapshot.documents.length == 0) {
-//         dataExists = false;
-//         print("no data");
-//       }
-//     }
-//   }
+      setState(() {
+        loadingData = false;
+        _lastDocument = queryList[queryList.length - 1].description;
+      });
+      if (snapshot.documents.length == 0) {
+        dataExists = false;
+        print("no data");
+      }
+    }
+  }
 
   @override
   void initState() {
     super.initState();
     getFood();
 
-//     _scrollController.addListener(() {
-//       double _maxScroll = _scrollController.position.maxScrollExtent;
-//       double _currentScroll = _scrollController.position.pixels;
-//       double _delta = MediaQuery.of(context).size.height * .25;
+    _scrollController.addListener(() {
+      double _maxScroll = _scrollController.position.maxScrollExtent;
+      double _currentScroll = _scrollController.position.pixels;
+      double _delta = MediaQuery.of(context).size.height * .25;
 
-//       if (_maxScroll - _currentScroll < _delta && loadingData == false) {
-//         getMoreFood();
-//       }
-//     });
-//   }
+      if (_maxScroll - _currentScroll < _delta && loadingData == false) {
+        getMoreFood();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

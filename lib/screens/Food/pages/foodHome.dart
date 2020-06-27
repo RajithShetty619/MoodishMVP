@@ -24,10 +24,16 @@ class FoodHome extends StatefulWidget {
 }
 
 class _FoodHomeState extends State<FoodHome> {
+
+  int _selected = 2 ;
+
   ScrollController _scrollController = ScrollController();
+  ScrollController _scrollController1 = ScrollController();
+   ScrollController _scrollController2 = ScrollController();
   bool _getFoodCalled = false;
   bool loadingData = false;
   DatabaseQuery _dq = new DatabaseQuery();
+
   @override
   void initState() {
     super.initState(); 
@@ -44,6 +50,42 @@ class _FoodHomeState extends State<FoodHome> {
     _scrollController.addListener(() {
       double _maxScroll = _scrollController.position.maxScrollExtent;
       double _currentScroll = _scrollController.position.pixels;
+      double _delta = MediaQuery.of(context).size.height * .25;
+      if (_maxScroll - _currentScroll < _delta && loadingData == false) {
+         print("scrool");
+        loadingData = true;
+        _dq
+            .getMoreFood(context)
+            .then((future) {
+               BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future,"0"));
+            setState(() {
+              loadingData = false;
+            });
+            });
+        print(loadingData);
+      }
+    });
+    _scrollController1.addListener(() {
+      double _maxScroll = _scrollController1.position.maxScrollExtent;
+      double _currentScroll = _scrollController1.position.pixels;
+      double _delta = MediaQuery.of(context).size.height * .25;
+      if (_maxScroll - _currentScroll < _delta && loadingData == false) {
+         print("scrool");
+        loadingData = true;
+        _dq
+            .getMoreFood(context)
+            .then((future) {
+               BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future,"0"));
+            setState(() {
+              loadingData = false;
+            });
+            });
+        print(loadingData);
+      }
+    });
+    _scrollController2.addListener(() {
+      double _maxScroll = _scrollController2.position.maxScrollExtent;
+      double _currentScroll = _scrollController2.position.pixels;
       double _delta = MediaQuery.of(context).size.height * .25;
       if (_maxScroll - _currentScroll < _delta && loadingData == false) {
          print("scrool");
@@ -128,16 +170,63 @@ class _FoodHomeState extends State<FoodHome> {
                                 ),
                               ),
                               Expanded(
-                                child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: 5,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return TodaySpecial(
+                                child: BlocConsumer<FoodBloc,Map<String, List<FoodListModel>>>(
+                            buildWhen: (Map<String, List<FoodListModel>> previous,
+                                Map<String, List<FoodListModel>> current) {
+                              return true;
+                            },
+                            listenWhen: (Map<String, List<FoodListModel>> previous,
+                                Map<String, List<FoodListModel>> current) {
+                              if (current.length > previous.length) {
+                                return true;
+                              }
+                              return false;
+                            },
+                            builder: (BuildContext context, foodList) {
+                              return Column(
+                                children: <Widget>[
+                                  Expanded(
+                                    child: ListView.builder(
+                                      controller: _scrollController1,
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: foodList["0"].length,
+                                      itemBuilder: (BuildContext context,int index) {
+                                        return TodaySpecial(
                                           image: 'assets/img.jpg',
-                                          descrip1: 'food 0',
-                                          descrip2: 'desc');
-                                    }),
+                                          descrip1: foodList['0'][index].foodName,
+                                          descrip2: foodList['0'][index].cuisine);
+                                      },
+                                    ),
+                                  ),
+                                  if (loadingData)
+                                    Container(
+                                      color: Colors.brown[100],
+                                      child: Center(
+                                        child: SpinKitChasingDots(
+                                          color: Colors.brown,
+                                          size: 50.0,
+                                        ),
+                                      ),
+                                    )
+                                ],
+                              );
+                            },
+                            listener: (context, foodList) {
+                              Scaffold.of(context).showSnackBar(
+                                SnackBar(content: Text('Added!')),
+                              );
+                            },
+                          ),
+                                // ListView.builder(
+                                //     scrollDirection: Axis.horizontal,
+                                //     itemCount: 5,
+                                //     itemBuilder:
+                                //         (BuildContext context, int index) {
+                                //       return TodaySpecial(
+                                //           image: 'assets/img.jpg',
+                                //           descrip1: 'food 0',
+                                //           descrip2: 'desc');
+                                //     }),
                                 //     TodaySpecial(
                                 //         image: 'assets/img.jpg',
                                 //         descrip1: 'food 1',
@@ -201,7 +290,7 @@ class _FoodHomeState extends State<FoodHome> {
                                 children: <Widget>[
                                   Expanded(
                                     child: ListView.builder(
-                                      controller: _scrollController,
+                                      controller: _scrollController1,
                                       scrollDirection: Axis.horizontal,
                                       itemCount: foodList["0"].length,
                                       itemBuilder: (BuildContext context,int index) {
@@ -278,30 +367,25 @@ class _FoodHomeState extends State<FoodHome> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              EveryTaste(
+                              mood(
                                 title: 'Happy',
-                                isActive: true,
-                                press: () {},
+                                index: 0,
                               ),
-                              EveryTaste(
+                              mood(
                                 title: 'Happy',
-                                isActive: false,
-                                press: () {},
+                                index: 1,
                               ),
-                              EveryTaste(
+                              mood(
                                 title: 'Happy',
-                                isActive: false,
-                                press: () {},
+                                index: 2,
                               ),
-                              EveryTaste(
+                              mood(
                                 title: 'Happy',
-                                isActive: false,
-                                press: () {},
+                                index: 3,
                               ),
-                              EveryTaste(
+                              mood(
                                 title: 'Happy',
-                                isActive: false,
-                                press: () {},
+                                index: 4,
                               ),
                             ],
                           ),
@@ -498,6 +582,40 @@ class _FoodHomeState extends State<FoodHome> {
       ),
     );
   }
+  Widget mood ({String title,int index}) {
+    return GestureDetector(
+      onTap: (){
+        setState(() {
+          _selected = index;
+        });
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        child: Column(
+          children: <Widget>[
+            Text(
+              title,
+              style: index == _selected? TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+                fontWeight: FontWeight.bold
+              ): TextStyle(color: Colors.grey[400],fontSize: 18)
+            ),
+            index == _selected?
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 5),
+              height: 3,
+              width: 22,
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.circular(20)
+              ),
+            ):Container(),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 
@@ -513,3 +631,4 @@ class CurvedShape extends StatelessWidget {
     );
   }
 }
+
