@@ -32,6 +32,8 @@ class _FoodHomeState extends State<FoodHome> {
    ScrollController _scrollController2 = ScrollController();
   bool _getFoodCalled = false;
   bool loadingData = false;
+  bool loadingData1 = false;
+  bool loadingData2 = false;
   DatabaseQuery _dq = new DatabaseQuery();
 
   @override
@@ -69,36 +71,36 @@ class _FoodHomeState extends State<FoodHome> {
       double _maxScroll = _scrollController1.position.maxScrollExtent;
       double _currentScroll = _scrollController1.position.pixels;
       double _delta = MediaQuery.of(context).size.height * .25;
-      if (_maxScroll - _currentScroll < _delta && loadingData == false) {
+      if (_maxScroll - _currentScroll < _delta && loadingData1 == false) {
          print("scrool");
-        loadingData = true;
+        loadingData1 = true;
         _dq
             .getMoreFood(context)
             .then((future) {
                BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future,"0"));
             setState(() {
-              loadingData = false;
+              loadingData1 = false;
             });
             });
-        print(loadingData);
+        print(loadingData1);
       }
     });
     _scrollController2.addListener(() {
       double _maxScroll = _scrollController2.position.maxScrollExtent;
       double _currentScroll = _scrollController2.position.pixels;
       double _delta = MediaQuery.of(context).size.height * .25;
-      if (_maxScroll - _currentScroll < _delta && loadingData == false) {
+      if (_maxScroll - _currentScroll < _delta && loadingData2 == false) {
          print("scrool");
-        loadingData = true;
+        loadingData2 = true;
         _dq
             .getMoreFood(context)
             .then((future) {
                BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future,"0"));
             setState(() {
-              loadingData = false;
+              loadingData2 = false;
             });
             });
-        print(loadingData);
+        print(loadingData2);
       }
     });
   }
@@ -183,7 +185,7 @@ class _FoodHomeState extends State<FoodHome> {
                               return false;
                             },
                             builder: (BuildContext context, foodList) {
-                              return Column(
+                              return Row(
                                 children: <Widget>[
                                   Expanded(
                                     child: ListView.builder(
@@ -198,7 +200,7 @@ class _FoodHomeState extends State<FoodHome> {
                                       },
                                     ),
                                   ),
-                                  if (loadingData)
+                                  if (loadingData1)
                                     Container(
                                       color: Colors.brown[100],
                                       child: Center(
@@ -286,11 +288,11 @@ class _FoodHomeState extends State<FoodHome> {
                               return false;
                             },
                             builder: (BuildContext context, foodList) {
-                              return Column(
+                              return Row(
                                 children: <Widget>[
                                   Expanded(
                                     child: ListView.builder(
-                                      controller: _scrollController1,
+                                      controller: _scrollController2,
                                       scrollDirection: Axis.horizontal,
                                       itemCount: foodList["0"].length,
                                       itemBuilder: (BuildContext context,int index) {
@@ -302,7 +304,7 @@ class _FoodHomeState extends State<FoodHome> {
                                       },
                                     ),
                                   ),
-                                  if (loadingData)
+                                  if (loadingData2)
                                     Container(
                                       color: Colors.brown[100],
                                       child: Center(
@@ -493,7 +495,7 @@ class _FoodHomeState extends State<FoodHome> {
                               return false;
                             },
                             builder: (BuildContext context, foodList) {
-                              return Column(
+                              return Row(
                                 children: <Widget>[
                                   Expanded(
                                     child: ListView.builder(
