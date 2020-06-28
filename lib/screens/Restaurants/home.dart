@@ -308,7 +308,7 @@ class _RestaurantState extends State<Restaurant> {
                           margin: EdgeInsets.all(10.0),
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.black),
-                            color: Colors.lightGreen[200],
+                            color: Colors.blue[200],
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(5.0),
