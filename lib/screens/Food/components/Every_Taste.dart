@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 class EveryTaste extends StatelessWidget {
   final String title;
+  final int index;
   final bool isActive;
   final Function press;
   const EveryTaste({
     Key key, 
     this.title, 
+    this.index,
     this.isActive = false, 
     this.press,
   }) : super(key: key);
