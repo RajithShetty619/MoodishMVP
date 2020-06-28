@@ -84,7 +84,7 @@ class _SignUpState extends State<SignUp> {
                                   _email = val ;
                                 });
 
-                                },                  ),
+                                },),
                               SizedBox(
                                 height: 10.0,
                               ),
@@ -189,7 +189,7 @@ class _SignUpState extends State<SignUp> {
                                         if(result == null){
                                           setState(() => error = 'Please Enter a Valid Email');
                                           loading = false;}
-                                        else if(_checkBoxValue==false)
+                                        if(_checkBoxValue==false)
                                           {err = 'Please Accept the Terms and Conditions!';}
                                         else
                                           Navigator.push(context, MaterialPageRoute(builder: (context){
