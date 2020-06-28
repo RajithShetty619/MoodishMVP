@@ -47,142 +47,139 @@ class _TopRatedState extends State<TopRated> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-          child: Expanded(
-            flex: 1,
-            child: ListView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemCount: rest.length,
-                itemBuilder: (context, index) {
-                  return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        if (index == 0)
-                          Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                SizedBox(
-                                  height: 30.0,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: TextField(
-                                    autocorrect: true,
-                                    style: TextStyle(color: Colors.white),
-                                    decoration: InputDecoration(
-                                      hintText: 'Where do you want to go?',
-                                      hintStyle: TextStyle(color: Colors.white),
-                                      prefixIcon: Icon(
-                                        Icons.search,
-                                        color: Colors.white,
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.black,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(30.0),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(30.0),
-                                      ),
+          child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemCount: rest.length,
+              itemBuilder: (context, index) {
+                return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      if (index == 0)
+                        Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              SizedBox(
+                                height: 30.0,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: TextField(
+                                  autocorrect: true,
+                                  style: TextStyle(color: Colors.white),
+                                  decoration: InputDecoration(
+                                    hintText: 'Where do you want to go?',
+                                    hintStyle: TextStyle(color: Colors.white),
+                                    prefixIcon: Icon(
+                                      Icons.search,
+                                      color: Colors.white,
+                                    ),
+                                    filled: true,
+                                    fillColor: Colors.black,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(30.0),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(30.0),
                                     ),
                                   ),
                                 ),
-                                Center(
-                                  child: Row(
+                              ),
+                              Center(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Icon(Icons.location_on),
+                                    Text('Mumbai,Maharashtra')
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10.0,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 10.0,left: 30.0,right: 30.0,bottom: 10.0),
+                                child: Container(
+                                  width: double.maxFinite,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30.0),
+                                    color: Colors.deepOrange,
+                                  ),
+                                  child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
-                                      Icon(Icons.location_on),
-                                      Text('Mumbai,Maharashtra')
+                                      SizedBox(height: 5.0,),
+                                      Container(
+                                        child: Icon(
+                                          Icons.stars,
+                                          size: 75.0,
+                                          color: Colors.yellow,
+                                        ),
+                                      ),
+                                      Container(
+                                        child: Text(
+                                          'Top Rated',
+                                          style: TextStyle(
+                                              fontSize: 20.0,
+                                              color: Colors.white),
+                                        ),
+                                      ),
+                                      Container(
+                                          child: Text(
+                                            '5+ Options',
+                                            style:
+                                            TextStyle(color: Colors.white),
+                                          )),
+                                      SizedBox(height: 10.0,)
                                     ],
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(top: 10.0,left: 30.0,right: 30.0,bottom: 10.0),
+                              ),
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
                                   child: Container(
-                                    width: double.maxFinite,
+                                    width: 175.0,
+                                    margin: EdgeInsets.all(10.0),
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                      color: Colors.deepOrange,
+                                        border: Border.all(color: Colors.transparent),
+                                        color: Colors.orange[200]
                                     ),
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        SizedBox(height: 5.0,),
-                                        Container(
-                                          child: Icon(
-                                            Icons.stars,
-                                            size: 75.0,
-                                            color: Colors.yellow,
-                                          ),
-                                        ),
-                                        Container(
-                                          child: Text(
-                                            'Top Rated',
-                                            style: TextStyle(
-                                                fontSize: 20.0,
-                                                color: Colors.white),
-                                          ),
-                                        ),
-                                        Container(
-                                            child: Text(
-                                              '5+ Options',
-                                              style:
-                                              TextStyle(color: Colors.white),
-                                            )),
-                                        SizedBox(height: 10.0,)
-                                      ],
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: Text(
+                                        'Top Restaurants -',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 20.0, fontWeight: FontWeight.bold),
+                                      ),
                                     ),
                                   ),
                                 ),
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                      width: 175.0,
-                                      margin: EdgeInsets.all(10.0),
-                                      decoration: BoxDecoration(
-                                          border: Border.all(color: Colors.transparent),
-                                          color: Colors.orange[200]
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(5.0),
-                                        child: Text(
-                                          'Top Restaurants -',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontSize: 20.0, fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ),
+                              )
+                            ]),
+                      Padding(
+                          padding: EdgeInsets.only(top: 15.0),
+                          child: Card(
+                              child: ListTile(
+                                onTap: () {},
+                                leading: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  child: Image(
+                                    image: AssetImage('assets/${rest[index].image}'),
+                                    width: 80.0,
+                                    height: 80.0,
                                   ),
-                                )
-                              ]),
-                        Padding(
-                            padding: EdgeInsets.only(top: 15.0),
-                            child: Card(
-                                child: ListTile(
-                                  onTap: () {},
-                                  leading: ClipRRect(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    child: Image(
-                                      image: AssetImage('assets/${rest[index].image}'),
-                                      width: 80.0,
-                                      height: 80.0,
-                                    ),
-                                  ),
-                                  title: Text(rest[index].name),
-                                  subtitle: Text(rest[index].desc),
-                                    trailing: Text(
-                                        '\u{02605}4.2'
-                                    )
-                                ))),
-                      ]);
-                }),
-          ),
+                                ),
+                                title: Text(rest[index].name),
+                                subtitle: Text(rest[index].desc),
+                                  trailing: Text(
+                                      '\u{02605}4.2'
+                                  )
+                              ))),
+                    ]);
+              }),
         ));
   }
 }

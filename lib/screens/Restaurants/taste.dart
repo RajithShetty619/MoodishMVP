@@ -31,7 +31,7 @@ class _TasteState extends State<Taste> {
                     text: 'Know Your',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 75,
+                        fontSize: 50,
                         color: Colors.green
                     ),
                     children: [
@@ -39,7 +39,7 @@ class _TasteState extends State<Taste> {
                           text: 'Taste.',
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
-                              fontSize: 75,
+                              fontSize: 50,
                               color: Colors.pinkAccent
                           )
                       )

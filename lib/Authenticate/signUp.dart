@@ -18,7 +18,7 @@ class _SignUpState extends State<SignUp> {
   bool _obscureText1 = true;
   bool _checkBoxValue = false;
   final _formKey = new GlobalKey<FormState>();
-  final _controller = TextEditingController();
+  String err= '';
   String pass1 , pass2;
   String _email = '' , _password = '' ;
   String error = '';
@@ -84,7 +84,7 @@ class _SignUpState extends State<SignUp> {
                                   _email = val ;
                                 });
 
-                                },                  ),
+                                },),
                               SizedBox(
                                 height: 10.0,
                               ),
@@ -96,6 +96,9 @@ class _SignUpState extends State<SignUp> {
                                     return 'Password too short';
                                   else
                                     return null;
+                                },
+                                onChanged: (val){
+                                  pass1 = val;
                                 },
                                 decoration: InputDecoration(
                                     labelText: 'NEW PASSWORD',
@@ -122,7 +125,7 @@ class _SignUpState extends State<SignUp> {
                                     return 'Enter a Password';
                                   else if(pass2.length<6)
                                     return 'Password too short';
-                                  else if(_controller.text!=pass2)
+                                  else if(pass1!=pass2)
                                     return 'Password doesnt match';
                                   else
                                     return null;
@@ -186,6 +189,8 @@ class _SignUpState extends State<SignUp> {
                                         if(result == null){
                                           setState(() => error = 'Please Enter a Valid Email');
                                           loading = false;}
+                                        if(_checkBoxValue==false)
+                                          {err = 'Please Accept the Terms and Conditions!';}
                                         else
                                           Navigator.push(context, MaterialPageRoute(builder: (context){
                                             return MainScreen();
@@ -205,12 +210,19 @@ class _SignUpState extends State<SignUp> {
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 10.0,),
+                              SizedBox(height: 5.0,),
                               Text(
                                 error,
                                 style: TextStyle(color: Colors.red, fontSize:  12.0),
 
-                              )
+                              ),
+                              SizedBox(height: 5.0,),
+                              Text(
+                                err,
+                                style: TextStyle(color: Colors.red, fontSize:  12.0),
+                              ),
+
+
                             ],
                           ),
                         )
