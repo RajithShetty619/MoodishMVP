@@ -121,13 +121,16 @@ class _CuisineState extends State<Cuisine> {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(12.0),
-                    child: Align(
+                    child: (i+1>3)?Align(
+                      alignment: Alignment.center,
+                      child: Text(''),
+                    ):Align(
                         alignment: Alignment.center,
                         child: Text(err,
                           style: TextStyle(
                               color: Colors.red
                           ),)
-                    ),
+                    )
                   ),
                   Align(
                     alignment: Alignment.centerRight,

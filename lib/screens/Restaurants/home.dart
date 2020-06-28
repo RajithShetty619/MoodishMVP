@@ -128,7 +128,7 @@ class _RestaurantState extends State<Restaurant> {
                       Padding(
                         padding: EdgeInsets.all(10.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: <Widget>[
                             RaisedButton(
                                 onPressed: () {
@@ -215,7 +215,7 @@ class _RestaurantState extends State<Restaurant> {
                       Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: <Widget>[
                             RaisedButton(
                                 onPressed: () {
@@ -327,6 +327,7 @@ class _RestaurantState extends State<Restaurant> {
                   Padding(
                       padding: EdgeInsets.only(top: 15.0),
                       child: Card(
+                        elevation: 0.0,
                           child: ListTile(
                         onTap: () {
                           Navigator.push(context,

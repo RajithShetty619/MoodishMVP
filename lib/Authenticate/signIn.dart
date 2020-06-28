@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:moodish_mvp/Authenticate/forgotPassword.dart';
 import 'package:moodish_mvp/Authenticate/loading.dart';
 import 'package:moodish_mvp/Services/authenticate.dart';
-import 'package:moodish_mvp/screens/Restaurants/cuisine.dart';
+import 'package:moodish_mvp/screens/mainScreen.dart';
 import 'signUp.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -142,7 +143,7 @@ class _SignInState extends State<SignIn> {
                                           loading = false;}
                                         else
                                           Navigator.push(context, MaterialPageRoute(builder: (context){
-                                            return Cuisine();
+                                            return MainScreen();
                                           }));
 
                                       }
@@ -169,7 +170,7 @@ class _SignInState extends State<SignIn> {
                                           loading = false;}
                                         else
                                           Navigator.push(context, MaterialPageRoute(builder: (context){
-                                            return Cuisine();
+                                            return MainScreen();
                                           }));
                                 },
                               ),
@@ -180,6 +181,11 @@ class _SignInState extends State<SignIn> {
                                 alignment: Alignment(1.0, 0),
                                 padding: EdgeInsets.only(top: 15.0),
                                 child: InkWell(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context){
+                                      return ForgotPassword();
+                                    }));
+                                  },
                                   child: Text(
                                     'Forgot Password',
                                     style: TextStyle(
