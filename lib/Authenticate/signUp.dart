@@ -45,7 +45,6 @@ class _SignUpState extends State<SignUp> {
                           child: Column(
                             children: <Widget>[
                               TextFormField(
-                                controller: _controller,
                                 decoration: InputDecoration(
                                   labelText: 'USERNAME',
                                   labelStyle: TextStyle(color: Colors.blueGrey),
@@ -90,7 +89,6 @@ class _SignUpState extends State<SignUp> {
                                 height: 10.0,
                               ),
                               TextFormField(
-                                controller: _controller,
                                 validator: (pass1){
                                   if(pass1.isEmpty)
                                     return 'Enter a Password';

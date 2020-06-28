@@ -36,7 +36,7 @@ class _CuisineState extends State<Cuisine> {
                     text: 'Cuisine',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 100,
+                        fontSize: 75,
                         color: Colors.orange
                     ),
                     children: [
@@ -44,7 +44,7 @@ class _CuisineState extends State<Cuisine> {
                           text: '.',
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
-                              fontSize: 110,
+                              fontSize: 90,
                               color: Colors.black
                           )
                       )
@@ -121,13 +121,16 @@ class _CuisineState extends State<Cuisine> {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(12.0),
-                    child: Align(
+                    child: (i+1>3)?Align(
+                      alignment: Alignment.center,
+                      child: Text(''),
+                    ):Align(
                         alignment: Alignment.center,
                         child: Text(err,
                           style: TextStyle(
                               color: Colors.red
                           ),)
-                    ),
+                    )
                   ),
                   Align(
                     alignment: Alignment.centerRight,
