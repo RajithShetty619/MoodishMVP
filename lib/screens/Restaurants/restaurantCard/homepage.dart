@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                               color: Colors.blue,
                               borderRadius: BorderRadius.circular(20.0)),
                           child: Text(
-                            "8.4/85 reviews",
+                            "1294 reviews",
                             style: TextStyle(color: Colors.black, fontSize: 13.0),
                           ),
                         ),
