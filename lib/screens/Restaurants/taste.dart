@@ -7,12 +7,12 @@ class Taste extends StatefulWidget {
 
 class _TasteState extends State<Taste> {
   List<GridTileBuilder> taste =[
-    GridTileBuilder(image: 'Chocolate.jpg',taste: 'Sweet'),
-    GridTileBuilder(image: 'Sour.jpeg',taste: 'Sour'),
-    GridTileBuilder(image: 'Spicy.jpg',taste: 'Hot n Spicy'),
-    GridTileBuilder(image: 'Coffee.jpg',taste: 'Aromatic'),
-    GridTileBuilder(image: 'Savory.jpg',taste: 'Savory'),
-    GridTileBuilder(image: 'Salty.jpg',taste: 'Salty'),
+    GridTileBuilder(image: 'Chocolate.jpg',taste: 'Sweet',currentOpacity: 1),
+    GridTileBuilder(image: 'Sour.jpeg',taste: 'Sour',currentOpacity: 1),
+    GridTileBuilder(image: 'Spicy.jpg',taste: 'Hot n Spicy',currentOpacity: 1),
+    GridTileBuilder(image: 'Coffee.jpg',taste: 'Aromatic',currentOpacity: 1),
+    GridTileBuilder(image: 'Savory.jpg',taste: 'Savory',currentOpacity: 1),
+    GridTileBuilder(image: 'Salty.jpg',taste: 'Salty',currentOpacity: 1),
   ];
   int i=0;
   List<String> pref=['','','','','',''];//all the user preferences are saved here
@@ -77,31 +77,37 @@ class _TasteState extends State<Taste> {
                           debugPrint('tapped');
                           pref[i]=taste[index].taste;
                           i++;
-                          setState(() {
-                            taste.removeAt(index);
-                          });
+                          setState(() =>  taste[index].currentOpacity=0 );
+
+//                          setState(() {
+//                            taste.removeAt(index);
+//                          });
 //                    for(int a=0;a<9;a++)
 //                    {
 //                      debugPrint(pref[a]);//print elements in pref
 //                    }
                         },
-                        child: Container(
-                          height: 125.0,
-                          width: 110.0,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage('assets/${taste[index].image}'),
-                                fit: BoxFit.cover,
-                              ),
-                              borderRadius: BorderRadius.circular(10.0)
-                          ),
-                          child: Center(
-                            child: Text(
-                              '${taste[index].taste}',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  fontSize: 20.0
+                        child: AnimatedOpacity(
+                          duration:  Duration(seconds: 1 ),
+                          opacity: taste[index].currentOpacity,
+                          child: Container(
+                            height: 125.0,
+                            width: 110.0,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage('assets/${taste[index].image}'),
+                                  fit: BoxFit.cover,
+                                ),
+                                borderRadius: BorderRadius.circular(10.0)
+                            ),
+                            child: Center(
+                              child: Text(
+                                '${taste[index].taste}',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    fontSize: 20.0
+                                ),
                               ),
                             ),
                           ),
@@ -161,6 +167,7 @@ class _TasteState extends State<Taste> {
 class GridTileBuilder{
   String image;
   String taste;
-  GridTileBuilder({this.taste,this.image}) ;
+  double currentOpacity;
+  GridTileBuilder({this.taste,this.image,this.currentOpacity}) ;
 
 }

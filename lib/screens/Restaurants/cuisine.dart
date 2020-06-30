@@ -8,15 +8,15 @@ class Cuisine extends StatefulWidget {
 
 class _CuisineState extends State<Cuisine> {
   List<GridTileBuilder> cuisine =[
-    GridTileBuilder(image: 'NorthIndian.jpeg',cuisine: 'North Indian'),
-    GridTileBuilder(image: 'SouthIndian.jpeg',cuisine: 'South Indian'),
-    GridTileBuilder(image: 'Chinese.png',cuisine: 'Chinese'),
-    GridTileBuilder(image: 'Dessert.jpg',cuisine: 'Desserts'),
-    GridTileBuilder(image: 'FastFood.png',cuisine: 'Fast Food'),
-    GridTileBuilder(image: 'Beverage.jpg',cuisine: 'Beverages'),
-    GridTileBuilder(image: 'Italian.jpg',cuisine: 'Italian'),
-    GridTileBuilder(image: 'Mexican.jpg',cuisine: 'Mexican'),
-    GridTileBuilder(image: 'Bakery.jpg',cuisine: 'Bakery'),
+    GridTileBuilder(image: 'NorthIndian.jpeg',cuisine: 'North Indian',currentOpacity: 1),
+    GridTileBuilder(image: 'SouthIndian.jpeg',cuisine: 'South Indian',currentOpacity: 1),
+    GridTileBuilder(image: 'Chinese.png',cuisine: 'Chinese',currentOpacity: 1),
+    GridTileBuilder(image: 'Dessert.jpg',cuisine: 'Desserts',currentOpacity: 1),
+    GridTileBuilder(image: 'FastFood.png',cuisine: 'Fast Food',currentOpacity: 1),
+    GridTileBuilder(image: 'Beverage.jpg',cuisine: 'Beverages',currentOpacity: 1),
+    GridTileBuilder(image: 'Italian.jpg',cuisine: 'Italian',currentOpacity: 1),
+    GridTileBuilder(image: 'Mexican.jpg',cuisine: 'Mexican',currentOpacity: 1),
+    GridTileBuilder(image: 'Bakery.jpg',cuisine: 'Bakery',currentOpacity: 1),
 
   ];
   int i=0;
@@ -77,36 +77,45 @@ class _CuisineState extends State<Cuisine> {
                     itemCount: cuisine.length,
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context,index){
-                      return GestureDetector(
+                      return (cuisine[index].currentOpacity==0)
+                          ? GestureDetector(
+                        onTap: ()=> null,
+                      )
+                          :GestureDetector(
                         onTap: (){
                           debugPrint('tapped');
                           pref[i]=cuisine[index].cuisine;
                           i++;
-                          setState(() {
-                            cuisine.removeAt(index);
-                          });
-//                    for(int a=0;a<9;a++)
-//                    {
-//                      debugPrint(pref[a]);//print elements in pref
-//                    }
+                          setState(() =>  cuisine[index].currentOpacity=0 );
+//                          setState(() {
+//                            cuisine.removeAt(index);
+//                          });
+                    for(int a=0;a<9;a++)
+                    {
+                      debugPrint(pref[a]);//print elements in pref
+                    }
                         },
-                        child: Container(
-                          height: 175.0,
-                          width: 110.0,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage('assets/${cuisine[index].image}'),
-                                fit: BoxFit.cover,
-                              ),
-                              borderRadius: BorderRadius.circular(10.0)
-                          ),
-                          child: Center(
-                            child: Text(
-                              '${cuisine[index].cuisine}',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  fontSize: 18.0
+                        child: AnimatedOpacity(
+                          duration:  Duration(seconds: 1 ),
+                          opacity: cuisine[index].currentOpacity,
+                          child: Container(
+                            height: 175.0,
+                            width: 110.0,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage('assets/${cuisine[index].image}'),
+                                  fit: BoxFit.cover,
+                                ),
+                                borderRadius: BorderRadius.circular(10.0)
+                            ),
+                            child: Center(
+                              child: Text(
+                                '${cuisine[index].cuisine}',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    fontSize: 18.0
+                                ),
                               ),
                             ),
                           ),
@@ -164,6 +173,7 @@ class _CuisineState extends State<Cuisine> {
 class GridTileBuilder{
   String image;
   String cuisine;
-  GridTileBuilder({this.cuisine,this.image}) ;
+  double currentOpacity;
+  GridTileBuilder({this.cuisine,this.image,this.currentOpacity}) ;
 
 }
