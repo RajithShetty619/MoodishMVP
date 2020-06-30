@@ -18,24 +18,25 @@ class IntroScreenState extends State<IntroScreen> {
     slides.add(
       new Slide(
         title:
-            "A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE A VERY LONG TITLE",
+            "Step 1",
         maxLineTitle: 2, 
         styleTitle: TextStyle(
-          color: Colors.white,
+          color: Colors.black,
           fontSize: 30.0,
           fontWeight: FontWeight.bold,
         ),
         description:
-            "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,",
+            "bkah bakjsbsjnn jnd kjdb ndsjv kjasv kjv kjv kjv kjf js jasf jasdvbv iugvrybwfc gfv ygf bygf ",
         styleDescription: TextStyle(
-          color: Colors.white,
+          color: Colors.black,
           fontSize: 20.0,
           fontStyle: FontStyle.italic,
         ),
         marginDescription:
             EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 70.0),
-        centerWidget: Text("Replace this with a custom widget",
-            style: TextStyle(color: Colors.white)), 
+        // centerWidget: Text("Replace this with a custom widget",
+        //     style: TextStyle(color: Colors.black)),
+        // pathImage: "images/photo_museum.png", 
         colorBegin: Color(0xffFFDAB9),
         colorEnd: Color(0xff40E0D0),
         // backgroundImage: 'images/photo_eraser.png',
@@ -46,47 +47,152 @@ class IntroScreenState extends State<IntroScreen> {
     );
     slides.add(
       new Slide(
-        title: "MUSEUM", 
+        title:
+            "Step 2",
+        maxLineTitle: 2, 
         styleTitle: TextStyle(
-          color: Color(0xffD02090),
+          color: Colors.black,
           fontSize: 30.0,
           fontWeight: FontWeight.bold,
         ),
         description:
-            "Ye indulgence unreserved connection alteration appearance",
+            "bkah bakjsbsjnn jnd kjdb ndsjv kjasv kjv kjv kjv kjf js jasf jasdvbv iugvrybwfc gfv ygf bygf ",
         styleDescription: TextStyle(
-          color: Color(0xffD02090),
+          color: Colors.black,
           fontSize: 20.0,
           fontStyle: FontStyle.italic,
-        ), 
-        // pathImage: "images/photo_museum.png",
-        colorBegin: Color(0xffFFFACD),
-        colorEnd: Color(0xffFF6347),
-        directionColorBegin: Alignment.topRight,
-        directionColorEnd: Alignment.bottomLeft,
+        ),
+        marginDescription:
+            EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 70.0),
+        // centerWidget: Text("Replace this with a custom widget",
+        //     style: TextStyle(color: Colors.black)),
+        // pathImage: "images/photo_museum.png", 
+        colorBegin: Color(0xffFFDAB9),
+        colorEnd: Color(0xff40E0D0),
+        // backgroundImage: 'images/photo_eraser.png',
+        directionColorBegin: Alignment.topLeft,
+        directionColorEnd: Alignment.bottomRight,
+        onCenterItemPress: () {},
       ),
     );
     slides.add(
       new Slide(
-        title: "COFFEE", 
+        title:
+            "Step 3",
+        maxLineTitle: 2, 
         styleTitle: TextStyle(
-          color: Color(0xffD02090),
+          color: Colors.black,
           fontSize: 30.0,
           fontWeight: FontWeight.bold,
         ),
         description:
-            "Much evil soon high in hope do view. Out may few northward believing attempted. Yet timed being songs marry one defer men our. Although finished blessing do of",
+            "bkah bakjsbsjnn jnd kjdb ndsjv kjasv kjv kjv kjv kjf js jasf jasdvbv iugvrybwfc gfv ygf bygf ",
         styleDescription: TextStyle(
-          color: Color(0xffD02090),
+          color: Colors.black,
           fontSize: 20.0,
           fontStyle: FontStyle.italic,
-        ), 
-        // pathImage: "images/photo_coffee_shop.png",
-        colorBegin: Color(0xffFFA500),
-        colorEnd: Color(0xff7FFFD4),
-        directionColorBegin: Alignment.topCenter,
-        directionColorEnd: Alignment.bottomCenter,
-        maxLineTextDescription: 3,
+        ),
+        marginDescription:
+            EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 70.0),
+        // centerWidget: Text("Replace this with a custom widget",
+        //     style: TextStyle(color: Colors.black)),
+        // pathImage: "images/photo_museum.png", 
+        colorBegin: Color(0xffFFDAB9),
+        colorEnd: Color(0xff40E0D0),
+        // backgroundImage: 'images/photo_eraser.png',
+        directionColorBegin: Alignment.topLeft,
+        directionColorEnd: Alignment.bottomRight,
+        onCenterItemPress: () {},
+      ),
+    );
+    slides.add(
+      new Slide(
+        title:
+            "Step 4",
+        maxLineTitle: 2, 
+        styleTitle: TextStyle(
+          color: Colors.black,
+          fontSize: 30.0,
+          fontWeight: FontWeight.bold,
+        ),
+        description:
+            "bkah bakjsbsjnn jnd kjdb ndsjv kjasv kjv kjv kjv kjf js jasf jasdvbv iugvrybwfc gfv ygf bygf ",
+        styleDescription: TextStyle(
+          color: Colors.black,
+          fontSize: 20.0,
+          fontStyle: FontStyle.italic,
+        ),
+        marginDescription:
+            EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 70.0),
+        // centerWidget: Text("Replace this with a custom widget",
+        //     style: TextStyle(color: Colors.black)),
+        // pathImage: "images/photo_museum.png", 
+        colorBegin: Color(0xffFFDAB9),
+        colorEnd: Color(0xff40E0D0),
+        // backgroundImage: 'images/photo_eraser.png',
+        directionColorBegin: Alignment.topLeft,
+        directionColorEnd: Alignment.bottomRight,
+        onCenterItemPress: () {},
+      ),
+    );
+    slides.add(
+      new Slide(
+        title:
+            "Step 5",
+        maxLineTitle: 2, 
+        styleTitle: TextStyle(
+          color: Colors.black,
+          fontSize: 30.0,
+          fontWeight: FontWeight.bold,
+        ),
+        description:
+            "bkah bakjsbsjnn jnd kjdb ndsjv kjasv kjv kjv kjv kjf js jasf jasdvbv iugvrybwfc gfv ygf bygf ",
+        styleDescription: TextStyle(
+          color: Colors.black,
+          fontSize: 20.0,
+          fontStyle: FontStyle.italic,
+        ),
+        marginDescription:
+            EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 70.0),
+        // centerWidget: Text("Replace this with a custom widget",
+        //     style: TextStyle(color: Colors.black)),
+        // pathImage: "images/photo_museum.png", 
+        colorBegin: Color(0xffFFDAB9),
+        colorEnd: Color(0xff40E0D0),
+        // backgroundImage: 'images/photo_eraser.png',
+        directionColorBegin: Alignment.topLeft,
+        directionColorEnd: Alignment.bottomRight,
+        onCenterItemPress: () {},
+      ),
+    );
+    slides.add(
+      new Slide(
+        title:
+            "Step 6",
+        maxLineTitle: 2, 
+        styleTitle: TextStyle(
+          color: Colors.black,
+          fontSize: 30.0,
+          fontWeight: FontWeight.bold,
+        ),
+        description:
+            "bkah bakjsbsjnn jnd kjdb ndsjv kjasv kjv kjv kjv kjf js jasf jasdvbv iugvrybwfc gfv ygf bygf ",
+        styleDescription: TextStyle(
+          color: Colors.black,
+          fontSize: 20.0,
+          fontStyle: FontStyle.italic,
+        ),
+        marginDescription:
+            EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 70.0),
+        // centerWidget: Text("Replace this with a custom widget",
+        //     style: TextStyle(color: Colors.black)),
+        // pathImage: "images/photo_museum.png", 
+        colorBegin: Color(0xffFFDAB9),
+        colorEnd: Color(0xff40E0D0),
+        // backgroundImage: 'images/photo_eraser.png',
+        directionColorBegin: Alignment.topLeft,
+        directionColorEnd: Alignment.bottomRight,
+        onCenterItemPress: () {},
       ),
     );
   }
@@ -101,24 +207,33 @@ class IntroScreenState extends State<IntroScreen> {
   }
 
   Widget renderNextBtn() {
-    return Icon(
-      Icons.navigate_next,
-      color: Color(0xffD02090),
-      size: 35.0,
+    return Padding(
+      padding: const EdgeInsets.all(30.0),
+      child: Icon(
+        Icons.navigate_next,
+        color: Color(0xffD02090),
+        size: 35.0,
+      ),
     );
   }
 
   Widget renderDoneBtn() {
-    return Icon(
-      Icons.done,
-      color: Color(0xffD02090),
+    return Padding(
+      padding: const EdgeInsets.all(30.0),
+      child: Icon(
+        Icons.done,
+        color: Color(0xffD02090),
+      ),
     );
   }
 
   Widget renderSkipBtn() {
-    return Icon(
-      Icons.skip_next,
-      color: Color(0xffD02090),
+    return Padding(
+      padding: const EdgeInsets.all(30.0),
+      child: Icon(
+        Icons.skip_next,
+        color: Color(0xffD02090),
+      ),
     );
   }
 
@@ -143,11 +258,12 @@ class IntroScreenState extends State<IntroScreen> {
       highlightColorDoneBtn: Color(0xff000000),
 
       // Dot indicator
-      colorDot: Color(0x33D02090),
-      colorActiveDot: Color(0xffD02090),
+      colorDot: Colors.grey[400],
+      colorActiveDot: Colors.black,
       sizeDot: 13.0,
 
       // Show or hide status bar
+      isShowSkipBtn: false,
       shouldHideStatusBar: true,
       backgroundColorAllSlides: Colors.grey,
     );
