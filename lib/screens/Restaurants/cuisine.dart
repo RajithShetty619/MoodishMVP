@@ -88,7 +88,7 @@ class _CuisineState extends State<Cuisine> {
                           i++;
                           // setState(() =>  cuisine[index].currentOpacity=0 );
                          setState(() {
-                           cuisine[index].currentOpacity=0;
+                          //  cuisine[index].currentOpacity=0;
                            cuisine.removeAt(index);
                          });
                     // for(int a=0;a<9;a++)

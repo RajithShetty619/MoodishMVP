@@ -83,7 +83,7 @@ class _TasteState extends State<Taste> {
                         int remo =  index;
                            
                            taste.removeAt(remo);
-                           taste[remo].currentOpacity=0;
+                          //  taste[remo].currentOpacity=0;
                          });
 //                    for(int a=0;a<9;a++)
 //                    {
