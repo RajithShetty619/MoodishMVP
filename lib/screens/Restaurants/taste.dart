@@ -77,18 +77,21 @@ class _TasteState extends State<Taste> {
                           debugPrint('tapped');
                           pref[i]=taste[index].taste;
                           i++;
-                          setState(() =>  taste[index].currentOpacity=0 );
+                          // setState(() =>  taste[index].currentOpacity=0 );
 
-//                          setState(() {
-//                            taste.removeAt(index);
-//                          });
+                         setState(() {
+                        int remo =  index;
+                           
+                           taste.removeAt(remo);
+                           taste[remo].currentOpacity=0;
+                         });
 //                    for(int a=0;a<9;a++)
 //                    {
 //                      debugPrint(pref[a]);//print elements in pref
 //                    }
                         },
                         child: AnimatedOpacity(
-                          duration:  Duration(seconds: 1 ),
+                          duration:  Duration(milliseconds: 500),
                           opacity: taste[index].currentOpacity,
                           child: Container(
                             height: 125.0,

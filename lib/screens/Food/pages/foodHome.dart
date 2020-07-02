@@ -139,7 +139,7 @@ class _FoodHomeState extends State<FoodHome> {
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0),
                           child: Text(
-                            'Hello Username,\n  Hungry yet?',
+                            'Hello Username,\n Hungry yet?',
                             style: TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.bold,
@@ -196,7 +196,8 @@ class _FoodHomeState extends State<FoodHome> {
                                         return TodaySpecial(
                                           image: 'assets/img.jpg',
                                           descrip1: foodList['0'][index].foodName,
-                                          descrip2: foodList['0'][index].cuisine);
+                                          descrip2: foodList['0'][index].cuisine,
+                                        );
                                       },
                                     ),
                                   ),
@@ -259,6 +260,7 @@ class _FoodHomeState extends State<FoodHome> {
                             margin: EdgeInsets.all(10.0),
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.black,width: 2),
+                              borderRadius: BorderRadius.circular(15),
                               // color: Colors.blue[200],
                             ),
                             child: Padding(
@@ -283,7 +285,8 @@ class _FoodHomeState extends State<FoodHome> {
                             children: <Widget>[
                               MealType(
                                   image: 'assets/img.jpg', types: 'breakfast'),
-                              MealType(image: 'assets/img.jpg', types: 'lunch'),
+                              MealType(
+                                  image: 'assets/img.jpg', types: 'lunch'),
                               MealType(
                                   image: 'assets/img.jpg', types: 'snacks'),
                               MealType(
@@ -355,6 +358,7 @@ class _FoodHomeState extends State<FoodHome> {
                               margin: EdgeInsets.all(10.0),
                               decoration: BoxDecoration(
                                 border: Border.all(color: Colors.black,width: 2),
+                                borderRadius: BorderRadius.circular(15),
                                 // color: Colors.blue[200],
                               ),
                               child: Padding(

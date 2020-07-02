@@ -87,24 +87,30 @@ class _TodaySpecialState extends State<TodaySpecial> {
                       SizedBox(height: 15),
                       FlatButton(
                         onPressed: () {},
-                        child: IconButton(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            // color: Colors.blue[300],
+                            child: IconButton(
  
-                          icon: Icon(
-                            Icons.restaurant,
-                            color: Colors.white,
-                            size: 35,
+                              icon: Icon(
+                                Icons.restaurant,
+                                color: Colors.white,
+                                size: 35,
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => IntroScreen()));
+                              },
+                            ),
                           ),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => IntroScreen()));
-                          },
                         ),
  
                         // label: Text(''),
                       ),
-                      SizedBox(height: 10),
+                      // SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.end,
