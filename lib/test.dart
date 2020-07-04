@@ -62,7 +62,7 @@ class _FoodListState extends State<FoodList> {
           .limit(10);
       QuerySnapshot snapshot = await q.getDocuments();
       List<FoodListModel> queryList =
-          DatabaseService().listFromSnapshot(snapshot);
+          await DatabaseService().listFromSnapshot(snapshot);
       BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(queryList, "0"));
       setState(() {
         print("$_lastDocument" + "doc");
@@ -95,7 +95,7 @@ class _FoodListState extends State<FoodList> {
           .limit(5);
       QuerySnapshot snapshot = await q.getDocuments();
       List<FoodListModel> queryList =
-          DatabaseService().listFromSnapshot(snapshot);
+          await DatabaseService().listFromSnapshot(snapshot);
       BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(queryList, "0"));
 
       setState(() {
