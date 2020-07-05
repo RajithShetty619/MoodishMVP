@@ -3,20 +3,18 @@ import 'package:moodish_mvp/Services/storage.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/models/name.dart';
 
-class DatabaseService { 
-
-  
+class DatabaseService {  
 
   final String uid;
   DatabaseService({ this.uid });
   final CollectionReference userName = Firestore.instance.collection('Username');
  
-  Future<void> updateUserData(String name) async {
+  Future<void> updateUserData(String uid,String email,String name) async {
     return await userName.document(uid).setData({
       'name': name,
+      'email': email,
     });
   }
-
  
   List<Name> _nameListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
