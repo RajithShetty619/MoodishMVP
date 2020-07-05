@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/screens/Food/components/Every_Situation.dart';
 import 'package:moodish_mvp/screens/Food/components/foodMood.dart';
 import 'package:moodish_mvp/screens/Food/pages/explore.dart';
 
@@ -28,41 +29,6 @@ class _FoodFeedState extends State<FoodFeed> {
                   Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Text(
-                                'Today ,\n Hungry yet?',
-                                style: TextStyle(
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            // Align(
-                            //   alignment: Alignment.centerRight,
-                            //   child: Container(
-                            //     height: 35,
-                            //     width: 140,
-                            //     child: CupertinoSlidingSegmentedControl(
-                            //       children: logowidgets,
-                            //       onValueChanged: (changeValue){
-
-                            //         setState(() {
-                            //           grpValue = changeValue;
-                            //         });
-                            //       },
-                            //       groupValue: grpValue,
-                            //     ),
-                            //   ),
-                            // ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
@@ -115,6 +81,67 @@ class _FoodFeedState extends State<FoodFeed> {
                                 return Mood_Food(image: 'assets/Chocolate.jpg', descrip1: 'food', descrip2: 'desc');
                               }
                             ),
+                          ),
+                        ),
+                        Padding(
+                              padding: const EdgeInsets.only(left: 10.0),
+                              child: Container(
+                                width: 120.0,
+                                margin: EdgeInsets.all(10.0),
+                                decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.black, width: 2),
+                                  borderRadius: BorderRadius.circular(15),
+                                  // color: Colors.blue[200],
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Text(
+                                    'My Feed',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                            ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              EverySituation(
+                                title: 'All',
+                                // isActive: true,
+                                index: 0,
+                                stIndex: 0,
+                                press: (){
+
+                                },
+                              ),
+                              EverySituation(
+                                title: 'Recipe',
+                                // isActive: false,
+                                index: 1,
+                                stIndex: 1,
+                                press: (){},
+                              ),
+                              EverySituation(
+                                title: 'Polls',
+                                // isActive: false,
+                                index: 2,
+                                stIndex: 2,
+                                press: (){},
+                              ),
+                              EverySituation(
+                                title: 'Food For Thought',
+                                // isActive: false,
+                                index: 3,
+                                stIndex: 3,
+                                press: (){},
+                              ),
+                            ],
                           ),
                         )
                       ]

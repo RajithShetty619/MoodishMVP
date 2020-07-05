@@ -29,18 +29,6 @@ class Explore extends StatefulWidget {
 
 class _ExploreState extends State<Explore> {
 
-
-  final Map<int, Widget> logowidgets = const <int, Widget>{
-    0: Text('Feed'),
-    1: Text('Explore'),
-  };
-
-  static Widget transition() {
-    return Center(
-      child: Text('feed'),
-    );
-  }
-
   int grpValue = 1;
 
   int _selected = 1;
@@ -132,21 +120,21 @@ class _ExploreState extends State<Explore> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Text(
-                              'Hello Username,\n Hungry yet?',
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: <Widget>[
+                      //     Padding(
+                      //       padding: const EdgeInsets.only(left: 8.0),
+                      //       child: Text(
+                      //         'Hello Username,\n Hungry yet?',
+                      //         style: TextStyle(
+                      //           fontSize: 25,
+                      //           fontWeight: FontWeight.bold,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
                       SizedBox(
                         height: 20,
                       ),
@@ -459,7 +447,7 @@ class _ExploreState extends State<Explore> {
                           ],
                         ),
                       ),
-                     /*  Container(
+                       Container(
                         height: 300,
                         child: BlocConsumer<FoodBloc,
                             Map<String, List<FoodListModel>>>(
@@ -554,7 +542,7 @@ class _ExploreState extends State<Explore> {
                         //         desc: 'description'),
                         //   ],
                         // ),
-                      ), */
+                      ), 
                     ],
                   ),
                 ],
