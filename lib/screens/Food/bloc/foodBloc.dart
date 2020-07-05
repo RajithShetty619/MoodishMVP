@@ -14,10 +14,9 @@ class FoodBloc extends Bloc<FoodEvent, Map<String, List<FoodListModel>>> {
       case EventType.add:
         Map<String, List<FoodListModel>> newstate = state;
         if (event.food != null) {
-          print("addinf");
+          print("addinf"); 
           newstate[event.listName].addAll(event.food);
-          final _box = Hive.box('foodlist');
-          _box.put(event.listName, newstate[event.listName]);
+          
         }
         yield newstate;
         break; 

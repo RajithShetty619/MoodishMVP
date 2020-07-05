@@ -2,33 +2,40 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:hive/hive.dart';
-import 'package:moodish_mvp/Services/database.dart';
+import 'package:hive/hive.dart'; 
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
-import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart';
-import 'package:moodish_mvp/screens/Food/components/Every_Situation.dart';
-import 'package:moodish_mvp/screens/Food/components/Every_Taste.dart';
-import 'package:moodish_mvp/screens/Food/components/Food_Situation.dart';
+import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart'; 
 import 'package:moodish_mvp/screens/Food/components/Food_Taste.dart';
 import 'package:moodish_mvp/screens/Food/components/MealType.dart';
 import 'package:moodish_mvp/screens/Food/components/TodaySpecial.dart';
-import 'package:moodish_mvp/screens/Food/components/foodBG.dart';
-import 'package:moodish_mvp/screens/Food/components/general.dart';
+import 'package:moodish_mvp/screens/Food/components/foodBG.dart'; 
 import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
-import 'package:moodish_mvp/screens/Food/pages/foodFeed.dart';
 
 // import 'package:intl/intl.dart';
 
 class Explore extends StatefulWidget {
- 
   @override
   _ExploreState createState() => _ExploreState();
-   Explore(key) : super(key: key);
 }
 
-class _ExploreState extends State<Explore> {
+class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
+  bool keepAlive = false;
 
+  Future doAsyncStuff() async {
+    keepAlive = true;
+    updateKeepAlive();
+    // Keeping alive...
+
+    await Future.delayed(Duration(seconds: 10));
+
+    keepAlive = false;
+    updateKeepAlive();
+    // Can be disposed whenever now.
+  }
+
+  @override
+  bool get wantKeepAlive => keepAlive;
 
   final Map<int, Widget> logowidgets = const <int, Widget>{
     0: Text('Feed'),
@@ -57,6 +64,7 @@ class _ExploreState extends State<Explore> {
   @override
   void initState() {
     super.initState();
+    doAsyncStuff();
     print("inti");
     if (!_getFoodCalled) {
       _dq.getFood(context).then((future) {
@@ -82,22 +90,22 @@ class _ExploreState extends State<Explore> {
     //     print(loadingData);
     //   }
     // });
-    // _scrollController1.addListener(() {
-    //   double _maxScroll = _scrollController1.position.maxScrollExtent;
-    //   double _currentScroll = _scrollController1.position.pixels;
-    //   double _delta = MediaQuery.of(context).size.height * .25;
-    //   if (_maxScroll - _currentScroll < _delta && loadingData1 == false) {
-    //     print("scrool");
-    //     loadingData1 = true;
-    //     _dq.getMoreFood(context).then((future) {
-    //       // BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
-    //       setState(() {
-    //         loadingData1 = false;
-    //       });
-    //     });
-    //     print(loadingData1);
-    //   }
-    // });
+    _scrollController1.addListener(() {
+      double _maxScroll = _scrollController1.position.maxScrollExtent;
+      double _currentScroll = _scrollController1.position.pixels;
+      double _delta = MediaQuery.of(context).size.height * .25;
+      if (_maxScroll - _currentScroll < _delta && loadingData1 == false) {
+        print("scrool");
+        loadingData1 = true;
+        _dq.getMoreFood(context).then((future) {
+          // BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
+          setState(() {
+            loadingData1 = false;
+          });
+        });
+        print(loadingData1);
+      }
+    });
     // _scrollController2.addListener(() {
     //   double _maxScroll = _scrollController2.position.maxScrollExtent;
     //   double _currentScroll = _scrollController2.position.pixels;
@@ -120,7 +128,7 @@ class _ExploreState extends State<Explore> {
   Widget build(BuildContext context) {
     // DateTime now = DateTime.now();
     // String day = DateFormat('MMMMEEEEd').format(now);
-
+    super.build(context);
     return Container(
       child: SafeArea(
         child: new Stack(
@@ -178,6 +186,8 @@ class _ExploreState extends State<Explore> {
                                 buildWhen: (Map<String, List<FoodListModel>>
                                         previous,
                                     Map<String, List<FoodListModel>> current) {
+                                      final _box = Hive.box('foodlist');
+                                       _box.put( "0", current["0"] );
                                   return true;
                                 },
                                 listenWhen: (Map<String, List<FoodListModel>>
@@ -193,13 +203,13 @@ class _ExploreState extends State<Explore> {
                                     children: <Widget>[
                                       Expanded(
                                         child: ListView.builder(
-                                          // controller: _scrollController1,
+                                          controller: _scrollController1,
                                           scrollDirection: Axis.horizontal,
                                           itemCount: foodList["0"].length,
                                           itemBuilder: (BuildContext context,
                                               int index) {
                                             return TodaySpecial(
-                                              image: 'assets/img.jpg',
+                                              image: foodList['0'][index].images ,
                                               descrip1:
                                                   foodList['0'][index].foodName,
                                               descrip2:
@@ -459,7 +469,7 @@ class _ExploreState extends State<Explore> {
                           ],
                         ),
                       ),
-                     /*  Container(
+                      /*  Container(
                         height: 300,
                         child: BlocConsumer<FoodBloc,
                             Map<String, List<FoodListModel>>>(

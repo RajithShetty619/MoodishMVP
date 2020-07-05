@@ -25,10 +25,11 @@ class DatabaseQuery {
           await DatabaseService().listFromSnapshot(snapshot);
        
       _lastDocument = queryList[queryList.length - 1].description;
-      print("$_lastDocument" + "doc");
+      print("$_lastDocument");
       return queryList;
 
     } else {
+      print("from data");
       List<FoodListModel> _foodList = _gfoodList.cast<FoodListModel>(); 
       _lastDocument = _foodList[_foodList.length - 1].description;
       print("$_lastDocument" + "doc");
