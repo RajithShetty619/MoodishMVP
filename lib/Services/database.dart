@@ -28,14 +28,15 @@ class DatabaseService {
     return userName.snapshots().map(_nameListFromSnapshot);
   }
 
-  List<FoodListModel> listFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.documents.map((doc) {
+  Future<List<FoodListModel>> listFromSnapshot(QuerySnapshot snapshot) async {
+    return Future.wait(snapshot.documents.map((doc) async{
       Map<String, dynamic> _docData =doc.data; 
+      String _url = await Storage().getUrl(_docData["Images"]);
       return FoodListModel(foodName: _docData["Food Name"] ?? '',foodDeter: _docData["Food deter"] ?? '',cuisine: _docData["Cuisine"] ?? '',mealType: _docData["Meal type"] ?? '',
-                        images: _docData["Images"] ?? '',description: _docData["Description"] ?? '',recipe: _docData["Recipe"] ?? '',ingrediants: _docData["Ingrediants"] ?? '',
+                        images: _url ?? '',description: _docData["Description"] ?? '',recipe: _docData["Recipe"] ?? '',ingrediants: _docData["Ingrediants"] ?? '',
                         servings: _docData["Servings"] ?? '',duration: _docData["Duration"] ?? '',nutrients: _docData["Nutrients"] ?? '',taste: _docData["Taste"] ?? '',
                         situation: _docData["Situation"] ?? '', );
-    }).toList();
+    }).toList());
   }
 
 }

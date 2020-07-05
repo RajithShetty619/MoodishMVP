@@ -22,7 +22,7 @@ class DatabaseQuery {
           .limit(5);
       QuerySnapshot snapshot = await q.getDocuments();
       List<FoodListModel> queryList =
-          DatabaseService().listFromSnapshot(snapshot);
+          await DatabaseService().listFromSnapshot(snapshot);
        
       _lastDocument = queryList[queryList.length - 1].description;
       print("$_lastDocument" + "doc");
@@ -49,7 +49,7 @@ class DatabaseQuery {
           .limit(2);
       QuerySnapshot snapshot = await q.getDocuments();
       List<FoodListModel> queryList =
-          DatabaseService().listFromSnapshot(snapshot);  
+          await DatabaseService().listFromSnapshot(snapshot);  
       _lastDocument = queryList[queryList.length - 1].description; 
       if (snapshot.documents.length == 0) {
         dataExists = false;

@@ -5,6 +5,7 @@ import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/models/user.dart';
 import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart';
 import 'package:moodish_mvp/screens/Food/bloc/foodBlocDelegate.dart';
+import 'package:moodish_mvp/screens/Food/pages/foodFeed.dart';
 import 'package:moodish_mvp/screens/wrapper.dart';
 import 'package:moodish_mvp/test.dart';
 import 'package:provider/provider.dart';

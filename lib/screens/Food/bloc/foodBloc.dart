@@ -5,7 +5,7 @@ import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 
 class FoodBloc extends Bloc<FoodEvent, Map<String, List<FoodListModel>>> {
   @override
-  Map<String, List<FoodListModel>> get initialState => {"0":[]};
+  Map<String, List<FoodListModel>> get initialState => {"0":[],"tsp":[]};
 
   @override
   Stream<Map<String, List<FoodListModel>>> mapEventToState(
