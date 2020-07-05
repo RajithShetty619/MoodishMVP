@@ -56,7 +56,7 @@ class Authenticate {
       // to sign in via Firebase Authentication
       final AuthCredential credential = GoogleAuthProvider.getCredential(
           accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
-      String username = credential.
+      String username = googleUser.displayName;
       AuthResult result  = await _auth.signInWithCredential(credential);
       FirebaseUser user = result.user;
 
