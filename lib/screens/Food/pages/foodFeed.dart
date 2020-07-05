@@ -2,6 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/screens/Food/components/Every_Situation.dart';
 import 'package:moodish_mvp/screens/Food/components/foodMood.dart';
+import 'package:moodish_mvp/screens/Food/myFeed/all.dart';
+import 'package:moodish_mvp/screens/Food/myFeed/foodft.dart';
+import 'package:moodish_mvp/screens/Food/myFeed/polls.dart';
+import 'package:moodish_mvp/screens/Food/myFeed/recipe.dart';
 import 'package:moodish_mvp/screens/Food/pages/explore.dart';
 
 class FoodFeed extends StatefulWidget {
@@ -16,6 +20,7 @@ class _FoodFeedState extends State<FoodFeed> {
   };
 
   int grpValue = 0;
+  int indx = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -111,39 +116,67 @@ class _FoodFeedState extends State<FoodFeed> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              EverySituation(
-                                title: 'All',
-                                // isActive: true,
-                                index: 0,
-                                stIndex: 0,
-                                press: (){
-
+                              GestureDetector(
+                                child: EverySituation(
+                                  title: 'All',
+                                  // isActive: true,
+                                  index: indx,
+                                  stIndex: 0,
+                                  press: (){},
+                                ),
+                                onTap: (){
+                                  setState(() {
+                                     indx =0;
+                                  });
                                 },
                               ),
-                              EverySituation(
-                                title: 'Recipe',
-                                // isActive: false,
-                                index: 1,
-                                stIndex: 1,
-                                press: (){},
+                              GestureDetector(
+                                child: EverySituation(
+                                  title: 'Recipe',
+                                  // isActive: true,
+                                  index: indx,
+                                  stIndex: 1,
+                                  press: (){},
+                                ),
+                                onTap: (){
+                                  setState(() {
+                                     indx =1;
+                                  });
+                                },
                               ),
-                              EverySituation(
-                                title: 'Polls',
-                                // isActive: false,
-                                index: 2,
-                                stIndex: 2,
-                                press: (){},
+                              GestureDetector(
+                                child: EverySituation(
+                                  title: 'Polls',
+                                  // isActive: true,
+                                  index: indx,
+                                  stIndex: 2,
+                                  press: (){},
+                                ),
+                                onTap: (){
+                                  setState(() {
+                                     indx =2;
+                                  });
+                                },
                               ),
-                              EverySituation(
-                                title: 'Food For Thought',
-                                // isActive: false,
-                                index: 3,
-                                stIndex: 3,
-                                press: (){},
+                              GestureDetector(
+                                child: EverySituation(
+                                  title: 'Food For Thought',
+                                  // isActive: true,
+                                  index: indx,
+                                  stIndex: 3,
+                                  press: (){},
+                                ),
+                                onTap: (){
+                                  setState(() {
+                                     indx =3;
+                                  });
+                                },
                               ),
                             ],
                           ),
-                        )
+                        ),
+                        RecipeTab(),
+                         
                       ]
                     )
                 ],
