@@ -185,7 +185,7 @@ class _SignUpState extends State<SignUp> {
                                     onPressed: () async{
                                       if(_formKey.currentState.validate()){
                                         setState(() => loading = true);
-                                        dynamic result = await _auth.newRegister(_email, _password);
+                                        dynamic result = await _auth.newRegister(_email,_name ,_password);
                                         if(result == null){
                                           setState(() => error = 'Please Enter a Valid Email');
                                           loading = false;}

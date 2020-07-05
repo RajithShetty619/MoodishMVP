@@ -98,7 +98,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
         print("scrool");
         loadingData1 = true;
         _dq.getMoreFood(context).then((future) {
-          // BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
+          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
           setState(() {
             loadingData1 = false;
           });
