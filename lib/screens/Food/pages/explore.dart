@@ -5,7 +5,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart'; 
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
-import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart'; 
+import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart';
+import 'package:moodish_mvp/screens/Food/components/Food_Situation.dart'; 
 import 'package:moodish_mvp/screens/Food/components/Food_Taste.dart';
 import 'package:moodish_mvp/screens/Food/components/MealType.dart';
 import 'package:moodish_mvp/screens/Food/components/TodaySpecial.dart';
@@ -17,6 +18,7 @@ import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 class Explore extends StatefulWidget {
   @override
   _ExploreState createState() => _ExploreState();
+  Explore(key) : super(key: key);
 }
 
 class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
@@ -36,17 +38,6 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
 
   @override
   bool get wantKeepAlive => keepAlive;
-
-  final Map<int, Widget> logowidgets = const <int, Widget>{
-    0: Text('Feed'),
-    1: Text('Explore'),
-  };
-
-  static Widget transition() {
-    return Center(
-      child: Text('feed'),
-    );
-  }
 
   int grpValue = 1;
 
@@ -140,21 +131,21 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Text(
-                              'Hello Username,\n Hungry yet?',
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: <Widget>[
+                      //     Padding(
+                      //       padding: const EdgeInsets.only(left: 8.0),
+                      //       child: Text(
+                      //         'Hello Username,\n Hungry yet?',
+                      //         style: TextStyle(
+                      //           fontSize: 25,
+                      //           fontWeight: FontWeight.bold,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
                       SizedBox(
                         height: 20,
                       ),
@@ -207,7 +198,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                           scrollDirection: Axis.horizontal,
                                           itemCount: foodList["0"].length,
                                           itemBuilder: (BuildContext context,
-                                              int index) {
+                                               index) {
                                             return TodaySpecial(
                                               image: foodList['0'][index].images ,
                                               descrip1:
@@ -391,7 +382,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                         child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount: 5,
-                            itemBuilder: (BuildContext context, int index) {
+                            itemBuilder: (BuildContext context, index) {
                               return FoodEveryTaste(
                                   image: 'assets/img.jpg',
                                   title: 'food1',
@@ -469,7 +460,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                           ],
                         ),
                       ),
-                      /*  Container(
+                       Container(
                         height: 300,
                         child: BlocConsumer<FoodBloc,
                             Map<String, List<FoodListModel>>>(
@@ -494,7 +485,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                     scrollDirection: Axis.horizontal,
                                     itemCount: foodList["0"].length,
                                     itemBuilder:
-                                        (BuildContext context, int index) {
+                                        (BuildContext context,  index) {
                                       return FoodEverySituation(
                                         image: 'assets/Coffee.jpg',
                                         title: foodList['0'][index].foodName,
@@ -564,7 +555,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                         //         desc: 'description'),
                         //   ],
                         // ),
-                      ), */
+                      ), 
                     ],
                   ),
                 ],

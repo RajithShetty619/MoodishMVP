@@ -26,21 +26,51 @@ class _FoodHomeState extends State<FoodHome> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            Container(
-              height: 35,
-              width: 140,
-              child: CupertinoSlidingSegmentedControl(
-                children: logowidgets,
-                onValueChanged: (changeValue) {
-                  setState(() {
-                    grpValue = changeValue;
-                    _switch = !_switch;
-                  });
-                },
-                groupValue: grpValue,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                _switch
+                    ? Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Text(
+                          'Hello Username ,\n Hungry yet?',
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Text(
+                          'Today,\n Hungry yet?',
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                Container(
+                  height: 35,
+                  width: 140,
+                  child: CupertinoSlidingSegmentedControl(
+                    children: logowidgets,
+                    onValueChanged: (changeValue) {
+                      print(_switch);
+                      setState(() {
+                        grpValue = changeValue;
+                        _switch = !_switch;
+                      });
+                    },
+                    groupValue: grpValue,
+                  ),
+                ),
+              ],
             ),
-            _switch ? Expanded(child: FoodFeed()) : Expanded(child: Explore()),
+            SizedBox(height: 15),
+            _switch
+                ? Expanded(child: Explore(_key))
+                : Expanded(child: FoodFeed()),
           ],
         ),
       ),

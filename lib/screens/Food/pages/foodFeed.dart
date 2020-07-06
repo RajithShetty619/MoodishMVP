@@ -1,6 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/screens/Food/components/Every_Situation.dart';
 import 'package:moodish_mvp/screens/Food/components/foodMood.dart';
+import 'package:moodish_mvp/screens/Food/myFeed/all.dart';
+import 'package:moodish_mvp/screens/Food/myFeed/foodft.dart';
+import 'package:moodish_mvp/screens/Food/myFeed/polls.dart';
+import 'package:moodish_mvp/screens/Food/myFeed/recipe.dart';
 import 'package:moodish_mvp/screens/Food/pages/explore.dart';
 
 class FoodFeed extends StatefulWidget {
@@ -15,6 +20,7 @@ class _FoodFeedState extends State<FoodFeed> {
   };
 
   int grpValue = 0;
+  int indx = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -28,41 +34,6 @@ class _FoodFeedState extends State<FoodFeed> {
                   Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Text(
-                                'Today ,\n Hungry yet?',
-                                style: TextStyle(
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            // Align(
-                            //   alignment: Alignment.centerRight,
-                            //   child: Container(
-                            //     height: 35,
-                            //     width: 140,
-                            //     child: CupertinoSlidingSegmentedControl(
-                            //       children: logowidgets,
-                            //       onValueChanged: (changeValue){
-
-                            //         setState(() {
-                            //           grpValue = changeValue;
-                            //         });
-                            //       },
-                            //       groupValue: grpValue,
-                            //     ),
-                            //   ),
-                            // ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
@@ -116,7 +87,96 @@ class _FoodFeedState extends State<FoodFeed> {
                               }
                             ),
                           ),
-                        )
+                        ),
+                        Padding(
+                              padding: const EdgeInsets.only(left: 10.0),
+                              child: Container(
+                                width: 120.0,
+                                margin: EdgeInsets.all(10.0),
+                                decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.black, width: 2),
+                                  borderRadius: BorderRadius.circular(15),
+                                  // color: Colors.blue[200],
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Text(
+                                    'My Feed',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                            ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              GestureDetector(
+                                child: EverySituation(
+                                  title: 'All',
+                                  // isActive: true,
+                                  index: indx,
+                                  stIndex: 0,
+                                  press: (){},
+                                ),
+                                onTap: (){
+                                  setState(() {
+                                     indx =0;
+                                  });
+                                },
+                              ),
+                              GestureDetector(
+                                child: EverySituation(
+                                  title: 'Recipe',
+                                  // isActive: true,
+                                  index: indx,
+                                  stIndex: 1,
+                                  press: (){},
+                                ),
+                                onTap: (){
+                                  setState(() {
+                                     indx =1;
+                                  });
+                                },
+                              ),
+                              GestureDetector(
+                                child: EverySituation(
+                                  title: 'Polls',
+                                  // isActive: true,
+                                  index: indx,
+                                  stIndex: 2,
+                                  press: (){},
+                                ),
+                                onTap: (){
+                                  setState(() {
+                                     indx =2;
+                                  });
+                                },
+                              ),
+                              GestureDetector(
+                                child: EverySituation(
+                                  title: 'Food For Thought',
+                                  // isActive: true,
+                                  index: indx,
+                                  stIndex: 3,
+                                  press: (){},
+                                ),
+                                onTap: (){
+                                  setState(() {
+                                     indx =3;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                        RecipeTab(),
+                         
                       ]
                     )
                 ],
