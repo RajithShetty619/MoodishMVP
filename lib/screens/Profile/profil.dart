@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/models/name.dart';
 import 'package:provider/provider.dart';
+
 //import 'main.dart';
 import '../../Services/authenticate.dart';
 import 'Edit.dart';
@@ -10,23 +11,23 @@ class profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Name>>.value(
-      value: DatabaseService().names,
+//      value: DatabaseService().names,
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(backgroundColor: Colors.grey, actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.notifications),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(Icons.group),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () {},
-          ),
-        ]),
+//        appBar: AppBar(backgroundColor: Colors.grey, actions: <Widget>[
+//          IconButton(
+//            icon: Icon(Icons.notifications),
+//            onPressed: () {},
+//          ),
+//          IconButton(
+//            icon: Icon(Icons.group),
+//            onPressed: () {},
+//          ),
+//          IconButton(
+//            icon: Icon(Icons.settings),
+//            onPressed: () {},
+//          ),
+//        ]),
         body: Theme(
           data: Theme.of(context).copyWith(
             brightness: Brightness.light,
@@ -47,63 +48,93 @@ class profile extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (context) => EditProfile()));
                     },
-                    child: Row(
-                      children: <Widget>[
-                        Container(
-                          width: 80,
-                          height: 80,
-                          decoration: BoxDecoration(
-                            color: Colors.grey,
-                            shape: BoxShape.circle,
-                            //From here u can add a profile pic
-                            //   image: DecorationImage(
-                            //image: CachedNetworkImageProvider(avatars[1]),
-                            //   fit: BoxFit.cover,
-                            // ),
-                            border: Border.all(
-                              color: Colors.black,
-                              width: 2.0,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 10.0),
-                        Expanded(
-                          child: Column(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 10.0,left: 5.0,right: 5.0),
+                      child: Row(
+                        children: <Widget>[
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                "Name",
+                                '',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 20.0,
+                                  fontSize: 32.0,
                                   color: Colors.black,
                                 ),
                               ),
+                              Text('',
+                              style: TextStyle(
+                                fontSize: 24,
+                                color: Colors.black38
+                              ),),
+                              SizedBox(height: 20.0,),
                               Text(
                                 "Edit",
                                 style: TextStyle(
                                   color: Colors.grey.shade400,
                                 ),
                               ),
+//                              SizedBox(
+//                                width: 20.0,
+//                              ),
+
                             ],
                           ),
-                        ),
-                      ],
+                          Spacer(),
+                          Container(
+                            width: 100,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              color: Colors.grey,
+                              shape: BoxShape.circle,
+                              //From here u can add a profile pic
+                              //   image: DecorationImage(
+                              //image: CachedNetworkImageProvider(avatars[1]),
+                              //   fit: BoxFit.cover,
+                              // ),
+                              border: Border.all(
+                                color: Colors.black,
+                                width: 2.0,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
 
                   const SizedBox(height: 20.0),
+                  Divider(
+                    thickness: 2.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      IconButton(
+                        icon: Icon(Icons.notifications,size: 50.0,),
+                        onPressed: () {},
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.group,size: 50,),
+                        onPressed: () {},
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.settings,size: 50,),
+                        onPressed: () {},
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10.0,),
+                  Divider(
+                    thickness: 2.0,
+                  ),
                   ListTile(
                     title: Text(
                       "Help & Support",
-                      style: TextStyle(color: Colors.black, fontSize: 20.0),
+                      style: TextStyle(color: Colors.black38, fontSize: 24.0),
                     ),
                     onTap: () {},
-                  ),
-
-                  Divider(
-                    thickness: 2.0,
-                    color: Colors.black,
                   ),
                   ListTile(
                     title: Text("FAQ's",
@@ -156,11 +187,7 @@ class profile extends StatelessWidget {
                   SizedBox(height: 5.0),
                   ListTile(
                     title: Text("About",
-                        style: TextStyle(color: Colors.black, fontSize: 20.0)),
-                  ),
-                  Divider(
-                    thickness: 2.0,
-                    color: Colors.black,
+                        style: TextStyle(color: Colors.black38, fontSize: 24.0)),
                   ),
                   ListTile(
                     title: Text("Send FeedBack's",
@@ -202,7 +229,7 @@ class profile extends StatelessWidget {
                   Container(
                     height: 50,
                     child: FlatButton(
-                      onPressed: () async{
+                      onPressed: () async {
                         await Authenticate().signOut();
                       },
                       padding: EdgeInsets.all(0),
@@ -216,18 +243,18 @@ class profile extends StatelessWidget {
                               begin: Alignment.centerLeft,
                               end: Alignment.centerRight,
                               colors: [
-                                Color(0xffeeeeee),
-                                Color(0xff263238),
-                                Color(0xffeeeeee),
+                                Colors.blue[900],
+                                Colors.blueAccent,
+                                Colors.blue[900],
                               ],
                             ),
                             borderRadius: BorderRadius.circular(6),
                           ),
                           child: FlatButton(
-                              onPressed: () async {
-                                await Authenticate().signOut();
-                              },
-                              child: Container(
+                            onPressed: () async {
+                              await Authenticate().signOut();
+                            },
+                            child: Container(
                               alignment: Alignment.center,
                               constraints: BoxConstraints(
                                   minHeight: 50, maxWidth: double.infinity),
@@ -253,3 +280,4 @@ class profile extends StatelessWidget {
     );
   }
 }
+

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:moodish_mvp/Authenticate/loading.dart';
 import 'package:moodish_mvp/Services/authenticate.dart';
 import 'package:moodish_mvp/models/name.dart';
- 
+import 'package:moodish_mvp/screens/Profile/profil.dart';
 import 'package:moodish_mvp/screens/mainScreen.dart';
 
 class SignUp extends StatefulWidget {
@@ -14,6 +14,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  var _controller = TextEditingController();
   bool _obscureText = true;
   bool _obscureText1 = true;
   bool _checkBoxValue = false;
@@ -45,6 +46,7 @@ class _SignUpState extends State<SignUp> {
                           child: Column(
                             children: <Widget>[
                               TextFormField(
+                                controller : _controller,
                                 decoration: InputDecoration(
                                   labelText: 'USERNAME',
                                   labelStyle: TextStyle(color: Colors.blueGrey),
@@ -53,8 +55,11 @@ class _SignUpState extends State<SignUp> {
                                       borderSide: BorderSide(color: Colors.lightBlue)),
                                 ),
                                 onChanged: (val) {setState(() {
+//                                  Authenticate(name: val);
                                   _name = val ;
-                                  Name().name = _name;
+//                                  print(_name);
+//                                print(val);
+//                                  Authenticate().name = _name;
                                 });
 
                                 },
@@ -184,6 +189,7 @@ class _SignUpState extends State<SignUp> {
                                     ),
                                     onPressed: () async{
                                       if(_formKey.currentState.validate()){
+                                        Authenticate(name: _name);
                                         setState(() => loading = true);
                                         dynamic result = await _auth.newRegister(_email, _password);
                                         if(result == null){

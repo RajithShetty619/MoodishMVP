@@ -1,10 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart'; 
-import 'package:google_sign_in/google_sign_in.dart'; 
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:moodish_mvp/Authenticate/signUp.dart';
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/models/name.dart';
 import 'package:moodish_mvp/models/user.dart';
 
 class Authenticate {
+  String name;
+  Authenticate({this.name});
+
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: [
     'email',
@@ -23,7 +28,7 @@ class Authenticate {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
-      await DatabaseService(uid: user.uid).updateUserData(Name().name);
+      await DatabaseService().updateUserData(name,user.uid);
       return _userFromFirebase(user);
     } catch (e) {
       print(e.toString());

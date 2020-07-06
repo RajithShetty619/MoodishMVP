@@ -56,25 +56,6 @@ class _StarFeedbackState extends State<StarFeedback> {
                     ),
                     SizedBox(height: 5.0,),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                          child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: RaisedButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(30.0)),
-                          color: Color(0xffed1e79),
-                          child: Text(
-                            'Submit',
-                            style: TextStyle(color: Color(0xffffffff)),
-                          ),
-                          onPressed: () {
-                            finalRating = _rating;
-                          },
-                        ),
-                      )),
-                    ),
-                    Padding(
                       padding: const EdgeInsets.only(left: 5.0,right: 5.0),
                       child: TextField(
                           maxLines: 5,
@@ -88,6 +69,26 @@ class _StarFeedbackState extends State<StarFeedback> {
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(30.0),
+                            ),
+                          )),
+                    ),
+                    SizedBox(height: 10.0,),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: RaisedButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: new BorderRadius.circular(30.0)),
+                              color: Color(0xffed1e79),
+                              child: Text(
+                                'Submit',
+                                style: TextStyle(color: Color(0xffffffff)),
+                              ),
+                              onPressed: () {
+                                finalRating = _rating;
+                              },
                             ),
                           )),
                     ),
