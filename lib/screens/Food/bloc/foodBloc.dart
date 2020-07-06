@@ -5,7 +5,7 @@ import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 
 class FoodBloc extends Bloc<FoodEvent, Map<String, List<FoodListModel>>> {
   @override
-  Map<String, List<FoodListModel>> get initialState => {"0":[]};
+  Map<String, List<FoodListModel>> get initialState => {"0":[],"tsp":[]};
 
   @override
   Stream<Map<String, List<FoodListModel>>> mapEventToState(
@@ -14,10 +14,9 @@ class FoodBloc extends Bloc<FoodEvent, Map<String, List<FoodListModel>>> {
       case EventType.add:
         Map<String, List<FoodListModel>> newstate = state;
         if (event.food != null) {
-          print("addinf");
+          print("addinf"); 
           newstate[event.listName].addAll(event.food);
-          final _box = Hive.box('foodlist');
-          _box.put(event.listName, newstate[event.listName]);
+          
         }
         yield newstate;
         break; 

@@ -1,44 +1,50 @@
 import 'package:flutter/material.dart';
 
-class EverySituation extends StatelessWidget {
+class EverySituation extends StatefulWidget {
   final String title;
-  final bool isActive;
+  // final bool isActive;
+  int index;
+  int stIndex;
   final Function press;
-  const EverySituation({
-    Key key, 
-    this.title, 
-    this.isActive = false, 
+  EverySituation({
+    Key key,
+    this.title,
+    this.stIndex,
+    this.index,
+    // this.isActive = false,
     this.press,
   }) : super(key: key);
 
   @override
+  _EverySituationState createState() => _EverySituationState();
+}
+
+class _EverySituationState extends State<EverySituation> { 
+  @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: press,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-        child: Column(
-          children: <Widget>[
-            Text(
-              title,
-              style: isActive? TextStyle(
-                color: Colors.black,
-                fontSize: 18,
-                fontWeight: FontWeight.bold
-              ): TextStyle(color: Colors.grey[400],fontSize: 18)
-            ),
-            if (isActive) 
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 5),
-              height: 3,
-              width: 22,
-              decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.circular(20)
-              ),
-            ),
-          ],
-        ),
+    
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      child: Column(
+        children: <Widget>[
+          Text(widget.title,
+              style: widget.stIndex == widget.index
+                  ? TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold)
+                  : TextStyle(color: Colors.grey[400], fontSize: 18)),
+          widget.stIndex == widget.index
+              ? Container(
+                  margin: EdgeInsets.symmetric(vertical: 5),
+                  height: 3,
+                  width: 10,
+                  decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(20)),
+                )
+              : Container(),
+        ],
       ),
     );
   }

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "430184247071-6o7lopivi4giut6ptvqr84skmrc73j1h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.moodishtest.snap",
+            "certificate_hash": "f7c24f5b6628e58f689cff9d8577382d9050cdc4"
+          }
+        },
+        {
           "client_id": "430184247071-9mif774p3h0hfemak1uf2mssnce98foc.apps.googleusercontent.com",
           "client_type": 3
         }

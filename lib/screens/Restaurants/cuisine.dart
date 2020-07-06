@@ -86,17 +86,18 @@ class _CuisineState extends State<Cuisine> {
                           debugPrint('tapped');
                           pref[i]=cuisine[index].cuisine;
                           i++;
-                          setState(() =>  cuisine[index].currentOpacity=0 );
-//                          setState(() {
-//                            cuisine.removeAt(index);
-//                          });
-                    for(int a=0;a<9;a++)
-                    {
-                      debugPrint(pref[a]);//print elements in pref
-                    }
+                          // setState(() =>  cuisine[index].currentOpacity=0 );
+                         setState(() {
+                          //  cuisine[index].currentOpacity=0;
+                           cuisine.removeAt(index);
+                         });
+                    // for(int a=0;a<9;a++)
+                    // {
+                    //   debugPrint(pref[a]);//print elements in pref
+                    // }
                         },
                         child: AnimatedOpacity(
-                          duration:  Duration(seconds: 1 ),
+                          duration:  Duration(milliseconds: 500 ),
                           opacity: cuisine[index].currentOpacity,
                           child: Container(
                             height: 175.0,
