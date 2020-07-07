@@ -60,9 +60,19 @@ class _BookingState extends State<Booking> {
                         Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              SizedBox(
-                                height: 30.0,
+                              Align(
+                                alignment: Alignment.topLeft,
+                                child: IconButton(
+                                    icon: Icon(
+                                      Icons.arrow_back,
+                                      size: 40,
+                                      color: Colors.black,
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    }),
                               ),
+                              SizedBox(height: 5.0,),
                               Padding(
                                 padding: const EdgeInsets.all(10.0),
                                 child: TextField(
@@ -116,7 +126,7 @@ class _BookingState extends State<Booking> {
                                         child: Icon(
                                           Icons.calendar_today,
                                           size: 75.0,
-                                          color: Colors.blue[200],
+                                          color: Colors.orangeAccent,
                                         ),
                                       ),
                                       Container(
@@ -147,7 +157,7 @@ class _BookingState extends State<Booking> {
                                     margin: EdgeInsets.all(10.0),
                                     decoration: BoxDecoration(
                                         border: Border.all(color: Colors.transparent),
-                                        color: Colors.blue[100]
+                                        color: Colors.orange
 
                                     ),
                                     child: Padding(

@@ -75,6 +75,18 @@ class _Food_InfoState extends State<Food_Info> {
                               image: AssetImage('assets/Coffee.jpg'),
                               fit: BoxFit.cover),
                         ),
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: IconButton(
+                              icon: Icon(
+                                Icons.arrow_back,
+                                size: 40,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              }),
+                        ),
                       ),
                       Row(
                         children: <Widget>[

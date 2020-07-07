@@ -55,7 +55,6 @@ class _AboutState extends State<About> {
                                 child: Tab(
                                     icon: Icon(
                                       Icons.call,
-                                      size: 85.0,
                                     ),
                                     child: Text("Phone"))),
                             SizedBox(
@@ -99,7 +98,6 @@ class _AboutState extends State<About> {
                                 child: Tab(
                                     icon: Icon(
                                       Icons.local_offer,
-                                      size: 85.0,
                                     ),
                                     child: Text("Offers"))),
                             SizedBox(
@@ -136,7 +134,6 @@ class _AboutState extends State<About> {
                                 child: Tab(
                                     icon: Icon(
                                       Icons.restaurant_menu,
-                                      size: 85.0,
                                     ),
                                     child: Text("Menu"))),
                             SizedBox(
@@ -162,7 +159,6 @@ class _AboutState extends State<About> {
                                 child: Tab(
                                   icon: Icon(
                                     Icons.share,
-                                    size: 85.0,
                                   ),
                                   child: Text("Share"),
                                 )),
