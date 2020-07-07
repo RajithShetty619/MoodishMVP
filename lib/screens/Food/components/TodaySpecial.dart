@@ -22,6 +22,9 @@ class TodaySpecial extends StatefulWidget {
 }
 
 class _TodaySpecialState extends State<TodaySpecial> {
+
+bool _like = true;
+
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
@@ -165,13 +168,23 @@ class _TodaySpecialState extends State<TodaySpecial> {
                       Align(
                         alignment: Alignment.topRight,
                         child: IconButton(
-                          icon: Icon(
+                          icon: _like ? Icon(
                             Icons.favorite_border,
                             color: Colors.white,
+                            size: 25,
+                          ):
+                          Icon(
+                            Icons.favorite,
+                            color: Colors.white,
+                            size: 30,
                           ),
                           onPressed: () async {
+                            if (_like != false)
                             final action = await Dialogs.yesAbortDialog(
                                 context, 'My title', 'My Body');
+                                setState(() {
+                                  _like = !_like;
+                                });
                           },
                         ),
                       ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intro_slider/intro_slider.dart';
+import 'package:moodish_mvp/screens/Food/components/stepSlider.dart';
 //import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FoodRecipe extends StatefulWidget {
@@ -207,7 +209,10 @@ class _FoodRecipeState extends State<FoodRecipe> {
                               borderRadius: BorderRadius.circular(20.0)
                           ),
                           elevation: 4.0,
-                          onPressed: (){ return null;},
+                          onPressed: (){
+                            Navigator.push(context,
+              MaterialPageRoute(builder: (context) => IntroScreen())); 
+                          },
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text('Step by Step'),
