@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/screens/Restaurants/restaurantCard/homepage.dart';
 
 class Booking extends StatefulWidget {
   @override
@@ -103,7 +104,9 @@ class _BookingState extends State<Booking> {
                                   width: double.maxFinite,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(30.0),
-                                    color: Colors.lightBlueAccent,
+                                    image: DecorationImage(
+                                        image: AssetImage('assets/Booking.png'),
+                                        fit: BoxFit.cover),
                                   ),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -113,6 +116,7 @@ class _BookingState extends State<Booking> {
                                         child: Icon(
                                           Icons.calendar_today,
                                           size: 75.0,
+                                          color: Colors.blue[200],
                                         ),
                                       ),
                                       Container(
@@ -143,7 +147,7 @@ class _BookingState extends State<Booking> {
                                     margin: EdgeInsets.all(10.0),
                                     decoration: BoxDecoration(
                                         border: Border.all(color: Colors.transparent),
-                                        color: Colors.grey[300]
+                                        color: Colors.blue[100]
 
                                     ),
                                     child: Padding(
@@ -161,23 +165,62 @@ class _BookingState extends State<Booking> {
                             ]),
                       Padding(
                           padding: EdgeInsets.only(top: 15.0),
-                          child: Card(
-                              child: ListTile(
-                                onTap: () {},
-                                leading: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  child: Image(
-                                    image: AssetImage('assets/${rest[index].image}'),
-                                    width: 80.0,
-                                    height: 80.0,
-                                  ),
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return HomePage();
+                                  }));
+                            },
+                            child: Card(
+                                elevation: 1.0,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0)
                                 ),
-                                title: Text(rest[index].name),
-                                subtitle: Text(rest[index].desc),
-                                  trailing: Text(
-                                      '\u{02605}4.2'
-                                  )
-                              ))),
+                                child: Row(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Container(
+                                        alignment: Alignment.centerLeft,
+                                        height: 125,
+                                        width: 125.0,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(30.0),
+                                          image: DecorationImage(
+                                              image: AssetImage('assets/${rest[index].image}'),
+                                              fit: BoxFit.cover),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(20.0),
+                                        child: Column(
+                                          children: <Widget>[
+                                            Container(
+                                              alignment: Alignment.centerLeft,
+                                              child: Text(rest[index].name,
+                                                style: TextStyle(
+                                                    fontSize: 22.0,
+                                                    fontWeight: FontWeight.bold
+                                                ),),
+                                            ),
+                                            Container(
+                                                alignment: Alignment.centerLeft,
+                                                child: Text('\u{02605}4.2')),
+                                            SizedBox(height: 5.0,),
+                                            Text(rest[index].desc),
+
+
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                )
+                            ),
+                          )),
                     ]);
               }),
         ));

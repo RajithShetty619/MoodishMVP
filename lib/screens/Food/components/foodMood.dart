@@ -70,12 +70,17 @@ class Mood_Food extends StatelessWidget {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(20),
                                     child: Container(
+                                       margin: EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.white, width: 2),
+                            borderRadius: BorderRadius.circular(300),
+                          ),
                                       // color: Colors.blue[300],
                                       child: IconButton(
                                         icon: Icon(
                                           Icons.arrow_forward,
                                           color: Colors.white,
-                                          size: 35,
+                                          size: 30,
                                         ),
                                         onPressed: () {
                                           

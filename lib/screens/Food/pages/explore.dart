@@ -200,7 +200,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                           itemBuilder: (BuildContext context,
                                                index) {
                                             return TodaySpecial(
-                                              image: foodList['0'][index].images ,
+                                              image: 'assets/img.jpg' ,
                                               descrip1:
                                                   foodList['0'][index].foodName,
                                               descrip2:

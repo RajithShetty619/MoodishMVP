@@ -9,6 +9,7 @@ class IntroScreen extends StatefulWidget {
 }
 
 class IntroScreenState extends State<IntroScreen> {
+  final _key = GlobalKey();
   List<Slide> slides = new List();
 
   @override
@@ -199,16 +200,16 @@ class IntroScreenState extends State<IntroScreen> {
 
   void onDonePress() {
     // Do what you want
-   /*  Navigator.pop( 
+     Navigator.pop( 
         context,
         MaterialPageRoute(
-          builder: (context) => (),
-        )); */ 
+          builder: (context) => (Explore(_key)),
+        )); 
   }
 
   Widget renderNextBtn() {
     return Padding(
-      padding: const EdgeInsets.all(30.0),
+      padding: const EdgeInsets.all(3.0),
       child: Icon(
         Icons.navigate_next,
         color: Color(0xffD02090),
@@ -219,7 +220,7 @@ class IntroScreenState extends State<IntroScreen> {
 
   Widget renderDoneBtn() {
     return Padding(
-      padding: const EdgeInsets.all(30.0),
+      padding: const EdgeInsets.all(3.0),
       child: Icon(
         Icons.done,
         color: Color(0xffD02090),
@@ -229,7 +230,7 @@ class IntroScreenState extends State<IntroScreen> {
 
   Widget renderSkipBtn() {
     return Padding(
-      padding: const EdgeInsets.all(30.0),
+      padding: const EdgeInsets.all(3.0),
       child: Icon(
         Icons.skip_next,
         color: Color(0xffD02090),
