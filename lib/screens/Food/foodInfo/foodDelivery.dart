@@ -114,7 +114,7 @@ class _FoodDeliveryState extends State<FoodDelivery> {
                             ),),
                         ),
                       ),
-                      SizedBox(width: 75.0,)
+                      SizedBox(width: 50.0,)
                     ],
                   ),
                 ),

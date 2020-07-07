@@ -61,9 +61,19 @@ class _PickUpState extends State<PickUp> {
                     Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          SizedBox(
-                            height: 30.0,
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: IconButton(
+                                icon: Icon(
+                                  Icons.arrow_back,
+                                  size: 40,
+                                  color: Colors.black,
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                }),
                           ),
+                          SizedBox(height: 5.0,),
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: TextField(

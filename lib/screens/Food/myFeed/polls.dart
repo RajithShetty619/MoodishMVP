@@ -38,45 +38,95 @@ class getListView extends StatelessWidget {
               ),),
             ),
           ),
-          Container(
-            child: RaisedButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0)
+          GestureDetector(
+            onTap: (){},
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                width: double.maxFinite,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                  color: Colors.grey[200],
+                ),
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: Text('Italy',
+                      style: TextStyle(
+                          fontSize: 22.0
+                      ),),
+                  ),
+                ),
               ),
-              onPressed: () {  },
-              child: Text('Italy'),
             ),
           ),
-          SizedBox(height: 8.0,),
-          Container(
-            child: RaisedButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0)
+          GestureDetector(
+            onTap: (){},
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                width: double.maxFinite,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                  color: Colors.grey[200],
+                ),
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: Text('Mexico',
+                      style: TextStyle(
+                          fontSize: 22.0
+                      ),),
+                  ),
+                ),
               ),
-              onPressed: () {  },
-              child: Text('Mexico'),
             ),
           ),
-          SizedBox(height: 8.0,),
-          Container(
-            child: RaisedButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0)
+          GestureDetector(
+            onTap: (){},
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                width: double.maxFinite,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                  color: Colors.grey[200],
+                ),
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: Text('Germany',
+                      style: TextStyle(
+                          fontSize: 22.0
+                      ),),
+                  ),
+                ),
               ),
-              onPressed: () {  },
-              child: Text('Germany'),
             ),
           ),
-          SizedBox(height: 8.0,),
-          Container(
-            child: RaisedButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0)
+          GestureDetector(
+            onTap: (){},
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                width: double.maxFinite,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                  color: Colors.grey[200],
+                ),
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: Text('Canada',
+                      style: TextStyle(
+                          fontSize: 22.0
+                      ),),
+                  ),
+                ),
               ),
-              onPressed: () {  },
-              child: Text('Canada'),
             ),
           ),
+
           SizedBox(height: 10.0,),
         ],
       ),

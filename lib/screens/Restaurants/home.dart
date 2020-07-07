@@ -464,7 +464,7 @@ class _RestaurantState extends State<Restaurant> {
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Padding(
-                      padding: const EdgeInsets.all(15.0),
+                      padding: const EdgeInsets.all(12.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
@@ -516,7 +516,7 @@ class _RestaurantState extends State<Restaurant> {
                                   ],
                                 ))),
                           ),
-                          SizedBox(width: 50,),
+                          SizedBox(width: 75,),
                           FlatButton(onPressed: null, child: null),
                           SizedBox(width: 30,),
                           FlatButton(onPressed: null, child: null)
