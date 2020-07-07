@@ -44,22 +44,37 @@ class _FoodListState extends State<FoodList> {
   bool loadingData = false;
   bool dataExists = true;
   // List<DocumentSnapshot> foodList = [];
-  final CollectionReference _ref = Firestore.instance.collection('0');
+  final CollectionReference _ref = Firestore.instance.collection('food');
   String _lastDocument;
   ScrollController _scrollController = ScrollController();
 
-  getFood() async {
+  getFood({String listName, List<String> field, List<String> value}) async {
     setState(() {
       loadingData = true;
     });
+    String _orderVal = field[0];
+    Query recQuery(List<String> _field, List<String> _value, Query q) {
+      Query _query = q;
+      if (_field.isEmpty) {
+        print(_query.toString());
+        return _query;
+      } else {
+        _query =
+            _query.where(_field.removeLast(), isEqualTo: _value.removeLast());
+        return recQuery(_field, _value, _query);
+      }
+    }
+
     final _box = Hive.box('foodlist');
-    List<dynamic> _gfoodList = await _box.get('0');
-    if (_gfoodList == null) {
-      print('getfood');
-      Query q = _ref
-          .where("Description", isGreaterThan: " ")
-          .orderBy('Description')
-          .limit(10);
+    List<dynamic> _gfoodList = await _box.get(listName);
+    if (_gfoodList == null) { 
+      
+
+      Query q =
+          recQuery(field, value, _ref.where('description', isGreaterThan: ''))
+              .orderBy('description')
+              .limit(10);
+       
       QuerySnapshot snapshot = await q.getDocuments();
       List<FoodListModel> queryList =
           await DatabaseService().listFromSnapshot(snapshot);
@@ -86,7 +101,6 @@ class _FoodListState extends State<FoodList> {
       setState(() {
         loadingData = true;
       });
-      print("getFood");
 
       Query q = _ref
           .where("Description", isGreaterThan: " ")
@@ -112,7 +126,7 @@ class _FoodListState extends State<FoodList> {
   @override
   void initState() {
     super.initState();
-    getFood();
+    getFood(listName: "0", field: ['cuisine'], value: ['indian']);
 
     _scrollController.addListener(() {
       double _maxScroll = _scrollController.position.maxScrollExtent;
@@ -120,7 +134,7 @@ class _FoodListState extends State<FoodList> {
       double _delta = MediaQuery.of(context).size.height * .25;
 
       if (_maxScroll - _currentScroll < _delta && loadingData == false) {
-        getMoreFood();
+        // getMoreFood();
       }
     });
   }
@@ -156,37 +170,20 @@ class _FoodListState extends State<FoodList> {
                         Text(foodList["0"][index].foodName),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: FutureBuilder<String>(
-                            future:
-                                Storage().getUrl(foodList["0"][index].images),
-                            initialData: null,
-                            builder:
-                                (BuildContext context, AsyncSnapshot snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.done) {
-                                return CachedNetworkImage(
-                                  imageUrl: snapshot.data,
-                                  imageBuilder: (context, imageProvider) { 
-                                    return Container(
-                                    height: 200,
-                                    decoration: BoxDecoration(
+                          child: CachedNetworkImage(
+                              imageUrl: foodList["0"][index].images,
+                              imageBuilder: (context, imageProvider) {
+                                return Container(
+                                  height: 200.0,
+                                  margin: EdgeInsets.only(right: 20),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
                                       image: DecorationImage(
                                         image: imageProvider,
-                                        fit: BoxFit.fill
-                                      ),
-                                    ),
-                                  );
-                                  },
-                                  placeholder: (context, url) =>
-                                      CircularProgressIndicator(),
-                                  errorWidget: (context, url, error) =>
-                                      Icon(Icons.error),
+                                        fit: BoxFit.cover,
+                                      )),
                                 );
-                              } else {
-                                return Container();
-                              }
-                            },
-                          ),
+                              }),
                         ),
                       ],
                     ),

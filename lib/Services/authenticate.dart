@@ -28,7 +28,7 @@ class Authenticate {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
-      await DatabaseService().updateUserData(name,user.uid);
+      await DatabaseService().updateUserData (email: email,name: name,uid: user.uid);
       return _userFromFirebase(user);
     } catch (e) {
       print(e.toString());
@@ -62,7 +62,9 @@ class Authenticate {
       // to sign in via Firebase Authentication
       final AuthCredential credential = GoogleAuthProvider.getCredential(
           accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
-      await _auth.signInWithCredential(credential);
+      AuthResult _user = await _auth.signInWithCredential(credential);
+      
+      await DatabaseService().updateUserData (email: googleUser.email,name: googleUser.displayName,uid: _user.user.uid);
 
       return true;
     } catch (e) {
