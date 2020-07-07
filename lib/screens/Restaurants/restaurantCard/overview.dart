@@ -392,11 +392,11 @@ class _OverViewState extends State<OverView> {
                                 child: Row(
                                   children: <Widget>[
                                     Text('5'),
-                                    Icon(Icons.star,color: Colors.amber,),
-                                    Icon(Icons.star,color: Colors.amber,),
-                                    Icon(Icons.star,color: Colors.amber,),
-                                    Icon(Icons.star,color: Colors.amber,),
-                                    Icon(Icons.star,color: Colors.amber,),
+                                    Icon(Icons.star,color: Colors.amber,size: 20.0,),
+                                    Icon(Icons.star,color: Colors.amber,size: 20.0,),
+                                    Icon(Icons.star,color: Colors.amber,size: 20.0,),
+                                    Icon(Icons.star,color: Colors.amber,size: 20.0,),
+                                    Icon(Icons.star,color: Colors.amber,size: 20.0,),
                                     Spacer(),
                                     Text('425'),
                                     SizedBox(width: 50.0,)
@@ -408,10 +408,10 @@ class _OverViewState extends State<OverView> {
                                 child: Row(
                                   children: <Widget>[
                                     Text('4'),
-                                    Icon(Icons.star,color: Colors.amber,),
-                                    Icon(Icons.star,color: Colors.amber,),
-                                    Icon(Icons.star,color: Colors.amber,),
-                                    Icon(Icons.star,color: Colors.amber,),
+                                    Icon(Icons.star,color: Colors.amber,size: 20.0,),
+                                    Icon(Icons.star,color: Colors.amber,size: 20.0,),
+                                    Icon(Icons.star,color: Colors.amber,size: 20.0,),
+                                    Icon(Icons.star,color: Colors.amber,size: 20.0,),
                                     Spacer(),
                                     Text('589'),
                                     SizedBox(width: 50.0,)
@@ -423,9 +423,9 @@ class _OverViewState extends State<OverView> {
                                 child: Row(
                                   children: <Widget>[
                                     Text('3'),
-                                    Icon(Icons.star,color: Colors.amber,),
-                                    Icon(Icons.star,color: Colors.amber,),
-                                    Icon(Icons.star,color: Colors.amber,),
+                                    Icon(Icons.star,color: Colors.amber,size: 20.0,),
+                                    Icon(Icons.star,color: Colors.amber,size: 20.0,),
+                                    Icon(Icons.star,color: Colors.amber,size: 20.0,),
                                     Spacer(),
                                     Text('130'),
                                     SizedBox(width: 50.0,)
@@ -437,8 +437,8 @@ class _OverViewState extends State<OverView> {
                                 child: Row(
                                   children: <Widget>[
                                     Text('2'),
-                                    Icon(Icons.star,color: Colors.amber,),
-                                    Icon(Icons.star,color: Colors.amber,),
+                                    Icon(Icons.star,color: Colors.amber,size: 20.0,),
+                                    Icon(Icons.star,color: Colors.amber,size: 20.0,),
                                     Spacer(),
                                     Text('126'),
                                     SizedBox(width: 50.0,)
@@ -451,7 +451,7 @@ class _OverViewState extends State<OverView> {
                                 child: Row(
                                   children: <Widget>[
                                     Text('1'),
-                                    Icon(Icons.star,color: Colors.amber,),
+                                    Icon(Icons.star,color: Colors.amber,size: 20.0,),
                                     Spacer(),
                                     Text('24'),
                                     SizedBox(width: 50.0,)

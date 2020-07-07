@@ -39,23 +39,6 @@ class _FoodRecipeState extends State<FoodRecipe> {
                               "afssad fgh dfgdg dfhdfd aewrt gcbvh krt sffghdfsdfsd sdfsz bvnrtty ftryt iowanhshd asbjda jadihu"
                           )),
                       SizedBox(height: 10.0),
-                      Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Nutrients',
-                            style: TextStyle(
-                              fontSize: 30,
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10.0,
-
-                      ),
                       Container(
                         child: Column(
                           children: <Widget>[
@@ -65,7 +48,7 @@ class _FoodRecipeState extends State<FoodRecipe> {
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   'Nutrients',
-                                  style: TextStyle(fontSize: 20.0),
+                                  style: TextStyle(fontSize: 24.0),
                                 ),
                               ),
                             ),

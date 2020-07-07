@@ -47,7 +47,7 @@ class _RestaurantTabState extends State<RestaurantTab> {
     return ListView.builder(
         itemCount: rest.length,
         itemBuilder: (context , index){
-          return                       Padding(
+          return  Padding(
               padding: EdgeInsets.only(top: 15.0),
               child: GestureDetector(
                 onTap: (){

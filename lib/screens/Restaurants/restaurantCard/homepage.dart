@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget {
 Color primaryColor =  Color(0xff109618);
 
 class _HomePageState extends State<HomePage> {
+  bool _favourite = false;
 
    Widget imageCarousel= Container(
     height: 225.0,
@@ -105,9 +106,12 @@ class _HomePageState extends State<HomePage> {
                         ),
                         Spacer(),
                         IconButton(
-                          color: Colors.red,
-                          icon: Icon(Icons.favorite_border),
-                          onPressed: () {},
+                          icon: _favourite?Icon(Icons.favorite,color: Colors.pinkAccent,):Icon(Icons.favorite_border,color: Colors.pinkAccent,),
+                          onPressed: () {
+                            setState(() {
+                              _favourite = !_favourite;
+                            });
+                          },
                         )
                     ],
                   ),),

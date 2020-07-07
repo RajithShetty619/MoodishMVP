@@ -175,10 +175,10 @@ class _DineOutState extends State<DineOut> {
                                       padding: const EdgeInsets.all(10.0),
                                       child: Container(
                                         alignment: Alignment.centerLeft,
-                                        height: 125,
-                                        width: 125.0,
+                                        height: 80,
+                                        width: 80.0,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(30.0),
+                                          borderRadius: BorderRadius.circular(20.0),
                                           image: DecorationImage(
                                               image: AssetImage('assets/${rest[index].image}'),
                                               fit: BoxFit.cover),
