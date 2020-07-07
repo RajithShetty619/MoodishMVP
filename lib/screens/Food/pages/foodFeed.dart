@@ -34,6 +34,7 @@ class _FoodFeedState extends State<FoodFeed> {
                   Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
+                        SizedBox(height: 10),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
@@ -63,13 +64,11 @@ class _FoodFeedState extends State<FoodFeed> {
                             Container(
                               height: 30,
                               width: 60,
-                              child: Text(
-                                'Happy',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                )
-                              ),
+                              child: Text('Happy',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  )),
                             ),
                             SizedBox(width: 5)
                           ],
@@ -77,40 +76,40 @@ class _FoodFeedState extends State<FoodFeed> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
-                            height:350,
-
+                            height: 350,
                             child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: 10,
-                              itemBuilder: (BuildContext context,int index){
-                                return Mood_Food(image: 'assets/Chocolate.jpg', descrip1: 'food', descrip2: 'desc');
-                              }
-                            ),
+                                scrollDirection: Axis.horizontal,
+                                itemCount: 10,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Mood_Food(
+                                      image: 'assets/Chocolate.jpg',
+                                      descrip1: 'food',
+                                      descrip2: 'desc');
+                                }),
                           ),
                         ),
                         Padding(
-                              padding: const EdgeInsets.only(left: 10.0),
-                              child: Container(
-                                width: 120.0,
-                                margin: EdgeInsets.all(10.0),
-                                decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.black, width: 2),
-                                  borderRadius: BorderRadius.circular(15),
-                                  // color: Colors.blue[200],
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: Text(
-                                    'My Feed',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 20.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
+                          padding: const EdgeInsets.only(left: 10.0),
+                          child: Container(
+                            width: 120.0,
+                            margin: EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black, width: 2),
+                              borderRadius: BorderRadius.circular(15),
+                              // color: Colors.blue[200],
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Text(
+                                'My Feed',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
+                          ),
+                        ),
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
@@ -122,11 +121,11 @@ class _FoodFeedState extends State<FoodFeed> {
                                   // isActive: true,
                                   index: indx,
                                   stIndex: 0,
-                                  press: (){},
+                                  press: () {},
                                 ),
-                                onTap: (){
+                                onTap: () {
                                   setState(() {
-                                     indx =0;
+                                    indx = 0;
                                   });
                                 },
                               ),
@@ -136,11 +135,11 @@ class _FoodFeedState extends State<FoodFeed> {
                                   // isActive: true,
                                   index: indx,
                                   stIndex: 1,
-                                  press: (){},
+                                  press: () {},
                                 ),
-                                onTap: (){
+                                onTap: () {
                                   setState(() {
-                                     indx =1;
+                                    indx = 1;
                                   });
                                 },
                               ),
@@ -150,11 +149,11 @@ class _FoodFeedState extends State<FoodFeed> {
                                   // isActive: true,
                                   index: indx,
                                   stIndex: 2,
-                                  press: (){},
+                                  press: () {},
                                 ),
-                                onTap: (){
+                                onTap: () {
                                   setState(() {
-                                     indx =2;
+                                    indx = 2;
                                   });
                                 },
                               ),
@@ -164,19 +163,19 @@ class _FoodFeedState extends State<FoodFeed> {
                                   // isActive: true,
                                   index: indx,
                                   stIndex: 3,
-                                  press: (){},
+                                  press: () {},
                                 ),
-                                onTap: (){
+                                onTap: () {
                                   setState(() {
-                                     indx =3;
+                                    indx = 3;
                                   });
                                 },
                               ),
                             ],
                           ),
                         ),
-                        RecipeTab(),
-                         
+                        
+
                       ]
                     )
                 ],
@@ -188,4 +187,3 @@ class _FoodFeedState extends State<FoodFeed> {
     );
   }
 }
-
