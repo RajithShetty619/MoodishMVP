@@ -162,7 +162,6 @@ class _TodaySpecialState extends State<TodaySpecial> {
         ),*/
         
            child: Container(
-              
               margin: EdgeInsets.only(right: 20),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
