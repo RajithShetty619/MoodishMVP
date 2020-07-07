@@ -26,162 +26,181 @@ class _FoodFeedState extends State<FoodFeed> {
   Widget build(BuildContext context) {
     return Container(
       child: SafeArea(
-        child: Stack(
-          children: <Widget>[
-            SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10.0),
-                              child: Container(
-                                width: 220.0,
-                                margin: EdgeInsets.all(10.0),
-                                decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.black, width: 2),
-                                  borderRadius: BorderRadius.circular(15),
-                                  // color: Colors.blue[200],
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: Text(
-                                    'Top 10 for Your Mood',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 20.0,
-                                        fontWeight: FontWeight.bold),
+        child: ListView.builder(
+          itemCount: 10,
+          shrinkWrap: true,
+          scrollDirection: Axis.vertical,
+          itemBuilder: (context, index) {
+            return Stack(
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    if(index==0)
+                    Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10.0),
+                                child: Container(
+                                  width: 220.0,
+                                  margin: EdgeInsets.all(10.0),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.black, width: 2),
+                                    borderRadius: BorderRadius.circular(15),
+                                    // color: Colors.blue[200],
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Text(
+                                      'Top 10 for Your Mood',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              height: 30,
-                              width: 60,
-                              child: Text('Happy',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                            ),
-                            SizedBox(width: 5)
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            height: 350,
-                            child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: 10,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Mood_Food(
-                                      image: 'assets/Chocolate.jpg',
-                                      descrip1: 'food',
-                                      descrip2: 'desc');
-                                }),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10.0),
-                          child: Container(
-                            width: 120.0,
-                            margin: EdgeInsets.all(10.0),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.black, width: 2),
-                              borderRadius: BorderRadius.circular(15),
-                              // color: Colors.blue[200],
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Text(
-                                'My Feed',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold),
+                              Container(
+                                height: 30,
+                                width: 60,
+                                child: Text('Happy',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    )),
                               ),
-                            ),
-                          ),
-                        ),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              GestureDetector(
-                                child: EverySituation(
-                                  title: 'All',
-                                  // isActive: true,
-                                  index: indx,
-                                  stIndex: 0,
-                                  press: () {},
-                                ),
-                                onTap: () {
-                                  setState(() {
-                                    indx = 0;
-                                  });
-                                },
-                              ),
-                              GestureDetector(
-                                child: EverySituation(
-                                  title: 'Recipe',
-                                  // isActive: true,
-                                  index: indx,
-                                  stIndex: 1,
-                                  press: () {},
-                                ),
-                                onTap: () {
-                                  setState(() {
-                                    indx = 1;
-                                  });
-                                },
-                              ),
-                              GestureDetector(
-                                child: EverySituation(
-                                  title: 'Polls',
-                                  // isActive: true,
-                                  index: indx,
-                                  stIndex: 2,
-                                  press: () {},
-                                ),
-                                onTap: () {
-                                  setState(() {
-                                    indx = 2;
-                                  });
-                                },
-                              ),
-                              GestureDetector(
-                                child: EverySituation(
-                                  title: 'Food For Thought',
-                                  // isActive: true,
-                                  index: indx,
-                                  stIndex: 3,
-                                  press: () {},
-                                ),
-                                onTap: () {
-                                  setState(() {
-                                    indx = 3;
-                                  });
-                                },
-                              ),
+                              SizedBox(width: 5)
                             ],
                           ),
-                        ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              height: 350,
+                              child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: 10,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return Mood_Food(
+                                        image: 'assets/Chocolate.jpg',
+                                        descrip1: 'food',
+                                        descrip2: 'desc');
+                                  }),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10.0),
+                            child: Container(
+                              width: 120.0,
+                              margin: EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.black, width: 2),
+                                borderRadius: BorderRadius.circular(15),
+                                // color: Colors.blue[200],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Text(
+                                  'My Feed',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                GestureDetector(
+                                  child: EverySituation(
+                                    title: 'All',
+                                    // isActive: true,
+                                    index: indx,
+                                    stIndex: 0,
+                                    press: () {},
+                                  ),
+                                  onTap: () {
+                                    setState(() {
+                                      indx = 0;
+                                    });
+                                  },
+                                ),
+                                GestureDetector(
+                                  child: EverySituation(
+                                    title: 'Recipe',
+                                    // isActive: true,
+                                    index: indx,
+                                    stIndex: 1,
+                                    press: () {},
+                                  ),
+                                  onTap: () {
+                                    setState(() {
+                                      indx = 1;
+                                    });
+                                  },
+                                ),
+                                GestureDetector(
+                                  child: EverySituation(
+                                    title: 'Polls',
+                                    // isActive: true,
+                                    index: indx,
+                                    stIndex: 2,
+                                    press: () {},
+                                  ),
+                                  onTap: () {
+                                    setState(() {
+                                      indx = 2;
+                                    });
+                                  },
+                                ),
+                                GestureDetector(
+                                  child: EverySituation(
+                                    title: 'Food For Thought',
+                                    // isActive: true,
+                                    index: indx,
+                                    stIndex: 3,
+                                    press: () {},
+                                  ),
+                                  onTap: () {
+                                    setState(() {
+                                      indx = 3;
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ]),
+                    Column(
+                      children: <Widget>[
+                        if (indx == 0)
+                        Container(height: 500, child: AllTabs()),
                         
+                        if(indx == 1)
+                        Container(height: 430, child: RecipeTab()),
 
-                      ]
-                    )
-                ],
-              ),
-            )
-          ],
+                        if(indx == 2)
+                        Container(height: 280, child: PollTabs()),
+
+                        if(indx == 3)
+                        Container(height: 450, child: FoodftTab()),
+                      ],
+                    ),
+                  ],
+                )
+              ],
+            );
+          },
         ),
       ),
     );

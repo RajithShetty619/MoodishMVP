@@ -14,102 +14,108 @@ class _AllTabsState extends State<AllTabs> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Expanded(
-          child: Scaffold(
-            body: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    height: 500.0,
-                    width: double.maxFinite,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 10,
-                        itemBuilder: (context , index){
-                          return Card(
-                            child: Column(
-                              children: <Widget>[
-                                Container(
-                                  height: 200.0,
-                                  width: 100.0,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(30.0),
-                                    image: DecorationImage(
-                                      image: AssetImage('assets/${_info[0].image}')
-                                    )
-                                  ),
-
-                                ),
-                                Text(_info[0].title,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),),
-                                SizedBox(height: 5.0,),
-                                Text(_info[0].cuisine),
-                                SizedBox(height: 2.0,),
-                                Text(_info[0].name)
-                              ],
-                            ),
-                          );
-                        }),
-                  ),
-                  Expanded(
-                    child: ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 10,
-                        itemBuilder: (context , index){
-                          return Material(
-                            child: Column(
-                              children: <Widget>[
-                                Container(
-                                  height: 150.0,
-                                  width: 100.0,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                      image: DecorationImage(
-                                          image: AssetImage('assets/${_info[0].image}')
-                                      )
-                                  ),
-
-                                )
-                              ],
-                            ),
-                          );
-                        }),
-                  ),
-                  Expanded(
-                    child: ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 10,
-                        itemBuilder: (context , index){
-                          return Card(
-                            child: Column(
-                              children: <Widget>[
-                                Container(
-                                  height: 150.0,
-                                  width: 100.0,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                      image: DecorationImage(
-                                          image: AssetImage('assets/${_info[0].image}')
-                                      )
-                                  ),
-
-                                )
-                              ],
-                            ),
-                          );
-                        }),
-                  )
-                ],
+        Container(
+          
+          child: SingleChildScrollView
+            (scrollDirection: Axis.horizontal,
+                child: RecipeListView(info: _info)
               ),
-            ),
-          ),
         ),
+        Expanded(
+          child: ListView.builder(
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: 10,
+              itemBuilder: (context , index){
+                return PollListView(info: _info);
+              }),
+        ),
+        Expanded(
+          child: ListView.builder(
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: 10,
+              itemBuilder: (context , index){
+                return Card(
+                  child: Container(
+                    height: 150.0,
+                    width: 100.0,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30.0),
+                        image: DecorationImage(
+                            image: AssetImage('assets/${_info[0].image}')
+                        )
+                    ),
+
+                  ),
+                );
+              }),
+        )
       ],
+    );
+  }
+}
+
+class PollListView extends StatelessWidget {
+  const PollListView({
+    Key key,
+    @required List<AllCard> info,
+  }) : _info = info, super(key: key);
+
+  final List<AllCard> _info;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Container(
+        height: 150.0,
+        width: 100.0,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30.0),
+            image: DecorationImage(
+                image: AssetImage('assets/${_info[0].image}')
+            )
+        ),
+
+      ),
+    );
+  }
+}
+
+class RecipeListView extends StatelessWidget {
+  const RecipeListView({
+    Key key,
+    @required List<AllCard> info,
+  }) : _info = info, super(key: key);
+
+  final List<AllCard> _info;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Column(
+        children: <Widget>[
+          Container(
+            height: 200.0,
+            width: 100.0,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30.0),
+              image: DecorationImage(
+                image: AssetImage('assets/${_info[0].image}')
+              )
+            ),
+
+          ),
+          Text(_info[0].title,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),),
+          SizedBox(height: 5.0,),
+          Text(_info[0].cuisine),
+          SizedBox(height: 2.0,),
+          Text(_info[0].name)
+        ],
+      ),
     );
   }
 }

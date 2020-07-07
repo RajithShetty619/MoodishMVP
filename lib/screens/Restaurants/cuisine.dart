@@ -7,22 +7,30 @@ class Cuisine extends StatefulWidget {
 }
 
 class _CuisineState extends State<Cuisine> {
-  List<GridTileBuilder> cuisine =[
-    GridTileBuilder(image: 'NorthIndian.jpeg',cuisine: 'North Indian',currentOpacity: 1),
-    GridTileBuilder(image: 'SouthIndian.jpeg',cuisine: 'South Indian',currentOpacity: 1),
-    GridTileBuilder(image: 'Chinese.png',cuisine: 'Chinese',currentOpacity: 1),
-    GridTileBuilder(image: 'Dessert.jpg',cuisine: 'Desserts',currentOpacity: 1),
-    GridTileBuilder(image: 'FastFood.png',cuisine: 'Fast Food',currentOpacity: 1),
-    GridTileBuilder(image: 'Beverage.jpg',cuisine: 'Beverages',currentOpacity: 1),
-    GridTileBuilder(image: 'Italian.jpg',cuisine: 'Italian',currentOpacity: 1),
-    GridTileBuilder(image: 'Mexican.jpg',cuisine: 'Mexican',currentOpacity: 1),
-    GridTileBuilder(image: 'Bakery.jpg',cuisine: 'Bakery',currentOpacity: 1),
-
+  List<GridTileBuilder> cuisine = [
+    GridTileBuilder(
+        image: 'NorthIndian.jpeg', cuisine: 'North Indian', currentOpacity: 1),
+    GridTileBuilder(
+        image: 'SouthIndian.jpeg', cuisine: 'South Indian', currentOpacity: 1),
+    GridTileBuilder(
+        image: 'Chinese.png', cuisine: 'Chinese', currentOpacity: 1),
+    GridTileBuilder(
+        image: 'Dessert.jpg', cuisine: 'Desserts', currentOpacity: 1),
+    GridTileBuilder(
+        image: 'FastFood.png', cuisine: 'Fast Food', currentOpacity: 1),
+    GridTileBuilder(
+        image: 'Beverage.jpg', cuisine: 'Beverages', currentOpacity: 1),
+    GridTileBuilder(
+        image: 'Italian.jpg', cuisine: 'Italian', currentOpacity: 1),
+    GridTileBuilder(
+        image: 'Mexican.jpg', cuisine: 'Mexican', currentOpacity: 1),
+    GridTileBuilder(image: 'Bakery.jpg', cuisine: 'Bakery', currentOpacity: 1),
   ];
-  int i=0;
-  List<String> pref=['','','','','','','','',''];//all the user preferences are saved here
-  String err = '';
 
+  int i = 0;
+  List<String> pref = []; //all the user preferences are saved here
+  String err = '';
+  bool _visible = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,123 +45,123 @@ class _CuisineState extends State<Cuisine> {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 75,
-                        color: Colors.orange
-                    ),
+                        color: Colors.orange),
                     children: [
                       TextSpan(
                           text: '.',
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 90,
-                              color: Colors.black
-                          )
-                      )
-                    ]
-                ),
+                              color: Colors.black))
+                    ]),
               ),
-              SizedBox(height: 25.0,),
+              SizedBox(
+                height: 25.0,
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   alignment: Alignment.centerLeft,
-                  child: Text('Select Any 3 Cuisine of your type :',
+                  child: Text(
+                    'Select Any 3 Cuisine of your type :',
                     textAlign: TextAlign.left,
                     style: TextStyle(
                         fontSize: 20.0,
                         fontStyle: FontStyle.italic,
-                        fontWeight: FontWeight.w400
-                    ),
+                        fontWeight: FontWeight.w400),
                   ),
                 ),
               ),
-              SizedBox(height: 10.0,),
+              SizedBox(
+                height: 10.0,
+              ),
               Expanded(
-                child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 7.0,
-                  mainAxisSpacing: 7.0,
-                ),
+                child: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 7.0,
+                      mainAxisSpacing: 7.0,
+                    ),
                     scrollDirection: Axis.vertical,
                     itemCount: cuisine.length,
                     shrinkWrap: true,
-                    itemBuilder: (BuildContext context,index){
-                      return (cuisine[index].currentOpacity==0)
-                          ? GestureDetector(
-                        onTap: ()=> null,
-                      )
-                          :GestureDetector(
-                        onTap: (){
-                          debugPrint('tapped');
-                          pref[i]=cuisine[index].cuisine;
-                          i++;
-                          // setState(() =>  cuisine[index].currentOpacity=0 );
-                         setState(() {
-                          //  cuisine[index].currentOpacity=0;
-                           cuisine.removeAt(index);
-                         });
-                    // for(int a=0;a<9;a++)
-                    // {
-                    //   debugPrint(pref[a]);//print elements in pref
-                    // }
+                    itemBuilder: (BuildContext context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          dynamic _val = cuisine[index];
+                          Future.delayed(Duration(milliseconds: 500), () {
+                            setState(() {
+                              cuisine.remove(_val);
+                              print(pref);
+                              if (pref.length == 9) {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return Taste();
+                                }));
+                              }
+                            });
+                          });
+                          setState(() {
+                            pref.add(_val.cuisine);
+                            i++;
+                            cuisine[index]._visible = !cuisine[index]._visible;
+                          });
                         },
                         child: AnimatedOpacity(
-                          duration:  Duration(milliseconds: 500 ),
-                          opacity: cuisine[index].currentOpacity,
+                          duration: Duration(milliseconds: 500),
+                          opacity: cuisine[index]._visible ? 1.0 : 0.0,
                           child: Container(
                             height: 175.0,
                             width: 110.0,
                             decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: AssetImage('assets/${cuisine[index].image}'),
+                                  image: AssetImage(
+                                      'assets/${cuisine[index].image}'),
                                   fit: BoxFit.cover,
                                 ),
-                                borderRadius: BorderRadius.circular(10.0)
-                            ),
+                                borderRadius: BorderRadius.circular(10.0)),
                             child: Center(
                               child: Text(
                                 '${cuisine[index].cuisine}',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
-                                    fontSize: 18.0
-                                ),
+                                    fontSize: 18.0),
                               ),
                             ),
                           ),
                         ),
                       );
-
-                    }
-                ),
+                    }),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: (i+1>3)?Align(
-                      alignment: Alignment.center,
-                      child: Text(''),
-                    ):Align(
-                        alignment: Alignment.center,
-                        child: Text(err,
-                          style: TextStyle(
-                              color: Colors.red
-                          ),)
-                    )
-                  ),
+                      padding: const EdgeInsets.all(12.0),
+                      child: (i + 1 > 3)
+                          ? Align(
+                              alignment: Alignment.center,
+                              child: Text(''),
+                            )
+                          : Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                err,
+                                style: TextStyle(color: Colors.red),
+                              ))),
                   Align(
                     alignment: Alignment.centerRight,
                     child: RaisedButton(
-                      onPressed: (){
-                        if(i+1>3)
+                      onPressed: () {
+                        if (i + 1 > 3)
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
-                                return Taste();
-                              }));
+                            return Taste();
+                          }));
                         else
                           setState(() {
-                            err='Select at least 3!';
+                            err = 'Select ${3 - i + 1} more!';
                           });
                       },
                       color: Colors.green,
@@ -162,7 +170,6 @@ class _CuisineState extends State<Cuisine> {
                   ),
                 ],
               )
-
             ],
           ),
         ),
@@ -171,10 +178,10 @@ class _CuisineState extends State<Cuisine> {
   }
 }
 
-class GridTileBuilder{
+class GridTileBuilder {
   String image;
   String cuisine;
   double currentOpacity;
-  GridTileBuilder({this.cuisine,this.image,this.currentOpacity}) ;
-
+  bool _visible = true;
+  GridTileBuilder({this.cuisine, this.image, this.currentOpacity});
 }

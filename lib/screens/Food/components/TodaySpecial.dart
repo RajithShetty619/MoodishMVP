@@ -75,79 +75,54 @@ class _TodaySpecialState extends State<TodaySpecial> {
                                 context, 'My title', 'My Body');
                           },
                         ),
+                        onPressed: () async {
+                          final action = await Dialogs.yesAbortDialog(
+                              context, 'My title', 'My Body');
+                        },
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              widget.descrip1,
-                              style: TextStyle(
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            widget.descrip1,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          widget.descrip2,
+                          style: TextStyle(color: Colors.white, fontSize: 18),
+                        ),
+                        SizedBox(height: 15),
+                        FlatButton(
+                          onPressed: () {},
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Container(
+                              // color: Colors.blue[300],
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.restaurant,
                                   color: Colors.white,
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            widget.descrip2,
-                            style: TextStyle(color: Colors.white, fontSize: 18),
-                          ),
-                          SizedBox(height: 15),
-                          FlatButton(
-                            onPressed: () {},
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Container(
-                                // color: Colors.blue[300],
-                                child: IconButton(
-                                  icon: Icon(
-                                    Icons.restaurant,
-                                    color: Colors.white,
-                                    size: 35,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                IntroScreen()));
-                                  },
+                                  size: 35,
                                 ),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              IntroScreen()));
+                                },
                               ),
                             ),
-
-                            // label: Text(''),
-                          ),
-                          // SizedBox(height: 10),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: <Widget>[
-                              FlatButton.icon(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.info_outline,
-                                    color: Colors.white,
-                                  ),
-                                  label: Text(
-                                    'More info',
-                                    style: TextStyle(color: Colors.white),
-                                  )),
-                              FlatButton.icon(
-                                  onPressed: () => _onButtonPressed(),
-                                  icon: Icon(
-                                    Icons.filter_center_focus,
-                                    color: Colors.white,
-                                  ),
-                                  label: Text(
-                                    'Filter',
-                                    style: TextStyle(color: Colors.white),
-                                  ))
-                            ],
                           ),
                         ],
                       )

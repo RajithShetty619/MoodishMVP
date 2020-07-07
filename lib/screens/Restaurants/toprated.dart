@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/screens/Restaurants/restaurantCard/homepage.dart';
 
 class TopRated extends StatefulWidget {
   @override
@@ -103,8 +104,9 @@ class _TopRatedState extends State<TopRated> {
                                   width: double.maxFinite,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(30.0),
-                                    color: Colors.deepOrange,
-                                  ),
+                                    image: DecorationImage(
+                                        image: AssetImage('assets/Top_Rated.png'),
+                                        fit: BoxFit.cover),                                  ),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
@@ -161,23 +163,31 @@ class _TopRatedState extends State<TopRated> {
                             ]),
                       Padding(
                           padding: EdgeInsets.only(top: 15.0),
-                          child: Card(
-                              child: ListTile(
-                                onTap: () {},
-                                leading: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  child: Image(
-                                    image: AssetImage('assets/${rest[index].image}'),
-                                    width: 80.0,
-                                    height: 80.0,
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return HomePage();
+                                  }));
+                            },
+                            child: Card(
+                                child: ListTile(
+                                  onTap: () {},
+                                  leading: ClipRRect(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    child: Image(
+                                      image: AssetImage('assets/${rest[index].image}'),
+                                      width: 80.0,
+                                      height: 80.0,
+                                    ),
                                   ),
-                                ),
-                                title: Text(rest[index].name),
-                                subtitle: Text(rest[index].desc),
-                                  trailing: Text(
-                                      '\u{02605}4.2'
-                                  )
-                              ))),
+                                  title: Text(rest[index].name),
+                                  subtitle: Text(rest[index].desc),
+                                    trailing: Text(
+                                        '\u{02605}4.2'
+                                    )
+                                )),
+                          )),
                     ]);
               }),
         ));

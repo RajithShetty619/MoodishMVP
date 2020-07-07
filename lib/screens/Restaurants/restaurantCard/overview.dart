@@ -54,7 +54,7 @@ class _OverViewState extends State<OverView> {
                               child: Tab(
                                   icon: Icon(
                                     Icons.call,
-                                    size: 85.0,
+                                    size: 70.0,
                                   ),
                                   child: Text("Phone"))),
                           SizedBox(
@@ -111,7 +111,7 @@ class _OverViewState extends State<OverView> {
                               child: Tab(
                                   icon: Icon(
                                     Icons.local_offer,
-                                    size: 85.0,
+                                    size: 70.0,
                                   ),
                                   child: Text("Offers"))),
                           SizedBox(
@@ -148,7 +148,7 @@ class _OverViewState extends State<OverView> {
                               child: Tab(
                                   icon: Icon(
                                     Icons.restaurant_menu,
-                                    size: 85.0,
+                                    size: 70.0,
                                   ),
                                   child: Text("Menu"))),
                           SizedBox(
@@ -174,7 +174,7 @@ class _OverViewState extends State<OverView> {
                               child: Tab(
                                 icon: Icon(
                                   Icons.share,
-                                  size: 85.0,
+                                  size: 70.0,
                                 ),
                                 child: Text("Share"),
                               )),
