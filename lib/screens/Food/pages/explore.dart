@@ -50,7 +50,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
   bool loadingData = false;
   bool loadingData1 = false;
   bool loadingData2 = false;
-  DatabaseQuery _dq = new DatabaseQuery();
+  DatabaseQuery _dq = new DatabaseQuery(listName: "0",field: ['taste'],value: ['Sweet']);
 
   @override
   void initState() {

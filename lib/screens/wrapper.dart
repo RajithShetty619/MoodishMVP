@@ -14,7 +14,7 @@ class Wrapper extends StatelessWidget {
       return SignIn();
     }
     else{
-      return Cuisine();
+      return MainScreen();
     }
   }
 }
