@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/screens/Food/foodInfo/food_info.dart';
 
 class FoodEveryTaste extends StatelessWidget {
   const FoodEveryTaste({
@@ -18,7 +19,8 @@ class FoodEveryTaste extends StatelessWidget {
       aspectRatio: 0.9 / 1.1,
       child: GestureDetector(
         onTap: () {
-          
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => Food_Info()));
         },
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 10,vertical: 5),

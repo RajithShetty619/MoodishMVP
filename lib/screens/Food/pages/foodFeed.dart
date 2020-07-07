@@ -179,8 +179,8 @@ class _FoodFeedState extends State<FoodFeed> {
                       ]),
                   Column(
                     children: <Widget>[
-                      if (indx == 0)
-                      Expanded( child: AllTabs()),
+                      // if (indx == 0)
+                      // Expanded( child: AllTabs()),
                       
                       if(indx == 1)
                       Container(height: 430, child: RecipeTab()),

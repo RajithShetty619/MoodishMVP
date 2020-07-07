@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/screens/Food/foodInfo/food_info.dart';
 
 class Mood_Food extends StatelessWidget {
   const Mood_Food({
@@ -18,7 +19,10 @@ class Mood_Food extends StatelessWidget {
     return AspectRatio(
       aspectRatio: 0.9 / 1.2,
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => Food_Info()));
+        },
         child: Container(
           margin: EdgeInsets.only(right: 20),
           decoration: BoxDecoration(
