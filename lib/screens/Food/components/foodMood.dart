@@ -9,9 +9,9 @@ class Mood_Food extends StatelessWidget {
     @required this.descrip2,
   }) : super(key: key);
 
-  final  image;
-  final  descrip1;
-  final  descrip2;
+  final image;
+  final descrip1;
+  final descrip2;
 
   @override
   Widget build(BuildContext context) {
@@ -19,82 +19,68 @@ class Mood_Food extends StatelessWidget {
       aspectRatio: 0.9 / 1.2,
       child: GestureDetector(
         onTap: () {},
-  
-                  child: Container(
-                    margin: EdgeInsets.only(right: 20),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
-                          image: AssetImage(image),
-                          fit: BoxFit.cover,
-                        )),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          gradient: LinearGradient(
-                              begin: Alignment.bottomCenter,
-                              stops: [
-                                .1,
-                                .5
-                              ],
-                              colors: [
-                                Colors.black.withOpacity(.6),
-                                Colors.black.withOpacity(.3),
-                              ])),
-                      child: Padding(
-                        padding: EdgeInsets.all(7.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            Align(
-                              alignment: Alignment.bottomLeft,
-                              child: Text(
-                                descrip1,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(
-                                  descrip2,
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 18),
-                                ),
-                                 FlatButton(
-                                  onPressed: () {},
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(20),
-                                    child: Container(
-                                       margin: EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white, width: 2),
-                            borderRadius: BorderRadius.circular(300),
+        child: Container(
+          margin: EdgeInsets.only(right: 20),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              image: DecorationImage(
+                image: AssetImage(image),
+                fit: BoxFit.cover,
+              )),
+          child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                gradient: LinearGradient(begin: Alignment.bottomCenter, stops: [
+                  .1,
+                  .5
+                ], colors: [
+                  Colors.black.withOpacity(.6),
+                  Colors.black.withOpacity(.3),
+                ])),
+            child: Padding(
+              padding: EdgeInsets.all(7.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Text(
+                      descrip1,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        descrip2,
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
+                      Container(
+                        margin: EdgeInsets.all(5.0),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white, width: 2),
+                          borderRadius: BorderRadius.circular(300),
+                        ),
+                        // color: Colors.blue[300],
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.arrow_forward,
+                            color: Colors.white,
+                            size: 30,
                           ),
-                                      // color: Colors.blue[300],
-                                      child: IconButton(
-                                        icon: Icon(
-                                          Icons.arrow_forward,
-                                          color: Colors.white,
-                                          size: 30,
-                                        ),
-                                        onPressed: () {
-                                          
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            
-                           
-                            // SizedBox(height: 10),
-                           /* Row(
+                          onPressed: () {},
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  // SizedBox(height: 10),
+                  /* Row(
                               mainAxisAlignment:
                                   MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.end,
@@ -121,14 +107,12 @@ class Mood_Food extends StatelessWidget {
                                     ))
                               ],
                             ),*/
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-    
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
-  
   }
 }

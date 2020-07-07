@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:moodish_mvp/Services/storage.dart';
 import 'package:moodish_mvp/screens/Food/components/shareDialog.dart';
 import 'package:moodish_mvp/screens/Food/components/stepSlider.dart';
+import 'package:moodish_mvp/screens/Food/foodInfo/food_info.dart';
 
 class TodaySpecial extends StatefulWidget {
   const TodaySpecial({
@@ -208,10 +209,10 @@ class _TodaySpecialState extends State<TodaySpecial> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => IntroScreen()));
+                            builder: (context) => Food_Info()));
                   },
                   child: Text(
-                    'Let`s Go!',
+                    "Let's Go!",
                     style: TextStyle(
                       fontSize: 20,
                     ),

@@ -43,26 +43,29 @@ class _FoodHomeState extends State<FoodHome> {
                     : Padding(
                         padding: const EdgeInsets.only(left: 8.0),
                         child: Text(
-                          'Today,\n Hungry yet?',
+                          "Today,\n Hungry yet?",
                           style: TextStyle(
                             fontSize: 25,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                Container(
-                  height: 35,
-                  width: 140,
-                  child: CupertinoSlidingSegmentedControl(
-                    children: logowidgets,
-                    onValueChanged: (changeValue) {
-                      print(_switch);
-                      setState(() {
-                        grpValue = changeValue;
-                        _switch = !_switch;
-                      });
-                    },
-                    groupValue: grpValue,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 35,
+                    width: 140,
+                    child: CupertinoSlidingSegmentedControl(
+                      children: logowidgets,
+                      onValueChanged: (changeValue) {
+                        print(_switch);
+                        setState(() {
+                          grpValue = changeValue;
+                          _switch = !_switch;
+                        });
+                      },
+                      groupValue: grpValue,
+                    ),
                   ),
                 ),
               ],

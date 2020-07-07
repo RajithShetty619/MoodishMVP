@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/screens/Food/myFeed/polls.dart';
+import 'package:moodish_mvp/screens/Food/myFeed/recipe.dart';
 
 class AllTabs extends StatefulWidget {
   @override
@@ -66,19 +68,8 @@ class PollListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Container(
-        height: 150.0,
-        width: 100.0,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30.0),
-            image: DecorationImage(
-                image: AssetImage('assets/${_info[0].image}')
-            )
-        ),
-
-      ),
-    );
+    return PollTabs();
+    
   }
 }
 
@@ -92,31 +83,7 @@ class RecipeListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Column(
-        children: <Widget>[
-          Container(
-            height: 200.0,
-            width: 100.0,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30.0),
-              image: DecorationImage(
-                image: AssetImage('assets/${_info[0].image}')
-              )
-            ),
-
-          ),
-          Text(_info[0].title,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),),
-          SizedBox(height: 5.0,),
-          Text(_info[0].cuisine),
-          SizedBox(height: 2.0,),
-          Text(_info[0].name)
-        ],
-      ),
-    );
+    return RecipeTab();
   }
 }
 

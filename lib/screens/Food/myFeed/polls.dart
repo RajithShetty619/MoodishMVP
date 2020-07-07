@@ -22,7 +22,7 @@ class getListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50.0)
+          borderRadius: BorderRadius.circular(35.0)
       ),
       child: Column(
         children: <Widget>[

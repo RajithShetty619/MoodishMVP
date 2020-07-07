@@ -6,6 +6,8 @@ import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart';
+import 'package:moodish_mvp/screens/Food/components/Every_Situation.dart';
+import 'package:moodish_mvp/screens/Food/components/Every_Taste.dart';
 import 'package:moodish_mvp/screens/Food/components/Food_Situation.dart'; 
 import 'package:moodish_mvp/screens/Food/components/Food_Taste.dart';
 import 'package:moodish_mvp/screens/Food/components/MealType.dart';
@@ -39,7 +41,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => keepAlive;
 
-  int grpValue = 1;
+  int indx = 0;
 
   int _selected = 1;
 
@@ -162,7 +164,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: Text(
-                                    'Today`s Special',
+                                    "Today's Special",
                                     style: TextStyle(
                                       fontSize: 22,
                                       fontWeight: FontWeight.bold,
@@ -352,26 +354,76 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            mood(
-                              title: 'Happy',
-                              index: 0,
-                            ),
-                            mood(
-                              title: 'Sad',
-                              index: 1,
-                            ),
-                            mood(
-                              title: 'Happy',
-                              index: 2,
-                            ),
-                            mood(
-                              title: 'Happy',
-                              index: 3,
-                            ),
-                            mood(
-                              title: 'Happy',
-                              index: 4,
-                            ),
+                            GestureDetector(
+                                  child: EveryTaste(
+                                    title: "bitter",
+                                    // isActive: true,
+                                    index: indx,
+                                    stIndex: 0,
+                                    press: () {},
+                                  ),
+                                  onTap: () {
+                                    setState(() {
+                                      indx = 0;
+                                    });
+                                  },
+                                ),
+                             GestureDetector(
+                                  child: EveryTaste(
+                                    title: "sweet",
+                                    // isActive: true,
+                                    index: indx,
+                                    stIndex: 1,
+                                    press: () {},
+                                  ),
+                                  onTap: () {
+                                    setState(() {
+                                      indx = 1;
+                                    });
+                                  },
+                                ),
+                                GestureDetector(
+                                  child: EveryTaste(
+                                    title: "salty",
+                                    // isActive: true,
+                                    index: indx,
+                                    stIndex: 2,
+                                    press: () {},
+                                  ),
+                                  onTap: () {
+                                    setState(() {
+                                      indx = 2;
+                                    });
+                                  },
+                                ),
+                                GestureDetector(
+                                  child: EveryTaste(
+                                    title: "sour",
+                                    // isActive: true,
+                                    index: indx,
+                                    stIndex: 3,
+                                    press: () {},
+                                  ),
+                                  onTap: () {
+                                    setState(() {
+                                      indx = 3;
+                                    });
+                                  },
+                                ),
+                                GestureDetector(
+                                  child: EveryTaste(
+                                    title: "umami",
+                                    // isActive: true,
+                                    index: indx,
+                                    stIndex: 4,
+                                    press: () {},
+                                  ),
+                                  onTap: () {
+                                    setState(() {
+                                      indx = 4;
+                                    });
+                                  },
+                                ),
                           ],
                         ),
                       ),
@@ -437,26 +489,76 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            mood(
-                              title: 'Happy',
-                              index: 0,
-                            ),
-                            mood(
-                              title: 'Sad',
-                              index: 1,
-                            ),
-                            mood(
-                              title: 'Happy',
-                              index: 2,
-                            ),
-                            mood(
-                              title: 'Happy',
-                              index: 3,
-                            ),
-                            mood(
-                              title: 'Happy',
-                              index: 4,
-                            ),
+                           GestureDetector(
+                                  child: EverySituation(
+                                    title: 'Happy',
+                                    // isActive: true,
+                                    index: indx,
+                                    stIndex: 0,
+                                    press: () {},
+                                  ),
+                                  onTap: () {
+                                    setState(() {
+                                      indx = 0;
+                                    });
+                                  },
+                                ),
+                                GestureDetector(
+                                  child: EverySituation(
+                                    title: 'sad',
+                                    // isActive: true,
+                                    index: indx,
+                                    stIndex: 1,
+                                    press: () {},
+                                  ),
+                                  onTap: () {
+                                    setState(() {
+                                      indx = 1;
+                                    });
+                                  },
+                                ),
+                                GestureDetector(
+                                  child: EverySituation(
+                                    title: 'Happy',
+                                    // isActive: true,
+                                    index: indx,
+                                    stIndex: 2,
+                                    press: () {},
+                                  ),
+                                  onTap: () {
+                                    setState(() {
+                                      indx = 2;
+                                    });
+                                  },
+                                ),
+                                GestureDetector(
+                                  child: EverySituation(
+                                    title: 'Happy',
+                                    // isActive: true,
+                                    index: indx,
+                                    stIndex: 3,
+                                    press: () {},
+                                  ),
+                                  onTap: () {
+                                    setState(() {
+                                      indx = 3;
+                                    });
+                                  },
+                                ),
+                                GestureDetector(
+                                  child: EverySituation(
+                                    title: 'Happy',
+                                    // isActive: true,
+                                    index: indx,
+                                    stIndex: 4,
+                                    press: () {},
+                                  ),
+                                  onTap: () {
+                                    setState(() {
+                                      indx = 4;
+                                    });
+                                  },
+                                ),
                           ],
                         ),
                       ),

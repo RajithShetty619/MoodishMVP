@@ -16,7 +16,7 @@ class _RecipeTabState extends State<RecipeTab> {
 
   @override
   Widget build(BuildContext context) {
-    return  getListview(info: _info);
+    return getListview(info: _info);
   }
 }
 
@@ -24,7 +24,8 @@ class getListview extends StatelessWidget {
   const getListview({
     Key key,
     @required List<RecipeCard> info,
-  }) : _info = info, super(key: key);
+  })  : _info = info,
+        super(key: key);
 
   final List<RecipeCard> _info;
 
@@ -33,10 +34,10 @@ class getListview extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 10, right: 10.0),
       child: GestureDetector(
-        onTap: (){},
+        onTap: () {},
         child: Card(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(50.0)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(35.0)),
           child: Column(
             children: <Widget>[
               Container(
@@ -49,38 +50,72 @@ class getListview extends StatelessWidget {
                       fit: BoxFit.cover),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    _info[0].title,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 18.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            _info[0].title,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 18.0),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5.0,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: Container(
+                            alignment: Alignment.centerLeft,
+                            child: Text(_info[0].cuisine)),
+                      ),
+                      SizedBox(
+                        height: 2.0,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0, top: 5.0),
+                        child: Container(
+                            alignment: Alignment.centerLeft,
+                            child: Text(_info[0].name)),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                    ],
                   ),
-                ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: FlatButton(
+                      onPressed: () {},
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                          margin: EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black, width: 2),
+                            borderRadius: BorderRadius.circular(300),
+                          ),
+                          // color: Colors.blue[300],
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.arrow_forward,
+                              color: Colors.black,
+                              size: 30,
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(
-                height: 5.0,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: Container(
-                    alignment: Alignment.centerLeft,
-                    child: Text(_info[0].cuisine)),
-              ),
-              SizedBox(
-                height: 2.0,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0,top: 5.0),
-                child: Container(
-                    alignment: Alignment.centerLeft,
-                    child: Text(_info[0].name)),
-              ),
-              SizedBox(
-                height: 30,
-              )
             ],
           ),
         ),
