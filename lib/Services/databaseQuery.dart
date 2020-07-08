@@ -8,14 +8,11 @@ class DatabaseQuery {
   String _lastDocument;
   bool dataExists = true;
   final CollectionReference _ref = Firestore.instance.collection('food');
-  final String listName;
-  String _orderVal;
+  final String listName; 
   List<String> field = [];
   List<dynamic> value;
 
-  DatabaseQuery({this.listName, this.field, this.value}) {
-    this._orderVal = field[0];
-  }
+  DatabaseQuery({this.listName, this.field, this.value});
 
   Future<List<FoodListModel>> getFood(BuildContext context) async {
     await Hive.openBox('foodlist');
