@@ -60,7 +60,7 @@ class DatabaseQuery {
     if (dataExists) {
       print("getMoreFood");
       print("$_lastDocument");
-      Query _finalQuery = _ref.where('description',isEqualTo: '') ;
+      Query _finalQuery = _ref.where('description',isGreaterThan: '') ;
 
       if (_value[_value.length - 1].runtimeType != String) {
         dynamic _v = _value.removeLast();
