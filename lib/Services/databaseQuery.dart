@@ -40,7 +40,8 @@ class DatabaseQuery {
 
       _lastDocument = queryList[queryList.length - 1].description;
       print("$_lastDocument"); 
-      // await _box.put(listName,queryList);
+
+      await _box.put(listName,queryList);
 
       return queryList;
 
@@ -84,6 +85,9 @@ class DatabaseQuery {
         dataExists = false;
         print("no data");
       }
+      
+      await _box.put(listName,queryList);
+
       return queryList;
     } else {
       return [];
