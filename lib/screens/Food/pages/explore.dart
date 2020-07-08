@@ -203,10 +203,14 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                                index) {
                                             return TodaySpecial(
                                               image: 'assets/img.jpg' ,
-                                              descrip1:
+                                              title:
                                                   foodList['0'][index].foodName,
                                               descrip2:
                                                   foodList['0'][index].cuisine,
+                                              descrip3: 
+                                                  foodList['0'][index].duration,
+                                              descrip4: 
+                                                  foodList['0'][index].foodDeter,
                                             );
                                           },
                                         ),
@@ -466,7 +470,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                       Padding(
                         padding: const EdgeInsets.only(left: 10.0),
                         child: Container(
-                          width: 250.0,
+                          width: 270.0,
                           margin: EdgeInsets.all(10.0),
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.black, width: 2),
@@ -491,7 +495,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                           children: <Widget>[
                            GestureDetector(
                                   child: EverySituation(
-                                    title: 'Happy',
+                                    title: 'At Home',
                                     // isActive: true,
                                     index: indx,
                                     stIndex: 0,
@@ -505,7 +509,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                 ),
                                 GestureDetector(
                                   child: EverySituation(
-                                    title: 'sad',
+                                    title: 'Lazy Cook',
                                     // isActive: true,
                                     index: indx,
                                     stIndex: 1,
@@ -519,7 +523,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                 ),
                                 GestureDetector(
                                   child: EverySituation(
-                                    title: 'Happy',
+                                    title: 'Urgent',
                                     // isActive: true,
                                     index: indx,
                                     stIndex: 2,
@@ -533,7 +537,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                 ),
                                 GestureDetector(
                                   child: EverySituation(
-                                    title: 'Happy',
+                                    title: 'Party',
                                     // isActive: true,
                                     index: indx,
                                     stIndex: 3,
@@ -547,7 +551,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                 ),
                                 GestureDetector(
                                   child: EverySituation(
-                                    title: 'Happy',
+                                    title: "I don't know",
                                     // isActive: true,
                                     index: indx,
                                     stIndex: 4,
