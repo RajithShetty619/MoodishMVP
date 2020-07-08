@@ -13,6 +13,10 @@ class DatabaseService {
       'name': name,
     });
   }
+/* 
+  Future<void> setPreference() async {
+    return await userName.document
+  } */
 
   List<Name> _nameListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
@@ -31,9 +35,10 @@ class DatabaseService {
 //    return userName.snapshots().map(_nameListFromSnapshot);
 //  }
 
-  Future<List<FoodListModel>> listFromSnapshot(QuerySnapshot snapshot) async {
+  Future<List<FoodListModel>> listFromSnapshot(QuerySnapshot snapshot) async { 
     return Future.wait(snapshot.documents.map((doc) async {
-      Map<String, dynamic> _docData = doc.data;
+
+      Map<String, dynamic> _docData = doc.data;  
       String _url = await Storage().getUrl(_docData["image"]);
       return FoodListModel(
         foodName: _docData["food_item"] ?? '',

@@ -52,7 +52,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
   bool loadingData = false;
   bool loadingData1 = false;
   bool loadingData2 = false;
-  DatabaseQuery _dq = new DatabaseQuery(listName: "0",field: ['taste'],value: ['Sweet']);
+  DatabaseQuery _dq =  DatabaseQuery(listName: "0");
 
   @override
   void initState() {
@@ -60,29 +60,13 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
     doAsyncStuff();
     print("inti");
     if (!_getFoodCalled) {
-      _dq.getFood(context).then((future) {
+      _dq.getFood(field: ['cuisine'],value: ['indian']).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
         setState(() {
           _getFoodCalled = true;
         });
       });
-    }
-    // _scrollController.addListener(() {
-    //   double _maxScroll = _scrollController.position.maxScrollExtent;
-    //   double _currentScroll = _scrollController.position.pixels;
-    //   double _delta = MediaQuery.of(context).size.height * .25;
-    //   if (_maxScroll - _currentScroll < _delta && loadingData == false) {
-    //     print("scrool");
-    //     loadingData = true;
-    //     _dq.getMoreFood(context).then((future) {
-    //       BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
-    //       setState(() {
-    //         loadingData = false;
-    //       });
-    //     });
-    //     print(loadingData);
-    //   }
-    // });
+    } 
     _scrollController1.addListener(() {
       double _maxScroll = _scrollController1.position.maxScrollExtent;
       double _currentScroll = _scrollController1.position.pixels;
@@ -90,7 +74,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
       if (_maxScroll - _currentScroll < _delta && loadingData1 == false) {
         print("scrool");
         loadingData1 = true;
-        _dq.getMoreFood(context).then((future) {
+        _dq.getMoreFood(field: ['cuisine'],value: ['indian']).then((future) {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
           setState(() {
             loadingData1 = false;
@@ -98,23 +82,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
         });
         print(loadingData1);
       }
-    });
-    // _scrollController2.addListener(() {
-    //   double _maxScroll = _scrollController2.position.maxScrollExtent;
-    //   double _currentScroll = _scrollController2.position.pixels;
-    //   double _delta = MediaQuery.of(context).size.height * .25;
-    //   if (_maxScroll - _currentScroll < _delta && loadingData2 == false) {
-    //     print("scrool");
-    //     loadingData2 = true;
-    //     _dq.getMoreFood(context).then((future) {
-    //       BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
-    //       setState(() {
-    //         loadingData2 = false;
-    //       });
-    //     });
-    //     print(loadingData2);
-    //   }
-    // });
+    }); 
   }
 
   @override
