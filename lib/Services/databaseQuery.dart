@@ -8,28 +8,26 @@ class DatabaseQuery {
   String _lastDocument;
   bool dataExists = true;
   final CollectionReference _ref = Firestore.instance.collection('food');
-  final String listName; 
-  List<String> field = [];
-  List<dynamic> value;
-
-  DatabaseQuery({this.listName, this.field, this.value});
-
-  Future<List<FoodListModel>> getFood(BuildContext context) async {
+  final String listName;  
+  DatabaseQuery({this.listName});
+  Future<List<FoodListModel>> getFood({List<String> field,List<dynamic> value}) async {
+    List<String> _field = field;
+    List<dynamic> _value = value;
     await Hive.openBox('foodlist');
     final _box = Hive.box('foodlist');
     List<dynamic> _gfoodList = await _box.get(listName);
     print('getfood');
     if (_gfoodList == null) {
-      Query _finalQuery = _ref.where('image', isGreaterThan: '');
+      Query _finalQuery = _ref.where('description',isEqualTo: '').where('image', isGreaterThan: '');
 
-      if (value[value.length - 1].runtimeType != String) {
-        dynamic _v = value.removeLast();
+      if (_value[_value.length - 1].runtimeType != String) {
+        dynamic _v = _value.removeLast();
         print(_v);
-        _finalQuery = _finalQuery.where(field.removeLast(), whereIn: _v);
+        _finalQuery = _finalQuery.where(_field.removeLast(), whereIn: _v);
       }
 
       _finalQuery =
-          recQuery(field, value, _finalQuery).orderBy('image').limit(5);
+          recQuery(_field, _value, _finalQuery).orderBy('image').limit(5);
 
       QuerySnapshot snapshot = await _finalQuery.getDocuments();
       List<FoodListModel> queryList =
@@ -37,6 +35,7 @@ class DatabaseQuery {
 
       _lastDocument = queryList[queryList.length - 1].description;
       print("$_lastDocument");
+      print("$field");
 
       return queryList;
     } else {
@@ -49,21 +48,24 @@ class DatabaseQuery {
     }
   }
 
-  Future<List<FoodListModel>> getMoreFood(BuildContext context) async {
+  Future<List<FoodListModel>> getMoreFood({List<String> field,List<dynamic> value}) async {
+    List<String> _field = field;
+    List<dynamic> _value = value;
+    print(_field);
     if (dataExists) {
       print("getMoreFood");
       print("$_lastDocument");
-      Query _finalQuery = _ref.where('image', isGreaterThan: '');
+      Query _finalQuery = _ref.where('description',isEqualTo: '').where('image', isGreaterThan: '');
 
-      if (value[value.length - 1].runtimeType != String) {
-        dynamic _v = value.removeLast();
+      if (_value[_value.length - 1].runtimeType != String) {
+        dynamic _v = _value.removeLast();
         print(_v);
-        _finalQuery = _finalQuery.where(field.removeLast(), whereIn: _v);
+        _finalQuery = _finalQuery.where(_field.removeLast(), whereIn: _v);
       }
 
-      _finalQuery = recQuery(field, value, _finalQuery)
-          // .startAfter([_lastDocument])
-          .orderBy('image')
+      _finalQuery = recQuery(_field, _value, _finalQuery)
+          .startAfter([_lastDocument])
+          .orderBy('description')
           .limit(2);
 
       QuerySnapshot snapshot = await _finalQuery.getDocuments();
