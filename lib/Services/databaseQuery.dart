@@ -10,15 +10,20 @@ class DatabaseQuery {
   final CollectionReference _ref = Firestore.instance.collection('food');
   final String listName;  
   DatabaseQuery({this.listName});
+
+
   Future<List<FoodListModel>> getFood({List<String> field,List<dynamic> value}) async {
+  
     List<String> _field = field;
     List<dynamic> _value = value;
+    print(field );
+    print(value);
     await Hive.openBox('foodlist');
     final _box = Hive.box('foodlist');
     List<dynamic> _gfoodList = await _box.get(listName);
     print('getfood');
     if (_gfoodList == null) {
-      Query _finalQuery = _ref.where('description',isEqualTo: '').where('image', isGreaterThan: '');
+      Query _finalQuery = _ref.where('description',isGreaterThan: '');
 
       if (_value[_value.length - 1].runtimeType != String) {
         dynamic _v = _value.removeLast();
@@ -26,8 +31,8 @@ class DatabaseQuery {
         _finalQuery = _finalQuery.where(_field.removeLast(), whereIn: _v);
       }
 
-      _finalQuery =
-          recQuery(_field, _value, _finalQuery).orderBy('image').limit(5);
+      _finalQuery = 
+          recQuery(_field, _value, _finalQuery).orderBy('description').limit(5);
 
       QuerySnapshot snapshot = await _finalQuery.getDocuments();
       List<FoodListModel> queryList =
@@ -55,7 +60,7 @@ class DatabaseQuery {
     if (dataExists) {
       print("getMoreFood");
       print("$_lastDocument");
-      Query _finalQuery = _ref.where('description',isEqualTo: '').where('image', isGreaterThan: '');
+      Query _finalQuery = _ref.where('description',isGreaterThan: '') ;
 
       if (_value[_value.length - 1].runtimeType != String) {
         dynamic _v = _value.removeLast();
@@ -85,8 +90,7 @@ class DatabaseQuery {
   //builds query
   Query recQuery(List<String> _field, List<dynamic> _value, Query q) {
     Query _query = q;
-    if (_field.isEmpty) {
-      print(_query.toString());
+    if (_field.isEmpty) { 
       return _query;
     } else {
       _query =
