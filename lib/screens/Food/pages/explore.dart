@@ -536,78 +536,78 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                       ),
                        Container(
                         height: 300,
-                        child: BlocConsumer<FoodBloc,
-                            Map<String, List<FoodListModel>>>(
-                          buildWhen: (Map<String, List<FoodListModel>> previous,
-                              Map<String, List<FoodListModel>> current) {
-                            return true;
-                          },
-                          listenWhen:
-                              (Map<String, List<FoodListModel>> previous,
-                                  Map<String, List<FoodListModel>> current) {
-                            if (current.length > previous.length) {
-                              return true;
-                            }
-                            return false;
-                          },
-                          builder: (BuildContext context, foodList) {
-                            return Row(
-                              children: <Widget>[
-                                Expanded(
-                                  child: ListView.builder(
-                                    controller: _scrollController,
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: foodList["0"].length,
-                                    itemBuilder:
-                                        (BuildContext context,  index) {
-                                      return FoodEverySituation(
-                                        image: 'assets/Coffee.jpg',
-                                        title: foodList['0'][index].foodName,
-                                        desc: foodList['0'][index].foodDeter,
-                                      );
-                                      // return Card(
-                                      //   margin: EdgeInsets.symmetric(
-                                      //       vertical: 5, horizontal: 10),
-                                      //   elevation: 2.0,
-                                      //   child: Padding(
-                                      //     padding: const EdgeInsets.all(8.0),
-                                      //     child: Text(
-                                      //         foodList['0'][index].description),
-                                      //   ),
-                                      // );
-                                    },
-                                  ),
-                                ),
-                                if (loadingData)
-                                  Container(
-                                    color: Colors.brown[100],
-                                    child: Center(
-                                      child: SpinKitChasingDots(
-                                        color: Colors.brown,
-                                        size: 50.0,
-                                      ),
-                                    ),
-                                  )
-                              ],
-                            );
-                          },
-                          listener: (context, foodList) {
-                            Scaffold.of(context).showSnackBar(
-                              SnackBar(content: Text('Added!')),
-                            );
-                          },
-                          // child: ListView.builder(
-                          //   scrollDirection: Axis.horizontal,
-                          //   itemCount: 5,
-                          //   itemBuilder: (BuildContext context,int index) {
-                          //     return FoodEverySituation(
-                          //       image: 'assets/img.jpg',
-                          //       title: 'food1',
-                          //       desc: 'description'
-                          //     );
-                          //   }
-                          // ),
-                        ),
+                        // child: BlocConsumer<FoodBloc,
+                        //     Map<String, List<FoodListModel>>>(
+                        //   buildWhen: (Map<String, List<FoodListModel>> previous,
+                        //       Map<String, List<FoodListModel>> current) {
+                        //     return true;
+                        //   },
+                        //   listenWhen:
+                        //       (Map<String, List<FoodListModel>> previous,
+                        //           Map<String, List<FoodListModel>> current) {
+                        //     if (current.length > previous.length) {
+                        //       return true;
+                        //     }
+                        //     return false;
+                        //   },
+                        //   builder: (BuildContext context, foodList) {
+                        //     return Row(
+                        //       children: <Widget>[
+                        //         Expanded(
+                        //           child: ListView.builder(
+                        //             controller: _scrollController,
+                        //             scrollDirection: Axis.horizontal,
+                        //             itemCount: foodList["0"].length,
+                        //             itemBuilder:
+                        //                 (BuildContext context,  index) {
+                        //               return FoodEverySituation(
+                        //                 image: 'assets/Coffee.jpg',
+                        //                 title: foodList['0'][index].foodName,
+                        //                 desc: foodList['0'][index].foodDeter,
+                        //               );
+                        //               // return Card(
+                        //               //   margin: EdgeInsets.symmetric(
+                        //               //       vertical: 5, horizontal: 10),
+                        //               //   elevation: 2.0,
+                        //               //   child: Padding(
+                        //               //     padding: const EdgeInsets.all(8.0),
+                        //               //     child: Text(
+                        //               //         foodList['0'][index].description),
+                        //               //   ),
+                        //               // );
+                        //             },
+                        //           ),
+                        //         ),
+                        //         if (loadingData)
+                        //           Container(
+                        //             color: Colors.brown[100],
+                        //             child: Center(
+                        //               child: SpinKitChasingDots(
+                        //                 color: Colors.brown,
+                        //                 size: 50.0,
+                        //               ),
+                        //             ),
+                        //           )
+                        //       ],
+                        //     );
+                        //   },
+                        //   listener: (context, foodList) {
+                        //     Scaffold.of(context).showSnackBar(
+                        //       SnackBar(content: Text('Added!')),
+                        //     );
+                        //   },
+                        //   // child: ListView.builder(
+                        //   //   scrollDirection: Axis.horizontal,
+                        //   //   itemCount: 5,
+                        //   //   itemBuilder: (BuildContext context,int index) {
+                        //   //     return FoodEverySituation(
+                        //   //       image: 'assets/img.jpg',
+                        //   //       title: 'food1',
+                        //   //       desc: 'description'
+                        //   //     );
+                        //   //   }
+                        //   // ),
+                        // ),
                         // child: ListView(
                         //   scrollDirection: Axis.horizontal,
                         //   children: <Widget>[
