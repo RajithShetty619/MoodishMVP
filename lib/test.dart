@@ -48,17 +48,16 @@ class _FoodListState extends State<FoodList> {
   String _lastDocument;
   ScrollController _scrollController = ScrollController();
 
-  getFood({String listName, List<String> field, List<String> value}) async {
+  getFood({String listName, List<String> field, List<dynamic> value}) async {
     setState(() {
       loadingData = true;
     });
-    String _orderVal = field[0];
-    Query recQuery(List<String> _field, List<String> _value, Query q) {
+
+    Query recQuery(List<dynamic> _field, List<dynamic> _value, Query q) {
       Query _query = q;
-      if (_field.isEmpty) {
-        print(_query.toString());
+      if (_field.isEmpty) {  
         return _query;
-      } else {
+      } else { 
         _query =
             _query.where(_field.removeLast(), isEqualTo: _value.removeLast());
         return recQuery(_field, _value, _query);
@@ -66,16 +65,19 @@ class _FoodListState extends State<FoodList> {
     }
 
     final _box = Hive.box('foodlist');
-    List<dynamic> _gfoodList = await _box.get(listName);
+    List<dynamic> _gfoodList = /* await _box.get(listName) */ null;
     if (_gfoodList == null) { 
-      
+      Query _finalQuery = _ref.where('image', isGreaterThan: '');
+      String _orderVal = field[0];
+      if (value[value.length - 1].runtimeType != String) {
+        dynamic _v =value.removeLast();
+        print(_v);
+        _finalQuery =
+            _finalQuery.where(field.removeLast(), whereIn: _v);
+      }
+      _finalQuery = recQuery(field,value, _finalQuery).orderBy('image').limit(10);
 
-      Query q =
-          recQuery(field, value, _ref.where('description', isGreaterThan: ''))
-              .orderBy('description')
-              .limit(10);
-       
-      QuerySnapshot snapshot = await q.getDocuments();
+      QuerySnapshot snapshot = await _finalQuery.getDocuments();
       List<FoodListModel> queryList =
           await DatabaseService().listFromSnapshot(snapshot);
       BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(queryList, "0"));
@@ -126,7 +128,11 @@ class _FoodListState extends State<FoodList> {
   @override
   void initState() {
     super.initState();
-    getFood(listName: "0", field: ['cuisine'], value: ['indian']);
+    getFood(listName: "0", field: [
+      'taste','cuisine' 
+    ], value: [
+      'Sweet', ['indian','american']
+    ]);
 
     _scrollController.addListener(() {
       double _maxScroll = _scrollController.position.maxScrollExtent;
@@ -168,6 +174,8 @@ class _FoodListState extends State<FoodList> {
                     child: Column(
                       children: <Widget>[
                         Text(foodList["0"][index].foodName),
+                        Text(foodList["0"][index].cuisine),
+                        Text(foodList["0"][index].taste),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: CachedNetworkImage(
@@ -197,7 +205,7 @@ class _FoodListState extends State<FoodList> {
                 child: Center(
                   child: SpinKitChasingDots(
                     color: Colors.brown,
-                    size: 50.0,
+                    size: 20.0,
                   ),
                 ),
               )

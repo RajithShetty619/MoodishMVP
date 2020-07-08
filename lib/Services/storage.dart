@@ -24,7 +24,7 @@ class Storage {
       return url;
     }
     catch(e){
-      print(e.toString());
+      print('path is probably wrong blame the database :/');
       return "https://www.shorturl.at/img/shorturl-square.png";
     }
     
