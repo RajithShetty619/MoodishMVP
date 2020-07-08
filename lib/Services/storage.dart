@@ -19,7 +19,7 @@ class Storage {
   Future<String> getUrl (String path) async {
     try{
       print(path);
-      final dynamic _url = await _ref.child(path).getDownloadURL().catchError(()=>"https://www.shorturl.at/img/shorturl-square.png");
+      final dynamic _url = await _ref.child(path).getDownloadURL();
       String url = _url;
       return url;
     }

@@ -144,196 +144,210 @@ bool _like = true;
           errorWidget: (context, url, error) => Icon(Icons.error),
         ),*/
         
-           child: Container(
-              margin: EdgeInsets.only(right: 20),
+           child: Stack(
+             children: <Widget>[
+               CachedNetworkImage(
+                  imageUrl: widget.image,
+                  imageBuilder: (context, imageProvider){
+                    return Container(
+                      margin: EdgeInsets.only(right: 20),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(
-                    image: AssetImage(widget.image),
+                    image:  imageProvider,
                     fit: BoxFit.cover,
                   )),
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    gradient:
-                        LinearGradient(begin: Alignment.bottomCenter, stops: [
-                      .1,
-                      .5
-                    ], colors: [
-                      Colors.black.withOpacity(.8),
-                      Colors.black.withOpacity(.2),
-                    ])),
-                child: Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: IconButton(
-                          icon: _like ? Icon(
-                            Icons.favorite_border,
-                            color: Colors.white,
-                            size: 25,
-                          ):
-                          Icon(
-                            Icons.favorite,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                          onPressed: () async {
-                            if (_like != false)
-                            final action = await Dialogs.yesAbortDialog(
-                                context, 'My title', 'My Body');
-                                setState(() {
-                                  _like = !_like;
-                                });
-                          },
-                        ),
-                      ),
-                      Column(
+                    );
+                  },
+                ),
+               Container(
+                  margin: EdgeInsets.only(right: 20),
+                  
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        gradient:
+                            LinearGradient(begin: Alignment.bottomCenter, stops: [
+                          .1,
+                          .5
+                        ], colors: [
+                          Colors.black.withOpacity(.8),
+                          Colors.black.withOpacity(.2),
+                        ])),
+                    child: Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              widget.title,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold),
+                            alignment: Alignment.topRight,
+                            child: IconButton(
+                              icon: _like ? Icon(
+                                Icons.favorite_border,
+                                color: Colors.white,
+                                size: 25,
+                              ):
+                              Icon(
+                                Icons.favorite,
+                                color: Colors.white,
+                                size: 30,
+                              ),
+                              onPressed: () async {
+                                if (_like != false)
+                                final action = await Dialogs.yesAbortDialog(
+                                    context, 'My title', 'My Body');
+                                    setState(() {
+                                      _like = !_like;
+                                    });
+                              },
                             ),
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              Text(
-                                widget.descrip2,
-                                style:
-                                    TextStyle(color: Colors.white, fontSize: 18),
-                              ),
-                              // Padding(
-                              //   padding: const EdgeInsets.all(3.0),
-                              //   child: Container(
-                              //     height: 5,
-                              //     width: 5,
-                              //     decoration: BoxDecoration(
-                              //       borderRadius: BorderRadius.circular(300),
-                              //       color: Colors.white,
-                              //     ),
-                              //   ),
-                              // ),
-                              // Text(
-                              //   widget.descrip3,
-                              //   style:
-                              //       TextStyle(color: Colors.white, fontSize: 18),
-                              // ),
-                               Padding(
-                                padding: const EdgeInsets.all(3.0),
-                                child: Container(
-                                  height: 5,
-                                  width: 5,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(300),
-                                    color: Colors.white,
-                                  ),
+                              Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  widget.title,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
-                              Text(
-                                widget.descrip4,
-                                style:
-                                    TextStyle(color: Colors.white, fontSize: 18),
+                              SizedBox(
+                                height: 10,
                               ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(
+                                    widget.descrip2,
+                                    style:
+                                        TextStyle(color: Colors.white, fontSize: 18),
+                                  ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.all(3.0),
+                                  //   child: Container(
+                                  //     height: 5,
+                                  //     width: 5,
+                                  //     decoration: BoxDecoration(
+                                  //       borderRadius: BorderRadius.circular(300),
+                                  //       color: Colors.white,
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  // Text(
+                                  //   widget.descrip3,
+                                  //   style:
+                                  //       TextStyle(color: Colors.white, fontSize: 18),
+                                  // ),
+                                   Padding(
+                                    padding: const EdgeInsets.all(3.0),
+                                    child: Container(
+                                      height: 5,
+                                      width: 5,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(300),
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    widget.descrip4,
+                                    style:
+                                        TextStyle(color: Colors.white, fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 15),
+                               ClipRRect(
+                  borderRadius: BorderRadius.circular(50),
+                  child: Container(
+                    height: 45,
+                    child: RaisedButton(
+                      // color: Colors.blue[200],
+                      elevation: 20,
+                      
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Food_Info()));
+                      },
+                      child: Text(
+                        "Let's Go!",
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+                              // FlatButton(
+                              //   onPressed: () {},
+                              //   child: ClipRRect(
+                              //     borderRadius: BorderRadius.circular(20),
+                              //     child: Container(
+                              //       // color: Colors.blue[300],
+                              //       child: IconButton(
+                              //         icon: Icon(
+                              //           Icons.restaurant,
+                              //           color: Colors.white,
+                              //           size: 35,
+                              //         ),
+                              //         onPressed: () {
+                              //           Navigator.push(
+                              //               context,
+                              //               MaterialPageRoute(
+                              //                   builder: (context) =>
+                              //                       IntroScreen()));
+                              //         },
+                              //       ),
+                              //     ),
+                              //   ),
+
+                              //   // label: Text(''),
+                              // ),
+                              // // SizedBox(height: 10),
+                              // Row(
+                              //   mainAxisAlignment:
+                              //       MainAxisAlignment.spaceBetween,
+                              //   crossAxisAlignment: CrossAxisAlignment.end,
+                              //   children: <Widget>[
+                              //     FlatButton.icon(
+                              //         onPressed: () {},
+                              //         icon: Icon(
+                              //           Icons.info_outline,
+                              //           color: Colors.white,
+                              //         ),
+                              //         label: Text(
+                              //           'More info',
+                              //           style: TextStyle(color: Colors.white),
+                              //         )),
+                              //     FlatButton.icon(
+                              //         onPressed: () => _onButtonPressed(),
+                              //         icon: Icon(
+                              //           Icons.filter_center_focus,
+                              //           color: Colors.white,
+                              //         ),
+                              //         label: Text(
+                              //           'Filter',
+                              //           style: TextStyle(color: Colors.white),
+                              //         ))
+                              //   ],
+                              // ),
                             ],
-                          ),
-                          SizedBox(height: 15),
-                           ClipRRect(
-              borderRadius: BorderRadius.circular(50),
-              child: Container(
-                height: 45,
-                child: RaisedButton(
-                  // color: Colors.blue[200],
-                  elevation: 20,
-                  
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Food_Info()));
-                  },
-                  child: Text(
-                    "Let's Go!",
-                    style: TextStyle(
-                      fontSize: 20,
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            )
-                          // FlatButton(
-                          //   onPressed: () {},
-                          //   child: ClipRRect(
-                          //     borderRadius: BorderRadius.circular(20),
-                          //     child: Container(
-                          //       // color: Colors.blue[300],
-                          //       child: IconButton(
-                          //         icon: Icon(
-                          //           Icons.restaurant,
-                          //           color: Colors.white,
-                          //           size: 35,
-                          //         ),
-                          //         onPressed: () {
-                          //           Navigator.push(
-                          //               context,
-                          //               MaterialPageRoute(
-                          //                   builder: (context) =>
-                          //                       IntroScreen()));
-                          //         },
-                          //       ),
-                          //     ),
-                          //   ),
-
-                          //   // label: Text(''),
-                          // ),
-                          // // SizedBox(height: 10),
-                          // Row(
-                          //   mainAxisAlignment:
-                          //       MainAxisAlignment.spaceBetween,
-                          //   crossAxisAlignment: CrossAxisAlignment.end,
-                          //   children: <Widget>[
-                          //     FlatButton.icon(
-                          //         onPressed: () {},
-                          //         icon: Icon(
-                          //           Icons.info_outline,
-                          //           color: Colors.white,
-                          //         ),
-                          //         label: Text(
-                          //           'More info',
-                          //           style: TextStyle(color: Colors.white),
-                          //         )),
-                          //     FlatButton.icon(
-                          //         onPressed: () => _onButtonPressed(),
-                          //         icon: Icon(
-                          //           Icons.filter_center_focus,
-                          //           color: Colors.white,
-                          //         ),
-                          //         label: Text(
-                          //           'Filter',
-                          //           style: TextStyle(color: Colors.white),
-                          //         ))
-                          //   ],
-                          // ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
+                
+             ],
+           ),
            
         //             },
         //             placeholder: (context, url) => CircularProgressIndicator(),

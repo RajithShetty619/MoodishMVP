@@ -53,6 +53,8 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
   bool loadingData1 = false;
   bool loadingData2 = false;
   DatabaseQuery _dq =  DatabaseQuery(listName: "0");
+  DatabaseQuery _dqtsp =  DatabaseQuery(listName: "tsp");
+  DatabaseQuery _dqsweet =  DatabaseQuery(listName: "sweet");
 
   @override
   void initState() {
@@ -60,11 +62,18 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
     doAsyncStuff();
     print("inti");
     if (!_getFoodCalled) {
-      _dq.getFood(field: ['cuisine'],value: ['indian']).then((future) {
-        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
-        setState(() {
+      setState(() {
           _getFoodCalled = true;
         });
+      _dq.getFood(field: ['taste'],value: ['Sweet']).then((future) {
+        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
+        
+      });
+      _dqtsp.getFood(field: ['cuisine'],value: [['japanese','italian']]).then((future){
+        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "tsp"));
+      });
+      _dqsweet.getFood(field: ['taste'],value: ['Sweet']).then((future){
+        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "sweet"));
       });
     } 
     _scrollController1.addListener(() {
@@ -74,7 +83,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
       if (_maxScroll - _currentScroll < _delta && loadingData1 == false) {
         print("scrool");
         loadingData1 = true;
-        _dq.getMoreFood(field: ['cuisine'],value: ['indian']).then((future) {
+        _dq.getMoreFood(field: ['taste'],value: ['Sweet']).then((future) {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
           setState(() {
             loadingData1 = false;
@@ -147,8 +156,6 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                 buildWhen: (Map<String, List<FoodListModel>>
                                         previous,
                                     Map<String, List<FoodListModel>> current) {
-                                      final _box = Hive.box('foodlist');
-                                       _box.put( "0", current["0"] );
                                   return true;
                                 },
                                 listenWhen: (Map<String, List<FoodListModel>>
@@ -166,19 +173,19 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                         child: ListView.builder(
                                           
                                           scrollDirection: Axis.horizontal,
-                                          itemCount: foodList["0"].length,
+                                          itemCount: foodList["tsp"].length,
                                           itemBuilder: (BuildContext context,
                                                index) {
                                             return TodaySpecial(
-                                              image: 'assets/img.jpg' ,
+                                              image: foodList['tsp'][index].images ,
                                               title:
-                                                  foodList['0'][index].foodName,
+                                                  foodList['tsp'][index].foodName,
                                               descrip2:
-                                                  foodList['0'][index].cuisine,
+                                                  foodList['tsp'][index].cuisine,
                                               descrip3: 
                                                   '10 min',
                                               descrip4: 
-                                                  foodList['0'][index].foodDeter,
+                                                  foodList['tsp'][index].foodDeter,
                                             );
                                           },
                                         ),
@@ -536,78 +543,78 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                       ),
                        Container(
                         height: 300,
-                        // child: BlocConsumer<FoodBloc,
-                        //     Map<String, List<FoodListModel>>>(
-                        //   buildWhen: (Map<String, List<FoodListModel>> previous,
-                        //       Map<String, List<FoodListModel>> current) {
-                        //     return true;
-                        //   },
-                        //   listenWhen:
-                        //       (Map<String, List<FoodListModel>> previous,
-                        //           Map<String, List<FoodListModel>> current) {
-                        //     if (current.length > previous.length) {
-                        //       return true;
-                        //     }
-                        //     return false;
-                        //   },
-                        //   builder: (BuildContext context, foodList) {
-                        //     return Row(
-                        //       children: <Widget>[
-                        //         Expanded(
-                        //           child: ListView.builder(
-                        //             controller: _scrollController,
-                        //             scrollDirection: Axis.horizontal,
-                        //             itemCount: foodList["0"].length,
-                        //             itemBuilder:
-                        //                 (BuildContext context,  index) {
-                        //               return FoodEverySituation(
-                        //                 image: 'assets/Coffee.jpg',
-                        //                 title: foodList['0'][index].foodName,
-                        //                 desc: foodList['0'][index].foodDeter,
-                        //               );
-                        //               // return Card(
-                        //               //   margin: EdgeInsets.symmetric(
-                        //               //       vertical: 5, horizontal: 10),
-                        //               //   elevation: 2.0,
-                        //               //   child: Padding(
-                        //               //     padding: const EdgeInsets.all(8.0),
-                        //               //     child: Text(
-                        //               //         foodList['0'][index].description),
-                        //               //   ),
-                        //               // );
-                        //             },
-                        //           ),
-                        //         ),
-                        //         if (loadingData)
-                        //           Container(
-                        //             color: Colors.brown[100],
-                        //             child: Center(
-                        //               child: SpinKitChasingDots(
-                        //                 color: Colors.brown,
-                        //                 size: 50.0,
-                        //               ),
-                        //             ),
-                        //           )
-                        //       ],
-                        //     );
-                        //   },
-                        //   listener: (context, foodList) {
-                        //     Scaffold.of(context).showSnackBar(
-                        //       SnackBar(content: Text('Added!')),
-                        //     );
-                        //   },
-                        //   // child: ListView.builder(
-                        //   //   scrollDirection: Axis.horizontal,
-                        //   //   itemCount: 5,
-                        //   //   itemBuilder: (BuildContext context,int index) {
-                        //   //     return FoodEverySituation(
-                        //   //       image: 'assets/img.jpg',
-                        //   //       title: 'food1',
-                        //   //       desc: 'description'
-                        //   //     );
-                        //   //   }
-                        //   // ),
-                        // ),
+                        child: BlocConsumer<FoodBloc,
+                            Map<String, List<FoodListModel>>>(
+                          buildWhen: (Map<String, List<FoodListModel>> previous,
+                              Map<String, List<FoodListModel>> current) {
+                            return true;
+                          },
+                          listenWhen:
+                              (Map<String, List<FoodListModel>> previous,
+                                  Map<String, List<FoodListModel>> current) {
+                            if (current.length > previous.length) {
+                              return true;
+                            }
+                            return false;
+                          },
+                          builder: (BuildContext context, foodList) {
+                            return Row(
+                              children: <Widget>[
+                                Expanded(
+                                  child: ListView.builder(
+                                    controller: _scrollController,
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: foodList["0"].length,
+                                    itemBuilder:
+                                        (BuildContext context,  index) {
+                                      return FoodEverySituation(
+                                        image: 'assets/Coffee.jpg',
+                                        title: foodList['0'][index].foodName,
+                                        desc: foodList['0'][index].foodDeter,
+                                      );
+                                      // return Card(
+                                      //   margin: EdgeInsets.symmetric(
+                                      //       vertical: 5, horizontal: 10),
+                                      //   elevation: 2.0,
+                                      //   child: Padding(
+                                      //     padding: const EdgeInsets.all(8.0),
+                                      //     child: Text(
+                                      //         foodList['0'][index].description),
+                                      //   ),
+                                      // );
+                                    },
+                                  ),
+                                ),
+                                if (loadingData)
+                                  Container(
+                                    color: Colors.brown[100],
+                                    child: Center(
+                                      child: SpinKitChasingDots(
+                                        color: Colors.brown,
+                                        size: 50.0,
+                                      ),
+                                    ),
+                                  )
+                              ],
+                            );
+                          },
+                          listener: (context, foodList) {
+                            Scaffold.of(context).showSnackBar(
+                              SnackBar(content: Text('Added!')),
+                            );
+                          },
+                          // child: ListView.builder(
+                          //   scrollDirection: Axis.horizontal,
+                          //   itemCount: 5,
+                          //   itemBuilder: (BuildContext context,int index) {
+                          //     return FoodEverySituation(
+                          //       image: 'assets/img.jpg',
+                          //       title: 'food1',
+                          //       desc: 'description'
+                          //     );
+                          //   }
+                          // ),
+                        ),
                         // child: ListView(
                         //   scrollDirection: Axis.horizontal,
                         //   children: <Widget>[
