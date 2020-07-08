@@ -216,22 +216,22 @@ bool _like = true;
                                 style:
                                     TextStyle(color: Colors.white, fontSize: 18),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(3.0),
-                                child: Container(
-                                  height: 5,
-                                  width: 5,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(300),
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                widget.descrip3,
-                                style:
-                                    TextStyle(color: Colors.white, fontSize: 18),
-                              ),
+                              // Padding(
+                              //   padding: const EdgeInsets.all(3.0),
+                              //   child: Container(
+                              //     height: 5,
+                              //     width: 5,
+                              //     decoration: BoxDecoration(
+                              //       borderRadius: BorderRadius.circular(300),
+                              //       color: Colors.white,
+                              //     ),
+                              //   ),
+                              // ),
+                              // Text(
+                              //   widget.descrip3,
+                              //   style:
+                              //       TextStyle(color: Colors.white, fontSize: 18),
+                              // ),
                                Padding(
                                 padding: const EdgeInsets.all(3.0),
                                 child: Container(

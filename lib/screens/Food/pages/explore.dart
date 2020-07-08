@@ -152,7 +152,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                         height: 20,
                       ),
                       Container(
-                        height: 380,
+                        height: 375,
                         // color: Colors.blue,
                         child: Row(
                           children: <Widget>[
@@ -196,7 +196,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                     children: <Widget>[
                                       Expanded(
                                         child: ListView.builder(
-                                          controller: _scrollController1,
+                                          
                                           scrollDirection: Axis.horizontal,
                                           itemCount: foodList["0"].length,
                                           itemBuilder: (BuildContext context,
@@ -208,7 +208,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                               descrip2:
                                                   foodList['0'][index].cuisine,
                                               descrip3: 
-                                                  foodList['0'][index].duration,
+                                                  '10 min',
                                               descrip4: 
                                                   foodList['0'][index].foodDeter,
                                             );

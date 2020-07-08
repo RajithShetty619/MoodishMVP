@@ -59,6 +59,7 @@ bool _like = true;
                     child: Container(
                       // margin: EdgeInsets.all(2.0),
                             decoration: BoxDecoration(
+                              
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(45),
                             ),
@@ -68,12 +69,12 @@ bool _like = true;
                           icon: _like ? Icon(
                             Icons.favorite_border,
                             color: Colors.black,
-                            size: 35,
+                            size: 30,
                           ):
                            Icon(
                             Icons.favorite,
                             color: Colors.red[700],
-                            size: 35,
+                            size: 30,
                            ),
                           onPressed: (){
                             setState(() {
