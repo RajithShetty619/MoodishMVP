@@ -61,9 +61,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
     doAsyncStuff();
     print("inti");
     if (!_getFoodCalled) {
-      setState(() {
-          _getFoodCalled = true;
-        });
+      
       _dq.getFood(field: ['taste'],value: ['Sweet']).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
         
@@ -74,6 +72,9 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
       _dqsweet.getFood(field: ['taste'],value: ['Sweet']).then((future){
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "sweet"));
       });
+      setState(() {
+          _getFoodCalled = true;
+        });
     } 
     _scrollController1.addListener(() {
       double _maxScroll = _scrollController1.position.maxScrollExtent;
