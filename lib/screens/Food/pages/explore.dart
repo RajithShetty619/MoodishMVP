@@ -29,8 +29,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
   Future doAsyncStuff() async {
     keepAlive = true;
     updateKeepAlive();
-    // Keeping alive...
-
+    // Keeping alive... 
     await Future.delayed(Duration(seconds: 10));
 
     keepAlive = false;
@@ -166,7 +165,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                   }
                                   return false;
                                 },
-                                builder: (BuildContext context, foodList) {
+                                builder: (BuildContext context, foodList) { 
                                   return Row(
                                     children: <Widget>[
                                       Expanded(
