@@ -29,8 +29,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
   Future doAsyncStuff() async {
     keepAlive = true;
     updateKeepAlive();
-    // Keeping alive...
-
+    // Keeping alive... 
     await Future.delayed(Duration(seconds: 10));
 
     keepAlive = false;
@@ -146,9 +145,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                   Map<String, List<FoodListModel>>>(
                                 buildWhen: (Map<String, List<FoodListModel>>
                                         previous,
-                                    Map<String, List<FoodListModel>> current) {
-                                      final _box = Hive.box('foodlist');
-                                       _box.put( "0", current["0"] );
+                                    Map<String, List<FoodListModel>> current) { 
                                   return true;
                                 },
                                 listenWhen: (Map<String, List<FoodListModel>>
@@ -159,7 +156,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                   }
                                   return false;
                                 },
-                                builder: (BuildContext context, foodList) {
+                                builder: (BuildContext context, foodList) { 
                                   return Row(
                                     children: <Widget>[
                                       Expanded(
