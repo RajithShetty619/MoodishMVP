@@ -9,13 +9,17 @@ class TodaySpecial extends StatefulWidget {
   const TodaySpecial({
     Key key,
     @required this.image,
-    @required this.descrip1,
+    @required this.title,
     @required this.descrip2,
+    @required this.descrip3,
+    @required this.descrip4,
   }) : super(key: key);
 
   final image;
-  final descrip1;
+  final title;
   final descrip2;
+  final descrip3;
+  final descrip4;
 
   @override
   _TodaySpecialState createState() => _TodaySpecialState();
@@ -156,8 +160,8 @@ bool _like = true;
                       .1,
                       .5
                     ], colors: [
-                      Colors.black.withOpacity(.6),
-                      Colors.black.withOpacity(.3),
+                      Colors.black.withOpacity(.8),
+                      Colors.black.withOpacity(.2),
                     ])),
                 child: Padding(
                   padding: EdgeInsets.all(10.0),
@@ -194,7 +198,7 @@ bool _like = true;
                           Align(
                             alignment: Alignment.center,
                             child: Text(
-                              widget.descrip1,
+                              widget.title,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 30,
@@ -204,10 +208,47 @@ bool _like = true;
                           SizedBox(
                             height: 10,
                           ),
-                          Text(
-                            widget.descrip2,
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 18),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                widget.descrip2,
+                                style:
+                                    TextStyle(color: Colors.white, fontSize: 18),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: Container(
+                                  height: 5,
+                                  width: 5,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(300),
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                widget.descrip3,
+                                style:
+                                    TextStyle(color: Colors.white, fontSize: 18),
+                              ),
+                               Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: Container(
+                                  height: 5,
+                                  width: 5,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(300),
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                widget.descrip4,
+                                style:
+                                    TextStyle(color: Colors.white, fontSize: 18),
+                              ),
+                            ],
                           ),
                           SizedBox(height: 15),
                            ClipRRect(

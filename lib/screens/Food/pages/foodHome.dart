@@ -70,6 +70,7 @@ class _FoodHomeState extends State<FoodHome> {
                 ),
               ],
             ),
+            SizedBox(height: 10),
             _switch
                 ? Expanded(child: Explore(_key))
                 : Expanded(child: FoodFeed()),
