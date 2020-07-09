@@ -22,8 +22,9 @@ class Explore extends StatefulWidget {
   _ExploreState createState() => _ExploreState();
 }
 
-class _ExploreState extends State<Explore> { 
- 
+class _ExploreState extends State<Explore> {
+  bool keepAlive = false;
+
   int indx = 0;
 
   int _selected = 1;
@@ -160,11 +161,13 @@ class _ExploreState extends State<Explore> {
                                                     .foodName,
                                                 cuisine: foodList['0'][index]
                                                     .cuisine,
-                                                preptime: '10 min',
+                                                preptime: foodList['0'][index].duration,
                                                 deter: foodList['0'][index]
                                                     .foodDeter,
                                                 description: foodList['0'][index].description,
-                                                
+                                                nutrient: foodList['0'][index].nutrients,
+                                                  preparation: foodList['0'][index].preperation,
+                                                taste: foodList['0'][index].taste,
                                               );
                                             else {
                                               return !_loadingData

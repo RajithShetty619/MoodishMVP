@@ -14,12 +14,20 @@ class Food_Info extends StatefulWidget {
     @required this.name,
     @required this.descbox,
     @required this.image,
+    @required this.nutrient,
+    @required this.preparation,
+    @required this.taste,
+    @required this.preptime,
 
   }):super (key:key);
 
   final name;
   final image;
   final descbox;
+  final nutrient;
+  final preparation;
+  final taste;
+  final preptime;
 
   @override
   _Food_InfoState createState() => _Food_InfoState();
@@ -229,8 +237,11 @@ class _Food_InfoState extends State<Food_Info> {
                         ),
                       ),
                       if (indx == 0) Container(height: 700, child: FoodAbout(
-                        name: widget.name,
                         descbox: widget.descbox,
+                        nutrient: widget.nutrient,
+                        preparation: widget.preparation,
+                        taste: widget.taste,
+                        preptime: widget.preptime,
                       )),
                       if (indx == 1)
                         Container(height: 800, child: FoodRecipe()),

@@ -47,14 +47,14 @@ class DatabaseService {
         mealType: _docData["mealType"] ?? '',
         images: _url ?? '',
         description: _docData["description"] ?? '',
-        recipe: _docData["preperation"] ?? '',
+        recipe: _docData["recipe"] ?? '',
         ingrediants: _docData["ingredients"] ?? '',
         servings: _docData["serving"] ?? '',
         duration: _docData["time"] ?? '',
-        nutrients: _docData["nutrients"] ?? '',
+        nutrients: _docData["nutrients "] ?? '',
         taste: _docData["taste"] ?? '',
         situation: _docData["situation"] ?? '',
-        preperation: _docData["preperation"] ?? ''
+        preperation: _docData["preparation"] ?? ''
       );
     }).toList());
   }

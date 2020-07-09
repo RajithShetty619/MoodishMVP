@@ -2,17 +2,21 @@ import 'package:flutter/material.dart';
 //import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FoodAbout extends StatefulWidget {
-  final Widget child;
+  
 
   FoodAbout({
     Key key,
-    this.child,
-    @required this.name,
     @required this.descbox,
+    @required this.nutrient,
+    @required this.preparation,
+    @required this.taste,
+    @required this.preptime,
   }) : super(key: key);
-
-  final name;
   final descbox;
+  final nutrient;
+  final preparation;
+  final taste;
+  final preptime;
 
   _FoodAboutState createState() => _FoodAboutState();
 }
@@ -24,15 +28,17 @@ class _FoodAboutState extends State<FoodAbout> {
     'Hygiene :',
     'Offers :'
   ];
-  List<String> nutri = ['Carbs.png', 'Protien.png', 'Fats.png', 'Sugar.png'];
+  // List<String> nutri = ['Carbs.png', 'Protien.png', 'Fats.png', 'Sugar.png'];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: foodAbout(
-        nutri: nutri,
-        name: widget.name,
         descbox: widget.descbox,
+        nutrient: widget.nutrient,
+        preparation: widget.preparation,
+        taste: widget.taste,
+        preptime: widget.preptime,
       ),
     );
   }
@@ -41,19 +47,25 @@ class _FoodAboutState extends State<FoodAbout> {
 class foodAbout extends StatelessWidget {
   const foodAbout({
     Key key,
-    @required this.nutri,
-    @required this.name,
-    @required this.descbox,
-  }) : super(key: key);
-  final name;
-  final descbox;
+    @required this.descbox, 
+    @required this.nutrient,
+    @required this.preparation,
+    @required this.taste,
+    @required this.preptime,
 
-  final List<String> nutri;
+  }) : super(key: key);
+
+  final descbox;
+  final nutrient;
+  final preparation;
+  final taste;
+  final preptime;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
+        
         Stack(
           children: <Widget>[
             Padding(
@@ -95,102 +107,107 @@ class foodAbout extends StatelessWidget {
                   SizedBox(
                     height: 10.0,
                   ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        Column(
-                          children: <Widget>[
-                            Container(
-                              height: 80.0,
-                              width: 80.0,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  image: AssetImage('assets/${nutri[0]}'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 7.0,
-                            ),
-                            Text('27% Carbs')
-                          ],
-                        ),
-                        SizedBox(
-                          width: 20.0,
-                        ),
-                        Column(
-                          children: <Widget>[
-                            Container(
-                              height: 80.0,
-                              width: 80.0,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  image: AssetImage('assets/${nutri[1]}'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 7.0,
-                            ),
-                            Text('36% Protien')
-                          ],
-                        ),
-                        SizedBox(
-                          width: 20.0,
-                        ),
-                        Column(
-                          children: <Widget>[
-                            Container(
-                              height: 80.0,
-                              width: 80.0,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  image: AssetImage('assets/${nutri[2]}'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 7.0,
-                            ),
-                            Text('14% Fats')
-                          ],
-                        ),
-                        SizedBox(
-                          width: 20.0,
-                        ),
-                        Column(
-                          children: <Widget>[
-                            Container(
-                              height: 80.0,
-                              width: 80.0,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  image: AssetImage('assets/${nutri[3]}'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 7.0,
-                            ),
-                            Text('23% Sugar')
-                          ],
-                        ),
-                        SizedBox(
-                          width: 20.0,
-                        ),
-                      ],
+                  Padding(
+                      padding: EdgeInsets.all(5.0),
+                      child: Text(nutrient),
+                      
                     ),
-                  ),
+                  // SingleChildScrollView(
+                  //   scrollDirection: Axis.horizontal,
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //     children: <Widget>[
+                  //       Column(
+                  //         children: <Widget>[
+                  //           Container(
+                  //             height: 80.0,
+                  //             width: 80.0,
+                  //             decoration: BoxDecoration(
+                  //               shape: BoxShape.circle,
+                  //               image: DecorationImage(
+                  //                 image: AssetImage('assets/${nutri[0]}'),
+                  //                 fit: BoxFit.cover,
+                  //               ),
+                  //             ),
+                  //           ),
+                  //           SizedBox(
+                  //             height: 7.0,
+                  //           ),
+                  //           Text('27% Carbs')
+                  //         ],
+                  //       ),
+                  //       SizedBox(
+                  //         width: 20.0,
+                  //       ),
+                  //       Column(
+                  //         children: <Widget>[
+                  //           Container(
+                  //             height: 80.0,
+                  //             width: 80.0,
+                  //             decoration: BoxDecoration(
+                  //               shape: BoxShape.circle,
+                  //               image: DecorationImage(
+                  //                 image: AssetImage('assets/${nutri[1]}'),
+                  //                 fit: BoxFit.cover,
+                  //               ),
+                  //             ),
+                  //           ),
+                  //           SizedBox(
+                  //             height: 7.0,
+                  //           ),
+                  //           Text('36% Protien')
+                  //         ],
+                  //       ),
+                  //       SizedBox(
+                  //         width: 20.0,
+                  //       ),
+                  //       Column(
+                  //         children: <Widget>[
+                  //           Container(
+                  //             height: 80.0,
+                  //             width: 80.0,
+                  //             decoration: BoxDecoration(
+                  //               shape: BoxShape.circle,
+                  //               image: DecorationImage(
+                  //                 image: AssetImage('assets/${nutri[2]}'),
+                  //                 fit: BoxFit.cover,
+                  //               ),
+                  //             ),
+                  //           ),
+                  //           SizedBox(
+                  //             height: 7.0,
+                  //           ),
+                  //           Text('14% Fats')
+                  //         ],
+                  //       ),
+                  //       SizedBox(
+                  //         width: 20.0,
+                  //       ),
+                  //       Column(
+                  //         children: <Widget>[
+                  //           Container(
+                  //             height: 80.0,
+                  //             width: 80.0,
+                  //             decoration: BoxDecoration(
+                  //               shape: BoxShape.circle,
+                  //               image: DecorationImage(
+                  //                 image: AssetImage('assets/${nutri[3]}'),
+                  //                 fit: BoxFit.cover,
+                  //               ),
+                  //             ),
+                  //           ),
+                  //           SizedBox(
+                  //             height: 7.0,
+                  //           ),
+                  //           Text('23% Sugar')
+                  //         ],
+                  //       ),
+                  //       SizedBox(
+                  //         width: 20.0,
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                   SizedBox(
                     height: 10.0,
                   ),
@@ -208,10 +225,17 @@ class foodAbout extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 5),
+                   if(preparation != null) 
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                        padding: EdgeInsets.only(left: 8),
+                        child:Text(preptime)),
+                  ),
+                  if(preparation == null)
                   Padding(
                       padding: EdgeInsets.all(5.0),
-                      child: Text(
-                          "afssad fgh dfgdg dfhdfd aewrt gcbvh krt sffghdfsdfsd sdfsz bvnrtty ftryt iowanhshd asbjda jadihu")),
+                      child:Text('empty')),
                   SizedBox(
                     height: 10.0,
                   ),
@@ -250,10 +274,14 @@ class foodAbout extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 5),
-                  Padding(
-                      padding: EdgeInsets.all(5.0),
-                      child: Text(
-                          "afssad fgh dfgdg dfhdfd aewrt gcbvh krt sffghdfsdfsd sdfsz bvnrtty ftryt iowanhshd asbjda jadihu")),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: Text(taste),
+                    )
+                  ),
+                  
                 ],
               ),
             )
