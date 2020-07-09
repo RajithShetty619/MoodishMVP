@@ -15,9 +15,7 @@ class DatabaseQuery {
   Future<List<FoodListModel>> getFood({List<String> field,List<dynamic> value}) async {
   
     List<String> _field = field;
-    List<dynamic> _value = value;
-    print(field );
-    print(value);
+    List<dynamic> _value = value; 
     await Hive.openBox(listName);
     final _box = Hive.box(listName);
     List<dynamic> _gfoodList = await _box.get(listName);
@@ -38,8 +36,7 @@ class DatabaseQuery {
       List<FoodListModel> queryList =
           await DatabaseService().listFromSnapshot(snapshot);
 
-      _lastDocument = queryList[queryList.length - 1].description;
-      print("$_lastDocument"); 
+      _lastDocument = queryList[queryList.length - 1].description; 
 
       await _box.put(listName,queryList);
 
@@ -62,8 +59,7 @@ class DatabaseQuery {
     _lastDocument = _gfoodList.cast<FoodListModel>()[_gfoodList.length-1].description;
 
     if (dataExists) {
-      print("getMoreFood");
-      print("$_lastDocument");
+      print("getMoreFood"); 
       Query _finalQuery = _ref.where('description',isGreaterThan: '') ;
 
       if (_value[_value.length - 1].runtimeType != String) {
