@@ -30,6 +30,7 @@ class _FoodHomeState extends State<FoodHome> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
+                 
                 _switch
                     ? Padding(
                         padding: const EdgeInsets.only(left: 8.0),

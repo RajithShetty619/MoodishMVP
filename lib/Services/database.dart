@@ -51,7 +51,7 @@ class DatabaseService {
         ingrediants: _docData["ingredients"] ?? '',
         servings: _docData["serving"] ?? '',
         duration: _docData["time"] ?? '',
-        nutrients: _docData["nutrients"] ?? '',
+        nutrients: _docData["nutrients "] ?? '',
         taste: _docData["taste"] ?? '',
         situation: _docData["situation"] ?? '',
         preperation: _docData["preparation"] ?? ''

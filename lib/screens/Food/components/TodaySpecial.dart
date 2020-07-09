@@ -4,22 +4,32 @@ import 'package:moodish_mvp/Services/storage.dart';
 import 'package:moodish_mvp/screens/Food/components/shareDialog.dart';
 import 'package:moodish_mvp/screens/Food/components/stepSlider.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/food_info.dart';
+import 'package:moodish_mvp/test.dart';
 
 class TodaySpecial extends StatefulWidget {
   const TodaySpecial({
     Key key,
     @required this.image,
     @required this.title,
-    @required this.descrip2,
-    @required this.descrip3,
-    @required this.descrip4,
+    @required this.cuisine,
+    @required this.preptime,
+    @required this.deter,
+    @required this.description,
+    @required this.nutrient,
+    @required this.preparation,
+    @required this.taste,
+
   }) : super(key: key);
 
   final image;
   final title;
-  final descrip2;
-  final descrip3;
-  final descrip4;
+  final cuisine;
+  final preptime;
+  final deter;
+  final description;
+  final nutrient;
+  final preparation;
+  final taste;
 
   @override
   _TodaySpecialState createState() => _TodaySpecialState();
@@ -222,7 +232,7 @@ class _TodaySpecialState extends State<TodaySpecial> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Text(
-                                widget.descrip2,
+                                widget.cuisine,
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 18),
                               ),
@@ -238,7 +248,7 @@ class _TodaySpecialState extends State<TodaySpecial> {
                               //   ),
                               // ),
                               // Text(
-                              //   widget.descrip3,
+                              //   widget.preptime,
                               //   style:
                               //       TextStyle(color: Colors.white, fontSize: 18),
                               // ),
@@ -254,7 +264,7 @@ class _TodaySpecialState extends State<TodaySpecial> {
                                 ),
                               ),
                               Text(
-                                widget.descrip4,
+                                widget.deter,
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 18),
                               ),
@@ -273,7 +283,16 @@ class _TodaySpecialState extends State<TodaySpecial> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => Food_Info()));
+                                          builder: (context) => Food_Info(
+                                            name: widget.title,
+                                            descbox: widget.description,
+                                            image: widget.image,
+                                            nutrient: widget.nutrient,
+                                            preparation: widget.preparation,
+                                            taste: widget.taste,
+                                            preptime: widget.preptime
+
+                                          )));
                                 },
                                 child: Text(
                                   "Let's Go!",

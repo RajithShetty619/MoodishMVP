@@ -22,8 +22,9 @@ class Explore extends StatefulWidget {
   _ExploreState createState() => _ExploreState();
 }
 
-class _ExploreState extends State<Explore> { 
- 
+class _ExploreState extends State<Explore> {
+  bool keepAlive = false;
+
   int indx = 0;
 
   int _selected = 1;
@@ -74,6 +75,8 @@ class _ExploreState extends State<Explore> {
   bool _loadingData = false;
   @override
   Widget build(BuildContext context) {
+    // DateTime now = DateTime.now();
+    // String day = DateFormat('MMMMEEEEd').format(now); 
     return Container(
       child: SafeArea(
         child: new Stack(
@@ -156,11 +159,15 @@ class _ExploreState extends State<Explore> {
                                                     foodList['0'][index].images,
                                                 title: foodList['0'][index]
                                                     .foodName,
-                                                descrip2: foodList['0'][index]
+                                                cuisine: foodList['0'][index]
                                                     .cuisine,
-                                                descrip3: '10 min',
-                                                descrip4: foodList['0'][index]
+                                                preptime: foodList['0'][index].duration,
+                                                deter: foodList['0'][index]
                                                     .foodDeter,
+                                                description: foodList['0'][index].description,
+                                                nutrient: foodList['0'][index].nutrients,
+                                                  preparation: foodList['0'][index].preperation,
+                                                taste: foodList['0'][index].taste,
                                               );
                                             else {
                                               return !_loadingData
