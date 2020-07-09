@@ -1,13 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:moodish_mvp/Services/databaseQuery.dart'; 
 import 'package:moodish_mvp/screens/Food/components/Every_Situation.dart';
 import 'package:moodish_mvp/screens/Food/components/foodMood.dart';
 import 'package:moodish_mvp/screens/Food/components/maFeed.dart';
+import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/all.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/foodft.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/polls.dart';
-import 'package:moodish_mvp/screens/Food/myFeed/recipe.dart';
-import 'package:moodish_mvp/screens/Food/pages/explore.dart';
+import 'package:moodish_mvp/screens/Food/myFeed/recipe.dart'; 
+import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart';
+
 
 class FoodFeed extends StatefulWidget {
   @override
@@ -16,9 +20,25 @@ class FoodFeed extends StatefulWidget {
 
 class _FoodFeedState extends State<FoodFeed> {
 
-
+   bool _getFoodCalled = false;
+  bool loadingData = false;
+  bool loadingData1 = false;
+  bool loadingData2 = false;
+  DatabaseQuery _dq = DatabaseQuery(listName: "t10m");
   int indx = 1;
-
+   @override
+  void initState() {
+    super.initState();
+    print("inti");
+    if (!_getFoodCalled) {
+        _dq.getFood(field: ['taste'], value: ['Sweet']).then((future) {
+        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t10m"));
+        setState(() {
+          _getFoodCalled = true;
+        });
+    });
+  }
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -201,3 +221,5 @@ class _FoodFeedState extends State<FoodFeed> {
     );
   }
 }
+
+ 
