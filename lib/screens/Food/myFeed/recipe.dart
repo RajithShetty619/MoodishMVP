@@ -110,10 +110,10 @@ class getListview extends StatelessWidget {
                               size: 30,
                             ),
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Food_Info()));
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) => Food_Info()));
                             },
                           ),
                         ),

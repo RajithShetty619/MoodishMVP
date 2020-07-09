@@ -18,7 +18,8 @@ class Food_Info extends StatefulWidget {
     @required this.preparation,
     @required this.taste,
     @required this.preptime,
-    @required this.cuisine
+    @required this.cuisine,
+    @required this.mealtype,
 
   }):super (key:key);
 
@@ -30,6 +31,7 @@ class Food_Info extends StatefulWidget {
   final taste;
   final preptime;
   final cuisine;
+  final mealtype;
 
   @override
   _Food_InfoState createState() => _Food_InfoState();
@@ -131,14 +133,14 @@ class _Food_InfoState extends State<Food_Info> {
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
-                          Spacer(),
-                          Text(
-                            '\u20B9400',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 24.0,
-                            ),
-                          ),
+                          // Spacer(),
+                          // Text(
+                          //   '',
+                          //   style: TextStyle(
+                          //     color: Colors.orange,
+                          //     fontSize: 24.0,
+                          //   ),
+                          // ),
                           SizedBox(
                             width: 10.0,
                           )
@@ -152,10 +154,10 @@ class _Food_InfoState extends State<Food_Info> {
                       ),
                       Row(
                         children: <Widget>[
-                          f_desc(title: 'Hello'),
-                          f_desc(title: 'Hello'),
-                          f_desc(title: 'Hello'),
-                          f_desc(title: 'Hello'),
+                          f_desc(title: widget.taste),
+                          f_desc(title: widget.mealtype),
+
+                          
                           SizedBox(
                             width: 5.0,
                           ),

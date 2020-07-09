@@ -14,6 +14,7 @@ class FoodBloc extends Bloc<FoodEvent, Map<String, List<FoodListModel>>> {
         "every_S": [],
         "food_T": [],
         "food_S": [],
+        "t10M": []
       };
 
   @override

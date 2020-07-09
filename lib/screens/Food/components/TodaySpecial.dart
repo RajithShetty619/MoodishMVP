@@ -18,6 +18,7 @@ class TodaySpecial extends StatefulWidget {
     @required this.nutrient,
     @required this.preparation,
     @required this.taste,
+    @required this.mealtype,
 
   }) : super(key: key);
 
@@ -30,6 +31,7 @@ class TodaySpecial extends StatefulWidget {
   final nutrient;
   final preparation;
   final taste;
+  final mealtype;
 
   @override
   _TodaySpecialState createState() => _TodaySpecialState();
@@ -292,6 +294,7 @@ class _TodaySpecialState extends State<TodaySpecial> {
                                             taste: widget.taste,
                                             preptime: widget.preptime,
                                             cuisine: widget.cuisine,
+                                            mealtype: widget.mealtype,
                                           )));
                                 },
                                 child: Text(

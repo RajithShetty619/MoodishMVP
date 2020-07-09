@@ -81,7 +81,7 @@ class _ExploreState extends State<Explore> {
       child: SafeArea(
         child: new Stack(
           children: <Widget>[
-            // CurvedShape(),
+            CurvedShape(),
             SingleChildScrollView(
               child: Column(
                 children: <Widget>[
@@ -104,10 +104,10 @@ class _ExploreState extends State<Explore> {
                       //   ],
                       // ),
                       SizedBox(
-                        height: 20,
+                        height: 15,
                       ),
                       Container(
-                        height: 375,
+                        height: 380,
                         // color: Colors.blue,
                         child: Row(
                           children: <Widget>[
@@ -168,6 +168,7 @@ class _ExploreState extends State<Explore> {
                                                 nutrient: foodList['0'][index].nutrients,
                                                   preparation: foodList['0'][index].preperation,
                                                 taste: foodList['0'][index].taste,
+                                                mealtype: foodList['0'][index].mealType,
                                               );
                                             else {
                                               return !_loadingData
