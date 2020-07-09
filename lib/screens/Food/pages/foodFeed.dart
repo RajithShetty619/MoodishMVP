@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/components/Every_Situation.dart';
@@ -14,6 +15,8 @@ import 'package:moodish_mvp/screens/Food/myFeed/polls.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/recipe.dart';
 import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart';
 
+import 'package:intl/intl.dart';
+
 class FoodFeed extends StatefulWidget {
   @override
   _FoodFeedState createState() => _FoodFeedState();
@@ -21,7 +24,7 @@ class FoodFeed extends StatefulWidget {
 
 class _FoodFeedState extends State<FoodFeed> {
   bool _getFoodCalled = false;
-  bool _loadingData= false;
+  bool _loadingData = false;
   bool loadingData1 = false;
   bool loadingData2 = false;
   DatabaseQuery _dq = DatabaseQuery(listName: "0");
@@ -29,14 +32,29 @@ class _FoodFeedState extends State<FoodFeed> {
   @override
   void initState() {
     super.initState();
-    print("inti");
     if (!_getFoodCalled) {
-      _dq.getFood(field: ['taste'], value: ['Sweet'],limit: 10).then((future) {
-        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
-        setState(() {
-          _getFoodCalled = true;
+      checkDate().then((check) {
+        _dq.getFood(field: ['taste'], value: ['Sweet'], limit: 10,check: check).then(
+            (future) {
+          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
+          setState(() {
+            _getFoodCalled = true;
+          });
         });
       });
+    }
+  }
+
+  Future<int> checkDate() async {
+    Box _box = await Hive.openBox("date");
+    String saveDate = await _box.get("date");
+    DateTime now = DateTime.now();
+    String date = DateFormat('EEE, M/d/y').format(now);
+    if (date == saveDate) {
+      return 1;
+    } else {
+      _box.put("date", date);
+      return 0;
     }
   }
 
@@ -270,17 +288,16 @@ class _FoodFeedState extends State<FoodFeed> {
           // if (indx == 0)
           // Expanded( child: AllTabs()),
 
-          if (indx == 1)
-            Container(height: 430, child: RecipeTab()),
+                  if (indx == 1)
+                    Container(height: 430, child: RecipeTab()),
 
-          if (indx == 2)
-            Container(height: 300, child: PollTabs()),
+                  if (indx == 2)
+                    Container(height: 300, child: PollTabs()),
 
-          if (indx == 3)
-            Container(height: 450, child: FoodftTab()),
-        ],
-      ),
-        
+                  if (indx == 3)
+                    Container(height: 450, child: FoodftTab()),
+                ],
+              ),
             ],
           ),
               )
