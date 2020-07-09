@@ -114,7 +114,7 @@ class _Food_InfoState extends State<Food_Info> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              'Tiramisu',
+                              widget.name,
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 32.0,
@@ -228,7 +228,10 @@ class _Food_InfoState extends State<Food_Info> {
                           ],
                         ),
                       ),
-                      if (indx == 0) Container(height: 700, child: FoodAbout()),
+                      if (indx == 0) Container(height: 700, child: FoodAbout(
+                        name: widget.name,
+                        descbox: widget.descbox,
+                      )),
                       if (indx == 1)
                         Container(height: 800, child: FoodRecipe()),
                       if (indx == 3)

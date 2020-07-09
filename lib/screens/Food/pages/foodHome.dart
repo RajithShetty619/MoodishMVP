@@ -72,17 +72,17 @@ class _FoodHomeState extends State<FoodHome> {
               ],
             ),
             SizedBox(height: 10),
-             Expanded(
-               child: IndexedStack(
-                    index: _switch
-                        ? 1
-                        : 0, // switch between Foo and Bar based on condition
-                    children: [
-                      Expanded(child: FoodFeed()),
-                      Expanded(child: Explore()),
-                    ],
-                  ),
-             ),
+            Expanded(
+              child: IndexedStack(
+                index: _switch
+                    ? 0
+                    : 1, // switch between Foo and Bar based on condition
+                children: [
+                  Explore(),
+                  FoodFeed(),
+                ],
+              ),
+            ),
           ],
         ),
       ),

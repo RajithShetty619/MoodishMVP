@@ -19,23 +19,15 @@ import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 
 class Explore extends StatefulWidget {
   @override
-  _ExploreState createState() => _ExploreState(); 
+  _ExploreState createState() => _ExploreState();
 }
 
-class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
+class _ExploreState extends State<Explore> {
   bool keepAlive = false;
-
-   
-  @override
-  bool get wantKeepAlive => keepAlive;
 
   int indx = 0;
 
   int _selected = 1;
-
-  ScrollController _scrollController = ScrollController();
-  ScrollController _scrollController1 = ScrollController();
-  ScrollController _scrollController2 = ScrollController();
   bool _getFoodCalled = false;
   bool loadingData = false;
   bool loadingData1 = false;
@@ -46,22 +38,21 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
 
   @override
   void initState() {
-    super.initState(); 
+    super.initState();
     print("inti");
     if (!_getFoodCalled) {
       _dq.getFood(field: ['taste'], value: ['Sweet']).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
-          setState(() {
+        setState(() {
           _getFoodCalled = true;
         });
       });
-      _dqtsp.getFood(field: ['cuisine'], value: ['indian']).then((future) {
-        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "tsp"));
-      });
-      _dqsweet.getFood(field: ['taste'], value: ['Sweet']).then((future) {
-        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "sweet"));
-      });
-      
+      // _dqtsp.getFood(field: ['cuisine'], value: ['indian']).then((future) {
+      //   BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "tsp"));
+      // });
+      // _dqsweet.getFood(field: ['taste'], value: ['Sweet']).then((future) {
+      //   BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "sweet"));
+      // });
     }
     // _scrollController1.addListener(() {
     //   double _maxScroll = _scrollController1.position.maxScrollExtent;
@@ -81,6 +72,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
     // });
   }
 
+  bool _loadingData = false;
   @override
   Widget build(BuildContext context) {
     // DateTime now = DateTime.now();
@@ -176,33 +168,51 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                                 
                                               );
                                             else {
-                                              return Center(
-                                                child: IconButton(
-                                                    icon: Icon(
-                                                      Icons
-                                                          .keyboard_arrow_right,
-                                                      size: 40,
-                                                      color: Colors.blue[300],
-                                                    ),
-                                                    onPressed: () async {
-                                                      await _dq.getMoreFood(
-                                                          field: [
-                                                            'taste'
-                                                          ],
-                                                          value: [
-                                                            'Sweet'
-                                                          ]).then((future) {
-                                                        BlocProvider.of<
-                                                                    FoodBloc>(
-                                                                context)
-                                                            .add(FoodEvent.add(
-                                                                future, "0"));
-                                                        setState(() {
-                                                          loadingData1 = false;
-                                                        });
-                                                      });
-                                                    }),
-                                              );
+                                              return !_loadingData
+                                                  ? Center(
+                                                      child: IconButton(
+                                                          icon: Icon(
+                                                            Icons
+                                                                .arrow_forward_ios,
+                                                            size: 30,
+                                                            color: !_loadingData
+                                                                ? Colors
+                                                                    .blue[300]
+                                                                : Colors.black,
+                                                          ),
+                                                          onPressed: () async {
+                                                            setState(() {
+                                                              _loadingData =
+                                                                  true;
+                                                            });
+                                                            await _dq
+                                                                .getMoreFood(
+                                                                    field: [
+                                                                  'taste'
+                                                                ],
+                                                                    value: [
+                                                                  'Sweet'
+                                                                ]).then(
+                                                                    (future) {
+                                                              BlocProvider.of<
+                                                                          FoodBloc>(
+                                                                      context)
+                                                                  .add(FoodEvent
+                                                                      .add(
+                                                                          future,
+                                                                          "0"));
+                                                              setState(() {
+                                                                _loadingData =
+                                                                    false;
+                                                              });
+                                                            });
+                                                          }),
+                                                    )
+                                                  : Center(
+                                                    child: SpinKitFadingCircle(
+                                                        color: Colors.blue[300],
+                                                        size: 30.0),
+                                                  );
                                             }
                                           },
                                         ),
@@ -579,7 +589,6 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                               children: <Widget>[
                                 Expanded(
                                   child: ListView.builder(
-                                    controller: _scrollController,
                                     scrollDirection: Axis.horizontal,
                                     itemCount: foodList["0"].length,
                                     itemBuilder: (BuildContext context, index) {
@@ -601,16 +610,6 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                     },
                                   ),
                                 ),
-                                if (loadingData)
-                                  Container(
-                                    color: Colors.brown[100],
-                                    child: Center(
-                                      child: SpinKitChasingDots(
-                                        color: Colors.brown,
-                                        size: 50.0,
-                                      ),
-                                    ),
-                                  )
                               ],
                             );
                           },
