@@ -20,6 +20,7 @@ class Food_Info extends StatefulWidget {
     @required this.preptime,
     @required this.cuisine,
     @required this.mealtype,
+    @required this.deter
 
   }):super (key:key);
 
@@ -32,6 +33,7 @@ class Food_Info extends StatefulWidget {
   final preptime;
   final cuisine;
   final mealtype;
+  final deter;
 
   @override
   _Food_InfoState createState() => _Food_InfoState();
@@ -129,7 +131,7 @@ class _Food_InfoState extends State<Food_Info> {
                               widget.name,
                               style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: 32.0,
+                                  fontSize: 30.0,
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
@@ -156,7 +158,7 @@ class _Food_InfoState extends State<Food_Info> {
                         children: <Widget>[
                           f_desc(title: widget.taste),
                           f_desc(title: widget.mealtype),
-
+                          f_desc(title: widget.deter),
                           
                           SizedBox(
                             width: 5.0,
@@ -168,7 +170,7 @@ class _Food_InfoState extends State<Food_Info> {
                         child: Container(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            'Indian-Cheap-10 mins',
+                            widget.cuisine ,
                             style: TextStyle(fontSize: 18.0),
                           ),
                         ),
@@ -249,7 +251,13 @@ class _Food_InfoState extends State<Food_Info> {
                         cuisine: widget.cuisine,
                       )),
                       if (indx == 1)
-                        Container(height: 800, child: FoodRecipe()),
+                        Container(height: 800, child: FoodRecipe(
+                          preparation: widget.preparation,
+                        taste: widget.taste,
+                        preptime: widget.preptime,
+                        nutrient: widget.nutrient,
+                        cuisine: widget.cuisine,
+                        )),
                       if (indx == 3)
                         Container(height: 800, child: FoodDelivery()),
                     ],

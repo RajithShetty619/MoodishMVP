@@ -295,6 +295,7 @@ class _TodaySpecialState extends State<TodaySpecial> {
                                             preptime: widget.preptime,
                                             cuisine: widget.cuisine,
                                             mealtype: widget.mealtype,
+                                            deter: widget.deter,
                                           )));
                                 },
                                 child: Text(

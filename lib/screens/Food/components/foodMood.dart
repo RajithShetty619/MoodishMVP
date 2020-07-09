@@ -55,6 +55,7 @@ class _Mood_FoodState extends State<Mood_Food> {
                         preptime: widget.preptime,
                         cuisine: widget.cuisine,
                         mealtype: widget.mealtype,
+                        deter: widget.deter,
                       )));
         },
         child: Stack(
@@ -171,7 +172,8 @@ class _Mood_FoodState extends State<Mood_Food> {
                                                   taste: widget.taste,
                                                   preptime: widget.preptime,
                                                   cuisine: widget.cuisine,
-                                                  mealtype: widget.mealtype,
+                                                  mealtype: widget.mealtype, 
+                                                  deter: widget.deter,
                                                 )));
                                   },
                                 ),

@@ -52,6 +52,7 @@ class _FoodEverySituationState extends State<FoodEverySituation> {
                         preptime: widget.preptime,
                         cuisine: widget.cuisine,
                         mealtype: widget.mealtype,
+                        deter: widget.deter,
                       )));
         },
         child: Stack(
