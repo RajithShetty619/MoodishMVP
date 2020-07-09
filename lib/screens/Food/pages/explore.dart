@@ -34,7 +34,7 @@ class _ExploreState extends State<Explore> {
   bool loadingData1 = false;
   bool loadingData2 = false;
   DatabaseQuery _dq = DatabaseQuery(listName: "0");
-  DatabaseQuery _dqtsp = DatabaseQuery(listName: "tsp"); 
+  DatabaseQuery _dqtsp = DatabaseQuery(listName: "tsp");
   DatabaseQuery _dqsituation0 = DatabaseQuery(listName: "s0");
   DatabaseQuery _dqsituation1 = DatabaseQuery(listName: "s1");
   DatabaseQuery _dqsituation2 = DatabaseQuery(listName: "s2");
@@ -44,50 +44,61 @@ class _ExploreState extends State<Explore> {
 
   @override
   void initState() {
-    super.initState();
-    print("inti");
+    super.initState(); 
     if (!_getFoodCalled) {
-      _dq.getFood(field: ['taste'], value: ['Sweet']).then((future) {
-        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
-      });
-      _dqtsp.getFood(field: ['cuisine'], value: ['indian']).then((future) {
-        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "tsp"));
-      });
-      _dqtaste0.getFood(field: ['taste'], value: getValue("t0"),limit: 7).then((future) {
-        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t0"));
-      });
-      _dqtaste1.getFood(field: ['taste'], value: getValue("t1"),limit: 7).then((future) {
-        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t1"));
-      });
-      _dqtaste2.getFood(field: ['taste'], value: getValue("t2"),limit: 7).then((future) {
-        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t2"));
-      });
-      _dqsituation0
-          .getFood(field: ['situation'], value: getValue("s0"),limit: 7).then((future) {
-        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s0"));
-      });
-      _dqsituation1
-          .getFood(field: ['situation'], value: getValue("s1"),limit: 7).then((future) {
-        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s1"));
-      });
-      _dqsituation2
-          .getFood(field: ['situation'], value: getValue("s2"),limit: 7).then((future) {
-        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s2"));
-        setState(() {
-          _getFoodCalled = true;
+      checkDate().then((check) {
+         
+        _dqtsp.getFood(field: ['cuisine'], value: ['indian'],check: check).then((future) {
+          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "tsp"));
+        });
+        _dqtaste0.getFood(
+            field: ['taste'], value: getValue("t0"), limit: 7,check: check).then((future) {
+          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t0"));
+        });
+        _dqtaste1.getFood(
+            field: ['taste'], value: getValue("t1"), limit: 7,check: check).then((future) {
+          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t1"));
+        });
+        _dqtaste2.getFood(
+            field: ['taste'], value: getValue("t2"), limit: 7,check: check).then((future) {
+          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t2"));
+        });
+        _dqsituation0.getFood(
+            field: ['situation'],
+            value: getValue("s0"),
+            limit: 7,check: check).then((future) {
+          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s0"));
+        });
+        _dqsituation1.getFood(
+            field: ['situation'],
+            value: getValue("s1"),
+            limit: 7,check: check).then((future) {
+          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s1"));
+        });
+        _dqsituation2.getFood(
+            field: ['situation'],
+            value: getValue("s2"),
+            limit: 7,check: check).then((future) {
+          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s2"));
+          setState(() {
+            _getFoodCalled = true;
+          });
         });
       });
-      checkDate();
     }
   }
 
-  void checkDate() async {
+  Future<int> checkDate() async {
     Box _box = await Hive.openBox("date");
+    String saveDate = await _box.get("date");
     DateTime now = DateTime.now();
-    String day = DateFormat('EEE, M/d/y').format(now);
-    print(day);
-
-
+    String date = DateFormat('EEE, M/d/y').format(now);
+    if (date == saveDate) {
+      return 1;
+    } else {
+      _box.put("date", date);
+      return 0;
+    }
   }
 
   List<String> getValue(String _list) {
@@ -411,7 +422,8 @@ class _ExploreState extends State<Explore> {
                                     scrollDirection: Axis.horizontal,
                                     itemCount: foodList["t$indxT"].length,
                                     itemBuilder: (BuildContext context, index) {
-                                      print(foodList["t$indxT"][index].foodName);
+                                      print(
+                                          foodList["t$indxT"][index].foodName);
                                       return FoodEveryTaste(
                                           image: 'assets/img.jpg',
                                           title: foodList["t$indxT"][index]

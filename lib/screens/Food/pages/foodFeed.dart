@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/components/Every_Situation.dart';
@@ -14,6 +15,8 @@ import 'package:moodish_mvp/screens/Food/myFeed/polls.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/recipe.dart';
 import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart';
 
+import 'package:intl/intl.dart';
+
 class FoodFeed extends StatefulWidget {
   @override
   _FoodFeedState createState() => _FoodFeedState();
@@ -21,21 +24,37 @@ class FoodFeed extends StatefulWidget {
 
 class _FoodFeedState extends State<FoodFeed> {
   bool _getFoodCalled = false;
-  bool _loadingData= false;
+  bool _loadingData = false;
   bool loadingData1 = false;
   bool loadingData2 = false;
   DatabaseQuery _dq = DatabaseQuery(listName: "0");
   int indx = 1;
   @override
   void initState() {
-    super.initState(); 
+    super.initState();
     if (!_getFoodCalled) {
-      _dq.getFood(field: ['taste'], value: ['Sweet'],limit: 10).then((future) {
-        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
-        setState(() {
-          _getFoodCalled = true;
+      checkDate().then((check) {
+        _dq.getFood(field: ['taste'], value: ['Sweet'], limit: 10,check: check).then(
+            (future) {
+          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
+          setState(() {
+            _getFoodCalled = true;
+          });
         });
       });
+    }
+  }
+
+  Future<int> checkDate() async {
+    Box _box = await Hive.openBox("date");
+    String saveDate = await _box.get("date");
+    DateTime now = DateTime.now();
+    String date = DateFormat('EEE, M/d/y').format(now);
+    if (date == saveDate) {
+      return 1;
+    } else {
+      _box.put("date", date);
+      return 0;
     }
   }
 
@@ -43,7 +62,7 @@ class _FoodFeedState extends State<FoodFeed> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
-          child: Stack(
+      child: Stack(
         children: <Widget>[
           Column(
             mainAxisSize: MainAxisSize.min,
@@ -64,19 +83,20 @@ class _FoodFeedState extends State<FoodFeed> {
                   },
                   builder: (BuildContext context, foodList) {
                     return Expanded(
-                      child: ListView.builder( 
+                      child: ListView.builder(
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
                         itemCount: foodList["0"].length + 1,
                         itemBuilder: (BuildContext context, index) {
-                          if (foodList["0"].length != index && foodList.isNotEmpty)
+                          if (foodList["0"].length != index &&
+                              foodList.isNotEmpty)
                             return Mood_Food(
                               image: 'assets/Chocolate.jpg',
                               descrip1: foodList["0"][index].description,
                               descrip2: foodList["0"][index].foodName,
                             );
                           else {
-                            return !_loadingData 
+                            return !_loadingData
                                 ? Center(
                                     child: IconButton(
                                         icon: Icon(
@@ -94,7 +114,8 @@ class _FoodFeedState extends State<FoodFeed> {
                                               field: ['taste'],
                                               value: ['Sweet']).then((future) {
                                             BlocProvider.of<FoodBloc>(context)
-                                                .add(FoodEvent.add(future, "0"));
+                                                .add(
+                                                    FoodEvent.add(future, "0"));
                                             setState(() {
                                               _loadingData = false;
                                             });
@@ -116,47 +137,48 @@ class _FoodFeedState extends State<FoodFeed> {
                     );
                   },
                 ),
-              ), 
+              ),
               Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(left: 10.0),
-                  child: Container(
-                    width: 220.0,
-                    margin: EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black, width: 2),
-                      borderRadius: BorderRadius.circular(15),
-                      // color: Colors.blue[200],
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10.0),
+                          child: Container(
+                            width: 220.0,
+                            margin: EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black, width: 2),
+                              borderRadius: BorderRadius.circular(15),
+                              // color: Colors.blue[200],
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Text(
+                                'Top 10 for Your Mood',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: 30,
+                          width: 60,
+                          child: Text('Happy',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ),
+                        SizedBox(width: 5)
+                      ],
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Text(
-                        'Top 10 for Your Mood',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 20.0, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  height: 30,
-                  width: 60,
-                  child: Text('Happy',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      )),
-                ),
-                SizedBox(width: 5)
-              ],
-            ),
-            /*   Padding(
+                    /*   Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         height: 350,
@@ -172,108 +194,107 @@ class _FoodFeedState extends State<FoodFeed> {
                             }),
                       ),
                     ), */
-            Padding(
-              padding: const EdgeInsets.only(left: 10.0),
-              child: Container(
-                width: 120.0,
-                margin: EdgeInsets.all(10.0),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black, width: 2),
-                  borderRadius: BorderRadius.circular(15),
-                  // color: Colors.blue[200],
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Text(
-                    'My Feed',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 20.0, fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10.0),
+                      child: Container(
+                        width: 120.0,
+                        margin: EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black, width: 2),
+                          borderRadius: BorderRadius.circular(15),
+                          // color: Colors.blue[200],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Text(
+                            'My Feed',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 20.0, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          GestureDetector(
+                            child: Feeed(
+                              title: 'All',
+                              // isActive: true,
+                              index: indx,
+                              stIndex: 0,
+                              press: () {},
+                            ),
+                            onTap: () {
+                              setState(() {
+                                indx = 0;
+                              });
+                            },
+                          ),
+                          GestureDetector(
+                            child: Feeed(
+                              title: 'Recipe',
+                              // isActive: true,
+                              index: indx,
+                              stIndex: 1,
+                              press: () {},
+                            ),
+                            onTap: () {
+                              setState(() {
+                                indx = 1;
+                              });
+                            },
+                          ),
+                          GestureDetector(
+                            child: Feeed(
+                              title: 'Polls',
+                              // isActive: true,
+                              index: indx,
+                              stIndex: 2,
+                              press: () {},
+                            ),
+                            onTap: () {
+                              setState(() {
+                                indx = 2;
+                              });
+                            },
+                          ),
+                          GestureDetector(
+                            child: Feeed(
+                              title: 'Food For Thought',
+                              // isActive: true,
+                              index: indx,
+                              stIndex: 3,
+                              press: () {},
+                            ),
+                            onTap: () {
+                              setState(() {
+                                indx = 3;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ]),
+              Column(
                 children: <Widget>[
-                  GestureDetector(
-                    child: Feeed(
-                      title: 'All',
-                      // isActive: true,
-                      index: indx,
-                      stIndex: 0,
-                      press: () {},
-                    ),
-                    onTap: () {
-                      setState(() {
-                        indx = 0;
-                      });
-                    },
-                  ),
-                  GestureDetector(
-                    child: Feeed(
-                      title: 'Recipe',
-                      // isActive: true,
-                      index: indx,
-                      stIndex: 1,
-                      press: () {},
-                    ),
-                    onTap: () {
-                      setState(() {
-                        indx = 1;
-                      });
-                    },
-                  ),
-                  GestureDetector(
-                    child: Feeed(
-                      title: 'Polls',
-                      // isActive: true,
-                      index: indx,
-                      stIndex: 2,
-                      press: () {},
-                    ),
-                    onTap: () {
-                      setState(() {
-                        indx = 2;
-                      });
-                    },
-                  ),
-                  GestureDetector(
-                    child: Feeed(
-                      title: 'Food For Thought',
-                      // isActive: true,
-                      index: indx,
-                      stIndex: 3,
-                      press: () {},
-                    ),
-                    onTap: () {
-                      setState(() {
-                        indx = 3;
-                      });
-                    },
-                  ),
+                  // if (indx == 0)
+                  // Expanded( child: AllTabs()),
+
+                  if (indx == 1)
+                    Container(height: 430, child: RecipeTab()),
+
+                  if (indx == 2)
+                    Container(height: 300, child: PollTabs()),
+
+                  if (indx == 3)
+                    Container(height: 450, child: FoodftTab()),
                 ],
               ),
-            ),
-          ]),
-      Column(
-        children: <Widget>[
-          // if (indx == 0)
-          // Expanded( child: AllTabs()),
-
-          if (indx == 1)
-            Container(height: 430, child: RecipeTab()),
-
-          if (indx == 2)
-            Container(height: 300, child: PollTabs()),
-
-          if (indx == 3)
-            Container(height: 450, child: FoodftTab()),
-        ],
-      ),
-        
             ],
           )
         ],

@@ -12,7 +12,7 @@ class DatabaseQuery {
   DatabaseQuery({this.listName});
 
 
-  Future<List<FoodListModel>> getFood({List<String> field,List<dynamic> value,int limit=5}) async {
+  Future<List<FoodListModel>> getFood({List<String> field,List<dynamic> value,int limit=5,int check=0}) async {
   
     List<String> _field = field;
     List<dynamic> _value = value; 
@@ -21,9 +21,12 @@ class DatabaseQuery {
     List<dynamic> _gfoodList = await _box.get(listName);
     print('getfood');
     
-    if (_gfoodList == null) {
+    if (_gfoodList == null || check==0) {
       Query _finalQuery = _ref.where('description',isGreaterThan: '');
 
+    if(_gfoodList!=null)
+      _lastDocument = _gfoodList.cast<FoodListModel>()[_gfoodList.length-1].description;
+      
       if (_value[_value.length - 1].runtimeType != String) {
         dynamic _v = _value.removeLast();
         print(_v);
@@ -31,7 +34,7 @@ class DatabaseQuery {
       }
 
       _finalQuery = 
-          recQuery(_field, _value, _finalQuery).orderBy('description').limit(limit);
+          recQuery(_field, _value, _finalQuery).startAfter([_lastDocument]).orderBy('description').limit(limit);
 
       QuerySnapshot snapshot = await _finalQuery.getDocuments();
       List<FoodListModel> queryList =
