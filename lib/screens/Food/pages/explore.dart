@@ -83,7 +83,7 @@ class _ExploreState extends State<Explore> {
             field: ['situation'],
             value: getValue("s1"),
             limit: 7,
-            check: check).then((future) {
+            check: 0).then((future) {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s1"));
         });
         _dqsituation2.getFood(
@@ -92,10 +92,10 @@ class _ExploreState extends State<Explore> {
             limit: 7,
             check: 0).then((future) {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s2"));
-          setState(() {
+        });
+        setState(() {
             _getFoodCalled = true;
           });
-        });
       });
     }
   }
