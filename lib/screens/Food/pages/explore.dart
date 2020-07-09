@@ -44,41 +44,53 @@ class _ExploreState extends State<Explore> {
 
   @override
   void initState() {
-    super.initState(); 
+    super.initState();
     if (!_getFoodCalled) {
       checkDate().then((check) {
-         
-        _dqtsp.getFood(field: ['cuisine'], value: ['indian'],check: check).then((future) {
+        _dqtsp.getFood(
+            field: ['cuisine'], value: ['indian'], check: check).then((future) {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "tsp"));
         });
         _dqtaste0.getFood(
-            field: ['taste'], value: getValue("t0"), limit: 7,check: check).then((future) {
+            field: ['taste'],
+            value: getValue("t0"),
+            limit: 7,
+            check: check).then((future) {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t0"));
         });
         _dqtaste1.getFood(
-            field: ['taste'], value: getValue("t1"), limit: 7,check: check).then((future) {
+            field: ['taste'],
+            value: getValue("t1"),
+            limit: 7,
+            check: check).then((future) {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t1"));
         });
         _dqtaste2.getFood(
-            field: ['taste'], value: getValue("t2"), limit: 7,check: check).then((future) {
+            field: ['taste'],
+            value: getValue("t2"),
+            limit: 7,
+            check: check).then((future) {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t2"));
         });
         _dqsituation0.getFood(
             field: ['situation'],
             value: getValue("s0"),
-            limit: 7,check: check).then((future) {
+            limit: 7,
+            check: check).then((future) {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s0"));
         });
         _dqsituation1.getFood(
             field: ['situation'],
             value: getValue("s1"),
-            limit: 7,check: check).then((future) {
+            limit: 7,
+            check: check).then((future) {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s1"));
         });
         _dqsituation2.getFood(
             field: ['situation'],
             value: getValue("s2"),
-            limit: 7,check: check).then((future) {
+            limit: 7,
+            check: 0).then((future) {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s2"));
           setState(() {
             _getFoodCalled = true;
@@ -119,7 +131,7 @@ class _ExploreState extends State<Explore> {
         return ["Romantic"];
         break;
       case 's2':
-        return ["Easy"];
+        return ["Fast"];
         break;
     }
   }
@@ -211,8 +223,9 @@ class _ExploreState extends State<Explore> {
                                                         [index]
                                                     .preperation,
                                                 taste: foodList['tsp'][index]
-                                                    .taste, 
-                                                mealtype: foodList['tsp'][index].mealType,
+                                                    .taste,
+                                                mealtype: foodList['tsp'][index]
+                                                    .mealType,
                                               );
                                             else {
                                               return !_loadingData
@@ -289,7 +302,7 @@ class _ExploreState extends State<Explore> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 20),
+                     /*  SizedBox(height: 20),
                       Padding(
                         padding: const EdgeInsets.only(left: 10.0),
                         child: Container(
@@ -318,15 +331,14 @@ class _ExploreState extends State<Explore> {
                         child: ListView(
                           scrollDirection: Axis.horizontal,
                           children: <Widget>[
-                            MealType(
-                                image: 'assets/img.jpg', types: 'breakfast'),
+                            MealType(image: 'assets/img.jpg', types: 'breakfast'),
                             MealType(image: 'assets/img.jpg', types: 'lunch'),
                             MealType(image: 'assets/img.jpg', types: 'snacks'),
                             MealType(image: 'assets/img.jpg', types: 'dinner'),
                           ],
                         ),
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: 20), */
                       Padding(
                         padding: const EdgeInsets.only(left: 10.0),
                         child: Container(
@@ -427,17 +439,26 @@ class _ExploreState extends State<Explore> {
                                       print(
                                           foodList["t$indxT"][index].foodName);
                                       return FoodEveryTaste(
-                                          image: foodList["t$indxT"][index].images,
-                                          title: foodList["t$indxT"][index].foodName,
-                                          desc: foodList["t$indxT"][index].description,
-                                          cuisine: foodList["t$indxT"][index].cuisine,
-                                          preptime: foodList["t$indxT"][index].duration,
-                                          deter: foodList["t$indxT"][index].foodDeter,
-                                          nutrient: foodList["t$indxT"][index].nutrients,
-                                          preparation: foodList["t$indxT"][index] .preperation,
-                                          taste: foodList["t$indxT"][index].taste, 
-                                          mealtype: foodList["t$indxT"][index].mealType,
-                                        );
+                                        image:
+                                            foodList["t$indxT"][index].images,
+                                        title:
+                                            foodList["t$indxT"][index].foodName,
+                                        desc: foodList["t$indxT"][index]
+                                            .description,
+                                        cuisine:
+                                            foodList["t$indxT"][index].cuisine,
+                                        preptime:
+                                            foodList["t$indxT"][index].duration,
+                                        deter: foodList["t$indxT"][index]
+                                            .foodDeter,
+                                        nutrient: foodList["t$indxT"][index]
+                                            .nutrients,
+                                        preparation: foodList["t$indxT"][index]
+                                            .preperation,
+                                        taste: foodList["t$indxT"][index].taste,
+                                        mealtype:
+                                            foodList["t$indxT"][index].mealType,
+                                      );
                                     },
                                   ),
                                 ),
@@ -582,16 +603,26 @@ class _ExploreState extends State<Explore> {
                                     itemBuilder: (BuildContext context, index) {
                                       if (foodList["s$indx"].length != index)
                                         return FoodEverySituation(
-                                          image: foodList['s$indx'][index].images,
-                                          title: foodList['s$indx'][index] .foodName,
-                                          desc: foodList['s$indx'][index].description,
-                                          cuisine: foodList["t$indx"][index].cuisine,
-                                          preptime: foodList["t$indx"][index].duration,
-                                          deter: foodList["t$indx"][index].foodDeter,
-                                          nutrient: foodList["t$indx"][index].nutrients,
-                                          preparation: foodList["t$indx"][index] .preperation,
-                                          taste: foodList["t$indx"][index].taste, 
-                                          mealtype: foodList["t$indx"][index].mealType,
+                                          image:
+                                              foodList['s$indx'][index].images,
+                                          title: foodList['s$indx'][index]
+                                              .foodName,
+                                          desc: foodList['s$indx'][index]
+                                              .description,
+                                          cuisine:
+                                              foodList["t$indx"][index].cuisine,
+                                          preptime: foodList["t$indx"][index]
+                                              .duration,
+                                          deter: foodList["t$indx"][index]
+                                              .foodDeter,
+                                          nutrient: foodList["t$indx"][index]
+                                              .nutrients,
+                                          preparation: foodList["t$indx"][index]
+                                              .preperation,
+                                          taste:
+                                              foodList["t$indx"][index].taste,
+                                          mealtype: foodList["t$indx"][index]
+                                              .mealType,
                                         );
                                       else {
                                         return !_loadingData

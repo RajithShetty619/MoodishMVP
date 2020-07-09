@@ -60,27 +60,10 @@ class _RestaurantState extends State<Restaurant> {
             children: <Widget>[
               if (index == 0)
                 Column(children: <Widget>[
-                  RichText(
-                    text: TextSpan(
-                        text: 'Restaurants',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 60,
-                            color: Colors.black
-                        ),
-                        children: [
-                          TextSpan(
-                              text: '.',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 100,
-                                  color: Colors.pinkAccent
-                              )
-                          )
-                        ]
-                    ),
+                  /* a */
+                 /*  SizedBox(
+                    height: 10.0,
                   ),
-                  SizedBox(height: 10.0,),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
@@ -91,23 +74,28 @@ class _RestaurantState extends State<Restaurant> {
                               height: 80,
                               width: 80,
                               decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  image: AssetImage('assets/Spicy.jpg'),
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    image: AssetImage('assets/Spicy.jpg'),
                                     fit: BoxFit.cover,
-                                ),
-                                border: Border.all(color: Colors.pinkAccent,width: 2.0)
-                              ),
+                                  ),
+                                  border: Border.all(
+                                      color: Colors.pinkAccent, width: 2.0)),
                             ),
-                            SizedBox(height: 5.0,),
-                            Text('Spicy',
-                            style: TextStyle(
+                            SizedBox(
+                              height: 5.0,
+                            ),
+                            Text(
+                              'Spicy',
+                              style: TextStyle(
 //                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.bold
-                            ),)
+                                  fontWeight: FontWeight.bold),
+                            )
                           ],
                         ),
-                        SizedBox(width: 10.0,),
+                        SizedBox(
+                          width: 10.0,
+                        ),
                         Column(
                           children: <Widget>[
                             Container(
@@ -119,18 +107,23 @@ class _RestaurantState extends State<Restaurant> {
                                     image: AssetImage('assets/Italian.jpg'),
                                     fit: BoxFit.cover,
                                   ),
-                                  border: Border.all(color: Colors.pinkAccent,width: 2.0)
-                              ),
+                                  border: Border.all(
+                                      color: Colors.pinkAccent, width: 2.0)),
                             ),
-                            SizedBox(height: 5.0,),
-                            Text('Italian',
+                            SizedBox(
+                              height: 5.0,
+                            ),
+                            Text(
+                              'Italian',
                               style: TextStyle(
 //                              fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.bold
-                              ),)
+                                  fontWeight: FontWeight.bold),
+                            )
                           ],
                         ),
-                        SizedBox(width: 10.0,),
+                        SizedBox(
+                          width: 10.0,
+                        ),
                         Column(
                           children: <Widget>[
                             Container(
@@ -142,18 +135,23 @@ class _RestaurantState extends State<Restaurant> {
                                     image: AssetImage('assets/Coffee.jpg'),
                                     fit: BoxFit.cover,
                                   ),
-                                  border: Border.all(color: Colors.pinkAccent,width: 2.0)
-                              ),
+                                  border: Border.all(
+                                      color: Colors.pinkAccent, width: 2.0)),
                             ),
-                            SizedBox(height: 5.0,),
-                            Text('Aromatic',
+                            SizedBox(
+                              height: 5.0,
+                            ),
+                            Text(
+                              'Aromatic',
                               style: TextStyle(
 //                              fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.bold
-                              ),)
+                                  fontWeight: FontWeight.bold),
+                            )
                           ],
                         ),
-                        SizedBox(width: 10.0,),
+                        SizedBox(
+                          width: 10.0,
+                        ),
                         Column(
                           children: <Widget>[
                             Container(
@@ -165,18 +163,23 @@ class _RestaurantState extends State<Restaurant> {
                                     image: AssetImage('assets/Beverage.jpg'),
                                     fit: BoxFit.cover,
                                   ),
-                                  border: Border.all(color: Colors.pinkAccent,width: 2.0)
-                              ),
+                                  border: Border.all(
+                                      color: Colors.pinkAccent, width: 2.0)),
                             ),
-                            SizedBox(height: 5.0,),
-                            Text('Beverages',
+                            SizedBox(
+                              height: 5.0,
+                            ),
+                            Text(
+                              'Beverages',
                               style: TextStyle(
 //                              fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.bold
-                              ),)
+                                  fontWeight: FontWeight.bold),
+                            )
                           ],
                         ),
-                        SizedBox(width: 10.0,),
+                        SizedBox(
+                          width: 10.0,
+                        ),
                         Column(
                           children: <Widget>[
                             Container(
@@ -188,21 +191,26 @@ class _RestaurantState extends State<Restaurant> {
                                     image: AssetImage('assets/Chocolate.jpg'),
                                     fit: BoxFit.cover,
                                   ),
-                                  border: Border.all(color: Colors.pinkAccent,width: 2.0)
-                              ),
+                                  border: Border.all(
+                                      color: Colors.pinkAccent, width: 2.0)),
                             ),
-                            SizedBox(height: 5.0,),
-                            Text('Chocolate',
+                            SizedBox(
+                              height: 5.0,
+                            ),
+                            Text(
+                              'Chocolate',
                               style: TextStyle(
 //                              fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.bold
-                              ),)
+                                  fontWeight: FontWeight.bold),
+                            )
                           ],
                         ),
                       ],
                     ),
+                  ), */
+                  SizedBox(
+                    height: 15.0,
                   ),
-                  SizedBox(height: 15.0,),
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: TextField(
@@ -311,18 +319,18 @@ class _RestaurantState extends State<Restaurant> {
                             onTap: () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
-                                    return DineOut();
-                                  }));
+                                return DineOut();
+                              }));
                             },
                             child: Container(
-                              width: 110.0,
-                            height: 145,
-                            decoration: BoxDecoration(
-                              borderRadius:  BorderRadius.circular(20.0),
-                                image: DecorationImage(
-                                    image: AssetImage('assets/Dine_out.png'),
-                                    fit: BoxFit.cover),
-                            ),
+                                width: 110.0,
+                                height: 145,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  image: DecorationImage(
+                                      image: AssetImage('assets/Dine_out.png'),
+                                      fit: BoxFit.cover),
+                                ),
                                 child: Center(
                                     child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -341,8 +349,7 @@ class _RestaurantState extends State<Restaurant> {
                                         style: TextStyle(
                                             fontSize: 20.0,
                                             color: Colors.white,
-                                          fontWeight: FontWeight.bold
-                                        ),
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                     Container(
@@ -356,24 +363,25 @@ class _RestaurantState extends State<Restaurant> {
                                   ],
                                 ))),
                           ),
-                          SizedBox(width: 20.0,),
+                          SizedBox(
+                            width: 20.0,
+                          ),
                           GestureDetector(
                             onTap: () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
-                                    return Booking();
-                                  }));
+                                return Booking();
+                              }));
                             },
                             child: Container(
                                 width: 110.0,
                                 height: 145,
                                 decoration: BoxDecoration(
-                                  borderRadius:  BorderRadius.circular(20.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                   image: DecorationImage(
                                       image: AssetImage('assets/Booking.png'),
                                       fit: BoxFit.cover),
                                 ),
-
                                 child: Center(
                                     child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -392,8 +400,7 @@ class _RestaurantState extends State<Restaurant> {
                                         style: TextStyle(
                                             fontSize: 20.0,
                                             color: Colors.white,
-                                        fontWeight: FontWeight.bold
-                                        ),
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                     Container(
@@ -407,27 +414,29 @@ class _RestaurantState extends State<Restaurant> {
                                   ],
                                 ))),
                           ),
-                          SizedBox(width: 20.0,),
+                          SizedBox(
+                            width: 20.0,
+                          ),
                           GestureDetector(
                             onTap: () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
-                                    return TopRated();
-                                  }));
+                                return TopRated();
+                              }));
                             },
                             child: Container(
                                 width: 110.0,
                                 height: 145,
                                 decoration: BoxDecoration(
-                                  borderRadius:  BorderRadius.circular(20.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                   image: DecorationImage(
                                       image: AssetImage('assets/Top_Rated.png'),
                                       fit: BoxFit.cover),
                                 ),
                                 child: Center(
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: <Widget>[
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
 //                                        Container(
 //                                          padding: EdgeInsets.only(top: 20.0),
 //                                          child: Icon(
@@ -436,26 +445,25 @@ class _RestaurantState extends State<Restaurant> {
 //                                            color: Colors.yellow,
 //                                          ),
 //                                        ),
-                                        Container(
-                                          child: Text(
-                                            'Top Rated',
-                                            style: TextStyle(
-                                                fontSize: 17.0,
-                                                color: Colors.white,
-                                              fontWeight: FontWeight.bold
-                                            ),
-                                          ),
-                                        ),
-                                        Container(
-                                            child: Text(
-                                              '5+ Options',
-                                              style: TextStyle(color: Colors.white),
-                                            )),
-                                        SizedBox(
-                                          height: 8.0,
-                                        )
-                                      ],
-                                    ))),
+                                    Container(
+                                      child: Text(
+                                        'Top Rated',
+                                        style: TextStyle(
+                                            fontSize: 17.0,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Container(
+                                        child: Text(
+                                      '5+ Options',
+                                      style: TextStyle(color: Colors.white),
+                                    )),
+                                    SizedBox(
+                                      height: 8.0,
+                                    )
+                                  ],
+                                ))),
                           ),
                         ],
                       ),
@@ -472,14 +480,14 @@ class _RestaurantState extends State<Restaurant> {
                             onTap: () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
-                                    return PickUp();
-                                  }));
+                                return PickUp();
+                              }));
                             },
                             child: Container(
                                 width: 110.0,
                                 height: 145,
                                 decoration: BoxDecoration(
-                                  borderRadius:  BorderRadius.circular(20.0),
+                                  borderRadius: BorderRadius.circular(20.0),
                                   image: DecorationImage(
                                       image: AssetImage('assets/Pickup.png'),
                                       fit: BoxFit.cover),
@@ -502,7 +510,7 @@ class _RestaurantState extends State<Restaurant> {
                                         style: TextStyle(
                                             fontSize: 20.0,
                                             color: Colors.white,
-                                        fontWeight: FontWeight.bold),
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                     Container(
@@ -516,9 +524,13 @@ class _RestaurantState extends State<Restaurant> {
                                   ],
                                 ))),
                           ),
-                          SizedBox(width: 75,),
+                          SizedBox(
+                            width: 75,
+                          ),
                           FlatButton(onPressed: null, child: null),
-                          SizedBox(width: 30,),
+                          SizedBox(
+                            width: 30,
+                          ),
                           FlatButton(onPressed: null, child: null)
                         ],
                       ),
@@ -541,8 +553,7 @@ class _RestaurantState extends State<Restaurant> {
                             'Top Restaurants -',
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold),
+                                fontSize: 20.0, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
@@ -552,18 +563,17 @@ class _RestaurantState extends State<Restaurant> {
               Padding(
                   padding: EdgeInsets.only(top: 15.0),
                   child: GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                            return HomePage();
-                          }));
+                        return HomePage();
+                      }));
                     },
                     child: Card(
-                      color: Colors.grey[200],
-                      elevation: 1.0,
+                        color: Colors.grey[200],
+                        elevation: 1.0,
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0)
-                        ),
+                            borderRadius: BorderRadius.circular(10.0)),
                         child: Row(
                           children: <Widget>[
                             Padding(
@@ -575,7 +585,8 @@ class _RestaurantState extends State<Restaurant> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20.0),
                                   image: DecorationImage(
-                                      image: AssetImage('assets/${rest[index].image}'),
+                                      image: AssetImage(
+                                          'assets/${rest[index].image}'),
                                       fit: BoxFit.cover),
                                 ),
                               ),
@@ -587,26 +598,26 @@ class _RestaurantState extends State<Restaurant> {
                                   children: <Widget>[
                                     Container(
                                       alignment: Alignment.centerLeft,
-                                      child: Text(rest[index].name,
-                                      style: TextStyle(
-                                        fontSize: 22.0,
-                                        fontWeight: FontWeight.bold
-                                      ),),
+                                      child: Text(
+                                        rest[index].name,
+                                        style: TextStyle(
+                                            fontSize: 22.0,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
                                     Container(
                                         alignment: Alignment.centerLeft,
                                         child: Text('\u{02605}4.2')),
-                                    SizedBox(height: 5.0,),
+                                    SizedBox(
+                                      height: 5.0,
+                                    ),
                                     Text(rest[index].desc),
-
-
                                   ],
                                 ),
                               ),
                             )
                           ],
-                        )
-                    ),
+                        )),
                   )),
             ],
           );
