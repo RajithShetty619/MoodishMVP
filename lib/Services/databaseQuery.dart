@@ -18,8 +18,8 @@ class DatabaseQuery {
     List<dynamic> _value = value;
     print(field );
     print(value);
-    await Hive.openBox('foodlist');
-    final _box = Hive.box('foodlist');
+    await Hive.openBox(listName);
+    final _box = Hive.box(listName);
     List<dynamic> _gfoodList = await _box.get(listName);
     print('getfood');
     if (_gfoodList == null) {
@@ -57,7 +57,7 @@ class DatabaseQuery {
     List<String> _field = field;
     List<dynamic> _value = value; 
     
-    final _box = Hive.box('foodlist');
+    final _box = Hive.box(listName);
     List<dynamic> _gfoodList = await _box.get(listName);
     _lastDocument = _gfoodList.cast<FoodListModel>()[_gfoodList.length-1].description;
 

@@ -171,7 +171,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                       Expanded(
                                         child: ListView.builder(
                                           scrollDirection: Axis.horizontal,
-                                          itemCount: foodList["0"].length ,
+                                          itemCount: foodList["0"].length+1 ,
                                           itemBuilder:
                                               (BuildContext context, index) {
                                             if (foodList["0"].length != index)
