@@ -31,7 +31,7 @@ class _FoodFeedState extends State<FoodFeed> {
     super.initState();
     print("inti");
     if (!_getFoodCalled) {
-      _dq.getFood(field: ['taste'], value: ['Sweet']).then((future) {
+      _dq.getFood(field: ['taste'], value: ['Sweet'],limit: 10).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
         setState(() {
           _getFoodCalled = true;
@@ -65,7 +65,7 @@ class _FoodFeedState extends State<FoodFeed> {
                   },
                   builder: (BuildContext context, foodList) {
                     return Expanded(
-                      child: ListView.builder(
+                      child: ListView.builder( 
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
                         itemCount: foodList["0"].length + 1,
@@ -77,7 +77,7 @@ class _FoodFeedState extends State<FoodFeed> {
                               descrip2: foodList["0"][index].foodName,
                             );
                           else {
-                            return !_loadingData && foodList.length>0
+                            return !_loadingData 
                                 ? Center(
                                     child: IconButton(
                                         icon: Icon(
@@ -117,8 +117,7 @@ class _FoodFeedState extends State<FoodFeed> {
                     );
                   },
                 ),
-              ),
-
+              ), 
               Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[

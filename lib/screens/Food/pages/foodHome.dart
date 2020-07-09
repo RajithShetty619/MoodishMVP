@@ -29,8 +29,7 @@ class _FoodHomeState extends State<FoodHome> {
           children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                 
+              children: <Widget>[ 
                 _switch
                     ? Padding(
                         padding: const EdgeInsets.only(left: 8.0),
@@ -63,7 +62,7 @@ class _FoodHomeState extends State<FoodHome> {
                         print(_switch);
                         setState(() {
                           grpValue = changeValue;
-                          _switch = !_switch;
+                          changeValue==0?_switch=false:_switch=true;
                         });
                       },
                       groupValue: grpValue,

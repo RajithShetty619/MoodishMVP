@@ -54,25 +54,25 @@ class _ExploreState extends State<Explore> {
       _dqtsp.getFood(field: ['cuisine'], value: ['indian']).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "tsp"));
       });
-      _dqtaste0.getFood(field: ['taste'], value: getValue("t0")).then((future) {
+      _dqtaste0.getFood(field: ['taste'], value: getValue("t0"),limit: 7).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t0"));
       });
-      _dqtaste1.getFood(field: ['taste'], value: getValue("t1")).then((future) {
+      _dqtaste1.getFood(field: ['taste'], value: getValue("t1"),limit: 7).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t1"));
       });
-      _dqtaste2.getFood(field: ['taste'], value: getValue("t2")).then((future) {
+      _dqtaste2.getFood(field: ['taste'], value: getValue("t2"),limit: 7).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t2"));
       });
       _dqsituation0
-          .getFood(field: ['situation'], value: getValue("s0")).then((future) {
+          .getFood(field: ['situation'], value: getValue("s0"),limit: 7).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s0"));
       });
       _dqsituation1
-          .getFood(field: ['situation'], value: getValue("s1")).then((future) {
+          .getFood(field: ['situation'], value: getValue("s1"),limit: 7).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s1"));
       });
       _dqsituation2
-          .getFood(field: ['situation'], value: getValue("s2")).then((future) {
+          .getFood(field: ['situation'], value: getValue("s2"),limit: 7).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s2"));
         setState(() {
           _getFoodCalled = true;
