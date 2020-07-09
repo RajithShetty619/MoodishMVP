@@ -25,8 +25,8 @@ class Explore extends StatefulWidget {
 class _ExploreState extends State<Explore> {
   bool keepAlive = false;
 
-  int indx = 2;
-  int indxT = 2;
+  int indx = 0;
+  int indxT = 0;
 
   int _selected = 1;
   bool _getFoodCalled = false;
@@ -65,13 +65,13 @@ class _ExploreState extends State<Explore> {
             check: check).then((future) {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t1"));
         });
-        _dqtaste2.getFood(
-            field: ['taste'],
-            value: getValue("t2"),
-            limit: 7,
-            check: check).then((future) {
-          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t2"));
-        });
+        // _dqtaste2.getFood(
+        //     field: ['taste'],
+        //     value: getValue("t2"),
+        //     limit: 7,
+        //     check: check).then((future) {
+        //   BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t2"));
+        // });
         _dqsituation0.getFood(
             field: ['situation'],
             value: getValue("s0"),
@@ -106,7 +106,7 @@ class _ExploreState extends State<Explore> {
     DateTime now = DateTime.now();
     String date = DateFormat('EEE, M/d/y').format(now);
     if (date == saveDate) {
-      return 0;
+      return 1;
     } else {
       _box.put("date", date);
       return 0;
@@ -121,9 +121,9 @@ class _ExploreState extends State<Explore> {
       case 't1':
         return [["Sweet"]];
         break;
-      case 't2':
-        return [["Savory"]];
-        break;
+      // case 't2':
+      //   return [["Salty"]];
+      //   break;
       case 's0':
         return [["At Home"]];
         break;
@@ -395,20 +395,20 @@ class _ExploreState extends State<Explore> {
                                 });
                               },
                             ),
-                            GestureDetector(
-                              child: EveryTaste(
-                                title: "Salty",
-                                // isActive: true,
-                                index: indxT,
-                                stIndex: 2,
-                                press: () {},
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  indxT = 2;
-                                });
-                              },
-                            ),
+                            // GestureDetector(
+                            //   child: EveryTaste(
+                            //     title: "Salty",
+                            //     // isActive: true,
+                            //     index: indxT,
+                            //     stIndex: 2,
+                            //     press: () {},
+                            //   ),
+                            //   onTap: () {
+                            //     setState(() {
+                            //       indxT = 2;
+                            //     });
+                            //   },
+                            // ),
                           ],
                         ),
                       ),

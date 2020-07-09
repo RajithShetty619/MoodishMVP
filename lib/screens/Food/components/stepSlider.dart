@@ -202,10 +202,8 @@ class IntroScreenState extends State<IntroScreen> {
   void onDonePress() {
     // Do what you want
      Navigator.pop( 
-        context,
-        MaterialPageRoute(
-          builder: (context) => (FoodRecipe()),
-        )); 
+        context
+        ); 
   }
 
   Widget renderNextBtn() {
