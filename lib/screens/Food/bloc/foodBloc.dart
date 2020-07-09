@@ -8,12 +8,12 @@ class FoodBloc extends Bloc<FoodEvent, Map<String, List<FoodListModel>>> {
   Map<String, List<FoodListModel>> get initialState => {
         "0": [],
         "tsp": [],
-        "sweet": [],
-        "savoury": [],
-        "salty": [],
-        "every_S": [],
-        "food_T": [],
-        "food_S": [],
+        "t0": [],
+        "t1": [],
+        "t2": [],
+        "s0": [],
+        "s1": [],
+        "s2": [],
         "t10M": []
       };
 

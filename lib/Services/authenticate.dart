@@ -18,12 +18,15 @@ class Authenticate {
   User _userFromFirebase(FirebaseUser user) {
     return user != null ? User(uid: user.uid) : null;
   }
-
+  Future<String> returnUid() async {
+    FirebaseUser user = await  _auth.currentUser();
+    String _uid = user.uid;
+    return _uid;
+  }
   Stream<User> get onAuthChanged {
     return _auth.onAuthStateChanged.map(_userFromFirebase);
-  }
-
-  Future newRegister(String email, String password) async {
+  } 
+  Future newRegister(String email,String name, String password) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
