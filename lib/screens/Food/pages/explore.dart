@@ -15,7 +15,7 @@ import 'package:moodish_mvp/screens/Food/components/TodaySpecial.dart';
 import 'package:moodish_mvp/screens/Food/components/foodBG.dart';
 import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 
-// import 'package:intl/intl.dart';
+import 'package:intl/intl.dart';
 
 class Explore extends StatefulWidget {
   @override
@@ -77,7 +77,17 @@ class _ExploreState extends State<Explore> {
           _getFoodCalled = true;
         });
       });
+      checkDate();
     }
+  }
+
+  void checkDate() async {
+    Box _box = await Hive.openBox("date");
+    DateTime now = DateTime.now();
+    String day = DateFormat('EEE, M/d/y').format(now);
+    print(day);
+
+
   }
 
   List<String> getValue(String _list) {
@@ -209,7 +219,7 @@ class _ExploreState extends State<Explore> {
                                                               _loadingData =
                                                                   true;
                                                             });
-                                                            await _dq
+                                                            await _dqtsp
                                                                 .getMoreFood(
                                                                     field: [
                                                                   'taste'
@@ -224,7 +234,7 @@ class _ExploreState extends State<Explore> {
                                                                   .add(FoodEvent
                                                                       .add(
                                                                           future,
-                                                                          "0"));
+                                                                          "tsp"));
                                                               setState(() {
                                                                 _loadingData =
                                                                     false;

@@ -8,8 +8,7 @@ class FoodHome extends StatefulWidget {
   _FoodHomeState createState() => _FoodHomeState();
 }
 
-class _FoodHomeState extends State<FoodHome> {
-  final _key = GlobalKey();
+class _FoodHomeState extends State<FoodHome> { 
 
   final Map<int, Widget> logowidgets = const <int, Widget>{
     0: Text('Feed'),

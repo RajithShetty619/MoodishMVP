@@ -43,18 +43,18 @@ class DatabaseQuery {
 
       return queryList;
 
-    }/*  else {
+    } else {
       print("from data");
       List<FoodListModel> _foodList = _gfoodList.cast<FoodListModel>();  
 
       return _foodList;
-    } */
+    }
   }
 
   Future<List<FoodListModel>> getMoreFood({List<String> field,List<dynamic> value}) async {
     List<String> _field = field;
     List<dynamic> _value = value; 
-    List<FoodListModel> _gfoodList=[];
+    List<dynamic> _gfoodList=[];
     final _box = Hive.box(listName);
     _gfoodList  = await _box.get(listName);
     _lastDocument = _gfoodList.cast<FoodListModel>()[_gfoodList.length-1].description;

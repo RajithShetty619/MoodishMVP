@@ -28,8 +28,7 @@ class _FoodFeedState extends State<FoodFeed> {
   int indx = 1;
   @override
   void initState() {
-    super.initState();
-    print("inti");
+    super.initState(); 
     if (!_getFoodCalled) {
       _dq.getFood(field: ['taste'], value: ['Sweet'],limit: 10).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
