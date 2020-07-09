@@ -11,12 +11,14 @@ class FoodAbout extends StatefulWidget {
     @required this.preparation,
     @required this.taste,
     @required this.preptime,
+    @required this.cuisine,
   }) : super(key: key);
   final descbox;
   final nutrient;
   final preparation;
   final taste;
   final preptime;
+  final cuisine;
 
   _FoodAboutState createState() => _FoodAboutState();
 }
@@ -39,6 +41,7 @@ class _FoodAboutState extends State<FoodAbout> {
         preparation: widget.preparation,
         taste: widget.taste,
         preptime: widget.preptime,
+        cuisine: widget.cuisine,
       ),
     );
   }
@@ -52,6 +55,7 @@ class foodAbout extends StatelessWidget {
     @required this.preparation,
     @required this.taste,
     @required this.preptime,
+    @required this.cuisine,
 
   }) : super(key: key);
 
@@ -60,6 +64,7 @@ class foodAbout extends StatelessWidget {
   final preparation;
   final taste;
   final preptime;
+  final cuisine;
 
   @override
   Widget build(BuildContext context) {
@@ -253,10 +258,12 @@ class foodAbout extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 5),
-                  Padding(
-                      padding: EdgeInsets.all(5.0),
-                      child: Text(
-                          "afssad fgh dfgdg dfhdfd aewrt gcbvh krt sffghdfsdfsd sdfsz bvnrtty ftryt iowanhshd asbjda jadihu")),
+                 Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                        padding: EdgeInsets.only(left: 8),
+                        child:Text(cuisine)),
+                  ),
                   SizedBox(
                     height: 10.0,
                   ),

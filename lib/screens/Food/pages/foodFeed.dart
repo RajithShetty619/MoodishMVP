@@ -137,20 +137,20 @@ class _FoodFeedState extends State<FoodFeed> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              GestureDetector(
-                                child: Feeed(
-                                  title: 'All',
-                                  // isActive: true,
-                                  index: indx,
-                                  stIndex: 0,
-                                  press: () {},
-                                ),
-                                onTap: () {
-                                  setState(() {
-                                    indx = 0;
-                                  });
-                                },
-                              ),
+                              // GestureDetector(
+                              //   child: Feeed(
+                              //     title: 'All',
+                              //     // isActive: true,
+                              //     index: indx,
+                              //     stIndex: 0,
+                              //     press: () {},
+                              //   ),
+                              //   onTap: () {
+                              //     setState(() {
+                              //       indx = 0;
+                              //     });
+                              //   },
+                              // ),
                               GestureDetector(
                                 child: Feeed(
                                   title: 'Recipe',

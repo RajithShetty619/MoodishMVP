@@ -290,8 +290,8 @@ class _TodaySpecialState extends State<TodaySpecial> {
                                             nutrient: widget.nutrient,
                                             preparation: widget.preparation,
                                             taste: widget.taste,
-                                            preptime: widget.preptime
-
+                                            preptime: widget.preptime,
+                                            cuisine: widget.cuisine,
                                           )));
                                 },
                                 child: Text(

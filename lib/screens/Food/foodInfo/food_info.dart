@@ -18,6 +18,7 @@ class Food_Info extends StatefulWidget {
     @required this.preparation,
     @required this.taste,
     @required this.preptime,
+    @required this.cuisine
 
   }):super (key:key);
 
@@ -28,6 +29,7 @@ class Food_Info extends StatefulWidget {
   final preparation;
   final taste;
   final preptime;
+  final cuisine;
 
   @override
   _Food_InfoState createState() => _Food_InfoState();
@@ -205,20 +207,20 @@ class _Food_InfoState extends State<Food_Info> {
                                 });
                               },
                             ),
-                            GestureDetector(
-                              child: PageTab(
-                                title: 'Restaurants',
-                                // isActive: true,
-                                index: indx,
-                                stIndex: 2,
-                                press: () {},
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  indx = 2;
-                                });
-                              },
-                            ),
+                            // GestureDetector(
+                            //   child: PageTab(
+                            //     title: 'Restaurants',
+                            //     // isActive: true,
+                            //     index: indx,
+                            //     stIndex: 2,
+                            //     press: () {},
+                            //   ),
+                            //   onTap: () {
+                            //     setState(() {
+                            //       indx = 2;
+                            //     });
+                            //   },
+                            // ),
                             GestureDetector(
                               child: PageTab(
                                 title: 'Delivery',
@@ -242,6 +244,7 @@ class _Food_InfoState extends State<Food_Info> {
                         preparation: widget.preparation,
                         taste: widget.taste,
                         preptime: widget.preptime,
+                        cuisine: widget.cuisine,
                       )),
                       if (indx == 1)
                         Container(height: 800, child: FoodRecipe()),
