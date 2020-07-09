@@ -18,7 +18,7 @@ class DatabaseQuery {
     List<dynamic> _value = value; 
     await Hive.openBox(listName);
     final _box = Hive.box(listName);
-    List<dynamic> _gfoodList = await _box.get(listName);
+    List<dynamic> _gfoodList =/*  await _box.get(listName) */ null ;
     print('getfood');
     if (_gfoodList == null) {
       Query _finalQuery = _ref.where('description',isGreaterThan: '');
@@ -42,20 +42,20 @@ class DatabaseQuery {
 
       return queryList;
 
-    } else {
+    }/*  else {
       print("from data");
       List<FoodListModel> _foodList = _gfoodList.cast<FoodListModel>();  
 
       return _foodList;
-    }
+    } */
   }
 
   Future<List<FoodListModel>> getMoreFood({List<String> field,List<dynamic> value}) async {
     List<String> _field = field;
     List<dynamic> _value = value; 
-    
+    List<FoodListModel> _gfoodList=[];
     final _box = Hive.box(listName);
-    List<dynamic> _gfoodList = await _box.get(listName);
+    _gfoodList  = await _box.get(listName);
     _lastDocument = _gfoodList.cast<FoodListModel>()[_gfoodList.length-1].description;
 
     if (dataExists) {
@@ -81,8 +81,8 @@ class DatabaseQuery {
         dataExists = false;
         print("no data");
       }
-      _gfoodList.addAll(queryList);
-      await _box.put(listName,_gfoodList);
+      ;
+      await _box.put(listName,_gfoodList+queryList);
 
       return queryList;
     } else {
