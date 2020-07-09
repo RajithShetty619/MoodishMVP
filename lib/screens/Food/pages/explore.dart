@@ -26,6 +26,7 @@ class _ExploreState extends State<Explore> {
   bool keepAlive = false;
 
   int indx = 0;
+  int indxT =0 ;
 
   int _selected = 1;
   bool _getFoodCalled = false;
@@ -78,8 +79,7 @@ class _ExploreState extends State<Explore> {
         break;
       case 's2':
         return ["Easy"];
-        break;
-      default:
+        break; 
     }
   }
 
@@ -370,13 +370,13 @@ class _ExploreState extends State<Explore> {
                               child: EveryTaste(
                                 title: "bitter",
                                 // isActive: true,
-                                index: indx,
+                                index: indxT,
                                 stIndex: 0,
                                 press: () {},
                               ),
                               onTap: () {
                                 setState(() {
-                                  indx = 0;
+                                  indxT= 0;
                                 });
                               },
                             ),
@@ -384,13 +384,13 @@ class _ExploreState extends State<Explore> {
                               child: EveryTaste(
                                 title: "sweet",
                                 // isActive: true,
-                                index: indx,
+                                index: indxT,
                                 stIndex: 1,
                                 press: () {},
                               ),
                               onTap: () {
                                 setState(() {
-                                  indx = 1;
+                                  indxT = 1;
                                 });
                               },
                             ),
@@ -398,44 +398,17 @@ class _ExploreState extends State<Explore> {
                               child: EveryTaste(
                                 title: "salty",
                                 // isActive: true,
-                                index: indx,
+                                index: indxT,
                                 stIndex: 2,
                                 press: () {},
                               ),
                               onTap: () {
                                 setState(() {
-                                  indx = 2;
+                                  indxT = 2;
                                 });
                               },
                             ),
-                            GestureDetector(
-                              child: EveryTaste(
-                                title: "sour",
-                                // isActive: true,
-                                index: indx,
-                                stIndex: 3,
-                                press: () {},
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  indx = 3;
-                                });
-                              },
-                            ),
-                            GestureDetector(
-                              child: EveryTaste(
-                                title: "umami",
-                                // isActive: true,
-                                index: indx,
-                                stIndex: 4,
-                                press: () {},
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  indx = 4;
-                                });
-                              },
-                            ),
+                            
                           ],
                         ),
                       ),
