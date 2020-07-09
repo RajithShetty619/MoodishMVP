@@ -24,8 +24,7 @@ class FoodBloc extends Bloc<FoodEvent, Map<String, List<FoodListModel>>> {
         Map<String, List<FoodListModel>> newstate = state;
         if (event.food != null) {
           print("addinf");
-          final List<FoodListModel>  _food = event.food;
-          newstate[event.listName].addAll( _food);
+          newstate[event.listName].addAll(event.food);
         }
         yield newstate;
         break;

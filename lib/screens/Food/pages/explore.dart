@@ -2,17 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:hive/hive.dart'; 
+import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart';
 import 'package:moodish_mvp/screens/Food/components/Every_Situation.dart';
 import 'package:moodish_mvp/screens/Food/components/Every_Taste.dart';
-import 'package:moodish_mvp/screens/Food/components/Food_Situation.dart'; 
+import 'package:moodish_mvp/screens/Food/components/Food_Situation.dart';
 import 'package:moodish_mvp/screens/Food/components/Food_Taste.dart';
 import 'package:moodish_mvp/screens/Food/components/MealType.dart';
 import 'package:moodish_mvp/screens/Food/components/TodaySpecial.dart';
-import 'package:moodish_mvp/screens/Food/components/foodBG.dart'; 
+import 'package:moodish_mvp/screens/Food/components/foodBG.dart';
 import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 
 // import 'package:intl/intl.dart';
@@ -29,7 +29,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
   Future doAsyncStuff() async {
     keepAlive = true;
     updateKeepAlive();
-    // Keeping alive... 
+    // Keeping alive...
     await Future.delayed(Duration(seconds: 10));
 
     keepAlive = false;
@@ -51,9 +51,9 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
   bool loadingData = false;
   bool loadingData1 = false;
   bool loadingData2 = false;
-  DatabaseQuery _dq =  DatabaseQuery(listName: "0");
-  DatabaseQuery _dqtsp =  DatabaseQuery(listName: "tsp");
-  DatabaseQuery _dqsweet =  DatabaseQuery(listName: "sweet");
+  DatabaseQuery _dq = DatabaseQuery(listName: "0");
+  DatabaseQuery _dqtsp = DatabaseQuery(listName: "tsp");
+  DatabaseQuery _dqsweet = DatabaseQuery(listName: "sweet");
 
   @override
   void initState() {
@@ -61,37 +61,36 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
     doAsyncStuff();
     print("inti");
     if (!_getFoodCalled) {
-      
-      _dq.getFood(field: ['taste'],value: ['Sweet']).then((future) {
+      _dq.getFood(field: ['taste'], value: ['Sweet']).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
-        
-      });
-      _dqtsp.getFood(field: ['cuisine'],value: [['japanese','italian']]).then((future){
-        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "tsp"));
-      });
-      _dqsweet.getFood(field: ['taste'],value: ['Sweet']).then((future){
-        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "sweet"));
-      });
-      setState(() {
+          setState(() {
           _getFoodCalled = true;
         });
-    } 
-    _scrollController1.addListener(() {
-      double _maxScroll = _scrollController1.position.maxScrollExtent;
-      double _currentScroll = _scrollController1.position.pixels;
-      double _delta = MediaQuery.of(context).size.height * .25;
-      if (_maxScroll - _currentScroll < _delta && loadingData1 == false) {
-        print("scrool");
-        loadingData1 = true;
-        _dq.getMoreFood(field: ['taste'],value: ['Sweet']).then((future) {
-          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
-          setState(() {
-            loadingData1 = false;
-          });
-        });
-        print(loadingData1);
-      }
-    }); 
+      });
+      _dqtsp.getFood(field: ['cuisine'], value: ['indian']).then((future) {
+        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "tsp"));
+      });
+      _dqsweet.getFood(field: ['taste'], value: ['Sweet']).then((future) {
+        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "sweet"));
+      });
+      
+    }
+    // _scrollController1.addListener(() {
+    //   double _maxScroll = _scrollController1.position.maxScrollExtent;
+    //   double _currentScroll = _scrollController1.position.pixels;
+    //   double _delta = MediaQuery.of(context).size.height * .25;
+    //   if (_maxScroll - _currentScroll < _delta && loadingData1 == false) {
+    //     print("scrool");
+    //     loadingData1 = true;
+    //     _dq.getMoreFood(field: ['taste'], value: ['Sweet']).then((future) {
+    //       BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
+    //       setState(() {
+    //         loadingData1 = false;
+    //       });
+    //     });
+    //     print(loadingData1);
+    //   }
+    // });
   }
 
   @override
@@ -166,27 +165,56 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                   }
                                   return false;
                                 },
-                                builder: (BuildContext context, foodList) { 
+                                builder: (BuildContext context, foodList) {
                                   return Row(
                                     children: <Widget>[
                                       Expanded(
                                         child: ListView.builder(
-                                          
                                           scrollDirection: Axis.horizontal,
-                                          itemCount: foodList["tsp"].length,
-                                          itemBuilder: (BuildContext context,
-                                               index) {
-                                            return TodaySpecial(
-                                              image: foodList['tsp'][index].images ,
-                                              title:
-                                                  foodList['tsp'][index].foodName,
-                                              descrip2:
-                                                  foodList['tsp'][index].cuisine,
-                                              descrip3: 
-                                                  '10 min',
-                                              descrip4: 
-                                                  foodList['tsp'][index].foodDeter,
-                                            );
+                                          itemCount: foodList["0"].length ,
+                                          itemBuilder:
+                                              (BuildContext context, index) {
+                                            if (foodList["0"].length != index)
+                                              return TodaySpecial(
+                                                image:
+                                                    foodList['0'][index].images,
+                                                title: foodList['0'][index]
+                                                    .foodName,
+                                                descrip2: foodList['0'][index]
+                                                    .cuisine,
+                                                descrip3: '10 min',
+                                                descrip4: foodList['0'][index]
+                                                    .foodDeter,
+                                              );
+                                            else {
+                                              return Center(
+                                                child: IconButton(
+                                                    icon: Icon(
+                                                      Icons
+                                                          .keyboard_arrow_right,
+                                                      size: 40,
+                                                      color: Colors.blue[300],
+                                                    ),
+                                                    onPressed: () async {
+                                                      await _dq.getMoreFood(
+                                                          field: [
+                                                            'taste'
+                                                          ],
+                                                          value: [
+                                                            'Sweet'
+                                                          ]).then((future) {
+                                                        BlocProvider.of<
+                                                                    FoodBloc>(
+                                                                context)
+                                                            .add(FoodEvent.add(
+                                                                future, "0"));
+                                                        setState(() {
+                                                          loadingData1 = false;
+                                                        });
+                                                      });
+                                                    }),
+                                              );
+                                            }
                                           },
                                         ),
                                       ),
@@ -334,75 +362,75 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             GestureDetector(
-                                  child: EveryTaste(
-                                    title: "bitter",
-                                    // isActive: true,
-                                    index: indx,
-                                    stIndex: 0,
-                                    press: () {},
-                                  ),
-                                  onTap: () {
-                                    setState(() {
-                                      indx = 0;
-                                    });
-                                  },
-                                ),
-                             GestureDetector(
-                                  child: EveryTaste(
-                                    title: "sweet",
-                                    // isActive: true,
-                                    index: indx,
-                                    stIndex: 1,
-                                    press: () {},
-                                  ),
-                                  onTap: () {
-                                    setState(() {
-                                      indx = 1;
-                                    });
-                                  },
-                                ),
-                                GestureDetector(
-                                  child: EveryTaste(
-                                    title: "salty",
-                                    // isActive: true,
-                                    index: indx,
-                                    stIndex: 2,
-                                    press: () {},
-                                  ),
-                                  onTap: () {
-                                    setState(() {
-                                      indx = 2;
-                                    });
-                                  },
-                                ),
-                                GestureDetector(
-                                  child: EveryTaste(
-                                    title: "sour",
-                                    // isActive: true,
-                                    index: indx,
-                                    stIndex: 3,
-                                    press: () {},
-                                  ),
-                                  onTap: () {
-                                    setState(() {
-                                      indx = 3;
-                                    });
-                                  },
-                                ),
-                                GestureDetector(
-                                  child: EveryTaste(
-                                    title: "umami",
-                                    // isActive: true,
-                                    index: indx,
-                                    stIndex: 4,
-                                    press: () {},
-                                  ),
-                                  onTap: () {
-                                    setState(() {
-                                      indx = 4;
-                                    });
-                                  },
-                                ),
+                              child: EveryTaste(
+                                title: "bitter",
+                                // isActive: true,
+                                index: indx,
+                                stIndex: 0,
+                                press: () {},
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  indx = 0;
+                                });
+                              },
+                            ),
+                            GestureDetector(
+                              child: EveryTaste(
+                                title: "sweet",
+                                // isActive: true,
+                                index: indx,
+                                stIndex: 1,
+                                press: () {},
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  indx = 1;
+                                });
+                              },
+                            ),
+                            GestureDetector(
+                              child: EveryTaste(
+                                title: "salty",
+                                // isActive: true,
+                                index: indx,
+                                stIndex: 2,
+                                press: () {},
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  indx = 2;
+                                });
+                              },
+                            ),
+                            GestureDetector(
+                              child: EveryTaste(
+                                title: "sour",
+                                // isActive: true,
+                                index: indx,
+                                stIndex: 3,
+                                press: () {},
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  indx = 3;
+                                });
+                              },
+                            ),
+                            GestureDetector(
+                              child: EveryTaste(
+                                title: "umami",
+                                // isActive: true,
+                                index: indx,
+                                stIndex: 4,
+                                press: () {},
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  indx = 4;
+                                });
+                              },
+                            ),
                           ],
                         ),
                       ),
@@ -468,80 +496,80 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                           GestureDetector(
-                                  child: EverySituation(
-                                    title: 'At Home',
-                                    // isActive: true,
-                                    index: indx,
-                                    stIndex: 0,
-                                    press: () {},
-                                  ),
-                                  onTap: () {
-                                    setState(() {
-                                      indx = 0;
-                                    });
-                                  },
-                                ),
-                                GestureDetector(
-                                  child: EverySituation(
-                                    title: 'Lazy Cook',
-                                    // isActive: true,
-                                    index: indx,
-                                    stIndex: 1,
-                                    press: () {},
-                                  ),
-                                  onTap: () {
-                                    setState(() {
-                                      indx = 1;
-                                    });
-                                  },
-                                ),
-                                GestureDetector(
-                                  child: EverySituation(
-                                    title: 'Urgent',
-                                    // isActive: true,
-                                    index: indx,
-                                    stIndex: 2,
-                                    press: () {},
-                                  ),
-                                  onTap: () {
-                                    setState(() {
-                                      indx = 2;
-                                    });
-                                  },
-                                ),
-                                GestureDetector(
-                                  child: EverySituation(
-                                    title: 'Party',
-                                    // isActive: true,
-                                    index: indx,
-                                    stIndex: 3,
-                                    press: () {},
-                                  ),
-                                  onTap: () {
-                                    setState(() {
-                                      indx = 3;
-                                    });
-                                  },
-                                ),
-                                GestureDetector(
-                                  child: EverySituation(
-                                    title: "I don't know",
-                                    // isActive: true,
-                                    index: indx,
-                                    stIndex: 4,
-                                    press: () {},
-                                  ),
-                                  onTap: () {
-                                    setState(() {
-                                      indx = 4;
-                                    });
-                                  },
-                                ),
+                            GestureDetector(
+                              child: EverySituation(
+                                title: 'At Home',
+                                // isActive: true,
+                                index: indx,
+                                stIndex: 0,
+                                press: () {},
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  indx = 0;
+                                });
+                              },
+                            ),
+                            GestureDetector(
+                              child: EverySituation(
+                                title: 'Lazy Cook',
+                                // isActive: true,
+                                index: indx,
+                                stIndex: 1,
+                                press: () {},
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  indx = 1;
+                                });
+                              },
+                            ),
+                            GestureDetector(
+                              child: EverySituation(
+                                title: 'Urgent',
+                                // isActive: true,
+                                index: indx,
+                                stIndex: 2,
+                                press: () {},
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  indx = 2;
+                                });
+                              },
+                            ),
+                            GestureDetector(
+                              child: EverySituation(
+                                title: 'Party',
+                                // isActive: true,
+                                index: indx,
+                                stIndex: 3,
+                                press: () {},
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  indx = 3;
+                                });
+                              },
+                            ),
+                            GestureDetector(
+                              child: EverySituation(
+                                title: "I don't know",
+                                // isActive: true,
+                                index: indx,
+                                stIndex: 4,
+                                press: () {},
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  indx = 4;
+                                });
+                              },
+                            ),
                           ],
                         ),
                       ),
-                       Container(
+                      Container(
                         height: 300,
                         child: BlocConsumer<FoodBloc,
                             Map<String, List<FoodListModel>>>(
@@ -565,8 +593,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                     controller: _scrollController,
                                     scrollDirection: Axis.horizontal,
                                     itemCount: foodList["0"].length,
-                                    itemBuilder:
-                                        (BuildContext context,  index) {
+                                    itemBuilder: (BuildContext context, index) {
                                       return FoodEverySituation(
                                         image: 'assets/Coffee.jpg',
                                         title: foodList['0'][index].foodName,
@@ -636,7 +663,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                         //         desc: 'description'),
                         //   ],
                         // ),
-                      ), 
+                      ),
                     ],
                   ),
                 ],
