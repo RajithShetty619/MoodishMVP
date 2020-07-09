@@ -54,6 +54,7 @@ class DatabaseService {
         nutrients: _docData["nutrients"] ?? '',
         taste: _docData["taste"] ?? '',
         situation: _docData["situation"] ?? '',
+        preperation: _docData["preperation"] ?? ''
       );
     }).toList());
   }
