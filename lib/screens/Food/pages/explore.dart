@@ -25,8 +25,8 @@ class Explore extends StatefulWidget {
 class _ExploreState extends State<Explore> {
   bool keepAlive = false;
 
-  int indx = 0;
-  int indxT = 0;
+  int indx = 2;
+  int indxT = 2;
 
   int _selected = 1;
   bool _getFoodCalled = false;
@@ -83,20 +83,20 @@ class _ExploreState extends State<Explore> {
             field: ['situation'],
             value: getValue("s1"),
             limit: 7,
-            check: 0).then((future) {
+            check: check).then((future) {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s1"));
         });
         _dqsituation2.getFood(
             field: ['situation'],
             value: getValue("s2"),
             limit: 7,
-            check: 0).then((future) {
+            check: check).then((future) {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s2"));
-        });
-        setState(() {
+        }); 
+      });
+       setState(() {
             _getFoodCalled = true;
           });
-      });
     }
   }
 
@@ -106,33 +106,35 @@ class _ExploreState extends State<Explore> {
     DateTime now = DateTime.now();
     String date = DateFormat('EEE, M/d/y').format(now);
     if (date == saveDate) {
-      return 1;
+      return 0;
     } else {
       _box.put("date", date);
       return 0;
     }
   }
 
-  List<String> getValue(String _list) {
+  List<dynamic> getValue(String _list) {
     switch (_list) {
       case 't0':
-        return ["Savory"];
+        return [["Savory"]];
         break;
       case 't1':
-        return ["Sweet"];
+        return [["Sweet"]];
         break;
       case 't2':
-        return ["Salty"];
+        return [["Savory"]];
         break;
       case 's0':
-        return ["At Home"];
+        return [["At Home"]];
         break;
       case 's1':
-        return ["Romantic"];
+        return [["Romantic"]];
         break;
       case 's2':
-        return ["Fast"];
+        return [["Easy"]];
         break;
+      default:
+        return ["Savory"];
     }
   }
 
@@ -431,37 +433,7 @@ class _ExploreState extends State<Explore> {
                           builder: (BuildContext context, foodList) {
                             return Row(
                               children: <Widget>[
-                                Expanded(
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: foodList["t$indxT"].length,
-                                    itemBuilder: (BuildContext context, index) {
-                                      print(
-                                          foodList["t$indxT"][index].foodName);
-                                      return FoodEveryTaste(
-                                        image:
-                                            foodList["t$indxT"][index].images,
-                                        title:
-                                            foodList["t$indxT"][index].foodName,
-                                        desc: foodList["t$indxT"][index]
-                                            .description,
-                                        cuisine:
-                                            foodList["t$indxT"][index].cuisine,
-                                        preptime:
-                                            foodList["t$indxT"][index].duration,
-                                        deter: foodList["t$indxT"][index]
-                                            .foodDeter,
-                                        nutrient: foodList["t$indxT"][index]
-                                            .nutrients,
-                                        preparation: foodList["t$indxT"][index]
-                                            .preperation,
-                                        taste: foodList["t$indxT"][index].taste,
-                                        mealtype:
-                                            foodList["t$indxT"][index].mealType,
-                                      );
-                                    },
-                                  ),
-                                ),
+                                DataListView(foodList : foodList['t$indxT']),
                               ],
                             );
                           },
@@ -596,77 +568,8 @@ class _ExploreState extends State<Explore> {
                           builder: (BuildContext context, foodList) {
                             return Row(
                               children: <Widget>[
-                                Expanded(
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: foodList["s$indx"].length,
-                                    itemBuilder: (BuildContext context, index) {
-                                      if (foodList["s$indx"].length != index)
-                                        return FoodEverySituation(
-                                          image:
-                                              foodList['s$indx'][index].images,
-                                          title: foodList['s$indx'][index]
-                                              .foodName,
-                                          desc: foodList['s$indx'][index]
-                                              .description,
-                                          cuisine:
-                                              foodList["t$indx"][index].cuisine,
-                                          preptime: foodList["t$indx"][index]
-                                              .duration,
-                                          deter: foodList["t$indx"][index]
-                                              .foodDeter,
-                                          nutrient: foodList["t$indx"][index]
-                                              .nutrients,
-                                          preparation: foodList["t$indx"][index]
-                                              .preperation,
-                                          taste:
-                                              foodList["t$indx"][index].taste,
-                                          mealtype: foodList["t$indx"][index]
-                                              .mealType,
-                                        );
-                                      else {
-                                        return !_loadingData
-                                            ? Center(
-                                                child: IconButton(
-                                                    icon: Icon(
-                                                      Icons.arrow_forward_ios,
-                                                      size: 30,
-                                                      color: !_loadingData
-                                                          ? Colors.blue[300]
-                                                          : Colors.black,
-                                                    ),
-                                                    onPressed: () async {
-                                                      setState(() {
-                                                        _loadingData = true;
-                                                      });
-                                                      await _dq.getMoreFood(
-                                                          field: [
-                                                            'taste'
-                                                          ],
-                                                          value: [
-                                                            'Sweet'
-                                                          ]).then((future) {
-                                                        BlocProvider.of<
-                                                                    FoodBloc>(
-                                                                context)
-                                                            .add(FoodEvent.add(
-                                                                future, "0"));
-                                                        setState(() {
-                                                          _loadingData = false;
-                                                        });
-                                                      });
-                                                    }),
-                                              )
-                                            : Center(
-                                                child: SpinKitFadingCircle(
-                                                    color: Colors.blue[300],
-                                                    size: 30.0),
-                                              );
-                                      }
-                                    },
-                                  ),
-                                ),
-                              ],
+                                 DataListView(foodList : foodList['s$indx']),
+                                 ],
                             );
                           },
                           listener: (context, foodList) {
@@ -749,6 +652,50 @@ class _ExploreState extends State<Explore> {
                 : Container(),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class DataListView extends StatelessWidget {
+  const DataListView({
+    Key key,
+    @required this.foodList,
+  }) : super(key: key);
+
+  final List<FoodListModel> foodList;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: foodList.length,
+        itemBuilder: (BuildContext context, index) {
+          print(
+              foodList [index].foodName);
+          return FoodEveryTaste(
+            image:
+                foodList [index].images,
+            title:
+                foodList [index].foodName,
+            desc: foodList [index]
+                .description,
+            cuisine:
+                foodList [index].cuisine,
+            preptime:
+                foodList [index].duration,
+            deter: foodList [index]
+                .foodDeter,
+            nutrient: foodList [index]
+                .nutrients,
+            preparation: foodList[index]
+                .preperation,
+            taste: foodList [index].taste,
+            mealtype:
+                foodList[index].mealType,
+          );
+        },
       ),
     );
   }
