@@ -19,24 +19,13 @@ import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 
 class Explore extends StatefulWidget {
   @override
-  _ExploreState createState() => _ExploreState();
-  Explore(key) : super(key: key);
+  _ExploreState createState() => _ExploreState(); 
 }
 
 class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
   bool keepAlive = false;
 
-  Future doAsyncStuff() async {
-    keepAlive = true;
-    updateKeepAlive();
-    // Keeping alive...
-    await Future.delayed(Duration(seconds: 10));
-
-    keepAlive = false;
-    updateKeepAlive();
-    // Can be disposed whenever now.
-  }
-
+   
   @override
   bool get wantKeepAlive => keepAlive;
 
@@ -57,8 +46,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
 
   @override
   void initState() {
-    super.initState();
-    doAsyncStuff();
+    super.initState(); 
     print("inti");
     if (!_getFoodCalled) {
       _dq.getFood(field: ['taste'], value: ['Sweet']).then((future) {
@@ -96,8 +84,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     // DateTime now = DateTime.now();
-    // String day = DateFormat('MMMMEEEEd').format(now);
-    super.build(context);
+    // String day = DateFormat('MMMMEEEEd').format(now); 
     return Container(
       child: SafeArea(
         child: new Stack(
@@ -171,7 +158,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                       Expanded(
                                         child: ListView.builder(
                                           scrollDirection: Axis.horizontal,
-                                          itemCount: foodList["0"].length+1 ,
+                                          itemCount: foodList["0"].length + 1,
                                           itemBuilder:
                                               (BuildContext context, index) {
                                             if (foodList["0"].length != index)
@@ -180,11 +167,13 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                                     foodList['0'][index].images,
                                                 title: foodList['0'][index]
                                                     .foodName,
-                                                descrip2: foodList['0'][index]
+                                                cuisine: foodList['0'][index]
                                                     .cuisine,
-                                                descrip3: '10 min',
-                                                descrip4: foodList['0'][index]
+                                                preptime: '10 min',
+                                                deter: foodList['0'][index]
                                                     .foodDeter,
+                                                description: foodList['0'][index].description,
+                                                
                                               );
                                             else {
                                               return Center(

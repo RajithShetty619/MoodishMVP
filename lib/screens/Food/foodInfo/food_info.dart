@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/foodDelivery.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/foodabout.dart';
@@ -7,12 +8,26 @@ import 'package:moodish_mvp/screens/Food/foodInfo/tabs_info.dart';
 import 'package:moodish_mvp/screens/Restaurants/restaurantCard/homepage.dart';
 
 class Food_Info extends StatefulWidget {
+
+  const Food_Info ({
+    Key key,
+    @required this.name,
+    @required this.descbox,
+    @required this.image,
+
+  }):super (key:key);
+
+  final name;
+  final image;
+  final descbox;
+
   @override
   _Food_InfoState createState() => _Food_InfoState();
 }
 
 class _Food_InfoState extends State<Food_Info> {
   int indx = 0;
+
 
   @override
   Widget build(BuildContext context) {
@@ -64,29 +79,35 @@ class _Food_InfoState extends State<Food_Info> {
                 if (index == 0)
                   Column(
                     children: <Widget>[
-                      Container(
-                        height: 300.0,
-                        width: double.maxFinite,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(30.0),
-                              bottomRight: Radius.circular(30.0)),
-                          image: DecorationImage(
-                              image: AssetImage('assets/Coffee.jpg'),
-                              fit: BoxFit.cover),
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-                          child: IconButton(
-                              icon: Icon(
-                                Icons.arrow_back,
-                                size: 40,
-                                color: Colors.white,
-                              ),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              }),
-                        ),
+                      CachedNetworkImage(
+                        imageUrl: widget.image,
+                        imageBuilder: (context, imageprovider){
+                          return  Container(
+                          height: 300.0,
+                          width: double.maxFinite,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(30.0),
+                                bottomRight: Radius.circular(30.0)),
+                            image: DecorationImage(
+                                image: imageprovider,
+                                fit: BoxFit.cover),
+                          ),
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: IconButton(
+                                icon: Icon(
+                                  Icons.arrow_back,
+                                  size: 40,
+                                  color: Colors.white,
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                }),
+                          ),
+                        );
+                        },
+                        
                       ),
                       Row(
                         children: <Widget>[

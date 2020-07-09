@@ -29,6 +29,7 @@ class _FoodHomeState extends State<FoodHome> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
+                 
                 _switch
                     ? Padding(
                         padding: const EdgeInsets.only(left: 8.0),
@@ -71,9 +72,17 @@ class _FoodHomeState extends State<FoodHome> {
               ],
             ),
             SizedBox(height: 10),
-            _switch
-                ? Expanded(child: Explore(_key))
-                : Expanded(child: FoodFeed()),
+             Expanded(
+               child: IndexedStack(
+                    index: _switch
+                        ? 1
+                        : 0, // switch between Foo and Bar based on condition
+                    children: [
+                      Expanded(child: FoodFeed()),
+                      Expanded(child: Explore()),
+                    ],
+                  ),
+             ),
           ],
         ),
       ),
