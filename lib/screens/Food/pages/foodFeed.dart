@@ -124,9 +124,8 @@ class _FoodFeedState extends State<FoodFeed> {
                           child: ListView.builder(
                             shrinkWrap: true,
                             scrollDirection: Axis.horizontal,
-                            itemCount: foodList["0"].length + 1,
-                            itemBuilder: (BuildContext context, index) {
-                              if (foodList["0"].length != index)
+                            itemCount: foodList["0"].length ,
+                            itemBuilder: (BuildContext context, index) { 
                                 return Mood_Food(
                                   image: foodList['0'][index].images,
                                   name: foodList["0"][index].foodName,
@@ -138,38 +137,7 @@ class _FoodFeedState extends State<FoodFeed> {
                                   preparation: foodList['0'][index].preperation,
                                   taste: foodList['0'][index].taste,
                                   mealtype: foodList['0'][index].mealType,
-                                );
-                              else {
-                                return !_loadingData
-                                    ? Center(
-                                        child: IconButton(
-                                            icon: Icon(
-                                              Icons.arrow_forward_ios,
-                                              size: 30,
-                                              color: !_loadingData
-                                                  ? Colors.blue[300]
-                                                  : Colors.black,
-                                            ),
-                                            onPressed: () async {
-                                              setState(() {
-                                                _loadingData = true;
-                                              });
-                                              await _dq.getMoreFood(
-                                                  field: ['taste'],
-                                                  value: ['Sweet']).then((future) {
-                                                BlocProvider.of<FoodBloc>(context)
-                                                    .add(FoodEvent.add(future, "0"));
-                                                setState(() {
-                                                  _loadingData = false;
-                                                });
-                                              });
-                                            }),
-                                      )
-                                    : Center(
-                                        child: SpinKitFadingCircle(
-                                            color: Colors.blue[300], size: 30.0),
-                                      );
-                              }
+                                ); 
                             },
                           ),
                         );

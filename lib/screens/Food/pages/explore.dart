@@ -25,8 +25,8 @@ class Explore extends StatefulWidget {
 class _ExploreState extends State<Explore> {
   bool keepAlive = false;
 
-  int indx = 2;
-  int indxT = 2;
+  int indx = 0;
+  int indxT = 0;
 
   int _selected = 1;
   bool _getFoodCalled = false;
@@ -65,13 +65,13 @@ class _ExploreState extends State<Explore> {
             check: check).then((future) {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t1"));
         });
-        _dqtaste2.getFood(
+       /*  _dqtaste2.getFood(
             field: ['taste'],
             value: getValue("t2"),
             limit: 7,
             check: check).then((future) {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t2"));
-        });
+        }); */
         _dqsituation0.getFood(
             field: ['situation'],
             value: getValue("s0"),
@@ -92,11 +92,11 @@ class _ExploreState extends State<Explore> {
             limit: 7,
             check: check).then((future) {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s2"));
-        }); 
+        });
       });
-       setState(() {
-            _getFoodCalled = true;
-          });
+      setState(() {
+        _getFoodCalled = true;
+      });
     }
   }
 
@@ -106,7 +106,7 @@ class _ExploreState extends State<Explore> {
     DateTime now = DateTime.now();
     String date = DateFormat('EEE, M/d/y').format(now);
     if (date == saveDate) {
-      return 0;
+      return 1;
     } else {
       _box.put("date", date);
       return 0;
@@ -116,22 +116,32 @@ class _ExploreState extends State<Explore> {
   List<dynamic> getValue(String _list) {
     switch (_list) {
       case 't0':
-        return [["Savory"]];
+        return [
+          ["Savory"]
+        ];
         break;
       case 't1':
-        return [["Sweet"]];
+        return [
+          ["Sweet"]
+        ];
         break;
-      case 't2':
-        return [["Savory"]];
-        break;
+      // case 't2':
+      //   return [["Salty"]];
+      //   break;
       case 's0':
-        return [["At Home"]];
+        return [
+          ["At Home"]
+        ];
         break;
       case 's1':
-        return [["Romantic"]];
+        return [
+          ["Romantic"]
+        ];
         break;
       case 's2':
-        return [["Easy"]];
+        return [
+          ["Easy"]
+        ];
         break;
       default:
         return ["Savory"];
@@ -304,7 +314,7 @@ class _ExploreState extends State<Explore> {
                           ],
                         ),
                       ),
-                     /*  SizedBox(height: 20),
+                      /*  SizedBox(height: 20),
                       Padding(
                         padding: const EdgeInsets.only(left: 10.0),
                         child: Container(
@@ -395,7 +405,7 @@ class _ExploreState extends State<Explore> {
                                 });
                               },
                             ),
-                            GestureDetector(
+                            /* GestureDetector(
                               child: EveryTaste(
                                 title: "Salty",
                                 // isActive: true,
@@ -408,7 +418,7 @@ class _ExploreState extends State<Explore> {
                                   indxT = 2;
                                 });
                               },
-                            ),
+                            ), */
                           ],
                         ),
                       ),
@@ -433,7 +443,7 @@ class _ExploreState extends State<Explore> {
                           builder: (BuildContext context, foodList) {
                             return Row(
                               children: <Widget>[
-                                DataListView(foodList : foodList['t$indxT']),
+                                DataListView(foodList: foodList['t$indxT']),
                               ],
                             );
                           },
@@ -568,8 +578,8 @@ class _ExploreState extends State<Explore> {
                           builder: (BuildContext context, foodList) {
                             return Row(
                               children: <Widget>[
-                                 DataListView(foodList : foodList['s$indx']),
-                                 ],
+                                DataListView(foodList: foodList['s$indx']),
+                              ],
                             );
                           },
                           listener: (context, foodList) {
@@ -672,28 +682,18 @@ class DataListView extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: foodList.length,
         itemBuilder: (BuildContext context, index) {
-          print(
-              foodList [index].foodName);
+          print(foodList[index].foodName);
           return FoodEveryTaste(
-            image:
-                foodList [index].images,
-            title:
-                foodList [index].foodName,
-            desc: foodList [index]
-                .description,
-            cuisine:
-                foodList [index].cuisine,
-            preptime:
-                foodList [index].duration,
-            deter: foodList [index]
-                .foodDeter,
-            nutrient: foodList [index]
-                .nutrients,
-            preparation: foodList[index]
-                .preperation,
-            taste: foodList [index].taste,
-            mealtype:
-                foodList[index].mealType,
+            image: foodList[index].images,
+            title: foodList[index].foodName,
+            desc: foodList[index].description,
+            cuisine: foodList[index].cuisine,
+            preptime: foodList[index].duration,
+            deter: foodList[index].foodDeter,
+            nutrient: foodList[index].nutrients,
+            preparation: foodList[index].preperation,
+            taste: foodList[index].taste,
+            mealtype: foodList[index].mealType,
           );
         },
       ),
