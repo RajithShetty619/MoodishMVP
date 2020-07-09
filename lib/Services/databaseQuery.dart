@@ -85,8 +85,8 @@ class DatabaseQuery {
         dataExists = false;
         print("no data");
       }
-      
-      await _box.put(listName,queryList);
+      _gfoodList.addAll(queryList);
+      await _box.put(listName,_gfoodList);
 
       return queryList;
     } else {

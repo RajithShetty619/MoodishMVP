@@ -20,33 +20,14 @@ import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 class Explore extends StatefulWidget {
   @override
   _ExploreState createState() => _ExploreState();
-  Explore(key) : super(key: key);
 }
 
-class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
+class _ExploreState extends State<Explore> {
   bool keepAlive = false;
-
-  Future doAsyncStuff() async {
-    keepAlive = true;
-    updateKeepAlive();
-    // Keeping alive...
-    await Future.delayed(Duration(seconds: 10));
-
-    keepAlive = false;
-    updateKeepAlive();
-    // Can be disposed whenever now.
-  }
-
-  @override
-  bool get wantKeepAlive => keepAlive;
 
   int indx = 0;
 
   int _selected = 1;
-
-  ScrollController _scrollController = ScrollController();
-  ScrollController _scrollController1 = ScrollController();
-  ScrollController _scrollController2 = ScrollController();
   bool _getFoodCalled = false;
   bool loadingData = false;
   bool loadingData1 = false;
@@ -58,22 +39,20 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
     super.initState();
-    doAsyncStuff();
     print("inti");
     if (!_getFoodCalled) {
       _dq.getFood(field: ['taste'], value: ['Sweet']).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
-          setState(() {
+        setState(() {
           _getFoodCalled = true;
         });
       });
-      _dqtsp.getFood(field: ['cuisine'], value: ['indian']).then((future) {
-        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "tsp"));
-      });
-      _dqsweet.getFood(field: ['taste'], value: ['Sweet']).then((future) {
-        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "sweet"));
-      });
-      
+      // _dqtsp.getFood(field: ['cuisine'], value: ['indian']).then((future) {
+      //   BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "tsp"));
+      // });
+      // _dqsweet.getFood(field: ['taste'], value: ['Sweet']).then((future) {
+      //   BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "sweet"));
+      // });
     }
     // _scrollController1.addListener(() {
     //   double _maxScroll = _scrollController1.position.maxScrollExtent;
@@ -93,11 +72,9 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
     // });
   }
 
+  bool _loadingData = false;
   @override
   Widget build(BuildContext context) {
-    // DateTime now = DateTime.now();
-    // String day = DateFormat('MMMMEEEEd').format(now);
-    super.build(context);
     return Container(
       child: SafeArea(
         child: new Stack(
@@ -171,7 +148,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                       Expanded(
                                         child: ListView.builder(
                                           scrollDirection: Axis.horizontal,
-                                          itemCount: foodList["0"].length+1 ,
+                                          itemCount: foodList["0"].length + 1,
                                           itemBuilder:
                                               (BuildContext context, index) {
                                             if (foodList["0"].length != index)
@@ -187,33 +164,51 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                                     .foodDeter,
                                               );
                                             else {
-                                              return Center(
-                                                child: IconButton(
-                                                    icon: Icon(
-                                                      Icons
-                                                          .keyboard_arrow_right,
-                                                      size: 40,
-                                                      color: Colors.blue[300],
-                                                    ),
-                                                    onPressed: () async {
-                                                      await _dq.getMoreFood(
-                                                          field: [
-                                                            'taste'
-                                                          ],
-                                                          value: [
-                                                            'Sweet'
-                                                          ]).then((future) {
-                                                        BlocProvider.of<
-                                                                    FoodBloc>(
-                                                                context)
-                                                            .add(FoodEvent.add(
-                                                                future, "0"));
-                                                        setState(() {
-                                                          loadingData1 = false;
-                                                        });
-                                                      });
-                                                    }),
-                                              );
+                                              return !_loadingData
+                                                  ? Center(
+                                                      child: IconButton(
+                                                          icon: Icon(
+                                                            Icons
+                                                                .arrow_forward_ios,
+                                                            size: 30,
+                                                            color: !_loadingData
+                                                                ? Colors
+                                                                    .blue[300]
+                                                                : Colors.black,
+                                                          ),
+                                                          onPressed: () async {
+                                                            setState(() {
+                                                              _loadingData =
+                                                                  true;
+                                                            });
+                                                            await _dq
+                                                                .getMoreFood(
+                                                                    field: [
+                                                                  'taste'
+                                                                ],
+                                                                    value: [
+                                                                  'Sweet'
+                                                                ]).then(
+                                                                    (future) {
+                                                              BlocProvider.of<
+                                                                          FoodBloc>(
+                                                                      context)
+                                                                  .add(FoodEvent
+                                                                      .add(
+                                                                          future,
+                                                                          "0"));
+                                                              setState(() {
+                                                                _loadingData =
+                                                                    false;
+                                                              });
+                                                            });
+                                                          }),
+                                                    )
+                                                  : Center(
+                                                    child: SpinKitFadingCircle(
+                                                        color: Colors.blue[300],
+                                                        size: 30.0),
+                                                  );
                                             }
                                           },
                                         ),
@@ -590,7 +585,6 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                               children: <Widget>[
                                 Expanded(
                                   child: ListView.builder(
-                                    controller: _scrollController,
                                     scrollDirection: Axis.horizontal,
                                     itemCount: foodList["0"].length,
                                     itemBuilder: (BuildContext context, index) {
@@ -612,16 +606,6 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                     },
                                   ),
                                 ),
-                                if (loadingData)
-                                  Container(
-                                    color: Colors.brown[100],
-                                    child: Center(
-                                      child: SpinKitChasingDots(
-                                        color: Colors.brown,
-                                        size: 50.0,
-                                      ),
-                                    ),
-                                  )
                               ],
                             );
                           },
