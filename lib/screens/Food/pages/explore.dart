@@ -26,7 +26,7 @@ class _ExploreState extends State<Explore> {
   bool keepAlive = false;
 
   int indx = 0;
-  int indxT =0 ;
+  int indxT = 0;
 
   int _selected = 1;
   bool _getFoodCalled = false;
@@ -39,6 +39,9 @@ class _ExploreState extends State<Explore> {
   DatabaseQuery _dqsituation0 = DatabaseQuery(listName: "s0");
   DatabaseQuery _dqsituation1 = DatabaseQuery(listName: "s1");
   DatabaseQuery _dqsituation2 = DatabaseQuery(listName: "s2");
+  DatabaseQuery _dqtaste0 = DatabaseQuery(listName: "t0");
+  DatabaseQuery _dqtaste1 = DatabaseQuery(listName: "t1");
+  DatabaseQuery _dqtaste2 = DatabaseQuery(listName: "t2");
 
   @override
   void initState() {
@@ -51,6 +54,15 @@ class _ExploreState extends State<Explore> {
       _dqtsp.getFood(field: ['cuisine'], value: ['indian']).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "tsp"));
       });
+      _dqtaste0.getFood(field: ['taste'], value: getValue("t0")).then((future) {
+        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t0"));
+      });
+      _dqtaste1.getFood(field: ['taste'], value: getValue("t1")).then((future) {
+        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t1"));
+      });
+      _dqtaste2.getFood(field: ['taste'], value: getValue("t2")).then((future) {
+        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t2"));
+      });
       _dqsituation0
           .getFood(field: ['situation'], value: getValue("s0")).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s0"));
@@ -60,7 +72,7 @@ class _ExploreState extends State<Explore> {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s1"));
       });
       _dqsituation2
-          .getFood(field: ['situation'],value: getValue("s2")).then((future) {
+          .getFood(field: ['situation'], value: getValue("s2")).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s2"));
         setState(() {
           _getFoodCalled = true;
@@ -71,6 +83,15 @@ class _ExploreState extends State<Explore> {
 
   List<String> getValue(String _list) {
     switch (_list) {
+      case 't0':
+        return ["Savory"];
+        break;
+      case 't1':
+        return ["Sweet"];
+        break;
+      case 't2':
+        return ["Salty"];
+        break;
       case 's0':
         return ["At Home"];
         break;
@@ -79,7 +100,7 @@ class _ExploreState extends State<Explore> {
         break;
       case 's2':
         return ["Easy"];
-        break; 
+        break;
     }
   }
 
@@ -98,12 +119,12 @@ class _ExploreState extends State<Explore> {
                 children: <Widget>[
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[ 
+                    children: <Widget>[
                       SizedBox(
                         height: 20,
                       ),
                       Container(
-                        height: 375, 
+                        height: 375,
                         child: Row(
                           children: <Widget>[
                             RotatedBox(
@@ -282,62 +303,6 @@ class _ExploreState extends State<Explore> {
                             MealType(image: 'assets/img.jpg', types: 'dinner'),
                           ],
                         ),
-                        // child: BlocConsumer<FoodBloc,Map<String, List<FoodListModel>>>(
-                        //   buildWhen: (Map<String, List<FoodListModel>> previous,
-                        //       Map<String, List<FoodListModel>> current) {
-                        //     return true;
-                        //   },
-                        //   listenWhen: (Map<String, List<FoodListModel>> previous,
-                        //       Map<String, List<FoodListModel>> current) {
-                        //     if (current.length > previous.length) {
-                        //       return true;
-                        //     }
-                        //     return false;
-                        //   },
-                        //   builder: (BuildContext context, foodList) {
-                        //     return Row(
-                        //       children: <Widget>[
-                        //         Expanded(
-                        //           child: ListView.builder(
-                        //             controller: _scrollController2,
-                        //             scrollDirection: Axis.horizontal,
-                        //             itemCount: foodList["0"].length,
-                        //             itemBuilder: (BuildContext context,int index) {
-                        //               return General(
-                        //                 image: 'assets/img1.jpg',
-                        //                 title: foodList['0'][index].foodName,
-                        //                 desc: foodList['0'][index].cuisine
-                        //               );
-                        //             },
-                        //           ),
-                        //         ),
-                        //         if (loadingData2)
-                        //           Container(
-                        //             color: Colors.brown[100],
-                        //             child: Center(
-                        //               child: SpinKitChasingDots(
-                        //                 color: Colors.brown,
-                        //                 size: 50.0,
-                        //               ),
-                        //             ),
-                        //           )
-                        //       ],
-                        //     );
-                        //   },
-                        //   listener: (context, foodList) {
-                        //     Scaffold.of(context).showSnackBar(
-                        //       SnackBar(content: Text('Added!')),
-                        //     );
-                        //   },
-                        // ),
-                        // ListView.builder(
-                        //     scrollDirection: Axis.horizontal,
-                        //     itemCount: 5,
-                        //     itemBuilder: (BuildContext context, int index) {
-                        //       return General(
-                        //         image: 'assets/img1.jpg', title: 'food', desc: 'description'
-                        //       );
-                        //     }),
                       ),
                       SizedBox(height: 20),
                       Padding(
@@ -368,7 +333,7 @@ class _ExploreState extends State<Explore> {
                           children: <Widget>[
                             GestureDetector(
                               child: EveryTaste(
-                                title: "bitter",
+                                title: "Savoury",
                                 // isActive: true,
                                 index: indxT,
                                 stIndex: 0,
@@ -376,13 +341,13 @@ class _ExploreState extends State<Explore> {
                               ),
                               onTap: () {
                                 setState(() {
-                                  indxT= 0;
+                                  indxT = 0;
                                 });
                               },
                             ),
                             GestureDetector(
                               child: EveryTaste(
-                                title: "sweet",
+                                title: "Sweet",
                                 // isActive: true,
                                 index: indxT,
                                 stIndex: 1,
@@ -396,7 +361,7 @@ class _ExploreState extends State<Explore> {
                             ),
                             GestureDetector(
                               child: EveryTaste(
-                                title: "salty",
+                                title: "Salty",
                                 // isActive: true,
                                 index: indxT,
                                 stIndex: 2,
@@ -408,7 +373,6 @@ class _ExploreState extends State<Explore> {
                                 });
                               },
                             ),
-                            
                           ],
                         ),
                       ),
@@ -416,15 +380,59 @@ class _ExploreState extends State<Explore> {
                       Container(
                         // color: Colors.grey[300],
                         height: 300,
-                        child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 5,
-                            itemBuilder: (BuildContext context, index) {
-                              return FoodEveryTaste(
-                                  image: 'assets/img.jpg',
-                                  title: 'food1',
-                                  desc: 'description');
-                            }),
+                        child: BlocConsumer<FoodBloc,
+                            Map<String, List<FoodListModel>>>(
+                          buildWhen: (Map<String, List<FoodListModel>> previous,
+                              Map<String, List<FoodListModel>> current) {
+                            return true;
+                          },
+                          listenWhen:
+                              (Map<String, List<FoodListModel>> previous,
+                                  Map<String, List<FoodListModel>> current) {
+                            if (current.length > previous.length) {
+                              return true;
+                            }
+                            return false;
+                          },
+                          builder: (BuildContext context, foodList) {
+                            return Row(
+                              children: <Widget>[
+                                Expanded(
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: foodList["t$indxT"].length,
+                                    itemBuilder: (BuildContext context, index) {
+                                      print(foodList["t$indxT"][index].foodName);
+                                      return FoodEveryTaste(
+                                          image: 'assets/img.jpg',
+                                          title: foodList["t$indxT"][index]
+                                              .foodName,
+                                          desc: foodList["t$indxT"][index]
+                                              .description);
+                                    },
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                          listener: (context, foodList) {
+                            Scaffold.of(context).showSnackBar(
+                              SnackBar(content: Text('Added!')),
+                            );
+                          },
+                          // child: ListView.builder(
+                          //   scrollDirection: Axis.horizontal,
+                          //   itemCount: 5,
+                          //   itemBuilder: (BuildContext context,int index) {
+                          //     return FoodEverySituation(
+                          //       image: 'assets/img.jpg',
+                          //       title: 'food1',
+                          //       desc: 'description'
+                          //     );
+                          //   }
+                          // ),
+                        ),
+
                         // child: ListView(
                         //   scrollDirection: Axis.horizontal,
                         //   children: <Widget>[
@@ -515,7 +523,7 @@ class _ExploreState extends State<Explore> {
                                   indx = 2;
                                 });
                               },
-                            ), 
+                            ),
                           ],
                         ),
                       ),
