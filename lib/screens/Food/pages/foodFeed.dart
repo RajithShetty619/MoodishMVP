@@ -70,14 +70,14 @@ class _FoodFeedState extends State<FoodFeed> {
                         scrollDirection: Axis.horizontal,
                         itemCount: foodList["0"].length + 1,
                         itemBuilder: (BuildContext context, index) {
-                          if (foodList["0"].length != index)
+                          if (foodList["0"].length != index && foodList.isNotEmpty)
                             return Mood_Food(
                               image: 'assets/Chocolate.jpg',
                               descrip1: foodList["0"][index].description,
                               descrip2: foodList["0"][index].foodName,
                             );
                           else {
-                            return !_loadingData
+                            return !_loadingData && foodList.length>0
                                 ? Center(
                                     child: IconButton(
                                         icon: Icon(

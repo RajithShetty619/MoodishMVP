@@ -35,6 +35,9 @@ class _ExploreState extends State<Explore> {
   DatabaseQuery _dq = DatabaseQuery(listName: "0");
   DatabaseQuery _dqtsp = DatabaseQuery(listName: "tsp");
   DatabaseQuery _dqsweet = DatabaseQuery(listName: "sweet");
+  DatabaseQuery _dqsituation0 = DatabaseQuery(listName: "s0");
+  DatabaseQuery _dqsituation1 = DatabaseQuery(listName: "s1");
+  DatabaseQuery _dqsituation2 = DatabaseQuery(listName: "s2");
 
   @override
   void initState() {
@@ -43,40 +46,48 @@ class _ExploreState extends State<Explore> {
     if (!_getFoodCalled) {
       _dq.getFood(field: ['taste'], value: ['Sweet']).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
+      });
+      _dqtsp.getFood(field: ['cuisine'], value: ['indian']).then((future) {
+        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "tsp"));
+      });
+      _dqsituation0
+          .getFood(field: ['situation'], value: getValue("s0")).then((future) {
+        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s0"));
+      });
+      _dqsituation1
+          .getFood(field: ['situation'], value: getValue("s1")).then((future) {
+        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s1"));
+      });
+      _dqsituation2
+          .getFood(field: ['situation'],value: getValue("s2")).then((future) {
+        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s2"));
         setState(() {
           _getFoodCalled = true;
         });
       });
-      // _dqtsp.getFood(field: ['cuisine'], value: ['indian']).then((future) {
-      //   BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "tsp"));
-      // });
-      // _dqsweet.getFood(field: ['taste'], value: ['Sweet']).then((future) {
-      //   BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "sweet"));
-      // });
     }
-    // _scrollController1.addListener(() {
-    //   double _maxScroll = _scrollController1.position.maxScrollExtent;
-    //   double _currentScroll = _scrollController1.position.pixels;
-    //   double _delta = MediaQuery.of(context).size.height * .25;
-    //   if (_maxScroll - _currentScroll < _delta && loadingData1 == false) {
-    //     print("scrool");
-    //     loadingData1 = true;
-    //     _dq.getMoreFood(field: ['taste'], value: ['Sweet']).then((future) {
-    //       BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
-    //       setState(() {
-    //         loadingData1 = false;
-    //       });
-    //     });
-    //     print(loadingData1);
-    //   }
-    // });
+  }
+
+  List<String> getValue(String _list) {
+    switch (_list) {
+      case 's0':
+        return ["At Home"];
+        break;
+      case 's1':
+        return ["Romantic"];
+        break;
+      case 's2':
+        return ["Easy"];
+        break;
+      default:
+    }
   }
 
   bool _loadingData = false;
   @override
   Widget build(BuildContext context) {
     // DateTime now = DateTime.now();
-    // String day = DateFormat('MMMMEEEEd').format(now); 
+    // String day = DateFormat('MMMMEEEEd').format(now);
     return Container(
       child: SafeArea(
         child: new Stack(
@@ -87,28 +98,12 @@ class _ExploreState extends State<Explore> {
                 children: <Widget>[
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: <Widget>[
-                      //     Padding(
-                      //       padding: const EdgeInsets.only(left: 8.0),
-                      //       child: Text(
-                      //         'Hello Username,\n Hungry yet?',
-                      //         style: TextStyle(
-                      //           fontSize: 25,
-                      //           fontWeight: FontWeight.bold,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
+                    children: <Widget>[ 
                       SizedBox(
                         height: 20,
                       ),
                       Container(
-                        height: 375,
-                        // color: Colors.blue,
+                        height: 375, 
                         child: Row(
                           children: <Widget>[
                             RotatedBox(
@@ -150,24 +145,31 @@ class _ExploreState extends State<Explore> {
                                       Expanded(
                                         child: ListView.builder(
                                           scrollDirection: Axis.horizontal,
-                                          itemCount: foodList["0"].length + 1,
+                                          itemCount: foodList["tsp"].length + 1,
                                           itemBuilder:
                                               (BuildContext context, index) {
-                                            if (foodList["0"].length != index)
+                                            if (foodList["tsp"].length != index)
                                               return TodaySpecial(
-                                                image:
-                                                    foodList['0'][index].images,
-                                                title: foodList['0'][index]
+                                                image: foodList['tsp'][index]
+                                                    .images,
+                                                title: foodList['tsp'][index]
                                                     .foodName,
-                                                cuisine: foodList['0'][index]
+                                                cuisine: foodList['tsp'][index]
                                                     .cuisine,
-                                                preptime: foodList['0'][index].duration,
-                                                deter: foodList['0'][index]
+                                                preptime: foodList['tsp'][index]
+                                                    .duration,
+                                                deter: foodList['tsp'][index]
                                                     .foodDeter,
-                                                description: foodList['0'][index].description,
-                                                nutrient: foodList['0'][index].nutrients,
-                                                  preparation: foodList['0'][index].preperation,
-                                                taste: foodList['0'][index].taste,
+                                                description: foodList['tsp']
+                                                        [index]
+                                                    .description,
+                                                nutrient: foodList['tsp'][index]
+                                                    .nutrients,
+                                                preparation: foodList['tsp']
+                                                        [index]
+                                                    .preperation,
+                                                taste: foodList['tsp'][index]
+                                                    .taste,
                                               );
                                             else {
                                               return !_loadingData
@@ -211,10 +213,12 @@ class _ExploreState extends State<Explore> {
                                                           }),
                                                     )
                                                   : Center(
-                                                    child: SpinKitFadingCircle(
-                                                        color: Colors.blue[300],
-                                                        size: 30.0),
-                                                  );
+                                                      child:
+                                                          SpinKitFadingCircle(
+                                                              color: Colors
+                                                                  .blue[300],
+                                                              size: 30.0),
+                                                    );
                                             }
                                           },
                                         ),
@@ -513,7 +517,7 @@ class _ExploreState extends State<Explore> {
                             ),
                             GestureDetector(
                               child: EverySituation(
-                                title: 'Lazy Cook',
+                                title: 'Romantic',
                                 // isActive: true,
                                 index: indx,
                                 stIndex: 1,
@@ -527,7 +531,7 @@ class _ExploreState extends State<Explore> {
                             ),
                             GestureDetector(
                               child: EverySituation(
-                                title: 'Urgent',
+                                title: 'easy',
                                 // isActive: true,
                                 index: indx,
                                 stIndex: 2,
@@ -538,35 +542,7 @@ class _ExploreState extends State<Explore> {
                                   indx = 2;
                                 });
                               },
-                            ),
-                            GestureDetector(
-                              child: EverySituation(
-                                title: 'Party',
-                                // isActive: true,
-                                index: indx,
-                                stIndex: 3,
-                                press: () {},
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  indx = 3;
-                                });
-                              },
-                            ),
-                            GestureDetector(
-                              child: EverySituation(
-                                title: "I don't know",
-                                // isActive: true,
-                                index: indx,
-                                stIndex: 4,
-                                press: () {},
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  indx = 4;
-                                });
-                              },
-                            ),
+                            ), 
                           ],
                         ),
                       ),
@@ -592,23 +568,55 @@ class _ExploreState extends State<Explore> {
                                 Expanded(
                                   child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
-                                    itemCount: foodList["0"].length,
+                                    itemCount: foodList["s$indx"].length,
                                     itemBuilder: (BuildContext context, index) {
-                                      return FoodEverySituation(
-                                        image: 'assets/Coffee.jpg',
-                                        title: foodList['0'][index].foodName,
-                                        desc: foodList['0'][index].foodDeter,
-                                      );
-                                      // return Card(
-                                      //   margin: EdgeInsets.symmetric(
-                                      //       vertical: 5, horizontal: 10),
-                                      //   elevation: 2.0,
-                                      //   child: Padding(
-                                      //     padding: const EdgeInsets.all(8.0),
-                                      //     child: Text(
-                                      //         foodList['0'][index].description),
-                                      //   ),
-                                      // );
+                                      if (foodList["s$indx"].length != index)
+                                        return FoodEverySituation(
+                                          image: 'assets/Coffee.jpg',
+                                          title: foodList['s$indx'][index]
+                                              .foodName,
+                                          desc: foodList['s$indx'][index]
+                                              .foodDeter,
+                                        );
+                                      else {
+                                        return !_loadingData
+                                            ? Center(
+                                                child: IconButton(
+                                                    icon: Icon(
+                                                      Icons.arrow_forward_ios,
+                                                      size: 30,
+                                                      color: !_loadingData
+                                                          ? Colors.blue[300]
+                                                          : Colors.black,
+                                                    ),
+                                                    onPressed: () async {
+                                                      setState(() {
+                                                        _loadingData = true;
+                                                      });
+                                                      await _dq.getMoreFood(
+                                                          field: [
+                                                            'taste'
+                                                          ],
+                                                          value: [
+                                                            'Sweet'
+                                                          ]).then((future) {
+                                                        BlocProvider.of<
+                                                                    FoodBloc>(
+                                                                context)
+                                                            .add(FoodEvent.add(
+                                                                future, "0"));
+                                                        setState(() {
+                                                          _loadingData = false;
+                                                        });
+                                                      });
+                                                    }),
+                                              )
+                                            : Center(
+                                                child: SpinKitFadingCircle(
+                                                    color: Colors.blue[300],
+                                                    size: 30.0),
+                                              );
+                                      }
                                     },
                                   ),
                                 ),

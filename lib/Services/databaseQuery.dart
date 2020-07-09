@@ -12,7 +12,7 @@ class DatabaseQuery {
   DatabaseQuery({this.listName});
 
 
-  Future<List<FoodListModel>> getFood({List<String> field,List<dynamic> value}) async {
+  Future<List<FoodListModel>> getFood({List<String> field,List<dynamic> value,int limit=5}) async {
   
     List<String> _field = field;
     List<dynamic> _value = value; 
@@ -30,7 +30,7 @@ class DatabaseQuery {
       }
 
       _finalQuery = 
-          recQuery(_field, _value, _finalQuery).orderBy('description').limit(5);
+          recQuery(_field, _value, _finalQuery).orderBy('description').limit(limit);
 
       QuerySnapshot snapshot = await _finalQuery.getDocuments();
       List<FoodListModel> queryList =
