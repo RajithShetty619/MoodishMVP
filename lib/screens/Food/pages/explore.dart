@@ -65,7 +65,6 @@ class _ExploreState extends State<Explore> {
             check: check).then((future) {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t1"));
         });
-<<<<<<< HEAD
         // _dqtaste2.getFood(
         //     field: ['taste'],
         //     value: getValue("t2"),
@@ -73,15 +72,6 @@ class _ExploreState extends State<Explore> {
         //     check: check).then((future) {
         //   BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t2"));
         // });
-=======
-       /*  _dqtaste2.getFood(
-            field: ['taste'],
-            value: getValue("t2"),
-            limit: 7,
-            check: check).then((future) {
-          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t2"));
-        }); */
->>>>>>> 912def323b27d89d465056e5daeeffdd8894ace1
         _dqsituation0.getFood(
             field: ['situation'],
             value: getValue("s0"),
