@@ -18,8 +18,9 @@ class DatabaseQuery {
     List<dynamic> _value = value; 
     await Hive.openBox(listName);
     final _box = Hive.box(listName);
-    List<dynamic> _gfoodList =/*  await _box.get(listName) */ null ;
+    List<dynamic> _gfoodList = await _box.get(listName);
     print('getfood');
+    
     if (_gfoodList == null) {
       Query _finalQuery = _ref.where('description',isGreaterThan: '');
 

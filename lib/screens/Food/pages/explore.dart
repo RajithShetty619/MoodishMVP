@@ -34,8 +34,7 @@ class _ExploreState extends State<Explore> {
   bool loadingData1 = false;
   bool loadingData2 = false;
   DatabaseQuery _dq = DatabaseQuery(listName: "0");
-  DatabaseQuery _dqtsp = DatabaseQuery(listName: "tsp");
-  DatabaseQuery _dqsweet = DatabaseQuery(listName: "sweet");
+  DatabaseQuery _dqtsp = DatabaseQuery(listName: "tsp"); 
   DatabaseQuery _dqsituation0 = DatabaseQuery(listName: "s0");
   DatabaseQuery _dqsituation1 = DatabaseQuery(listName: "s1");
   DatabaseQuery _dqsituation2 = DatabaseQuery(listName: "s2");
