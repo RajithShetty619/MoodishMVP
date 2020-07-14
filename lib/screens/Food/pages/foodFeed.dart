@@ -73,7 +73,7 @@ class _FoodFeedState extends State<FoodFeed> {
                   Padding(
                     padding: const EdgeInsets.only(left: 7.0),
                     child: Container(
-                      width: 220.0,
+                      width: 270.0,
                       margin: EdgeInsets.all(10.0),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.black, width: 2),
@@ -91,14 +91,20 @@ class _FoodFeedState extends State<FoodFeed> {
                       ),
                     ),
                   ),
-                  Container(
-                    height: 30,
-                    width: 60,
-                    child: Text('Happy',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        )),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 30,
+                      width: 60,
+                      child: Center(
+                        child: Text(
+                          'Happy',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ),
+                    ),
                   ),
                   SizedBox(width: 5)
                 ],

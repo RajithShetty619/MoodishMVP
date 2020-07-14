@@ -333,16 +333,19 @@ class _Food_InfoState extends State<Food_Info> {
   Widget f_desc({title}) {
     return GestureDetector(
       onTap: () {}, //category
-      child: Container(
-        margin: EdgeInsets.all(10.0),
-        decoration: BoxDecoration(
-          color: Colors.grey[300],
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: Text(
-            title,
-            style: TextStyle(fontSize: 16.0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: Container(
+          margin: EdgeInsets.all(10.0),
+          decoration: BoxDecoration(
+            color: Colors.grey[300],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Text(
+              title,
+              style: TextStyle(fontSize: 16.0),
+            ),
           ),
         ),
       ),
