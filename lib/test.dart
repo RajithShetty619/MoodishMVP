@@ -9,6 +9,7 @@ import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart';
 import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'models/foodListModel.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Test extends StatefulWidget {
   @override
@@ -41,12 +42,29 @@ class FoodList extends StatefulWidget {
 }
 
 class _FoodListState extends State<FoodList> {
+  final ImagePicker _picker = ImagePicker();
+  Image _imageFile =
+      Image.network('https://www.shorturl.at/img/shorturl-square.png');
   bool loadingData = false;
   bool dataExists = true;
   // List<DocumentSnapshot> foodList = [];
   final CollectionReference _ref = Firestore.instance.collection('food');
   String _lastDocument;
   ScrollController _scrollController = ScrollController();
+
+  void _onImagePress() async {
+    try {
+      final pickedFile = await _picker.getImage(
+        source: ImageSource.gallery,
+      );
+      Image image = Image.memory(await pickedFile.readAsBytes());
+      setState(() {
+        _imageFile = image;
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
 
   getFood({String listName, List<String> field, List<dynamic> value}) async {
     setState(() {
@@ -55,9 +73,9 @@ class _FoodListState extends State<FoodList> {
 
     Query recQuery(List<dynamic> _field, List<dynamic> _value, Query q) {
       Query _query = q;
-      if (_field.isEmpty) {  
+      if (_field.isEmpty) {
         return _query;
-      } else { 
+      } else {
         _query =
             _query.where(_field.removeLast(), isEqualTo: _value.removeLast());
         return recQuery(_field, _value, _query);
@@ -66,16 +84,16 @@ class _FoodListState extends State<FoodList> {
 
     final _box = Hive.box('foodlist');
     List<dynamic> _gfoodList = /* await _box.get(listName) */ null;
-    if (_gfoodList == null) { 
+    if (_gfoodList == null) {
       Query _finalQuery = _ref.where('image', isGreaterThan: '');
       String _orderVal = field[0];
       if (value[value.length - 1].runtimeType != String) {
-        dynamic _v =value.removeLast();
+        dynamic _v = value.removeLast();
         print(_v);
-        _finalQuery =
-            _finalQuery.where(field.removeLast(), whereIn: _v);
+        _finalQuery = _finalQuery.where(field.removeLast(), whereIn: _v);
       }
-      _finalQuery = recQuery(field,value, _finalQuery).orderBy('image').limit(10);
+      _finalQuery =
+          recQuery(field, value, _finalQuery).orderBy('image').limit(10);
 
       QuerySnapshot snapshot = await _finalQuery.getDocuments();
       List<FoodListModel> queryList =
@@ -129,9 +147,11 @@ class _FoodListState extends State<FoodList> {
   void initState() {
     super.initState();
     getFood(listName: "0", field: [
-      'taste','cuisine' 
+      'taste',
+      'cuisine'
     ], value: [
-      'Sweet', ['indian','american']
+      'Sweet',
+      ['indian', 'american']
     ]);
 
     _scrollController.addListener(() {
@@ -147,7 +167,7 @@ class _FoodListState extends State<FoodList> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<FoodBloc, Map<String, List<FoodListModel>>>(
+    return /* BlocConsumer<FoodBloc, Map<String, List<FoodListModel>>>(
       buildWhen: (Map<String, List<FoodListModel>> previous,
           Map<String, List<FoodListModel>> current) {
         return true;
@@ -217,6 +237,24 @@ class _FoodListState extends State<FoodList> {
           SnackBar(content: Text('Added!')),
         );
       },
+    );
+  */
+        GestureDetector(
+      onTap: () {
+        // _onImagePress();
+      },
+      child: Container(
+        width: 100,
+        height: 100,
+        decoration: BoxDecoration(
+          color: Colors.grey,
+          shape: BoxShape.circle,
+          border: Border.all(
+            color: Colors.black,
+            width: 2.0,
+          ),
+        ),
+      ),
     );
   }
 }
