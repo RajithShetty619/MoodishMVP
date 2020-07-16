@@ -1,13 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:hive/hive.dart';
+import 'package:moodish_mvp/Services/databaseQuery.dart';
+import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/components/Every_Situation.dart';
 import 'package:moodish_mvp/screens/Food/components/foodMood.dart';
 import 'package:moodish_mvp/screens/Food/components/maFeed.dart';
+import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/all.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/foodft.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/polls.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/recipe.dart';
-import 'package:moodish_mvp/screens/Food/pages/explore.dart';
+import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart';
+
+import 'package:intl/intl.dart';
 
 class FoodFeed extends StatefulWidget {
   @override
@@ -15,288 +23,259 @@ class FoodFeed extends StatefulWidget {
 }
 
 class _FoodFeedState extends State<FoodFeed> {
-
-
+  bool _getFoodCalled = false;
+  bool _loadingData = false;
+  bool loadingData1 = false;
+  bool loadingData2 = false;
+  DatabaseQuery _dq = DatabaseQuery(listName: "0");
   int indx = 1;
+  @override
+  void initState() {
+    super.initState();
+    if (!_getFoodCalled) {
+      checkDate().then((check) {
+        _dq.getFood(field: ['taste'], value: ['Sweet'], limit: 10,check: check).then(
+            (future) {
+          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
+          setState(() {
+            _getFoodCalled = true;
+          });
+        });
+      });
+    }
+  }
+
+  Future<int> checkDate() async {
+    Box _box = await Hive.openBox("date");
+    String saveDate = await _box.get("date");
+    DateTime now = DateTime.now();
+    String date = DateFormat('EEE, M/d/y').format(now);
+    if (date == saveDate) {
+      return 1;
+    } else {
+      _box.put("date", date);
+      return 0;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ListView.builder(
-        itemCount: 10,
-        shrinkWrap: true,
-        scrollDirection: Axis.vertical,
-        itemBuilder: (context, index) {
-          return Stack(
-            children: <Widget>[
-              Column(
+    return Stack(
+        children: <Widget>[
+              SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  if(index==0)
-                  Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10.0),
-                              child: Container(
-                                width: 220.0,
-                                margin: EdgeInsets.all(10.0),
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.black, width: 2),
-                                  borderRadius: BorderRadius.circular(15),
-                                  // color: Colors.blue[200],
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: Text(
-                                    'Top 10 for Your Mood',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 20.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              height: 30,
-                              width: 60,
-                              child: Text('Happy',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                            ),
-                            SizedBox(width: 5)
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            height: 350,
-                            child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: 10,
-                                itemBuilder:
-                                    (BuildContext context, int index) {
-                                  return Mood_Food(
-                                      image: 'assets/Chocolate.jpg',
-                                      descrip1: 'food',
-                                      descrip2: 'desc');
-                                }),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10.0),
-                          child: Container(
-                            width: 120.0,
-                            margin: EdgeInsets.all(10.0),
-                            decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: Colors.black, width: 2),
-                              borderRadius: BorderRadius.circular(15),
-                              // color: Colors.blue[200],
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Text(
-                                'My Feed',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              GestureDetector(
-                                child: Feeed(
-                                  title: 'All',
-                                  // isActive: true,
-                                  index: indx,
-                                  stIndex: 0,
-                                  press: () {},
-                                ),
-                                onTap: () {
-                                  setState(() {
-                                    indx = 0;
-                                  });
-                                },
-                              ),
-                              GestureDetector(
-                                child: Feeed(
-                                  title: 'Recipe',
-                                  // isActive: true,
-                                  index: indx,
-                                  stIndex: 1,
-                                  press: () {},
-                                ),
-                                onTap: () {
-                                  setState(() {
-                                    indx = 1;
-                                  });
-                                },
-                              ),
-                              GestureDetector(
-                                child: Feeed(
-                                  title: 'Polls',
-                                  // isActive: true,
-                                  index: indx,
-                                  stIndex: 2,
-                                  press: () {},
-                                ),
-                                onTap: () {
-                                  setState(() {
-                                    indx = 2;
-                                  });
-                                },
-                              ),
-                              GestureDetector(
-                                child: Feeed(
-                                  title: 'Food For Thought',
-                                  // isActive: true,
-                                  index: indx,
-                                  stIndex: 3,
-                                  press: () {},
-                                ),
-                                onTap: () {
-                                  setState(() {
-                                    indx = 3;
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      ]),
-                  Column(
-                    children: <Widget>[
-                      if (indx == 0)
-                      Column(
-                        children: <Widget>[
-                          ListView.builder(
-                              itemCount: 8,
-                              shrinkWrap: true,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context , index){
-                                return Padding(
-                                  padding: const EdgeInsets.only(left: 10, right: 10.0),
-                                  child: GestureDetector(
-                                    onTap: () {},
-                                    child: Card(
-                                      shape:
-                                      RoundedRectangleBorder(borderRadius: BorderRadius.circular(35.0)),
-                                      child: Column(
-                                        children: <Widget>[
-                                          Container(
-                                            height: 300.0,
-                                            width: double.maxFinite,
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(30.0),
-                                              image: DecorationImage(
-                                                  image: AssetImage('assets/Salty.jpg'),
-                                                  fit: BoxFit.cover),
-                                            ),
-                                          ),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: <Widget>[
-                                              Column(
-                                                children: <Widget>[
-                                                  Padding(
-                                                    padding: const EdgeInsets.all(10.0),
-                                                    child: Container(
-                                                      alignment: Alignment.centerLeft,
-                                                      child: Text(
-                                                       'Chips n Salt',
-                                                        style: TextStyle(
-                                                            fontWeight: FontWeight.bold, fontSize: 22.0),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 5.0,
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets.only(left: 10.0),
-                                                    child: Container(
-                                                        alignment: Alignment.centerLeft,
-                                                        child: Text('Indian-Cheap-10 mins')),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 2.0,
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets.only(left: 10.0, top: 5.0),
-                                                    child: Container(
-                                                        alignment: Alignment.centerLeft,
-                                                        child: Text('Name')),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 20,
-                                                  ),
-                                                ],
-                                              ),
-                                              Align(
-                                                alignment: Alignment.centerRight,
-                                                child: FlatButton(
-                                                  onPressed: () {},
-                                                  child: ClipRRect(
-                                                    borderRadius: BorderRadius.circular(20),
-                                                    child: Container(
-                                                      margin: EdgeInsets.all(8.0),
-                                                      decoration: BoxDecoration(
-                                                        border: Border.all(color: Colors.black, width: 2),
-                                                        borderRadius: BorderRadius.circular(300),
-                                                      ),
-                                                      // color: Colors.blue[300],
-                                                      child: IconButton(
-                                                        icon: Icon(
-                                                          Icons.arrow_forward,
-                                                          color: Colors.black,
-                                                          size: 30,
-                                                        ),
-                                                        onPressed: () {},
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              }),
-                        ],
+                  Padding(
+                    padding: const EdgeInsets.only(left: 7.0),
+                    child: Container(
+                      width: 270.0,
+                      margin: EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black, width: 2),
+                        borderRadius: BorderRadius.circular(15),
+                        // color: Colors.blue[200],
                       ),
-                      
-                      if(indx == 1)
-                      Container(height: 430, child: RecipeTab()),
-
-                      if(indx == 2)
-                      Container(height: 300, child: PollTabs()),
-
-                      if(indx == 3)
-                      Container(height: 450, child: FoodftTab()),
-                    ],
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Text(
+                          'Top 10 for Your Mood',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 20.0, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 30,
+                      width: 60,
+                      child: Center(
+                        child: Text(
+                          'Happy',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 5)
                 ],
-              )
+            ),
+            Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                    height: 350,
+                    child: BlocConsumer<FoodBloc, Map<String, List<FoodListModel>>>(
+                      buildWhen: (Map<String, List<FoodListModel>> previous,
+                          Map<String, List<FoodListModel>> current) {
+                        return true;
+                      },
+                      listenWhen: (Map<String, List<FoodListModel>> previous,
+                          Map<String, List<FoodListModel>> current) {
+                        if (current.length > previous.length) {
+                          return true;
+                        }
+                        return false;
+                      },
+                      builder: (BuildContext context, foodList) {
+                        return Container(
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemCount: foodList["0"].length ,
+                            itemBuilder: (BuildContext context, index) { 
+                                return Mood_Food(
+                                  image: foodList['0'][index].images,
+                                  name: foodList["0"][index].foodName,
+                                  deter: foodList["0"][index].foodDeter,
+                                  cuisine: foodList['0'][index].cuisine,
+                                  preptime: foodList['0'][index].duration,
+                                  description: foodList['0'][index].description,
+                                  nutrient: foodList['0'][index].nutrients,
+                                  preparation: foodList['0'][index].preperation,
+                                  taste: foodList['0'][index].taste,
+                                  mealtype: foodList['0'][index].mealType,
+                                ); 
+                            },
+                          ),
+                        );
+                      },
+                      listener: (context, foodList) {
+                        Scaffold.of(context).showSnackBar(
+                          SnackBar(content: Text('Added!')),
+                        );
+                      },
+                    ),
+                  ),
+            ),
+            /*   Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: 350,
+                          child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 10,
+                              itemBuilder:
+                                  (BuildContext context, int index) {
+                                return Mood_Food(
+                                    image: 'assets/Chocolate.jpg',
+                                    descrip1: 'food',
+                                    descrip2: 'desc');
+                              }),
+                        ),
+                      ), */
+            Padding(
+                padding: const EdgeInsets.only(left: 10.0),
+                child: Container(
+                  width: 120.0,
+                  margin: EdgeInsets.all(10.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black, width: 2),
+                    borderRadius: BorderRadius.circular(15),
+                    // color: Colors.blue[200],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Text(
+                      'My Feed',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 20.0, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+            ),
+            SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    // GestureDetector(
+                    //   child: Feeed(
+                    //     title: 'All',
+                    //     // isActive: true,
+                    //     index: indx,
+                    //     stIndex: 0,
+                    //     press: () {},
+                    //   ),
+                    //   onTap: () {
+                    //     setState(() {
+                    //       indx = 0;
+                    //     });
+                    //   },
+                    // ),
+                    GestureDetector(
+                      child: Feeed(
+                        title: 'Recipe',
+                        // isActive: true,
+                        index: indx,
+                        stIndex: 1,
+                        press: () {},
+                      ),
+                      onTap: () {
+                        setState(() {
+                          indx = 1;
+                        });
+                      },
+                    ),
+                    GestureDetector(
+                      child: Feeed(
+                        title: 'Polls',
+                        // isActive: true,
+                        index: indx,
+                        stIndex: 2,
+                        press: () {},
+                      ),
+                      onTap: () {
+                        setState(() {
+                          indx = 2;
+                        });
+                      },
+                    ),
+                    GestureDetector(
+                      child: Feeed(
+                        title: 'Food For Thought',
+                        // isActive: true,
+                        index: indx,
+                        stIndex: 3,
+                        press: () {},
+                      ),
+                      onTap: () {
+                        setState(() {
+                          indx = 3;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+            ),
+      Column(
+        children: <Widget>[
+          // if (indx == 0)
+          // Expanded( child: AllTabs()),
+
+                  if (indx == 1)
+                    Container(height: 430, child: RecipeTab()),
+
+                  if (indx == 2)
+                    Container(height: 300, child: PollTabs()),
+
+                  if (indx == 3)
+                    Container(height: 450, child: FoodftTab()),
+                ],
+              ),
             ],
-          );
-        },
-      ),
+          ),
+              )
+        ],
     );
   }
 }
