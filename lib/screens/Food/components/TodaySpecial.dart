@@ -4,24 +4,42 @@ import 'package:moodish_mvp/Services/storage.dart';
 import 'package:moodish_mvp/screens/Food/components/shareDialog.dart';
 import 'package:moodish_mvp/screens/Food/components/stepSlider.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/food_info.dart';
+import 'package:moodish_mvp/test.dart';
 
 class TodaySpecial extends StatefulWidget {
   const TodaySpecial({
     Key key,
     @required this.image,
-    @required this.descrip1,
-    @required this.descrip2,
+    @required this.title,
+    @required this.cuisine,
+    @required this.preptime,
+    @required this.deter,
+    @required this.description,
+    @required this.nutrient,
+    @required this.preparation,
+    @required this.taste,
+    @required this.mealtype,
+
   }) : super(key: key);
 
   final image;
-  final descrip1;
-  final descrip2;
+  final title;
+  final cuisine;
+  final preptime;
+  final deter;
+  final description;
+  final nutrient;
+  final preparation;
+  final taste;
+  final mealtype;
 
   @override
   _TodaySpecialState createState() => _TodaySpecialState();
 }
 
 class _TodaySpecialState extends State<TodaySpecial> {
+  bool _like = true;
+
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
@@ -136,15 +154,25 @@ class _TodaySpecialState extends State<TodaySpecial> {
           placeholder: (context, url) => CircularProgressIndicator(),
           errorWidget: (context, url, error) => Icon(Icons.error),
         ),*/
-        
-           child: Container(
+
+        child: Stack(
+          children: <Widget>[
+            CachedNetworkImage(
+              imageUrl: widget.image,
+              imageBuilder: (context, imageProvider) {
+                return Container(
+                  margin: EdgeInsets.only(right: 20),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      image: DecorationImage(
+                        image: imageProvider,
+                        fit: BoxFit.cover,
+                      )),
+                );
+              },
+            ),
+            Container(
               margin: EdgeInsets.only(right: 20),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  image: DecorationImage(
-                    image: AssetImage(widget.image),
-                    fit: BoxFit.cover,
-                  )),
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
@@ -153,8 +181,8 @@ class _TodaySpecialState extends State<TodaySpecial> {
                       .1,
                       .5
                     ], colors: [
-                      Colors.black.withOpacity(.6),
-                      Colors.black.withOpacity(.3),
+                      Colors.black.withOpacity(.8),
+                      Colors.black.withOpacity(.2),
                     ])),
                 child: Padding(
                   padding: EdgeInsets.all(10.0),
@@ -165,13 +193,24 @@ class _TodaySpecialState extends State<TodaySpecial> {
                       Align(
                         alignment: Alignment.topRight,
                         child: IconButton(
-                          icon: Icon(
-                            Icons.favorite_border,
-                            color: Colors.white,
-                          ),
+                          icon: _like
+                              ? Icon(
+                                  Icons.favorite_border,
+                                  color: Colors.white,
+                                  size: 25,
+                                )
+                              : Icon(
+                                  Icons.favorite,
+                                  color: Colors.white,
+                                  size: 30,
+                                ),
                           onPressed: () async {
-                            final action = await Dialogs.yesAbortDialog(
-                                context, 'My title', 'My Body');
+                            if (_like != false)
+                              final action = await Dialogs.yesAbortDialog(
+                                  context, 'My title', 'My Body');
+                            setState(() {
+                              _like = !_like;
+                            });
                           },
                         ),
                       ),
@@ -181,7 +220,7 @@ class _TodaySpecialState extends State<TodaySpecial> {
                           Align(
                             alignment: Alignment.center,
                             child: Text(
-                              widget.descrip1,
+                              widget.title,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 30,
@@ -191,35 +230,83 @@ class _TodaySpecialState extends State<TodaySpecial> {
                           SizedBox(
                             height: 10,
                           ),
-                          Text(
-                            widget.descrip2,
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 18),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                widget.cuisine,
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 18),
+                              ),
+                              // Padding(
+                              //   padding: const EdgeInsets.all(3.0),
+                              //   child: Container(
+                              //     height: 5,
+                              //     width: 5,
+                              //     decoration: BoxDecoration(
+                              //       borderRadius: BorderRadius.circular(300),
+                              //       color: Colors.white,
+                              //     ),
+                              //   ),
+                              // ),
+                              // Text(
+                              //   widget.preptime,
+                              //   style:
+                              //       TextStyle(color: Colors.white, fontSize: 18),
+                              // ),
+                              Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: Container(
+                                  height: 5,
+                                  width: 5,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(300),
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                widget.deter,
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 18),
+                              ),
+                            ],
                           ),
                           SizedBox(height: 15),
-                           ClipRRect(
-              borderRadius: BorderRadius.circular(50),
-              child: Container(
-                height: 45,
-                child: RaisedButton(
-                  // color: Colors.blue[200],
-                  elevation: 20,
-                  
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Food_Info()));
-                  },
-                  child: Text(
-                    "Let's Go!",
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                ),
-              ),
-            )
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(50),
+                            child: Container(
+                              height: 45,
+                              child: RaisedButton(
+                                // color: Colors.blue[200],
+                                elevation: 20,
+
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Food_Info(
+                                            name: widget.title,
+                                            descbox: widget.description,
+                                            image: widget.image,
+                                            nutrient: widget.nutrient,
+                                            preparation: widget.preparation,
+                                            taste: widget.taste,
+                                            preptime: widget.preptime,
+                                            cuisine: widget.cuisine,
+                                            mealtype: widget.mealtype,
+                                            deter: widget.deter,
+                                          )));
+                                },
+                                child: Text(
+                                  "Let's Go!",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
                           // FlatButton(
                           //   onPressed: () {},
                           //   child: ClipRRect(
@@ -280,7 +367,9 @@ class _TodaySpecialState extends State<TodaySpecial> {
                 ),
               ),
             ),
-           
+          ],
+        ),
+
         //             },
         //             placeholder: (context, url) => CircularProgressIndicator(),
         //             errorWidget: (context, url, error) => Icon(Icons.error),

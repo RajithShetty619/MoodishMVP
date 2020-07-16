@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/screens/Food/foodInfo/food_info.dart';
 
 class RecipeTab extends StatefulWidget {
   @override
@@ -108,7 +109,12 @@ class getListview extends StatelessWidget {
                               color: Colors.black,
                               size: 30,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) => Food_Info()));
+                            },
                           ),
                         ),
                       ),

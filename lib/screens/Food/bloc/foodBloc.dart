@@ -5,7 +5,17 @@ import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 
 class FoodBloc extends Bloc<FoodEvent, Map<String, List<FoodListModel>>> {
   @override
-  Map<String, List<FoodListModel>> get initialState => {"0":[],"tsp":[]};
+  Map<String, List<FoodListModel>> get initialState => {
+        "0": [],
+        "tsp": [],
+        "t0": [],
+        "t1": [],
+        "t2": [],
+        "s0": [],
+        "s1": [],
+        "s2": [],
+        "t10M": []
+      };
 
   @override
   Stream<Map<String, List<FoodListModel>>> mapEventToState(
@@ -14,12 +24,11 @@ class FoodBloc extends Bloc<FoodEvent, Map<String, List<FoodListModel>>> {
       case EventType.add:
         Map<String, List<FoodListModel>> newstate = state;
         if (event.food != null) {
-          print("addinf"); 
+          print("addinf");
           newstate[event.listName].addAll(event.food);
-          
         }
         yield newstate;
-        break; 
+        break;
       default:
         throw Exception("event not found $event");
     }

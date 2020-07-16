@@ -7,6 +7,9 @@ class Detailed_Type extends StatefulWidget {
 }
 
 class _Detailed_TypeState extends State<Detailed_Type> {
+
+bool _like = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,12 +56,22 @@ class _Detailed_TypeState extends State<Detailed_Type> {
                       Align(
                         alignment: Alignment.topRight,
                         child: IconButton( 
-                            icon: Icon(
+                            icon: _like ? Icon(
                               Icons.favorite_border,
                               size: 40,
                               color: Colors.black,
+                            ):
+                            Icon(
+                              Icons.favorite,
+                              size: 40,
+                              color: Colors.black,
                             ),
-                            onPressed: () {}), 
+                            onPressed: () {
+                              setState(() {
+                                _like = !_like;
+                              });
+                            }
+                            ), 
                       ),
                     ],
                   ),

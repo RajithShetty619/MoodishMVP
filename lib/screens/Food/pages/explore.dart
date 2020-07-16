@@ -2,154 +2,170 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:hive/hive.dart'; 
+import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart';
 import 'package:moodish_mvp/screens/Food/components/Every_Situation.dart';
 import 'package:moodish_mvp/screens/Food/components/Every_Taste.dart';
-import 'package:moodish_mvp/screens/Food/components/Food_Situation.dart'; 
+import 'package:moodish_mvp/screens/Food/components/Food_Situation.dart';
 import 'package:moodish_mvp/screens/Food/components/Food_Taste.dart';
 import 'package:moodish_mvp/screens/Food/components/MealType.dart';
 import 'package:moodish_mvp/screens/Food/components/TodaySpecial.dart';
-import 'package:moodish_mvp/screens/Food/components/foodBG.dart'; 
+import 'package:moodish_mvp/screens/Food/components/foodBG.dart';
 import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 
-// import 'package:intl/intl.dart';
+import 'package:intl/intl.dart';
 
 class Explore extends StatefulWidget {
   @override
   _ExploreState createState() => _ExploreState();
-  Explore(key) : super(key: key);
 }
 
-class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
+class _ExploreState extends State<Explore> {
   bool keepAlive = false;
 
-  Future doAsyncStuff() async {
-    keepAlive = true;
-    updateKeepAlive();
-    // Keeping alive...
-
-    await Future.delayed(Duration(seconds: 10));
-
-    keepAlive = false;
-    updateKeepAlive();
-    // Can be disposed whenever now.
-  }
-
-  @override
-  bool get wantKeepAlive => keepAlive;
-
   int indx = 0;
+  int indxT = 0;
 
   int _selected = 1;
-
-  ScrollController _scrollController = ScrollController();
-  ScrollController _scrollController1 = ScrollController();
-  ScrollController _scrollController2 = ScrollController();
   bool _getFoodCalled = false;
   bool loadingData = false;
   bool loadingData1 = false;
   bool loadingData2 = false;
-  DatabaseQuery _dq = new DatabaseQuery(listName: "0",field: ['taste'],value: ['Sweet']);
+  DatabaseQuery _dq = DatabaseQuery(listName: "0");
+  DatabaseQuery _dqtsp = DatabaseQuery(listName: "tsp");
+  DatabaseQuery _dqsituation0 = DatabaseQuery(listName: "s0");
+  DatabaseQuery _dqsituation1 = DatabaseQuery(listName: "s1");
+  DatabaseQuery _dqsituation2 = DatabaseQuery(listName: "s2");
+  DatabaseQuery _dqtaste0 = DatabaseQuery(listName: "t0");
+  DatabaseQuery _dqtaste1 = DatabaseQuery(listName: "t1");
+  DatabaseQuery _dqtaste2 = DatabaseQuery(listName: "t2");
 
   @override
   void initState() {
     super.initState();
-    doAsyncStuff();
-    print("inti");
     if (!_getFoodCalled) {
-      _dq.getFood(context).then((future) {
-        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
-        setState(() {
-          _getFoodCalled = true;
+      checkDate().then((check) {
+        _dqtsp.getFood(
+            field: ['cuisine'], value: ['indian'], check: check).then((future) {
+          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "tsp"));
+        });
+        _dqtaste0.getFood(
+            field: ['taste'],
+            value: getValue("t0"),
+            limit: 7,
+            check: check).then((future) {
+          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t0"));
+        });
+        _dqtaste1.getFood(
+            field: ['taste'],
+            value: getValue("t1"),
+            limit: 7,
+            check: check).then((future) {
+          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t1"));
+        });
+       /*  _dqtaste2.getFood(
+            field: ['taste'],
+            value: getValue("t2"),
+            limit: 7,
+            check: check).then((future) {
+          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t2"));
+        }); */
+        _dqsituation0.getFood(
+            field: ['situation'],
+            value: getValue("s0"),
+            limit: 7,
+            check: check).then((future) {
+          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s0"));
+        });
+        _dqsituation1.getFood(
+            field: ['situation'],
+            value: getValue("s1"),
+            limit: 7,
+            check: check).then((future) {
+          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s1"));
+        });
+        _dqsituation2.getFood(
+            field: ['situation'],
+            value: getValue("s2"),
+            limit: 7,
+            check: check).then((future) {
+          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s2"));
         });
       });
+      setState(() {
+        _getFoodCalled = true;
+      });
     }
-    // _scrollController.addListener(() {
-    //   double _maxScroll = _scrollController.position.maxScrollExtent;
-    //   double _currentScroll = _scrollController.position.pixels;
-    //   double _delta = MediaQuery.of(context).size.height * .25;
-    //   if (_maxScroll - _currentScroll < _delta && loadingData == false) {
-    //     print("scrool");
-    //     loadingData = true;
-    //     _dq.getMoreFood(context).then((future) {
-    //       BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
-    //       setState(() {
-    //         loadingData = false;
-    //       });
-    //     });
-    //     print(loadingData);
-    //   }
-    // });
-    _scrollController1.addListener(() {
-      double _maxScroll = _scrollController1.position.maxScrollExtent;
-      double _currentScroll = _scrollController1.position.pixels;
-      double _delta = MediaQuery.of(context).size.height * .25;
-      if (_maxScroll - _currentScroll < _delta && loadingData1 == false) {
-        print("scrool");
-        loadingData1 = true;
-        _dq.getMoreFood(context).then((future) {
-          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
-          setState(() {
-            loadingData1 = false;
-          });
-        });
-        print(loadingData1);
-      }
-    });
-    // _scrollController2.addListener(() {
-    //   double _maxScroll = _scrollController2.position.maxScrollExtent;
-    //   double _currentScroll = _scrollController2.position.pixels;
-    //   double _delta = MediaQuery.of(context).size.height * .25;
-    //   if (_maxScroll - _currentScroll < _delta && loadingData2 == false) {
-    //     print("scrool");
-    //     loadingData2 = true;
-    //     _dq.getMoreFood(context).then((future) {
-    //       BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
-    //       setState(() {
-    //         loadingData2 = false;
-    //       });
-    //     });
-    //     print(loadingData2);
-    //   }
-    // });
   }
 
+  Future<int> checkDate() async {
+    Box _box = await Hive.openBox("date");
+    String saveDate = await _box.get("date");
+    DateTime now = DateTime.now();
+    String date = DateFormat('EEE, M/d/y').format(now);
+    if (date == saveDate) {
+      return 1;
+    } else {
+      _box.put("date", date);
+      return 0;
+    }
+  }
+
+  List<dynamic> getValue(String _list) {
+    switch (_list) {
+      case 't0':
+        return [
+          ["Savory"]
+        ];
+        break;
+      case 't1':
+        return [
+          ["Sweet"]
+        ];
+        break;
+      // case 't2':
+      //   return [["Salty"]];
+      //   break;
+      case 's0':
+        return [
+          ["At Home"]
+        ];
+        break;
+      case 's1':
+        return [
+          ["Romantic"]
+        ];
+        break;
+      case 's2':
+        return [
+          ["Easy"]
+        ];
+        break;
+      default:
+        return ["Savory"];
+    }
+  }
+
+  bool _loadingData = false;
   @override
   Widget build(BuildContext context) {
     // DateTime now = DateTime.now();
     // String day = DateFormat('MMMMEEEEd').format(now);
-    super.build(context);
     return Container(
       child: SafeArea(
         child: new Stack(
           children: <Widget>[
-            // CurvedShape(),
+            CurvedShape(),
             SingleChildScrollView(
               child: Column(
                 children: <Widget>[
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: <Widget>[
-                      //     Padding(
-                      //       padding: const EdgeInsets.only(left: 8.0),
-                      //       child: Text(
-                      //         'Hello Username,\n Hungry yet?',
-                      //         style: TextStyle(
-                      //           fontSize: 25,
-                      //           fontWeight: FontWeight.bold,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
                       SizedBox(
-                        height: 20,
+                        height: 15,
                       ),
                       Container(
                         height: 380,
@@ -179,8 +195,6 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                 buildWhen: (Map<String, List<FoodListModel>>
                                         previous,
                                     Map<String, List<FoodListModel>> current) {
-                                      final _box = Hive.box('foodlist');
-                                       _box.put( "0", current["0"] );
                                   return true;
                                 },
                                 listenWhen: (Map<String, List<FoodListModel>>
@@ -196,18 +210,84 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                                     children: <Widget>[
                                       Expanded(
                                         child: ListView.builder(
-                                          controller: _scrollController1,
                                           scrollDirection: Axis.horizontal,
-                                          itemCount: foodList["0"].length,
-                                          itemBuilder: (BuildContext context,
-                                               index) {
-                                            return TodaySpecial(
-                                              image: 'assets/img.jpg' ,
-                                              descrip1:
-                                                  foodList['0'][index].foodName,
-                                              descrip2:
-                                                  foodList['0'][index].cuisine,
-                                            );
+                                          itemCount: foodList["tsp"].length + 1,
+                                          itemBuilder:
+                                              (BuildContext context, index) {
+                                            if (foodList["tsp"].length != index)
+                                              return TodaySpecial(
+                                                image: foodList['tsp'][index]
+                                                    .images,
+                                                title: foodList['tsp'][index]
+                                                    .foodName,
+                                                cuisine: foodList['tsp'][index]
+                                                    .cuisine,
+                                                preptime: foodList['tsp'][index]
+                                                    .duration,
+                                                deter: foodList['tsp'][index]
+                                                    .foodDeter,
+                                                description: foodList['tsp']
+                                                        [index]
+                                                    .description,
+                                                nutrient: foodList['tsp'][index]
+                                                    .nutrients,
+                                                preparation: foodList['tsp']
+                                                        [index]
+                                                    .preperation,
+                                                taste: foodList['tsp'][index]
+                                                    .taste,
+                                                mealtype: foodList['tsp'][index]
+                                                    .mealType,
+                                              );
+                                            else {
+                                              return !_loadingData
+                                                  ? Center(
+                                                      child: IconButton(
+                                                          icon: Icon(
+                                                            Icons
+                                                                .arrow_forward_ios,
+                                                            size: 30,
+                                                            color: !_loadingData
+                                                                ? Colors
+                                                                    .blue[300]
+                                                                : Colors.black,
+                                                          ),
+                                                          onPressed: () async {
+                                                            setState(() {
+                                                              _loadingData =
+                                                                  true;
+                                                            });
+                                                            await _dqtsp
+                                                                .getMoreFood(
+                                                                    field: [
+                                                                  'taste'
+                                                                ],
+                                                                    value: [
+                                                                  'Sweet'
+                                                                ]).then(
+                                                                    (future) {
+                                                              BlocProvider.of<
+                                                                          FoodBloc>(
+                                                                      context)
+                                                                  .add(FoodEvent
+                                                                      .add(
+                                                                          future,
+                                                                          "tsp"));
+                                                              setState(() {
+                                                                _loadingData =
+                                                                    false;
+                                                              });
+                                                            });
+                                                          }),
+                                                    )
+                                                  : Center(
+                                                      child:
+                                                          SpinKitFadingCircle(
+                                                              color: Colors
+                                                                  .blue[300],
+                                                              size: 30.0),
+                                                    );
+                                            }
                                           },
                                         ),
                                       ),
@@ -234,7 +314,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                           ],
                         ),
                       ),
-                      SizedBox(height: 20),
+                      /*  SizedBox(height: 20),
                       Padding(
                         padding: const EdgeInsets.only(left: 10.0),
                         child: Container(
@@ -263,71 +343,14 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                         child: ListView(
                           scrollDirection: Axis.horizontal,
                           children: <Widget>[
-                            MealType(
-                                image: 'assets/img.jpg', types: 'breakfast'),
+                            MealType(image: 'assets/img.jpg', types: 'breakfast'),
                             MealType(image: 'assets/img.jpg', types: 'lunch'),
                             MealType(image: 'assets/img.jpg', types: 'snacks'),
                             MealType(image: 'assets/img.jpg', types: 'dinner'),
                           ],
                         ),
-                        // child: BlocConsumer<FoodBloc,Map<String, List<FoodListModel>>>(
-                        //   buildWhen: (Map<String, List<FoodListModel>> previous,
-                        //       Map<String, List<FoodListModel>> current) {
-                        //     return true;
-                        //   },
-                        //   listenWhen: (Map<String, List<FoodListModel>> previous,
-                        //       Map<String, List<FoodListModel>> current) {
-                        //     if (current.length > previous.length) {
-                        //       return true;
-                        //     }
-                        //     return false;
-                        //   },
-                        //   builder: (BuildContext context, foodList) {
-                        //     return Row(
-                        //       children: <Widget>[
-                        //         Expanded(
-                        //           child: ListView.builder(
-                        //             controller: _scrollController2,
-                        //             scrollDirection: Axis.horizontal,
-                        //             itemCount: foodList["0"].length,
-                        //             itemBuilder: (BuildContext context,int index) {
-                        //               return General(
-                        //                 image: 'assets/img1.jpg',
-                        //                 title: foodList['0'][index].foodName,
-                        //                 desc: foodList['0'][index].cuisine
-                        //               );
-                        //             },
-                        //           ),
-                        //         ),
-                        //         if (loadingData2)
-                        //           Container(
-                        //             color: Colors.brown[100],
-                        //             child: Center(
-                        //               child: SpinKitChasingDots(
-                        //                 color: Colors.brown,
-                        //                 size: 50.0,
-                        //               ),
-                        //             ),
-                        //           )
-                        //       ],
-                        //     );
-                        //   },
-                        //   listener: (context, foodList) {
-                        //     Scaffold.of(context).showSnackBar(
-                        //       SnackBar(content: Text('Added!')),
-                        //     );
-                        //   },
-                        // ),
-                        // ListView.builder(
-                        //     scrollDirection: Axis.horizontal,
-                        //     itemCount: 5,
-                        //     itemBuilder: (BuildContext context, int index) {
-                        //       return General(
-                        //         image: 'assets/img1.jpg', title: 'food', desc: 'description'
-                        //       );
-                        //     }),
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: 20), */
                       Padding(
                         padding: const EdgeInsets.only(left: 10.0),
                         child: Container(
@@ -355,75 +378,47 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             GestureDetector(
-                                  child: EveryTaste(
-                                    title: "bitter",
-                                    // isActive: true,
-                                    index: indx,
-                                    stIndex: 0,
-                                    press: () {},
-                                  ),
-                                  onTap: () {
-                                    setState(() {
-                                      indx = 0;
-                                    });
-                                  },
-                                ),
-                             GestureDetector(
-                                  child: EveryTaste(
-                                    title: "sweet",
-                                    // isActive: true,
-                                    index: indx,
-                                    stIndex: 1,
-                                    press: () {},
-                                  ),
-                                  onTap: () {
-                                    setState(() {
-                                      indx = 1;
-                                    });
-                                  },
-                                ),
-                                GestureDetector(
-                                  child: EveryTaste(
-                                    title: "salty",
-                                    // isActive: true,
-                                    index: indx,
-                                    stIndex: 2,
-                                    press: () {},
-                                  ),
-                                  onTap: () {
-                                    setState(() {
-                                      indx = 2;
-                                    });
-                                  },
-                                ),
-                                GestureDetector(
-                                  child: EveryTaste(
-                                    title: "sour",
-                                    // isActive: true,
-                                    index: indx,
-                                    stIndex: 3,
-                                    press: () {},
-                                  ),
-                                  onTap: () {
-                                    setState(() {
-                                      indx = 3;
-                                    });
-                                  },
-                                ),
-                                GestureDetector(
-                                  child: EveryTaste(
-                                    title: "umami",
-                                    // isActive: true,
-                                    index: indx,
-                                    stIndex: 4,
-                                    press: () {},
-                                  ),
-                                  onTap: () {
-                                    setState(() {
-                                      indx = 4;
-                                    });
-                                  },
-                                ),
+                              child: EveryTaste(
+                                title: "Savoury",
+                                // isActive: true,
+                                index: indxT,
+                                stIndex: 0,
+                                press: () {},
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  indxT = 0;
+                                });
+                              },
+                            ),
+                            GestureDetector(
+                              child: EveryTaste(
+                                title: "Sweet",
+                                // isActive: true,
+                                index: indxT,
+                                stIndex: 1,
+                                press: () {},
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  indxT = 1;
+                                });
+                              },
+                            ),
+                            /* GestureDetector(
+                              child: EveryTaste(
+                                title: "Salty",
+                                // isActive: true,
+                                index: indxT,
+                                stIndex: 2,
+                                press: () {},
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  indxT = 2;
+                                });
+                              },
+                            ), */
                           ],
                         ),
                       ),
@@ -431,15 +426,45 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                       Container(
                         // color: Colors.grey[300],
                         height: 300,
-                        child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 5,
-                            itemBuilder: (BuildContext context, index) {
-                              return FoodEveryTaste(
-                                  image: 'assets/img.jpg',
-                                  title: 'food1',
-                                  desc: 'description');
-                            }),
+                        child: BlocConsumer<FoodBloc,
+                            Map<String, List<FoodListModel>>>(
+                          buildWhen: (Map<String, List<FoodListModel>> previous,
+                              Map<String, List<FoodListModel>> current) {
+                            return true;
+                          },
+                          listenWhen:
+                              (Map<String, List<FoodListModel>> previous,
+                                  Map<String, List<FoodListModel>> current) {
+                            if (current.length > previous.length) {
+                              return true;
+                            }
+                            return false;
+                          },
+                          builder: (BuildContext context, foodList) {
+                            return Row(
+                              children: <Widget>[
+                                DataListView(foodList: foodList['t$indxT']),
+                              ],
+                            );
+                          },
+                          listener: (context, foodList) {
+                            Scaffold.of(context).showSnackBar(
+                              SnackBar(content: Text('Added!')),
+                            );
+                          },
+                          // child: ListView.builder(
+                          //   scrollDirection: Axis.horizontal,
+                          //   itemCount: 5,
+                          //   itemBuilder: (BuildContext context,int index) {
+                          //     return FoodEverySituation(
+                          //       image: 'assets/img.jpg',
+                          //       title: 'food1',
+                          //       desc: 'description'
+                          //     );
+                          //   }
+                          // ),
+                        ),
+
                         // child: ListView(
                         //   scrollDirection: Axis.horizontal,
                         //   children: <Widget>[
@@ -466,7 +491,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                       Padding(
                         padding: const EdgeInsets.only(left: 10.0),
                         child: Container(
-                          width: 250.0,
+                          width: 270.0,
                           margin: EdgeInsets.all(10.0),
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.black, width: 2),
@@ -489,80 +514,52 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                           GestureDetector(
-                                  child: EverySituation(
-                                    title: 'Happy',
-                                    // isActive: true,
-                                    index: indx,
-                                    stIndex: 0,
-                                    press: () {},
-                                  ),
-                                  onTap: () {
-                                    setState(() {
-                                      indx = 0;
-                                    });
-                                  },
-                                ),
-                                GestureDetector(
-                                  child: EverySituation(
-                                    title: 'sad',
-                                    // isActive: true,
-                                    index: indx,
-                                    stIndex: 1,
-                                    press: () {},
-                                  ),
-                                  onTap: () {
-                                    setState(() {
-                                      indx = 1;
-                                    });
-                                  },
-                                ),
-                                GestureDetector(
-                                  child: EverySituation(
-                                    title: 'Happy',
-                                    // isActive: true,
-                                    index: indx,
-                                    stIndex: 2,
-                                    press: () {},
-                                  ),
-                                  onTap: () {
-                                    setState(() {
-                                      indx = 2;
-                                    });
-                                  },
-                                ),
-                                GestureDetector(
-                                  child: EverySituation(
-                                    title: 'Happy',
-                                    // isActive: true,
-                                    index: indx,
-                                    stIndex: 3,
-                                    press: () {},
-                                  ),
-                                  onTap: () {
-                                    setState(() {
-                                      indx = 3;
-                                    });
-                                  },
-                                ),
-                                GestureDetector(
-                                  child: EverySituation(
-                                    title: 'Happy',
-                                    // isActive: true,
-                                    index: indx,
-                                    stIndex: 4,
-                                    press: () {},
-                                  ),
-                                  onTap: () {
-                                    setState(() {
-                                      indx = 4;
-                                    });
-                                  },
-                                ),
+                            GestureDetector(
+                              child: EverySituation(
+                                title: 'At Home',
+                                // isActive: true,
+                                index: indx,
+                                stIndex: 0,
+                                press: () {},
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  indx = 0;
+                                });
+                              },
+                            ),
+                            GestureDetector(
+                              child: EverySituation(
+                                title: 'Romantic',
+                                // isActive: true,
+                                index: indx,
+                                stIndex: 1,
+                                press: () {},
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  indx = 1;
+                                });
+                              },
+                            ),
+                            GestureDetector(
+                              child: EverySituation(
+                                title: 'Easy',
+                                // isActive: true,
+                                index: indx,
+                                stIndex: 2,
+                                press: () {},
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  indx = 2;
+                                });
+                              },
+                            ),
                           ],
                         ),
                       ),
-                       Container(
+                      Container(
                         height: 300,
                         child: BlocConsumer<FoodBloc,
                             Map<String, List<FoodListModel>>>(
@@ -581,41 +578,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                           builder: (BuildContext context, foodList) {
                             return Row(
                               children: <Widget>[
-                                Expanded(
-                                  child: ListView.builder(
-                                    controller: _scrollController,
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: foodList["0"].length,
-                                    itemBuilder:
-                                        (BuildContext context,  index) {
-                                      return FoodEverySituation(
-                                        image: 'assets/Coffee.jpg',
-                                        title: foodList['0'][index].foodName,
-                                        desc: foodList['0'][index].foodDeter,
-                                      );
-                                      // return Card(
-                                      //   margin: EdgeInsets.symmetric(
-                                      //       vertical: 5, horizontal: 10),
-                                      //   elevation: 2.0,
-                                      //   child: Padding(
-                                      //     padding: const EdgeInsets.all(8.0),
-                                      //     child: Text(
-                                      //         foodList['0'][index].description),
-                                      //   ),
-                                      // );
-                                    },
-                                  ),
-                                ),
-                                if (loadingData)
-                                  Container(
-                                    color: Colors.brown[100],
-                                    child: Center(
-                                      child: SpinKitChasingDots(
-                                        color: Colors.brown,
-                                        size: 50.0,
-                                      ),
-                                    ),
-                                  )
+                                DataListView(foodList: foodList['s$indx']),
                               ],
                             );
                           },
@@ -657,7 +620,7 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                         //         desc: 'description'),
                         //   ],
                         // ),
-                      ), 
+                      ),
                     ],
                   ),
                 ],
@@ -699,6 +662,40 @@ class _ExploreState extends State<Explore> with AutomaticKeepAliveClientMixin {
                 : Container(),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class DataListView extends StatelessWidget {
+  const DataListView({
+    Key key,
+    @required this.foodList,
+  }) : super(key: key);
+
+  final List<FoodListModel> foodList;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: foodList.length,
+        itemBuilder: (BuildContext context, index) {
+          print(foodList[index].foodName);
+          return FoodEveryTaste(
+            image: foodList[index].images,
+            title: foodList[index].foodName,
+            desc: foodList[index].description,
+            cuisine: foodList[index].cuisine,
+            preptime: foodList[index].duration,
+            deter: foodList[index].foodDeter,
+            nutrient: foodList[index].nutrients,
+            preparation: foodList[index].preperation,
+            taste: foodList[index].taste,
+            mealtype: foodList[index].mealType,
+          );
+        },
       ),
     );
   }

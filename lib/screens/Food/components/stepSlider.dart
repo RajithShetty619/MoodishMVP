@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
+import 'package:moodish_mvp/screens/Food/foodInfo/foodrecipe.dart';
 import 'package:moodish_mvp/screens/Food/pages/explore.dart';
 
 class IntroScreen extends StatefulWidget {
@@ -201,10 +202,8 @@ class IntroScreenState extends State<IntroScreen> {
   void onDonePress() {
     // Do what you want
      Navigator.pop( 
-        context,
-        MaterialPageRoute(
-          builder: (context) => (Explore(_key)),
-        )); 
+        context
+        ); 
   }
 
   Widget renderNextBtn() {
