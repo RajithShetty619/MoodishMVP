@@ -60,148 +60,148 @@ class _RestaurantState extends State<Restaurant> {
             children: <Widget>[
               if (index == 0)
                 Column(children: <Widget>[
-                  RichText(
-                    text: TextSpan(
-                        text: 'Restaurants',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 60,
-                            color: Colors.black
-                        ),
-                        children: [
-                          TextSpan(
-                              text: '.',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 100,
-                                  color: Colors.pinkAccent
-                              )
-                          )
-                        ]
-                    ),
-                  ),
-                  SizedBox(height: 10.0,),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: <Widget>[
-                        Column(
-                          children: <Widget>[
-                            Container(
-                              height: 80,
-                              width: 80,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  image: AssetImage('assets/Spicy.jpg'),
-                                    fit: BoxFit.cover,
-                                ),
-                                border: Border.all(color: Colors.pinkAccent,width: 2.0)
-                              ),
-                            ),
-                            SizedBox(height: 5.0,),
-                            Text('Spicy',
-                            style: TextStyle(
-//                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.bold
-                            ),)
-                          ],
-                        ),
-                        SizedBox(width: 10.0,),
-                        Column(
-                          children: <Widget>[
-                            Container(
-                              height: 80,
-                              width: 80,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                    image: AssetImage('assets/Italian.jpg'),
-                                    fit: BoxFit.cover,
-                                  ),
-                                  border: Border.all(color: Colors.pinkAccent,width: 2.0)
-                              ),
-                            ),
-                            SizedBox(height: 5.0,),
-                            Text('Italian',
-                              style: TextStyle(
-//                              fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.bold
-                              ),)
-                          ],
-                        ),
-                        SizedBox(width: 10.0,),
-                        Column(
-                          children: <Widget>[
-                            Container(
-                              height: 80,
-                              width: 80,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                    image: AssetImage('assets/Coffee.jpg'),
-                                    fit: BoxFit.cover,
-                                  ),
-                                  border: Border.all(color: Colors.pinkAccent,width: 2.0)
-                              ),
-                            ),
-                            SizedBox(height: 5.0,),
-                            Text('Aromatic',
-                              style: TextStyle(
-//                              fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.bold
-                              ),)
-                          ],
-                        ),
-                        SizedBox(width: 10.0,),
-                        Column(
-                          children: <Widget>[
-                            Container(
-                              height: 80,
-                              width: 80,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                    image: AssetImage('assets/Beverage.jpg'),
-                                    fit: BoxFit.cover,
-                                  ),
-                                  border: Border.all(color: Colors.pinkAccent,width: 2.0)
-                              ),
-                            ),
-                            SizedBox(height: 5.0,),
-                            Text('Beverages',
-                              style: TextStyle(
-//                              fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.bold
-                              ),)
-                          ],
-                        ),
-                        SizedBox(width: 10.0,),
-                        Column(
-                          children: <Widget>[
-                            Container(
-                              height: 80,
-                              width: 80,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                    image: AssetImage('assets/Chocolate.jpg'),
-                                    fit: BoxFit.cover,
-                                  ),
-                                  border: Border.all(color: Colors.pinkAccent,width: 2.0)
-                              ),
-                            ),
-                            SizedBox(height: 5.0,),
-                            Text('Chocolate',
-                              style: TextStyle(
-//                              fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.bold
-                              ),)
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+//                  RichText(
+//                    text: TextSpan(
+//                        text: 'Restaurants',
+//                        style: TextStyle(
+//                            fontWeight: FontWeight.bold,
+//                            fontSize: 60,
+//                            color: Colors.black
+//                        ),
+//                        children: [
+//                          TextSpan(
+//                              text: '.',
+//                              style: TextStyle(
+//                                  fontWeight: FontWeight.w500,
+//                                  fontSize: 100,
+//                                  color: Colors.pinkAccent
+//                              )
+//                          )
+//                        ]
+//                    ),
+//                  ),
+//                  SizedBox(height: 10.0,),
+//                  SingleChildScrollView(
+//                    scrollDirection: Axis.horizontal,
+//                    child: Row(
+//                      children: <Widget>[
+//                        Column(
+//                          children: <Widget>[
+//                            Container(
+//                              height: 80,
+//                              width: 80,
+//                              decoration: BoxDecoration(
+//                                shape: BoxShape.circle,
+//                                image: DecorationImage(
+//                                  image: AssetImage('assets/Spicy.jpg'),
+//                                    fit: BoxFit.cover,
+//                                ),
+//                                border: Border.all(color: Colors.pinkAccent,width: 2.0)
+//                              ),
+//                            ),
+//                            SizedBox(height: 5.0,),
+//                            Text('Spicy',
+//                            style: TextStyle(
+////                              fontStyle: FontStyle.italic,
+//                              fontWeight: FontWeight.bold
+//                            ),)
+//                          ],
+//                        ),
+//                        SizedBox(width: 10.0,),
+//                        Column(
+//                          children: <Widget>[
+//                            Container(
+//                              height: 80,
+//                              width: 80,
+//                              decoration: BoxDecoration(
+//                                  shape: BoxShape.circle,
+//                                  image: DecorationImage(
+//                                    image: AssetImage('assets/Italian.jpg'),
+//                                    fit: BoxFit.cover,
+//                                  ),
+//                                  border: Border.all(color: Colors.pinkAccent,width: 2.0)
+//                              ),
+//                            ),
+//                            SizedBox(height: 5.0,),
+//                            Text('Italian',
+//                              style: TextStyle(
+////                              fontStyle: FontStyle.italic,
+//                                  fontWeight: FontWeight.bold
+//                              ),)
+//                          ],
+//                        ),
+//                        SizedBox(width: 10.0,),
+//                        Column(
+//                          children: <Widget>[
+//                            Container(
+//                              height: 80,
+//                              width: 80,
+//                              decoration: BoxDecoration(
+//                                  shape: BoxShape.circle,
+//                                  image: DecorationImage(
+//                                    image: AssetImage('assets/Coffee.jpg'),
+//                                    fit: BoxFit.cover,
+//                                  ),
+//                                  border: Border.all(color: Colors.pinkAccent,width: 2.0)
+//                              ),
+//                            ),
+//                            SizedBox(height: 5.0,),
+//                            Text('Aromatic',
+//                              style: TextStyle(
+////                              fontStyle: FontStyle.italic,
+//                                  fontWeight: FontWeight.bold
+//                              ),)
+//                          ],
+//                        ),
+//                        SizedBox(width: 10.0,),
+//                        Column(
+//                          children: <Widget>[
+//                            Container(
+//                              height: 80,
+//                              width: 80,
+//                              decoration: BoxDecoration(
+//                                  shape: BoxShape.circle,
+//                                  image: DecorationImage(
+//                                    image: AssetImage('assets/Beverage.jpg'),
+//                                    fit: BoxFit.cover,
+//                                  ),
+//                                  border: Border.all(color: Colors.pinkAccent,width: 2.0)
+//                              ),
+//                            ),
+//                            SizedBox(height: 5.0,),
+//                            Text('Beverages',
+//                              style: TextStyle(
+////                              fontStyle: FontStyle.italic,
+//                                  fontWeight: FontWeight.bold
+//                              ),)
+//                          ],
+//                        ),
+//                        SizedBox(width: 10.0,),
+//                        Column(
+//                          children: <Widget>[
+//                            Container(
+//                              height: 80,
+//                              width: 80,
+//                              decoration: BoxDecoration(
+//                                  shape: BoxShape.circle,
+//                                  image: DecorationImage(
+//                                    image: AssetImage('assets/Chocolate.jpg'),
+//                                    fit: BoxFit.cover,
+//                                  ),
+//                                  border: Border.all(color: Colors.pinkAccent,width: 2.0)
+//                              ),
+//                            ),
+//                            SizedBox(height: 5.0,),
+//                            Text('Chocolate',
+//                              style: TextStyle(
+////                              fontStyle: FontStyle.italic,
+//                                  fontWeight: FontWeight.bold
+//                              ),)
+//                          ],
+//                        ),
+//                      ],
+//                    ),
+//                  ),
                   SizedBox(height: 15.0,),
                   Padding(
                     padding: const EdgeInsets.all(10.0),
@@ -526,24 +526,21 @@ class _RestaurantState extends State<Restaurant> {
                   ),
                   Container(
                     alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        width: 175.0,
-                        margin: EdgeInsets.all(10.0),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-//                          color: Colors.blue[200],
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Text(
-                            'Top Restaurants -',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold),
-                          ),
+                    child: Container(
+//                        width: 175.0,
+//                        margin: EdgeInsets.all(10.0),
+//                        decoration: BoxDecoration(
+//                          border: Border.all(color: Colors.black),
+////                          color: Colors.blue[200],
+//                        ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Text(
+                          'Top Restaurants :',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
@@ -559,7 +556,6 @@ class _RestaurantState extends State<Restaurant> {
                           }));
                     },
                     child: Card(
-                      color: Colors.grey[200],
                       elevation: 1.0,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0)

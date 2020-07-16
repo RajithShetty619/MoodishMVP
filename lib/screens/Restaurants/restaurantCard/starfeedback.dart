@@ -81,7 +81,7 @@ class _StarFeedbackState extends State<StarFeedback> {
                             child: RaisedButton(
                               shape: RoundedRectangleBorder(
                                   borderRadius: new BorderRadius.circular(30.0)),
-                              color: Color(0xffed1e79),
+                              color: Colors.deepOrange,
                               child: Text(
                                 'Submit',
                                 style: TextStyle(color: Color(0xffffffff)),

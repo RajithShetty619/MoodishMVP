@@ -180,7 +180,106 @@ class _FoodFeedState extends State<FoodFeed> {
                   Column(
                     children: <Widget>[
                       if (indx == 0)
-                      Expanded( child: AllTabs()),
+                      Column(
+                        children: <Widget>[
+                          ListView.builder(
+                              itemCount: 8,
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context , index){
+                                return Padding(
+                                  padding: const EdgeInsets.only(left: 10, right: 10.0),
+                                  child: GestureDetector(
+                                    onTap: () {},
+                                    child: Card(
+                                      shape:
+                                      RoundedRectangleBorder(borderRadius: BorderRadius.circular(35.0)),
+                                      child: Column(
+                                        children: <Widget>[
+                                          Container(
+                                            height: 300.0,
+                                            width: double.maxFinite,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(30.0),
+                                              image: DecorationImage(
+                                                  image: AssetImage('assets/Salty.jpg'),
+                                                  fit: BoxFit.cover),
+                                            ),
+                                          ),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: <Widget>[
+                                              Column(
+                                                children: <Widget>[
+                                                  Padding(
+                                                    padding: const EdgeInsets.all(10.0),
+                                                    child: Container(
+                                                      alignment: Alignment.centerLeft,
+                                                      child: Text(
+                                                       'Chips n Salt',
+                                                        style: TextStyle(
+                                                            fontWeight: FontWeight.bold, fontSize: 22.0),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 5.0,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets.only(left: 10.0),
+                                                    child: Container(
+                                                        alignment: Alignment.centerLeft,
+                                                        child: Text('Indian-Cheap-10 mins')),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 2.0,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets.only(left: 10.0, top: 5.0),
+                                                    child: Container(
+                                                        alignment: Alignment.centerLeft,
+                                                        child: Text('Name')),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 20,
+                                                  ),
+                                                ],
+                                              ),
+                                              Align(
+                                                alignment: Alignment.centerRight,
+                                                child: FlatButton(
+                                                  onPressed: () {},
+                                                  child: ClipRRect(
+                                                    borderRadius: BorderRadius.circular(20),
+                                                    child: Container(
+                                                      margin: EdgeInsets.all(8.0),
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(color: Colors.black, width: 2),
+                                                        borderRadius: BorderRadius.circular(300),
+                                                      ),
+                                                      // color: Colors.blue[300],
+                                                      child: IconButton(
+                                                        icon: Icon(
+                                                          Icons.arrow_forward,
+                                                          color: Colors.black,
+                                                          size: 30,
+                                                        ),
+                                                        onPressed: () {},
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }),
+                        ],
+                      ),
                       
                       if(indx == 1)
                       Container(height: 430, child: RecipeTab()),
