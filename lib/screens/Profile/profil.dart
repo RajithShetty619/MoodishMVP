@@ -8,12 +8,12 @@ import 'package:provider/provider.dart';
 import '../../Services/authenticate.dart';
 import 'Edit.dart';
 
-class profile extends StatefulWidget {
+class Profile extends StatefulWidget {
   @override
-  _profileState createState() => _profileState();
+  _ProfileState createState() => _ProfileState();
 }
 
-class _profileState extends State<profile> {
+class _ProfileState extends State<Profile> {
   List<String> userData = ['name', 'email'];
   @override
   void initState() {
@@ -290,10 +290,11 @@ class _profileState extends State<profile> {
                             constraints: BoxConstraints(
                                 minHeight: 50, maxWidth: double.infinity),
                             child: Text(
-                              "Logout",
+                              'Logout',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white),
+                                  color: Colors.white,
+                                ),
                               textAlign: TextAlign.left,
                             ),
                           ),

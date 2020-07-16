@@ -3,20 +3,18 @@ import 'package:flutter/material.dart';
 //import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'hometoptabs.dart';
 
-
 class HomePage extends StatefulWidget {
-  
   final Widget child;
   HomePage({Key key, this.child}) : super(key: key);
   _HomePageState createState() => _HomePageState();
 }
 
-Color primaryColor =  Color(0xff109618);
+Color primaryColor = Color(0xff109618);
 
 class _HomePageState extends State<HomePage> {
   bool _favourite = false;
 
-   Widget imageCarousel= Container(
+  Widget imageCarousel = Container(
     height: 225.0,
     child: Carousel(
       overlayShadow: false,
@@ -30,101 +28,109 @@ class _HomePageState extends State<HomePage> {
         new AssetImage('img/variety-of-fruits-890507.jpg'),
         new AssetImage('img/3.png'),
         new AssetImage('img/4.png'),
-
-
       ],
       animationCurve: Curves.fastOutSlowIn,
       animationDuration: Duration(microseconds: 1500),
     ),
   );
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 1,
       child: Scaffold(
-        backgroundColor: Colors.white,
-
-              body: Stack(
-                          children: <Widget>[
-                             Container(child: imageCarousel),
-
-                             Container(
-                               padding: EdgeInsets.fromLTRB(0,300,0,0),
-                               child: Container(
-
-                                 child: TabBarView(
-                  children: <Widget>[
-                    HomeTopTabs(0xffff5722),//ff5722
-
-                  ],
+          backgroundColor: Colors.white,
+          body: Stack(
+            children: <Widget>[
+              Container(child: imageCarousel),
+              Container(
+                padding: EdgeInsets.fromLTRB(0, 300, 0, 0),
+                child: Container(
+                  child: TabBarView(
+                    children: <Widget>[
+                      HomeTopTabs(0xffff5722), //ff5722
+                    ],
+                  ),
                 ),
-                               ),
-                             ),
-                 SingleChildScrollView(
-                   child: Padding(
-                        padding: EdgeInsets.fromLTRB(8,250,0,0),
-                         child: Stack(
-                         children: <Widget>[
-                           Text(
+              ),
+              SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(8, 250, 0, 0),
+                  child: Stack(
+                    children: <Widget>[
+                      Text(
                         "Classic Restaurant",
-                        style: TextStyle(color: Colors.black, fontSize: 28.0, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 28.0,
+                            fontWeight: FontWeight.bold),
                       ),
                       Padding(
-                         padding: EdgeInsets.fromLTRB(0,30,0,0),
-                        child: Divider(color:Colors.black,)
+                          padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                          child: Divider(
+                            color: Colors.black,
+                          )),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(10, 50, 0, 0),
+                        child: Text.rich(
+                          TextSpan(children: [
+                            WidgetSpan(
+                                child: Icon(
+                              Icons.location_on,
+                              size: 16.0,
+                              color: Colors.black,
+                            )),
+                            TextSpan(text: "Mumbai, Maharashtra")
+                          ]),
+                          style: TextStyle(color: Colors.black, fontSize: 12.0),
                         ),
-                       Container(
-
-                        padding: EdgeInsets.fromLTRB(10,50,0,0),
-                      child: Text.rich(TextSpan(children: [
-                                        WidgetSpan(
-                                          child: Icon(Icons.location_on, size: 16.0, color: Colors.black,)
-                                        ),
-                                        TextSpan(
-                                          text: "Mumbai, Maharashtra"
-                                        )
-                                      ]), style: TextStyle(color: Colors.black, fontSize: 12.0),),
-                     ),
-
-                        Padding(
-                             padding: EdgeInsets.fromLTRB(4,80,0,0),
-                          child: Row(
-                      children: <Widget>[
-                          const SizedBox(width: 16.0),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 8.0,
-                              horizontal: 16.0,
-                            ),
-                            decoration: BoxDecoration(
-                                color: Colors.blue,
-                                borderRadius: BorderRadius.circular(20.0)),
-                            child: Text(
-                              "1294 reviews",
-                              style: TextStyle(color: Colors.black, fontSize: 13.0),
-                            ),
-                          ),
-                          Spacer(),
-                          IconButton(
-                            icon: _favourite?Icon(Icons.favorite,color: Colors.pinkAccent,):Icon(Icons.favorite_border,color: Colors.pinkAccent,),
-                            onPressed: () {
-                              setState(() {
-                                _favourite = !_favourite;
-                              });
-                            },
-                          )
-                      ],
-                    ),),
-                     ],
-                         ),
                       ),
-                 ),
-
-                           ], )),
-      );
-    
-   
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(4, 80, 0, 0),
+                        child: Row(
+                          children: <Widget>[
+                            const SizedBox(width: 16.0),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 8.0,
+                                horizontal: 16.0,
+                              ),
+                              decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius: BorderRadius.circular(20.0)),
+                              child: Text(
+                                "1294 reviews",
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 13.0),
+                              ),
+                            ),
+                            Spacer(),
+                            IconButton(
+                              icon: _favourite
+                                  ? Icon(
+                                      Icons.favorite,
+                                      color: Colors.pinkAccent,
+                                    )
+                                  : Icon(
+                                      Icons.favorite_border,
+                                      color: Colors.pinkAccent,
+                                    ),
+                              onPressed: () {
+                                setState(() {
+                                  _favourite = !_favourite;
+                                });
+                              },
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          )),
+    );
   }
 }
 /*

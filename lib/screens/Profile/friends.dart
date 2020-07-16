@@ -123,7 +123,7 @@ class friends extends StatelessWidget {
                     child: InkWell(
                       onTap: () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => profile()));
+                            MaterialPageRoute(builder: (context) => Profile()));
                       },
                       child: Ink(
                         decoration: BoxDecoration(

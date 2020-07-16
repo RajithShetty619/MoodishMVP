@@ -73,7 +73,7 @@ class _FoodFeedState extends State<FoodFeed> {
                   Padding(
                     padding: const EdgeInsets.only(left: 7.0),
                     child: Container(
-                      width: 270.0,
+                      width: 250.0,
                       margin: EdgeInsets.all(10.0),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.black, width: 2),

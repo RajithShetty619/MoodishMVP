@@ -14,7 +14,7 @@ class _MainScreenState extends State<MainScreen> {
   static List<Widget> _widgetOptions = <Widget>[
     FoodHome(),
     Restaurant(),
-    profile(),
+    Profile(),
   ];
 
   void _onItemTapped(int index) {
