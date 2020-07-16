@@ -110,7 +110,7 @@ class EditProfileState extends State<EditProfile> {
   }
 
   Widget _buildCalories() {
-   return TextFormField(
+    return TextFormField(
       decoration: InputDecoration(labelText: 'Location'),
       maxLength: 10,
       validator: (String value) {
@@ -125,68 +125,83 @@ class EditProfileState extends State<EditProfile> {
       },
     );
   }
-  Widget Profile(){
-    return
-    Container(
-                         width: 120,
-                            height: 120,
-                            decoration: BoxDecoration(
-                              color: Colors.blueGrey,
-                              shape: BoxShape.circle,
-                           //   image: DecorationImage(
-                                //image: CachedNetworkImageProvider(avatars[1]),
-                             //   fit: BoxFit.cover,
-                             // ),
-                              border: Border.all(color: Colors.black,width: 2.0,),
-                            ),
 
-                      );
-                    
-              //      SizedBox(height: 30,),
-                //   Divider(color: Colors.black,),
-                  //  SizedBox(height: 30,),
-                   // Text("Edit",style: TextStyle(fontSize: 26,color: Colors.white,fontWeight: FontWeight.bold,),),
-                  //  SizedBox(height: 6,),
-                    //Text("msg",style: TextStyle(fontSize: 20,color: Colors.grey.shade400),),
-                  
+  Widget Profile() {
+    return Container(
+      width: 120,
+      height: 120,
+      decoration: BoxDecoration(
+        color: Colors.blueGrey,
+        shape: BoxShape.circle,
+        //   image: DecorationImage(
+        //image: CachedNetworkImageProvider(avatars[1]),
+        //   fit: BoxFit.cover,
+        // ),
+        border: Border.all(
+          color: Colors.black,
+          width: 2.0,
+        ),
+      ),
+    );
+
+    //      SizedBox(height: 30,),
+    //   Divider(color: Colors.black,),
+    //  SizedBox(height: 30,),
+    // Text("Edit",style: TextStyle(fontSize: 26,color: Colors.white,fontWeight: FontWeight.bold,),),
+    //  SizedBox(height: 6,),
+    //Text("msg",style: TextStyle(fontSize: 20,color: Colors.grey.shade400),),
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
       body: SingleChildScrollView(
-              child: Container(
-
+        child: Container(
           margin: EdgeInsets.all(20),
-          
           child: Form(
             key: _formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SizedBox(height: 10,),
-                Container(
-                         width: 120,
-                            height: 120,
-                            decoration: BoxDecoration(
-                              color: Colors.blueGrey,
-                              shape: BoxShape.circle,
-                           //   image: DecorationImage(
-                                //image: CachedNetworkImageProvider(avatars[1]),
-                             //   fit: BoxFit.cover,
-                             // ),
-                              border: Border.all(color: Colors.black,width: 2.0,),
-                            ),
-
-
+                SizedBox(
+                  height: 10,
                 ),
-                    SizedBox(height: 10,),Text("Edit",style: TextStyle(fontSize: 15,color: Colors.blueGrey,fontWeight: FontWeight.bold,),),
-                 
-                   Divider(color: Colors.black,),
-                    SizedBox(height: 30,),
-                    //  SizedBox(height: 6,),
-                
+                Container(
+                  width: 120,
+                  height: 120,
+                  decoration: BoxDecoration(
+                    color: Colors.blueGrey,
+                    shape: BoxShape.circle,
+                    //   image: DecorationImage(
+                    //image: CachedNetworkImageProvider(avatars[1]),
+                    //   fit: BoxFit.cover,
+                    // ),
+                    border: Border.all(
+                      color: Colors.black,
+                      width: 2.0,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "Edit",
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.blueGrey,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+                Divider(
+                  color: Colors.black,
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                //  SizedBox(height: 6,),
+
                 _buildName(),
                 _buildEmail(),
                 _buildPassword(),
@@ -194,55 +209,62 @@ class EditProfileState extends State<EditProfile> {
                 _buildPhoneNumber(),
                 _buildCalories(),
                 SizedBox(height: 20),
-               
+
                 Container(
-                      height: 50,
-                      child: FlatButton(
-                        onPressed: (){},
-                        padding: EdgeInsets.all(0),
-                        shape: RoundedRectangleBorder(
+                  height: 50,
+                  child: FlatButton(
+                    onPressed: () {},
+                    padding: EdgeInsets.all(0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        if (!_formKey.currentState.validate()) {
+                          return;
+                        }
+
+                        _formKey.currentState.save();
+
+                        print(_name);
+                        print(_email);
+                        print(_phoneNumber);
+                        print(_birthdate);
+                        print(_password);
+                        print(_location);
+
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => group()));
+                      },
+                      child: Ink(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                            colors: [
+                              Color(0xffeeeeee),
+                              Color(0xff263238),
+                              Color(0xffeeeeee),
+                            ],
+                          ),
                           borderRadius: BorderRadius.circular(6),
                         ),
-                        child: InkWell(
-                         onTap: (){
-                            if (!_formKey.currentState.validate()) {
-                      return;
-                    }
-
-                    _formKey.currentState.save();
-
-                    print(_name);
-                    print(_email);
-                    print(_phoneNumber);
-                    print(_birthdate);
-                    print(_password);
-                    print(_location);
-
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => group()));
-                  },
-                                                  child: Ink(
-                            
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                                colors: [
-                                  Color(0xffeeeeee),
-                                  Color(0xff263238),
-                                  Color(0xffeeeeee),
-                                ],
-                              ),
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: Container(
-                              alignment: Alignment.center,
-                              constraints: BoxConstraints(minHeight: 50,maxWidth: double.infinity),
-                              child: Text("Save",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),textAlign: TextAlign.center,),
-                            ),
+                        child: Container(
+                          alignment: Alignment.center,
+                          constraints: BoxConstraints(
+                              minHeight: 50, maxWidth: double.infinity),
+                          child: Text(
+                            "Save",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                            textAlign: TextAlign.center,
                           ),
                         ),
                       ),
                     ),
+                  ),
+                ),
               ],
             ),
           ),

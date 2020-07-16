@@ -9,27 +9,25 @@ import '../../Services/authenticate.dart';
 import 'Edit.dart';
 
 class profile extends StatefulWidget {
-   
-  
   @override
   _profileState createState() => _profileState();
 }
 
 class _profileState extends State<profile> {
-  List<String> userData =['name','email'];
+  List<String> userData = ['name', 'email'];
   @override
-  void initState() { 
+  void initState() {
     super.initState();
-     
-       data() async {
+
+    data() async {
       List<String> _userData = await DatabaseService().returnUser();
       setState(() {
-        userData=_userData;
+        userData = _userData;
       });
       print(userData);
-       }
+    }
+
     data();
-    
   }
 
   @override
@@ -65,13 +63,12 @@ class _profileState extends State<profile> {
               children: <Widget>[
                 InkWell(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => EditProfile()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => EditProfile()));
                   },
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 10.0,left: 5.0,right: 5.0),
+                    padding:
+                        const EdgeInsets.only(top: 10.0, left: 5.0, right: 5.0),
                     child: Row(
                       children: <Widget>[
                         Column(
@@ -85,12 +82,14 @@ class _profileState extends State<profile> {
                                 color: Colors.black,
                               ),
                             ),
-                            Text(userData[1],
-                            style: TextStyle(
-                              fontSize: 24,
-                              color: Colors.black38
-                            ),),
-                            SizedBox(height: 20.0,),
+                            Text(
+                              userData[1],
+                              style: TextStyle(
+                                  fontSize: 24, color: Colors.black38),
+                            ),
+                            SizedBox(
+                              height: 20.0,
+                            ),
                             Text(
                               "Edit",
                               style: TextStyle(
@@ -100,7 +99,6 @@ class _profileState extends State<profile> {
 //                              SizedBox(
 //                                width: 20.0,
 //                              ),
-
                           ],
                         ),
                         Spacer(),
@@ -134,20 +132,31 @@ class _profileState extends State<profile> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     IconButton(
-                      icon: Icon(Icons.notifications,size: 50.0,),
+                      icon: Icon(
+                        Icons.notifications,
+                        size: 50.0,
+                      ),
                       onPressed: () {},
                     ),
                     IconButton(
-                      icon: Icon(Icons.group,size: 50,),
+                      icon: Icon(
+                        Icons.group,
+                        size: 50,
+                      ),
                       onPressed: () {},
                     ),
                     IconButton(
-                      icon: Icon(Icons.settings,size: 50,),
+                      icon: Icon(
+                        Icons.settings,
+                        size: 50,
+                      ),
                       onPressed: () {},
                     ),
                   ],
                 ),
-                SizedBox(height: 10.0,),
+                SizedBox(
+                  height: 10.0,
+                ),
                 Divider(
                   thickness: 2.0,
                 ),
@@ -301,4 +310,3 @@ class _profileState extends State<profile> {
     );
   }
 }
-
