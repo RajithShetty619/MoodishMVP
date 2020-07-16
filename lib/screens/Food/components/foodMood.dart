@@ -140,7 +140,7 @@ class _Mood_FoodState extends State<Mood_Food> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Text(
-                                widget.deter,
+                                widget.cuisine,
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 18),
                               ),
