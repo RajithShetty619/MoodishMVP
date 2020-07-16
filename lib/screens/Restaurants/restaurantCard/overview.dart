@@ -15,6 +15,7 @@ class OverView extends StatefulWidget {
 }
 
 class _OverViewState extends State<OverView> {
+  String finalRating;
   var _rating;
   String review='';
   @override
@@ -470,6 +471,7 @@ class _OverViewState extends State<OverView> {
                                   ],
                                 ),
                               ),
+                              SizedBox(height: 8.0,),
                               Text('   Please Rate & Review\nHow was your Experience?'),
                               SizedBox(height: 5.0,),
                               RatingBar(
@@ -510,6 +512,26 @@ class _OverViewState extends State<OverView> {
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(30.0),
+                                      ),
+                                    )),
+                              ),
+                              SizedBox(height: 5.0,),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                    child: Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: RaisedButton(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: new BorderRadius.circular(30.0)),
+                                        color: Colors.deepOrange,
+                                        child: Text(
+                                          'Submit',
+                                          style: TextStyle(color: Color(0xffffffff)),
+                                        ),
+                                        onPressed: () {
+                                           finalRating = _rating;
+                                        },
                                       ),
                                     )),
                               ),

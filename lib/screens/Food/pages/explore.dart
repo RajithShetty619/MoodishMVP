@@ -65,13 +65,13 @@ class _ExploreState extends State<Explore> {
             check: check).then((future) {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t1"));
         });
-        // _dqtaste2.getFood(
-        //     field: ['taste'],
-        //     value: getValue("t2"),
-        //     limit: 7,
-        //     check: check).then((future) {
-        //   BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t2"));
-        // });
+       /*  _dqtaste2.getFood(
+            field: ['taste'],
+            value: getValue("t2"),
+            limit: 7,
+            check: check).then((future) {
+          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t2"));
+        }); */
         _dqsituation0.getFood(
             field: ['situation'],
             value: getValue("s0"),
@@ -121,13 +121,9 @@ class _ExploreState extends State<Explore> {
         ];
         break;
       case 't1':
-<<<<<<< HEAD
-        return [["Sweet"]];
-=======
         return [
           ["Sweet"]
         ];
->>>>>>> 912def323b27d89d465056e5daeeffdd8894ace1
         break;
       // case 't2':
       //   return [["Salty"]];
@@ -409,22 +405,6 @@ class _ExploreState extends State<Explore> {
                                 });
                               },
                             ),
-<<<<<<< HEAD
-                            // GestureDetector(
-                            //   child: EveryTaste(
-                            //     title: "Salty",
-                            //     // isActive: true,
-                            //     index: indxT,
-                            //     stIndex: 2,
-                            //     press: () {},
-                            //   ),
-                            //   onTap: () {
-                            //     setState(() {
-                            //       indxT = 2;
-                            //     });
-                            //   },
-                            // ),
-=======
                             /* GestureDetector(
                               child: EveryTaste(
                                 title: "Salty",
@@ -439,7 +419,6 @@ class _ExploreState extends State<Explore> {
                                 });
                               },
                             ), */
->>>>>>> 912def323b27d89d465056e5daeeffdd8894ace1
                           ],
                         ),
                       ),
@@ -565,7 +544,7 @@ class _ExploreState extends State<Explore> {
                             ),
                             GestureDetector(
                               child: EverySituation(
-                                title: 'easy',
+                                title: 'Easy',
                                 // isActive: true,
                                 index: indx,
                                 stIndex: 2,

@@ -30,7 +30,7 @@ class getListView extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              alignment: Alignment.centerLeft,
+              alignment: Alignment.center,
               child: Text('Which country pizza was orignated from?',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
