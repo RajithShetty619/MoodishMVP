@@ -44,80 +44,82 @@ class _HomePageState extends State<HomePage> {
       length: 1,
       child: Scaffold(
         backgroundColor: Colors.white,
-            
+
               body: Stack(
                           children: <Widget>[
                              Container(child: imageCarousel),
-              
+
                              Container(
                                padding: EdgeInsets.fromLTRB(0,300,0,0),
                                child: Container(
-                               
+
                                  child: TabBarView(
                   children: <Widget>[
                     HomeTopTabs(0xffff5722),//ff5722
-                 
+
                   ],
                 ),
                                ),
                              ),
-                 Padding(
-                      padding: EdgeInsets.fromLTRB(8,250,0,0),
-                       child: Stack(
-                       children: <Widget>[ 
-                         Text(
-                      "Classic Restaurant",
-                      style: TextStyle(color: Colors.black, fontSize: 28.0, fontWeight: FontWeight.bold),
-                    ),
-                    Padding(
-                       padding: EdgeInsets.fromLTRB(0,30,0,0),
-                      child: Divider(color:Colors.black,)
+                 SingleChildScrollView(
+                   child: Padding(
+                        padding: EdgeInsets.fromLTRB(8,250,0,0),
+                         child: Stack(
+                         children: <Widget>[
+                           Text(
+                        "Classic Restaurant",
+                        style: TextStyle(color: Colors.black, fontSize: 28.0, fontWeight: FontWeight.bold),
                       ),
-                     Container(
-                   
-                      padding: EdgeInsets.fromLTRB(10,50,0,0),
-                    child: Text.rich(TextSpan(children: [
-                                      WidgetSpan(
-                                        child: Icon(Icons.location_on, size: 16.0, color: Colors.black,)
-                                      ),
-                                      TextSpan(
-                                        text: "Mumbai, Maharashtra"
-                                      )
-                                    ]), style: TextStyle(color: Colors.black, fontSize: 12.0),),
-                   ),
-                   
                       Padding(
-                           padding: EdgeInsets.fromLTRB(4,80,0,0),
-                        child: Row(
-                    children: <Widget>[
-                        const SizedBox(width: 16.0),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 8.0,
-                            horizontal: 16.0,
-                          ),
-                          decoration: BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius: BorderRadius.circular(20.0)),
-                          child: Text(
-                            "1294 reviews",
-                            style: TextStyle(color: Colors.black, fontSize: 13.0),
-                          ),
+                         padding: EdgeInsets.fromLTRB(0,30,0,0),
+                        child: Divider(color:Colors.black,)
                         ),
-                        Spacer(),
-                        IconButton(
-                          icon: _favourite?Icon(Icons.favorite,color: Colors.pinkAccent,):Icon(Icons.favorite_border,color: Colors.pinkAccent,),
-                          onPressed: () {
-                            setState(() {
-                              _favourite = !_favourite;
-                            });
-                          },
-                        )
-                    ],
-                  ),),
-                   ],
-                       ),
-                    ),
+                       Container(
+
+                        padding: EdgeInsets.fromLTRB(10,50,0,0),
+                      child: Text.rich(TextSpan(children: [
+                                        WidgetSpan(
+                                          child: Icon(Icons.location_on, size: 16.0, color: Colors.black,)
+                                        ),
+                                        TextSpan(
+                                          text: "Mumbai, Maharashtra"
+                                        )
+                                      ]), style: TextStyle(color: Colors.black, fontSize: 12.0),),
+                     ),
+
+                        Padding(
+                             padding: EdgeInsets.fromLTRB(4,80,0,0),
+                          child: Row(
+                      children: <Widget>[
+                          const SizedBox(width: 16.0),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 8.0,
+                              horizontal: 16.0,
+                            ),
+                            decoration: BoxDecoration(
+                                color: Colors.blue,
+                                borderRadius: BorderRadius.circular(20.0)),
+                            child: Text(
+                              "1294 reviews",
+                              style: TextStyle(color: Colors.black, fontSize: 13.0),
+                            ),
+                          ),
+                          Spacer(),
+                          IconButton(
+                            icon: _favourite?Icon(Icons.favorite,color: Colors.pinkAccent,):Icon(Icons.favorite_border,color: Colors.pinkAccent,),
+                            onPressed: () {
+                              setState(() {
+                                _favourite = !_favourite;
+                              });
+                            },
+                          )
+                      ],
+                    ),),
+                     ],
+                         ),
+                      ),
+                 ),
 
                            ], )),
       );

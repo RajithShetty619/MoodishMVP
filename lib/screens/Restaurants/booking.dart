@@ -150,24 +150,21 @@ class _BookingState extends State<Booking> {
                               ),
                               Container(
                                 alignment: Alignment.centerLeft,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    width: 175.0,
-                                    margin: EdgeInsets.all(10.0),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(color: Colors.transparent),
-                                        color: Colors.orange
-
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Text(
-                                        'Top Restaurants -',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: 20.0, fontWeight: FontWeight.bold),
-                                      ),
+                                child: Container(
+//                                    width: 175.0,
+//                                    margin: EdgeInsets.all(10.0),
+//                                    decoration: BoxDecoration(
+//                                        border: Border.all(color: Colors.transparent),
+//                                        color: Colors.orange
+//
+//                                    ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Text(
+                                      'Top Restaurants :',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 20.0, fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ),
