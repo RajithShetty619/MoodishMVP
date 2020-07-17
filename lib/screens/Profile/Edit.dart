@@ -114,7 +114,7 @@ class _EditProfileState extends State<EditProfile> {
   }
 }
 
-Widget getListTile(String category,String name,context,int tile){
+Widget getListTile(String category,String name,BuildContext context,int tile){
   return InkWell(
     onTap: (){
       if(tile==0)
@@ -148,7 +148,7 @@ Widget getListTile(String category,String name,context,int tile){
   );
 }
 
-_onAlertWithCustomContentPressed(String category,String name,context){
+_onAlertWithCustomContentPressed(String category,String name,context) {
   Alert(
       context: context,
       title: category,

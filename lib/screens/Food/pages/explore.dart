@@ -106,7 +106,7 @@ class _ExploreState extends State<Explore> {
     DateTime now = DateTime.now();
     String date = DateFormat('EEE, M/d/y').format(now);
     if (date == saveDate) {
-      return 1;
+      return /* 1 */ 0;
     } else {
       _box.put("date", date);
       return 0;
@@ -223,9 +223,9 @@ class _ExploreState extends State<Explore> {
                                                 cuisine: foodList['tsp'][index]
                                                     .cuisine,
                                                 preptime: foodList['tsp'][index]
-                                                    .duration,
+                                                    .time,
                                                 deter: foodList['tsp'][index]
-                                                    .foodDeter,
+                                                    .deter,
                                                 description: foodList['tsp']
                                                         [index]
                                                     .description,
@@ -233,11 +233,11 @@ class _ExploreState extends State<Explore> {
                                                     .nutrients,
                                                 preparation: foodList['tsp']
                                                         [index]
-                                                    .preperation,
+                                                    .preparation[0],
                                                 taste: foodList['tsp'][index]
                                                     .taste,
                                                 mealtype: foodList['tsp'][index]
-                                                    .mealType,
+                                                    .meal_type,
                                               );
                                             else {
                                               return !_loadingData
@@ -688,12 +688,12 @@ class DataListView extends StatelessWidget {
             title: foodList[index].foodName,
             desc: foodList[index].description,
             cuisine: foodList[index].cuisine,
-            preptime: foodList[index].duration,
-            deter: foodList[index].foodDeter,
+            preptime: foodList[index].time,
+            deter: foodList[index].deter,
             nutrient: foodList[index].nutrients,
-            preparation: foodList[index].preperation,
+            preparation: foodList[index].preparation,
             taste: foodList[index].taste,
-            mealtype: foodList[index].mealType,
+            mealtype: foodList[index].meal_type,
           );
         },
       ),
