@@ -7,7 +7,8 @@ import 'database.dart';
 class DatabaseQuery {
   String _lastDocument;
   bool dataExists = true;
-  final CollectionReference _ref = Firestore.instance.collection('food');
+  final CollectionReference _ref =
+      Firestore.instance.collection('Master Sheet');
   final String listName;
   DatabaseQuery({this.listName});
 

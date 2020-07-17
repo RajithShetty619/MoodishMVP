@@ -1,276 +1,276 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
-import 'package:moodish_mvp/Services/database.dart';
-import 'package:moodish_mvp/Services/storage.dart';
-import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart';
-import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'models/foodListModel.dart';
-import 'package:image_picker/image_picker.dart';
+// import 'package:cached_network_image/cached_network_image.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:hive/hive.dart';
+// import 'package:moodish_mvp/Services/database.dart';
+// import 'package:moodish_mvp/Services/storage.dart';
+// import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart';
+// import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
+// import 'package:flutter_spinkit/flutter_spinkit.dart';
+// import 'models/foodListModel.dart';
+// import 'package:image_picker/image_picker.dart';
 
-class Test extends StatefulWidget {
-  @override
-  _TestState createState() => _TestState();
-}
+// class Test extends StatefulWidget {
+//   @override
+//   _TestState createState() => _TestState();
+// }
 
-class _TestState extends State<Test> {
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<Box>(
-      future: Hive.openBox('foodlist'),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return BlocProvider<FoodBloc>(
-            create: (context) => FoodBloc(),
-            child: Scaffold(
-              body: FoodList(),
-            ),
-          );
-        }
-        return Scaffold();
-      },
-    );
-  }
-}
+// class _TestState extends State<Test> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return FutureBuilder<Box>(
+//       future: Hive.openBox('foodlist'),
+//       builder: (BuildContext context, AsyncSnapshot snapshot) {
+//         if (snapshot.connectionState == ConnectionState.done) {
+//           return BlocProvider<FoodBloc>(
+//             create: (context) => FoodBloc(),
+//             child: Scaffold(
+//               body: FoodList(),
+//             ),
+//           );
+//         }
+//         return Scaffold();
+//       },
+//     );
+//   }
+// }
 
-class FoodList extends StatefulWidget {
-  @override
-  _FoodListState createState() => _FoodListState();
-}
+// class FoodList extends StatefulWidget {
+//   @override
+//   _FoodListState createState() => _FoodListState();
+// }
 
-class _FoodListState extends State<FoodList> {
-  final ImagePicker _picker = ImagePicker();
-  Image _imageFile =
-      Image.network('https://www.shorturl.at/img/shorturl-square.png');
-  bool loadingData = false;
-  bool dataExists = true;
-  // List<DocumentSnapshot> foodList = [];
-  final CollectionReference _ref = Firestore.instance.collection('food');
-  String _lastDocument;
-  ScrollController _scrollController = ScrollController();
+// class _FoodListState extends State<FoodList> {
+//   final ImagePicker _picker = ImagePicker();
+//   Image _imageFile =
+//       Image.network('https://www.shorturl.at/img/shorturl-square.png');
+//   bool loadingData = false;
+//   bool dataExists = true;
+//   // List<DocumentSnapshot> foodList = [];
+//   final CollectionReference _ref = Firestore.instance.collection('food');
+//   String _lastDocument;
+//   ScrollController _scrollController = ScrollController();
 
-  void _onImagePress() async {
-    try {
-      final pickedFile = await _picker.getImage(
-        source: ImageSource.gallery,
-      );
-      Image image = Image.memory(await pickedFile.readAsBytes());
-      setState(() {
-        _imageFile = image;
-      });
-    } catch (e) {
-      print(e);
-    }
-  }
+//   void _onImagePress() async {
+//     try {
+//       final pickedFile = await _picker.getImage(
+//         source: ImageSource.gallery,
+//       );
+//       Image image = Image.memory(await pickedFile.readAsBytes());
+//       setState(() {
+//         _imageFile = image;
+//       });
+//     } catch (e) {
+//       print(e);
+//     }
+//   }
 
-  getFood({String listName, List<String> field, List<dynamic> value}) async {
-    setState(() {
-      loadingData = true;
-    });
+//   getFood({String listName, List<String> field, List<dynamic> value}) async {
+//     setState(() {
+//       loadingData = true;
+//     });
 
-    Query recQuery(List<dynamic> _field, List<dynamic> _value, Query q) {
-      Query _query = q;
-      if (_field.isEmpty) {
-        return _query;
-      } else {
-        _query =
-            _query.where(_field.removeLast(), isEqualTo: _value.removeLast());
-        return recQuery(_field, _value, _query);
-      }
-    }
+//     Query recQuery(List<dynamic> _field, List<dynamic> _value, Query q) {
+//       Query _query = q;
+//       if (_field.isEmpty) {
+//         return _query;
+//       } else {
+//         _query =
+//             _query.where(_field.removeLast(), isEqualTo: _value.removeLast());
+//         return recQuery(_field, _value, _query);
+//       }
+//     }
 
-    final _box = Hive.box('foodlist');
-    List<dynamic> _gfoodList = /* await _box.get(listName) */ null;
-    if (_gfoodList == null) {
-      Query _finalQuery = _ref.where('image', isGreaterThan: '');
-      String _orderVal = field[0];
-      if (value[value.length - 1].runtimeType != String) {
-        dynamic _v = value.removeLast();
-        print(_v);
-        _finalQuery = _finalQuery.where(field.removeLast(), whereIn: _v);
-      }
-      _finalQuery =
-          recQuery(field, value, _finalQuery).orderBy('image').limit(10);
+//     final _box = Hive.box('foodlist');
+//     List<dynamic> _gfoodList = /* await _box.get(listName) */ null;
+//     if (_gfoodList == null) {
+//       Query _finalQuery = _ref.where('image', isGreaterThan: '');
+//       String _orderVal = field[0];
+//       if (value[value.length - 1].runtimeType != String) {
+//         dynamic _v = value.removeLast();
+//         print(_v);
+//         _finalQuery = _finalQuery.where(field.removeLast(), whereIn: _v);
+//       }
+//       _finalQuery =
+//           recQuery(field, value, _finalQuery).orderBy('image').limit(10);
 
-      QuerySnapshot snapshot = await _finalQuery.getDocuments();
-      List<FoodListModel> queryList =
-          await DatabaseService().listFromSnapshot(snapshot);
-      BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(queryList, "0"));
-      setState(() {
-        print("$_lastDocument" + "doc");
-        loadingData = false;
-        _lastDocument = queryList[queryList.length - 1].description;
-      });
-    } else {
-      List<FoodListModel> _foodList = _gfoodList.cast<FoodListModel>();
-      BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(_foodList, "0"));
-      setState(() {
-        print("$_lastDocument" + "doc");
-        loadingData = false;
-        _lastDocument = _foodList[_foodList.length - 1].description;
-      });
-    }
-  }
+//       QuerySnapshot snapshot = await _finalQuery.getDocuments();
+//       List<FoodListModel> queryList =
+//           await DatabaseService().listFromSnapshot(snapshot);
+//       BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(queryList, "0"));
+//       setState(() {
+//         print("$_lastDocument" + "doc");
+//         loadingData = false;
+//         _lastDocument = queryList[queryList.length - 1].description;
+//       });
+//     } else {
+//       List<FoodListModel> _foodList = _gfoodList.cast<FoodListModel>();
+//       BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(_foodList, "0"));
+//       setState(() {
+//         print("$_lastDocument" + "doc");
+//         loadingData = false;
+//         _lastDocument = _foodList[_foodList.length - 1].description;
+//       });
+//     }
+//   }
 
-  getMoreFood() async {
-    print("getMoreFood");
-    if (dataExists && !loadingData) {
-      setState(() {
-        loadingData = true;
-      });
+//   getMoreFood() async {
+//     print("getMoreFood");
+//     if (dataExists && !loadingData) {
+//       setState(() {
+//         loadingData = true;
+//       });
 
-      Query q = _ref
-          .where("Description", isGreaterThan: " ")
-          .startAfter([_lastDocument])
-          .orderBy('Description')
-          .limit(5);
-      QuerySnapshot snapshot = await q.getDocuments();
-      List<FoodListModel> queryList =
-          await DatabaseService().listFromSnapshot(snapshot);
-      BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(queryList, "0"));
+//       Query q = _ref
+//           .where("Description", isGreaterThan: " ")
+//           .startAfter([_lastDocument])
+//           .orderBy('Description')
+//           .limit(5);
+//       QuerySnapshot snapshot = await q.getDocuments();
+//       List<FoodListModel> queryList =
+//           await DatabaseService().listFromSnapshot(snapshot);
+//       BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(queryList, "0"));
 
-      setState(() {
-        loadingData = false;
-        _lastDocument = queryList[queryList.length - 1].description;
-      });
-      if (snapshot.documents.length == 0) {
-        dataExists = false;
-        print("no data");
-      }
-    }
-  }
+//       setState(() {
+//         loadingData = false;
+//         _lastDocument = queryList[queryList.length - 1].description;
+//       });
+//       if (snapshot.documents.length == 0) {
+//         dataExists = false;
+//         print("no data");
+//       }
+//     }
+//   }
 
-  @override
-  void initState() {
-    super.initState();
-    getFood(listName: "0", field: [
-      'taste',
-      'cuisine'
-    ], value: [
-      'Sweet',
-      ['indian', 'american']
-    ]);
+//   @override
+//   void initState() {
+//     super.initState();
+//     getFood(listName: "0", field: [
+//       'taste',
+//       'cuisine'
+//     ], value: [
+//       'Sweet',
+//       ['indian', 'american']
+//     ]);
 
-    _scrollController.addListener(() {
-      double _maxScroll = _scrollController.position.maxScrollExtent;
-      double _currentScroll = _scrollController.position.pixels;
-      double _delta = MediaQuery.of(context).size.height * .25;
+//     _scrollController.addListener(() {
+//       double _maxScroll = _scrollController.position.maxScrollExtent;
+//       double _currentScroll = _scrollController.position.pixels;
+//       double _delta = MediaQuery.of(context).size.height * .25;
 
-      if (_maxScroll - _currentScroll < _delta && loadingData == false) {
-        // getMoreFood();
-      }
-    });
-  }
+//       if (_maxScroll - _currentScroll < _delta && loadingData == false) {
+//         // getMoreFood();
+//       }
+//     });
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return /* BlocConsumer<FoodBloc, Map<String, List<FoodListModel>>>(
-      buildWhen: (Map<String, List<FoodListModel>> previous,
-          Map<String, List<FoodListModel>> current) {
-        return true;
-      },
-      listenWhen: (Map<String, List<FoodListModel>> previous,
-          Map<String, List<FoodListModel>> current) {
-        if (current.length > previous.length) {
-          return true;
-        }
-        return false;
-      },
-      builder: (context, foodList) {
-        List<String> urlList = Storage().listUrl(foodList["0"]);
-        return Column(
-          children: <Widget>[
-            Expanded(
-              child: ListView.builder(
-                controller: _scrollController,
-                itemCount: foodList["0"].length,
-                itemBuilder: (context, index) {
-                  return Card(
-                    margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                    elevation: 2.0,
-                    child: Column(
-                      children: <Widget>[
-                        Text(foodList["0"][index].foodName),
-                        Text(foodList["0"][index].cuisine),
-                        Text(foodList["0"][index].taste),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: CachedNetworkImage(
-                              imageUrl: foodList["0"][index].images,
-                              imageBuilder: (context, imageProvider) {
-                                return Container(
-                                  height: 200.0,
-                                  margin: EdgeInsets.only(right: 20),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      image: DecorationImage(
-                                        image: imageProvider,
-                                        fit: BoxFit.cover,
-                                      )),
-                                );
-                              }),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-            if (loadingData)
-              Container(
-                color: Colors.brown[100],
-                child: Center(
-                  child: SpinKitChasingDots(
-                    color: Colors.brown,
-                    size: 20.0,
-                  ),
-                ),
-              )
-          ],
-        );
-      },
-      listener: (BuildContext context, foodList) {
-        Scaffold.of(context).showSnackBar(
-          SnackBar(content: Text('Added!')),
-        );
-      },
-    );
-  */
-        GestureDetector(
-      onTap: () {
-        // _onImagePress();
-      },
-      child: Container(
-        width: 100,
-        height: 100,
-        decoration: BoxDecoration(
-          color: Colors.grey,
-          shape: BoxShape.circle,
-          border: Border.all(
-            color: Colors.black,
-            width: 2.0,
-          ),
-        ),
-      ),
-    );
-  }
-}
-/* Image.network(
-                        urlList[index],
-                        fit: BoxFit.fill,
-                        loadingBuilder: (BuildContext context, Widget child,
-                            ImageChunkEvent loadingProgress) {
-                          if (loadingProgress == null) return child;
-                          return Center(
-                            child: CircularProgressIndicator(
-                              value: loadingProgress.expectedTotalBytes != null
-                                  ? loadingProgress.cumulativeBytesLoaded /
-                                      loadingProgress.expectedTotalBytes
-                                  : null,
-                            ),
-                          );
-                        },
-                      ), */
+//   @override
+//   Widget build(BuildContext context) {
+//     return /* BlocConsumer<FoodBloc, Map<String, List<FoodListModel>>>(
+//       buildWhen: (Map<String, List<FoodListModel>> previous,
+//           Map<String, List<FoodListModel>> current) {
+//         return true;
+//       },
+//       listenWhen: (Map<String, List<FoodListModel>> previous,
+//           Map<String, List<FoodListModel>> current) {
+//         if (current.length > previous.length) {
+//           return true;
+//         }
+//         return false;
+//       },
+//       builder: (context, foodList) {
+//         List<String> urlList = Storage().listUrl(foodList["0"]);
+//         return Column(
+//           children: <Widget>[
+//             Expanded(
+//               child: ListView.builder(
+//                 controller: _scrollController,
+//                 itemCount: foodList["0"].length,
+//                 itemBuilder: (context, index) {
+//                   return Card(
+//                     margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+//                     elevation: 2.0,
+//                     child: Column(
+//                       children: <Widget>[
+//                         Text(foodList["0"][index].foodName),
+//                         Text(foodList["0"][index].cuisine),
+//                         Text(foodList["0"][index].taste),
+//                         Padding(
+//                           padding: const EdgeInsets.all(8.0),
+//                           child: CachedNetworkImage(
+//                               imageUrl: foodList["0"][index].images,
+//                               imageBuilder: (context, imageProvider) {
+//                                 return Container(
+//                                   height: 200.0,
+//                                   margin: EdgeInsets.only(right: 20),
+//                                   decoration: BoxDecoration(
+//                                       borderRadius: BorderRadius.circular(20),
+//                                       image: DecorationImage(
+//                                         image: imageProvider,
+//                                         fit: BoxFit.cover,
+//                                       )),
+//                                 );
+//                               }),
+//                         ),
+//                       ],
+//                     ),
+//                   );
+//                 },
+//               ),
+//             ),
+//             if (loadingData)
+//               Container(
+//                 color: Colors.brown[100],
+//                 child: Center(
+//                   child: SpinKitChasingDots(
+//                     color: Colors.brown,
+//                     size: 20.0,
+//                   ),
+//                 ),
+//               )
+//           ],
+//         );
+//       },
+//       listener: (BuildContext context, foodList) {
+//         Scaffold.of(context).showSnackBar(
+//           SnackBar(content: Text('Added!')),
+//         );
+//       },
+//     );
+//   */
+//         GestureDetector(
+//       onTap: () {
+//         // _onImagePress();
+//       },
+//       child: Container(
+//         width: 100,
+//         height: 100,
+//         decoration: BoxDecoration(
+//           color: Colors.grey,
+//           shape: BoxShape.circle,
+//           border: Border.all(
+//             color: Colors.black,
+//             width: 2.0,
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+// /* Image.network(
+//                         urlList[index],
+//                         fit: BoxFit.fill,
+//                         loadingBuilder: (BuildContext context, Widget child,
+//                             ImageChunkEvent loadingProgress) {
+//                           if (loadingProgress == null) return child;
+//                           return Center(
+//                             child: CircularProgressIndicator(
+//                               value: loadingProgress.expectedTotalBytes != null
+//                                   ? loadingProgress.cumulativeBytesLoaded /
+//                                       loadingProgress.expectedTotalBytes
+//                                   : null,
+//                             ),
+//                           );
+//                         },
+//                       ), */
