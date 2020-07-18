@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/pollsModel.dart';
 
@@ -21,9 +22,7 @@ class _PollTabsState extends State<PollTabs> {
           return ListView.builder(
             itemCount: _pollList.length,
             itemBuilder: (BuildContext context, int index) {
-              return getListView( 
-                poll: _pollList[index]
-              );
+              return getListView(poll: _pollList[index]);
             },
           );
         } else {
@@ -41,9 +40,8 @@ class _PollTabsState extends State<PollTabs> {
 
 /* poll card displayin widget */
 class getListView extends StatefulWidget {
- 
-  final PollsModel poll ;
-  getListView({ 
+  final PollsModel poll;
+  getListView({
     this.poll,
     Key key,
   }) : super(key: key);
@@ -53,7 +51,6 @@ class getListView extends StatefulWidget {
 }
 
 class _getListViewState extends State<getListView> {
-
   int _index;
   bool pollPressed = false;
 
@@ -71,28 +68,36 @@ class _getListViewState extends State<getListView> {
             child: Container(
               alignment: Alignment.center,
               child: Text(
-                widget.poll.question??'',
+                widget.poll.question ?? '',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
               ),
             ),
           ),
           GestureDetector(
-            onTap: () {if(!pollPressed){
-              
-            }},
+            onTap: () async {
+              if (!pollPressed) {
+                await DatabaseService()
+                    .likePoll(opt: "aLike", sr_no: widget.poll.sr_no,like:widget.poll.cLike);
+                setState(() {
+                  _index = 1;
+                  pollPressed=true;
+                });
+              }
+            },
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Container(
                 width: double.maxFinite,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
+                  border: Border.all( color: _index==1?Colors.blueAccent:Colors.black),
                   color: Colors.grey[200],
                 ),
                 child: Center(
                   child: Padding(
                     padding: EdgeInsets.all(5.0),
                     child: Text(
-                      widget.poll.A??'',
+                      widget.poll.A ?? '',
                       style: TextStyle(fontSize: 22.0),
                     ),
                   ),
@@ -101,20 +106,30 @@ class _getListViewState extends State<getListView> {
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () async {
+              if (!pollPressed) {
+                await DatabaseService()
+                    .likePoll(opt: "bLike", sr_no: widget.poll.sr_no,like:widget.poll.cLike);
+                setState(() {
+                  _index = 2;
+                  pollPressed=true;
+                });
+              }
+            },
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Container(
                 width: double.maxFinite,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
+                  border: Border.all( color: _index==2?Colors.blueAccent:Colors.black),
                   color: Colors.grey[200],
                 ),
                 child: Center(
                   child: Padding(
                     padding: EdgeInsets.all(5.0),
                     child: Text(
-                      widget.poll.B??'',
+                      widget.poll.B ?? '',
                       style: TextStyle(fontSize: 22.0),
                     ),
                   ),
@@ -123,20 +138,30 @@ class _getListViewState extends State<getListView> {
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () async {
+              if (!pollPressed) {
+                await DatabaseService()
+                    .likePoll(opt: "cLike", sr_no: widget.poll.sr_no,like:widget.poll.cLike);
+                setState(() {
+                  _index = 3;
+                  pollPressed=true;
+                });
+              }
+            },
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Container(
                 width: double.maxFinite,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
+                  border: Border.all( color: _index==3?Colors.blueAccent:Colors.black),
                   color: Colors.grey[200],
                 ),
                 child: Center(
                   child: Padding(
                     padding: EdgeInsets.all(5.0),
                     child: Text(
-                      widget.poll.C??'',
+                      widget.poll.C ?? '',
                       style: TextStyle(fontSize: 22.0),
                     ),
                   ),
@@ -145,20 +170,30 @@ class _getListViewState extends State<getListView> {
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () async {
+              if (!pollPressed) {
+                await DatabaseService()
+                    .likePoll(opt: "dLike", sr_no: widget.poll.sr_no,like:widget.poll.cLike);
+                setState(() {
+                  _index = 4;
+                  pollPressed=true;
+                });
+              }
+            },
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Container(
                 width: double.maxFinite,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
+                  border: Border.all( color: _index==4?Colors.blueAccent:Colors.black),
                   color: Colors.grey[200],
                 ),
                 child: Center(
                   child: Padding(
                     padding: EdgeInsets.all(5.0),
                     child: Text(
-                      widget.poll.D??'',
+                      widget.poll.D ?? '',
                       style: TextStyle(fontSize: 22.0),
                     ),
                   ),
