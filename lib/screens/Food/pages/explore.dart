@@ -222,28 +222,7 @@ class _ExploreState extends State<Explore> {
                                               (BuildContext context, index) {
                                             if (foodList["tsp"].length != index)
                                               return TodaySpecial(
-                                                image: foodList['tsp'][index]
-                                                    .images,
-                                                title: foodList['tsp'][index]
-                                                    .foodName,
-                                                cuisine: foodList['tsp'][index]
-                                                    .cuisine,
-                                                preptime: foodList['tsp'][index]
-                                                    .time,
-                                                deter: foodList['tsp'][index]
-                                                    .deter,
-                                                description: foodList['tsp']
-                                                        [index]
-                                                    .description,
-                                                nutrient: foodList['tsp'][index]
-                                                    .nutrients,
-                                                preparation: foodList['tsp']
-                                                        [index]
-                                                    .preparation[0],
-                                                taste: foodList['tsp'][index]
-                                                    .taste,
-                                                mealtype: foodList['tsp'][index]
-                                                    .meal_type,
+                                                foodList: foodList["tsp"][index],
                                               );
                                             else {
                                               return !_loadingData
@@ -680,16 +659,7 @@ class DataListView extends StatelessWidget {
         itemBuilder: (BuildContext context, index) {
           print(foodList[index].foodName);
           return FoodEveryTaste(
-            image: foodList[index].images,
-            title: foodList[index].foodName,
-            desc: foodList[index].description,
-            cuisine: foodList[index].cuisine,
-            preptime: foodList[index].time,
-            deter: foodList[index].deter,
-            nutrient: foodList[index].nutrients,
-            preparation: foodList[index].preparation,
-            taste: foodList[index].taste,
-            mealtype: foodList[index].meal_type,
+            foodList: foodList[index],
           );
         },
       ),

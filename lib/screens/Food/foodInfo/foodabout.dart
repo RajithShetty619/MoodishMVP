@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/models/foodListModel.dart';
 //import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FoodAbout extends StatefulWidget {
@@ -6,19 +7,9 @@ class FoodAbout extends StatefulWidget {
 
   FoodAbout({
     Key key,
-    @required this.descbox,
-    @required this.nutrient,
-    @required this.preparation,
-    @required this.taste,
-    @required this.preptime,
-    @required this.cuisine,
+    this.foodList,
   }) : super(key: key);
-  final descbox;
-  final nutrient;
-  final preparation;
-  final taste;
-  final preptime;
-  final cuisine;
+  final FoodListModel foodList;
 
   _FoodAboutState createState() => _FoodAboutState();
 }
@@ -30,18 +21,14 @@ class _FoodAboutState extends State<FoodAbout> {
     'Hygiene :',
     'Offers :'
   ];
-  // List<String> nutri = ['Carbs.png', 'Protien.png', 'Fats.png', 'Sugar.png'];
+  List<String> nutri = ['Carbs.png', 'Protien.png', 'Fats.png', 'Sugar.png'];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: foodAbout(
-        descbox: widget.descbox,
-        nutrient: widget.nutrient,
-        preparation: widget.preparation,
-        taste: widget.taste,
-        preptime: widget.preptime,
-        cuisine: widget.cuisine,
+        foodList: widget.foodList,
+        nutri: nutri,
       ),
     );
   }
@@ -50,21 +37,13 @@ class _FoodAboutState extends State<FoodAbout> {
 class foodAbout extends StatelessWidget {
   const foodAbout({
     Key key,
-    @required this.descbox, 
-    @required this.nutrient,
-    @required this.preparation,
-    @required this.taste,
-    @required this.preptime,
-    @required this.cuisine,
+    this.foodList,
+    this.nutri
 
   }) : super(key: key);
 
-  final descbox;
-  final nutrient;
-  final preparation;
-  final taste;
-  final preptime;
-  final cuisine;
+  final FoodListModel foodList;
+  final nutri;
 
   @override
   Widget build(BuildContext context) {
@@ -93,8 +72,30 @@ class foodAbout extends StatelessWidget {
                   SizedBox(height: 5),
                   Padding(
                       padding: EdgeInsets.all(5.0),
-                      child: Text(descbox),
+                      child: Text(foodList.description),
                     ),
+                  SizedBox(height: 10.0),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Container(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Calories',
+                        style: TextStyle(
+                          fontSize: 30,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: Text(foodList.calories),
+                    )
+                  ),
                   SizedBox(height: 10.0),
                   Padding(
                     padding: const EdgeInsets.all(5.0),
@@ -112,107 +113,102 @@ class foodAbout extends StatelessWidget {
                   SizedBox(
                     height: 10.0,
                   ),
-                  Padding(
-                      padding: EdgeInsets.all(5.0),
-                      child: Text(nutrient),
-                      
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Column(
+                          children: <Widget>[
+                            Container(
+                              height: 80.0,
+                              width: 80.0,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  image: AssetImage('assets/${nutri[0]}'),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 7.0,
+                            ),
+                            Text('${foodList.carbohydrates} Carbs' )
+                          ],
+                        ),
+                        SizedBox(
+                          width: 20.0,
+                        ),
+                        Column(
+                          children: <Widget>[
+                            Container(
+                              height: 80.0,
+                              width: 80.0,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  image: AssetImage('assets/${nutri[1]}'),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 7.0,
+                            ),
+                            Text('${foodList.protein} Protien')
+                          ],
+                        ),
+                        SizedBox(
+                          width: 20.0,
+                        ),
+                        Column(
+                          children: <Widget>[
+                            Container(
+                              height: 80.0,
+                              width: 80.0,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  image: AssetImage('assets/${nutri[2]}'),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 7.0,
+                            ),
+                            Text('${foodList.fat} Fats')
+                          ],
+                        ),
+                        SizedBox(
+                          width: 20.0,
+                        ),
+                        // Column(
+                        //   children: <Widget>[
+                        //     Container(
+                        //       height: 80.0,
+                        //       width: 80.0,
+                        //       decoration: BoxDecoration(
+                        //         shape: BoxShape.circle,
+                        //         image: DecorationImage(
+                        //           image: AssetImage('assets/${nutri[3]}'),
+                        //           fit: BoxFit.cover,
+                        //         ),
+                        //       ),
+                        //     ),
+                        //     SizedBox(
+                        //       height: 7.0,
+                        //     ),
+                        //     Text('${foodList.calories} Sugar')
+                        //   ],
+                        // ),
+                        SizedBox(
+                          width: 20.0,
+                        ),
+                      ],
                     ),
-                  // SingleChildScrollView(
-                  //   scrollDirection: Axis.horizontal,
-                  //   child: Row(
-                  //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  //     children: <Widget>[
-                  //       Column(
-                  //         children: <Widget>[
-                  //           Container(
-                  //             height: 80.0,
-                  //             width: 80.0,
-                  //             decoration: BoxDecoration(
-                  //               shape: BoxShape.circle,
-                  //               image: DecorationImage(
-                  //                 image: AssetImage('assets/${nutri[0]}'),
-                  //                 fit: BoxFit.cover,
-                  //               ),
-                  //             ),
-                  //           ),
-                  //           SizedBox(
-                  //             height: 7.0,
-                  //           ),
-                  //           Text('27% Carbs')
-                  //         ],
-                  //       ),
-                  //       SizedBox(
-                  //         width: 20.0,
-                  //       ),
-                  //       Column(
-                  //         children: <Widget>[
-                  //           Container(
-                  //             height: 80.0,
-                  //             width: 80.0,
-                  //             decoration: BoxDecoration(
-                  //               shape: BoxShape.circle,
-                  //               image: DecorationImage(
-                  //                 image: AssetImage('assets/${nutri[1]}'),
-                  //                 fit: BoxFit.cover,
-                  //               ),
-                  //             ),
-                  //           ),
-                  //           SizedBox(
-                  //             height: 7.0,
-                  //           ),
-                  //           Text('36% Protien')
-                  //         ],
-                  //       ),
-                  //       SizedBox(
-                  //         width: 20.0,
-                  //       ),
-                  //       Column(
-                  //         children: <Widget>[
-                  //           Container(
-                  //             height: 80.0,
-                  //             width: 80.0,
-                  //             decoration: BoxDecoration(
-                  //               shape: BoxShape.circle,
-                  //               image: DecorationImage(
-                  //                 image: AssetImage('assets/${nutri[2]}'),
-                  //                 fit: BoxFit.cover,
-                  //               ),
-                  //             ),
-                  //           ),
-                  //           SizedBox(
-                  //             height: 7.0,
-                  //           ),
-                  //           Text('14% Fats')
-                  //         ],
-                  //       ),
-                  //       SizedBox(
-                  //         width: 20.0,
-                  //       ),
-                  //       Column(
-                  //         children: <Widget>[
-                  //           Container(
-                  //             height: 80.0,
-                  //             width: 80.0,
-                  //             decoration: BoxDecoration(
-                  //               shape: BoxShape.circle,
-                  //               image: DecorationImage(
-                  //                 image: AssetImage('assets/${nutri[3]}'),
-                  //                 fit: BoxFit.cover,
-                  //               ),
-                  //             ),
-                  //           ),
-                  //           SizedBox(
-                  //             height: 7.0,
-                  //           ),
-                  //           Text('23% Sugar')
-                  //         ],
-                  //       ),
-                  //       SizedBox(
-                  //         width: 20.0,
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
+                  ),
                   SizedBox(
                     height: 10.0,
                   ),
@@ -230,14 +226,14 @@ class foodAbout extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 5),
-                   if(preparation != null) 
+                   if(foodList.preparation != null) 
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
                         padding: EdgeInsets.only(left: 8),
-                        child:Text(preptime)),
+                        child:Text(foodList.time)),
                   ),
-                  if(preparation == null)
+                  if(foodList.preparation == null)
                   Padding(
                       padding: EdgeInsets.all(5.0),
                       child:Text('empty')),
@@ -262,7 +258,7 @@ class foodAbout extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: Padding(
                         padding: EdgeInsets.only(left: 8),
-                        child:Text(cuisine)),
+                        child:Text(foodList.cuisine)),
                   ),
                   SizedBox(
                     height: 10.0,
@@ -285,7 +281,7 @@ class foodAbout extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 8),
-                      child: Text(taste),
+                      child: Text(foodList.taste),
                     )
                   ),
                   

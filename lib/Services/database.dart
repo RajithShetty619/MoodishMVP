@@ -86,8 +86,10 @@ class DatabaseService {
 
   /* //////////////////////////////////////////////////// POLL METHOD///////////////////////////////////// */
 
-  Future<void> likeMethod(int ) async {
-
+  Future<void> likePoll({String sr_no,String opt,String like}) async {
+    print(sr_no+"  "+opt);
+    DocumentReference _poll = Firestore.instance.collection('polls').document(sr_no);
+    _poll.setData({opt:like});
   }
 }
 

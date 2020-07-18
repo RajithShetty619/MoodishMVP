@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/foodDelivery.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/foodabout.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/foodrecipe.dart';
@@ -11,29 +12,11 @@ class Food_Info extends StatefulWidget {
 
   const Food_Info ({
     Key key,
-    @required this.name,
-    @required this.descbox,
-    @required this.image,
-    @required this.nutrient,
-    @required this.preparation,
-    @required this.taste,
-    @required this.preptime,
-    @required this.cuisine,
-    @required this.mealtype,
-    @required this.deter
+    this.foodList,
 
   }):super (key:key);
-
-  final name;
-  final image;
-  final descbox;
-  final nutrient;
-  final preparation;
-  final taste;
-  final preptime;
-  final cuisine;
-  final mealtype;
-  final deter;
+    final FoodListModel foodList;
+  
 
   @override
   _Food_InfoState createState() => _Food_InfoState();
@@ -86,6 +69,7 @@ class _Food_InfoState extends State<Food_Info> {
         child: ListView.builder(
           itemCount: rest.length,
           shrinkWrap: true,
+          // physics: NeverScrollableScrollPhysics(),
           scrollDirection: Axis.vertical,
           itemBuilder: (context, index) {
             return Column(
@@ -94,7 +78,7 @@ class _Food_InfoState extends State<Food_Info> {
                   Column(
                     children: <Widget>[
                       CachedNetworkImage(
-                        imageUrl: widget.image,
+                        imageUrl: widget.foodList.images,
                         imageBuilder: (context, imageprovider){
                           return  Container(
                           height: 300.0,
@@ -128,7 +112,7 @@ class _Food_InfoState extends State<Food_Info> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              widget.name,
+                              widget.foodList.foodName,
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 30.0,
@@ -156,9 +140,9 @@ class _Food_InfoState extends State<Food_Info> {
                       ),
                       Row(
                         children: <Widget>[
-                          f_desc(title: widget.taste),
-                          f_desc(title: widget.mealtype),
-                          f_desc(title: widget.deter),
+                          f_desc(title: widget.foodList.taste),
+                          f_desc(title: widget.foodList.meal_type),
+                          f_desc(title: widget.foodList.deter),
                           
                           SizedBox(
                             width: 5.0,
@@ -170,7 +154,7 @@ class _Food_InfoState extends State<Food_Info> {
                         child: Container(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            widget.cuisine ,
+                            widget.foodList.cuisine ,
                             style: TextStyle(fontSize: 18.0),
                           ),
                         ),
@@ -243,20 +227,11 @@ class _Food_InfoState extends State<Food_Info> {
                         ),
                       ),
                       if (indx == 0) Container(height: 700, child: FoodAbout(
-                        descbox: widget.descbox,
-                        nutrient: widget.nutrient,
-                        preparation: widget.preparation,
-                        taste: widget.taste,
-                        preptime: widget.preptime,
-                        cuisine: widget.cuisine,
+                        foodList: widget.foodList,
                       )),
                       if (indx == 1)
-                        Container(height: 800, child: FoodRecipe(
-                          preparation: widget.preparation,
-                        taste: widget.taste,
-                        preptime: widget.preptime,
-                        nutrient: widget.nutrient,
-                        cuisine: widget.cuisine,
+                        Container(height: 1000,child: FoodRecipe(
+                          foodList: widget.foodList,
                         )),
                       if (indx == 3)
                         Container(height: 800, child: FoodDelivery()),
