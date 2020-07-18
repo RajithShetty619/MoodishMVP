@@ -25,14 +25,15 @@ class Explore extends StatefulWidget {
 class _ExploreState extends State<Explore> {
   bool keepAlive = false;
 
+  /* index used for situation */
   int indx = 0;
-  int indxT = 0;
-
+  /* index used for taste */
+  int indxT = 0; 
+  /* dont remember mohit look into it :) */
   int _selected = 1;
-  bool _getFoodCalled = false;
-  bool loadingData = false;
-  bool loadingData1 = false;
-  bool loadingData2 = false;
+  bool _getFoodCalled = false; 
+
+  /* constructor initialised with list name  */
   DatabaseQuery _dq = DatabaseQuery(listName: "0");
   DatabaseQuery _dqtsp = DatabaseQuery(listName: "tsp");
   DatabaseQuery _dqsituation0 = DatabaseQuery(listName: "s0");
@@ -45,6 +46,7 @@ class _ExploreState extends State<Explore> {
   @override
   void initState() {
     super.initState();
+    /* check to run it only once */
     if (!_getFoodCalled) {
       checkDate().then((check) {
         _dqtsp.getFood(
@@ -100,19 +102,22 @@ class _ExploreState extends State<Explore> {
     }
   }
 
+  /* this function returns 0 if app opened on new day
+    and zero if opened on the same day used to update data daily */
   Future<int> checkDate() async {
     Box _box = await Hive.openBox("date");
     String saveDate = await _box.get("date");
     DateTime now = DateTime.now();
     String date = DateFormat('EEE, M/d/y').format(now);
     if (date == saveDate) {
-      return /* 1 */ 0;
+      return 1 ; //change to zero for testing purpose
     } else {
       _box.put("date", date);
       return 0;
     }
   }
 
+  /* used to get value associated with list  */
   List<dynamic> getValue(String _list) {
     switch (_list) {
       case 't0':
@@ -189,6 +194,7 @@ class _ExploreState extends State<Explore> {
                                 ),
                               ),
                             ),
+                            /* todays special list display widget */
                             Expanded(
                               child: BlocConsumer<FoodBloc,
                                   Map<String, List<FoodListModel>>>(
@@ -290,17 +296,7 @@ class _ExploreState extends State<Explore> {
                                             }
                                           },
                                         ),
-                                      ),
-                                      if (loadingData1)
-                                        Container(
-                                          color: Colors.brown[100],
-                                          child: Center(
-                                            child: SpinKitChasingDots(
-                                              color: Colors.brown,
-                                              size: 50.0,
-                                            ),
-                                          ),
-                                        )
+                                      ), 
                                     ],
                                   );
                                 },

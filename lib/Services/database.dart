@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Services/authenticate.dart';
 import 'package:moodish_mvp/Services/storage.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
@@ -8,16 +9,12 @@ class DatabaseService {
   final CollectionReference userName =
       Firestore.instance.collection('Username');
 
-  final CollectionReference polls = Firestore.instance.collection('polls');
+/* ////////////////////////////////////////////////////////////////////// USERNAMEMETHODS ////////////////////////////////////////////////////////// */
 
   Future<void> updateUserData({String uid, String email, String name}) async {
     return await userName.document(uid).setData({'name': name, 'email': email});
   }
-/* 
-  Future<void> setPreference() async {
-    return await userName.document
-  } */
-
+  /* used to display name and email in profile */
   Future<List<String>> returnUser() async {
     List<String> _data = [];
     DocumentSnapshot user =
@@ -27,30 +24,39 @@ class DatabaseService {
     return _data;
   }
 
+/* ////////////////////////////////////////////////////////////////////// FOODLISTMETHODS ////////////////////////////////////////////////////////// */
+
+  /* converts snapshot from db into foodListModel */
   Future<List<FoodListModel>> listFromSnapshot(QuerySnapshot snapshot) async {
+    /* Future wait is used to make sure each iteration
+      of the map is awaited by the code */
     return Future.wait(snapshot.documents.map((doc) async {
       Map<String, dynamic> _docData = doc.data;
+      /* convert image name to url from storage */
       String _url = await Storage().getUrl(_docData["image"]);
+
       List<String> _preparation = [];
       List<String> _ingredients = [];
       int i = 2;
+      /* done coz first step is named preparation for some reason */
       _preparation.add(await _docData["preparation"]);
-
+      /* converting step1,step2..... to List of preparation */
       while (_docData["step$i"] != null) {
         _preparation.add(await _docData["step$i"]);
         i++;
       }
+      /* initialized */
       i = 2;
-
+      /* same reason as preparation */
       _ingredients.add(await _docData["ingredients"]);
 
+      /* converting step1,step2..... to List of preparation */ 
       while (await _docData["ingredient$i"] != null) {
         _ingredients.add(await _docData["ingredient$i"]);
         ++i;
-      }
-      print(_preparation);
-      print(_ingredients);
-
+      } 
+      /* might look overwhelming but just 
+      initialized constructor of FoodListModel */
       return FoodListModel(
         foodName: _docData["food_item"] ?? '',
         deter: _docData["deter"] ?? '',
@@ -73,15 +79,19 @@ class DatabaseService {
         mood: _docData["mood"] ?? '',
         restaurants: _docData["restaurants"] ?? '',
         delivery: _docData["delivery"] ?? '',
+        sr_no: _docData["sr_no"] ?? ''
       );
     }).toList());
   }
 
-  // Future<void> getPoll()  async {
-  //   Query q = polls.
-  // }
+  /* //////////////////////////////////////////////////// POLL METHOD///////////////////////////////////// */
+
+  Future<void> likeMethod(int ) async {
+
+  }
 }
-/* 
+
+/* example of Database Snapshot single DocumentSnapshot looks like this 
  "mood": "anger",
             "food_item": "American Pork Barbecue",
             "recipe": "The meat is pulled or chopped into moist strands, dressed with some remaining \"mop\" (the vinegar-and-red-pepper basting sauce), and mixed with cracklings.",

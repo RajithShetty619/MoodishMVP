@@ -46,6 +46,8 @@ class FoodListModel {
   final String restaurants;
   @HiveField(20)
   final String delivery;
+  @HiveField(21)
+  final String sr_no ;
 
   FoodListModel(
       {this.foodName,
@@ -68,11 +70,12 @@ class FoodListModel {
       this.carbohydrates,
       this.mood,
       this.protein,
-      this.restaurants});
+      this.restaurants,
+      this.sr_no});
 
 /*  
 run command: flutter packages pub run build_runner build --delete-conflicting-outputs
- {
+ {      "sr_no": 2
 		   "mood": "anger",
             "food_item": "American Pork Barbecue",
             "recipe": "The meat is pulled or chopped into moist strands, dressed with some remaining \"mop\" (the vinegar-and-red-pepper basting sauce), and mixed with cracklings.",
