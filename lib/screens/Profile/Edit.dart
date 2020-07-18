@@ -148,7 +148,7 @@ Widget getListTile(String category,String name,BuildContext context,int tile){
   );
 }
 
-_onAlertWithCustomContentPressed(String category,String name,BuildContext context) {
+_onAlertWithCustomContentPressed(String category,String name,context) {
   Alert(
       context: context,
       title: category,
