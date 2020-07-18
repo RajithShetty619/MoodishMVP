@@ -1,32 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/food_info.dart';
 
 class FoodEverySituation extends StatefulWidget {
   const FoodEverySituation({
     Key key,
-    @required this.image,
-    @required this.title,
-    @required this.desc,
-    @required this.cuisine,
-    @required this.preptime,
-    @required this.deter,
-    @required this.nutrient,
-    @required this.preparation,
-    @required this.taste,
-    @required this.mealtype,
+    this.foodList,
   }) : super(key: key);
 
-  final image;
-  final title;
-  final desc;
-  final cuisine;
-  final preptime;
-  final deter;
-  final nutrient;
-  final preparation;
-  final taste;
-  final mealtype;
+  final FoodListModel foodList;
 
   @override
   _FoodEverySituationState createState() => _FoodEverySituationState();
@@ -43,22 +26,13 @@ class _FoodEverySituationState extends State<FoodEverySituation> {
               context,
               MaterialPageRoute(
                   builder: (context) => Food_Info(
-                        name: widget.title,
-                        descbox: widget.desc,
-                        image: widget.image,
-                        nutrient: widget.nutrient,
-                        preparation: widget.preparation,
-                        taste: widget.taste,
-                        preptime: widget.preptime,
-                        cuisine: widget.cuisine,
-                        mealtype: widget.mealtype,
-                        deter: widget.deter,
+                        foodList: widget.foodList,
                       )));
         },
         child: Stack(
           children: <Widget>[
             CachedNetworkImage(
-              imageUrl: widget.image,
+              imageUrl: widget.foodList.images,
               imageBuilder: (context, imageProvider) {
                 return Container(
                   margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -93,7 +67,7 @@ class _FoodEverySituationState extends State<FoodEverySituation> {
                       Align(
                           alignment: Alignment.center,
                           child: Text(
-                            widget.title,
+                            widget.foodList.foodName,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 28,
@@ -101,7 +75,7 @@ class _FoodEverySituationState extends State<FoodEverySituation> {
                           )),
                       SizedBox(height: 10),
                       Text(
-                        widget.deter,
+                        widget.foodList.deter,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,

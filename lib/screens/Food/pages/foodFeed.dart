@@ -133,16 +133,7 @@ class _FoodFeedState extends State<FoodFeed> {
                             itemCount: foodList["0"].length ,
                             itemBuilder: (BuildContext context, index) { 
                                 return Mood_Food(
-                                  image: foodList['0'][index].images,
-                                  name: foodList["0"][index].foodName,
-                                  deter: foodList["0"][index].deter,
-                                  cuisine: foodList['0'][index].cuisine,
-                                  preptime: foodList['0'][index].time,
-                                  description: foodList['0'][index].description[0],
-                                  nutrient: foodList['0'][index].nutrients,
-                                  preparation: foodList['0'][index].preparation[0],
-                                  taste: foodList['0'][index].taste,
-                                  mealtype: foodList['0'][index].meal_type,
+                                  foodList: foodList["0"][index],
                                 ); 
                             },
                           ),
