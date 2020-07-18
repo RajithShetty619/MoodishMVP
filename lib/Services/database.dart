@@ -76,6 +76,10 @@ class DatabaseService {
       );
     }).toList());
   }
+
+  // Future<void> getPoll()  async {
+  //   Query q = polls.
+  // }
 }
 /* 
  "mood": "anger",

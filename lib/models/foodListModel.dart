@@ -1,57 +1,74 @@
 import 'package:hive/hive.dart';
- 
+
 part 'foodListModel.g.dart';
 
 @HiveType(typeId: 0)
 class FoodListModel {
   @HiveField(0)
-  final String foodName ;
-  @HiveField(1) 
-  final String deter ;
+  final String foodName;
+  @HiveField(1)
+  final String deter;
   @HiveField(2)
-  final String cuisine ;
+  final String cuisine;
   @HiveField(3)
   final String meal_type;
   @HiveField(4)
-  final String images ;
+  final String images;
   @HiveField(5)
-  final String  description;
+  final String description;
   @HiveField(6)
-  final String  recipe;
+  final String recipe;
   @HiveField(7)
-  final List<String> ingredients ;
+  final List<String> ingredients;
   @HiveField(8)
-  final String servings ;
+  final String servings;
   @HiveField(9)
   final String time;
   @HiveField(10)
-  final String nutrients ;
+  final String nutrients;
   @HiveField(11)
   final String taste;
   @HiveField(12)
-  final String situation ;
+  final String situation;
   @HiveField(13)
-  final List<String> preparation ;
-    @HiveField(14)
-  final String calories ;
-    @HiveField(15)
-  final String mood ;
-    @HiveField(16)
-  final String fat ;
-     @HiveField(17)
-  final String carbohydrates ; 
-     @HiveField(18)
-  final String protein ;
-       @HiveField(19)
-  final String restaurants ;
-         @HiveField(20)
-  final String delivery ;
-  
+  final List<String> preparation;
+  @HiveField(14)
+  final String calories;
+  @HiveField(15)
+  final String mood;
+  @HiveField(16)
+  final String fat;
+  @HiveField(17)
+  final String carbohydrates;
+  @HiveField(18)
+  final String protein;
+  @HiveField(19)
+  final String restaurants;
+  @HiveField(20)
+  final String delivery;
 
-
-  FoodListModel({this.foodName,this.deter,this.cuisine,this.meal_type,this.images,this.description,
-              this.recipe,this.ingredients,this.servings,this.time,this.nutrients,this.situation,this.taste,this.preparation,
-              this.delivery,this.calories,this.fat,this.carbohydrates,this.mood,this.protein,this.restaurants});
+  FoodListModel(
+      {this.foodName,
+      this.deter,
+      this.cuisine,
+      this.meal_type,
+      this.images,
+      this.description,
+      this.recipe,
+      this.ingredients,
+      this.servings,
+      this.time,
+      this.nutrients,
+      this.situation,
+      this.taste,
+      this.preparation,
+      this.delivery,
+      this.calories,
+      this.fat,
+      this.carbohydrates,
+      this.mood,
+      this.protein,
+      this.restaurants});
 
 /*  
 run command: flutter packages pub run build_runner build --delete-conflicting-outputs
