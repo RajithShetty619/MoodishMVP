@@ -9,33 +9,48 @@ class DineOut extends StatefulWidget {
 class _DineOutState extends State<DineOut> {
   List<_Restaurants> rest = [
     _Restaurants(
-        image: 'downtown_china.jpg',
-        name: 'Downtown China',
-        desc: 'Casual Dining - Chinese, Thai, Asian, Seafood, Momos, Beverages, Desserts \nAndheri Lokhandwala, Andheri West'),
+        image: 'blackolive.png',
+        image1: 'blackolive1.png',
+        image2: 'blackolive2.png',
+        name: 'Black Olive',
+        desc: 'Italian, Continental, Fast Food, Health Food \nVeera Desai, Andheri West'),
     _Restaurants(
-        image: 'family_tree.jpg',
-        name: 'Family Tree',
-        desc:'Casual Dining - Biryani, Chinese, North Indian, Pizza, South Indian, Desserts \nGhatkopar East'),
+        image: 'chaipecharcha.png',
+        image1: 'chaipecharcha1.png',
+        image2: 'chaipecharcha2.png',
+        name: 'Chai pe Charcha',
+        desc:'North Indian ,Street Food ,Pure Vegetarian ,Breakfast ,Fast Food \nPrabhadevi, Mumbai '),
     _Restaurants(
-        image: 'frozen_bottle.jpg',
-        name: 'Frozen Bottle',
-        desc:'Beverage Shop, Dessert Parlor - Beverages, Desserts, Ice Cream \nMatunga East'),
+        image: 'dominos.png',
+        image1: 'dominos1.png',
+        image2: 'dominos2.png',
+        name: 'Dominos',
+        desc:'Italian ,Fast Food ,Breakfast \nChakala-andheri East, Mumbai'),
     _Restaurants(
-        image: 'irish_house.png',
-        name: 'The Irish House',
-        desc: 'Pub, Casual Dining - European, American \nLower Parel'),
+        image: 'jimmys.png',
+        image1: 'jimmys1.png',
+        image2: 'jimmys2.png',
+        name: 'Jimmy\'s',
+        desc: 'American ,Fast Food \nNagar-malad West, Mumbai'),
     _Restaurants(
-        image: 'Mainland_China.jpg',
-        name: 'Mainland China',
-        desc:'Casual Dining - Chinese, Asian, Sushi, Japanese, Thai \nSakinaka'),
+        image: 'bayview.png',
+        image1: 'bayview1.png',
+        image2: 'bayview2.png',
+        name: 'Bay View',
+        desc:'Chinese ,Mughlai ,North Indian ,Indian ,Tandoori ,American \nColaba, Mumba'),
     _Restaurants(
-        image: 'pop_tates.jpg',
-        name: 'Pop Tates',
-        desc:'Bar, Casual Dining - Continental, Chinese, Italian, Beverages \nLower Parel'),
+        image: 'pizzaah.png',
+        image1: 'pizzaah1.png',
+        image2: 'pizzaah.png',
+        name: 'PizzAah! District',
+        desc:'Italian ,Fast Food \n Kandivali West, Mumbai'),
     _Restaurants(
-        image: 'tipsy_gipsy.jpg',
-        name: 'Tipsy Gipsy',
-        desc:'Bar, Casual Dining - Continental, Mediterranean, Italian \nVeera Desai Area'),
+        image: 'thambbi.png',
+        image1: 'thambbi1.png',
+        image2: 'thambbi2.png',
+        name: 'Thambbi',
+        desc:'Pure Vegetarian ,Punjabi ,South Indian ,North Indian ,Indian ,Breakfast \nKurla West, Mumbai '),
+
   ];
 
   @override
@@ -168,7 +183,7 @@ class _DineOutState extends State<DineOut> {
                             onTap: (){
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
-                                    return HomePage();
+                                    return HomePage(imgName: rest[index].image,imgName1: rest[index].image1,imgName2: rest[index].image2,restName: rest[index].name,);
                                   }));
                             },
                             child: Card(
@@ -230,6 +245,8 @@ class _Restaurants {
   String image;
   String name;
   String desc;
+  String image1;
+  String image2;
 
-  _Restaurants({this.image, this.name, this.desc});
+  _Restaurants({this.image, this.name, this.desc,this.image1,this.image2});
 }
