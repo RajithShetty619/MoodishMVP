@@ -140,6 +140,7 @@ Widget getListTile(String category,String name,BuildContext context,int tile){
             ),),
         ),
         Text(name,
+          overflow: TextOverflow.ellipsis,
           style: TextStyle(
               fontSize: 20.0
           ),)
