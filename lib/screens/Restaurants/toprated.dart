@@ -9,39 +9,53 @@ class TopRated extends StatefulWidget {
 class _TopRatedState extends State<TopRated> {
   List<_Restaurants> rest = [
     _Restaurants(
-        image: 'downtown_china.jpg',
-        name: 'Downtown China',
+        image: 'bayview.png',
+        image1: 'bayview1.png',
+        image2: 'bayview2.png',
+        name: 'Bay View',
         desc:
-        'Casual Dining - Chinese, Thai, Asian, Seafood, Momos, Beverages, Desserts \nAndheri Lokhandwala, Andheri West'),
+        'Casual Dining - Seafood, North Indian, Chinese\nBorivali West'),
     _Restaurants(
-        image: 'family_tree.jpg',
-        name: 'Family Tree',
+        image: 'canto.png',
+        image1: 'canto1.png',
+        image2: 'canto2.png',
+        name: 'Canto- Resto & Bar',
         desc:
-        'Casual Dining - Biryani, Chinese, North Indian, Pizza, South Indian, Desserts \nGhatkopar East'),
+        'Casual Dining, Bar - North Indian, Continental, Italian, Lebanese\nLower Parel'),
     _Restaurants(
-        image: 'frozen_bottle.jpg',
-        name: 'Frozen Bottle',
+        image: 'quessoristorante.png',
+        image1: 'quessoristorante1.png',
+        image2: 'quessoristorante2.png',
+        name: 'Quesso Ristorante',
         desc:
-        'Beverage Shop, Dessert Parlor - Beverages, Desserts, Ice Cream \nMatunga East'),
+        'Casual Dining, Bar - Continental, Mexican, Italian, Mediterranean, Thai, Desserts\nOshiwara, Andheri West'),
     _Restaurants(
-        image: 'irish_house.png',
-        name: 'The Irish House',
-        desc: 'Pub, Casual Dining - European, American \nLower Parel'),
-    _Restaurants(
-        image: 'Mainland_China.jpg',
-        name: 'Mainland China',
+        image: 'burgerbrasserie.png',
+        image1: 'burgerbrasserie1.png',
+        image2: 'burgerbrasserie2.png',
+        name: 'Burger Brasserie',
         desc:
-        'Casual Dining - Chinese, Asian, Sushi, Japanese, Thai \nSakinaka'),
+        'Quick Bites - Burger, Fast Food, Beverages \nAndheri Lokhandwala, Andheri West'),
     _Restaurants(
-        image: 'pop_tates.jpg',
-        name: 'Pop Tates',
-        desc:
-        'Bar, Casual Dining - Continental, Chinese, Italian, Beverages \nLower Parel'),
+        image: 'blackolive.png',
+        image1: 'blackolive1.png',
+        image2: 'blackolive2.png',
+        name: 'Black Olive',
+        desc: 'Healthy Food, Continental, Italian \nOshiwara, Andheri West'),
     _Restaurants(
-        image: 'tipsy_gipsy.jpg',
-        name: 'Tipsy Gipsy',
+        image: 'sevenkitchen.png',
+        image1: 'sevenkitchen1.png',
+        image2: 'sevenkitchen2.png',
+        name: 'Seven Kitchen',
         desc:
-        'Bar, Casual Dining - Continental, Mediterranean, Italian \nVeera Desai Area'),
+        'Fine Dining - Chinese, North Indian, Italian, European, Desserts \nLower Parel'),
+    _Restaurants(
+        image: 'sincity.png',
+        image1: 'sincity1.png',
+        image2: 'sincity2.png',
+        name: 'Sin City',
+        desc:
+        'Bar, Casual Dining - Continental, North Indian, Thai, Italian \nAndheri Lokhandwala, Andheri West'),
   ];
 
   @override
@@ -174,7 +188,7 @@ class _TopRatedState extends State<TopRated> {
                             onTap: () {
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
-                                    return HomePage();
+                                    return HomePage(imgName: rest[index].image,imgName1: rest[index].image1,imgName2: rest[index].image2,restName: rest[index].name,);
                                   }));
                             },
                             child: Card(
@@ -236,6 +250,8 @@ class _Restaurants {
   String image;
   String name;
   String desc;
+  String image1;
+  String image2;
 
-  _Restaurants({this.image, this.name, this.desc});
+  _Restaurants({this.image, this.name, this.desc,this.image1,this.image2});
 }
