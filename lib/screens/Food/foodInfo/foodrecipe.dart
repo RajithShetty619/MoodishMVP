@@ -71,27 +71,28 @@ class _FoodRecipeState extends State<FoodRecipe> {
                           itemCount: widget.foodList.ingredients.length,
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
-                          itemBuilder: (context , index){
-                            return Padding(
-                        padding: const EdgeInsets.only(left: 10.0),
-                        child: Container(
-                          margin: EdgeInsets.all(10.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black, width: 2),
-                            borderRadius: BorderRadius.circular(15),
-                            // color: Colors.blue[200],
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Text(
+                          itemBuilder: (BuildContext context ,index){
+                            print(widget.foodList.ingredients[index]);
+                            return Text(
                               widget.foodList.ingredients[index],
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 20.0, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                      );
+                            );
+                            // return Container(
+                            //   margin: EdgeInsets.all(10.0),
+                            //   decoration: BoxDecoration(
+                            //     border: Border.all(color: Colors.black, width: 2),
+                            //     borderRadius: BorderRadius.circular(15),
+                            //     // color: Colors.blue[200],
+                            //   ),
+                            //   child: Padding(
+                            //     padding: const EdgeInsets.all(5.0),
+                            //     child: Text(
+                            //       widget.foodList.ingredients[index],
+                            //       textAlign: TextAlign.center,
+                            //       style: TextStyle(
+                            //            fontWeight: FontWeight.bold),
+                            //     ),
+                            //   ),
+                            // );
 
                           },
 
