@@ -31,7 +31,7 @@ class DatabaseService {
     /* Future wait is used to make sure each iteration
       of the map is awaited by the code */
     return Future.wait(snapshot.documents.map((doc) async {
-      Map<String, dynamic> _docData = doc.data;
+      Map<String, dynamic> _docData =    doc.data;
       /* convert image name to url from storage */
       String _url = await Storage().getUrl(_docData["image"]);
 
@@ -39,24 +39,33 @@ class DatabaseService {
       List<String> _ingredients = [];
       int i = 2;
       /* done coz first step is named preparation for some reason */
-      _preparation.add(await _docData["preparation"]);
+      _preparation.add(  _docData["preparation"]);
       /* converting step1,step2..... to List of preparation */
-      while (_docData["step$i"] != null) {
-        _preparation.add(await _docData["step$i"]);
+
+      while (_docData["step $i"] != null) {
+        _preparation.add(  _docData["step $i"]);
+        print( _docData["step $i"]);
         i++;
       }
       /* initialized */
       i = 2;
       /* same reason as preparation */
-      _ingredients.add(await _docData["ingredients"]);
-
+      _ingredients.add(  _docData["ingredients"]);
+      print(_docData["ingredient2"] );
+      print("ingredient $i");
       /* converting step1,step2..... to List of preparation */ 
-      while (await _docData["ingredient$i"] != null) {
-        _ingredients.add(await _docData["ingredient$i"]);
+      while (_docData["ingredient $i"] != null) {
+        _ingredients.add(  _docData["ingredient $i"]);
+        print(_docData["ingredient $i"]);
+        
         ++i;
       } 
       /* might look overwhelming but just 
       initialized constructor of FoodListModel */
+      print("/////////////////////////////////////////////////////////////////////////////////");
+
+      print(_ingredients);
+      print(_preparation);
       return FoodListModel(
         foodName: _docData["food_item"] ?? '',
         deter: _docData["deter"] ?? '',
@@ -82,6 +91,7 @@ class DatabaseService {
         sr_no: _docData["sr_no"] ?? ''
       );
     }).toList());
+    
   }
 
   /* //////////////////////////////////////////////////// POLL METHOD///////////////////////////////////// */
@@ -96,13 +106,15 @@ class DatabaseService {
 /* example of Database Snapshot single DocumentSnapshot looks like this 
  "mood": "anger",
             "food_item": "American Pork Barbecue",
+
             "recipe": "The meat is pulled or chopped into moist strands, dressed with some remaining \"mop\" (the vinegar-and-red-pepper basting sauce), and mixed with cracklings.",
+
             "preparation": "Cut roast into quarters. Mix brown sugar, salt, paprika and pepper; rub over meat. Place meat and onions in a 5-qt. slow cooker.",
             "step2": "In a small bowl, whisk vinegar, Worcestershire sauce, sugar and seasonings; pour over roast. Cook, covered, on low 6-8 hours or until meat is tender.",
             "step3": "Remove roast; cool slightly. Reserve 1-1/2 cups cooking juices; discard remaining juices. Skim fat from reserved juices. Shred pork with two forks. Return pork and reserved juices to slow cooker; heat through. Serve on buns with coleslaw.",
             "ingredients": "\\n 1 boneless pork shoulder butt roast (4 to 5 pounds)\\n",
-            "ingredient2": "2 tablespoons brown sugar\\n",
-            "ingredient3": "2 teaspoons salt\\n",
+            "ingredient 2": "2 tablespoons brown sugar\\n",
+            "ingredient 3": "2 teaspoons salt\\n",
             "ingredient4": "1 teaspoon paprika\\n",
             "ingredient5": "1/2 teaspoon pepper\\n",
             "ingredient6": "2 medium onions, quartered\\n",
