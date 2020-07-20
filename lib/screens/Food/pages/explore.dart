@@ -110,7 +110,7 @@ class _ExploreState extends State<Explore> {
     DateTime now = DateTime.now();
     String date = DateFormat('EEE, M/d/y').format(now);
     if (date == saveDate) {
-      return 1 ; //change to zero for testing purpose
+      return 1 ; //change 1 to 0 for testing purpose
     } else {
       _box.put("date", date);
       return 0;

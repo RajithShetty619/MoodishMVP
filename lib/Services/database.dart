@@ -24,6 +24,17 @@ class DatabaseService {
     return _data;
   }
 
+/* ////////////////////////////////////////////////////////////////////////  upload PHOTOMETHOD///////////////////////////////////////////////////// */
+
+Future uploadFile(File image) async {    
+   StorageReference storageReference = FirebaseStorage.instance    
+       .ref()    
+       .child('user/'+Authenticate().returnUid());    
+   StorageUploadTask uploadTask = storageReference.putFile(image);    
+   await uploadTask.onComplete;    
+   print('File Uploaded');     
+ }
+
 /* ////////////////////////////////////////////////////////////////////// FOODLISTMETHODS ////////////////////////////////////////////////////////// */
 
   /* converts snapshot from db into foodListModel */
@@ -86,15 +97,15 @@ class DatabaseService {
 
   /* //////////////////////////////////////////////////// POLL METHOD///////////////////////////////////// */
 
-  Future<void> likePoll({String sr_no,String opt,String like}) async {
+  Future<void> likePoll({String sr_no,String opt,int like}) async {
     print(sr_no+"  "+opt);
     DocumentReference _poll = Firestore.instance.collection('polls').document(sr_no);
-    _poll.setData({opt:like});
+    _poll.setData({opt:like},merge: true);
   }
 }
 
 /* example of Database Snapshot single DocumentSnapshot looks like this 
- "mood": "anger",
+            "mood": "anger",
             "food_item": "American Pork Barbecue",
             "recipe": "The meat is pulled or chopped into moist strands, dressed with some remaining \"mop\" (the vinegar-and-red-pepper basting sauce), and mixed with cracklings.",
             "preparation": "Cut roast into quarters. Mix brown sugar, salt, paprika and pepper; rub over meat. Place meat and onions in a 5-qt. slow cooker.",

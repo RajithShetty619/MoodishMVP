@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 //import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'hometoptabs.dart';
 
-class HomePage extends StatefulWidget {
-  final Widget child;
-  HomePage({Key key, this.child}) : super(key: key);
+class HomePage extends StatefulWidget { 
+  final String imgName;
+  HomePage({Key key,this.imgName}) : super(key: key);
   _HomePageState createState() => _HomePageState();
 }
 
@@ -24,10 +24,10 @@ class _HomePageState extends State<HomePage> {
       dotSize: 5.0,
       indicatorBgPadding: 9.0,
       images: [
-        new AssetImage('img/3.png'),
-        new AssetImage('img/variety-of-fruits-890507.jpg'),
-        new AssetImage('img/3.png'),
-        new AssetImage('img/4.png'),
+          Image.asset('img/variety-of-fruits-890507.jpg'),
+          AssetImage('img/variety-of-fruits-890507.jpg'),
+          AssetImage('img/3.png'),
+          AssetImage('img/4.png'),
       ],
       animationCurve: Curves.fastOutSlowIn,
       animationDuration: Duration(microseconds: 1500),

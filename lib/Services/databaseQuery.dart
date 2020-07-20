@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
+import 'package:moodish_mvp/models/factsModel.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/models/pollsModel.dart';
 import 'database.dart';
@@ -12,6 +13,7 @@ class DatabaseQuery {
       Firestore.instance.collection('food');
 
   final CollectionReference polls = Firestore.instance.collection('polls');
+  final CollectionReference facts = Firestore.instance.collection('facts');
   final String listName;
   DatabaseQuery({this.listName});
 
@@ -143,8 +145,11 @@ class DatabaseQuery {
         await q.getDocuments().then((value) => value.documents);
 
     /* saving last poll to be displayed*/
-    String _lastpoll = await _snapshot[_snapshot.length - 1].data['value'];
-    await _box.put('lastpoll', _lastpoll);
+    try{String _lastpoll = await _snapshot[_snapshot.length - 1].data['value'];await _box.put('lastpoll', _lastpoll);}
+    catch(e){
+      await _box.put('lastpoll', null);
+    }
+    
 
     /* list of polls is made and returned */
     return _snapshot.map((doc) {
@@ -157,10 +162,38 @@ class DatabaseQuery {
           C: _docData['C'] ?? '',
           D: _docData['D'] ?? '',
           sr_no: _docData['sr_no'] ?? '',
-          aLike: _docData['aLike'] ?? '',
-          bLike: _docData['bLike'] ?? '',
-          cLike: _docData['cLike'] ?? '',
-          dLike: _docData['dLike'] ?? '');
+          aLike: _docData['aLike'] ?? 0,
+          bLike: _docData['bLike'] ?? 0,
+          cLike: _docData['cLike'] ?? 0,
+          dLike: _docData['dLike'] ?? 0);
     }).toList();
+  }
+
+   Future<List<FactModel>> getFact() async {
+    /* retrieving last polls for querying */
+    Box _box = await Hive.openBox('fact');
+    dynamic last = _box.get('lastfact');
+    /*  */
+    Query q = facts
+        .where('fact', isGreaterThan: '')
+        .startAfter([last])
+        .orderBy('fact')
+        .limit(3);
+    List<DocumentSnapshot> _snapshot =
+        await q.getDocuments().then((value) => value.documents);
+
+    /* saving last poll to be displayed*/
+    try{String _lastfact = await _snapshot[_snapshot.length - 1].data['fact'];await _box.put('lastfact', _lastfact);}
+    catch(e){
+      await _box.put('lastfact', null);
+    }
+    
+
+    /* list of polls is made and returned */
+    return _snapshot.map((doc) {
+      print(doc.data);
+      Map<String, dynamic> _docData = doc.data;
+      return  FactModel(factHeading:_docData['fact'], factStatment:_docData['factStatement']);
+      }).toList();
   }
 }

@@ -77,10 +77,10 @@ class _getListViewState extends State<getListView> {
             onTap: () async {
               if (!pollPressed) {
                 await DatabaseService()
-                    .likePoll(opt: "aLike", sr_no: widget.poll.sr_no,like:widget.poll.cLike);
+                    .likePoll(opt: "aLike", sr_no: widget.poll.sr_no,like:widget.poll.cLike+1);
                 setState(() {
                   _index = 1;
-                  pollPressed=true;
+                  // pollPressed=true;
                 });
               }
             },
@@ -90,7 +90,7 @@ class _getListViewState extends State<getListView> {
                 width: double.maxFinite,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
-                  border: Border.all( color: _index==1?Colors.blueAccent:Colors.black),
+                  border: Border.all( color: _index==1?Colors.blueAccent:Colors.black12),
                   color: Colors.grey[200],
                 ),
                 child: Center(
@@ -109,7 +109,7 @@ class _getListViewState extends State<getListView> {
             onTap: () async {
               if (!pollPressed) {
                 await DatabaseService()
-                    .likePoll(opt: "bLike", sr_no: widget.poll.sr_no,like:widget.poll.cLike);
+                    .likePoll(opt: "bLike", sr_no: widget.poll.sr_no,like:widget.poll.cLike+1);
                 setState(() {
                   _index = 2;
                   pollPressed=true;
@@ -122,7 +122,7 @@ class _getListViewState extends State<getListView> {
                 width: double.maxFinite,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
-                  border: Border.all( color: _index==2?Colors.blueAccent:Colors.black),
+                  border: Border.all( color: _index==2?Colors.blueAccent:Colors.black12),
                   color: Colors.grey[200],
                 ),
                 child: Center(
@@ -141,7 +141,7 @@ class _getListViewState extends State<getListView> {
             onTap: () async {
               if (!pollPressed) {
                 await DatabaseService()
-                    .likePoll(opt: "cLike", sr_no: widget.poll.sr_no,like:widget.poll.cLike);
+                    .likePoll(opt: "cLike", sr_no: widget.poll.sr_no,like:widget.poll.cLike+1);
                 setState(() {
                   _index = 3;
                   pollPressed=true;
@@ -154,7 +154,7 @@ class _getListViewState extends State<getListView> {
                 width: double.maxFinite,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
-                  border: Border.all( color: _index==3?Colors.blueAccent:Colors.black),
+                  border: Border.all( color: _index==3?Colors.blueAccent:Colors.black12),
                   color: Colors.grey[200],
                 ),
                 child: Center(
@@ -173,7 +173,7 @@ class _getListViewState extends State<getListView> {
             onTap: () async {
               if (!pollPressed) {
                 await DatabaseService()
-                    .likePoll(opt: "dLike", sr_no: widget.poll.sr_no,like:widget.poll.cLike);
+                    .likePoll(opt: "dLike", sr_no: widget.poll.sr_no,like:widget.poll.cLike+1);
                 setState(() {
                   _index = 4;
                   pollPressed=true;
@@ -186,7 +186,7 @@ class _getListViewState extends State<getListView> {
                 width: double.maxFinite,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
-                  border: Border.all( color: _index==4?Colors.blueAccent:Colors.black),
+                  border: Border.all( color: _index==4?Colors.blueAccent:Colors.black12),
                   color: Colors.grey[200],
                 ),
                 child: Center(

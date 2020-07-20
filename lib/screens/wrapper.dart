@@ -7,6 +7,8 @@ import 'package:moodish_mvp/screens/mainScreen.dart';
 import 'package:moodish_mvp/test.dart';
 import 'package:provider/provider.dart';
 
+import 'Restaurants/mood.dart';
+
 class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,7 @@ class Wrapper extends StatelessWidget {
       return SignIn();
     }
     else{
-      return MainScreen();
+      return  Mood();
     }
   }
 }
