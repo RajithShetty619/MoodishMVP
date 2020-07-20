@@ -1,33 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/food_info.dart';
 
 class Mood_Food extends StatefulWidget {
   const Mood_Food({
     Key key,
-    @required this.image,
-    @required this.name,
-    @required this.deter,
-    @required this.cuisine,
-    @required this.preptime,
-    @required this.description,
-    @required this.nutrient,
-    @required this.preparation,
-    @required this.taste,
-    @required this.mealtype,
+    this.foodList,
   }) : super(key: key);
 
-  final image;
-  final name;
-  final deter;
-  final cuisine;
-  final preptime;
-  final description;
-  final nutrient;
-  final preparation;
-  final taste;
-  final mealtype;
+  final FoodListModel foodList;
 
   @override
   _Mood_FoodState createState() => _Mood_FoodState();
@@ -46,22 +29,13 @@ class _Mood_FoodState extends State<Mood_Food> {
               context,
               MaterialPageRoute(
                   builder: (context) => Food_Info(
-                        name: widget.name,
-                        descbox: widget.description,
-                        image: widget.image,
-                        nutrient: widget.nutrient,
-                        preparation: widget.preparation,
-                        taste: widget.taste,
-                        preptime: widget.preptime,
-                        cuisine: widget.cuisine,
-                        mealtype: widget.mealtype,
-                        deter: widget.deter,
+                        foodList: widget.foodList,
                       )));
         },
         child: Stack(
           children: <Widget>[
             CachedNetworkImage(
-              imageUrl: widget.image,
+              imageUrl: widget.foodList.images,
               imageBuilder: (context, imageProvider) {
                 return Container(
                   margin: EdgeInsets.only(right: 20),
@@ -129,7 +103,7 @@ class _Mood_FoodState extends State<Mood_Food> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              widget.name,
+                              widget.foodList.foodName,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 30,
@@ -140,7 +114,7 @@ class _Mood_FoodState extends State<Mood_Food> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Text(
-                                widget.cuisine,
+                                widget.foodList.cuisine,
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 18),
                               ),
@@ -163,17 +137,7 @@ class _Mood_FoodState extends State<Mood_Food> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => Food_Info(
-                                                  name: widget.name,
-                                                  descbox: widget.description,
-                                                  image: widget.image,
-                                                  nutrient: widget.nutrient,
-                                                  preparation:
-                                                      widget.preparation,
-                                                  taste: widget.taste,
-                                                  preptime: widget.preptime,
-                                                  cuisine: widget.cuisine,
-                                                  mealtype: widget.mealtype, 
-                                                  deter: widget.deter,
+                                                  foodList: widget.foodList,
                                                 )));
                                   },
                                 ),

@@ -10,39 +10,53 @@ class PickUp extends StatefulWidget {
 class _PickUpState extends State<PickUp> {
   List<_Restaurants> rest = [
     _Restaurants(
-        image: 'downtown_china.jpg',
-        name: 'Downtown China',
+        image: 'bombayvintage.png',
+        image1: 'bombayvintage1.png',
+        image2: 'bombayvintage2.png',
+        name: 'Bombay Vintage',
         desc:
-            'Casual Dining - Chinese, Thai, Asian, Seafood, Momos, Beverages, Desserts \nAndheri Lokhandwala, Andheri West'),
+            'Casual Dining, Bar - North Indian, South Indian, Maharashtrian\nColaba'),
     _Restaurants(
-        image: 'family_tree.jpg',
-        name: 'Family Tree',
+        image: 'jamjar.png',
+        image1: 'jamjar1.png',
+        image2: 'jamjar2.png',
+        name: 'JamJar Diner',
         desc:
-            'Casual Dining - Biryani, Chinese, North Indian, Pizza, South Indian, Desserts \nGhatkopar East'),
+            'Casual Dining, Bar - American, Italian, Mexican, Healthy Food, Burger, Salad, Beverages\nHill Road, Bandra West'),
     _Restaurants(
-        image: 'frozen_bottle.jpg',
-        name: 'Frozen Bottle',
+        image: 'mabruk.png',
+        image1: 'mabruk1.png',
+        image2: 'mabruk2.png',
+        name: 'Mabruk- Sahara Star',
         desc:
-            'Beverage Shop, Dessert Parlor - Beverages, Desserts, Ice Cream \nMatunga East'),
+            'Fine Dining - Lebanese, Mediterranean \nVile Parle East'),
     _Restaurants(
-        image: 'irish_house.png',
-        name: 'The Irish House',
-        desc: 'Pub, Casual Dining - European, American \nLower Parel'),
+        image: 'masque.png',
+        image1: 'masque1.png',
+        image2: 'masque2.png',
+        name: 'Masque',
+        desc: 'Fine Dining - Modern Indian\nMahalaxmi'),
     _Restaurants(
-        image: 'Mainland_China.jpg',
-        name: 'Mainland China',
+        image: 'kfc.png',
+        image1: 'kfc1.png',
+        image2: 'kfc2.png',
+        name: 'KFC',
         desc:
-            'Casual Dining - Chinese, Asian, Sushi, Japanese, Thai \nSakinaka'),
+            'Quick Bites - Burger, Fast Food, Finger Food, Beverages\nLinking Road, Bandra West'),
     _Restaurants(
-        image: 'pop_tates.jpg',
-        name: 'Pop Tates',
+        image: 'mexichino.png',
+        image1: 'mexichino1.png',
+        image2: 'mexichino2.png',
+        name: 'MexiChino',
         desc:
-            'Bar, Casual Dining - Continental, Chinese, Italian, Beverages \nLower Parel'),
+            'Casual Dining - Mexican, Chinese, Continental\nBorivali West'),
     _Restaurants(
-        image: 'tipsy_gipsy.jpg',
-        name: 'Tipsy Gipsy',
+        image: 'rabdiwala.png',
+        image1: 'rabdiwala1.png',
+        image2: 'rabdiwala2.png',
+        name: 'RabdiWala',
         desc:
-            'Bar, Casual Dining - Continental, Mediterranean, Italian \nVeera Desai Area'),
+            'Casual Dining, Dessert Parlor - Rajasthani, Gujarati, Mithai, Desserts, Maharashtrian\nBorivali West'),
   ];
 
   @override
@@ -181,7 +195,7 @@ class _PickUpState extends State<PickUp> {
                         onTap: () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
-                            return HomePage();
+                                return HomePage(imgName: rest[index].image,imgName1: rest[index].image1,imgName2: rest[index].image2,restName: rest[index].name,);
                           }));
                         },
                         child: Card(
@@ -243,6 +257,8 @@ class _Restaurants {
   String image;
   String name;
   String desc;
+  String image1;
+  String image2;
 
-  _Restaurants({this.image, this.name, this.desc});
+  _Restaurants({this.image, this.name, this.desc,this.image1,this.image2});
 }

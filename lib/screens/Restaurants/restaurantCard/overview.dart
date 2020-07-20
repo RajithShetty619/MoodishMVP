@@ -70,10 +70,10 @@ class _OverViewState extends State<OverView> {
                                         shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(10.0))),
-                                        content: Column(
-                                          children: [
-                                            SingleChildScrollView(
-                                              child: Container(
+                                        content: SingleChildScrollView(
+                                          child: Column(
+                                            children: [
+                                              Container(
                                                 height: 500.0,
                                                 width: 200.0,
                                                 child: Stack(
@@ -97,8 +97,8 @@ class _OverViewState extends State<OverView> {
                                                   ],
                                                 ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
                                         actions: <Widget>[
                                           FlatButton(

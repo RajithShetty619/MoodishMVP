@@ -38,8 +38,8 @@ dependencies:
   carousel_pro: ^1.0.0
   carousel_slider: ^2.0.0
   rate_my_app: ^0.4.0
-  flutter_map: any
-  latlong: ^0.6.1
+#  flutter_map: any
+#  latlong: ^0.6.1
   share: ^0.6.2+3
   flutter_bloc: ^4.0.0
   hive: ^1.4.1+1
@@ -50,6 +50,9 @@ dependencies:
   cached_network_image: ^2.2.0+1
   flutter_rating_bar: ^3.0.1+1
   rflutter_alert: ^1.0.3
+  location: ^3.0.2
+  image_picker: 0.6.3+4
+  flutter_rounded_date_picker: ^1.0.4
 
 
 

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/Services/storage.dart';
+import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/components/shareDialog.dart';
 import 'package:moodish_mvp/screens/Food/components/stepSlider.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/food_info.dart';
@@ -9,29 +10,11 @@ import 'package:moodish_mvp/test.dart';
 class TodaySpecial extends StatefulWidget {
   const TodaySpecial({
     Key key,
-    @required this.image,
-    @required this.title,
-    @required this.cuisine,
-    @required this.preptime,
-    @required this.deter,
-    @required this.description,
-    @required this.nutrient,
-    @required this.preparation,
-    @required this.taste,
-    @required this.mealtype,
+     this.foodList,
 
   }) : super(key: key);
 
-  final image;
-  final title;
-  final cuisine;
-  final preptime;
-  final deter;
-  final description;
-  final nutrient;
-  final preparation;
-  final taste;
-  final mealtype;
+  final FoodListModel foodList ;
 
   @override
   _TodaySpecialState createState() => _TodaySpecialState();
@@ -158,7 +141,7 @@ class _TodaySpecialState extends State<TodaySpecial> {
         child: Stack(
           children: <Widget>[
             CachedNetworkImage(
-              imageUrl: widget.image,
+              imageUrl: widget.foodList.images,
               imageBuilder: (context, imageProvider) {
                 return Container(
                   margin: EdgeInsets.only(right: 20),
@@ -220,7 +203,7 @@ class _TodaySpecialState extends State<TodaySpecial> {
                           Align(
                             alignment: Alignment.center,
                             child: Text(
-                              widget.title,
+                              widget.foodList.foodName,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 30,
@@ -234,7 +217,7 @@ class _TodaySpecialState extends State<TodaySpecial> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Text(
-                                widget.cuisine,
+                                widget.foodList.cuisine,
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 18),
                               ),
@@ -266,7 +249,7 @@ class _TodaySpecialState extends State<TodaySpecial> {
                                 ),
                               ),
                               Text(
-                                widget.deter,
+                                widget.foodList.deter,
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 18),
                               ),
@@ -286,20 +269,11 @@ class _TodaySpecialState extends State<TodaySpecial> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => Food_Info(
-                                            name: widget.title,
-                                            descbox: widget.description,
-                                            image: widget.image,
-                                            nutrient: widget.nutrient,
-                                            preparation: widget.preparation,
-                                            taste: widget.taste,
-                                            preptime: widget.preptime,
-                                            cuisine: widget.cuisine,
-                                            mealtype: widget.mealtype,
-                                            deter: widget.deter,
+                                            foodList: widget.foodList,
                                           )));
                                 },
                                 child: Text(
-                                  "Let's Go!",
+                                  "Let's cook!",
                                   style: TextStyle(
                                     fontSize: 20,
                                   ),

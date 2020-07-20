@@ -1,7 +1,11 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/models/name.dart';
 import 'package:moodish_mvp/screens/Food/components/TodaySpecial.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
 //import 'main.dart';
@@ -9,17 +13,31 @@ import '../../Services/authenticate.dart';
 import 'Edit.dart';
 
 class Profile extends StatefulWidget {
+  File image;
+  Profile({Key key, this.image}) : super(key: key);
   @override
   _ProfileState createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
+  File _image;
   List<String> userData = ['name', 'email'];
   @override
   void initState() {
     super.initState();
 
     data() async {
+      final Directory _dir = await getApplicationDocumentsDirectory();
+      final String _path = _dir.path;
+      try {
+        imageCache.clearLiveImages();
+        File _file = File('$_path/image1.jpg');
+        setState(() {
+          _image = _file;
+        });
+      } catch (e) {
+        print(e);
+      }
       List<String> _userData = await DatabaseService().returnUser();
       setState(() {
         userData = _userData;
@@ -71,41 +89,14 @@ class _ProfileState extends State<Profile> {
                         const EdgeInsets.only(top: 10.0, left: 5.0, right: 5.0),
                     child: Row(
                       children: <Widget>[
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              userData[0],
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 32.0,
-                                color: Colors.black,
-                              ),
-                            ),
-                            Text(
-                              userData[1],
-                              style: TextStyle(
-                                  fontSize: 24, color: Colors.black38),
-                            ),
-                            SizedBox(
-                              height: 20.0,
-                            ),
-                            Text(
-                              "Edit",
-                              style: TextStyle(
-                                color: Colors.grey.shade400,
-                              ),
-                            ),
-//                              SizedBox(
-//                                width: 20.0,
-//                              ),
-                          ],
-                        ),
-                        Spacer(),
                         Container(
                           width: 100,
                           height: 100,
                           decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: _image == null
+                                    ? AssetImage('assets/anonuser.png')
+                                    : FileImage(_image)),
                             color: Colors.grey,
                             shape: BoxShape.circle,
                             //From here u can add a profile pic
@@ -117,6 +108,43 @@ class _ProfileState extends State<Profile> {
                               color: Colors.black,
                               width: 2.0,
                             ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 8.0,
+                        ),
+                        Flexible(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                userData[0],
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 32.0,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              Text(
+                                userData[1],
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    fontSize: 24, color: Colors.black38),
+                              ),
+                              SizedBox(
+                                height: 20.0,
+                              ),
+                              Text(
+                                "Edit",
+                                style: TextStyle(
+                                  color: Colors.grey.shade400,
+                                ),
+                              ),
+//                              SizedBox(
+//                                width: 20.0,
+//                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -292,9 +320,9 @@ class _ProfileState extends State<Profile> {
                             child: Text(
                               'Logout',
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
                               textAlign: TextAlign.left,
                             ),
                           ),
