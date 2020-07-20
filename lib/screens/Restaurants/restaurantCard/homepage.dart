@@ -42,13 +42,16 @@ class _HomePageState extends State<HomePage> {
                     animationDuration: Duration(microseconds: 1500),
                   ),
                 )),
-                Container(
-                  padding: EdgeInsets.fromLTRB(0, 300, 0, 0),
+                Padding(
+                  padding: const EdgeInsets.only(top: 15.0),
                   child: Container(
-                    child: TabBarView(
-                      children: <Widget>[
-                        HomeTopTabs(0xffff5722), //ff5722
-                      ],
+                    padding: EdgeInsets.fromLTRB(0, 300, 0, 0),
+                    child: Container(
+                      child: TabBarView(
+                        children: <Widget>[
+                          HomeTopTabs(0xffff5722), //ff5722
+                        ],
+                      ),
                     ),
                   ),
                 ),

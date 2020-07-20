@@ -15,13 +15,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.39.13"
-  ansicolor:
-    dependency: transitive
-    description:
-      name: ansicolor
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.2"
   archive:
     dependency: transitive
     description:
@@ -197,13 +190,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.14.12"
-  console_log_handler:
-    dependency: transitive
-    description:
-      name: console_log_handler
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.6"
   convert:
     dependency: transitive
     description:
@@ -335,20 +321,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.4.1"
-  flutter_image:
+  flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
-      name: flutter_image
+      name: flutter_plugin_android_lifecycle
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.0"
-  flutter_map:
-    dependency: "direct main"
-    description:
-      name: flutter_map
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.10.1"
+    version: "1.0.8"
   flutter_rating_bar:
     dependency: "direct main"
     description:
@@ -356,6 +335,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1+1"
+  flutter_rounded_date_picker:
+    dependency: "direct main"
+    description:
+      name: flutter_rounded_date_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.4"
   flutter_signin_button:
     dependency: "direct main"
     description:
@@ -478,6 +464,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.12"
+  image_picker:
+    dependency: "direct main"
+    description:
+      name: image_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.3+4"
   intl:
     dependency: transitive
     description:
@@ -513,20 +506,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
-  latlong:
+  location:
     dependency: "direct main"
     description:
-      name: latlong
+      name: location
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.1"
-  lists:
+    version: "3.0.2"
+  location_platform_interface:
     dependency: transitive
     description:
-      name: lists
+      name: location_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.6"
+    version: "1.0.0"
+  location_web:
+    dependency: transitive
+    description:
+      name: location_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   logging:
     dependency: transitive
     description:
@@ -548,13 +548,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.8"
-  mgrs_dart:
-    dependency: transitive
-    description:
-      name: mgrs_dart
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.1"
   mime:
     dependency: transitive
     description:
@@ -660,13 +653,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.4.0"
-  positioned_tap_detector:
-    dependency: transitive
-    description:
-      name: positioned_tap_detector
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.3"
   process:
     dependency: transitive
     description:
@@ -674,13 +660,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.13"
-  proj4dart:
-    dependency: transitive
-    description:
-      name: proj4dart
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.5"
   provider:
     dependency: "direct main"
     description:
@@ -889,20 +868,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.1+2"
-  transparent_image:
-    dependency: transitive
-    description:
-      name: transparent_image
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
-  tuple:
-    dependency: transitive
-    description:
-      name: tuple
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.3"
   typed_data:
     dependency: transitive
     description:
@@ -910,13 +875,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.6"
-  unicode:
-    dependency: transitive
-    description:
-      name: unicode
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.4"
   uuid:
     dependency: transitive
     description:
@@ -924,13 +882,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.0"
-  validate:
-    dependency: transitive
-    description:
-      name: validate
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.7.0"
   vector_math:
     dependency: transitive
     description:
@@ -952,13 +903,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
-  wkt_parser:
-    dependency: transitive
-    description:
-      name: wkt_parser
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.7"
   xdg_directories:
     dependency: transitive
     description:
