@@ -5,10 +5,10 @@ class PollsModel {
   final String C;
   final String D;
   final String sr_no;
-  final String aLike;
-  final String bLike;
-  final String cLike;
-  final String dLike;
+  final int aLike;
+  final int bLike;
+  final int cLike;
+  final int dLike;
 
   PollsModel(
       {this.question,

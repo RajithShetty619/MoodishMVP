@@ -11,12 +11,12 @@ class _MoodState extends State<Mood> {
     GridTileBuilder(image: 'happy.png', mood: 'Happy', currentOpacity: 1),
     GridTileBuilder(image: 'healthy.png', mood: 'Healthy', currentOpacity: 1),
     GridTileBuilder(image: 'sad.png', mood: 'Sad', currentOpacity: 1),
-    GridTileBuilder(image: 'angry.png', mood: 'Angry', currentOpacity: 1),
+    GridTileBuilder(image: 'angry.jpg', mood: 'Angry', currentOpacity: 1),
     GridTileBuilder(image: 'sluggish.png', mood: 'Sluggish', currentOpacity: 1),
     GridTileBuilder(image: 'stress.png', mood: 'Stress', currentOpacity: 1),
   ];
   int i = 0;
-  List<String> pref = []; //all the user preferences are saved here
+  List<String> pref = []; //all the user preferences are saved here 
   String err = '';
 
   @override
@@ -84,8 +84,8 @@ class _MoodState extends State<Mood> {
                               if (mood.length < 1) {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                      return MainScreen();
-                                    }));
+                                  return MainScreen();
+                                }));
                               }
                             });
                           });
@@ -103,8 +103,8 @@ class _MoodState extends State<Mood> {
                             width: 110.0,
                             decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: AssetImage(
-                                      'assets/${mood[index].image}'),
+                                  image:
+                                      AssetImage('assets/${mood[index].image}'),
                                   fit: BoxFit.cover,
                                 ),
                                 borderRadius: BorderRadius.circular(10.0)),
@@ -132,27 +132,31 @@ class _MoodState extends State<Mood> {
                       padding: const EdgeInsets.all(12.0),
                       child: (i + 1 > 3)
                           ? Align(
-                        alignment: Alignment.center,
-                        child: Text(''),
-                      )
+                              alignment: Alignment.center,
+                              child: Text(''),
+                            )
                           : Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            err,
-                            style: TextStyle(color: Colors.red),
-                          ))),
+                              alignment: Alignment.center,
+                              child: Text(
+                                err,
+                                style: TextStyle(color: Colors.red),
+                              ))),
                   Align(
                     alignment: Alignment.centerRight,
                     child: RaisedButton(
                       onPressed: () {
                         if (i + 1 > 3)
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                                return MainScreen();
-                              }));
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              return MainScreen(
+                                mood: pref,
+                              );
+                            }),
+                          );
                         else
                           setState(() {
-                            err = 'Select  ${3-i} more!';
+                            err = 'Select  ${3 - i} more!';
                           });
                       },
                       color: Colors.green,

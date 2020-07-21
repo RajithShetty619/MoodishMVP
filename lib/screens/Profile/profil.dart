@@ -20,18 +20,16 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  File _image;
+  Image _image;
   List<String> userData = ['name', 'email'];
   @override
   void initState() {
     super.initState();
 
     data() async {
-      final Directory _dir = await getApplicationDocumentsDirectory();
-      final String _path = _dir.path;
       try {
-        imageCache.clearLiveImages();
-        File _file = File('$_path/image1.jpg');
+        String _url = await DatabaseService().downloadPhoto();
+        Image _file = Image.network(_url);
         setState(() {
           _image = _file;
         });
@@ -82,7 +80,7 @@ class _ProfileState extends State<Profile> {
                 InkWell(
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => EditProfile()));
+                        MaterialPageRoute(builder: (context) => EditProfile(image:_image)));
                   },
                   child: Padding(
                     padding:
@@ -96,7 +94,7 @@ class _ProfileState extends State<Profile> {
                             image: DecorationImage(
                                 image: _image == null
                                     ? AssetImage('assets/anonuser.png')
-                                    : FileImage(_image)),
+                                    : _image),
                             color: Colors.grey,
                             shape: BoxShape.circle,
                             //From here u can add a profile pic

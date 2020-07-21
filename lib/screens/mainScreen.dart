@@ -5,6 +5,8 @@ import 'package:moodish_mvp/screens/Restaurants/home.dart';
 import 'Food/pages/foodHome.dart';
 
 class MainScreen extends StatefulWidget {
+  final List<String> mood;
+  MainScreen({this.mood});
   @override
   _MainScreenState createState() => _MainScreenState();
 }

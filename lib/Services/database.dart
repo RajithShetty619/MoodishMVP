@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Services/authenticate.dart';
 import 'package:moodish_mvp/Services/storage.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/models/name.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class DatabaseService {
   final CollectionReference userName =
@@ -23,6 +26,25 @@ class DatabaseService {
     _data.add(user.data['email']);
     return _data;
   }
+
+/* ////////////////////////////////////////////////////////////////////////  upload PHOTOMETHOD///////////////////////////////////////////////////// */
+
+Future uploadPhoto(File image) async {    
+   StorageReference storageReference = FirebaseStorage.instance    
+       .ref()    
+       .child('user/'+await Authenticate().returnUid()+'/profilePhoto/');    
+   StorageUploadTask uploadTask = storageReference.putFile(image);    
+   await uploadTask.onComplete;    
+   print('File Uploaded');     
+ }
+
+Future<String> downloadPhoto() async {
+  StorageReference storageReference = FirebaseStorage.instance    
+       .ref()    
+       .child('user/'+await Authenticate().returnUid()+'/profilePhoto/');  
+  String _url = await storageReference.getDownloadURL(); 
+  return _url;
+}
 
 /* ////////////////////////////////////////////////////////////////////// FOODLISTMETHODS ////////////////////////////////////////////////////////// */
 
@@ -96,15 +118,15 @@ class DatabaseService {
 
   /* //////////////////////////////////////////////////// POLL METHOD///////////////////////////////////// */
 
-  Future<void> likePoll({String sr_no,String opt,String like}) async {
+  Future<void> likePoll({String sr_no,String opt,int like}) async {
     print(sr_no+"  "+opt);
     DocumentReference _poll = Firestore.instance.collection('polls').document(sr_no);
-    _poll.setData({opt:like});
+    _poll.setData({opt:like},merge: true);
   }
 }
 
 /* example of Database Snapshot single DocumentSnapshot looks like this 
- "mood": "anger",
+            "mood": "anger",
             "food_item": "American Pork Barbecue",
 
             "recipe": "The meat is pulled or chopped into moist strands, dressed with some remaining \"mop\" (the vinegar-and-red-pepper basting sauce), and mixed with cracklings.",
