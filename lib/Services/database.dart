@@ -29,14 +29,22 @@ class DatabaseService {
 
 /* ////////////////////////////////////////////////////////////////////////  upload PHOTOMETHOD///////////////////////////////////////////////////// */
 
-Future uploadFile(File image) async {    
+Future uploadPhoto(File image) async {    
    StorageReference storageReference = FirebaseStorage.instance    
        .ref()    
-       .child('user/'+await Authenticate().returnUid());    
+       .child('user/'+await Authenticate().returnUid()+'/profilePhoto/');    
    StorageUploadTask uploadTask = storageReference.putFile(image);    
    await uploadTask.onComplete;    
    print('File Uploaded');     
  }
+
+Future<String> downloadPhoto() async {
+  StorageReference storageReference = FirebaseStorage.instance    
+       .ref()    
+       .child('user/'+await Authenticate().returnUid()+'/profilePhoto/');  
+  String _url = await storageReference.getDownloadURL(); 
+  return _url;
+}
 
 /* ////////////////////////////////////////////////////////////////////// FOODLISTMETHODS ////////////////////////////////////////////////////////// */
 

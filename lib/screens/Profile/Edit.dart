@@ -1,33 +1,33 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/Authenticate/forgotPassword.dart';
+import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/screens/Profile/profil.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 
 class EditProfile extends StatefulWidget {
+  Image image;
+  EditProfile({this.image});
   @override
   _EditProfileState createState() => _EditProfileState();
 }
 
 class _EditProfileState extends State<EditProfile> {
-  File _image;
-  
+  Image _image;
+
   getImage() async {
-    final image = await ImagePicker.pickImage(source: ImageSource.gallery); 
-    imageCache.clear();
-    imageCache.clearLiveImages();
+    final fileImage = await ImagePicker.pickImage(source: ImageSource.gallery);
+    Image image = Image.file(fileImage);
+
     final Directory _dir = await getApplicationDocumentsDirectory();
     final String _path = _dir.path;
-    /* delete cache */ 
-    String img1 = FileImage(image).toString(); 
-     final File _file = await image.copy('$_path/image1.jpg'); 
     setState(() {
 //      Profile(image: image);
       _image = image;
-    }); 
-    DatabaseService().
+    });
+    DatabaseService().uploadPhoto(fileImage);
   }
 
   @override
@@ -35,14 +35,11 @@ class _EditProfileState extends State<EditProfile> {
     super.initState();
 
     data() async {
-      final Directory _dir = await getApplicationDocumentsDirectory();
-      final String _path = _dir.path;
-      try{final _file = File('$_path/image1.jpg'); 
-      setState(() {
-        _image = _file;
-      });
-      }
-      catch(e){
+      try {
+        setState(() {
+          _image = widget.image;
+        });
+      } catch (e) {
         print(e);
       }
     }
@@ -94,7 +91,7 @@ class _EditProfileState extends State<EditProfile> {
                             image: DecorationImage(
                                 image: _image == null
                                     ? AssetImage('assets/anonuser.png')
-                                    : FileImage(_image))),
+                                    : _image)),
                       ),
                     ),
                     SizedBox(
