@@ -2,17 +2,24 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/Authenticate/forgotPassword.dart';
 import 'package:moodish_mvp/screens/Profile/profil.dart';
+import 'package:moodish_mvp/screens/Restaurants/restaurantCard/map.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
-
+import 'package:geolocator/geolocator.dart';
 class EditProfile extends StatefulWidget {
   @override
   _EditProfileState createState() => _EditProfileState();
 }
 
 class _EditProfileState extends State<EditProfile> {
+
+
+
   File _image;
+  Position _currentPosition;
+  String _currentAddress ='Mumbai,Maharashtra';
+  Geolocator geolocator = Geolocator();
   
   getImage() async {
     final image = await ImagePicker.pickImage(source: ImageSource.gallery); 
@@ -28,7 +35,6 @@ class _EditProfileState extends State<EditProfile> {
       _image = image;
     }); 
   }
-
   @override
   void initState() {
     super.initState();
@@ -47,6 +53,24 @@ class _EditProfileState extends State<EditProfile> {
     }
 
     data();
+  }
+  getCurrentLocation()async{
+    final position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.best).then((Position position) {_currentPosition=position;});
+    print(position);
+  }
+  _getAddressFromLatLng() async {
+    try {
+      List<Placemark> p = await geolocator.placemarkFromCoordinates(_currentPosition.latitude, _currentPosition.longitude);
+
+      Placemark place = p[0];
+
+      setState(() {
+        _currentAddress = "${place.subLocality},${place.locality}-${place.postalCode}";
+      });
+      print(_currentAddress);
+    } catch (e) {
+      print(e);
+    }
   }
 
   // File _storedImage;
@@ -151,7 +175,31 @@ class _EditProfileState extends State<EditProfile> {
                   thickness: 2.0,
                 ),
               ),
-              getListTile('Location', 'Mumbai,Maharashtra', context, 3),
+            InkWell(
+              onTap: () {
+                getCurrentLocation();
+                _getAddressFromLatLng();
+                print(_currentAddress);
+                },
+              child: Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      'Location',
+                      style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Flexible(
+                    child: Text(
+                      _currentAddress,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontSize: 20.0),
+                    ),
+                  )
+                ],
+              ),
+            ),
               Padding(
                 padding: EdgeInsets.only(left: 10.0, right: 10.0),
                 child: Divider(
@@ -201,6 +249,7 @@ class _EditProfileState extends State<EditProfile> {
 
 Widget getListTile(
     String category, String name, BuildContext context, int tile) {
+
   return InkWell(
     onTap: () {
       if (tile == 0) _onAlertWithCustomContentPressed(category, name, context);
@@ -208,7 +257,9 @@ Widget getListTile(
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return ForgotPassword();
         }));
-      if (tile == 2) if (tile == 3) {/*put google map */}
+      if (tile == 2)
+        {/*setup datepicker*/}
+
       if (tile == 4) return null;
     },
     child: Row(
