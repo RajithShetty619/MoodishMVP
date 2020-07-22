@@ -20,7 +20,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  Image _image;
+  ImageProvider _image;
   List<String> userData = ['name', 'email'];
   @override
   void initState() {
@@ -29,7 +29,7 @@ class _ProfileState extends State<Profile> {
     data() async {
       try {
         String _url = await DatabaseService().downloadPhoto();
-        Image _file = Image.network(_url);
+        ImageProvider _file = NetworkImage(_url);
         setState(() {
           _image = _file;
         });
@@ -80,7 +80,7 @@ class _ProfileState extends State<Profile> {
                 InkWell(
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => EditProfile(image:_image)));
+                        MaterialPageRoute(builder: (context) => EditProfile(image: _image, )));
                   },
                   child: Padding(
                     padding:

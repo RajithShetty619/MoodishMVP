@@ -8,23 +8,22 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 
 class EditProfile extends StatefulWidget {
-  Image image;
+  ImageProvider image;
   EditProfile({this.image});
   @override
   _EditProfileState createState() => _EditProfileState();
 }
 
 class _EditProfileState extends State<EditProfile> {
-  Image _image;
+  ImageProvider _image;
 
   getImage() async {
     final fileImage = await ImagePicker.pickImage(source: ImageSource.gallery);
-    Image image = Image.file(fileImage);
+    ImageProvider image = FileImage(fileImage);
 
-    final Directory _dir = await getApplicationDocumentsDirectory();
-    final String _path = _dir.path;
-    setState(() {
-//      Profile(image: image);
+    // final Directory _dir = await getApplicationDocumentsDirectory();
+    // final String _path = _dir.path;
+    setState(() { 
       _image = image;
     });
     DatabaseService().uploadPhoto(fileImage);
@@ -34,17 +33,17 @@ class _EditProfileState extends State<EditProfile> {
   void initState() {
     super.initState();
 
-    data() async {
-      try {
-        setState(() {
-          _image = widget.image;
-        });
-      } catch (e) {
-        print(e);
-      }
-    }
+    // data() async {
+    //   try {
+    //     setState(() {
+    //       _image = widget.image;
+    //     });
+    //   } catch (e) {
+    //     print(e);
+    //   }
+    // }
 
-    data();
+    // data();
   }
 
   // File _storedImage;
