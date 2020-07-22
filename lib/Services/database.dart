@@ -125,11 +125,7 @@ Future<String> downloadPhoto() async {
   Future<void> likePoll({String sr_no,String opt,int like}) async {
     print(sr_no+"  "+opt);
     DocumentReference _poll = Firestore.instance.collection('polls').document(sr_no);
-<<<<<<< HEAD
-    _poll.setData({opt:like}),merge(true);
-=======
     _poll.setData({opt:like},merge: true);
->>>>>>> ae700911218fbb4aee9c35bd5208388fc4f8dbe2
   }
   
 

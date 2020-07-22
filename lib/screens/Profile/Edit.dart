@@ -4,6 +4,8 @@ import 'package:moodish_mvp/Services/database.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:image_picker/image_picker.dart'; 
 import 'package:geolocator/geolocator.dart';
+import 'package:moodish_mvp/Services/database.dart';
+
 class EditProfile extends StatefulWidget {
   final ImageProvider image;
   EditProfile({this.image});
@@ -134,7 +136,7 @@ class _EditProfileState extends State<EditProfile> {
                   thickness: 2.0,
                 ),
               ),
-              getListTile('Username', 'Dummy Text', context, 0),
+              getListTile('Username', 'Dummy Text', context, 3),
               Padding(
                 padding: EdgeInsets.only(left: 10.0, right: 10.0),
                 child: Divider(
@@ -162,7 +164,7 @@ class _EditProfileState extends State<EditProfile> {
                   thickness: 2.0,
                 ),
               ),
-              getListTile('Phone number', 'Dummy Text', context, 0),
+              getListTile('Phone number', 'Dummy Text', context, 5),
               Padding(
                 padding: EdgeInsets.only(left: 10.0, right: 10.0),
                 child: Divider(
@@ -243,18 +245,97 @@ class _EditProfileState extends State<EditProfile> {
 
 Widget getListTile(
     String category, String name, BuildContext context, int tile) {
+  String username;
+  String phoneNo;
+  String birthDate;
+  final userData = DatabaseService();
 
   return InkWell(
     onTap: () {
-      if (tile == 0) _onAlertWithCustomContentPressed(category, name, context);
       if (tile == 1)
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return ForgotPassword();
         }));
       if (tile == 2)
-        {/*setup datepicker*/}
+        {Alert(
+            context: context,
+            title: category,
+            content: TextField(
+              keyboardType: TextInputType.datetime,
+              onChanged: (val){
+//                birthDate = val;
+//                userData.editUserData(field: 'Birthdate',value: birthDate);
+              },
+              decoration: InputDecoration(
+                icon: Icon(Icons.edit),
+                labelText: 'Edit',
+                hintText: name,
+              ),
+            ),
+            buttons: [
+              DialogButton(
+                onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+                child: Text(
+                  "Save",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+              )
+            ]).show();}
+      if(tile==3) {
+        Alert(
+            context: context,
+            title: category,
+            content: TextField(
+              onChanged: (val) {
+                username = val;
+                userData.editUserData(field: 'Username', value: username);
+              },
+              decoration: InputDecoration(
+                icon: Icon(Icons.edit),
+                labelText: 'Edit',
+                hintText: name,
+              ),
+            ),
+            buttons: [
+              DialogButton(
+                onPressed: () =>
+                    Navigator.of(context, rootNavigator: true).pop(),
+                child: Text(
+                  "Save",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+              )
+            ]).show();
+      }
 
       if (tile == 4) return null;
+      if(tile==5)
+        {
+          Alert(
+              context: context,
+              title: category,
+              content: TextField(
+                keyboardType: TextInputType.number,
+                onChanged: (val){
+                  phoneNo = val;
+                  userData.editUserData(field: 'PhoneNo.',value: phoneNo);
+                },
+                decoration: InputDecoration(
+                  icon: Icon(Icons.edit),
+                  labelText: 'Edit',
+                  hintText: name,
+                ),
+              ),
+              buttons: [
+                DialogButton(
+                  onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+                  child: Text(
+                    "Save",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                )
+              ]).show();
+        }
     },
     child: Row(
       children: <Widget>[
@@ -277,11 +358,26 @@ Widget getListTile(
   );
 }
 
-_onAlertWithCustomContentPressed(String category, String name, context) {
+_onAlertWithCustomContentPressed(String category, String name, context, int tile) {
+  String username;
+  String phoneNo;
+  final userData = DatabaseService();
   Alert(
       context: context,
       title: category,
       content: TextField(
+        onChanged: (val){
+          if(tile==3){
+            username = val;
+            userData.editUserData(field: 'Username',value: username);
+          }
+          if(tile==5)
+            {
+              phoneNo = val;
+              userData.editUserData(field: 'PhoneNo.',value: phoneNo);
+            }
+
+        },
         decoration: InputDecoration(
           icon: Icon(Icons.edit),
           labelText: 'Edit',
