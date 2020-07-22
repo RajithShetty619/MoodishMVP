@@ -4,15 +4,18 @@ import 'package:hive/hive.dart';
 import 'package:moodish_mvp/models/factsModel.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/models/pollsModel.dart';
+import 'package:moodish_mvp/models/this_thatModel.dart';
 import 'database.dart';
 
 class DatabaseQuery {
   String _lastDocument;
   bool dataExists = true;
-  final CollectionReference _ref =
-      Firestore.instance.collection('food');
+  final CollectionReference _ref = Firestore.instance.collection('food');
 
   final CollectionReference polls = Firestore.instance.collection('polls');
+
+  final CollectionReference this_that = Firestore.instance.collection('this_that');
+
   final CollectionReference facts = Firestore.instance.collection('facts');
   final String listName;
   DatabaseQuery({this.listName});
@@ -119,7 +122,7 @@ class DatabaseQuery {
     }
   }
 
-  //builds query by stacking 'where(_field,_value)' statement behing each ohter
+  //builds query by stacking 'where(_field,_value)' statement behind each ohter
   Query recQuery(List<String> _field, List<dynamic> _value, Query q) {
     Query _query = q;
     if (_field.isEmpty) {

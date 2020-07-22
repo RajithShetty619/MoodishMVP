@@ -17,13 +17,17 @@ class DatabaseService {
   Future<void> updateUserData({String uid, String email, String name}) async {
     return await userName.document(uid).setData({'name': name, 'email': email});
   }
+ 
+ /* user data edit function for eg:- func(field:'name',value:'xyz')  then name field is update in db */
+  Future<void> editUserData({  String field, String value}) async {
+    return await userName.document(await Authenticate().returnUid()).setData({field: value},merge: true);
+  }
   /* used to display name and email in profile */
-  Future<List<String>> returnUser() async {
-    List<String> _data = [];
+  Future<Map<String,String>> returnUser() async {
+    Map<String,String> _data = {};
     DocumentSnapshot user =
-        await userName.document(await Authenticate().returnUid()).get();
-    _data.add(user.data['name']);
-    _data.add(user.data['email']);
+        await userName.document(await Authenticate().returnUid()).get();  
+    user.data.forEach((key, value) {_data.putIfAbsent(key, () => value);});
     return _data;
   }
 
@@ -84,10 +88,10 @@ Future<String> downloadPhoto() async {
       } 
       /* might look overwhelming but just 
       initialized constructor of FoodListModel */
-      print("/////////////////////////////////////////////////////////////////////////////////");
+      // print("/////////////////////////////////////////////////////////////////////////////////");
 
-      print(_ingredients);
-      print(_preparation);
+      // print(_ingredients);
+      // print(_preparation);
       return FoodListModel(
         foodName: _docData["food_item"] ?? '',
         deter: _docData["deter"] ?? '',
@@ -121,8 +125,20 @@ Future<String> downloadPhoto() async {
   Future<void> likePoll({String sr_no,String opt,int like}) async {
     print(sr_no+"  "+opt);
     DocumentReference _poll = Firestore.instance.collection('polls').document(sr_no);
+<<<<<<< HEAD
+    _poll.setData({opt:like}),merge(true);
+=======
     _poll.setData({opt:like},merge: true);
+>>>>>>> ae700911218fbb4aee9c35bd5208388fc4f8dbe2
   }
+  
+
+  /* //////////////////////////////////////////////////// THIS_THAT METHOD///////////////////////////////////// */
+
+  //   Future<void> like_this_that({String option,String like}) async {
+  //     print(''+ option);
+  //     DocumentReference _that = Firestore.instance.collection('this_that')
+  //   }
 }
 
 /* example of Database Snapshot single DocumentSnapshot looks like this 

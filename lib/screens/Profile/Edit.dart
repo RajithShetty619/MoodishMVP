@@ -1,34 +1,30 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/Authenticate/forgotPassword.dart';
-import 'package:moodish_mvp/Services/database.dart';
-import 'package:moodish_mvp/screens/Profile/profil.dart';
-import 'package:moodish_mvp/screens/Restaurants/restaurantCard/map.dart';
+import 'package:moodish_mvp/Services/database.dart'; 
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:image_picker/image_picker.dart'; 
 import 'package:geolocator/geolocator.dart';
 class EditProfile extends StatefulWidget {
-  Image image;
+  final ImageProvider image;
   EditProfile({this.image});
   @override
   _EditProfileState createState() => _EditProfileState();
 }
 
 class _EditProfileState extends State<EditProfile> {
+  ImageProvider _image;
 
   Position _currentPosition;
   String _currentAddress ='Mumbai,Maharashtra';
   Geolocator geolocator = Geolocator();
-  Image _image;
+  ImageProvider image;
   getImage() async {
     final fileImage = await ImagePicker.pickImage(source: ImageSource.gallery);
-    Image image = Image.file(fileImage);
+    ImageProvider image = FileImage(fileImage);
 
-    final Directory _dir = await getApplicationDocumentsDirectory();
-    final String _path = _dir.path;
-    setState(() {
-//      Profile(image: image);
+    // final Directory _dir = await getApplicationDocumentsDirectory();
+    // final String _path = _dir.path;
+    setState(() { 
       _image = image;
     });
     DatabaseService().uploadPhoto(fileImage);

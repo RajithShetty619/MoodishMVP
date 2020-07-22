@@ -150,7 +150,6 @@ class _MoodState extends State<Mood> {
                             context,
                             MaterialPageRoute(builder: (context) {
                               return MainScreen(
-                                mood: pref,
                               );
                             }),
                           );
