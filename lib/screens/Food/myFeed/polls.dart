@@ -38,6 +38,8 @@ class _PollTabsState extends State<PollTabs> {
   }
 }
 
+
+
 /* poll card displayin widget */
 class getListView extends StatefulWidget {
   final PollsModel poll;
@@ -76,8 +78,7 @@ class _getListViewState extends State<getListView> {
           GestureDetector(
             onTap: () async {
               if (!pollPressed) {
-                await DatabaseService()
-                    .likePoll(opt: "aLike", sr_no: widget.poll.sr_no,like:widget.poll.cLike+1);
+                await DatabaseService();
                 setState(() {
                   _index = 1;
                   // pollPressed=true;
@@ -108,8 +109,7 @@ class _getListViewState extends State<getListView> {
           GestureDetector(
             onTap: () async {
               if (!pollPressed) {
-                await DatabaseService()
-                    .likePoll(opt: "bLike", sr_no: widget.poll.sr_no,like:widget.poll.cLike+1);
+                await DatabaseService();
                 setState(() {
                   _index = 2;
                   pollPressed=true;
@@ -140,8 +140,7 @@ class _getListViewState extends State<getListView> {
           GestureDetector(
             onTap: () async {
               if (!pollPressed) {
-                await DatabaseService()
-                    .likePoll(opt: "cLike", sr_no: widget.poll.sr_no,like:widget.poll.cLike+1);
+                await DatabaseService();
                 setState(() {
                   _index = 3;
                   pollPressed=true;
@@ -172,8 +171,7 @@ class _getListViewState extends State<getListView> {
           GestureDetector(
             onTap: () async {
               if (!pollPressed) {
-                await DatabaseService()
-                    .likePoll(opt: "dLike", sr_no: widget.poll.sr_no,like:widget.poll.cLike+1);
+                await DatabaseService();
                 setState(() {
                   _index = 4;
                   pollPressed=true;

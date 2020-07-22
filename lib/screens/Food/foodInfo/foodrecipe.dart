@@ -48,11 +48,9 @@ class _FoodRecipeState extends State<FoodRecipe> {
                           itemCount:widget.foodList.preparation.length,
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
-                          
                           itemBuilder: (BuildContext context ,index){
                             return Container(
                               margin: EdgeInsets.all(8.0),
-                              
                               child: Text(
                                 '* ${widget.foodList.preparation [index]}',
                                 style: TextStyle(
@@ -60,9 +58,7 @@ class _FoodRecipeState extends State<FoodRecipe> {
                                 ),
                               ),
                             );
-
                           },
-
                         ),
                       ),
                       SizedBox(height: 10.0,),

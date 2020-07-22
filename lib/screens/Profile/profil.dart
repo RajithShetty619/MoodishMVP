@@ -71,7 +71,7 @@ class _ProfileState extends State<Profile> {
                 InkWell(
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => EditProfile(image: _image, )));
+                        MaterialPageRoute(builder: (context) => EditProfile( )));
                   },
                   child: Padding(
                     padding:
