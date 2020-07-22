@@ -21,7 +21,7 @@ class _EditProfileState extends State<EditProfile> {
   Position _currentPosition;
   String _currentAddress ='Mumbai,Maharashtra';
   Geolocator geolocator = Geolocator();
-  Image _image;
+  ImageProvider image;
   getImage() async {
     final fileImage = await ImagePicker.pickImage(source: ImageSource.gallery);
     ImageProvider image = FileImage(fileImage);
