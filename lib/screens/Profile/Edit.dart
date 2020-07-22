@@ -55,6 +55,9 @@ class _EditProfileState extends State<EditProfile> {
   }
   _getAddressFromLatLng() async {
     try {
+      setState(() {
+        _currentAddress='Wait a Moment...';
+      });
       List<Placemark> p = await geolocator.placemarkFromCoordinates(_currentPosition.latitude, _currentPosition.longitude);
 
       Placemark place = p[0];
