@@ -1,15 +1,11 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/Authenticate/forgotPassword.dart';
-import 'package:moodish_mvp/Services/database.dart';
-import 'package:moodish_mvp/screens/Profile/profil.dart';
-import 'package:moodish_mvp/screens/Restaurants/restaurantCard/map.dart';
+import 'package:moodish_mvp/Services/database.dart'; 
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:image_picker/image_picker.dart'; 
 import 'package:geolocator/geolocator.dart';
 class EditProfile extends StatefulWidget {
-  ImageProvider image;
+  final ImageProvider image;
   EditProfile({this.image});
   @override
   _EditProfileState createState() => _EditProfileState();
@@ -37,17 +33,17 @@ class _EditProfileState extends State<EditProfile> {
   void initState() {
     super.initState();
 
-    // data() async {
-    //   try {
-    //     setState(() {
-    //       _image = widget.image;
-    //     });
-    //   } catch (e) {
-    //     print(e);
-    //   }
-    // }
+    data() async {
+      try {
+        setState(() {
+          _image = widget.image;
+        });
+      } catch (e) {
+        print(e);
+      }
+    }
 
-    // data();
+    data();
   }
   getCurrentLocation()async{
     final position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.best).then((Position position) {_currentPosition=position;});

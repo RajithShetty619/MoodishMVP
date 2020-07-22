@@ -1,27 +1,18 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:moodish_mvp/Services/database.dart';
-import 'package:moodish_mvp/models/name.dart';
-import 'package:moodish_mvp/screens/Food/components/TodaySpecial.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:provider/provider.dart';
-
-//import 'main.dart';
+import 'package:moodish_mvp/Services/database.dart';  
 import '../../Services/authenticate.dart';
 import 'Edit.dart';
 
 class Profile extends StatefulWidget {
-  File image;
-  Profile({Key key, this.image}) : super(key: key);
+    
   @override
   _ProfileState createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
   ImageProvider _image;
-  List<String> userData = ['name', 'email'];
+  Map<String,String> userData = {};
   @override
   void initState() {
     super.initState();
@@ -29,14 +20,14 @@ class _ProfileState extends State<Profile> {
     data() async {
       try {
         String _url = await DatabaseService().downloadPhoto();
-        ImageProvider _file = NetworkImage(_url);
+        ImageProvider _file =await NetworkImage(_url);
         setState(() {
           _image = _file;
         });
       } catch (e) {
         print(e);
       }
-      List<String> _userData = await DatabaseService().returnUser();
+      Map<String,String> _userData = await DatabaseService().returnUser();
       setState(() {
         userData = _userData;
       });
@@ -116,7 +107,7 @@ class _ProfileState extends State<Profile> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                userData[0],
+                                userData["name"]??'name',
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -125,7 +116,7 @@ class _ProfileState extends State<Profile> {
                                 ),
                               ),
                               Text(
-                                userData[1],
+                                userData["email"]??'email',
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                     fontSize: 24, color: Colors.black38),
@@ -138,10 +129,7 @@ class _ProfileState extends State<Profile> {
                                 style: TextStyle(
                                   color: Colors.grey.shade400,
                                 ),
-                              ),
-//                              SizedBox(
-//                                width: 20.0,
-//                              ),
+                              ), 
                             ],
                           ),
                         ),

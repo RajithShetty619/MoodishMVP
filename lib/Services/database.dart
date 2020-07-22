@@ -17,13 +17,17 @@ class DatabaseService {
   Future<void> updateUserData({String uid, String email, String name}) async {
     return await userName.document(uid).setData({'name': name, 'email': email});
   }
+ 
+ /* user data edit function for eg:- func(field:'name',value:'xyz')  then name field is update in db */
+  Future<void> editUserData({  String field, String value}) async {
+    return await userName.document(await Authenticate().returnUid()).setData({field: value},merge: true);
+  }
   /* used to display name and email in profile */
-  Future<List<String>> returnUser() async {
-    List<String> _data = [];
+  Future<Map<String,String>> returnUser() async {
+    Map<String,String> _data = {};
     DocumentSnapshot user =
-        await userName.document(await Authenticate().returnUid()).get();
-    _data.add(user.data['name']);
-    _data.add(user.data['email']);
+        await userName.document(await Authenticate().returnUid()).get();  
+    user.data.forEach((key, value) {_data.putIfAbsent(key, () => value);});
     return _data;
   }
 
