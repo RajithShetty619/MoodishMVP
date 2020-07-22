@@ -1,12 +1,86 @@
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/Authenticate/forgotPassword.dart';
+import 'package:moodish_mvp/Services/database.dart'; 
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:image_picker/image_picker.dart'; 
+import 'package:geolocator/geolocator.dart';
 class EditProfile extends StatefulWidget {
+  final ImageProvider image;
+  EditProfile({this.image});
   @override
   _EditProfileState createState() => _EditProfileState();
 }
 
 class _EditProfileState extends State<EditProfile> {
+  ImageProvider _image;
+
+  Position _currentPosition;
+  String _currentAddress ='Mumbai,Maharashtra';
+  Geolocator geolocator = Geolocator();
+  ImageProvider image;
+  getImage() async {
+    final fileImage = await ImagePicker.pickImage(source: ImageSource.gallery);
+    ImageProvider image = FileImage(fileImage);
+
+    // final Directory _dir = await getApplicationDocumentsDirectory();
+    // final String _path = _dir.path;
+    setState(() { 
+      _image = image;
+    });
+    DatabaseService().uploadPhoto(fileImage);
+  }
+  @override
+  void initState() {
+    super.initState();
+
+    data() async {
+      try {
+        setState(() {
+          _image = widget.image;
+        });
+      } catch (e) {
+        print(e);
+      }
+    }
+
+    data();
+  }
+  getCurrentLocation()async{
+    final position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.best).then((Position position) {_currentPosition=position;});
+    print(position);
+  }
+  _getAddressFromLatLng() async {
+    try {
+      List<Placemark> p = await geolocator.placemarkFromCoordinates(_currentPosition.latitude, _currentPosition.longitude);
+
+      Placemark place = p[0];
+
+      setState(() {
+        _currentAddress = "${place.subLocality},${place.locality}-${place.postalCode}";
+      });
+      print(_currentAddress);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  // File _storedImage;
+  // Future<void> _takePicture() async {
+  //   final imageFile = await ImagePicker.pickImage(
+  //     source: ImageSource.gallery,
+  //   );
+  //   if (imageFile == null) {
+  //     return;
+  //   }
+  //   setState(() {
+  //     _storedImage = imageFile;
+  //   });
+  //   final appDir = await getApplicationDocumentsDirectory();
+  //   final fileName = Directory(imageFile.path);
+
+  //   final savedImage = await imageFile.copy('${appDir}/$fileName');
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,69 +88,118 @@ class _EditProfileState extends State<EditProfile> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              SizedBox(height: 20.0,),
+              SizedBox(
+                height: 20.0,
+              ),
               Center(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     InkWell(
-                      onTap:(){},
+                      onTap: () {
+                        getImage();
+                      },
                       borderRadius: BorderRadius.circular(150),
-                      child:Container(
+                      child: Container(
                         height: 150,
                         width: 150,
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            border: Border.all(color: Colors.black)
-                        ),
+                            image: DecorationImage(
+                                image: _image == null
+                                    ? AssetImage('assets/anonuser.png')
+                                    : _image)),
                       ),
                     ),
-                    SizedBox(height: 10.0,),
-                    Text('Edit',
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Text(
+                      'Edit',
                       style: TextStyle(
-                          fontSize: 24.0,
-                          fontWeight: FontWeight.bold
-                      ),)
-
+                          fontSize: 24.0, fontWeight: FontWeight.bold),
+                    )
                   ],
                 ),
               ),
-              SizedBox(height: 5.0,),
-              Padding(
-                padding: EdgeInsets.only(left: 10.0,right: 10.0),
-                child: Divider(thickness: 2.0,),
+              SizedBox(
+                height: 5.0,
               ),
-              getListTile('Name','Varun Singh',context,0),
               Padding(
-                padding: EdgeInsets.only(left: 10.0,right: 10.0),
-                child: Divider(thickness: 2.0,),
+                padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                child: Divider(
+                  thickness: 2.0,
+                ),
               ),
-              getListTile('Email','varunsingh1308@gmail.com',context,0),
+              getListTile('Username', 'Dummy Text', context, 0),
               Padding(
-                padding: EdgeInsets.only(left: 10.0,right: 10.0),
-                child: Divider(thickness: 2.0,),
+                padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                child: Divider(
+                  thickness: 2.0,
+                ),
               ),
-              getListTile('Password','********',context,1),
+              getListTile('Email', 'DummyText@gmail.com', context, 4),
               Padding(
-                padding: EdgeInsets.only(left: 10.0,right: 10.0),
-                child: Divider(thickness: 2.0,),
+                padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                child: Divider(
+                  thickness: 2.0,
+                ),
               ),
-              getListTile('Birthdate','13/08',context,2),
+              getListTile('Password', '********', context, 1),
               Padding(
-                padding: EdgeInsets.only(left: 10.0,right: 10.0),
-                child: Divider(thickness: 2.0,),
+                padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                child: Divider(
+                  thickness: 2.0,
+                ),
               ),
-              getListTile('Phone number','9326562724',context,0),
+              getListTile('Birthdate', '13/08', context, 2),
               Padding(
-                padding: EdgeInsets.only(left: 10.0,right: 10.0),
-                child: Divider(thickness: 2.0,),
+                padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                child: Divider(
+                  thickness: 2.0,
+                ),
               ),
-              getListTile('Location','Mumbai,Maharashtra',context,3),
+              getListTile('Phone number', 'Dummy Text', context, 0),
               Padding(
-                padding: EdgeInsets.only(left: 10.0,right: 10.0),
-                child: Divider(thickness: 2.0,),
+                padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                child: Divider(
+                  thickness: 2.0,
+                ),
               ),
-              SizedBox(height: 20.0,),
+            InkWell(
+              onTap: () {
+                getCurrentLocation();
+                _getAddressFromLatLng();
+                print(_currentAddress);
+                },
+              child: Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      'Location',
+                      style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Flexible(
+                    child: Text(
+                      _currentAddress,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontSize: 20.0),
+                    ),
+                  )
+                ],
+              ),
+            ),
+              Padding(
+                padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                child: Divider(
+                  thickness: 2.0,
+                ),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
               InkWell(
                 child: Ink(
                   decoration: BoxDecoration(
@@ -93,19 +216,20 @@ class _EditProfileState extends State<EditProfile> {
                   ),
                   child: FlatButton(
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 10.0,bottom: 10.0,right: 100.0,left: 100.0),
-                      child: Text('Save',
-                        style: TextStyle(
-                            fontSize: 18.0,
-                            color: Colors.white
-                        ),),
+                      padding: const EdgeInsets.only(
+                          top: 10.0, bottom: 10.0, right: 100.0, left: 100.0),
+                      child: Text(
+                        'Save',
+                        style: TextStyle(fontSize: 18.0, color: Colors.white),
+                      ),
                     ),
-                    onPressed: (){},
+                    onPressed: () {},
                   ),
                 ),
               ),
-              SizedBox(height: 20.0,)
-
+              SizedBox(
+                height: 20.0,
+              )
             ],
           ),
         ),
@@ -114,54 +238,56 @@ class _EditProfileState extends State<EditProfile> {
   }
 }
 
-Widget getListTile(String category,String name,BuildContext context,int tile){
+Widget getListTile(
+    String category, String name, BuildContext context, int tile) {
+
   return InkWell(
-    onTap: (){
-      if(tile==0)
-      _onAlertWithCustomContentPressed(category, name, context);
-      if(tile==1)
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) {
-              return ForgotPassword();
-            }));
-      if(tile==2)
-        {/*put calendar fot birthdate*/}
-      if(tile==3)
-        {/*put google map key*/}
+    onTap: () {
+      if (tile == 0) _onAlertWithCustomContentPressed(category, name, context);
+      if (tile == 1)
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return ForgotPassword();
+        }));
+      if (tile == 2)
+        {/*setup datepicker*/}
+
+      if (tile == 4) return null;
     },
     child: Row(
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(20.0),
-          child: Text(category,
-            style: TextStyle(
-                fontSize: 22.0,
-                fontWeight: FontWeight.bold
-            ),),
+          child: Text(
+            category,
+            style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+          ),
         ),
-        Text(name,
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(
-              fontSize: 20.0
-          ),)
+        Flexible(
+          child: Text(
+            name,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(fontSize: 20.0),
+          ),
+        )
       ],
     ),
   );
 }
 
-_onAlertWithCustomContentPressed(String category,String name,context) {
+_onAlertWithCustomContentPressed(String category, String name, context) {
   Alert(
       context: context,
       title: category,
       content: TextField(
         decoration: InputDecoration(
           icon: Icon(Icons.edit),
-          labelText: name,
+          labelText: 'Edit',
+          hintText: name,
         ),
       ),
       buttons: [
         DialogButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
           child: Text(
             "Save",
             style: TextStyle(color: Colors.white, fontSize: 20),
@@ -169,9 +295,6 @@ _onAlertWithCustomContentPressed(String category,String name,context) {
         )
       ]).show();
 }
-
-
-
 
 //import 'package:flutter/material.dart';
 //import 'package:flutter/cupertino.dart';

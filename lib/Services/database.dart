@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Services/authenticate.dart';
 import 'package:moodish_mvp/Services/storage.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/models/name.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class DatabaseService {
   final CollectionReference userName =
@@ -14,15 +17,38 @@ class DatabaseService {
   Future<void> updateUserData({String uid, String email, String name}) async {
     return await userName.document(uid).setData({'name': name, 'email': email});
   }
+ 
+ /* user data edit function for eg:- func(field:'name',value:'xyz')  then name field is update in db */
+  Future<void> editUserData({  String field, String value}) async {
+    return await userName.document(await Authenticate().returnUid()).setData({field: value},merge: true);
+  }
   /* used to display name and email in profile */
-  Future<List<String>> returnUser() async {
-    List<String> _data = [];
+  Future<Map<String,String>> returnUser() async {
+    Map<String,String> _data = {};
     DocumentSnapshot user =
-        await userName.document(await Authenticate().returnUid()).get();
-    _data.add(user.data['name']);
-    _data.add(user.data['email']);
+        await userName.document(await Authenticate().returnUid()).get();  
+    user.data.forEach((key, value) {_data.putIfAbsent(key, () => value);});
     return _data;
   }
+
+/* ////////////////////////////////////////////////////////////////////////  upload PHOTOMETHOD///////////////////////////////////////////////////// */
+
+Future uploadPhoto(File image) async {    
+   StorageReference storageReference = FirebaseStorage.instance    
+       .ref()    
+       .child('user/'+await Authenticate().returnUid()+'/profilePhoto/');    
+   StorageUploadTask uploadTask = storageReference.putFile(image);    
+   await uploadTask.onComplete;    
+   print('File Uploaded');     
+ }
+
+Future<String> downloadPhoto() async {
+  StorageReference storageReference = FirebaseStorage.instance    
+       .ref()    
+       .child('user/'+await Authenticate().returnUid()+'/profilePhoto/');  
+  String _url = await storageReference.getDownloadURL(); 
+  return _url;
+}
 
 /* ////////////////////////////////////////////////////////////////////// FOODLISTMETHODS ////////////////////////////////////////////////////////// */
 
@@ -96,10 +122,14 @@ class DatabaseService {
 
   /* //////////////////////////////////////////////////// POLL METHOD///////////////////////////////////// */
 
-  Future<void> likePoll({String sr_no,String opt,String like}) async {
+  Future<void> likePoll({String sr_no,String opt,int like}) async {
     print(sr_no+"  "+opt);
     DocumentReference _poll = Firestore.instance.collection('polls').document(sr_no);
+<<<<<<< HEAD
     _poll.setData({opt:like}),merge(true);
+=======
+    _poll.setData({opt:like},merge: true);
+>>>>>>> ae700911218fbb4aee9c35bd5208388fc4f8dbe2
   }
   
 
@@ -112,7 +142,7 @@ class DatabaseService {
 }
 
 /* example of Database Snapshot single DocumentSnapshot looks like this 
- "mood": "anger",
+            "mood": "anger",
             "food_item": "American Pork Barbecue",
 
             "recipe": "The meat is pulled or chopped into moist strands, dressed with some remaining \"mop\" (the vinegar-and-red-pepper basting sauce), and mixed with cracklings.",
