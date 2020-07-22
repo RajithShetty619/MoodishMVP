@@ -38,6 +38,8 @@ class _PollTabsState extends State<PollTabs> {
   }
 }
 
+
+
 /* poll card displayin widget */
 class getListView extends StatefulWidget {
   final PollsModel poll;

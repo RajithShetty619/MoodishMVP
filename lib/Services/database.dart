@@ -62,10 +62,10 @@ class DatabaseService {
       } 
       /* might look overwhelming but just 
       initialized constructor of FoodListModel */
-      print("/////////////////////////////////////////////////////////////////////////////////");
+      // print("/////////////////////////////////////////////////////////////////////////////////");
 
-      print(_ingredients);
-      print(_preparation);
+      // print(_ingredients);
+      // print(_preparation);
       return FoodListModel(
         foodName: _docData["food_item"] ?? '',
         deter: _docData["deter"] ?? '',
@@ -99,8 +99,16 @@ class DatabaseService {
   Future<void> likePoll({String sr_no,String opt,String like}) async {
     print(sr_no+"  "+opt);
     DocumentReference _poll = Firestore.instance.collection('polls').document(sr_no);
-    _poll.setData({opt:like});
+    _poll.setData({opt:like}),merge(true);
   }
+  
+
+  /* //////////////////////////////////////////////////// THIS_THAT METHOD///////////////////////////////////// */
+
+  //   Future<void> like_this_that({String option,String like}) async {
+  //     print(''+ option);
+  //     DocumentReference _that = Firestore.instance.collection('this_that')
+  //   }
 }
 
 /* example of Database Snapshot single DocumentSnapshot looks like this 

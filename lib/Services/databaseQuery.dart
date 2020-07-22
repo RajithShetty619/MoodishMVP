@@ -3,15 +3,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/models/pollsModel.dart';
+import 'package:moodish_mvp/models/this_thatModel.dart';
 import 'database.dart';
 
 class DatabaseQuery {
   String _lastDocument;
   bool dataExists = true;
-  final CollectionReference _ref =
-      Firestore.instance.collection('food');
+  final CollectionReference _ref = Firestore.instance.collection('food');
 
   final CollectionReference polls = Firestore.instance.collection('polls');
+
+  final CollectionReference this_that = Firestore.instance.collection('this_that');
+
   final String listName;
   DatabaseQuery({this.listName});
 
@@ -117,7 +120,7 @@ class DatabaseQuery {
     }
   }
 
-  //builds query by stacking 'where(_field,_value)' statement behing each ohter
+  //builds query by stacking 'where(_field,_value)' statement behind each ohter
   Query recQuery(List<String> _field, List<dynamic> _value, Query q) {
     Query _query = q;
     if (_field.isEmpty) {
@@ -163,4 +166,34 @@ class DatabaseQuery {
           dLike: _docData['dLike'] ?? '');
     }).toList();
   }
+
+  Future<List<This_thatModel>> getthis_that() async {
+    Box _box = await Hive.openBox('this_that');
+    dynamic end = _box.get('endthat');
+
+    Query t = this_that
+        .where('A', isGreaterThan: '')
+        .startAfter([end])
+        .orderBy('A')
+        .limit(2);
+    List<DocumentSnapshot> _snapshot =
+        await t.getDocuments().then((value) => value.documents);
+    // saving last this_that to be shown
+    String _endthat = await _snapshot[_snapshot.length - 1].data['A'];
+    await _box.put('endthat', _endthat);
+
+/* list of this_that is made and returned */
+    return _snapshot.map((doc) {
+      print(doc.data);
+      Map<String, dynamic> _docData = doc.data;
+      return This_thatModel(
+        A: _docData['A'],
+        B: _docData['B'] ?? '',
+        aLike: _docData['aLike'] ?? '',
+        bLike: _docData['bLike'] ?? '',
+      );
+    }).toList();
+  }
+
+
 }
