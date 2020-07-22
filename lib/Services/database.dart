@@ -17,47 +17,61 @@ class DatabaseService {
   Future<void> updateUserData({String uid, String email, String name}) async {
     return await userName.document(uid).setData({'name': name, 'email': email});
   }
- 
- /* user data edit function for eg:- func(field:'name',value:'xyz')  then name field is update in db */
-  Future<void> editUserData({  String field, String value}) async {
-    return await userName.document(await Authenticate().returnUid()).setData({field: value},merge: true);
+
+  /* user data edit function for eg:- func(field:'name',value:'xyz')  then name field is update in db */
+  Future<void> editUserData({String field, String value}) async {
+    return await userName
+        .document(await Authenticate().returnUid())
+        .setData({field: value}, merge: true);
   }
+
   /* used to display name and email in profile */
-  Future<Map<String,String>> returnUser() async {
-    Map<String,String> _data = {};
+  Future<Map<String, String>> returnUser() async {
+    Map<String, String> _data = {};
     DocumentSnapshot user =
-        await userName.document(await Authenticate().returnUid()).get();  
-    user.data.forEach((key, value) {_data.putIfAbsent(key, () => value);});
+        await userName.document(await Authenticate().returnUid()).get();
+    user.data.forEach((key, value) {
+      _data.putIfAbsent(key, () => value);
+    });
     return _data;
   }
 
 /* ////////////////////////////////////////////////////////////////////////  upload PHOTOMETHOD///////////////////////////////////////////////////// */
 
-Future uploadPhoto(File image) async {    
-   StorageReference storageReference = FirebaseStorage.instance    
-       .ref()    
-       .child('user/'+await Authenticate().returnUid()+'/profilePhoto/');    
-   StorageUploadTask uploadTask = storageReference.putFile(image);    
-   await uploadTask.onComplete;    
-   print('File Uploaded');     
- }
+  Future uploadPhoto(File image) async {
+    StorageReference storageReference = FirebaseStorage.instance
+        .ref()
+        .child('user/' + await Authenticate().returnUid() + '/profilePhoto/');
+    StorageUploadTask uploadTask = storageReference.putFile(image);
+    await uploadTask.onComplete;
+    print('File Uploaded');
+  }
 
-Future<String> downloadPhoto() async {
-  StorageReference storageReference = FirebaseStorage.instance    
-       .ref()    
-       .child('user/'+await Authenticate().returnUid()+'/profilePhoto/');  
-  String _url = await storageReference.getDownloadURL(); 
-  return _url;
-}
+  Future<String> downloadPhoto() async {
+    StorageReference storageReference = FirebaseStorage.instance
+        .ref()
+        .child('user/' + await Authenticate().returnUid() + '/profilePhoto/');
+    String _url = await storageReference.getDownloadURL();
+    return _url;
+  }
 
 /* ////////////////////////////////////////////////////////////////////// FOODLISTMETHODS ////////////////////////////////////////////////////////// */
+
+  /* get fooddocument from sr_no */
+  Future<DocumentSnapshot> documentFrmSrno({String sr_no}) async {
+    return await Firestore.instance.collection('food').document(sr_no).get();
+  }
+
+  Future<List<FoodListModel>> searchDocuments({dynamic data}) async {
+    
+  }
 
   /* converts snapshot from db into foodListModel */
   Future<List<FoodListModel>> listFromSnapshot(QuerySnapshot snapshot) async {
     /* Future wait is used to make sure each iteration
       of the map is awaited by the code */
     return Future.wait(snapshot.documents.map((doc) async {
-      Map<String, dynamic> _docData =    doc.data;
+      Map<String, dynamic> _docData = doc.data;
       /* convert image name to url from storage */
       String _url = await Storage().getUrl(_docData["image"]);
 
@@ -65,27 +79,27 @@ Future<String> downloadPhoto() async {
       List<String> _ingredients = [];
       int i = 2;
       /* done coz first step is named preparation for some reason */
-      _preparation.add(  _docData["preparation"]);
+      _preparation.add(_docData["preparation"]);
       /* converting step1,step2..... to List of preparation */
 
       while (_docData["step $i"] != null) {
-        _preparation.add(  _docData["step $i"]);
-        print( _docData["step $i"]);
+        _preparation.add(_docData["step $i"]);
+        print(_docData["step $i"]);
         i++;
       }
       /* initialized */
       i = 2;
       /* same reason as preparation */
-      _ingredients.add(  _docData["ingredients"]);
-      print(_docData["ingredient2"] );
+      _ingredients.add(_docData["ingredients"]);
+      print(_docData["ingredient2"]);
       print("ingredient $i");
-      /* converting step1,step2..... to List of preparation */ 
+      /* converting step1,step2..... to List of preparation */
       while (_docData["ingredient $i"] != null) {
-        _ingredients.add(  _docData["ingredient $i"]);
+        _ingredients.add(_docData["ingredient $i"]);
         print(_docData["ingredient $i"]);
-        
+
         ++i;
-      } 
+      }
       /* might look overwhelming but just 
       initialized constructor of FoodListModel */
       // print("/////////////////////////////////////////////////////////////////////////////////");
@@ -93,45 +107,39 @@ Future<String> downloadPhoto() async {
       // print(_ingredients);
       // print(_preparation);
       return FoodListModel(
-        foodName: _docData["food_item"] ?? '',
-        deter: _docData["deter"] ?? '',
-        cuisine: _docData["cuisine"] ?? '',
-        meal_type: _docData["meal_type"] ?? '',
-        images: _url ?? '',
-        description: _docData["description"] ?? '',
-        recipe: _docData["recipe"] ?? '',
-        ingredients: _ingredients ?? '',
-        servings: _docData["serving"] ?? '',
-        time: _docData["time"] ?? '',
-        nutrients: _docData["nutrients"] ?? '',
-        taste: _docData["taste"] ?? '',
-        situation: _docData["situation"] ?? '',
-        preparation: _preparation ?? '',
-        calories: _docData["calories"] ?? '',
-        fat: _docData["fat"] ?? '',
-        carbohydrates: _docData["carbohydrates"] ?? '',
-        protein: _docData["protein"] ?? '',
-        mood: _docData["mood"] ?? '',
-        restaurants: _docData["restaurants"] ?? '',
-        delivery: _docData["delivery"] ?? '',
-        sr_no: _docData["sr_no"] ?? ''
-      );
+          foodName: _docData["food_item"] ?? '',
+          deter: _docData["deter"] ?? '',
+          cuisine: _docData["cuisine"] ?? '',
+          meal_type: _docData["meal_type"] ?? '',
+          images: _url ?? '',
+          description: _docData["description"] ?? '',
+          recipe: _docData["recipe"] ?? '',
+          ingredients: _ingredients ?? '',
+          servings: _docData["serving"] ?? '',
+          time: _docData["time"] ?? '',
+          nutrients: _docData["nutrients"] ?? '',
+          taste: _docData["taste"] ?? '',
+          situation: _docData["situation"] ?? '',
+          preparation: _preparation ?? '',
+          calories: _docData["calories"] ?? '',
+          fat: _docData["fat"] ?? '',
+          carbohydrates: _docData["carbohydrates"] ?? '',
+          protein: _docData["protein"] ?? '',
+          mood: _docData["mood"] ?? '',
+          restaurants: _docData["restaurants"] ?? '',
+          delivery: _docData["delivery"] ?? '',
+          sr_no: _docData["sr_no"] ?? '');
     }).toList());
-    
   }
 
   /* //////////////////////////////////////////////////// POLL METHOD///////////////////////////////////// */
 
-  Future<void> likePoll({String sr_no,String opt,int like}) async {
-    print(sr_no+"  "+opt);
-    DocumentReference _poll = Firestore.instance.collection('polls').document(sr_no);
-<<<<<<< HEAD
-    _poll.setData({opt:like}),merge(true);
-=======
-    _poll.setData({opt:like},merge: true);
->>>>>>> ae700911218fbb4aee9c35bd5208388fc4f8dbe2
+  Future<void> likePoll({String sr_no, String opt, int like}) async {
+    print(sr_no + "  " + opt);
+    DocumentReference _poll =
+        Firestore.instance.collection('polls').document(sr_no);
+    _poll.setData({opt: like}, merge: true);
   }
-  
 
   /* //////////////////////////////////////////////////// THIS_THAT METHOD///////////////////////////////////// */
 

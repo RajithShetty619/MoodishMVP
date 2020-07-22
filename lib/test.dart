@@ -40,22 +40,33 @@ class _FoodListState extends State<FoodList> {
       .getHttpsCallable(functionName: 'helloWorld')
         ..timeout = const Duration(seconds: 30);
   int _responseCount = 0;
-
+  String text= ''; 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: FlatButton(
-          onPressed: () async {
-            try {
-               dynamic res = await SearchFunction().search();
-               print(res);
-            } catch (e) {
-              print('caught generic exception');
-              print(e);
-            }
-          },
-          child: Text("call"),
+        child: Column(
+          children: <Widget>[
+            TextFormField(
+              onChanged: (e) {
+                setState(() {
+                  text = e;
+                });
+              },
+            ),
+            FlatButton(
+              onPressed: () async {
+                try {
+                   dynamic res = await SearchFunction().search(text);
+                   print(res);
+                } catch (e) {
+                  print('caught generic exception');
+                  print(e);
+                }
+              },
+              child: Text("call"),
+            ),
+          ],
         ),
       ),
     );
