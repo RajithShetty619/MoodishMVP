@@ -51,7 +51,7 @@ class _FoodFeedState extends State<FoodFeed> {
     DateTime now = DateTime.now();
     String date = DateFormat('EEE, M/d/y').format(now);
     if (date == saveDate) {
-      return 1;
+      return 0;
     } else {
       _box.put("date", date);
       return 0;
@@ -257,7 +257,7 @@ class _FoodFeedState extends State<FoodFeed> {
                     Container(height: 430, child: RecipeTab()),
 
                   if (indx == 2)
-                    Container(height: 300, child: PollTabs()),
+                    Container(height: 300, child: This_ThatTabs()),
 
                   if (indx == 3)
                     Container(height: 450, child: FoodftTab()),

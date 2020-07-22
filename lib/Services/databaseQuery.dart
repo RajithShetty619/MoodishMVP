@@ -13,13 +13,11 @@ class DatabaseQuery {
   final CollectionReference _ref = Firestore.instance.collection('food');
 
   final CollectionReference polls = Firestore.instance.collection('polls');
-<<<<<<< HEAD
 
-  final CollectionReference this_that = Firestore.instance.collection('this_that');
+  final CollectionReference this_that =
+      Firestore.instance.collection('this_that');
 
-=======
   final CollectionReference facts = Firestore.instance.collection('facts');
->>>>>>> ae700911218fbb4aee9c35bd5208388fc4f8dbe2
   final String listName;
   DatabaseQuery({this.listName});
 
@@ -151,11 +149,12 @@ class DatabaseQuery {
         await q.getDocuments().then((value) => value.documents);
 
     /* saving last poll to be displayed*/
-    try{String _lastpoll = await _snapshot[_snapshot.length - 1].data['value'];await _box.put('lastpoll', _lastpoll);}
-    catch(e){
+    try {
+      String _lastpoll = await _snapshot[_snapshot.length - 1].data['value'];
+      await _box.put('lastpoll', _lastpoll);
+    } catch (e) {
       await _box.put('lastpoll', null);
     }
-    
 
     /* list of polls is made and returned */
     return _snapshot.map((doc) {
@@ -175,7 +174,6 @@ class DatabaseQuery {
     }).toList();
   }
 
-<<<<<<< HEAD
   Future<List<This_thatModel>> getthis_that() async {
     Box _box = await Hive.openBox('this_that');
     dynamic end = _box.get('endthat');
@@ -204,9 +202,7 @@ class DatabaseQuery {
     }).toList();
   }
 
-
-=======
-   Future<List<FactModel>> getFact() async {
+  Future<List<FactModel>> getFact() async {
     /* retrieving last polls for querying */
     Box _box = await Hive.openBox('fact');
     dynamic last = _box.get('lastfact');
@@ -220,18 +216,20 @@ class DatabaseQuery {
         await q.getDocuments().then((value) => value.documents);
 
     /* saving last poll to be displayed*/
-    try{String _lastfact = await _snapshot[_snapshot.length - 1].data['fact'];await _box.put('lastfact', _lastfact);}
-    catch(e){
+    try {
+      String _lastfact = await _snapshot[_snapshot.length - 1].data['fact'];
+      await _box.put('lastfact', _lastfact);
+    } catch (e) {
       await _box.put('lastfact', null);
     }
-    
 
     /* list of polls is made and returned */
     return _snapshot.map((doc) {
       print(doc.data);
       Map<String, dynamic> _docData = doc.data;
-      return  FactModel(factHeading:_docData['fact'], factStatment:_docData['factStatement']);
-      }).toList();
+      return FactModel(
+          factHeading: _docData['fact'],
+          factStatment: _docData['factStatement']);
+    }).toList();
   }
->>>>>>> ae700911218fbb4aee9c35bd5208388fc4f8dbe2
 }

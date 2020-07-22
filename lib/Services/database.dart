@@ -88,10 +88,10 @@ Future<String> downloadPhoto() async {
       } 
       /* might look overwhelming but just 
       initialized constructor of FoodListModel */
-      // print("/////////////////////////////////////////////////////////////////////////////////");
+      print("/////////////////////////////////////////////////////////////////////////////////");
 
-      // print(_ingredients);
-      // print(_preparation);
+      print(_ingredients);
+      print(_preparation);
       return FoodListModel(
         foodName: _docData["food_item"] ?? '',
         deter: _docData["deter"] ?? '',
@@ -125,28 +125,14 @@ Future<String> downloadPhoto() async {
   Future<void> likePoll({String sr_no,String opt,int like}) async {
     print(sr_no+"  "+opt);
     DocumentReference _poll = Firestore.instance.collection('polls').document(sr_no);
-<<<<<<< HEAD
-    _poll.setData({opt:like}),merge(true);
-=======
     _poll.setData({opt:like},merge: true);
->>>>>>> ae700911218fbb4aee9c35bd5208388fc4f8dbe2
   }
-  
-
-  /* //////////////////////////////////////////////////// THIS_THAT METHOD///////////////////////////////////// */
-
-  //   Future<void> like_this_that({String option,String like}) async {
-  //     print(''+ option);
-  //     DocumentReference _that = Firestore.instance.collection('this_that')
-  //   }
 }
 
 /* example of Database Snapshot single DocumentSnapshot looks like this 
             "mood": "anger",
             "food_item": "American Pork Barbecue",
-
             "recipe": "The meat is pulled or chopped into moist strands, dressed with some remaining \"mop\" (the vinegar-and-red-pepper basting sauce), and mixed with cracklings.",
-
             "preparation": "Cut roast into quarters. Mix brown sugar, salt, paprika and pepper; rub over meat. Place meat and onions in a 5-qt. slow cooker.",
             "step2": "In a small bowl, whisk vinegar, Worcestershire sauce, sugar and seasonings; pour over roast. Cook, covered, on low 6-8 hours or until meat is tender.",
             "step3": "Remove roast; cool slightly. Reserve 1-1/2 cups cooking juices; discard remaining juices. Skim fat from reserved juices. Shred pork with two forks. Return pork and reserved juices to slow cooker; heat through. Serve on buns with coleslaw.",
