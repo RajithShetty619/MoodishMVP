@@ -1,8 +1,8 @@
 import 'package:hive/hive.dart';
 
-part 'foodListModel.g.dart';
+part 'foodListModel.g.dart';/* put this to generate hive file  (if theres an error here run the command give at the bottom) */
 
-@HiveType(typeId: 0)
+@HiveType(typeId: 0)/* put different typeId for different class */
 class FoodListModel {
   @HiveField(0)
   final String foodName;
@@ -48,6 +48,8 @@ class FoodListModel {
   final String delivery;
   @HiveField(21)
   final String sr_no ;
+  @HiveField(22)
+  final String like ;
 
   FoodListModel(
       {this.foodName,
@@ -71,9 +73,11 @@ class FoodListModel {
       this.mood,
       this.protein,
       this.restaurants,
-      this.sr_no});
+      this.sr_no,
+      this.like});
 
 /*  
+ AFTER ANY CHANGES RUN THIS COMMANDS 
 run command: flutter packages pub run build_runner build --delete-conflicting-outputs
  {      "sr_no": 2
 		   "mood": "anger",

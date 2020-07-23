@@ -16,15 +16,17 @@ import 'package:moodish_mvp/screens/Food/myFeed/recipe.dart';
 import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart';
 
 import 'package:intl/intl.dart';
+import 'package:moodish_mvp/screens/Restaurants/mood.dart';
 
 class FoodFeed extends StatefulWidget {
+  final String mood;
+  FoodFeed({this.mood});
   @override
   _FoodFeedState createState() => _FoodFeedState();
 }
 
 class _FoodFeedState extends State<FoodFeed> {
-  bool _getFoodCalled = false;
-  bool _loadingData = false;
+  bool _getFoodCalled = false; 
   bool loadingData1 = false;
   bool loadingData2 = false;
   DatabaseQuery _dq = DatabaseQuery(listName: "0");
@@ -32,9 +34,11 @@ class _FoodFeedState extends State<FoodFeed> {
   @override
   void initState() {
     super.initState();
-    if (!_getFoodCalled) {
+    if (!_getFoodCalled) { 
+      print(widget.mood);
+      print("////////////////////////");
       checkDate().then((check) {
-        _dq.getFood(field: ['taste'], value: ['Sweet'], limit: 10,check: check).then(
+        _dq.getFood(field: ['mood'], value: [widget.mood], limit: 10,check: check).then(
             (future) {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
           setState(() {
@@ -51,7 +55,7 @@ class _FoodFeedState extends State<FoodFeed> {
     DateTime now = DateTime.now();
     String date = DateFormat('EEE, M/d/y').format(now);
     if (date == saveDate) {
-      return 1;
+      return 0;
     } else {
       _box.put("date", date);
       return 0;
@@ -257,10 +261,15 @@ class _FoodFeedState extends State<FoodFeed> {
                     Container(height: 430, child: RecipeTab()),
 
                   if (indx == 2)
-                    Container(height: 300, child: PollTabs()),
+                    Column(
+                      children: <Widget>[
+                        Container(height: 300, child: This_ThatTabs()),
+                        Container(height: 300,child: PollTabs()),
+                      ],
+                    ),
 
                   if (indx == 3)
-                    Container(height: 450, child: FoodftTab()),
+                    Container(height: 600, child: FoodftTab()),
                 ],
               ),
             ],

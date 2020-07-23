@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/pollsModel.dart';
+import 'package:moodish_mvp/models/this_thatModel.dart';
 
 class PollTabs extends StatefulWidget {
   @override
@@ -20,6 +21,8 @@ class _PollTabsState extends State<PollTabs> {
         if (snapshot.connectionState == ConnectionState.done) {
           List<PollsModel> _pollList = snapshot.data;
           return ListView.builder(
+            shrinkWrap: true,
+            primary: false,
             itemCount: _pollList.length,
             itemBuilder: (BuildContext context, int index) {
               return getListView(poll: _pollList[index]);
@@ -38,6 +41,120 @@ class _PollTabsState extends State<PollTabs> {
   }
 }
 
+class This_ThatTabs extends StatefulWidget {
+  @override
+  _This_ThatTabsState createState() => _This_ThatTabsState();
+}
+
+class _This_ThatTabsState extends State<This_ThatTabs> {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<This_thatModel>>(
+      future: DatabaseQuery().getthis_that(),
+      initialData: [],
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          List<This_thatModel> _thisthat = snapshot.data;
+          return ListView.builder(
+            shrinkWrap: true,
+            primary: false,
+            itemCount: _thisthat.length,
+            itemBuilder: (BuildContext context, int index) {
+              return GetListView(this_that: _thisthat[index],);
+            }
+          );
+        }
+        else{
+          return Center(
+            child: SpinKitFadingCircle(
+              color: Colors.greenAccent[400],
+              size: 40,
+            ),
+          );
+        }
+      }
+    );
+  }
+}
+
+// print this that on the screen
+class GetListView extends StatefulWidget {
+  
+  final This_thatModel this_that;
+  GetListView({
+    this.this_that,
+    Key key,
+  }) : super(key: key);
+  @override
+  _GetListViewState createState() => _GetListViewState();
+}
+
+class _GetListViewState extends State<GetListView> {
+  int _index;
+  @override
+  Widget build(BuildContext context) {
+    return  Card(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35.0)),
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 8.0,
+              ),
+              GestureDetector(
+                onTap: ()  {
+                  
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    width: double.maxFinite,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.0),
+                      border: Border.all( color: _index==1?Colors.blueAccent:Colors.black12),
+                      color: Colors.grey[200],
+                    ),
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: Text(
+                          widget.this_that.A ?? '',
+                          style: TextStyle(fontSize: 22.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: ()  {
+                  
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    width: double.maxFinite,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.0),
+                      border: Border.all( color: _index==1?Colors.blueAccent:Colors.black12),
+                      color: Colors.grey[200],
+                    ),
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: Text(
+                          widget.this_that.B ?? '',
+                          style: TextStyle(fontSize: 22.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+  }
+}
 
 
 /* poll card displayin widget */

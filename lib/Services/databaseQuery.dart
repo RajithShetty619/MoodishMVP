@@ -14,7 +14,8 @@ class DatabaseQuery {
 
   final CollectionReference polls = Firestore.instance.collection('polls');
 
-  final CollectionReference this_that = Firestore.instance.collection('this_that');
+  final CollectionReference this_that =
+      Firestore.instance.collection('this_that');
 
   final CollectionReference facts = Firestore.instance.collection('facts');
   final String listName;
@@ -24,12 +25,13 @@ class DatabaseQuery {
       {List<String> field,
       List<dynamic> value,
       int limit = 5,
-      int check = 0}) async {
+      int check = 0,
+      String mood
+      }) async {
     List<String> _field = field;
     List<dynamic> _value = value;
     /* gets previous list saved by the name */
-    await Hive.openBox(listName);
-    final _box = Hive.box(listName);
+    final _box = await Hive.openBox(listName+(mood??'')); 
     List<dynamic> _gfoodList = await _box.get(listName);
     print('getfood');
 
@@ -148,11 +150,12 @@ class DatabaseQuery {
         await q.getDocuments().then((value) => value.documents);
 
     /* saving last poll to be displayed*/
-    try{String _lastpoll = await _snapshot[_snapshot.length - 1].data['value'];await _box.put('lastpoll', _lastpoll);}
-    catch(e){
+    try {
+      String _lastpoll = await _snapshot[_snapshot.length - 1].data['value'];
+      await _box.put('lastpoll', _lastpoll);
+    } catch (e) {
       await _box.put('lastpoll', null);
     }
-    
 
     /* list of polls is made and returned */
     return _snapshot.map((doc) {
@@ -172,7 +175,36 @@ class DatabaseQuery {
     }).toList();
   }
 
-   Future<List<FactModel>> getFact() async {
+  Future<List<This_thatModel>> getthis_that() async {
+    Box _box = await Hive.openBox('this_that');
+    dynamic end = _box.get('endthat');
+
+    Query t = this_that
+        .where('A', isGreaterThan: '')
+        .startAfter([end])
+        .orderBy('A')
+        .limit(2);
+    List<DocumentSnapshot> _snapshot =
+        await t.getDocuments().then((value) => value.documents);
+    // saving last this_that to be shown
+    String _endthat = await _snapshot[_snapshot.length - 1].data['A'];
+    await _box.put('endthat', _endthat);
+
+/* list of this_that is made and returned */
+    return _snapshot.map((doc) {
+      print(doc.data);
+      Map<String, dynamic> _docData = doc.data;
+      return This_thatModel(
+        A: _docData['A'],
+        B: _docData['B'] ?? '',
+        aLike: _docData['aLike'] ?? '',
+        bLike: _docData['bLike'] ?? '',
+      );
+    }).toList();
+  }
+
+   
+  Future<List<FactModel>> getFact() async {
     /* retrieving last polls for querying */
     Box _box = await Hive.openBox('fact');
     dynamic last = _box.get('lastfact');
@@ -186,17 +218,20 @@ class DatabaseQuery {
         await q.getDocuments().then((value) => value.documents);
 
     /* saving last poll to be displayed*/
-    try{String _lastfact = await _snapshot[_snapshot.length - 1].data['fact'];await _box.put('lastfact', _lastfact);}
-    catch(e){
+    try {
+      String _lastfact = await _snapshot[_snapshot.length - 1].data['fact'];
+      await _box.put('lastfact', _lastfact);
+    } catch (e) {
       await _box.put('lastfact', null);
     }
-    
 
     /* list of polls is made and returned */
     return _snapshot.map((doc) {
       print(doc.data);
       Map<String, dynamic> _docData = doc.data;
-      return  FactModel(factHeading:_docData['fact'], factStatment:_docData['factStatement']);
-      }).toList();
+      return FactModel(
+          factHeading: _docData['fact'],
+          factStatment: _docData['factStatement']);
+    }).toList();
   }
 }

@@ -69,10 +69,9 @@ class _EditProfileState extends State<EditProfile> {
       setState(() {
         _currentAddress='Wait a Moment...';
       });
-      List<Placemark> p = await geolocator.placemarkFromCoordinates(_currentPosition.latitude, _currentPosition.longitude);
-
-      Placemark place = p[0];
-
+      List<Placemark> p = await geolocator.placemarkFromCoordinates(_currentPosition.latitude, _currentPosition.longitude);  
+      Placemark place = p[0]; 
+      
       setState(() {
         _currentAddress = "${place.subLocality},${place.locality}-${place.postalCode}";
       });
@@ -82,23 +81,7 @@ class _EditProfileState extends State<EditProfile> {
       print(e);
     }
   }
-
-  // File _storedImage;
-  // Future<void> _takePicture() async {
-  //   final imageFile = await ImagePicker.pickImage(
-  //     source: ImageSource.gallery,
-  //   );
-  //   if (imageFile == null) {
-  //     return;
-  //   }
-  //   setState(() {
-  //     _storedImage = imageFile;
-  //   });
-  //   final appDir = await getApplicationDocumentsDirectory();
-  //   final fileName = Directory(imageFile.path);
-
-  //   final savedImage = await imageFile.copy('${appDir}/$fileName');
-  // }
+ 
 
   @override
   Widget build(BuildContext context) {

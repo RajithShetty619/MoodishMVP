@@ -1,9 +1,15 @@
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:flappy_search_bar/flappy_search_bar.dart';
+import 'package:flappy_search_bar/search_bar_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
+import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/Services/searchFunction.dart';
+import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart';
+import 'package:moodish_mvp/screens/Food/components/TodaySpecial.dart';
 
 class Test extends StatefulWidget {
   @override
@@ -36,37 +42,23 @@ class FoodList extends StatefulWidget {
 }
 
 class _FoodListState extends State<FoodList> {
-  final HttpsCallable callable = CloudFunctions.instance
-      .getHttpsCallable(functionName: 'helloWorld')
-        ..timeout = const Duration(seconds: 30);
-  int _responseCount = 0;
-  String text= ''; 
+  String text = '';
+  int count = 0;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Column(
-          children: <Widget>[
-            TextFormField(
-              onChanged: (e) {
-                setState(() {
-                  text = e;
-                });
-              },
-            ),
-            FlatButton(
-              onPressed: () async {
-                try {
-                   dynamic res = await SearchFunction().search(text);
-                   print(res);
-                } catch (e) {
-                  print('caught generic exception');
-                  print(e);
-                }
-              },
-              child: Text("call"),
-            ),
-          ],
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          child: FlatButton(
+            onPressed: () async {
+              await DatabaseService()
+                  .likeTransction(collection: "pol", field: "like", sr_no: "3");
+                  setState(() {
+                    count++;
+                  }); 
+            },
+            child: Center(child: Text("$count")),
+          ),
         ),
       ),
     );

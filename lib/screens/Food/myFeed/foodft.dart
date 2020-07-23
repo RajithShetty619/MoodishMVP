@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:moodish_mvp/Services/databaseQuery.dart';
+import 'package:moodish_mvp/models/factsModel.dart';
 
 class FoodftTab extends StatefulWidget {
   @override
@@ -8,15 +11,46 @@ class FoodftTab extends StatefulWidget {
 class _FoodftTabState extends State<FoodftTab> {
   @override
   Widget build(BuildContext context) {
-    return getListView();
+    return FutureBuilder<List<FactModel>>(
+      future: DatabaseQuery().getFact(),
+      initialData: [],
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          List<FactModel> _fact = snapshot.data;
+          return ListView.builder(
+            shrinkWrap: true,
+            primary: false,
+            itemCount: _fact.length,
+            itemBuilder: (BuildContext context, int index) {
+              return getListView(fact: _fact[index],);
+            }
+          );
+        }
+        else{
+          return Center(
+            child: SpinKitFadingCircle(
+              color: Colors.greenAccent[400],
+              size: 40,
+            ),
+          );
+        }
+      }
+    );
   }
 }
 
-class getListView extends StatelessWidget {
-  const getListView({
+class getListView extends StatefulWidget {
+  final FactModel fact;
+   getListView({
+     this.fact,
     Key key,
   }) : super(key: key);
 
+  @override
+  _getListViewState createState() => _getListViewState();
+}
+
+class _getListViewState extends State<getListView> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -31,7 +65,7 @@ class getListView extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: Container(
               alignment: Alignment.centerLeft,
-              child: Text('Food For Thought',
+              child: Text(widget.fact.factHeading,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -39,24 +73,12 @@ class getListView extends StatelessWidget {
                 ),),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 300.0,
-              width: double.maxFinite,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30.0),
-                image: DecorationImage(
-                    image: AssetImage('assets/Salty.jpg'),
-                    fit: BoxFit.cover),
-              ),
-            ),
-          ),
+         
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Container(
               alignment: Alignment.centerLeft,
-              child: Text('Omega-3 is the most important food item today.',
+              child: Text(widget.fact.factStatment,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                   fontSize: 16.0,
