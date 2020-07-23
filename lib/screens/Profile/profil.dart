@@ -20,7 +20,7 @@ class _ProfileState extends State<Profile> {
     data() async {
       try {
         String _url = await DatabaseService().downloadPhoto();
-        ImageProvider _file =await NetworkImage(_url);
+        ImageProvider _file = NetworkImage(_url);
         setState(() {
           _image = _file;
         });

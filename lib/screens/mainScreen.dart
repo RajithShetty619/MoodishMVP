@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/screens/Profile/profil.dart';
-import 'package:moodish_mvp/screens/Restaurants/home.dart';
-
+import 'package:moodish_mvp/screens/Restaurants/home.dart'; 
 import 'Food/pages/foodHome.dart';
 
 class MainScreen extends StatefulWidget {

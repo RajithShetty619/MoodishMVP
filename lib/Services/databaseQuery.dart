@@ -174,7 +174,6 @@ class DatabaseQuery {
     }).toList();
   }
 
-<<<<<<< HEAD
   Future<List<This_thatModel>> getthis_that() async {
     Box _box = await Hive.openBox('this_that');
     dynamic end = _box.get('endthat');
@@ -203,10 +202,8 @@ class DatabaseQuery {
     }).toList();
   }
 
-  Future<List<FactModel>> getFact() async {
-=======
+  
    Future<List<FactModel>> getFact() async {
->>>>>>> 96e17ba710197dfd10a945d6022d8c303e160823
     /* retrieving last polls for querying */
     Box _box = await Hive.openBox('fact');
     dynamic last = _box.get('lastfact');
