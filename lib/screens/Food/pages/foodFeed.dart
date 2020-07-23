@@ -257,10 +257,15 @@ class _FoodFeedState extends State<FoodFeed> {
                     Container(height: 430, child: RecipeTab()),
 
                   if (indx == 2)
-                    Container(height: 300, child: This_ThatTabs()),
+                    Column(
+                      children: <Widget>[
+                        Container(height: 300, child: This_ThatTabs()),
+                        Container(height: 300,child: PollTabs()),
+                      ],
+                    ),
 
                   if (indx == 3)
-                    Container(height: 450, child: FoodftTab()),
+                    Container(height: 600, child: FoodftTab()),
                 ],
               ),
             ],

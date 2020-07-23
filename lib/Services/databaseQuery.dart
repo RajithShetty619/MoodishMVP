@@ -202,8 +202,8 @@ class DatabaseQuery {
     }).toList();
   }
 
-  
-   Future<List<FactModel>> getFact() async {
+   
+  Future<List<FactModel>> getFact() async {
     /* retrieving last polls for querying */
     Box _box = await Hive.openBox('fact');
     dynamic last = _box.get('lastfact');

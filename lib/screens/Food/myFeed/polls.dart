@@ -21,6 +21,8 @@ class _PollTabsState extends State<PollTabs> {
         if (snapshot.connectionState == ConnectionState.done) {
           List<PollsModel> _pollList = snapshot.data;
           return ListView.builder(
+            shrinkWrap: true,
+            primary: false,
             itemCount: _pollList.length,
             itemBuilder: (BuildContext context, int index) {
               return getListView(poll: _pollList[index]);
@@ -54,9 +56,11 @@ class _This_ThatTabsState extends State<This_ThatTabs> {
         if (snapshot.connectionState == ConnectionState.done) {
           List<This_thatModel> _thisthat = snapshot.data;
           return ListView.builder(
+            shrinkWrap: true,
+            primary: false,
             itemCount: _thisthat.length,
             itemBuilder: (BuildContext context, int index) {
-              return getListView(this_that: _thisthat[index],);
+              return GetListView(this_that: _thisthat[index],);
             }
           );
         }
@@ -73,31 +77,23 @@ class _This_ThatTabsState extends State<This_ThatTabs> {
   }
 }
 
-
-
-/* poll card displayin widget */
-class getListView extends StatefulWidget {
-  final PollsModel poll;
+// print this that on the screen
+class GetListView extends StatefulWidget {
+  
   final This_thatModel this_that;
-  getListView({
-    this.poll,
+  GetListView({
     this.this_that,
     Key key,
   }) : super(key: key);
-
   @override
-  _getListViewState createState() => _getListViewState();
+  _GetListViewState createState() => _GetListViewState();
 }
 
-class _getListViewState extends State<getListView> {
+class _GetListViewState extends State<GetListView> {
   int _index;
-  bool pollPressed = false;
-
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Card(
+    return  Card(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35.0)),
           child: Column(
             children: <Widget>[
@@ -156,155 +152,175 @@ class _getListViewState extends State<getListView> {
               ),
             ],
           ),
-        ),
-        Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35.0)),
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 8.0,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    widget.poll.question ?? '',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () async {
-                  if (!pollPressed) {
-                    await DatabaseService();
-                    setState(() {
-                      _index = 1;
-                      // pollPressed=true;
-                    });
-                  }
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    width: double.maxFinite,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.0),
-                      border: Border.all( color: _index==1?Colors.blueAccent:Colors.black12),
-                      color: Colors.grey[200],
-                    ),
-                    child: Center(
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: Text(
-                          widget.poll.A ?? '',
-                          style: TextStyle(fontSize: 22.0),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () async {
-                  if (!pollPressed) {
-                    await DatabaseService();
-                    setState(() {
-                      _index = 2;
-                      pollPressed=true;
-                    });
-                  }
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    width: double.maxFinite,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.0),
-                      border: Border.all( color: _index==2?Colors.blueAccent:Colors.black12),
-                      color: Colors.grey[200],
-                    ),
-                    child: Center(
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: Text(
-                          widget.poll.B ?? '',
-                          style: TextStyle(fontSize: 22.0),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () async {
-                  if (!pollPressed) {
-                    await DatabaseService();
-                    setState(() {
-                      _index = 3;
-                      pollPressed=true;
-                    });
-                  }
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    width: double.maxFinite,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.0),
-                      border: Border.all( color: _index==3?Colors.blueAccent:Colors.black12),
-                      color: Colors.grey[200],
-                    ),
-                    child: Center(
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: Text(
-                          widget.poll.C ?? '',
-                          style: TextStyle(fontSize: 22.0),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () async {
-                  if (!pollPressed) {
-                    await DatabaseService();
-                    setState(() {
-                      _index = 4;
-                      pollPressed=true;
-                    });
-                  }
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    width: double.maxFinite,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.0),
-                      border: Border.all( color: _index==4?Colors.blueAccent:Colors.black12),
-                      color: Colors.grey[200],
-                    ),
-                    child: Center(
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: Text(
-                          widget.poll.D ?? '',
-                          style: TextStyle(fontSize: 22.0),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-            ],
+        );
+  }
+}
+
+
+/* poll card displayin widget */
+class getListView extends StatefulWidget {
+  final PollsModel poll;
+  getListView({
+    this.poll,
+    Key key,
+  }) : super(key: key);
+
+  @override
+  _getListViewState createState() => _getListViewState();
+}
+
+class _getListViewState extends State<getListView> {
+  int _index;
+  bool pollPressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35.0)),
+      child: Column(
+        children: <Widget>[
+          SizedBox(
+            height: 8.0,
           ),
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              alignment: Alignment.center,
+              child: Text(
+                widget.poll.question ?? '',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () async {
+              if (!pollPressed) {
+                await DatabaseService();
+                setState(() {
+                  _index = 1;
+                  // pollPressed=true;
+                });
+              }
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                width: double.maxFinite,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                  border: Border.all( color: _index==1?Colors.blueAccent:Colors.black12),
+                  color: Colors.grey[200],
+                ),
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: Text(
+                      widget.poll.A ?? '',
+                      style: TextStyle(fontSize: 22.0),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () async {
+              if (!pollPressed) {
+                await DatabaseService();
+                setState(() {
+                  _index = 2;
+                  pollPressed=true;
+                });
+              }
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                width: double.maxFinite,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                  border: Border.all( color: _index==2?Colors.blueAccent:Colors.black12),
+                  color: Colors.grey[200],
+                ),
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: Text(
+                      widget.poll.B ?? '',
+                      style: TextStyle(fontSize: 22.0),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () async {
+              if (!pollPressed) {
+                await DatabaseService();
+                setState(() {
+                  _index = 3;
+                  pollPressed=true;
+                });
+              }
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                width: double.maxFinite,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                  border: Border.all( color: _index==3?Colors.blueAccent:Colors.black12),
+                  color: Colors.grey[200],
+                ),
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: Text(
+                      widget.poll.C ?? '',
+                      style: TextStyle(fontSize: 22.0),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () async {
+              if (!pollPressed) {
+                await DatabaseService();
+                setState(() {
+                  _index = 4;
+                  pollPressed=true;
+                });
+              }
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                width: double.maxFinite,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                  border: Border.all( color: _index==4?Colors.blueAccent:Colors.black12),
+                  color: Colors.grey[200],
+                ),
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: Text(
+                      widget.poll.D ?? '',
+                      style: TextStyle(fontSize: 22.0),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 10.0,
+          ),
+        ],
+      ),
     );
   }
 }
