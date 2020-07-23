@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
+import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/Services/searchFunction.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart';
@@ -42,45 +43,21 @@ class FoodList extends StatefulWidget {
 
 class _FoodListState extends State<FoodList> {
   String text = '';
+  int count = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container( 
-          child: SearchBar<FoodListModel>(
-            debounceDuration: Duration(seconds: 1),
-            onSearch: SearchFunction().search,
-            emptyWidget: Center(child: Text('not a thing found')),
-            cancellationWidget: Icon(Icons.cancel,size: 40,),
-            onItemFound: (FoodListModel food, int index) { 
-              return Container(
-                alignment: Alignment.topCenter,
-                  padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
-                  child: Center(child: TodaySpecial(foodList: food)));
+        child: Container(
+          child: FlatButton(
+            onPressed: () async {
+              await DatabaseService()
+                  .likeTransction(collection: "pol", field: "like", sr_no: "3");
+                  setState(() {
+                    count++;
+                  }); 
             },
-            onError: (e) {
-              print(e);
-              return Center(
-                child: Text("error"),
-              );
-            },
-            textStyle: TextStyle(
-              color: Colors.grey[100],
-            ),
-            minimumChars: 4,
-            hintText: "Search for items by name,mood or mealtype  ",
-            hintStyle: TextStyle(
-              color: Colors.grey[100],
-            ),
-            loader: Center(
-                child: SpinKitFadingCircle(
-              color: Colors.blueAccent,
-            )),
-            searchBarStyle: SearchBarStyle(
-              backgroundColor: Colors.grey[500],
-              padding: EdgeInsets.all(10),
-              borderRadius: BorderRadius.circular(10),
-            ),
+            child: Center(child: Text("$count")),
           ),
         ),
       ),
