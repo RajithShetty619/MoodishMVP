@@ -1,35 +1,37 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/food_info.dart';
 
 class RecipeTab extends StatefulWidget {
+  final FoodListModel foodList;
+
+  const RecipeTab({Key key, this.foodList}) : super(key: key);
   @override
   _RecipeTabState createState() => _RecipeTabState();
 }
 
 class _RecipeTabState extends State<RecipeTab> {
-  List<RecipeCard> _info = [
-    RecipeCard(
-        image: 'Salty.jpg',
-        title: 'Chips n Salt',
-        cuisine: 'Indian-Cheap-10 mins',
-        name: 'Name')
-  ];
+ 
 
   @override
   Widget build(BuildContext context) {
-    return getListview(info: _info);
+    return getListview(foodList: widget.foodList);
   }
 }
 
-class getListview extends StatelessWidget {
-  const getListview({
-    Key key,
-    @required List<RecipeCard> info,
-  })  : _info = info,
-        super(key: key);
+class getListview extends StatefulWidget {
+  
 
-  final List<RecipeCard> _info;
+  final FoodListModel foodList;
 
+  const getListview({Key key, this.foodList}) : super(key: key);
+
+  @override
+  _getListviewState createState() => _getListviewState();
+}
+
+class _getListviewState extends State<getListview> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -38,32 +40,37 @@ class getListview extends StatelessWidget {
         onTap: () {},
         child: Card(
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(35.0)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
           child: Column(
             children: <Widget>[
-              Container(
-                height: 300.0,
-                width: double.maxFinite,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30.0),
-                  image: DecorationImage(
-                      image: AssetImage('assets/${_info[0].image}'),
-                      fit: BoxFit.cover),
-                ),
-              ),
+               CachedNetworkImage(
+              imageUrl: widget.foodList.images,
+              imageBuilder: (context, imageProvider) {
+                return Container(
+                  height: 300,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      image: DecorationImage(
+                        image: imageProvider,
+                        fit: BoxFit.cover,
+                      )),
+                );
+              },
+            ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Container(
                           alignment: Alignment.centerLeft,
-                          child: Text(
-                            _info[0].title,
+                          child: Text(widget.foodList.foodName,
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18.0),
+                                fontWeight: FontWeight.bold, fontSize: 22.0),
                           ),
                         ),
                       ),
@@ -74,7 +81,10 @@ class getListview extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 10.0),
                         child: Container(
                             alignment: Alignment.centerLeft,
-                            child: Text(_info[0].cuisine)),
+                            child: Text(widget.foodList.cuisine,
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),),)
                       ),
                       SizedBox(
                         height: 2.0,
@@ -83,7 +93,11 @@ class getListview extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 10.0, top: 5.0),
                         child: Container(
                             alignment: Alignment.centerLeft,
-                            child: Text(_info[0].name)),
+                            child: Text(widget.foodList.deter,
+                            style: TextStyle(
+                              fontSize: 18,
+                            )
+                            )),
                       ),
                       SizedBox(
                         height: 20,
@@ -110,10 +124,12 @@ class getListview extends StatelessWidget {
                               size: 30,
                             ),
                             onPressed: () {
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => Food_Info()));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Food_Info(
+                                        foodList: widget.foodList
+                                      )));
                             },
                           ),
                         ),

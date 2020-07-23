@@ -5,23 +5,28 @@ import 'dart:convert';
 import 'package:moodish_mvp/models/foodListModel.dart';
 
 class SearchFunction {
+
   Future<List<FoodListModel>> search(String text) async {
+    print("called");
     var data = await get(
         'https://us-central1-moodishtest.cloudfunctions.net/helloWorld?text=$text');
-    var info = json.decode(data.body);
-    print(info);
+    var info = json.decode(data.body); 
 
-    return await listFromSnapshot(info["results"]);
+     List<dynamic> _passData =  json.decode(info["results"]);  
+    List<FoodListModel>_list=  await listFromSnapshot(_passData  );
+    print(_list);
+    return _list;
   }
 
-   Future<List<FoodListModel>> listFromSnapshot(dynamic snapshot) async {
+   Future<List<FoodListModel>> listFromSnapshot(List<dynamic> snapshot) async {
     /* Future wait is used to make sure each iteration
-      of the map is awaited by the code */
+      of the map is awaited by the code */ 
     return Future.wait(snapshot.map((doc) async {
-      Map<String, dynamic> _docData = doc.data;
+      dynamic _docData = doc;
+      print(_docData);
+      print("////////////////////////////////////////////////////");
       /* convert image name to url from storage */
-      String _url = await Storage().getUrl(_docData["image"]);
-      print(_docData["food_item"]);
+      String _url = await Storage().getUrl(_docData["image"]); 
       List<String> _preparation = [];
       List<String> _ingredients = [];
       int i = 2;
@@ -30,8 +35,7 @@ class SearchFunction {
       /* converting step1,step2..... to List of preparation */
 
       while (_docData["step $i"] != null) {
-        _preparation.add(_docData["step $i"]);
-        print(_docData["step $i"]);
+        _preparation.add(_docData["step $i"]); 
         i++;
       }
       /* initialized */

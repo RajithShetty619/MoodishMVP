@@ -1,0 +1,404 @@
+﻿{
+    "polls": [
+        {
+            "sr_no": "0",
+            "value": "How often do you consume fast food on a weekly basis?",
+            "A": "1-2 times",
+            "B": "3-4 times",
+            "C": "5-6 times",
+            "D": "7 times or more"
+        },
+        {
+            "sr_no": "1",
+            "value": "How many times in a week do you consume instantly made food (canned food, frozen food, noodles)?",
+            "A": "1-2 times",
+            "B": "3-4 times",
+            "C": "5-6 times",
+            "D": "7 times or more"
+        },
+        {
+            "sr_no": "2",
+            "value": "How do you top your hash browns?",
+            "A": "Smothered",
+            "B": "Covered",
+            "C": "All the way",
+            "D": "Just plain"
+        },
+        {
+            "sr_no": "3",
+            "value": "Which is the best pizza topping amongst these according to you?",
+            "A": "Bacon",
+            "B": "Sausage",
+            "C": "Mushroom",
+            "D": "Pepperoni"
+        },
+        {
+            "sr_no": "4",
+            "value": "Favourite fast food restaurant",
+            "A": "Pizza hut",
+            "B": "Subway",
+            "C": "Taco bell",
+            "D": "McDonald's"
+        },
+        {
+            "sr_no": "5",
+            "value": "If you had to give up one, which would it be?",
+            "A": "Pizza ",
+            "B": "Pasta",
+            "C": "Fries",
+            "D": "Burger"
+        },
+        {
+            "sr_no": "6",
+            "value": "How do you like your eggs?",
+            "A": "Hard boiled",
+            "B": "Soft boiled",
+            "C": "Scrambled",
+            "D": "Omelette"
+        },
+        {
+            "sr_no": "7",
+            "value": "Your favourite pool side drink",
+            "A": "Cucumber Margarita.",
+            "B": "Strawberry-Lemon Mojitos",
+            "C": "Brewsky Sangria",
+            "D": "Watermelon-Tequila Cocktail"
+        },
+        {
+            "sr_no": "8",
+            "value": "What do you prefer drinking in the morning?",
+            "A": "Tea",
+            "B": "Coffee",
+            "C": "Milk",
+            "D": "Juice"
+        },
+        {
+            "sr_no": "9",
+            "value": "One has to go, which one do you think?",
+            "A": "Pastries",
+            "B": "Waffles",
+            "C": "Pancakes",
+            "D": "Icecream"
+        },
+        {
+            "sr_no": "10",
+            "value": "Which according to you is the best yogurt flavour among these?",
+            "A": "Plain",
+            "B": "Vanilla",
+            "C": "Strawberry",
+            "D": "Peach"
+        },
+        {
+            "sr_no": "11",
+            "value": "Best chicken wings",
+            "A": "Honey Garlic",
+            "B": "Orange ginger",
+            "C": "Teriyaki glazed",
+            "D": "BBQ"
+        },
+        {
+            "sr_no": "12",
+            "value": "Which icecream flavour best describes you?",
+            "A": "Vanilla- Impulsive",
+            "B": "Chocolate - flirtatious",
+            "C": "Strawberry- Introvert",
+            "D": "Mint chocolate chip-argumentative"
+        },
+        {
+            "sr_no": "13",
+            "value": "Best chocolate bar",
+            "A": "Hershey's",
+            "B": "Milkybar",
+            "C": "Snickers",
+            "D": "Kitkat"
+        },
+        {
+            "sr_no": "14",
+            "value": "Favourite coffee type",
+            "A": "Cappucino",
+            "B": "Espresso",
+            "C": "Latte",
+            "D": "Irish"
+        },
+        {
+            "sr_no": "15",
+            "value": "How you like your chicken?",
+            "A": "Roasted",
+            "B": "Grilled",
+            "C": "Stir-fried",
+            "D": "Pan-fried"
+        },
+        {
+            "sr_no": "16",
+            "value": "Favourite pasta",
+            "A": "Spaghetti",
+            "B": "Macaroni",
+            "C": "Penne",
+            "D": "Fettuccine"
+        },
+        {
+            "sr_no": "17",
+            "value": "Your favourite barbeque dish",
+            "A": "Paneer Afghani",
+            "B": "Reshmi Tikka",
+            "C": "BBQ chicken",
+            "D": "Skewered meat"
+        },
+        {
+            "sr_no": "18",
+            "value": "Your favourite summer drink",
+            "A": "Lassi",
+            "B": "Lemonade",
+            "C": "Mojito",
+            "D": "Grape soda"
+        },
+        {
+            "sr_no": "19",
+            "value": "Favourite icecream topping",
+            "A": "Nuts",
+            "B": "Hot fudge",
+            "C": "Fruits",
+            "D": "Whipped cream"
+        },
+        {
+            "sr_no": "20",
+            "value": "Which Is your preferred pasta sauce?",
+            "A": "Pesto",
+            "B": "Alfredo",
+            "C": "Brown butter",
+            "D": "Marinara"
+        },
+        {
+            "sr_no": "21",
+            "value": "Which soda category would you prefer ?",
+            "A": "Ginger ale",
+            "B": "Club soda",
+            "C": "Soda water",
+            "D": "Tonic water"
+        },
+        {
+            "sr_no": "22",
+            "value": "Your favourite winter drink",
+            "A": "Hot chocolate",
+            "B": "Spiced Irish Coffee",
+            "C": "Slow Cooker-Mulled Wine With Cranberries and Rosemary",
+            "D": "Bourbon-Spiked White Hot Chocolate"
+        },
+        {
+            "sr_no": "23",
+            "value": "Your favourite appetizer",
+            "A": "Apricot Ricotta Honey Basil Bites",
+            "B": " Grilled Salmon Lemon Kebobs",
+            "C": "Smashed Sweet Potato Guacamole Bites",
+            "D": "Grilled Garlic Toasts with Prosciutto and Mozzarella"
+        },
+        {
+            "sr_no": "24",
+            "value": "Which pie out of these would you love to make for your family?",
+            "A": "Coconut Cream Pie",
+            "B": "Pumpkin Pie.",
+            "C": "Blueberry Pie.",
+            "D": "Sweet Potato Pie."
+        },
+        {
+            "sr_no": "25",
+            "value": "When you got out on a date, which out of these would you order?",
+            "A": "Quesadilla",
+            "B": "Oyesters",
+            "C": "Sushi",
+            "D": "Chicken"
+        },
+        {
+            "sr_no": "26",
+            "value": "What according to you is a better side dish than the rest?",
+            "A": "Tangy Cucumber Salad",
+            "B": "Tomato Chickpea Salad",
+            "C": "Grilled Asparagus",
+            "D": "Creamed Spinach."
+        },
+        {
+            "sr_no": "27",
+            "value": "Which is your favourite potato chip flavour?",
+            "A": "sour cream & onion",
+            "B": "salt & vinegar",
+            "C": "plain",
+            "D": "cheese"
+        },
+        {
+            "sr_no": "28",
+            "value": "The aroma of which of these food items do you like?",
+            "A": "Cripsy Bacon",
+            "B": "Cinnamon buns",
+            "C": "Turkey",
+            "D": "Barbecued meat"
+        },
+        {
+            "sr_no": "29",
+            "value": "Which is your preferred canned food?",
+            "A": "Canned salmon",
+            "B": "Canned smoked mackerel",
+            "C": "Canned kidney beans",
+            "D": "Canned sardines"
+        },
+        {
+            "sr_no": "30",
+            "value": "Which is your most favourite vegetable?",
+            "A": "Broccoli",
+            "B": "Potato",
+            "C": "Lettuce",
+            "D": "Bell Pepper"
+        },
+        {
+            "sr_no": "31",
+            "value": "Which of these is the most irresistible cookie flavour?",
+            "A": "Chocolate chip",
+            "B": "Oatmeal Raisin ",
+            "C": "Peanut Butter",
+            "D": "Gingersnaps"
+        },
+        {
+            "sr_no": "32",
+            "value": "What do you cook/order for your friends at 2am after a party?",
+            "A": "Pizza",
+            "B": "Pasta",
+            "C": "Maggi",
+            "D": "Cookies"
+        },
+        {
+            "sr_no": "33",
+            "value": "The best dipping sauce among these",
+            "A": "Spicy Beer Mustard",
+            "B": "Tangy Ranch Dip Duo.",
+            "C": "Espresso Barbecue Sauce",
+            "D": "Roasted Red Pepper Tartar Sauce"
+        },
+        {
+            "sr_no": "34",
+            "value": "Which of these easy prep dishes would you try or have tried?",
+            "A": "Veggie fried rice",
+            "B": "Black Bean–Stuffed Sweet Potatoes",
+            "C": "Ground Turkey Skillet with Green Beans",
+            "D": "Low-Carb Chili"
+        },
+        {
+            "sr_no": "35",
+            "value": "Messiest food in your opinon?",
+            "A": "Sushi",
+            "B": "Ribs",
+            "C": "Crab legs",
+            "D": "Ice cream cones"
+        },
+        {
+            "sr_no": "36",
+            "value": "Favourite cake?",
+            "A": "Chocolate ",
+            "B": "Red velvet",
+            "C": "Lemon",
+            "D": "Cheesecake"
+        },
+        {
+            "sr_no": "37",
+            "value": "Your favourite type of sprinkle as a kid",
+            "A": "Rainbow",
+            "B": "Chocolate ",
+            "C": "Jimmies",
+            "D": "sanding sugar"
+        },
+        {
+            "sr_no": "38",
+            "value": "Your favourite cheese",
+            "A": "Mozarella",
+            "B": "Cheddar",
+            "C": "Swiss",
+            "D": "American"
+        },
+        {
+            "sr_no": "39",
+            "value": "Which is your favourite lunch meat?",
+            "A": "Ham",
+            "B": "Beef",
+            "C": "Salami",
+            "D": "Chicken"
+        },
+        {
+            "sr_no": "40",
+            "value": "Favourite oreo flavour?",
+            "A": "Red velvet",
+            "B": "Minted",
+            "C": "Chocolate",
+            "D": "Classic"
+        },
+        {
+            "sr_no": "41",
+            "value": "What do you eat with dinner rolls?",
+            "A": "Soup",
+            "B": "Stews",
+            "C": "Meatballs",
+            "D": "Gravy"
+        },
+        {
+            "sr_no": "42",
+            "value": "Which accoring to you is the best looking food among these?",
+            "A": "Oreo Cookie Pancakes",
+            "B": "Mac 'n' Cheese Burger",
+            "C": "Cheesecake Cake Batter Dip",
+            "D": "Spaghetti Tacos"
+        },
+        {
+            "sr_no": "43",
+            "value": "Which is your most favourite Fruit Juice flavour?",
+            "A": "Cranberry",
+            "B": "Beet",
+            "C": "Orange",
+            "D": "Pomegranate"
+        },
+        {
+            "sr_no": "44",
+            "value": "Your favourite bubble gum flavour as a kid",
+            "A": "Fruit Stripe",
+            "B": "Wrigley's Juicy Fruit",
+            "C": "Bubblicious Watermelon",
+            "D": "Cotton Candy"
+        },
+        {
+            "sr_no": "45",
+            "value": "If you could only eat one of these forever, what would it be?",
+            "A": "Pie",
+            "B": "Cakes",
+            "C": "Icecream",
+            "D": "Chocolate"
+        },
+        {
+            "sr_no": "46",
+            "value": "What type of beverage do you drink most often while working?",
+            "A": "Fruit juice",
+            "B": "Tea/Coffee",
+            "C": "Soft drink",
+            "D": "Energy drink"
+        },
+        {
+            "sr_no": "47",
+            "value": "On the subject of alcoholic beverages, which one is your favourite?",
+            "A": "Beer",
+            "B": "Cocktail",
+            "C": "Light beer",
+            "D": "Wine"
+        },
+        {
+            "sr_no": "48",
+            "value": "Which one do you like the most out of these?",
+            "A": "Iced tea",
+            "B": "Fruit drinks",
+            "C": "Flavoured liquor",
+            "D": "Organic beverage"
+        },
+        {
+            "sr_no": "49",
+            "value": "When you go out to chill with friends at night, where do you typically preferring going?",
+            "A": "Clubs",
+            "B": "Restaurants",
+            "C": "Lounges",
+            "D": "Bar"
+        }
+    ]
+}
