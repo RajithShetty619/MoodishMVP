@@ -16,15 +16,17 @@ import 'package:moodish_mvp/screens/Food/myFeed/recipe.dart';
 import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart';
 
 import 'package:intl/intl.dart';
+import 'package:moodish_mvp/screens/Restaurants/mood.dart';
 
 class FoodFeed extends StatefulWidget {
+  final String mood;
+  FoodFeed({this.mood});
   @override
   _FoodFeedState createState() => _FoodFeedState();
 }
 
 class _FoodFeedState extends State<FoodFeed> {
-  bool _getFoodCalled = false;
-  bool _loadingData = false;
+  bool _getFoodCalled = false; 
   bool loadingData1 = false;
   bool loadingData2 = false;
   DatabaseQuery _dq = DatabaseQuery(listName: "0");
@@ -32,9 +34,11 @@ class _FoodFeedState extends State<FoodFeed> {
   @override
   void initState() {
     super.initState();
-    if (!_getFoodCalled) {
+    if (!_getFoodCalled) { 
+      print(widget.mood);
+      print("////////////////////////");
       checkDate().then((check) {
-        _dq.getFood(field: ['mood'], value: ['anger'], limit: 10,check: check).then(
+        _dq.getFood(field: ['mood'], value: [widget.mood], limit: 10,check: check).then(
             (future) {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
           setState(() {

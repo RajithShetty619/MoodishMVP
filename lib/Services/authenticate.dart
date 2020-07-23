@@ -65,10 +65,9 @@ class Authenticate {
       // to sign in via Firebase Authentication
       final AuthCredential credential = GoogleAuthProvider.getCredential(
           accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
-      AuthResult _user = await _auth.signInWithCredential(credential);
+      AuthResult _user = await _auth.signInWithCredential(credential); 
+      await DatabaseService().updateUserData (email: googleUser.email,name: googleUser.displayName,uid: _user.user.uid); 
       
-      await DatabaseService().updateUserData (email: googleUser.email,name: googleUser.displayName,uid: _user.user.uid);
-
       return true;
     } catch (e) {
       print(e.toString());

@@ -53,7 +53,8 @@ dependencies:
   cloud_functions: ^0.5.0 
   geolocator: ^5.3.2+2
   geocoder: ^0.2.1
-  flappy_search_bar: ^1.7.2 
+  flappy_search_bar: ^1.7.2  
+  custom_navigator: ^0.3.0
 
 dev_dependencies:
   flutter_test:

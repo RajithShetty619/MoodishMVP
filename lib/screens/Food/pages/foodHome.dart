@@ -4,6 +4,8 @@ import 'package:moodish_mvp/screens/Food/pages/explore.dart';
 import 'package:moodish_mvp/screens/Food/pages/foodFeed.dart';
 
 class FoodHome extends StatefulWidget {
+  final String mood;
+  FoodHome({this.mood});
   @override
   _FoodHomeState createState() => _FoodHomeState();
 }
@@ -66,8 +68,8 @@ class _FoodHomeState extends State<FoodHome> {
                           onValueChanged: (changeValue) {
                             print(_switch);
                             setState(() {
-                              grpValue = changeValue;
-                              _switch = !_switch;
+                              if(grpValue!=changeValue){grpValue = changeValue;
+                              _switch = !_switch;}
                             });
                           },
                           groupValue: grpValue,
@@ -86,7 +88,7 @@ class _FoodHomeState extends State<FoodHome> {
                     : 1, // switch between Foo and Bar based on condition
                 children: [
                   Explore(),
-                  FoodFeed(),
+                  FoodFeed(mood:widget.mood),
                 ],
               ),
             ),

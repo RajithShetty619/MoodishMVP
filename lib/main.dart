@@ -22,7 +22,7 @@ void main() async {
     debugShowCheckedModeBanner: false,
   ));
 }
-
+GlobalKey<NavigatorState> mainNavigatorKey = GlobalKey<NavigatorState>();
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -25,12 +25,13 @@ class DatabaseQuery {
       {List<String> field,
       List<dynamic> value,
       int limit = 5,
-      int check = 0}) async {
+      int check = 0,
+      String mood
+      }) async {
     List<String> _field = field;
     List<dynamic> _value = value;
     /* gets previous list saved by the name */
-    await Hive.openBox(listName);
-    final _box = Hive.box(listName);
+    final _box = await Hive.openBox(listName+(mood??'')); 
     List<dynamic> _gfoodList = await _box.get(listName);
     print('getfood');
 
