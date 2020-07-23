@@ -8,14 +8,14 @@ import 'package:moodish_mvp/Services/database.dart';
 
 class EditProfile extends StatefulWidget {
   final ImageProvider image;
-  EditProfile({this.image});
+  EditProfile({this.image });
   @override
   _EditProfileState createState() => _EditProfileState();
 }
 
 class _EditProfileState extends State<EditProfile> {
   ImageProvider _image;
-
+  Map<String,String> _usrre;
   Position _currentPosition;
   String _currentAddress ='Mumbai,Maharashtra';
   Geolocator geolocator = Geolocator();
@@ -136,7 +136,7 @@ class _EditProfileState extends State<EditProfile> {
                   thickness: 2.0,
                 ),
               ),
-              getListTile('Username', 'Dummy Text', context, 3),
+              getListTile('Username', 'dummy', context, 3),
               Padding(
                 padding: EdgeInsets.only(left: 10.0, right: 10.0),
                 child: Divider(

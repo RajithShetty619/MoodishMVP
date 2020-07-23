@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,6 +19,10 @@ import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart';
 import 'package:intl/intl.dart';
 
 class FoodFeed extends StatefulWidget {
+  final int number;
+
+   FoodFeed({Key key, this.number}) : super(key: key);
+  
   @override
   _FoodFeedState createState() => _FoodFeedState();
 }
@@ -259,8 +264,12 @@ class _FoodFeedState extends State<FoodFeed> {
                   if (indx == 2)
                     Column(
                       children: <Widget>[
-                        Container(height: 300, child: This_ThatTabs()),
-                        Container(height: 300,child: PollTabs()),
+                        if(widget.number == 0)
+                        Container(height: 600, child: YesNoTabs()),
+                        if(widget.number == 1)
+                        Container(height: 600,child: PollTabs()),
+                        if (widget.number == 2)
+                         Container(height: 300,child: This_ThatTabs()),
                       ],
                     ),
 
@@ -273,5 +282,27 @@ class _FoodFeedState extends State<FoodFeed> {
               )
         ],
     );
+  }
+}
+
+class Rndm extends StatefulWidget {
+  @override
+  _RndmState createState() => _RndmState();
+}
+
+class _RndmState extends State<Rndm> {
+  @override
+  void initState() {
+    
+Random random = new Random();
+int randomNumber = random.nextInt(3);
+print('/////////////////////////////////////////////////////////////////////////////////');
+print(randomNumber);
+FoodFeed(number: randomNumber);
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

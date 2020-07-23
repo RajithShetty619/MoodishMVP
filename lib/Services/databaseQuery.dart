@@ -5,6 +5,7 @@ import 'package:moodish_mvp/models/factsModel.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/models/pollsModel.dart';
 import 'package:moodish_mvp/models/this_thatModel.dart';
+import 'package:moodish_mvp/models/yesNo.dart';
 import 'database.dart';
 
 class DatabaseQuery {
@@ -16,6 +17,9 @@ class DatabaseQuery {
 
   final CollectionReference this_that =
       Firestore.instance.collection('this_that');
+      
+  final CollectionReference yesorno =
+      Firestore.instance.collection('yesorno');
 
   final CollectionReference facts = Firestore.instance.collection('facts');
   final String listName;
@@ -198,6 +202,33 @@ class DatabaseQuery {
         B: _docData['B'] ?? '',
         aLike: _docData['aLike'] ?? '',
         bLike: _docData['bLike'] ?? '',
+      );
+    }).toList();
+  }
+
+  Future<List<YesNoModel>> getYesno() async {
+    Box _box = await Hive.openBox('yesorno');
+    dynamic end = _box.get('end');
+
+    Query y = yesorno
+        .where('Questions', isGreaterThan: '')
+        .startAfter([end])
+        .orderBy('Questions')
+        .limit(3);
+    List<DocumentSnapshot> _snapshot =
+        await y.getDocuments().then((value) => value.documents);
+    // saving last this_that to be shown
+    String _end = await _snapshot[_snapshot.length - 1].data['Questions'];
+    await _box.put('end', _end);
+
+/* list of this_that is made and returned */
+    return _snapshot.map((doc) {
+      print(doc.data);
+      Map<String, dynamic> _docData = doc.data;
+      return YesNoModel(
+        Questions: _docData['Questions'],
+        yes: _docData['yes'] ?? '',
+        no: _docData['no'] ?? '',
       );
     }).toList();
   }

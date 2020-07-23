@@ -140,6 +140,7 @@ class DatabaseService {
         Firestore.instance.collection('polls').document(sr_no);
     _poll.setData({opt: like}, merge: true);
   }
+
 }
   /* //////////////////////////////////////////////////// THIS_THAT METHOD///////////////////////////////////// */
 

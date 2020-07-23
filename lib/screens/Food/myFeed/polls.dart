@@ -4,6 +4,7 @@ import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/pollsModel.dart';
 import 'package:moodish_mvp/models/this_thatModel.dart';
+import 'package:moodish_mvp/models/yesNo.dart';
 
 class PollTabs extends StatefulWidget {
   @override
@@ -73,6 +74,126 @@ class _This_ThatTabsState extends State<This_ThatTabs> {
           );
         }
       }
+    );
+  }
+}
+
+class YesNoTabs extends StatefulWidget {
+  @override
+  _YesNoTabsState createState() => _YesNoTabsState();
+}
+
+class _YesNoTabsState extends State<YesNoTabs> {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<YesNoModel>>(
+      future: DatabaseQuery().getYesno(),
+      initialData: [],
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          List<YesNoModel> _yesno = snapshot.data;
+          return ListView.builder(
+            shrinkWrap: true,
+            primary: false,
+            itemCount: _yesno.length,
+            itemBuilder: (BuildContext context, int index) {
+              return YesNoList(yesno: _yesno[index],);
+            }
+          );
+        }
+        else{
+          return Center(
+            child: SpinKitFadingCircle(
+              color: Colors.greenAccent[400],
+              size: 40,
+            ),
+          );
+        }
+      }
+    );
+  }
+}
+
+class YesNoList extends StatefulWidget {
+  final YesNoModel yesno;
+
+  const YesNoList({Key key, this.yesno}) : super(key: key);
+  @override
+  _YesNoListState createState() => _YesNoListState();
+}
+
+class _YesNoListState extends State<YesNoList> {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35.0)),
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+            height: 8.0,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              alignment: Alignment.center,
+              child: Text( widget.yesno.Questions ?? '',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+              ),
+            ),
+          ),
+          GestureDetector(
+                onTap: ()  {
+                  
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    width: double.maxFinite,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.0),
+                      border: Border.all( color: Colors.black12),
+                      color: Colors.grey[200],
+                    ),
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: Text(
+                          "Yes" ,
+                          style: TextStyle(fontSize: 22.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: ()  {
+                  
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    width: double.maxFinite,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.0),
+                      border: Border.all( color: Colors.black12),
+                      color: Colors.grey[200],
+                    ),
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: Text(
+                          "No" ,
+                          style: TextStyle(fontSize: 22.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+      
     );
   }
 }
