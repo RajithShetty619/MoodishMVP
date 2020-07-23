@@ -18,6 +18,8 @@ class _FoodftTabState extends State<FoodftTab> {
         if (snapshot.connectionState == ConnectionState.done) {
           List<FactModel> _fact = snapshot.data;
           return ListView.builder(
+            shrinkWrap: true,
+            primary: false,
             itemCount: _fact.length,
             itemBuilder: (BuildContext context, int index) {
               return getListView(fact: _fact[index],);
