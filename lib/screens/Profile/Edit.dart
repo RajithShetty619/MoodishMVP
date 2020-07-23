@@ -4,18 +4,19 @@ import 'package:moodish_mvp/Services/database.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:image_picker/image_picker.dart'; 
 import 'package:geolocator/geolocator.dart';
-import 'package:moodish_mvp/Services/database.dart';
-
+import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 class EditProfile extends StatefulWidget {
   final ImageProvider image;
-  EditProfile({this.image});
+  final Map<String,String> user;
+  EditProfile({this.image,this.user});
   @override
   _EditProfileState createState() => _EditProfileState();
 }
 
 class _EditProfileState extends State<EditProfile> {
+  Map<String,String>_user;
   ImageProvider _image;
-
+  final userData1 = DatabaseService();
   Position _currentPosition;
   String _currentAddress ='Mumbai,Maharashtra';
   Geolocator geolocator = Geolocator();
@@ -34,11 +35,23 @@ class _EditProfileState extends State<EditProfile> {
   @override
   void initState() {
     super.initState();
+    info()async{
+      try{
+        setState(() {
+
+        });
+      }catch(e){
+        print(e);
+      }
+    }
 
     data() async {
       try {
         setState(() {
           _image = widget.image;
+        });
+        setState(() {
+          _user=widget.user;
         });
       } catch (e) {
         print(e);
@@ -64,6 +77,7 @@ class _EditProfileState extends State<EditProfile> {
         _currentAddress = "${place.subLocality},${place.locality}-${place.postalCode}";
       });
       print(_currentAddress);
+      userData1.editUserData(field: 'location', value: _currentAddress);
     } catch (e) {
       print(e);
     }
@@ -88,6 +102,7 @@ class _EditProfileState extends State<EditProfile> {
 
   @override
   Widget build(BuildContext context) {
+    String phone='Contact';
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -136,14 +151,14 @@ class _EditProfileState extends State<EditProfile> {
                   thickness: 2.0,
                 ),
               ),
-              getListTile('Username', 'Dummy Text', context, 3),
+              getListTile('Username', _user['name'], context, 3),
               Padding(
                 padding: EdgeInsets.only(left: 10.0, right: 10.0),
                 child: Divider(
                   thickness: 2.0,
                 ),
               ),
-              getListTile('Email', 'DummyText@gmail.com', context, 4),
+              getListTile('Email', _user['email'], context, 4),
               Padding(
                 padding: EdgeInsets.only(left: 10.0, right: 10.0),
                 child: Divider(
@@ -157,14 +172,14 @@ class _EditProfileState extends State<EditProfile> {
                   thickness: 2.0,
                 ),
               ),
-              getListTile('Birthdate', '13/08', context, 2),
+              getListTile('Birthdate', _user['Birthdate']??'Enter your Birthdate!', context, 2),
               Padding(
                 padding: EdgeInsets.only(left: 10.0, right: 10.0),
                 child: Divider(
                   thickness: 2.0,
                 ),
               ),
-              getListTile('Phone number', 'Dummy Text', context, 5),
+              getListTile('Phone number', _user['PhoneNo.']??'Enter your Phone no.!', context, 5),
               Padding(
                 padding: EdgeInsets.only(left: 10.0, right: 10.0),
                 child: Divider(
@@ -182,13 +197,13 @@ class _EditProfileState extends State<EditProfile> {
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Text(
-                      'Location',
+                      'Location:',
                       style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
                     ),
                   ),
                   Flexible(
                     child: Text(
-                      _currentAddress,
+                      _user['location']??_currentAddress,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(fontSize: 20.0),
                     ),
@@ -228,7 +243,9 @@ class _EditProfileState extends State<EditProfile> {
                         style: TextStyle(fontSize: 18.0, color: Colors.white),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                   ),
                 ),
               ),
@@ -247,8 +264,22 @@ Widget getListTile(
     String category, String name, BuildContext context, int tile) {
   String username;
   String phoneNo;
-  String birthDate;
+  String birth;
   final userData = DatabaseService();
+  birthDate()async{
+      var datePicked = await DatePicker.showSimpleDatePicker(
+      context,
+      initialDate: DateTime(1994),
+      firstDate: DateTime(1960),
+      lastDate: DateTime(2012),
+      dateFormat: "dd-MMMM-yyyy",
+      locale: DateTimePickerLocale.en_us,
+      looping: true,
+    );
+
+      birth= '${datePicked.day.toString()}/${datePicked.month.toString()}/${datePicked.year.toString()}';
+      userData.editUserData(field: 'Birthdate',value: birth);
+  }
 
   return InkWell(
     onTap: () {
@@ -257,30 +288,33 @@ Widget getListTile(
           return ForgotPassword();
         }));
       if (tile == 2)
-        {Alert(
-            context: context,
-            title: category,
-            content: TextField(
-              keyboardType: TextInputType.datetime,
-              onChanged: (val){
-//                birthDate = val;
-//                userData.editUserData(field: 'Birthdate',value: birthDate);
-              },
-              decoration: InputDecoration(
-                icon: Icon(Icons.edit),
-                labelText: 'Edit',
-                hintText: name,
-              ),
-            ),
-            buttons: [
-              DialogButton(
-                onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
-                child: Text(
-                  "Save",
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-              )
-            ]).show();}
+        {
+          birthDate();
+        }
+//        {Alert(
+//            context: context,
+//            title: category,
+//            content: TextField(
+//              keyboardType: TextInputType.datetime,
+//              onChanged: (val){
+////                birthDate = val;
+////                userData.editUserData(field: 'Birthdate',value: birthDate);
+//              },
+//              decoration: InputDecoration(
+//                icon: Icon(Icons.edit),
+//                labelText: 'Edit',
+//                hintText: name,
+//              ),
+//            ),
+//            buttons: [
+//              DialogButton(
+//                onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+//                child: Text(
+//                  "Save",
+//                  style: TextStyle(color: Colors.white, fontSize: 20),
+//                ),
+//              )
+//            ]).show();}
       if(tile==3) {
         Alert(
             context: context,
@@ -288,7 +322,7 @@ Widget getListTile(
             content: TextField(
               onChanged: (val) {
                 username = val;
-                userData.editUserData(field: 'Username', value: username);
+                userData.editUserData(field: 'name', value: username);
               },
               decoration: InputDecoration(
                 icon: Icon(Icons.edit),
@@ -318,7 +352,8 @@ Widget getListTile(
                 keyboardType: TextInputType.number,
                 onChanged: (val){
                   phoneNo = val;
-                  userData.editUserData(field: 'PhoneNo.',value: phoneNo);
+                  userData.editUserData(field: 'Phoneno.',value: phoneNo);
+
                 },
                 decoration: InputDecoration(
                   icon: Icon(Icons.edit),
@@ -342,7 +377,7 @@ Widget getListTile(
         Padding(
           padding: const EdgeInsets.all(20.0),
           child: Text(
-            category,
+            '$category :',
             style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
           ),
         ),
@@ -358,42 +393,42 @@ Widget getListTile(
   );
 }
 
-_onAlertWithCustomContentPressed(String category, String name, context, int tile) {
-  String username;
-  String phoneNo;
-  final userData = DatabaseService();
-  Alert(
-      context: context,
-      title: category,
-      content: TextField(
-        onChanged: (val){
-          if(tile==3){
-            username = val;
-            userData.editUserData(field: 'Username',value: username);
-          }
-          if(tile==5)
-            {
-              phoneNo = val;
-              userData.editUserData(field: 'PhoneNo.',value: phoneNo);
-            }
-
-        },
-        decoration: InputDecoration(
-          icon: Icon(Icons.edit),
-          labelText: 'Edit',
-          hintText: name,
-        ),
-      ),
-      buttons: [
-        DialogButton(
-          onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
-          child: Text(
-            "Save",
-            style: TextStyle(color: Colors.white, fontSize: 20),
-          ),
-        )
-      ]).show();
-}
+//_onAlertWithCustomContentPressed(String category, String name, context, int tile) {
+//  String username;
+//  String phoneNo;
+//  final userData = DatabaseService();
+//  Alert(
+//      context: context,
+//      title: category,
+//      content: TextField(
+//        onChanged: (val){
+//          if(tile==3){
+//            username = val;
+//            userData.editUserData(field: 'Username',value: username);
+//          }
+//          if(tile==5)
+//            {
+//              phoneNo = val;
+//              userData.editUserData(field: 'PhoneNo.',value: phoneNo);
+//            }
+//
+//        },
+//        decoration: InputDecoration(
+//          icon: Icon(Icons.edit),
+//          labelText: 'Edit',
+//          hintText: name,
+//        ),
+//      ),
+//      buttons: [
+//        DialogButton(
+//          onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+//          child: Text(
+//            "Save",
+//            style: TextStyle(color: Colors.white, fontSize: 20),
+//          ),
+//        )
+//      ]).show();
+//}
 
 //import 'package:flutter/material.dart';
 //import 'package:flutter/cupertino.dart';

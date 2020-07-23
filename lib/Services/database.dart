@@ -10,7 +10,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 class DatabaseService {
   final CollectionReference userName =
-      Firestore.instance.collection('Username');
+  Firestore.instance.collection('Username');
 
 /* ////////////////////////////////////////////////////////////////////// USERNAMEMETHODS ////////////////////////////////////////////////////////// */
 
@@ -29,7 +29,7 @@ class DatabaseService {
   Future<Map<String, String>> returnUser() async {
     Map<String, String> _data = {};
     DocumentSnapshot user =
-        await userName.document(await Authenticate().returnUid()).get();
+    await userName.document(await Authenticate().returnUid()).get();
     user.data.forEach((key, value) {
       _data.putIfAbsent(key, () => value);
     });
@@ -63,7 +63,7 @@ class DatabaseService {
   }
 
   Future<List<FoodListModel>> searchDocuments({dynamic data}) async {
-    
+
   }
 
   /* converts snapshot from db into foodListModel */
@@ -134,27 +134,25 @@ class DatabaseService {
 
   /* //////////////////////////////////////////////////// POLL METHOD///////////////////////////////////// */
 
-<<<<<<< HEAD
-  Future<void> likePoll({String sr_no,String opt,int like}) async {
-    print(sr_no+"  "+opt);
-    DocumentReference _poll = Firestore.instance.collection('polls').document(sr_no);
-    _poll.setData({opt:like},merge: true);
-=======
   Future<void> likePoll({String sr_no, String opt, int like}) async {
     print(sr_no + "  " + opt);
-    DocumentReference _poll =
-        Firestore.instance.collection('polls').document(sr_no);
+    DocumentReference _poll = Firestore.instance.collection('polls').document(
+        sr_no);
     _poll.setData({opt: like}, merge: true);
->>>>>>> 9bdd26f9321bcd4beb9b4480d4b734c910bc20d6
+    Future<void> likePoll({String sr_no, String opt, int like}) async {
+      print(sr_no + "  " + opt);
+      DocumentReference _poll =
+      Firestore.instance.collection('polls').document(sr_no);
+      _poll.setData({opt: like}, merge: true);
+    }
+
+    /* //////////////////////////////////////////////////// THIS_THAT METHOD///////////////////////////////////// */
+
+    //   Future<void> like_this_that({String option,String like}) async {
+    //     print(''+ option);
+    //     DocumentReference _that = Firestore.instance.collection('this_that')
+    //   }
   }
-
-  /* //////////////////////////////////////////////////// THIS_THAT METHOD///////////////////////////////////// */
-
-  //   Future<void> like_this_that({String option,String like}) async {
-  //     print(''+ option);
-  //     DocumentReference _that = Firestore.instance.collection('this_that')
-  //   }
-}
 
 /* example of Database Snapshot single DocumentSnapshot looks like this 
             "mood": "anger",
@@ -196,3 +194,4 @@ class DatabaseService {
             "meal_type": "Maincourse",
             "image": "americanporkbarbeque.JPG" 
 */
+}

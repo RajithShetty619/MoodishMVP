@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:moodish_mvp/Services/database.dart';  
+import 'package:moodish_mvp/Services/database.dart';
 import '../../Services/authenticate.dart';
 import 'Edit.dart';
 
@@ -71,7 +71,7 @@ class _ProfileState extends State<Profile> {
                 InkWell(
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => EditProfile( )));
+                        MaterialPageRoute(builder: (context) => EditProfile(user:userData)));
                   },
                   child: Padding(
                     padding:
