@@ -49,7 +49,7 @@ class FoodListModel {
   @HiveField(21)
   final String sr_no ;
   @HiveField(22)
-  final String like ;
+  final int like ;
 
   FoodListModel(
       {this.foodName,

@@ -39,7 +39,7 @@ class FoodListModelAdapter extends TypeAdapter<FoodListModel> {
       protein: fields[18] as String,
       restaurants: fields[19] as String,
       sr_no: fields[21] as String,
-      like: fields[22] as String,
+      like: fields[22] as int,
     );
   }
 

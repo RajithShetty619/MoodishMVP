@@ -158,9 +158,7 @@ class _YesNoListState extends State<YesNoList> {
           GestureDetector(
             onTap: () async {
               if (!_pressed) {
-                await DatabaseService().likeTransction(
-                    collection: 'yesorno', sr_no: _yes.sr_no, field: 'yes');
-                setState(() {
+                 setState(() {
                   _index = 1;
                   ++_yes.yes;
                   _pressed = true;
@@ -207,14 +205,14 @@ class _YesNoListState extends State<YesNoList> {
           GestureDetector(
             onTap: () async {
               if (!_pressed) {
-                await DatabaseService().likeTransction(
-                    collection: 'yesorno', sr_no: _yes.sr_no, field: 'no');
                 setState(() {
                   _index = 2;
                   ++_yes.no;
                   _pressed = true;
                 });
-                await DatabaseService().likeTransction(collection: 'yesorno',sr_no: _yes.sr_no, field: 'no');
+                await DatabaseService().likeTransction(
+                    collection: 'yesorno', sr_no: _yes.sr_no, field: 'no');
+                
                 
               }
             },
@@ -310,10 +308,8 @@ class _GetListViewState extends State<GetListView> {
                   ++_thisT.aLike;
                   thispressed = true;
                 });
-                await DatabaseService().likeTransction(
-                    collection: 'this_that',
-                    sr_no: _thisT.sr_no,
-                    field: 'aLike');
+                await DatabaseService().likeTransction(collection: 'this_that',sr_no: _thisT.sr_no, field: 'aLike');
+               
               }
             },
             child: Padding(
@@ -346,10 +342,8 @@ class _GetListViewState extends State<GetListView> {
                   thispressed = true;
                   ++_thisT.bLike;
                 });
-                await DatabaseService().likeTransction(
-                    collection: 'this_that',
-                    sr_no: _thisT.sr_no,
-                    field: 'bLike');
+                await DatabaseService().likeTransction(collection: 'this_that',sr_no: _thisT.sr_no, field: 'bLike');
+              
               }
             },
             child: Padding(
