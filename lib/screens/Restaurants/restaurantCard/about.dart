@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 class About extends StatefulWidget {
   final Widget child;
+  final String desc;
 
-  About({Key key, this.child}) : super(key: key);
+  About({Key key, this.child,this.desc}) : super(key: key);
 
   _AboutState createState() => _AboutState();
 }
@@ -196,7 +197,7 @@ class _AboutState extends State<About> {
                           Padding(
                               padding: EdgeInsets.all(5.0),
                               child: Text(
-                                  "afssad fgh dfgdg dfhdfd aewrt gcbvh krt sffghdfsdfsd sdfsz bvnrtty ftryt iowanhshd asbjda jadihu")),
+                                  widget.desc)),
 //                          SizedBox(height: 10.0),
 //                          Padding(
 //                            padding: const EdgeInsets.all(5.0),

@@ -8,7 +8,8 @@ class HomePage extends StatefulWidget {
   final String imgName1;
   final String imgName2;
   final String restName;
-  HomePage({Key key,this.imgName,this.imgName1,this.imgName2,this.restName}) : super(key: key);
+  final String desc;
+  HomePage({Key key,this.imgName,this.imgName1,this.imgName2,this.restName,this.desc}) : super(key: key);
   _HomePageState createState() => _HomePageState();
 }
 
@@ -49,7 +50,7 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                       child: TabBarView(
                         children: <Widget>[
-                          HomeTopTabs(0xffff5722), //ff5722
+                          HomeTopTabs(colorVal: 0xffff5722,desc: widget.desc,), //ff5722
                         ],
                       ),
                     ),

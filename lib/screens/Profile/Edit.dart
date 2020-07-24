@@ -35,15 +35,6 @@ class _EditProfileState extends State<EditProfile> {
   @override
   void initState() {
     super.initState();
-    info()async{
-      try{
-        setState(() {
-
-        });
-      }catch(e){
-        print(e);
-      }
-    }
 
     data() async {
       try {
@@ -57,6 +48,7 @@ class _EditProfileState extends State<EditProfile> {
         print(e);
       }
     }
+
 
     data();
   }
@@ -85,7 +77,8 @@ class _EditProfileState extends State<EditProfile> {
 
   @override
   Widget build(BuildContext context) {
-    String phone='Contact';
+    String phone='( none )';
+    String birth = '( none )';
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -134,14 +127,14 @@ class _EditProfileState extends State<EditProfile> {
                   thickness: 2.0,
                 ),
               ),
-              getListTile('Username', _user['name'], context, 3),
+              getListTile('Username', _user['name']??'', context, 3),
               Padding(
                 padding: EdgeInsets.only(left: 10.0, right: 10.0),
                 child: Divider(
                   thickness: 2.0,
                 ),
               ),
-              getListTile('Email', _user['email'], context, 4),
+              getListTile('Email', _user['email']??'', context, 4),
               Padding(
                 padding: EdgeInsets.only(left: 10.0, right: 10.0),
                 child: Divider(
@@ -155,14 +148,14 @@ class _EditProfileState extends State<EditProfile> {
                   thickness: 2.0,
                 ),
               ),
-              getListTile('Birthdate', _user['Birthdate']??'Enter your Birthdate!', context, 2),
+              getListTile('Birthdate', _user['Birthdate']??birth, context, 2),
               Padding(
                 padding: EdgeInsets.only(left: 10.0, right: 10.0),
                 child: Divider(
                   thickness: 2.0,
                 ),
               ),
-              getListTile('Phone number', _user['PhoneNo.']??'Enter your Phone no.!', context, 5),
+              getListTile('Phone number', _user['PhoneNo.']??phone, context, 5),
               Padding(
                 padding: EdgeInsets.only(left: 10.0, right: 10.0),
                 child: Divider(
@@ -346,7 +339,10 @@ Widget getListTile(
               ),
               buttons: [
                 DialogButton(
-                  onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+                  onPressed: (){
+
+                    Navigator.of(context, rootNavigator: true).pop();
+                  },
                   child: Text(
                     "Save",
                     style: TextStyle(color: Colors.white, fontSize: 20),

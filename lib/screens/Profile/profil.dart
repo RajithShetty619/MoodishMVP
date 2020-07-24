@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/Services/database.dart';
+import 'package:moodish_mvp/screens/Restaurants/home.dart';
 import '../../Services/authenticate.dart';
 import 'Edit.dart';
-
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
 class Profile extends StatefulWidget {
     
   @override
@@ -190,7 +192,49 @@ class _ProfileState extends State<Profile> {
                     Icons.keyboard_arrow_right,
                     color: Colors.grey.shade400,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                      builder: (BuildContext context){
+                          return Dialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Container(
+                              height: 150.0,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Linkify(
+                                        onOpen:(link) async {
+                                            await launch(link.url);
+                                        },
+                                        text: 'You have got Questions? We have answers\nClick https://snapinsight.net/faq.php',
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 15.0,),
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: RaisedButton(
+                                      child: Text('OK'),
+                                      onPressed: (){
+                                        Navigator.of(context).pop();
+                                      },
+
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                      }
+                    );
+                  },
                 ),
                 Divider(),
                 ListTile(
@@ -325,3 +369,14 @@ class _ProfileState extends State<Profile> {
     );
   }
 }
+
+//Future<void> _onOpen(LinkableElement link) async {
+//  if (await canLaunch(link.url)) {
+//    await launch(link.url,
+//    forceSafariVC: false,
+//    forceWebView: false,
+//    );
+//  } else {
+//    throw 'Could not launch $link';
+//  }
+//}

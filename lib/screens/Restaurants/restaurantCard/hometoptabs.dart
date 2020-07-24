@@ -8,8 +8,8 @@ import 'photo.dart';
 import 'starfeedback.dart';
 
 class HomeTopTabs extends StatefulWidget {
-
-  HomeTopTabs(this.colorVal);
+String desc;
+  HomeTopTabs({this.colorVal,this.desc});
   int colorVal;
 
   _HomeTopTabsState createState() => _HomeTopTabsState();
@@ -21,7 +21,7 @@ TabController _tabController;
 @override
      void initState() {
        super.initState();
-      _tabController = new TabController(vsync: this, length: 4);
+      _tabController = new TabController(vsync: this, length: 3);
       _tabController.addListener(_handleTabSelection);
      }
      void _handleTabSelection() {
@@ -32,7 +32,7 @@ TabController _tabController;
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length:4,
+      length:3,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -69,24 +69,24 @@ TabController _tabController;
                 ),
                 
               ),
-              Tab(
-               /* icon: Icon(FontAwesomeIcons.shapes, color: _tabController.index == 2
-                          ? Color( widget.colorVal)
-                          : Colors.grey),*/
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(25,0,25,0),
-                                  child: Text('Photo',style: TextStyle( color: _tabController.index == 2
-                            ?  Color( widget.colorVal)
-                            : Colors.grey)),
-                ),
-              ),
+//              Tab(
+//               /* icon: Icon(FontAwesomeIcons.shapes, color: _tabController.index == 2
+//                          ? Color( widget.colorVal)
+//                          : Colors.grey),*/
+//                child: Padding(
+//                  padding: EdgeInsets.fromLTRB(25,0,25,0),
+//                                  child: Text('Photo',style: TextStyle( color: _tabController.index == 2
+//                            ?  Color( widget.colorVal)
+//                            : Colors.grey)),
+//                ),
+//              ),
               Tab(
              /*   icon: Icon(FontAwesomeIcons.solidBookmark, color: _tabController.index == 3
                           ? Color( widget.colorVal)
                           : Colors.grey),*/
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(0,0,25,0),
-                                  child: Text('About',style: TextStyle( color: _tabController.index == 3
+                                  child: Text('About',style: TextStyle( color: _tabController.index == 2
                             ?  Color( widget.colorVal)
                             : Colors.grey)),
                 ),
@@ -98,10 +98,9 @@ TabController _tabController;
          body: TabBarView(
            controller: _tabController,
             children: <Widget>[
-             OverView(),
+             OverView(desc: widget.desc,),
             StarFeedback(),
-           Photo(),
-              About(),
+              About(desc: widget.desc,),
           
             ],
          ),
