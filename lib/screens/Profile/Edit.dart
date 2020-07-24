@@ -75,6 +75,7 @@ class _EditProfileState extends State<EditProfile> {
       setState(() {
         _currentAddress =
             "${place.subLocality},${place.locality}-${place.postalCode}";
+            _user['location']=_currentAddress;
       });
       print(_currentAddress);
       userData1.editUserData(field: 'location', value: _currentAddress);
