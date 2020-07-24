@@ -17,9 +17,8 @@ class DatabaseQuery {
 
   final CollectionReference this_that =
       Firestore.instance.collection('this_that');
-      
-  final CollectionReference yesorno =
-      Firestore.instance.collection('yesorno');
+
+  final CollectionReference yesorno = Firestore.instance.collection('yesorno');
 
   final CollectionReference facts = Firestore.instance.collection('facts');
   final String listName;
@@ -30,12 +29,11 @@ class DatabaseQuery {
       List<dynamic> value,
       int limit = 5,
       int check = 0,
-      String mood
-      }) async {
+      String mood}) async {
     List<String> _field = field;
     List<dynamic> _value = value;
     /* gets previous list saved by the name */
-    final _box = await Hive.openBox(listName+(mood??'')); 
+    final _box = await Hive.openBox(listName + (mood ?? ''));
     List<dynamic> _gfoodList = await _box.get(listName);
     print('getfood');
 
@@ -43,10 +41,8 @@ class DatabaseQuery {
         or new list to be retrieved coz of next day has arrived */
     if (_gfoodList == null || check == 0) {
       Query _finalQuery = _ref.where('description', isGreaterThan: '');
-  print(_gfoodList.length);
       /* last document to continue query from */
-      if (_gfoodList != null && _gfoodList.length!=0)
-
+      if (_gfoodList != null) if (_gfoodList.length != 0)
         _lastDocument =
             _gfoodList.cast<FoodListModel>()[_gfoodList.length - 1].description;
 
@@ -202,7 +198,7 @@ class DatabaseQuery {
       return This_thatModel(
         A: _docData['A'],
         B: _docData['B'] ?? '',
-        aLike: _docData['aLike'] ?? 0 ,
+        aLike: _docData['aLike'] ?? 0,
         bLike: _docData['bLike'] ?? 0,
       );
     }).toList();

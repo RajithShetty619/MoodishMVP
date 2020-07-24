@@ -158,13 +158,9 @@ class _YesNoListState extends State<YesNoList> {
           GestureDetector(
             onTap: () async {
               if (!_pressed) {
-<<<<<<< HEAD
-                 setState(() {
-=======
                 await DatabaseService().likeTransction(
                     collection: 'yesorno', sr_no: _yes.sr_no, field: 'yes');
                 setState(() {
->>>>>>> 41c7c46de8ed5150b6b1bc8a07d895cd9e3e527d
                   _index = 1;
                   ++_yes.yes;
                   _pressed = true;
@@ -211,11 +207,8 @@ class _YesNoListState extends State<YesNoList> {
           GestureDetector(
             onTap: () async {
               if (!_pressed) {
-<<<<<<< HEAD
-=======
                 await DatabaseService().likeTransction(
                     collection: 'yesorno', sr_no: _yes.sr_no, field: 'no');
->>>>>>> 41c7c46de8ed5150b6b1bc8a07d895cd9e3e527d
                 setState(() {
                   _index = 2;
                   ++_yes.no;
@@ -317,15 +310,10 @@ class _GetListViewState extends State<GetListView> {
                   ++_thisT.aLike;
                   thispressed = true;
                 });
-<<<<<<< HEAD
-                await DatabaseService().likeTransction(collection: 'this_that',sr_no: _thisT.sr_no, field: 'aLike');
-               
-=======
                 await DatabaseService().likeTransction(
                     collection: 'this_that',
                     sr_no: _thisT.sr_no,
                     field: 'aLike');
->>>>>>> 41c7c46de8ed5150b6b1bc8a07d895cd9e3e527d
               }
             },
             child: Padding(
@@ -358,15 +346,10 @@ class _GetListViewState extends State<GetListView> {
                   thispressed = true;
                   ++_thisT.bLike;
                 });
-<<<<<<< HEAD
-                await DatabaseService().likeTransction(collection: 'this_that',sr_no: _thisT.sr_no, field: 'bLike');
-              
-=======
                 await DatabaseService().likeTransction(
                     collection: 'this_that',
                     sr_no: _thisT.sr_no,
                     field: 'bLike');
->>>>>>> 41c7c46de8ed5150b6b1bc8a07d895cd9e3e527d
               }
             },
             child: Padding(
@@ -446,11 +429,7 @@ class _getListViewState extends State<getListView> {
               if (!pollPressed) {
                 setState(() {
                   _index = 1;
-<<<<<<< HEAD
-                 pollPressed=true;
-=======
                    pollPressed=true;
->>>>>>> 41c7c46de8ed5150b6b1bc8a07d895cd9e3e527d
                   ++_poll.aLike;
                 });
                 await DatabaseService().likeTransction(
