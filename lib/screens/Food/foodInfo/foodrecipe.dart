@@ -21,7 +21,7 @@ class FoodRecipe extends StatefulWidget {
 
 class _FoodRecipeState extends State<FoodRecipe> {
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
       child: Column(
@@ -118,7 +118,7 @@ class _FoodRecipeState extends State<FoodRecipe> {
             ),
           ),
           SizedBox(height: 8),
-          ListView.builder( 
+          ListView.builder(
             itemCount: widget.foodList.preparation.length,
             shrinkWrap: true,
             primary: false,
@@ -132,14 +132,83 @@ class _FoodRecipeState extends State<FoodRecipe> {
                   textHeightBehavior: TextHeightBehavior(
                       applyHeightToFirstAscent: false,
                       applyHeightToLastDescent: true),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 3,
                   style: TextStyle(
                     fontSize: 16,
                   ),
                 ),
               );
             },
+          ),
+          Padding(
+            padding: EdgeInsets.all(8),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: RaisedButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Scaffold(
+                          body: ListView(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text('How to Prepare?',
+                                style: TextStyle(
+                                  fontSize:32,
+                                  fontWeight:FontWeight.bold
+                                ),),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: ListView.builder(
+                                    itemCount: widget.foodList.preparation.length,
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemBuilder: (BuildContext context, index) {
+                                      return Container(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            'Step ${index+1}) ${widget.foodList.preparation[index]}',
+                                            textHeightBehavior: TextHeightBehavior(
+                                                applyHeightToFirstAscent: false,
+                                                applyHeightToLastDescent: false),
+                                                style: TextStyle(
+                                                  fontSize:20,
+                                                ),
+                                          ),
+                                        ),
+                                      );
+                                    }),
+                              ),
+                                  SizedBox(height: 10,),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: RaisedButton(
+                                      color: Colors.blue[300],
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      onPressed: ()=>Navigator.of(context).pop(),
+                                      child: Text('Ok'),),
+                                  )
+                            ],
+                          ),
+                        );
+                       
+                      }
+                      
+                      );
+                },
+                child: Text('Show More'),
+              ),
+            ),
           ),
 
           // Container(
