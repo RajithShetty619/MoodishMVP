@@ -67,10 +67,7 @@ class _MoodState extends State<Mood> {
                             String _val = mood[index].mood;
                             Future.delayed(Duration(milliseconds: 400), () {
                               setState(() {
-                                Navigator.of(context).push( 
-                                    MaterialPageRoute(builder: (context) {
-                                  return MainScreen(mood: _val);
-                                }));
+                                 Navigator.pop(context,_val);
                               });
                             });
                             setState(() {

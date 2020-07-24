@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/Authenticate/forgotPassword.dart';
-import 'package:moodish_mvp/Services/database.dart'; 
+import 'package:moodish_mvp/Services/database.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:image_picker/image_picker.dart'; 
+import 'package:image_picker/image_picker.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
+
 class EditProfile extends StatefulWidget {
   final ImageProvider image;
-  final Map<String,String> user;
-  EditProfile({this.image,this.user});
+  final Map<String, String> user;
+  EditProfile({this.image, this.user});
   @override
   _EditProfileState createState() => _EditProfileState();
 }
 
 class _EditProfileState extends State<EditProfile> {
-  Map<String,String>_user;
+  Map<String, String> _user;
   ImageProvider _image;
-  final userData1 = DatabaseService();
-  Map<String,String> _usrre;
+  final userData1 = DatabaseService(); 
   Position _currentPosition;
-  String _currentAddress ='Mumbai,Maharashtra';
+  String _currentAddress = 'Mumbai,Maharashtra';
   Geolocator geolocator = Geolocator();
   ImageProvider image;
   getImage() async {
@@ -28,11 +28,12 @@ class _EditProfileState extends State<EditProfile> {
 
     // final Directory _dir = await getApplicationDocumentsDirectory();
     // final String _path = _dir.path;
-    setState(() { 
+    setState(() {
       _image = image;
     });
     DatabaseService().uploadPhoto(fileImage);
   }
+
   @override
   void initState() {
     super.initState();
@@ -43,30 +44,37 @@ class _EditProfileState extends State<EditProfile> {
           _image = widget.image;
         });
         setState(() {
-          _user=widget.user;
+          _user = widget.user;
         });
       } catch (e) {
         print(e);
       }
     }
 
-
     data();
   }
-  getCurrentLocation()async{
-    final position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.best).then((Position position) {_currentPosition=position;});
+
+  getCurrentLocation() async {
+    final position = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+        .then((Position position) {
+      _currentPosition = position;
+    });
     print(position);
   }
+
   _getAddressFromLatLng() async {
     try {
       setState(() {
-        _currentAddress='Wait a Moment...';
+        _currentAddress = 'Wait a Moment...';
       });
-      List<Placemark> p = await geolocator.placemarkFromCoordinates(_currentPosition.latitude, _currentPosition.longitude);  
-      Placemark place = p[0]; 
-      
+      List<Placemark> p = await geolocator.placemarkFromCoordinates(
+          _currentPosition.latitude, _currentPosition.longitude);
+      Placemark place = p[0];
+
       setState(() {
-        _currentAddress = "${place.subLocality},${place.locality}-${place.postalCode}";
+        _currentAddress =
+            "${place.subLocality},${place.locality}-${place.postalCode}";
       });
       print(_currentAddress);
       userData1.editUserData(field: 'location', value: _currentAddress);
@@ -74,303 +82,359 @@ class _EditProfileState extends State<EditProfile> {
       print(e);
     }
   }
- 
 
   @override
-  Widget build(BuildContext context) {
-    String phone='( none )';
-    String birth = '( none )';
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 20.0,
-              ),
-              Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    InkWell(
-                      onTap: () {
-                        getImage();
+  Widget build(BuildContext context) { 
+    String birth = '( none )'; 
+    birthDate() async {
+      var datePicked = await DatePicker.showSimpleDatePicker(
+        context,
+        initialDate: DateTime(1994),
+        firstDate: DateTime(1960),
+        lastDate: DateTime(2012),
+        dateFormat: "dd-MMMM-yyyy",
+        locale: DateTimePickerLocale.en_us,
+        looping: true,
+      );
+      setState(() {
+        birth =
+            '${datePicked.day.toString()}/${datePicked.month.toString()}/${datePicked.year.toString()}';
+            _user['Birthdate'] = birth;
+      });
+      userData1.editUserData(field: 'Birthdate', value: birth);
+    }
+
+    return WillPopScope(
+      onWillPop: ()async{
+         Navigator.pop(context,_user);
+      },
+          child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 20.0,
+                ),
+                Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      InkWell(
+                        onTap: () {
+                          getImage();
+                        },
+                        borderRadius: BorderRadius.circular(150),
+                        child: Container(
+                          height: 150,
+                          width: 150,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                  image: _image == null
+                                      ? AssetImage('assets/anonuser.png')
+                                      : _image)),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Text(
+                        'Edit',
+                        style: TextStyle(
+                            fontSize: 24.0, fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 5.0,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: Divider(
+                    thickness: 2.0,
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Alert(
+                        context: context,
+                        title: 'Username',
+                        content: TextField(
+                          onChanged: (val) {
+                            setState(() {
+                              _user['name'] = val;
+                            });
+                            userData1.editUserData(
+                                field: 'name', value: _user['name']);
+                          },
+                          decoration: InputDecoration(
+                            icon: Icon(Icons.edit),
+                            labelText: 'Edit',
+                            hintText: _user['name'] ?? 'name',
+                          ),
+                        ),
+                        buttons: [
+                          DialogButton(
+                            onPressed: () =>
+                                Navigator.of(context, rootNavigator: true).pop(),
+                            child: Text(
+                              "Save",
+                              style: TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                          )
+                        ]).show();
+                  },
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Text(
+                          'Username :',
+                          style: TextStyle(
+                              fontSize: 22.0, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Flexible(
+                        child: Text(
+                          _user['name'] ?? 'name',
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(fontSize: 20.0),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: Divider(
+                    thickness: 2.0,
+                  ),
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Text(
+                          'Email :',
+                          style: TextStyle(
+                              fontSize: 22.0, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Flexible(
+                        child: Text(
+                          _user['email'] ?? 'Enter!',
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(fontSize: 20.0),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: Divider(
+                    thickness: 2.0,
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      return ForgotPassword();
+                    }));
+                  },
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Text(
+                          'Password :',
+                          style: TextStyle(
+                              fontSize: 22.0, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Flexible(
+                        child: Text(
+                          '*********',
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(fontSize: 20.0),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: Divider(
+                    thickness: 2.0,
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    birthDate();
+                  },
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Text(
+                          'Birthday :',
+                          style: TextStyle(
+                              fontSize: 22.0, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Flexible(
+                        child: Text(
+                          _user['Birthdate'] ?? birth,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(fontSize: 20.0),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: Divider(
+                    thickness: 2.0,
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Alert(
+                        context: context,
+                        title: 'PhoneNo.',
+                        content: TextField(
+                          keyboardType: TextInputType.number,
+                          onChanged: (val) {
+                             setState(() {
+                               _user['PhoneNo.']=val.toString();
+                             }); 
+                            userData1.editUserData(
+                                field: 'Phoneno.', value:  _user['PhoneNo.']);
+                          },
+                          decoration: InputDecoration(
+                            icon: Icon(Icons.edit),
+                            labelText: 'Edit',
+                            hintText: _user['PhoneNo.'] ?? '( none )',
+                          ),
+                        ),
+                        buttons: [
+                          DialogButton(
+                            onPressed: () {
+                              Navigator.of(context, rootNavigator: true)
+                                  .pop( );
+                            },
+                            child: Text(
+                              "Save",
+                              style: TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                          )
+                        ]).show();
+                  },
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Text(
+                          'PhoneNo.:',
+                          style: TextStyle(
+                              fontSize: 22.0, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Flexible(
+                        child: Text(
+                          _user['PhoneNo.'] ?? '( none )',
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(fontSize: 20.0),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: Divider(
+                    thickness: 2.0,
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    getCurrentLocation();
+                    _getAddressFromLatLng();
+                    print(_currentAddress);
+                  },
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Text(
+                          'Location:',
+                          style: TextStyle(
+                              fontSize: 22.0, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Flexible(
+                        child: Text(
+                          _user['location'] ?? _currentAddress,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(fontSize: 20.0),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: Divider(
+                    thickness: 2.0,
+                  ),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                InkWell(
+                  child: Ink(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [
+                          Colors.blue[900],
+                          Colors.blueAccent,
+                          Colors.blue[900],
+                        ],
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: FlatButton(
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            top: 10.0, bottom: 10.0, right: 100.0, left: 100.0),
+                        child: Text(
+                          'Save',
+                          style: TextStyle(fontSize: 18.0, color: Colors.white),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context,_user);
                       },
-                      borderRadius: BorderRadius.circular(150),
-                      child: Container(
-                        height: 150,
-                        width: 150,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                                image: _image == null
-                                    ? AssetImage('assets/anonuser.png')
-                                    : _image)),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    Text(
-                      'Edit',
-                      style: TextStyle(
-                          fontSize: 24.0, fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 5.0,
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                child: Divider(
-                  thickness: 2.0,
-                ),
-              ),
-              getListTile('Username', _user['name']??'', context, 3),
-              Padding(
-                padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                child: Divider(
-                  thickness: 2.0,
-                ),
-              ),
-              getListTile('Email', _user['email']??'', context, 4),
-              Padding(
-                padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                child: Divider(
-                  thickness: 2.0,
-                ),
-              ),
-              getListTile('Password', '********', context, 1),
-              Padding(
-                padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                child: Divider(
-                  thickness: 2.0,
-                ),
-              ),
-              getListTile('Birthdate', _user['Birthdate']??birth, context, 2),
-              Padding(
-                padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                child: Divider(
-                  thickness: 2.0,
-                ),
-              ),
-              getListTile('Phone number', _user['PhoneNo.']??phone, context, 5),
-              Padding(
-                padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                child: Divider(
-                  thickness: 2.0,
-                ),
-              ),
-            InkWell(
-              onTap: () {
-                getCurrentLocation();
-                _getAddressFromLatLng();
-                print(_currentAddress);
-                },
-              child: Row(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Text(
-                      'Location:',
-                      style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Flexible(
-                    child: Text(
-                      _user['location']??_currentAddress,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontSize: 20.0),
-                    ),
-                  )
-                ],
-              ),
+                ),
+                SizedBox(
+                  height: 20.0,
+                )
+              ],
             ),
-              Padding(
-                padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                child: Divider(
-                  thickness: 2.0,
-                ),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              InkWell(
-                child: Ink(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [
-                        Colors.blue[900],
-                        Colors.blueAccent,
-                        Colors.blue[900],
-                      ],
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: FlatButton(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 10.0, bottom: 10.0, right: 100.0, left: 100.0),
-                      child: Text(
-                        'Save',
-                        style: TextStyle(fontSize: 18.0, color: Colors.white),
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20.0,
-              )
-            ],
           ),
         ),
       ),
     );
   }
-}
-
-Widget getListTile(
-    String category, String name, BuildContext context, int tile) {
-  String username;
-  String phoneNo;
-  String birth;
-  final userData = DatabaseService();
-  birthDate()async{
-      var datePicked = await DatePicker.showSimpleDatePicker(
-      context,
-      initialDate: DateTime(1994),
-      firstDate: DateTime(1960),
-      lastDate: DateTime(2012),
-      dateFormat: "dd-MMMM-yyyy",
-      locale: DateTimePickerLocale.en_us,
-      looping: true,
-    );
-
-      birth= '${datePicked.day.toString()}/${datePicked.month.toString()}/${datePicked.year.toString()}';
-      userData.editUserData(field: 'Birthdate',value: birth);
-  }
-
-  return InkWell(
-    onTap: () {
-      if (tile == 1)
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return ForgotPassword();
-        }));
-      if (tile == 2)
-        {
-          birthDate();
-        }
-//        {Alert(
-//            context: context,
-//            title: category,
-//            content: TextField(
-//              keyboardType: TextInputType.datetime,
-//              onChanged: (val){
-////                birthDate = val;
-////                userData.editUserData(field: 'Birthdate',value: birthDate);
-//              },
-//              decoration: InputDecoration(
-//                icon: Icon(Icons.edit),
-//                labelText: 'Edit',
-//                hintText: name,
-//              ),
-//            ),
-//            buttons: [
-//              DialogButton(
-//                onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
-//                child: Text(
-//                  "Save",
-//                  style: TextStyle(color: Colors.white, fontSize: 20),
-//                ),
-//              )
-//            ]).show();}
-      if(tile==3) {
-        Alert(
-            context: context,
-            title: category,
-            content: TextField(
-              onChanged: (val) {
-                username = val;
-                userData.editUserData(field: 'name', value: username);
-              },
-              decoration: InputDecoration(
-                icon: Icon(Icons.edit),
-                labelText: 'Edit',
-                hintText: name,
-              ),
-            ),
-            buttons: [
-              DialogButton(
-                onPressed: () =>
-                    Navigator.of(context, rootNavigator: true).pop(),
-                child: Text(
-                  "Save",
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-              )
-            ]).show();
-      }
-
-      if (tile == 4) return null;
-      if(tile==5)
-        {
-          Alert(
-              context: context,
-              title: category,
-              content: TextField(
-                keyboardType: TextInputType.number,
-                onChanged: (val){
-                  phoneNo = val;
-                  userData.editUserData(field: 'Phoneno.',value: phoneNo);
-
-                },
-                decoration: InputDecoration(
-                  icon: Icon(Icons.edit),
-                  labelText: 'Edit',
-                  hintText: name,
-                ),
-              ),
-              buttons: [
-                DialogButton(
-                  onPressed: (){
-
-                    Navigator.of(context, rootNavigator: true).pop();
-                  },
-                  child: Text(
-                    "Save",
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                )
-              ]).show();
-        }
-    },
-    child: Row(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Text(
-            '$category :',
-            style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
-          ),
-        ),
-        Flexible(
-          child: Text(
-            name,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontSize: 20.0),
-          ),
-        )
-      ],
-    ),
-  );
 }
 
 //_onAlertWithCustomContentPressed(String category, String name, context, int tile) {

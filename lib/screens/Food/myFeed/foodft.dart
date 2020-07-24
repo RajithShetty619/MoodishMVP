@@ -23,7 +23,7 @@ class _FoodftTabState extends State<FoodftTab> {
             physics: NeverScrollableScrollPhysics(),
             itemCount: _fact.length,
             itemBuilder: (BuildContext context, int index) {
-              return getListView(fact: _fact[index],);
+              return getListView(fact: _fact[index],key: Key('$index'),);
             }
           );
         }

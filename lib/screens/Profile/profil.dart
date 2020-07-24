@@ -71,9 +71,12 @@ class _ProfileState extends State<Profile> {
             child: Column(
               children: <Widget>[
                 InkWell(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => EditProfile(user:userData)));
+                  onTap: () async{
+                    final _userdata = await Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => EditProfile(user:userData,image: _image,)));
+                    setState(() {
+                      userData=_userdata;
+                    });
                   },
                   child: Padding(
                     padding:
@@ -210,9 +213,7 @@ class _ProfileState extends State<Profile> {
                                     child: Align(
                                       alignment: Alignment.centerLeft,
                                       child: Linkify(
-                                        onOpen:(link) async {
-                                            await launch(link.url);
-                                        },
+                                        onOpen:_onOpen,
                                         text: 'You have got Questions? We have answers\nClick https://snapinsight.net/faq.php',
                                       ),
                                     ),
@@ -370,13 +371,14 @@ class _ProfileState extends State<Profile> {
   }
 }
 
-//Future<void> _onOpen(LinkableElement link) async {
-//  if (await canLaunch(link.url)) {
-//    await launch(link.url,
-//    forceSafariVC: false,
-//    forceWebView: false,
-//    );
-//  } else {
-//    throw 'Could not launch $link';
-//  }
-//}
+Future<void> _onOpen(LinkableElement link) async {
+  if (await canLaunch(link.url)) {
+    await launch(link.url,
+    enableJavaScript: true,
+    forceSafariVC: false,
+    forceWebView: false,
+    );
+  } else {
+    throw 'Could not launch $link';
+  }
+}
