@@ -52,31 +52,30 @@ class _This_ThatTabsState extends State<This_ThatTabs> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<This_thatModel>>(
-      future: DatabaseQuery().getthis_that(),
-      initialData: [],
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          List<This_thatModel> _thisthat = snapshot.data;
-          return ListView.builder(
-            shrinkWrap: true,
-            primary: false,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: _thisthat.length,
-            itemBuilder: (BuildContext context, int index) {
-              return GetListView(this_that: _thisthat[index],);
-            }
-          );
-        }
-        else{
-          return Center(
-            child: SpinKitFadingCircle(
-              color: Colors.greenAccent[400],
-              size: 40,
-            ),
-          );
-        }
-      }
-    );
+        future: DatabaseQuery().getthis_that(),
+        initialData: [],
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            List<This_thatModel> _thisthat = snapshot.data;
+            return ListView.builder(
+                shrinkWrap: true,
+                primary: false,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: _thisthat.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return GetListView(
+                    this_that: _thisthat[index],
+                  );
+                });
+          } else {
+            return Center(
+              child: SpinKitFadingCircle(
+                color: Colors.greenAccent[400],
+                size: 40,
+              ),
+            );
+          }
+        });
   }
 }
 
@@ -89,31 +88,30 @@ class _YesNoTabsState extends State<YesNoTabs> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<YesNoModel>>(
-      future: DatabaseQuery().getYesno(),
-      initialData: [],
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          List<YesNoModel> _yesno = snapshot.data;
-          return ListView.builder(
-            shrinkWrap: true,
-            primary: false,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: _yesno.length,
-            itemBuilder: (BuildContext context, int index) {
-              return YesNoList(yesno: _yesno[index],);
-            }
-          );
-        }
-        else{
-          return Center(
-            child: SpinKitFadingCircle(
-              color: Colors.greenAccent[400],
-              size: 40,
-            ),
-          );
-        }
-      }
-    );
+        future: DatabaseQuery().getYesno(),
+        initialData: [],
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            List<YesNoModel> _yesno = snapshot.data;
+            return ListView.builder(
+                shrinkWrap: true,
+                primary: false,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: _yesno.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return YesNoList(
+                    yesno: _yesno[index],
+                  );
+                });
+          } else {
+            return Center(
+              child: SpinKitFadingCircle(
+                color: Colors.greenAccent[400],
+                size: 40,
+              ),
+            );
+          }
+        });
   }
 }
 
@@ -125,143 +123,145 @@ class YesNoList extends StatefulWidget {
   _YesNoListState createState() => _YesNoListState();
 }
 
-
 class _YesNoListState extends State<YesNoList> {
-int _index;
-bool _pressed = false;
-YesNoModel _yes;
-  
- @override
+  int _index;
+  bool _pressed = false;
+  YesNoModel _yes;
+
+  @override
   void initState() {
     setState(() {
       _yes = widget.yesno;
     });
     super.initState();
-  }            
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35.0)),
-          child: Column(
-            children: <Widget>[
-              SizedBox(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35.0)),
+      child: Column(
+        children: <Widget>[
+          SizedBox(
             height: 8.0,
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
               alignment: Alignment.center,
-              child: Text( widget.yesno.Questions ?? '',
+              child: Text(
+                widget.yesno.Questions ?? '',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
               ),
             ),
           ),
           GestureDetector(
-                onTap: () async {
+            onTap: () async {
               if (!_pressed) {
-                await DatabaseService().likeTransction(collection: 'yesorno',sr_no: _yes.sr_no, field: 'yes');
+                await DatabaseService().likeTransction(
+                    collection: 'yesorno', sr_no: _yes.sr_no, field: 'yes');
                 setState(() {
                   _index = 1;
                   ++_yes.yes;
-                  _pressed=true;
+                  _pressed = true;
                 });
               }
             },
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    width: double.maxFinite,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.0),
-                      border: Border.all( color: _index==1?Colors.blueAccent:Colors.black12),
-                      color: Colors.grey[200],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Align(
-                          alignment: Alignment.center,
-                          child: Padding(
-                            padding: EdgeInsets.all(5.0),
-                            child: Text(
-                              "    Yes",
-                              style: TextStyle(fontSize: 22.0),
-                            ),
-                          ),
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                width: double.maxFinite,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                  border: Border.all(
+                      color: _index == 1 ? Colors.blueAccent : Colors.black12),
+                  color: Colors.grey[200],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Align(
+                      alignment: Alignment.center,
+                      child: Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: Text(
+                          "    Yes",
+                          style: TextStyle(fontSize: 22.0),
                         ),
-                        Padding(
-                            padding: EdgeInsets.all(5.0),
-                            child: Text(
-                              " ${_yes.yes}   ",
-                              style: TextStyle(fontSize: 22.0),
-                            ),
-                          ),
-                      ],
+                      ),
                     ),
-                  ),
+                    Padding(
+                      padding: EdgeInsets.all(5.0),
+                      child: Text(
+                        " ${_yes.yes}   ",
+                        style: TextStyle(fontSize: 22.0),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              GestureDetector(
-                onTap: () async {
+            ),
+          ),
+          GestureDetector(
+            onTap: () async {
               if (!_pressed) {
-                await DatabaseService().likeTransction(collection: 'yesorno',sr_no: _yes.sr_no, field: 'no');
+                await DatabaseService().likeTransction(
+                    collection: 'yesorno', sr_no: _yes.sr_no, field: 'no');
                 setState(() {
                   _index = 2;
                   ++_yes.no;
-                  _pressed=true;
+                  _pressed = true;
                 });
               }
             },
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    width: double.maxFinite,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.0),
-                      border: Border.all( color: _index==2?Colors.blueAccent:Colors.black12),
-                      color: Colors.grey[200],
-                    ),
-                   child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Align(
-                          alignment: Alignment.center,
-                          child: Padding(
-                            padding: EdgeInsets.all(5.0),
-                            child: Text(
-                              "    No",
-                              style: TextStyle(fontSize: 22.0),
-                            ),
-                          ),
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                width: double.maxFinite,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                  border: Border.all(
+                      color: _index == 2 ? Colors.blueAccent : Colors.black12),
+                  color: Colors.grey[200],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Align(
+                      alignment: Alignment.center,
+                      child: Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: Text(
+                          "    No",
+                          style: TextStyle(fontSize: 22.0),
                         ),
-                        Padding(
-                            padding: EdgeInsets.all(5.0),
-                            child: Text(
-                              " ${_yes.no}   ",
-                              style: TextStyle(fontSize: 22.0),
-                            ),
-                          ),
-                      ],
+                      ),
                     ),
-                  ),
+                    Padding(
+                      padding: EdgeInsets.all(5.0),
+                      child: Text(
+                        " ${_yes.no}   ",
+                        style: TextStyle(fontSize: 22.0),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
+            ),
           ),
-      
+        ],
+      ),
     );
   }
 }
 
 // print this that on the screen
 class GetListView extends StatefulWidget {
-  
   final This_thatModel this_that;
   GetListView({
     this.this_that,
     Key key,
   }) : super(key: key);
-
 
   @override
   _GetListViewState createState() => _GetListViewState();
@@ -271,22 +271,24 @@ class _GetListViewState extends State<GetListView> {
   int _index;
   bool thispressed = false;
   This_thatModel _thisT;
-   @override
+  @override
   void initState() {
     setState(() {
       _thisT = widget.this_that;
     });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    return  Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35.0)),
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 8.0,
-              ), Padding(
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35.0)),
+      child: Column(
+        children: <Widget>[
+          SizedBox(
+            height: 8.0,
+          ),
+          Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
               alignment: Alignment.center,
@@ -296,76 +298,83 @@ class _GetListViewState extends State<GetListView> {
               ),
             ),
           ),
-              GestureDetector(
-                 onTap: () async {
+          GestureDetector(
+            onTap: () async {
               if (!thispressed) {
-                await DatabaseService().likeTransction(collection: 'this_that',sr_no: _thisT.sr_no, field: 'aLike');
                 setState(() {
                   _index = 1;
                   ++_thisT.aLike;
-                  thispressed=true;
+                  thispressed = true;
                 });
+                await DatabaseService().likeTransction(
+                    collection: 'this_that',
+                    sr_no: _thisT.sr_no,
+                    field: 'aLike');
               }
             },
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    width: double.maxFinite,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.0),
-                      border: Border.all( color: _index==1?Colors.blueAccent:Colors.black12),
-                      color: Colors.grey[200],
-                    ),
-                    child: Center(
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: Text(
-                         (_thisT.A ?? '')+" ${_thisT.aLike}",
-                          style: TextStyle(fontSize: 22.0),
-                        ),
-                      ),
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                width: double.maxFinite,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                  border: Border.all(
+                      color: _index == 1 ? Colors.blueAccent : Colors.black12),
+                  color: Colors.grey[200],
+                ),
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: Text(
+                      (_thisT.A ?? '') + " ${_thisT.aLike}",
+                      style: TextStyle(fontSize: 22.0),
                     ),
                   ),
                 ),
               ),
-              GestureDetector(
-                onTap: () async {
+            ),
+          ),
+          GestureDetector(
+            onTap: () async {
               if (!thispressed) {
-                await DatabaseService().likeTransction(collection: 'this_that',sr_no: _thisT.sr_no, field: 'bLike');
                 setState(() {
                   _index = 2;
-                  thispressed=true;
+                  thispressed = true;
                   ++_thisT.bLike;
                 });
+                await DatabaseService().likeTransction(
+                    collection: 'this_that',
+                    sr_no: _thisT.sr_no,
+                    field: 'bLike');
               }
             },
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    width: double.maxFinite,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.0),
-                      border: Border.all( color: _index==2?Colors.blueAccent:Colors.black12),
-                      color: Colors.grey[200],
-                    ),
-                    child: Center(
-                      child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: Text(
-                          (_thisT.B ?? '')+" ${_thisT.bLike}",
-                          style: TextStyle(fontSize: 22.0),
-                        ),
-                      ),
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                width: double.maxFinite,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                  border: Border.all(
+                      color: _index == 2 ? Colors.blueAccent : Colors.black12),
+                  color: Colors.grey[200],
+                ),
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: Text(
+                      (_thisT.B ?? '') + " ${_thisT.bLike}",
+                      style: TextStyle(fontSize: 22.0),
                     ),
                   ),
                 ),
               ),
-            ],
+            ),
           ),
-        );
+        ],
+      ),
+    );
   }
 }
-
 
 /* poll card displayin widget */
 class getListView extends StatefulWidget {
@@ -384,10 +393,10 @@ class _getListViewState extends State<getListView> {
   bool pollPressed = false;
   PollsModel _poll;
 
-   @override
+  @override
   void initState() {
     setState(() {
-      _poll=widget.poll;
+      _poll = widget.poll;
     });
     super.initState();
   }
@@ -414,12 +423,14 @@ class _getListViewState extends State<getListView> {
           GestureDetector(
             onTap: () async {
               if (!pollPressed) {
-                await DatabaseService().likeTransction(collection: 'polls',sr_no: _poll.sr_no,field: 'aLike');
                 setState(() {
                   _index = 1;
-                //  pollPressed=true;
+                   pollPressed=true;
                   ++_poll.aLike;
                 });
+                await DatabaseService().likeTransction(
+                    collection: 'polls', sr_no: _poll.sr_no, field: 'aLike');
+              
               }
             },
             child: Padding(
@@ -428,14 +439,15 @@ class _getListViewState extends State<getListView> {
                 width: double.maxFinite,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
-                  border: Border.all( color: _index==1?Colors.blueAccent:Colors.black12),
+                  border: Border.all(
+                      color: _index == 1 ? Colors.blueAccent : Colors.black12),
                   color: Colors.grey[200],
                 ),
                 child: Center(
                   child: Padding(
                     padding: EdgeInsets.all(5.0),
                     child: Text(
-                      (_poll.A ?? '')+" ${_poll.aLike}",
+                      (_poll.A ?? '') + " ${_poll.aLike}",
                       style: TextStyle(fontSize: 22.0),
                     ),
                   ),
@@ -446,13 +458,14 @@ class _getListViewState extends State<getListView> {
           GestureDetector(
             onTap: () async {
               if (!pollPressed) {
-                await DatabaseService().likeTransction(collection: 'polls',sr_no: _poll.sr_no,field:  "bLike");
                 setState(() {
                   _index = 2;
-                  pollPressed=true;
+                  pollPressed = true;
                   ++_poll.bLike;
                 });
-
+                await DatabaseService().likeTransction(
+                    collection: 'polls', sr_no: _poll.sr_no, field: "bLike");
+                ;
               }
             },
             child: Padding(
@@ -461,14 +474,15 @@ class _getListViewState extends State<getListView> {
                 width: double.maxFinite,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
-                  border: Border.all( color: _index==2?Colors.blueAccent:Colors.black12),
+                  border: Border.all(
+                      color: _index == 2 ? Colors.blueAccent : Colors.black12),
                   color: Colors.grey[200],
                 ),
                 child: Center(
                   child: Padding(
                     padding: EdgeInsets.all(5.0),
                     child: Text(
-                      (_poll.B ?? '')+" ${_poll.bLike}",
+                      (_poll.B ?? '') + " ${_poll.bLike}",
                       style: TextStyle(fontSize: 22.0),
                     ),
                   ),
@@ -479,12 +493,14 @@ class _getListViewState extends State<getListView> {
           GestureDetector(
             onTap: () async {
               if (!pollPressed) {
-                await DatabaseService().likeTransction(collection: 'polls',sr_no: _poll.sr_no,field: 'cLike');
                 setState(() {
                   _index = 3;
-                  pollPressed=true;
+                  pollPressed = true;
                   ++_poll.cLike;
                 });
+                await DatabaseService().likeTransction(
+                    collection: 'polls', sr_no: _poll.sr_no, field: 'cLike');
+                
               }
             },
             child: Padding(
@@ -493,14 +509,15 @@ class _getListViewState extends State<getListView> {
                 width: double.maxFinite,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
-                  border: Border.all( color: _index==3?Colors.blueAccent:Colors.black12),
+                  border: Border.all(
+                      color: _index == 3 ? Colors.blueAccent : Colors.black12),
                   color: Colors.grey[200],
                 ),
                 child: Center(
                   child: Padding(
                     padding: EdgeInsets.all(5.0),
                     child: Text(
-                      (_poll.C ?? '')+" ${_poll.cLike}",
+                      (_poll.C ?? '') + " ${_poll.cLike}",
                       style: TextStyle(fontSize: 22.0),
                     ),
                   ),
@@ -511,12 +528,14 @@ class _getListViewState extends State<getListView> {
           GestureDetector(
             onTap: () async {
               if (!pollPressed) {
-                await DatabaseService().likeTransction(collection: 'polls',sr_no: _poll.sr_no,field: 'dLike');
                 setState(() {
                   _index = 4;
-                  pollPressed=true;
+                  pollPressed = true;
                   ++_poll.dLike;
                 });
+                await DatabaseService().likeTransction(
+                    collection: 'polls', sr_no: _poll.sr_no, field: 'dLike');
+                
               }
             },
             child: Padding(
@@ -525,14 +544,15 @@ class _getListViewState extends State<getListView> {
                 width: double.maxFinite,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20.0),
-                  border: Border.all( color: _index==4?Colors.blueAccent:Colors.black12),
+                  border: Border.all(
+                      color: _index == 4 ? Colors.blueAccent : Colors.black12),
                   color: Colors.grey[200],
                 ),
                 child: Center(
                   child: Padding(
                     padding: EdgeInsets.all(5.0),
                     child: Text(
-                      (_poll.D ?? '')+" ${_poll.dLike}",
+                      (_poll.D ?? '') + " ${_poll.dLike}",
                       style: TextStyle(fontSize: 22.0),
                     ),
                   ),
