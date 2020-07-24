@@ -88,7 +88,7 @@ class _FoodFeedState extends State<FoodFeed> {
     DateTime now = DateTime.now();
     String date = DateFormat('EEE, M/d/y').format(now);
     if (date == saveDate) {
-      return 0;
+      return 1;
     } else {
       _box.put("date", date);
       return 0;
@@ -192,7 +192,7 @@ class _FoodFeedState extends State<FoodFeed> {
                         Padding(
                           padding: const EdgeInsets.only(left: 7.0),
                           child: Container(
-                            width: 250.0,
+                            width: 230.0,
                             margin: EdgeInsets.all(10.0),
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.black, width: 2),
@@ -202,7 +202,7 @@ class _FoodFeedState extends State<FoodFeed> {
                             child: Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: Text(
-                                'Top 10 for Your Mood',
+                                'Food for Your Mood',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: 20.0,
