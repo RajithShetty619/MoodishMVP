@@ -46,19 +46,29 @@ class _FoodFeedState extends State<FoodFeed> {
     GridTileBuilder(image: 'stress.png', mood: 'stress', currentOpacity: 1),
   ];
 
-  data(BuildContext context, String mood) async {
-    print('//////////////////////' + mood);
+  @override
+  void initState() {
+    super.initState();
     checkDate().then((check) {
-      _dq.getFood(field: ['mood'], value: [mood], limit: 10, check: check).then(
-          (future) {
-        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "0"));
-      });
       _dqtaste2.getFood(
           field: ['cuisine'],
           value: ['indian'],
           limit: 7,
           check: check).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t2"));
+      });
+    });
+  }
+
+  data(BuildContext dataContext, String mood) async {
+    print('//////////////////////' + mood);
+    await checkDate().then((check) {
+      _dq.getFood(field: ['mood'], value: [mood], limit: 10, check: check).then(
+          (future) {
+        setState(() {
+          BlocProvider.of<FoodBloc>(dataContext)
+              .add(FoodEvent.add(future, "0"));
+        });
       });
     });
   }
@@ -118,7 +128,7 @@ class _FoodFeedState extends State<FoodFeed> {
                       scrollDirection: Axis.vertical,
                       itemCount: mood.length,
                       shrinkWrap: true,
-                      itemBuilder: (BuildContext context, index) {
+                      itemBuilder: (BuildContext itemContext, index) {
                         return GestureDetector(
                           onTap: () {
                             debugPrint('tapped');
@@ -234,6 +244,10 @@ class _FoodFeedState extends State<FoodFeed> {
                                 scrollDirection: Axis.horizontal,
                                 itemCount: foodList["0"].length,
                                 itemBuilder: (BuildContext context, index) {
+                                  if (foodList["0"].length == 0)
+                                    return SpinKitChasingDots(
+                                      color: Colors.blueAccent,
+                                    );
                                   return Mood_Food(
                                     foodList: foodList["0"][index],
                                   );
@@ -249,22 +263,6 @@ class _FoodFeedState extends State<FoodFeed> {
                         ),
                       ),
                     ),
-                    /*   Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                height: 350,
-                                child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: 10,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return Mood_Food(
-                                          image: 'assets/Chocolate.jpg',
-                                          descrip1: 'food',
-                                          descrip2: 'desc');
-                                    }),
-                              ),
-                            ), */
                     Padding(
                       padding: const EdgeInsets.only(left: 10.0),
                       child: Container(
@@ -273,7 +271,6 @@ class _FoodFeedState extends State<FoodFeed> {
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.black, width: 2),
                           borderRadius: BorderRadius.circular(15),
-                          // color: Colors.blue[200],
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(5.0),
@@ -351,19 +348,19 @@ class _FoodFeedState extends State<FoodFeed> {
                       ),
                     ),
                     IndexedStack(
-                      index: indx-1,
+                      index: indx - 1,
                       children: <Widget>[
                         Container(
                           child: BlocConsumer<FoodBloc,
                               Map<String, List<FoodListModel>>>(
-                            buildWhen: (Map<String, List<FoodListModel>>
-                            previous,
-                                Map<String, List<FoodListModel>> current) {
+                            buildWhen:
+                                (Map<String, List<FoodListModel>> previous,
+                                    Map<String, List<FoodListModel>> current) {
                               return true;
                             },
-                            listenWhen: (Map<String, List<FoodListModel>>
-                            previous,
-                                Map<String, List<FoodListModel>> current) {
+                            listenWhen:
+                                (Map<String, List<FoodListModel>> previous,
+                                    Map<String, List<FoodListModel>> current) {
                               if (current.length > previous.length) {
                                 return true;
                               }
@@ -399,18 +396,11 @@ class _FoodFeedState extends State<FoodFeed> {
                               Container(height: 800, child: PollTabs()),
                             if (widget.number == 2)
                               Container(height: 300, child: This_ThatTabs()),
-
                           ],
                         ),
-                        Flexible(
-                            fit: FlexFit.loose,
-
-                            child: FoodftTab()),
+                        Flexible(fit: FlexFit.loose, child: FoodftTab()),
                       ],
                     )
-
-
-
                   ],
                 ),
               )
