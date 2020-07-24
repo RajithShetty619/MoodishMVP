@@ -15296,9 +15296,6 @@
             "meal_type": "maincourse",
             "image": "ramennoodles.JPG"
         },
-<<<<<<< HEAD
-        
-=======
         {
             "sr_no": "439",
             "food_item": "samosa",
@@ -15347,7 +15344,6 @@
             "meal_type": "1 Lime",
             "image": "1 tbsp Coriander leaves"
         },
->>>>>>> aab78e21693e5d9ce699674d80664be04c2e531e
         {
             "sr_no": "440",
             "food_item": "Sausage rolls",
