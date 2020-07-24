@@ -30,6 +30,7 @@ class FoodFeed extends StatefulWidget {
 }
 
 class _FoodFeedState extends State<FoodFeed> {
+  int numbr;
   bool _getFoodCalled = false;
   bool loadingData1 = false;
   bool loadingData2 = false;
@@ -58,6 +59,12 @@ class _FoodFeedState extends State<FoodFeed> {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t2"));
       });
     });
+    Random random = new Random();
+    int randomNumber = random.nextInt(3);
+    print(randomNumber);
+    setState(() {
+       numbr = randomNumber;
+    });
   }
 
   data(BuildContext dataContext, String mood) async {
@@ -72,6 +79,8 @@ class _FoodFeedState extends State<FoodFeed> {
       });
     });
   }
+     
+  
 
   Future<int> checkDate() async {
     Box _box = await Hive.openBox("date");
@@ -347,6 +356,8 @@ class _FoodFeedState extends State<FoodFeed> {
                         ],
                       ),
                     ),
+
+                 
                     IndexedStack(
                       index: indx - 1,
                       children: <Widget>[
@@ -388,17 +399,17 @@ class _FoodFeedState extends State<FoodFeed> {
                             },
                           ),
                         ),
-                        Column(
-                          children: <Widget>[
-                            if (widget.number == 0)
-                              Container(height: 600, child: YesNoTabs()),
-                            if (widget.number == 1)
-                              Container(height: 800, child: PollTabs()),
-                            if (widget.number == 2)
-                              Container(height: 300, child: This_ThatTabs()),
-                          ],
-                        ),
-                        Flexible(fit: FlexFit.loose, child: FoodftTab()),
+                       Column(
+                      children: <Widget>[
+                        if (numbr == 0)
+                          Container( child: YesNoTabs()),
+                        if (numbr == 1)
+                          Container( child: PollTabs()),
+                        if (numbr == 2)
+                          Container( child: This_ThatTabs()),
+                      ],
+                    ),
+                        Container( child: FoodftTab()),
                       ],
                     )
                   ],
@@ -412,26 +423,3 @@ class _FoodFeedState extends State<FoodFeed> {
   }
 }
 
-class Rndm extends StatefulWidget {
-  @override
-  _RndmState createState() => _RndmState();
-}
-
-class _RndmState extends State<Rndm> {
-  @override
-  void initState() {
-    super.initState();
-
-    Random random = new Random();
-    int randomNumber = random.nextInt(3);
-    print(
-        '/////////////////////////////////////////////////////////////////////////////////');
-    print(randomNumber);
-    FoodFeed(number: randomNumber);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(height: 500);
-  }
-}

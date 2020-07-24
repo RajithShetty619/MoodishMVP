@@ -12,8 +12,6 @@ class RecipeTab extends StatefulWidget {
 }
 
 class _RecipeTabState extends State<RecipeTab> {
- 
-
   @override
   Widget build(BuildContext context) {
     return getListview(foodList: widget.foodList);
@@ -21,12 +19,9 @@ class _RecipeTabState extends State<RecipeTab> {
 }
 
 class getListview extends StatefulWidget {
-  
 
   final FoodListModel foodList;
-
   const getListview({Key key, this.foodList}) : super(key: key);
-
   @override
   _getListviewState createState() => _getListviewState();
 }
@@ -68,9 +63,10 @@ class _getListviewState extends State<getListview> {
                         padding: const EdgeInsets.all(10.0),
                         child: Container(
                           alignment: Alignment.centerLeft,
-                          child: Text(widget.foodList.foodName,
+                          child: Text(widget.foodList.foodName, 
+                          overflow: TextOverflow.clip,
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 22.0),
+                                fontWeight: FontWeight.bold, fontSize:widget.foodList.foodName.length<=15 ?22.0:18.0),
                           ),
                         ),
                       ),
