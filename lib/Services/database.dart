@@ -145,8 +145,8 @@ class DatabaseService {
           mood: _docData["mood"] ?? '',
           restaurants: _docData["restaurants"] ?? '',
           delivery: _docData["delivery"] ?? '',
-          sr_no: _docData["sr_no"] ?? '',
-          like: _docData["like"] ?? '');
+          sr_no: _docData["sr_no"] ?? '');
+          // like: _docData["like"] ?? 0);
     }).toList());
   }
 
