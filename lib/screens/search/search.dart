@@ -23,7 +23,7 @@ class _SearchState extends State<Search> {
             debounceDuration: Duration(seconds: 1),
             onSearch: SearchFunction().search,
             emptyWidget: Center(child: Text('not a thing found')),
-            cancellationWidget: Icon(Icons.cancel,size: 40,color: Colors.grey[400],),
+            cancellationWidget: Icon(Icons.cancel,size: 45,color: Colors.grey[400],),
             onItemFound: (FoodListModel food, int index) { 
               return Container(
                 alignment: Alignment.topCenter,
@@ -50,7 +50,7 @@ class _SearchState extends State<Search> {
             )),
             searchBarStyle: SearchBarStyle(
               backgroundColor: Colors.grey[400],
-              padding: EdgeInsets.all(5),
+              padding: EdgeInsets.only(top: 5,left: 5,),
               borderRadius: BorderRadius.circular(10),
             ),
           ),

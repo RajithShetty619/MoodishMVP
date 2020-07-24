@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 class About extends StatefulWidget {
   final Widget child;
+  final String desc;
 
-  About({Key key, this.child}) : super(key: key);
+  About({Key key, this.child,this.desc}) : super(key: key);
 
   _AboutState createState() => _AboutState();
 }
@@ -16,7 +17,7 @@ class _AboutState extends State<About> {
     'Hygiene :',
     'Offers :'
   ];
-  List<String> nutri = ['Carbs.png', 'Protien.png', 'Fats.png', 'Sugar.png'];
+//  List<String> nutri = ['Carbs.png', 'Protien.png', 'Fats.png', 'Sugar.png'];
 
   @override
   Widget build(BuildContext context) {
@@ -196,108 +197,108 @@ class _AboutState extends State<About> {
                           Padding(
                               padding: EdgeInsets.all(5.0),
                               child: Text(
-                                  "afssad fgh dfgdg dfhdfd aewrt gcbvh krt sffghdfsdfsd sdfsz bvnrtty ftryt iowanhshd asbjda jadihu")),
-                          SizedBox(height: 10.0),
-                          Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Container(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                'Nutrients',
-                                style: TextStyle(
-                                  fontSize: 30,
-                                ),
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10.0,
-                          ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-
-                            child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: <Widget>[
-                                  Column(
-                                    children: <Widget>[
-                                      Container(
-                                        height: 80.0,
-                                        width: 80.0,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          image: DecorationImage(
-                                            image: AssetImage('assets/${nutri[0]}'),
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(height: 7.0,),
-                                      Text('27% Carbs')
-                                    ],
-                                  ),
-                                  SizedBox(width: 20.0,),
-                                  Column(
-                                    children: <Widget>[
-                                      Container(
-                                        height: 80.0,
-                                        width: 80.0,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          image: DecorationImage(
-                                            image: AssetImage('assets/${nutri[1]}'),
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(height: 7.0,),
-                                      Text('36% Protien')
-                                    ],
-                                  ),
-                                  SizedBox(width: 20.0,),
-                                  Column(
-                                    children: <Widget>[
-                                      Container(
-                                        height: 80.0,
-                                        width: 80.0,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          image: DecorationImage(
-                                            image: AssetImage('assets/${nutri[2]}'),
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(height: 7.0,),
-                                      Text('14% Fats')
-                                    ],
-                                  ),
-                                  SizedBox(width: 20.0,),
-                                  Column(
-                                    children: <Widget>[
-                                      Container(
-                                        height: 80.0,
-                                        width: 80.0,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          image: DecorationImage(
-                                            image: AssetImage('assets/${nutri[3]}'),
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(height: 7.0,),
-                                      Text('23% Sugar')
-                                    ],
-                                  ),
-                                  SizedBox(width: 20.0,),
-
-
-
-                                ],
-                              ),
-                          ),
+                                  widget.desc)),
+//                          SizedBox(height: 10.0),
+//                          Padding(
+//                            padding: const EdgeInsets.all(5.0),
+//                            child: Container(
+//                              alignment: Alignment.centerLeft,
+//                              child: Text(
+//                                'Nutrients',
+//                                style: TextStyle(
+//                                  fontSize: 30,
+//                                ),
+//                                textAlign: TextAlign.left,
+//                              ),
+//                            ),
+//                          ),
+//                          SizedBox(
+//                            height: 10.0,
+//                          ),
+//                          SingleChildScrollView(
+//                            scrollDirection: Axis.horizontal,
+//
+//                            child: Row(
+//                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+//                                children: <Widget>[
+//                                  Column(
+//                                    children: <Widget>[
+//                                      Container(
+//                                        height: 80.0,
+//                                        width: 80.0,
+//                                        decoration: BoxDecoration(
+//                                          shape: BoxShape.circle,
+//                                          image: DecorationImage(
+//                                            image: AssetImage('assets/${nutri[0]}'),
+//                                            fit: BoxFit.cover,
+//                                          ),
+//                                        ),
+//                                      ),
+//                                      SizedBox(height: 7.0,),
+//                                      Text('27% Carbs')
+//                                    ],
+//                                  ),
+//                                  SizedBox(width: 20.0,),
+//                                  Column(
+//                                    children: <Widget>[
+//                                      Container(
+//                                        height: 80.0,
+//                                        width: 80.0,
+//                                        decoration: BoxDecoration(
+//                                          shape: BoxShape.circle,
+//                                          image: DecorationImage(
+//                                            image: AssetImage('assets/${nutri[1]}'),
+//                                            fit: BoxFit.cover,
+//                                          ),
+//                                        ),
+//                                      ),
+//                                      SizedBox(height: 7.0,),
+//                                      Text('36% Protien')
+//                                    ],
+//                                  ),
+//                                  SizedBox(width: 20.0,),
+//                                  Column(
+//                                    children: <Widget>[
+//                                      Container(
+//                                        height: 80.0,
+//                                        width: 80.0,
+//                                        decoration: BoxDecoration(
+//                                          shape: BoxShape.circle,
+//                                          image: DecorationImage(
+//                                            image: AssetImage('assets/${nutri[2]}'),
+//                                            fit: BoxFit.cover,
+//                                          ),
+//                                        ),
+//                                      ),
+//                                      SizedBox(height: 7.0,),
+//                                      Text('14% Fats')
+//                                    ],
+//                                  ),
+//                                  SizedBox(width: 20.0,),
+//                                  Column(
+//                                    children: <Widget>[
+//                                      Container(
+//                                        height: 80.0,
+//                                        width: 80.0,
+//                                        decoration: BoxDecoration(
+//                                          shape: BoxShape.circle,
+//                                          image: DecorationImage(
+//                                            image: AssetImage('assets/${nutri[3]}'),
+//                                            fit: BoxFit.cover,
+//                                          ),
+//                                        ),
+//                                      ),
+//                                      SizedBox(height: 7.0,),
+//                                      Text('23% Sugar')
+//                                    ],
+//                                  ),
+//                                  SizedBox(width: 20.0,),
+//
+//
+//
+//                                ],
+//                              ),
+//                          ),
                           SizedBox(height: 10.0,),
 
                         ],

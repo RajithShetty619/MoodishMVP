@@ -6,10 +6,10 @@ import 'package:moodish_mvp/screens/Restaurants/home.dart';
 import 'package:moodish_mvp/screens/Restaurants/mood.dart';
 import 'package:moodish_mvp/screens/search/search.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class MainScreen extends StatefulWidget {
-  final String mood;
-  MainScreen({this.mood});
+
   @override
   _MainScreenState createState() => _MainScreenState();
 }
@@ -28,9 +28,47 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        /* ///////////////////////////////////PUT ALERT BOX HERE /////////////////////////////////// */
+        bool value;
+         await Alert(
+          context: context,
+          type: AlertType.warning,
+          title: "Do You Want To Leave The App?",
+          desc: "Press No to continue or Yes to Exit!",
+          buttons: [
+            DialogButton(
+              child: Text(
+                "Yes",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: ()  {
+
+                Navigator.of(context,rootNavigator: true).pop();
+
+              setState(() {
+                value = true;
+              });
+
+
+              },
+              color: Colors.green[600],
+            ),
+            DialogButton(
+              child: Text(
+                "No",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () {
+                Navigator.of(context,rootNavigator: true).pop();
+                setState(() {
+                  value =false;
+                });
+              },
+              color: Colors.red[700],
+            )
+          ],
+        ).show();
         /* return true if want to exit the app  else false*/
-        return false;
+        return value;
       },
       child: Scaffold(
         body: Center(
@@ -38,7 +76,6 @@ class _MainScreenState extends State<MainScreen> {
           index: _selectedIndex,
           children: [
             FoodHome(
-              mood: widget.mood,
             ),
             Restaurant(),
             Search(),

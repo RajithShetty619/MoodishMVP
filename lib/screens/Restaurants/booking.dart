@@ -197,7 +197,7 @@ class _BookingState extends State<Booking> {
                             onTap: (){
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
-                                    return HomePage(imgName: rest[index].image,imgName1: rest[index].image1,imgName2: rest[index].image2,restName: rest[index].name,);
+                                    return HomePage(imgName: rest[index].image,imgName1: rest[index].image1,imgName2: rest[index].image2,restName: rest[index].name,desc: rest[index].desc,);
                                   }));
                             },
                             child: Card(

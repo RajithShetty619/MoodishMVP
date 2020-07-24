@@ -8,8 +8,9 @@ import 'starfeedback.dart';
 
 class OverView extends StatefulWidget {
   final Widget child;
+  final String desc;
 
-  OverView({Key key, this.child}) : super(key: key);
+  OverView({Key key, this.child,this.desc}) : super(key: key);
 
   _OverViewState createState() => _OverViewState();
 }
@@ -209,7 +210,7 @@ class _OverViewState extends State<OverView> {
                         Padding(
                             padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
                             child: Text(
-                                "afssad fgh dfgdg dfhdfd aewrt gcbvh krt sffghdfsdfsd sdfsz bvnrtty ftryt iowanhshd asbjda jadihu")),
+                                widget.desc)),
                         SizedBox(height: 5.0),
                         Padding(
                           padding: EdgeInsets.fromLTRB(0, 20, 10, 10),

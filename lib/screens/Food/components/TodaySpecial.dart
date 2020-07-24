@@ -144,7 +144,7 @@ class _TodaySpecialState extends State<TodaySpecial> {
               imageUrl: widget.foodList.images,
               imageBuilder: (context, imageProvider) {
                 return Container(
-                  margin: EdgeInsets.only(right: 20),
+                  margin: EdgeInsets.only(right: 10,left: 10.0),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       image: DecorationImage(
@@ -155,7 +155,7 @@ class _TodaySpecialState extends State<TodaySpecial> {
               },
             ),
             Container(
-              margin: EdgeInsets.only(right: 20),
+              margin: EdgeInsets.only(right: 10,left: 10),
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),

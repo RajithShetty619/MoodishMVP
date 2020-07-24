@@ -43,9 +43,10 @@ class DatabaseQuery {
         or new list to be retrieved coz of next day has arrived */
     if (_gfoodList == null || check == 0) {
       Query _finalQuery = _ref.where('description', isGreaterThan: '');
-
+  print(_gfoodList.length);
       /* last document to continue query from */
-      if (_gfoodList != null)
+      if (_gfoodList != null && _gfoodList.length!=0)
+
         _lastDocument =
             _gfoodList.cast<FoodListModel>()[_gfoodList.length - 1].description;
 
