@@ -409,7 +409,7 @@ class _FoodFeedState extends State<FoodFeed> {
                           Container( child: This_ThatTabs()),
                       ],
                     ),
-                        Flexible(fit: FlexFit.loose, child: FoodftTab()),
+                        Container( child: FoodftTab()),
                       ],
                     )
                   ],

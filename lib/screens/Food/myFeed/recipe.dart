@@ -63,9 +63,10 @@ class _getListviewState extends State<getListview> {
                         padding: const EdgeInsets.all(10.0),
                         child: Container(
                           alignment: Alignment.centerLeft,
-                          child: Text(widget.foodList.foodName,
+                          child: Text(widget.foodList.foodName, 
+                          overflow: TextOverflow.clip,
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 22.0),
+                                fontWeight: FontWeight.bold, fontSize:widget.foodList.foodName.length<=15 ?22.0:18.0),
                           ),
                         ),
                       ),
