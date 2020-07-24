@@ -126,7 +126,7 @@ class DatabaseService {
       return FoodListModel(
           foodName: _docData["food_item"] ?? '',
           deter: _docData["deter"] ?? '',
-          cuisine: _docData["cuisine"] ?? '',
+          cuisine: "${_docData['cuisine'][0].toUpperCase()}${_docData['cuisine'].substring(1)}"??'',
           meal_type: _docData["meal_type"] ?? '',
           images: _url ?? '',
           description: _docData["description"] ?? '',

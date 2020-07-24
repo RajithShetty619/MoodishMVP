@@ -54,7 +54,7 @@ class _FoodFeedState extends State<FoodFeed> {
       _dqtaste2.getFood(
           field: ['cuisine'],
           value: ['indian'],
-          limit: 7,
+          limit: 5,
           check: check).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t2"));
       });
@@ -211,20 +211,20 @@ class _FoodFeedState extends State<FoodFeed> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            height: 30,
-                            width: 60,
-                            child: Center(
-                              child: Text('Happy',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                            ),
-                          ),
-                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.all(8.0),
+                        //   child: Container(
+                        //     height: 30,
+                        //     width: 60,
+                        //     child: Center(
+                        //       child: Text('Happy',
+                        //           style: TextStyle(
+                        //             fontSize: 20,
+                        //             fontWeight: FontWeight.bold,
+                        //           )),
+                        //     ),
+                        //   ),
+                        // ),
                         SizedBox(width: 5)
                       ],
                     ),

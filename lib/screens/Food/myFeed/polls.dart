@@ -159,12 +159,13 @@ YesNoModel _yes;
           GestureDetector(
                 onTap: () async {
               if (!_pressed) {
-                await DatabaseService().likeTransction(collection: 'yesorno',sr_no: _yes.sr_no, field: 'yes');
-                setState(() {
+                 setState(() {
                   _index = 1;
                   ++_yes.yes;
                   _pressed=true;
                 });
+                await DatabaseService().likeTransction(collection: 'yesorno',sr_no: _yes.sr_no, field: 'yes');
+                
               }
             },
                 child: Padding(
@@ -204,12 +205,13 @@ YesNoModel _yes;
               GestureDetector(
                 onTap: () async {
               if (!_pressed) {
-                await DatabaseService().likeTransction(collection: 'yesorno',sr_no: _yes.sr_no, field: 'no');
                 setState(() {
                   _index = 2;
                   ++_yes.no;
                   _pressed=true;
                 });
+                await DatabaseService().likeTransction(collection: 'yesorno',sr_no: _yes.sr_no, field: 'no');
+                
               }
             },
                 child: Padding(
@@ -299,12 +301,13 @@ class _GetListViewState extends State<GetListView> {
               GestureDetector(
                  onTap: () async {
               if (!thispressed) {
-                await DatabaseService().likeTransction(collection: 'this_that',sr_no: _thisT.sr_no, field: 'aLike');
                 setState(() {
                   _index = 1;
                   ++_thisT.aLike;
                   thispressed=true;
                 });
+                await DatabaseService().likeTransction(collection: 'this_that',sr_no: _thisT.sr_no, field: 'aLike');
+               
               }
             },
                 child: Padding(
@@ -331,12 +334,13 @@ class _GetListViewState extends State<GetListView> {
               GestureDetector(
                 onTap: () async {
               if (!thispressed) {
-                await DatabaseService().likeTransction(collection: 'this_that',sr_no: _thisT.sr_no, field: 'bLike');
                 setState(() {
                   _index = 2;
                   thispressed=true;
                   ++_thisT.bLike;
                 });
+                await DatabaseService().likeTransction(collection: 'this_that',sr_no: _thisT.sr_no, field: 'bLike');
+              
               }
             },
                 child: Padding(
@@ -417,7 +421,7 @@ class _getListViewState extends State<getListView> {
                 await DatabaseService().likeTransction(collection: 'polls',sr_no: _poll.sr_no,field: 'aLike');
                 setState(() {
                   _index = 1;
-                //  pollPressed=true;
+                 pollPressed=true;
                   ++_poll.aLike;
                 });
               }
