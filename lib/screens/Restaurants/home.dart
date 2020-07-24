@@ -364,19 +364,19 @@ class _RestaurantState extends State<Restaurant> {
                   ),
                   Container(
                     height: 400,
-                    child: restura(rest[0].image, rest[0].name, rest[0].desc),
+                    child: restura(rest[0].image, rest[0].name, rest[0].desc,rest,context,1),
                   ),
                   Container(
                     height: 400,
-                    child: restura(rest[1].image, rest[1].name, rest[1].desc),
+                    child: restura(rest[1].image, rest[1].name, rest[1].desc,rest,context,2),
                   ),
                   Container(
                     height: 400,
-                    child: restura(rest[2].image, rest[2].name, rest[2].desc),
+                    child: restura(rest[2].image, rest[2].name, rest[2].desc,rest,context,3),
                   ),
                   Container(
                     height: 400,
-                    child: restura(rest[3].image, rest[3].name, rest[3].desc),
+                    child: restura(rest[3].image, rest[3].name, rest[3].desc,rest,context,4),
                   ),
                 ],
               ),
@@ -436,155 +436,175 @@ Widget getCategory(String imgName, String name, context,int tile) {
   );
 }
 
-Widget restura(String imgName, String name, String desc) {
+Widget restura(String imgName, String name, String desc, List<_Restaurants>rest,BuildContext context,int tile) {
   return Padding(
     padding: const EdgeInsets.all(10.0),
-    child: Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-      child: Column(
-        children: <Widget>[
-          Stack(
-            children: <Widget>[
-              Container(
-                height: 250,
-                width: double.maxFinite,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20)),
-                    image: DecorationImage(
-                        image: AssetImage('assets/${imgName}'), fit: BoxFit.cover),
-                    ),
-              ),
-              Container(
-                child: Container(
+    child: GestureDetector(
+      onTap: (){
+        if(tile==1)
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return HomePage(imgName1: rest[0].image1,imgName: rest[0].image,imgName2: rest[0].image2,restName: rest[0].name,desc: rest[0].desc,);
+            }));
+        if(tile==2)
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return HomePage(imgName1: rest[1].image1,imgName: rest[1].image,imgName2: rest[1].image2,restName: rest[1].name,desc: rest[1].desc,);
+            }));
+        if(tile==3)
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return HomePage(imgName1: rest[2].image1,imgName: rest[2].image,imgName2: rest[2].image2,restName: rest[2].name,desc: rest[2].desc,);
+            }));
+        if(tile==4)
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return HomePage(imgName1: rest[3].image1,imgName: rest[3].image,imgName2: rest[3].image2,restName: rest[3].name,desc: rest[3].desc,);
+            }));
+      },
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        child: Column(
+          children: <Widget>[
+            Stack(
+              children: <Widget>[
+                Container(
                   height: 250,
                   width: double.maxFinite,
                   decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topLeft,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20)),
+                      image: DecorationImage(
+                          image: AssetImage('assets/${imgName}'), fit: BoxFit.cover),
+                      ),
+                ),
+                Container(
+                  child: Container(
+                    height: 250,
+                    width: double.maxFinite,
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            begin: Alignment.topLeft,
 //                          stops: [.6,.5],
-                      end: Alignment.centerRight,
-                          colors: [
-                            Colors.transparent,
-                            Colors.transparent,
-                            Colors.white,
-                          ])
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            children: <Widget>[
-                              Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Icon(
-                                    Icons.av_timer,
-                                    color: Colors.black,
-                                    size: 28,
-                                  )),
-                              SizedBox(
-                                height: 2,
-                              ),
-                              Align(
-                                alignment: Alignment.centerRight,
-                                child: Text(
-                                  '30mins',
-                                  style: TextStyle(
+                        end: Alignment.centerRight,
+                            colors: [
+                              Colors.transparent,
+                              Colors.transparent,
+                              Colors.white,
+                            ])
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Column(
+                              children: <Widget>[
+                                Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Icon(
+                                      Icons.av_timer,
                                       color: Colors.black,
-                                      fontWeight: FontWeight.w500),
+                                      size: 28,
+                                    )),
+                                SizedBox(
+                                  height: 2,
                                 ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            children: <Widget>[
-                              Icon(
-                                Icons.star,
-                                color: Colors.black,
-                                size: 28,
-                              ),
-                              SizedBox(
-                                height: 2,
-                              ),
-                              Text(
-                                '4.5',
-                                style: TextStyle(
-                                    color: Colors.black, fontWeight: FontWeight.w500),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            children: <Widget>[
-                              Align(
+                                Align(
                                   alignment: Alignment.centerRight,
-                                  child: Icon(
-                                    Icons.library_books,
-                                    color: Colors.black,
-                                    size: 22,
-                                  )),
-                              SizedBox(
-                                height: 2,
-                              ),
-                              Align(
-                                alignment: Alignment.centerRight,
-                                child: Text(
-                                  'Write Review',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              )
-                            ],
+                                  child: Text(
+                                    '30mins',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                      )
-                    ],
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Column(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.star,
+                                  color: Colors.black,
+                                  size: 28,
+                                ),
+                                SizedBox(
+                                  height: 2,
+                                ),
+                                Text(
+                                  '4.5',
+                                  style: TextStyle(
+                                      color: Colors.black, fontWeight: FontWeight.w500),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Column(
+                              children: <Widget>[
+                                Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Icon(
+                                      Icons.library_books,
+                                      color: Colors.black,
+                                      size: 22,
+                                    )),
+                                SizedBox(
+                                  height: 2,
+                                ),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    'Write Review',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
 
-            ],
-          ),
-          Container(
-            child: Padding(
-              padding: EdgeInsets.all(8),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  name,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ],
+            ),
+            Container(
+              child: Padding(
+                padding: EdgeInsets.all(8),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    name,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
             ),
-          ),
-          Container(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(desc),
+            Container(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(desc),
+                ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     ),
   );
