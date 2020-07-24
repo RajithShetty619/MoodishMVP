@@ -6,15 +6,15 @@ import '../../Services/authenticate.dart';
 import 'Edit.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+
 class Profile extends StatefulWidget {
-    
   @override
   _ProfileState createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
   ImageProvider _image;
-  Map<String,String> userData = {};
+  Map<String, String> userData = {};
   @override
   void initState() {
     super.initState();
@@ -29,7 +29,7 @@ class _ProfileState extends State<Profile> {
       } catch (e) {
         print(e);
       }
-      Map<String,String> _userData = await DatabaseService().returnUser();
+      Map<String, String> _userData = await DatabaseService().returnUser();
       setState(() {
         userData = _userData;
       });
@@ -71,11 +71,16 @@ class _ProfileState extends State<Profile> {
             child: Column(
               children: <Widget>[
                 InkWell(
-                  onTap: () async{
-                    final _userdata = await Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => EditProfile(user:userData,image: _image,)));
+                  onTap: () async {
+                    final _userdata = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => EditProfile(
+                                  user: userData,
+                                  image: _image,
+                                )));
                     setState(() {
-                      userData=_userdata;
+                      userData = _userdata;
                     });
                   },
                   child: Padding(
@@ -100,7 +105,7 @@ class _ProfileState extends State<Profile> {
                             // ),
                             border: Border.all(
                               color: Colors.black,
-                              width: 2.0,
+                              width: 0.7,
                             ),
                           ),
                         ),
@@ -112,7 +117,7 @@ class _ProfileState extends State<Profile> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                userData["name"]??'name',
+                                userData["name"] ?? 'name',
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -121,7 +126,7 @@ class _ProfileState extends State<Profile> {
                                 ),
                               ),
                               Text(
-                                userData["email"]??'email',
+                                userData["email"] ?? 'email',
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                     fontSize: 24, color: Colors.black38),
@@ -134,7 +139,7 @@ class _ProfileState extends State<Profile> {
                                 style: TextStyle(
                                   color: Colors.grey.shade400,
                                 ),
-                              ), 
+                              ),
                             ],
                           ),
                         ),
@@ -155,21 +160,138 @@ class _ProfileState extends State<Profile> {
                         Icons.notifications,
                         size: 50.0,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext idcontext) {
+                              return Dialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Container(
+                                  height: 135,
+                                  child: Column(
+                                    children: <Widget>[
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        'Coming Soon.......!',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(height: 20,),
+                                      Padding(
+                                        padding: EdgeInsets.all(10),
+                                        child: Align(
+                                          alignment: Alignment.centerRight,
+                                          child: RaisedButton(
+                                            onPressed: () =>
+                                                Navigator.of(idcontext,rootNavigator: true).pop(),
+                                            child: Text('ok'),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
+                            });
+                      },
                     ),
                     IconButton(
                       icon: Icon(
                         Icons.group,
                         size: 50,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext idcontext) {
+                              return Dialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Container(
+                                  height: 135,
+                                  child: Column(
+                                    children: <Widget>[
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        'Coming Soon.......!',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(height: 20,),
+                                      Padding(
+                                        padding: EdgeInsets.all(10),
+                                        child: Align(
+                                          alignment: Alignment.centerRight,
+                                          child: RaisedButton(
+                                            onPressed: () =>
+                                                Navigator.of(idcontext,rootNavigator: true).pop(),
+                                            child: Text('ok'),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
+                            });
+                      },
                     ),
                     IconButton(
                       icon: Icon(
                         Icons.settings,
                         size: 50,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext idcontext) {
+                              return Dialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Container(
+                                  height: 135,
+                                  child: Column(
+                                    children: <Widget>[
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        'Coming Soon.......!',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(height: 20,),
+                                      Padding(
+                                        padding: EdgeInsets.all(10),
+                                        child: Align(
+                                          alignment: Alignment.centerRight,
+                                          child: RaisedButton(
+                                            onPressed: () =>
+                                                Navigator.of(idcontext,rootNavigator: true).pop(),
+                                            child: Text('ok'),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
+                            });
+                      },
                     ),
                   ],
                 ),
@@ -198,7 +320,7 @@ class _ProfileState extends State<Profile> {
                   onTap: () {
                     showDialog(
                         context: context,
-                      builder: (BuildContext context){
+                        builder: (BuildContext context) {
                           return Dialog(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0),
@@ -213,28 +335,31 @@ class _ProfileState extends State<Profile> {
                                     child: Align(
                                       alignment: Alignment.centerLeft,
                                       child: Linkify(
-                                        onOpen:_onOpen,
-                                        text: 'You have got Questions? We have answers\nClick https://snapinsight.net/faq.php',
+                                        onOpen: _onOpen,
+                                        text:
+                                            'You have got Questions? We have answers\nClick https://snapinsight.net/faq.php',
                                       ),
                                     ),
                                   ),
-                                  SizedBox(height: 15.0,),
-                                  Align(
-                                    alignment: Alignment.centerRight,
-                                    child: RaisedButton(
-                                      child: Text('OK'),
-                                      onPressed: (){
-                                        Navigator.of(context).pop();
-                                      },
-
+                                  SizedBox(
+                                    height: 15.0,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Align(
+                                      alignment: Alignment.centerRight,
+                                      child: RaisedButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(),
+                                        child: Text('ok'),
+                                      ),
                                     ),
                                   )
                                 ],
                               ),
                             ),
                           );
-                      }
-                    );
+                        });
                   },
                 ),
                 Divider(),
@@ -373,10 +498,11 @@ class _ProfileState extends State<Profile> {
 
 Future<void> _onOpen(LinkableElement link) async {
   if (await canLaunch(link.url)) {
-    await launch(link.url,
-    enableJavaScript: true,
-    forceSafariVC: false,
-    forceWebView: false,
+    await launch(
+      link.url,
+      enableJavaScript: true,
+      forceSafariVC: false,
+      forceWebView: false,
     );
   } else {
     throw 'Could not launch $link';
