@@ -17,6 +17,7 @@ class _EditProfileState extends State<EditProfile> {
   Map<String,String>_user;
   ImageProvider _image;
   final userData1 = DatabaseService();
+  Map<String,String> _usrre;
   Position _currentPosition;
   String _currentAddress ='Mumbai,Maharashtra';
   Geolocator geolocator = Geolocator();

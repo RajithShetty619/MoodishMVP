@@ -47,6 +47,7 @@ class _FoodRecipeState extends State<FoodRecipe> {
                         child: ListView.builder(
                           itemCount:widget.foodList.preparation.length,
                           shrinkWrap: true,
+                          primary: false,
                           scrollDirection: Axis.vertical,
                           itemBuilder: (BuildContext context ,index){
                             return Container(

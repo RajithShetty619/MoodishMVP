@@ -20,6 +20,7 @@ class _FoodftTabState extends State<FoodftTab> {
           return ListView.builder(
             shrinkWrap: true,
             primary: false,
+            physics: NeverScrollableScrollPhysics(),
             itemCount: _fact.length,
             itemBuilder: (BuildContext context, int index) {
               return getListView(fact: _fact[index],);
@@ -54,9 +55,9 @@ class _getListViewState extends State<getListView> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.black,
+      color: Colors.white,
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(35.0)
+          borderRadius: BorderRadius.circular(20.0)
       ),
       child: Column(
         children: <Widget>[
@@ -68,7 +69,7 @@ class _getListViewState extends State<getListView> {
               child: Text(widget.fact.factHeading,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 20,
                 ),),
             ),
@@ -80,13 +81,44 @@ class _getListViewState extends State<getListView> {
               alignment: Alignment.centerLeft,
               child: Text(widget.fact.factStatment,
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
                   fontSize: 16.0,
-                  color: Colors.white
+                  color: Colors.black,
                 ),),
             ),
           ),
-          SizedBox(height: 10.0,)
+          SizedBox(height: 10.0,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              IconButton(
+                icon: Icon(
+                  Icons.favorite_border,
+                  size: 25,
+                ),
+                onPressed: (){
+
+                },
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.add_circle_outline,
+                  size: 25,
+                ),
+                onPressed: (){
+                  
+                },
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.swap_horizontal_circle,
+                  size: 25,
+                ),
+                onPressed: (){
+                  
+                },
+              )
+            ],
+          )
         ],
       )
     );
