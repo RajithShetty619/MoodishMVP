@@ -201,8 +201,8 @@ class DatabaseQuery {
       return This_thatModel(
         A: _docData['A'],
         B: _docData['B'] ?? '',
-        aLike: _docData['aLike'] ?? '',
-        bLike: _docData['bLike'] ?? '',
+        aLike: _docData['aLike'] ?? 0 ,
+        bLike: _docData['bLike'] ?? 0,
       );
     }).toList();
   }
@@ -213,7 +213,7 @@ class DatabaseQuery {
 
     Query y = yesorno
         .where('Questions', isGreaterThan: '')
-        .startAfter([end])
+        .startAfter([null])
         .orderBy('Questions')
         .limit(3);
     List<DocumentSnapshot> _snapshot =
@@ -228,8 +228,8 @@ class DatabaseQuery {
       Map<String, dynamic> _docData = doc.data;
       return YesNoModel(
         Questions: _docData['Questions'],
-        yes: _docData['yes'] ?? '',
-        no: _docData['no'] ?? '',
+        yes: _docData['yes'] ?? 0,
+        no: _docData['no'] ?? 0,
       );
     }).toList();
   }

@@ -30,6 +30,7 @@ class FoodFeed extends StatefulWidget {
 }
 
 class _FoodFeedState extends State<FoodFeed> {
+  int numbr;
   bool _getFoodCalled = false;
   bool loadingData1 = false;
   bool loadingData2 = false;
@@ -62,6 +63,15 @@ class _FoodFeedState extends State<FoodFeed> {
         _getFoodCalled = true;
       });
     }
+
+    Random random = new Random();
+    int randomNumber = random.nextInt(3);
+    print(
+        '/////////////////////////////////////////////////////////////////////////////////');
+    print(randomNumber);
+    setState(() {
+       numbr = randomNumber;
+    });
   }
 
   Future<int> checkDate() async {
@@ -86,46 +96,49 @@ class _FoodFeedState extends State<FoodFeed> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(left: 7.0),
-                    child: Container(
-                      width: 250.0,
-                      margin: EdgeInsets.all(10.0),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width: 2),
-                        borderRadius: BorderRadius.circular(15),
-                        // color: Colors.blue[200],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Text(
-                          'Top 10 for Your Mood',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 20.0, fontWeight: FontWeight.bold),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(left: 7.0),
+                      child: Container(
+                        width: 250.0,
+                        margin: EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black, width: 2),
+                          borderRadius: BorderRadius.circular(15),
+                          // color: Colors.blue[200],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Text(
+                            'Top 10 for Your Mood',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 20.0, fontWeight: FontWeight.bold),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 30,
-                      width: 60,
-                      child: Center(
-                        child: Text('Happy',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            )),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 30,
+                        width: 60,
+                        child: Center(
+                          child: Text('Happy',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              )),
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(width: 5)
-                ],
+                    SizedBox(width: 5)
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -311,19 +324,20 @@ class _FoodFeedState extends State<FoodFeed> {
                     ),
 
                   if (indx == 2)
+                  // Container(child: YesNoTabs()),
                     Column(
                       children: <Widget>[
-                        if (widget.number == 0)
-                          Container(height: 600, child: YesNoTabs()),
-                        if (widget.number == 1)
-                          Container(height: 800, child: PollTabs()),
-                        if (widget.number == 2)
-                          Container(height: 300, child: This_ThatTabs()),
+                        if (numbr == 0)
+                          Container( child: YesNoTabs()),
+                        if (numbr == 1)
+                          Container( child: PollTabs()),
+                        if (numbr == 2)
+                          Container( child: This_ThatTabs()),
                       ],
                     ),
 
                   if (indx == 3)
-                    Container(height: 800, child: FoodftTab()),
+                    Container( child: FoodftTab()),
                 ],
               ),
             ],
@@ -334,26 +348,3 @@ class _FoodFeedState extends State<FoodFeed> {
   }
 }
 
-class Rndm extends StatefulWidget {
-  @override
-  _RndmState createState() => _RndmState();
-}
-
-class _RndmState extends State<Rndm> {
-  @override
-  void initState() {
-    super.initState();
-
-    Random random = new Random();
-    int randomNumber = random.nextInt(3);
-    print(
-        '/////////////////////////////////////////////////////////////////////////////////');
-    print(randomNumber);
-    FoodFeed(number: randomNumber);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(height: 500);
-  }
-}

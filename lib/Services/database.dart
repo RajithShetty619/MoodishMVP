@@ -22,7 +22,7 @@ class DatabaseService {
     DocumentReference documentReference =
         Firestore.instance.collection(collection).document(sr_no);
 
-    return documentReference
+    return documentReference  
         .setData({
           field: FieldValue.increment(1) /* atomically increments data by 1 */
         }, merge: true)

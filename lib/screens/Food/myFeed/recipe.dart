@@ -12,8 +12,6 @@ class RecipeTab extends StatefulWidget {
 }
 
 class _RecipeTabState extends State<RecipeTab> {
- 
-
   @override
   Widget build(BuildContext context) {
     return getListview(foodList: widget.foodList);
@@ -21,12 +19,9 @@ class _RecipeTabState extends State<RecipeTab> {
 }
 
 class getListview extends StatefulWidget {
-  
 
   final FoodListModel foodList;
-
   const getListview({Key key, this.foodList}) : super(key: key);
-
   @override
   _getListviewState createState() => _getListviewState();
 }

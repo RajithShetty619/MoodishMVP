@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/food_info.dart';
 
@@ -88,7 +89,13 @@ class _Mood_FoodState extends State<Mood_Food> {
                                         color: Colors.red[700],
                                         size: 30,
                                       ),
-                                onPressed: () {
+                                onPressed: () async {
+                                  if (!_like)
+                                    await DatabaseService().likeTransction(
+                                        sr_no: widget.foodList.sr_no,
+                                        collection: "food",
+                                        field: "like"); 
+
                                   setState(() {
                                     _like = !_like;
                                   });

@@ -48,6 +48,7 @@ class _FoodRecipeState extends State<FoodRecipe> {
                           itemCount:widget.foodList.preparation.length,
                           shrinkWrap: true,
                           primary: false,
+                          physics: NeverScrollableScrollPhysics(),
                           scrollDirection: Axis.vertical,
                           itemBuilder: (BuildContext context ,index){
                             return Container(
