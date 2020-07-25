@@ -163,13 +163,13 @@ class _SignUpState extends State<SignUp> {
                                 alignment: Alignment(1.0, 0.0),
                                 child: Row(
                                   children: <Widget>[
-                                    Text('Agree to Terms & Conditions'),
                                     Checkbox(value: _checkBoxValue, onChanged: (bool value){
                                       setState(() {
                                         _checkBoxValue = value;
                                       },
                                       );
-                                    })
+                                    }),
+                                    Text('Agree to Terms & Conditions'),
                                   ],
                                 ),
                               ),
@@ -193,10 +193,53 @@ class _SignUpState extends State<SignUp> {
                                         setState(() => loading = true);
                                         dynamic result = await _auth.newRegister(_email,_name ,_password);
                                         if(result == null){
-                                          setState(() => error = 'Please Enter a Valid Email');
+                                          setState(() => error = 'Email or Password is wrong!');
                                           loading = false;}
                                         if(_checkBoxValue==false)
-                                          {err = 'Please Accept the Terms and Conditions!';}
+                                          {setState(()=> err = 'Please Accept the Terms and Conditions!');
+                                            showDialog(
+                                                context: context,
+                                                builder: (BuildContext idcontext) {
+                                                  return Dialog(
+                                                    shape: RoundedRectangleBorder(
+                                                      borderRadius: BorderRadius.circular(10.0),
+                                                    ),
+                                                    child: Container(
+                                                      height: 175,
+                                                      child: Column(
+                                                        children: <Widget>[
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Padding(
+                                                            padding: const EdgeInsets.all(10.0),
+                                                            child: Text(
+                                                              err,
+                                                              style: TextStyle(
+                                                                  fontSize: 20,
+                                                                  fontWeight: FontWeight.bold,
+                                                                  color: Colors.red
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          SizedBox(height: 20,),
+                                                          Padding(
+                                                            padding: EdgeInsets.all(10),
+                                                            child: Align(
+                                                              alignment: Alignment.centerRight,
+                                                              child: RaisedButton(
+                                                                onPressed: () =>
+                                                                    Navigator.of(context,rootNavigator: true).pop(),
+                                                                child: Text('ok'),
+                                                              ),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  );
+                                                });
+                                          }
                                         else
                                           Navigator.push(context, MaterialPageRoute(builder: (context){
                                             return MainScreen();
@@ -219,15 +262,10 @@ class _SignUpState extends State<SignUp> {
                               SizedBox(height: 5.0,),
                               Text(
                                 error,
-                                style: TextStyle(color: Colors.red, fontSize:  12.0),
+                                style: TextStyle(color: Colors.red, fontSize:  16.0),
 
                               ),
                               SizedBox(height: 5.0,),
-                              Text(
-                                err,
-                                style: TextStyle(color: Colors.red, fontSize:  12.0),
-                              ),
-
 
                             ],
                           ),

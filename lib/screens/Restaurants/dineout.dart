@@ -25,7 +25,7 @@ class _DineOutState extends State<DineOut> {
         image1: 'dominos1.png',
         image2: 'dominos2.png',
         name: 'Dominos',
-        desc:'Italian ,Fast Food ,Breakfast \nChakala-andheri East, Mumbai'),
+        desc:'Italian ,Fast Food ,Breakfast \nChakala-andheri East, Mumbai\n'),
     _Restaurants(
         image: 'jimmys.png',
         image1: 'jimmys1.png',
@@ -43,7 +43,7 @@ class _DineOutState extends State<DineOut> {
         image1: 'pizzaah1.png',
         image2: 'pizzaah.png',
         name: 'PizzAah! District',
-        desc:'Italian ,Fast Food \n Kandivali West, Mumbai'),
+        desc:'Italian ,Fast Food \nKandivali West, Mumbai'),
     _Restaurants(
         image: 'thambbi.png',
         image1: 'thambbi1.png',
@@ -120,6 +120,7 @@ class _DineOutState extends State<DineOut> {
                               Padding(
                                 padding: EdgeInsets.only(top: 10.0,left: 30.0,right: 30.0,bottom: 10.0),
                                 child: Container(
+                                  height: 180,
                                   width: double.maxFinite,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(30.0),
@@ -131,18 +132,11 @@ class _DineOutState extends State<DineOut> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       Container(
-                                        padding: EdgeInsets.only(top: 20.0),
-                                        child: Icon(
-                                          Icons.restaurant,
-                                          size: 75.0,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      Container(
                                         child: Text(
                                           'Dineout',
                                           style: TextStyle(
-                                              fontSize: 20.0,
+                                              fontSize: 30.0,
+                                              fontWeight: FontWeight.bold,
                                               color: Colors.white),
                                         ),
                                       ),
@@ -177,64 +171,62 @@ class _DineOutState extends State<DineOut> {
                                 ),
                               )
                             ]),
-                      Padding(
-                          padding: EdgeInsets.only(top: 15.0),
-                          child: GestureDetector(
-                            onTap: (){
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                    return HomePage(desc: rest[index].desc,imgName: rest[index].image,imgName1: rest[index].image1,imgName2: rest[index].image2,restName: rest[index].name,);
-                                  }));
-                            },
-                            child: Card(
-                                elevation: 1.0,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0)
-                                ),
-                                child: Row(
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Container(
-                                        alignment: Alignment.centerLeft,
-                                        height: 80,
-                                        width: 80.0,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20.0),
-                                          image: DecorationImage(
-                                              image: AssetImage('assets/${rest[index].image}'),
-                                              fit: BoxFit.cover),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(20.0),
-                                        child: Column(
-                                          children: <Widget>[
-                                            Container(
-                                              alignment: Alignment.centerLeft,
-                                              child: Text(rest[index].name,
-                                                style: TextStyle(
-                                                    fontSize: 22.0,
-                                                    fontWeight: FontWeight.bold
-                                                ),),
-                                            ),
-                                            Container(
-                                                alignment: Alignment.centerLeft,
-                                                child: Text('\u{02605}4.2')),
-                                            SizedBox(height: 5.0,),
-                                            Text(rest[index].desc),
-
-
-                                          ],
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                )
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                                return HomePage(desc: rest[index].desc,imgName: rest[index].image,imgName1: rest[index].image1,imgName2: rest[index].image2,restName: rest[index].name,);
+                              }));
+                        },
+                        child: Card(
+                            elevation: 1.0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0)
                             ),
-                          )),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Container(
+                                    alignment: Alignment.centerLeft,
+                                    height: 100,
+                                    width: 100.0,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      image: DecorationImage(
+                                          image: AssetImage('assets/${rest[index].image}'),
+                                          fit: BoxFit.cover),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Column(
+                                      children: <Widget>[
+                                        Container(
+                                          alignment: Alignment.centerLeft,
+                                          child: Text(rest[index].name,
+                                            style: TextStyle(
+                                                fontSize: 22.0,
+                                                fontWeight: FontWeight.bold
+                                            ),),
+                                        ),
+                                        Container(
+                                            alignment: Alignment.centerLeft,
+                                            child: Text('\u{02605}4.2')),
+                                        SizedBox(height: 5.0,),
+                                        Container( alignment:Alignment.centerLeft,child: Text(rest[index].desc)),
+
+
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              ],
+                            )
+                        ),
+                      ),
                     ]);
               }),
         ));
