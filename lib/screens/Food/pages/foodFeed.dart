@@ -6,6 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
+import 'package:moodish_mvp/models/pollsModel.dart';
 import 'package:moodish_mvp/screens/Food/components/Every_Situation.dart';
 import 'package:moodish_mvp/screens/Food/components/foodMood.dart';
 import 'package:moodish_mvp/screens/Food/components/maFeed.dart';
@@ -88,7 +89,7 @@ class _FoodFeedState extends State<FoodFeed> {
     DateTime now = DateTime.now();
     String date = DateFormat('EEE, M/d/y').format(now);
     if (date == saveDate) {
-      return 1;
+      return 0;
     } else {
       _box.put("date", date);
       return 0;
@@ -149,25 +150,47 @@ class _FoodFeedState extends State<FoodFeed> {
                               });
                             });
                           },
-                          child: Container(
-                            height: 125.0,
-                            width: 110.0,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image:
-                                      AssetImage('assets/${mood[index].image}'),
-                                  fit: BoxFit.cover,
-                                ),
-                                borderRadius: BorderRadius.circular(10.0)),
-                            child: Center(
-                              child: Text(
-                                '${mood[index].mood}',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    fontSize: 20.0),
+                          child: Stack(
+                            children: <Widget>[
+                              Container(
+                                height: 200.0,
+                                width: 160.0,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image:
+                                          AssetImage('assets/${mood[index].image}'),
+                                      fit: BoxFit.cover,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10.0)),
                               ),
-                            ),
+                              Container(
+                                height: 200.0,
+                                width: 160.0,
+                                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    gradient:
+                        LinearGradient(begin: Alignment.bottomCenter, stops: [
+                      .1,
+                      .9
+                    ], colors: [
+                      Colors.black.withOpacity(.5),
+                      Colors.black.withOpacity(.1),
+                    ])),
+                                child: Align(
+                                  alignment: Alignment.bottomCenter,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text(
+                                        '${mood[index].mood[0].toUpperCase()}${mood[index].mood.substring(1)}',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                            fontSize: 20.0),
+                                      ),
+                                    ),
+                                  ),
+                              ),
+                            ],
                           ),
                         );
                       }),
@@ -358,9 +381,9 @@ class _FoodFeedState extends State<FoodFeed> {
                     ),
 
                  
-                    IndexedStack(
-                      index: indx - 1,
+                    Column(
                       children: <Widget>[
+                        if(indx == 1)
                         Container(
                           child: BlocConsumer<FoodBloc,
                               Map<String, List<FoodListModel>>>(
@@ -399,17 +422,24 @@ class _FoodFeedState extends State<FoodFeed> {
                             },
                           ),
                         ),
+                        if(indx == 2)
                        Column(
                       children: <Widget>[
+                        // Container(
+                        //   child:  PollTabs()
+                        //   ),
                         if (numbr == 0)
                           Container( child: YesNoTabs()),
                         if (numbr == 1)
-                          Container( child: PollTabs()),
+                          Container(
+                          child:  PollTabs()
+                          ),
                         if (numbr == 2)
                           Container( child: This_ThatTabs()),
                       ],
                     ),
-                        Container( child: FoodftTab()),
+                    if(indx == 3)
+                        Container(child: FoodftTab()),
                       ],
                     )
                   ],

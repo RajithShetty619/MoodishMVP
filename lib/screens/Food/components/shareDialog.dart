@@ -16,7 +16,7 @@ class Dialogs {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          title: Text(title),
+          title: Text("Share"),
           content: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[ 

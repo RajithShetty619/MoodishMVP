@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
+import 'package:moodish_mvp/screens/Food/components/pageview1.dart';
 import 'package:moodish_mvp/screens/Food/components/stepSlider.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/ingredients.dart';
 //import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -40,7 +41,7 @@ class _FoodRecipeState extends State<FoodRecipe> {
             ),
           ),
           AspectRatio(
-            aspectRatio: 16 / 9,
+            aspectRatio: 10 / 5,
             child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
@@ -150,61 +151,68 @@ class _FoodRecipeState extends State<FoodRecipe> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return Scaffold(
-                          body: ListView(
-                            children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text('How to Prepare?',
-                                style: TextStyle(
-                                  fontSize:32,
-                                  fontWeight:FontWeight.bold
-                                ),),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: ListView.builder(
-                                    itemCount: widget.foodList.preparation.length,
-                                    shrinkWrap: true,
-                                    physics: NeverScrollableScrollPhysics(),
-                                    itemBuilder: (BuildContext context, index) {
-                                      return Container(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Text(
-                                            'Step ${index+1}) ${widget.foodList.preparation[index]}',
-                                            textHeightBehavior: TextHeightBehavior(
-                                                applyHeightToFirstAscent: false,
-                                                applyHeightToLastDescent: false),
-                                                style: TextStyle(
-                                                  fontSize:20,
-                                                ),
-                                          ),
-                                        ),
-                                      );
-                                    }),
-                              ),
-                                  SizedBox(height: 10,),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: RaisedButton(
-                                      color: Colors.blue[300],
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      onPressed: ()=>Navigator.of(context).pop(),
-                                      child: Text('Ok'),),
-                                  )
-                            ],
-                          ),
-                        );
+                  
+                          Navigator.push(context,
+          MaterialPageRoute(builder: (context) => PageViewer1(
+            foodList: widget.foodList,
+          )));
+
+
+                  // showDialog(
+                  //     context: context,
+                  //     builder: (BuildContext context) {
+                  //       return Scaffold(
+                  //         body: ListView(
+                  //           children: <Widget>[
+                  //             Padding(
+                  //               padding: const EdgeInsets.all(8.0),
+                  //               child: Text('How to Prepare?',
+                  //               style: TextStyle(
+                  //                 fontSize:32,
+                  //                 fontWeight:FontWeight.bold
+                  //               ),),
+                  //             ),
+                  //             Padding(
+                  //               padding: const EdgeInsets.all(5.0),
+                  //               child: ListView.builder(
+                  //                   itemCount: widget.foodList.preparation.length,
+                  //                   shrinkWrap: true,
+                  //                   physics: NeverScrollableScrollPhysics(),
+                  //                   itemBuilder: (BuildContext context, index) {
+                  //                     return Container(
+                  //                       child: Padding(
+                  //                         padding: const EdgeInsets.all(8.0),
+                  //                         child: Text(
+                  //                           'Step ${index+1}) ${widget.foodList.preparation[index]}',
+                  //                           textHeightBehavior: TextHeightBehavior(
+                  //                               applyHeightToFirstAscent: false,
+                  //                               applyHeightToLastDescent: false),
+                  //                               style: TextStyle(
+                  //                                 fontSize:20,
+                  //                               ),
+                  //                         ),
+                  //                       ),
+                  //                     );
+                  //                   }),
+                  //             ),
+                  //                 SizedBox(height: 10,),
+                  //                 Padding(
+                  //                   padding: const EdgeInsets.all(8.0),
+                  //                   child: RaisedButton(
+                  //                     color: Colors.blue[300],
+                  //                     shape: RoundedRectangleBorder(
+                  //                       borderRadius: BorderRadius.circular(10),
+                  //                     ),
+                  //                     onPressed: ()=>Navigator.of(context).pop(),
+                  //                     child: Text('Ok'),),
+                  //                 )
+                  //           ],
+                  //         ),
+                  //       );
                        
-                      }
+                  //     }
                       
-                      );
+                  //     );
                 },
                 child: Text('Show More'),
               ),

@@ -81,29 +81,45 @@ class _Food_InfoState extends State<Food_Info> {
                       ),
                       child: Align(
                         alignment: Alignment.topLeft,
-                        child: IconButton(
-                            icon: Icon(
-                              Icons.arrow_back,
-                              size: 40,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            decoration: BoxDecoration(
                               color: Colors.white,
+                              borderRadius: BorderRadius.circular(45),
                             ),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            }),
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: IconButton(
+                                  icon: Icon(
+                                    Icons.arrow_back,
+                                    size: 30,
+                                    color: Colors.black,
+                                  ),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  }),
+                            ),
+                          ),
+                        ),
                       ),
                     );
                   },
                 ),
-                Row(
+                Wrap(
+                  direction: Axis.horizontal,
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        widget.foodList.foodName,
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 30.0,
-                            fontWeight: FontWeight.bold),
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          widget.foodList.foodName,
+
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                     SizedBox(

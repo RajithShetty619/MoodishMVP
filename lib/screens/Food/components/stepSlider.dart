@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
+import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/foodrecipe.dart';
 import 'package:moodish_mvp/screens/Food/pages/explore.dart';
 
 class IntroScreen extends StatefulWidget {
+final FoodListModel foodList;
+
+  const IntroScreen({Key key, this.foodList}) : super(key: key);
   @override
   IntroScreenState createState() => IntroScreenState();
 }
@@ -20,7 +24,7 @@ class IntroScreenState extends State<IntroScreen> {
     slides.add(
       new Slide(
         title:
-            "Step 1",
+            'steps' "${widget.foodList.protein}",
         maxLineTitle: 2, 
         styleTitle: TextStyle(
           color: Colors.black,
@@ -263,7 +267,6 @@ class IntroScreenState extends State<IntroScreen> {
       sizeDot: 13.0,
 
       // Show or hide status bar
-      isShowSkipBtn: false,
       shouldHideStatusBar: true,
       backgroundColorAllSlides: Colors.grey,
     );

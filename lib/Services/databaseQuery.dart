@@ -240,7 +240,7 @@ class DatabaseQuery {
         .where('fact', isGreaterThan: '')
         .startAfter([last])
         .orderBy('fact')
-        .limit(3);
+        .limit(5);
     List<DocumentSnapshot> _snapshot =
         await q.getDocuments().then((value) => value.documents);
 

@@ -324,8 +324,8 @@ class _ExploreState extends State<Explore> {
                             MealType(image: 'assets/img.jpg', types: 'dinner'),
                           ],
                         ),
-                      ),
-                      SizedBox(height: 20), */
+                      ),  */
+                      SizedBox(height: 20), 
                       Padding(
                         padding: const EdgeInsets.only(left: 10.0),
                         child: Container(

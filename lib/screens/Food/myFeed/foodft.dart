@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/factsModel.dart';
+import 'package:moodish_mvp/screens/Food/components/shareDialog.dart';
 
 class FoodftTab extends StatefulWidget {
   @override
@@ -18,16 +19,18 @@ class _FoodftTabState extends State<FoodftTab> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             List<FactModel> _fact = snapshot.data;
-            return ListView.builder(
-                shrinkWrap: true,
-                primary: false,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: _fact.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return getListView(
-                    fact: _fact[index],
-                  );
-                });
+            return Container(
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  primary: false,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: _fact.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return getListView(
+                      fact: _fact[index],
+                    );
+                  }),
+            );
           } else {
             return Center(
               child: SpinKitFadingCircle(
@@ -55,83 +58,89 @@ class _getListViewState extends State<getListView> {
   bool _like = true;
   @override
   Widget build(BuildContext context) {
-    return Card(
-        color: Colors.white,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 10.0,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Container(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  widget.fact.factHeading,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                    fontSize: 20,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+          color: Colors.white,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 10.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    widget.fact.factHeading,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 20,
+                    ),
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Container(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  widget.fact.factStatment,
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    color: Colors.black,
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    widget.fact.factStatment,
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 10.0,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                IconButton(
-                  icon: _like
-                      ? Icon(
-                          Icons.favorite_border,
-                          color: Colors.black,
-                          size: 30,
-                        )
-                      : Icon(
-                          Icons.favorite,
-                          color: Colors.red[700],
-                          size: 30,
-                        ),
-                  onPressed: () {
-                    setState(() {
-                      _like = !_like;
-                    });
-                  },
-                ),
-                IconButton(
-                  icon: Icon(
-                    Icons.add_circle_outline,
-                    size: 25,
+              SizedBox(
+                height: 10.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  IconButton(
+                    icon: _like
+                        ? Icon(
+                            Icons.favorite_border,
+                            color: Colors.black,
+                            size: 30,
+                          )
+                        : Icon(
+                            Icons.favorite,
+                            color: Colors.red[700],
+                            size: 30,
+                          ),
+                    onPressed: () {
+                      setState(() {
+                        _like = !_like;
+                      });
+                    },
                   ),
-                  onPressed: () {},
-                ),
-                IconButton(
-                  icon: Icon(
-                    Icons.swap_horizontal_circle,
-                    size: 25,
-                  ),
-                  onPressed: () {},
-                )
-              ],
-            )
-          ],
-        ));
+                  // IconButton(
+                  //   icon: Icon(
+                  //     Icons.add_circle_outline,
+                  //     size: 25,
+                  //   ),
+                  //   onPressed: () {},
+                  // ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.reply,
+                      size: 25,
+                    ),
+                    onPressed: () async {
+                      final action = await Dialogs.yesAbortDialog(
+                                    context, 'My title', 'My Body');
+                    },
+                  )
+                ],
+              )
+            ],
+          )),
+    );
   }
 }
