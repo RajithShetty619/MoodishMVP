@@ -5,6 +5,7 @@ import 'package:moodish_mvp/screens/Restaurants/dineout.dart';
 import 'package:moodish_mvp/screens/Restaurants/pickup.dart';
 import 'package:moodish_mvp/screens/Restaurants/restaurantCard/homepage.dart';
 import 'package:moodish_mvp/screens/Restaurants/toprated.dart';
+import 'package:geolocator/geolocator.dart';
 
 class Restaurant extends StatefulWidget {
   @override
@@ -117,271 +118,371 @@ class _RestaurantState extends State<Restaurant> {
         desc:
         'Casual Dining - Continental, North Indian, Chinese, Thai, Ice Cream, Beverages, South Indian, Seafood \nBorivali West')
   ];
+  Position _currentPosition;
+  String location='Mumbai,Maharashtra';
+  Geolocator geolocator= Geolocator();
+
+  void initState() {
+    super.initState();
+
+    getCurrentLocation();
+}
+  getCurrentLocation() async {
+    final position = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+        .then((Position position) {
+      _currentPosition = position;
+    });
+    print(position);
+  }
+  _getAddressFromLatLng() async {
+    try {
+      setState(() {
+        location = 'Wait a Moment...';
+      });
+      List<Placemark> p = await geolocator.placemarkFromCoordinates(
+          _currentPosition.latitude, _currentPosition.longitude);
+      Placemark place = p[0];
+
+      setState(() {
+        location =
+        "${place.subLocality},${place.locality}-${place.postalCode}";
+      });
+      print(location);
+    } catch (e) {
+      print(e);
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: SafeArea(
-        child: Stack(
-          children: <Widget>[
-            SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(top: 10,left: 16),
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  child: RichText(
+                    text: TextSpan(
+                      text: 'Restaurants',
+                      style: TextStyle(
+                        fontSize: MediaQuery.of(context).size.width/6,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold
+                      ),
+                      children: [
+                        TextSpan(
+                          text: '.',
+                          style: TextStyle(
+                            fontSize: 60,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.pinkAccent
+                          )
+                        )
+                      ]
+                    ),
+                  ),
+                ),
+              ),
+
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(left: 12),
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Row(
                         children: <Widget>[
-                          Icon(Icons.location_on),
-                          Text('Mumbai,Maharashtra')
+                          IconButton(icon: Icon(Icons.location_on),
+                          onPressed: ()=>_getAddressFromLatLng(),),
+                          Text(location)
                         ],
                       ),
                     ),
                   ),
-                  Container(
-                    height: 380,
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: rest.length,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                return HomePage(desc: rest[index].desc,imgName: rest[index].image,imgName1: rest[index].image1,imgName2: rest[index].image2,restName: rest[index].name,);
-                              }));
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Card(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0)),
-                                child: Column(
+              Container(
+                height: 380,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: rest.length,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) {
+                            return HomePage(desc: rest[index].desc,imgName: rest[index].image,imgName1: rest[index].image1,imgName2: rest[index].image2,restName: rest[index].name,);
+                          }));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0)),
+                            child: Column(
+                              children: <Widget>[
+                                Stack(
                                   children: <Widget>[
-                                    Stack(
-                                      children: <Widget>[
-                                        Container(
-                                          height: 200,
-                                          width: 250,
-                                          decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.only(
-                                                  topLeft: Radius.circular(20),
-                                                  topRight: Radius.circular(20)),
-                                              image: DecorationImage(
-                                                  image: AssetImage(
-                                                      'assets/${rest[index].image}'),
-                                                  fit: BoxFit.cover)),
+                                    Container(
+                                      height: 200,
+                                      width: 250,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(20),
+                                              topRight: Radius.circular(20)),
+                                          image: DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/${rest[index].image}'),
+                                              fit: BoxFit.cover)),
+                                    ),
+                                    Container(
+                                      child: Container(
+                                        height: 200,
+                                        width: 250,
+                                        decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            begin: Alignment.centerLeft,
+                                            end: Alignment.centerRight,
+                                            colors: [
+                                              Colors.transparent,
+                                              Colors.transparent,
+                                              Colors.white
+                                            ]
+                                          )
                                         ),
-                                        Container(
-                                          child: Container(
-                                            height: 200,
-                                            width: 250,
-                                            decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                begin: Alignment.centerLeft,
-                                                end: Alignment.centerRight,
-                                                colors: [
-                                                  Colors.transparent,
-                                                  Colors.transparent,
-                                                  Colors.white
-                                                ]
-                                              )
-                                            ),
-                                            child: Column(
-                                              children: <Widget>[
-                                                Align(
-                                                  alignment: Alignment.topRight,
-                                                  child: Padding(
-                                                    padding:
-                                                    const EdgeInsets.all(10.0),
-                                                    child: Column(
-                                                      children: <Widget>[
-                                                        Align(
-                                                            alignment:
-                                                            Alignment.centerRight,
-                                                            child: Icon(
-                                                              Icons.av_timer,
-                                                              color: Colors.black,
-                                                              size: 28,
-                                                            )),
-                                                        SizedBox(
-                                                          height: 2,
-                                                        ),
-                                                        Align(
-                                                          alignment:
-                                                          Alignment.centerRight,
-                                                          child: Text(
-                                                            '30mins',
-                                                            style: TextStyle(
-                                                                color: Colors.black,
-                                                                fontWeight:
-                                                                FontWeight.w500),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                                Align(
-                                                  alignment: Alignment.centerRight,
-                                                  child: Padding(
-                                                    padding:
-                                                    const EdgeInsets.all(10.0),
-                                                    child: Column(
-                                                      children: <Widget>[
-                                                        Icon(
-                                                          Icons.star,
+                                        child: Column(
+                                          children: <Widget>[
+                                            Align(
+                                              alignment: Alignment.topRight,
+                                              child: Padding(
+                                                padding:
+                                                const EdgeInsets.all(10.0),
+                                                child: Column(
+                                                  children: <Widget>[
+                                                    Align(
+                                                        alignment:
+                                                        Alignment.centerRight,
+                                                        child: Icon(
+                                                          Icons.av_timer,
                                                           color: Colors.black,
                                                           size: 28,
-                                                        ),
-                                                        SizedBox(
-                                                          height: 2,
-                                                        ),
-                                                        Text(
-                                                          '4.5',
-                                                          style: TextStyle(
-                                                              color: Colors.black,
-                                                              fontWeight:
-                                                              FontWeight.w500),
-                                                        )
-                                                      ],
+                                                        )),
+                                                    SizedBox(
+                                                      height: 2,
                                                     ),
-                                                  ),
+                                                    Align(
+                                                      alignment:
+                                                      Alignment.centerRight,
+                                                      child: Text(
+                                                        '30mins',
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontWeight:
+                                                            FontWeight.w500),
+                                                      ),
+                                                    )
+                                                  ],
                                                 ),
-                                                Align(
-                                                  alignment: Alignment.bottomRight,
-                                                  child: Padding(
-                                                    padding:
-                                                    const EdgeInsets.all(10.0),
-                                                    child: Column(
-                                                      children: <Widget>[
-                                                        Align(
-                                                            alignment:
-                                                            Alignment.centerRight,
-                                                            child: Icon(
-                                                              Icons.library_books,
-                                                              color: Colors.black,
-                                                              size: 22,
-                                                            )),
-                                                        SizedBox(
-                                                          height: 2,
-                                                        ),
-                                                        Align(
-                                                          alignment:
-                                                          Alignment.centerRight,
-                                                          child: Text(
-                                                            'Write Review',
-                                                            style: TextStyle(
-                                                                color: Colors.black,
-                                                                fontSize: 12,
-                                                                fontWeight:
-                                                                FontWeight.w500),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
+                                              ),
                                             ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    Container(
-                                      width: 250,
-                                      child: Padding(
-                                        padding: EdgeInsets.all(8),
-                                        child: Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Text(
-                                            rest[index].name,
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      width: 250,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Text(rest[index].desc),
+                                            Align(
+                                              alignment: Alignment.centerRight,
+                                              child: Padding(
+                                                padding:
+                                                const EdgeInsets.all(10.0),
+                                                child: Column(
+                                                  children: <Widget>[
+                                                    Icon(
+                                                      Icons.star,
+                                                      color: Colors.black,
+                                                      size: 28,
+                                                    ),
+                                                    SizedBox(
+                                                      height: 2,
+                                                    ),
+                                                    Text(
+                                                      '4.5',
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                          FontWeight.w500),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            Align(
+                                              alignment: Alignment.bottomRight,
+                                              child: Padding(
+                                                padding:
+                                                const EdgeInsets.all(10.0),
+                                                child: Column(
+                                                  children: <Widget>[
+                                                    Align(
+                                                        alignment:
+                                                        Alignment.centerRight,
+                                                        child: Icon(
+                                                          Icons.library_books,
+                                                          color: Colors.black,
+                                                          size: 22,
+                                                        )),
+                                                    SizedBox(
+                                                      height: 2,
+                                                    ),
+                                                    Align(
+                                                      alignment:
+                                                      Alignment.centerRight,
+                                                      child: Text(
+                                                        'Review',
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 12,
+                                                            fontWeight:
+                                                            FontWeight.w500),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            )
+                                          ],
                                         ),
                                       ),
                                     )
                                   ],
                                 ),
-                              ),
+                                Container(
+                                  width: 250,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8),
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        rest[index].name,
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  width: 250,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(rest[index].desc),
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
-                          );
-                        }),
-                  ),
-                  SizedBox(
-                    height: 8.0,
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        getCategory('Dine_out.png', 'Dineout', context,1),
-                        SizedBox(
-                          width: 10.0,
+                          ),
                         ),
-                        getCategory('Booking.png', 'Booking', context,2),
-                        SizedBox(
-                          width: 10.0,
-                        ),
-                        getCategory('Pickup.png', 'Pick Up', context,3),
-                        SizedBox(
-                          width: 10.0,
-                        ),
-                        getCategory('Top_Rated.png', 'Top Rated', context,4),
-                        SizedBox(
-                          width: 10.0,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Top Restaurants :',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 20.0, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 400,
-                    child: restura(rest[0].image, rest[0].name, rest[0].desc,rest,context,1),
-                  ),
-                  Container(
-                    height: 400,
-                    child: restura(rest[1].image, rest[1].name, rest[1].desc,rest,context,2),
-                  ),
-                  Container(
-                    height: 400,
-                    child: restura(rest[2].image, rest[2].name, rest[2].desc,rest,context,3),
-                  ),
-                  Container(
-                    height: 400,
-                    child: restura(rest[3].image, rest[3].name, rest[3].desc,rest,context,4),
-                  ),
-                ],
+                      );
+                    }),
               ),
-            ),
-          ],
+              SizedBox(
+                height: 3.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10,0,0,10),
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  child: RichText(
+                    text: TextSpan(
+                      text: 'Categories',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black
+                      ),
+                      children: [
+                        TextSpan(
+                          text: '.',
+                          style: TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.pinkAccent
+                          )
+                        )
+                      ]
+                    ),
+                  ),
+                ),
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    getCategory('Dine_out.png', 'Dineout', context,1),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    getCategory('Booking.png', 'Booking', context,2),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    getCategory('Pickup.png', 'Pick Up', context,3),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    getCategory('Top_Rated.png', 'Top Rated', context,4),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10,0,0,0),
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  child: RichText(
+                    text: TextSpan(
+                        text: 'Top Restaurant',
+                        style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black
+                        ),
+                        children: [
+                          TextSpan(
+                              text: '.',
+                              style: TextStyle(
+                                  fontSize: 40,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.pinkAccent
+                              )
+                          )
+                        ]
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                height: 400,
+                child: restura(rest[0].image, rest[0].name, rest[0].desc,rest,context,1),
+              ),
+              Container(
+                height: 400,
+                child: restura(rest[1].image, rest[1].name, rest[1].desc,rest,context,2),
+              ),
+              Container(
+                height: 400,
+                child: restura(rest[2].image, rest[2].name, rest[2].desc,rest,context,3),
+              ),
+              Container(
+                height: 400,
+                child: restura(rest[3].image, rest[3].name, rest[3].desc,rest,context,4),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -564,7 +665,7 @@ Widget restura(String imgName, String name, String desc, List<_Restaurants>rest,
                                 Align(
                                   alignment: Alignment.centerRight,
                                   child: Text(
-                                    'Write Review',
+                                    'Review',
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 12,

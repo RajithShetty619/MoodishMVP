@@ -70,15 +70,14 @@ class _FoodFeedState extends State<FoodFeed> {
 
   data(BuildContext dataContext, String mood) async {
     print('//////////////////////' + mood);
-    await checkDate().then((check) {
-      _dq.getFood(field: ['mood'], value: [mood], limit: 10, check: check).then(
+      _dq.getFood(field: ['mood'], value: [mood], limit: 10, check: null).then(
           (future) {
         setState(() {
           BlocProvider.of<FoodBloc>(dataContext)
               .add(FoodEvent.add(future, "0"));
         });
       });
-    });
+   
   }
      
   

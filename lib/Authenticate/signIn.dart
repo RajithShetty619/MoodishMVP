@@ -166,7 +166,7 @@ class _SignInState extends State<SignIn> {
                                 onPressed: () async{
                                   dynamic result = await _auth.googleSignIn();
                                     if(result == null){
-                                          setState(() => error = 'Something went');
+                                          setState(() => error = 'Something went Wrong!');
                                           loading = false;}
                                         else
                                           Navigator.push(context, MaterialPageRoute(builder: (context){
@@ -216,7 +216,7 @@ class _SignInState extends State<SignIn> {
                               SizedBox(height: 10.0,),
                               Text(
                                 error,
-                                style: TextStyle(color: Colors.red, fontSize:  12.0),
+                                style: TextStyle(color: Colors.red, fontSize:  16.0,fontWeight: FontWeight.bold),
                               )
 
                             ],

@@ -333,7 +333,7 @@ class _ProfileState extends State<Profile> {
                                   Padding(
                                     padding: EdgeInsets.all(8.0),
                                     child: Align(
-                                      alignment: Alignment.centerLeft,
+                                      alignment: Alignment.center,
                                       child: Linkify(
                                         onOpen: _onOpen,
                                         text:
@@ -372,7 +372,50 @@ class _ProfileState extends State<Profile> {
                     Icons.keyboard_arrow_right,
                     color: Colors.grey.shade400,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Dialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Container(
+                              height: 150.0,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      child: Linkify(
+                                        onOpen: _onOpen,
+                                        text:
+                                        'To View Terms And Conditions\nClick https://snapinsight.net/termsandconditions.php',
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 15.0,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Align(
+                                      alignment: Alignment.centerRight,
+                                      child: RaisedButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(),
+                                        child: Text('ok'),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        });
+                  },
                 ),
                 Divider(),
                 ListTile(
@@ -384,7 +427,50 @@ class _ProfileState extends State<Profile> {
                     Icons.keyboard_arrow_right,
                     color: Colors.grey.shade400,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Dialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Container(
+                              height: 150.0,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      child: Linkify(
+                                        onOpen: _onOpen,
+                                        text:
+                                        'Contact Us?\nClick https://snapinsight.net/contacts.pho',
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 15.0,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Align(
+                                      alignment: Alignment.centerRight,
+                                      child: RaisedButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(),
+                                        child: Text('ok'),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        });
+                  },
                 ),
                 Divider(),
                 ListTile(
