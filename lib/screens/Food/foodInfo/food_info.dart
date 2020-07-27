@@ -214,7 +214,6 @@ class _Food_InfoState extends State<Food_Info> {
                       )),
                 if (indx == 1)
                   Container(
-                    height: MediaQuery.of(context).size.height*1.1,
                     child: FoodRecipe(
                       foodList: widget.foodList,
                     ),

@@ -394,7 +394,7 @@ class _RestaurantState extends State<Restaurant> {
                     text: TextSpan(
                       text: 'Categories',
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 26,
                         fontWeight: FontWeight.bold,
                         color: Colors.black
                       ),
