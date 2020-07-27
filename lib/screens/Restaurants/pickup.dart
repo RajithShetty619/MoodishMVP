@@ -15,48 +15,48 @@ class _PickUpState extends State<PickUp> {
         image2: 'bombayvintage2.png',
         name: 'Bombay Vintage',
         desc:
-            'Casual Dining, Bar - North Indian, South Indian, Maharashtrian\nColaba'),
+            '\u27A4 Casual Dining, Bar - North Indian, South Indian, Maharashtrian\n\u2691 Colaba'),
     _Restaurants(
         image: 'jamjar.png',
         image1: 'jamjar1.png',
         image2: 'jamjar2.png',
         name: 'JamJar Diner',
         desc:
-            'Casual Dining, Bar - American, Italian, Mexican, Healthy Food, Burger, Salad, Beverages\nHill Road, Bandra West'),
+            '\u27A4 Casual Dining, Bar - American, Italian, Mexican, Healthy Food, Burger, Salad, Beverages\n\u2691 Hill Road, Bandra West'),
     _Restaurants(
         image: 'mabruk.png',
         image1: 'mabruk1.png',
         image2: 'mabruk2.png',
         name: 'Mabruk- Sahara Star',
         desc:
-            'Fine Dining - Lebanese, Mediterranean \nVile Parle East'),
+            '\u27A4 Fine Dining - Lebanese, Mediterranean \n\u2691 Vile Parle East'),
     _Restaurants(
         image: 'masque.png',
         image1: 'masque1.png',
         image2: 'masque2.png',
         name: 'Masque',
-        desc: 'Fine Dining - Modern Indian\nMahalaxmi'),
+        desc: '\u27A4 Fine Dining - Modern Indian\n\u2691 Mahalaxmi'),
     _Restaurants(
         image: 'kfc.png',
         image1: 'kfc1.png',
         image2: 'kfc2.png',
         name: 'KFC',
         desc:
-            'Quick Bites - Burger, Fast Food, Finger Food, Beverages\nLinking Road, Bandra West'),
+            '\u27A4 Quick Bites - Burger, Fast Food, Finger Food, Beverages\n\u2691 Linking Road, Bandra West'),
     _Restaurants(
         image: 'mexichino.png',
         image1: 'mexichino1.png',
         image2: 'mexichino2.png',
         name: 'MexiChino',
         desc:
-            'Casual Dining - Mexican, Chinese, Continental\nBorivali West'),
+            '\u27A4 Casual Dining - Mexican, Chinese, Continental\n\u2691 Borivali West'),
     _Restaurants(
         image: 'rabdiwala.png',
         image1: 'rabdiwala1.png',
         image2: 'rabdiwala2.png',
         name: 'RabdiWala',
         desc:
-            'Casual Dining, Dessert Parlor - Rajasthani, Gujarati, Mithai, Desserts, Maharashtrian\nBorivali West'),
+            '\u27A4 Casual Dining, Dessert Parlor - Rajasthani, Gujarati, Mithai, Desserts, Maharashtrian\n\u2691 Borivali West'),
   ];
 
   @override

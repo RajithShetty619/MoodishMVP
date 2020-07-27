@@ -14,55 +14,55 @@ class _BookingState extends State<Booking> {
         image2: 'burgerbresserie2.png',
         name: 'Burger Brasserie',
         desc:
-        'Quick Bites - Burger, Fast Food, Beverages \nAndheri Lokhandwala, Andheri West'),
+        '\u27A4 Quick Bites - Burger, Fast Food, Beverages \n\u2691 Andheri Lokhandwala, Andheri West'),
     _Restaurants(
         image: 'canto.png',
         image1: 'canto1.png',
         image2: 'canto2.png',
         name: 'Canto- Resto & Bar',
         desc:
-        'Casual Dining, Bar - North Indian, Continental, Italian, Lebanese\nLower Parel'),
+        '\u27A4 Casual Dining, Bar - North Indian, Continental, Italian, Lebanese\n\u2691 Lower Parel'),
     _Restaurants(
         image: 'bayview.png',
         image1: 'bayview1.png',
         image2: 'bayview2.png',
         name: 'Bay View',
         desc:
-        'Casual Dining - Seafood, North Indian, Chinese\nBorivali West'),
+        '\u27A4 Casual Dining - Seafood, North Indian, Chinese\n\u2691 Borivali West'),
     _Restaurants(
         image: 'blackolive.png',
         image1: 'blackolive1.png',
         image2: 'blackolive2.png',
         name: 'Black Olive',
-        desc: 'Healthy Food, Continental, Italian \nOshiwara, Andheri West'),
+        desc: '\u27A4 Healthy Food, Continental, Italian \n\u2691 Oshiwara, Andheri West'),
     _Restaurants(
         image: 'quessoristorante.png',
         image1: 'quessoristorante1.png',
         image2: 'quessoristorante2.png',
         name: 'Quesso Ristorante',
         desc:
-        'Casual Dining, Bar - Continental, Mexican, Italian, Mediterranean, Thai, Desserts\nOshiwara, Andheri West'),
+        '\u27A4 Casual Dining, Bar - Continental, Mexican, Italian, Mediterranean, Thai, Desserts\n\u2691 Oshiwara, Andheri West'),
     _Restaurants(
         image: 'sevenkitchen.png',
         image1: 'sevenkitchen1.png',
         image2: 'sevenkitchen2.png',
         name: 'Seven Kitchen',
         desc:
-        'Fine Dining - Chinese, North Indian, Italian, European, Desserts \nLower Parel'),
+        '\u27A4 Fine Dining - Chinese, North Indian, Italian, European, Desserts \n\u2691 Lower Parel'),
     _Restaurants(
         image: 'sincity.png',
         image1: 'sincity1.png',
         image2: 'sincity2.png',
         name: 'Sin City',
         desc:
-        'Bar, Casual Dining - Continental, North Indian, Thai, Italian \nAndheri Lokhandwala, Andheri West'),
+        '\u27A4 Bar, Casual Dining - Continental, North Indian, Thai, Italian \n\u2691 Andheri Lokhandwala, Andheri West'),
     _Restaurants(
         image: 'silvercoin.png',
         image1: 'silvercoin1.png',
         image2: 'silvercoin2.png',
         name: 'Silver Coin',
         desc:
-        'Casual Dining - Continental, North Indian, Chinese, Thai, Ice Cream, Beverages, South Indian, Seafood \nBorivali West')
+        '\u27A4 Casual Dining - Continental, North Indian, Chinese, Thai, Ice Cream, Beverages, South Indian, Seafood \n\u2691 Borivali West')
   ];
 
   @override

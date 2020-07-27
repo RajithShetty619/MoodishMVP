@@ -20,103 +20,103 @@ class _RestaurantState extends State<Restaurant> {
         image2: 'downtown_china2.png',
         name: 'Downtown China',
         desc:
-            'Casual Dining - Chinese, Thai, Asian, Seafood, Momos, Beverages, Desserts \nAndheri Lokhandwala, Andheri West'),
+            '\u27A4 Casual Dining - Chinese, Thai, Asian, Seafood, Momos, Beverages, Desserts \n\u2691 Andheri Lokhandwala, Andheri West'),
     _Restaurants(
         image: 'family_tree.jpg',
         image1: 'family_tree1.jpg',
         image2: 'family_tree2.png',
         name: 'Family Tree',
         desc:
-            'Casual Dining - Biryani, Chinese, North Indian, Pizza, South Indian, Desserts \nGhatkopar East'),
+            '\u27A4 Casual Dining - Biryani, Chinese, North Indian, Pizza, South Indian, Desserts \n\u2691 Ghatkopar East'),
     _Restaurants(
         image: 'frozen_bottle.jpg',
         image1: 'frozen_bottle1.jpg',
         image2: 'frozen_bottle2.png',
         name: 'Frozen Bottle',
         desc:
-            'Beverage Shop, Dessert Parlor - Beverages, Desserts, Ice Cream \nMatunga East'),
+            '\u27A4 Beverage Shop, Dessert Parlor - Beverages, Desserts, Ice Cream \n\u2691 Matunga East'),
     _Restaurants(
         image: 'irish_house.png',
         image1: 'irish_house1.png',
         image2: 'irish_house2.png',
         name: 'The Irish House',
-        desc: 'Pub, Casual Dining - European, American \nLower Parel'),
+        desc: '\u27A4 Pub, Casual Dining - European, American \n\u2691 Lower Parel'),
     _Restaurants(
         image: 'Mainland_China.jpg',
         image1: 'Mainland_China.png',
         image2: 'Mainland_China2.jpg',
         name: 'Mainland China',
         desc:
-            'Casual Dining - Chinese, Asian, Sushi, Japanese, Thai \nSakinaka'),
+            '\u27A4 Casual Dining - Chinese, Asian, Sushi, Japanese, Thai \n\u2691 Sakinaka'),
     _Restaurants(
         image: 'pop_tates.jpg',
         image1: 'pop_tates1.jpg',
         image2: 'pop_tates2.png',
         name: 'Pop Tates',
         desc:
-            'Bar, Casual Dining - Continental, Chinese, Italian, Beverages \nLower Parel'),
+            '\u27A4 Bar, Casual Dining - Continental, Chinese, Italian, Beverages \n\u2691 Lower Parel'),
     _Restaurants(
         image: 'tipsy_gipsy.jpg',
         image1: 'tipsy_gipsy1.jpg',
         image2: 'tipsy_gipsy2.jpg',
         name: 'Tipsy Gipsy',
         desc:
-            'Bar, Casual Dining - Continental, Mediterranean, Italian \nVeera Desai Area'),
+            '\u27A4 Bar, Casual Dining - Continental, Mediterranean, Italian \n\u2691 Veera Desai Area'),
     _Restaurants(
         image: 'burgerbrasserie.png',
         image1: 'burgerbrasserie1.png',
         image2: 'burgerbresserie2.png',
         name: 'Burger Brasserie',
         desc:
-        'Quick Bites - Burger, Fast Food, Beverages \nAndheri Lokhandwala, Andheri West'),
+        '\u27A4 Quick Bites - Burger, Fast Food, Beverages \n\u2691 Andheri Lokhandwala, Andheri West'),
     _Restaurants(
         image: 'canto.png',
         image1: 'canto1.png',
         image2: 'canto2.png',
         name: 'Canto- Resto & Bar',
         desc:
-        'Casual Dining, Bar - North Indian, Continental, Italian, Lebanese\nLower Parel'),
+        '\u27A4 Casual Dining, Bar - North Indian, Continental, Italian, Lebanese\n\u2691 Lower Parel'),
     _Restaurants(
         image: 'bayview.png',
         image1: 'bayview1.png',
         image2: 'bayview2.png',
         name: 'Bay View',
         desc:
-        'Casual Dining - Seafood, North Indian, Chinese\nBorivali West'),
+        '\u27A4 Casual Dining - Seafood, North Indian, Chinese\n\u2691 Borivali West'),
     _Restaurants(
         image: 'blackolive.png',
         image1: 'blackolive1.png',
         image2: 'blackolive2.png',
         name: 'Black Olive',
-        desc: 'Healthy Food, Continental, Italian \nOshiwara, Andheri West'),
+        desc: '\u27A4 Healthy Food, Continental, Italian \n\u2691 Oshiwara, Andheri West'),
     _Restaurants(
         image: 'quessoristorante.png',
         image1: 'quessoristorante1.png',
         image2: 'quessoristorante2.png',
         name: 'Quesso Ristorante',
         desc:
-        'Casual Dining, Bar - Continental, Mexican, Italian, Mediterranean, Thai, Desserts\nOshiwara, Andheri West'),
+        '\u27A4 Casual Dining, Bar - Continental, Mexican, Italian, Mediterranean, Thai, Desserts\n\u2691 Oshiwara, Andheri West'),
     _Restaurants(
         image: 'sevenkitchen.png',
         image1: 'sevenkitchen1.png',
         image2: 'sevenkitchen2.png',
         name: 'Seven Kitchen',
         desc:
-        'Fine Dining - Chinese, North Indian, Italian, European, Desserts \nLower Parel'),
+        '\u27A4 Fine Dining - Chinese, North Indian, Italian, European, Desserts \n\u2691 Lower Parel'),
     _Restaurants(
         image: 'sincity.png',
         image1: 'sincity1.png',
         image2: 'sincity2.png',
         name: 'Sin City',
         desc:
-        'Bar, Casual Dining - Continental, North Indian, Thai, Italian \nAndheri Lokhandwala, Andheri West'),
+        '\u27A4 Bar, Casual Dining - Continental, North Indian, Thai, Italian \n\u2691 Andheri Lokhandwala, Andheri West'),
     _Restaurants(
         image: 'silvercoin.png',
         image1: 'silvercoin1.png',
         image2: 'silvercoin2.png',
         name: 'Silver Coin',
         desc:
-        'Casual Dining - Continental, North Indian, Chinese, Thai, Ice Cream, Beverages, South Indian, Seafood \nBorivali West')
+        '\u27A4 Casual Dining - Continental, North Indian, Chinese, Thai, Ice Cream, Beverages, South Indian, Seafood \n\u2691 Borivali West')
   ];
   Position _currentPosition;
   String location='Mumbai,Maharashtra';
