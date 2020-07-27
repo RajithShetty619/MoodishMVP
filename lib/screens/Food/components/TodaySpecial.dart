@@ -10,11 +10,10 @@ import 'package:moodish_mvp/test.dart';
 class TodaySpecial extends StatefulWidget {
   const TodaySpecial({
     Key key,
-     this.foodList,
-
+    this.foodList,
   }) : super(key: key);
 
-  final FoodListModel foodList ;
+  final FoodListModel foodList;
 
   @override
   _TodaySpecialState createState() => _TodaySpecialState();
@@ -28,7 +27,14 @@ class _TodaySpecialState extends State<TodaySpecial> {
     return AspectRatio(
       aspectRatio: 0.9 / 1.2,
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Food_Info(
+                        foodList: widget.foodList,
+                      )));
+        },
         //     child: FutureBuilder<String>(
         //       future: Storage().getUrl(widget.image),
         //       initialData: null,
@@ -144,7 +150,7 @@ class _TodaySpecialState extends State<TodaySpecial> {
               imageUrl: widget.foodList.images,
               imageBuilder: (context, imageProvider) {
                 return Container(
-                  margin: EdgeInsets.only(right: 10,left: 10.0),
+                  margin: EdgeInsets.only(right: 10, left: 10.0),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       image: DecorationImage(
@@ -155,7 +161,7 @@ class _TodaySpecialState extends State<TodaySpecial> {
               },
             ),
             Container(
-              margin: EdgeInsets.only(right: 10,left: 10),
+              margin: EdgeInsets.only(right: 10, left: 10),
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
@@ -269,8 +275,8 @@ class _TodaySpecialState extends State<TodaySpecial> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => Food_Info(
-                                            foodList: widget.foodList,
-                                          )));
+                                                foodList: widget.foodList,
+                                              )));
                                 },
                                 child: Text(
                                   "Let's cook!",

@@ -75,17 +75,19 @@ class _PageViewer1State extends State<PageViewer1> {
                           //   border: Border.all(color: Colors.black)
 
                           // ),
-                          child: Container(
-                            margin: EdgeInsets.only(
-                                left: 20.0,
-                                right: 20.0,
-                                top: 0.0,
-                                bottom: 80.0),
-                            child: Text(
-                              "${widget.foodList.preparation[index]}",
-                              style: TextStyle(
-                                fontSize: 22,
-                                fontStyle: FontStyle.italic,
+                          child: SingleChildScrollView(
+                            child: Container(
+                              margin: EdgeInsets.only(
+                                  left: 20.0,
+                                  right: 20.0,
+                                  top: 0.0,
+                                  bottom: 80.0),
+                              child: Text(
+                                "${widget.foodList.preparation[index]}",
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  fontStyle: FontStyle.italic,
+                                ),
                               ),
                             ),
                           ),
@@ -117,7 +119,7 @@ class _PageViewer1State extends State<PageViewer1> {
                         ),
                       if (index + 1 < widget.foodList.preparation.length)
                         Text(
-                          'Swipe Left for next Step',
+                          'Page ${index +1} of ${widget.foodList.preparation.length} ',
                           style:
                               TextStyle(color: Colors.grey[400], fontSize: 18),
                         ),
