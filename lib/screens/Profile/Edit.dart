@@ -312,15 +312,15 @@ class _EditProfileState extends State<EditProfile> {
                           keyboardType: TextInputType.number,
                           onChanged: (val) {
                              setState(() {
-                               _user['PhoneNo.']=val.toString();
+                               _user['Phoneno.']=val.toString();
                              }); 
                             userData1.editUserData(
-                                field: 'Phoneno.', value:  _user['PhoneNo.']);
+                                field: 'Phoneno.', value:  _user['Phoneno.']);
                           },
                           decoration: InputDecoration(
                             icon: Icon(Icons.edit),
                             labelText: 'Edit',
-                            hintText: _user['PhoneNo.'] ?? '( none )',
+                            hintText: _user['Phoneno.'] ?? '( none )',
                           ),
                         ),
                         buttons: [
@@ -348,7 +348,7 @@ class _EditProfileState extends State<EditProfile> {
                       ),
                       Flexible(
                         child: Text(
-                          _user['PhoneNo.'] ?? '( none )',
+                          _user['Phoneno.'] ?? '( none )',
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(fontSize: 20.0),
                         ),

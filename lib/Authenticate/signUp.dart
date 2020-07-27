@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:moodish_mvp/Authenticate/loading.dart';
 import 'package:moodish_mvp/Services/authenticate.dart';
 import 'package:moodish_mvp/models/name.dart';
@@ -26,11 +27,13 @@ class _SignUpState extends State<SignUp> {
   String _name = '';
   final Authenticate _auth = Authenticate();
   bool loading = false;
+  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
+
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return loading ? Loading() : SafeArea(
+    return SafeArea(
         child : Scaffold(
             resizeToAvoidBottomPadding: false,
             resizeToAvoidBottomInset: true,
@@ -190,7 +193,7 @@ class _SignUpState extends State<SignUp> {
                                     onPressed: () async{
                                       if(_formKey.currentState.validate()){
                                         Authenticate(name: _name);
-                                        setState(() => loading = true);
+                                        _handleSubmit(context);
                                         dynamic result = await _auth.newRegister(_email,_name ,_password);
                                         if(result == null){
                                           setState(() => error = 'Email or Password is wrong!');
@@ -199,7 +202,7 @@ class _SignUpState extends State<SignUp> {
                                           {setState(()=> err = 'Please Accept the Terms and Conditions!');
                                             showDialog(
                                                 context: context,
-                                                builder: (BuildContext idcontext) {
+                                                builder: (BuildContext context) {
                                                   return Dialog(
                                                     shape: RoundedRectangleBorder(
                                                       borderRadius: BorderRadius.circular(10.0),
@@ -278,6 +281,15 @@ class _SignUpState extends State<SignUp> {
         )
     );
   }
+  Future<void> _handleSubmit(BuildContext context) async {
+    try {
+      Dialogs.showLoadingDialog(context, _keyLoader);//invoking login
+      await _auth.newRegister(_email,_name ,_password);
+      Navigator.of(_keyLoader.currentContext,rootNavigator: true).pop();//close the dialog
+    } catch (error) {
+      print(error);
+    }
+  }
 }
 
 
@@ -294,4 +306,37 @@ Widget getImageAsset() {
     child: image,
     padding: EdgeInsets.only(top: 50.0, bottom: 25.0),
   );
+}
+
+class Dialogs {
+  static Future<void> showLoadingDialog(
+      BuildContext context, GlobalKey key) async {
+    return showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return new WillPopScope(
+              onWillPop: () async => false,
+              child: SimpleDialog(
+                  key: key,
+                  children: <Widget>[
+                    Center(
+                      child: Column(children: [
+                        Text(
+                          'Wait a Moment...',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 20,),
+                        SpinKitHourGlass(
+                          color: Colors.blueAccent,
+                          size: 50.0,
+                        ),
+                      ]),
+                    )
+                  ]));
+        });
+  }
 }

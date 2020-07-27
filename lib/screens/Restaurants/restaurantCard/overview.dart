@@ -57,7 +57,7 @@ class _OverViewState extends State<OverView> {
                                 child: Tab(
                                     icon: Icon(
                                       Icons.call,
-                                      size: 70.0,
+                                      size: 50.0,
                                     ),
                                     child: Text("Phone"))),
                             SizedBox(
@@ -119,7 +119,7 @@ class _OverViewState extends State<OverView> {
                                 child: Tab(
                                     icon: Icon(
                                       Icons.local_offer,
-                                      size: 70.0,
+                                      size: 50.0,
                                     ),
                                     child: Text("Offers"))),
                             SizedBox(
@@ -156,7 +156,7 @@ class _OverViewState extends State<OverView> {
                                 child: Tab(
                                     icon: Icon(
                                       Icons.restaurant_menu,
-                                      size: 70.0,
+                                      size: 50.0,
                                     ),
                                     child: Text("Menu"))),
                             SizedBox(
@@ -182,7 +182,7 @@ class _OverViewState extends State<OverView> {
                                 child: Tab(
                                   icon: Icon(
                                     Icons.share,
-                                    size: 70.0,
+                                    size: 50.0,
                                   ),
                                   child: Text("Share"),
                                 )),
@@ -228,7 +228,7 @@ class _OverViewState extends State<OverView> {
                                     child: Text(
                                       'Read Me',
                                       style: TextStyle(
-                                        fontSize: 30,
+                                        fontSize: 24,
                                         fontWeight: FontWeight.w700,
                                         color: Colors.black,
                                       ),

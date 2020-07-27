@@ -128,6 +128,7 @@ class _RestaurantState extends State<Restaurant> {
     getCurrentLocation();
 }
   getCurrentLocation() async {
+    geolocator.isLocationServiceEnabled();
     final position = await Geolocator()
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
         .then((Position position) {
