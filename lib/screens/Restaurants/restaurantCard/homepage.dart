@@ -91,15 +91,27 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Align(
                       alignment: Alignment.topLeft,
-                      child: IconButton(
-                          icon: Icon(
-                            Icons.arrow_back,
-                            size: 40,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
                             color: Colors.white,
+                            borderRadius: BorderRadius.circular(45),
                           ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          }),
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: IconButton(
+                                icon: Icon(
+                                  Icons.arrow_back,
+                                  size: 30,
+                                  color: Colors.black,
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                }),
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),

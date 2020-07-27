@@ -128,6 +128,7 @@ class _RestaurantState extends State<Restaurant> {
     getCurrentLocation();
 }
   getCurrentLocation() async {
+    geolocator.isLocationServiceEnabled();
     final position = await Geolocator()
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
         .then((Position position) {
@@ -394,7 +395,7 @@ class _RestaurantState extends State<Restaurant> {
                     text: TextSpan(
                       text: 'Categories',
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 26,
                         fontWeight: FontWeight.bold,
                         color: Colors.black
                       ),

@@ -50,7 +50,7 @@ class _ExploreState extends State<Explore> {
     if (!_getFoodCalled) {
       checkDate().then((check) {
         _dqtsp.getFood(
-            field: ['cuisine'], value: ['indian'], check: check).then((future) {
+            field: ['cuisine'], value: ['indian'], check: 0).then((future) {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "tsp"));
         });
         _dqtaste0.getFood(
