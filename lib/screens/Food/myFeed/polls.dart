@@ -12,15 +12,20 @@ class PollTabs extends StatefulWidget {
   _PollTabsState createState() => _PollTabsState();
 }
 
-class _PollTabsState extends State<PollTabs> {
+class _PollTabsState extends State<PollTabs> with AutomaticKeepAliveClientMixin {
   @override
+  bool keepAlive = false;
   Widget build(BuildContext context) {
+    keepAlive=true;
+    updateKeepAlive();
     /* used to get polls from the database */
     return FutureBuilder<List<PollsModel>>(
       future: DatabaseQuery().getPoll(),
       initialData: [],
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
+          keepAlive=true;
+          updateKeepAlive();
           List<PollsModel> _pollList = snapshot.data;
           return 
           ListView.builder(
@@ -33,6 +38,8 @@ class _PollTabsState extends State<PollTabs> {
             },
           );
         } else {
+          keepAlive = false;
+          updateKeepAlive();
           return Center(
             child: SpinKitFadingCircle(
               color: Colors.blueAccent,
@@ -43,6 +50,10 @@ class _PollTabsState extends State<PollTabs> {
       },
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => keepAlive;
 }
 
 class This_ThatTabs extends StatefulWidget {
