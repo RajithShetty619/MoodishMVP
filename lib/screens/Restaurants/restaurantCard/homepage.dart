@@ -7,7 +7,14 @@ class HomePage extends StatefulWidget {
   final String imgName2;
   final String restName;
   final String desc;
-  HomePage({Key key,this.imgName,this.imgName1,this.imgName2,this.restName,this.desc}) : super(key: key);
+  HomePage(
+      {Key key,
+      this.imgName,
+      this.imgName1,
+      this.imgName2,
+      this.restName,
+      this.desc})
+      : super(key: key);
   _HomePageState createState() => _HomePageState();
 }
 
@@ -31,58 +38,61 @@ class _HomePageState extends State<HomePage> {
                         children: <Widget>[
                           Container(
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(bottomRight: Radius.circular(30),bottomLeft: Radius.circular(30)),
+                                borderRadius: BorderRadius.only(
+                                    bottomRight: Radius.circular(30),
+                                    bottomLeft: Radius.circular(30)),
                                 image: DecorationImage(
-                                    image: AssetImage('assets/${widget.imgName}'),
-                                    fit: BoxFit.cover
-                                )
-                            ),
+                                    image:
+                                        AssetImage('assets/${widget.imgName}'),
+                                    fit: BoxFit.cover)),
                             child: Padding(
                               padding: EdgeInsets.all(10),
                               child: Align(
                                 alignment: Alignment.bottomRight,
-                                child: Text('1 of 3',
-                                style: TextStyle(
-                                  color: Colors.white
-                                ),),
+                                child: Text(
+                                  '1 of 3',
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                             ),
                           ),
                           Container(
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(bottomRight: Radius.circular(30),bottomLeft: Radius.circular(30)),
+                                borderRadius: BorderRadius.only(
+                                    bottomRight: Radius.circular(30),
+                                    bottomLeft: Radius.circular(30)),
                                 image: DecorationImage(
-                                    image: AssetImage('assets/${widget.imgName1}'),
-                                    fit: BoxFit.cover
-                                )
-                            ),
+                                    image:
+                                        AssetImage('assets/${widget.imgName1}'),
+                                    fit: BoxFit.cover)),
                             child: Padding(
                               padding: EdgeInsets.all(10),
                               child: Align(
                                 alignment: Alignment.bottomRight,
-                                child: Text('2 of 3',
-                                  style: TextStyle(
-                                      color: Colors.white
-                                  ),),
+                                child: Text(
+                                  '2 of 3',
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                             ),
                           ),
                           Container(
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(bottomRight: Radius.circular(30),bottomLeft: Radius.circular(30)),
+                                borderRadius: BorderRadius.only(
+                                    bottomRight: Radius.circular(30),
+                                    bottomLeft: Radius.circular(30)),
                                 image: DecorationImage(
-                                    image: AssetImage('assets/${widget.imgName2}'),
-                                    fit: BoxFit.cover
-                                )
-                            ),
+                                    image:
+                                        AssetImage('assets/${widget.imgName2}'),
+                                    fit: BoxFit.cover)),
                             child: Padding(
                               padding: EdgeInsets.all(10),
                               child: Align(
                                 alignment: Alignment.bottomRight,
-                                child: Text('3 of 3',
-                                  style: TextStyle(
-                                      color: Colors.white
-                                  ),),
+                                child: Text(
+                                  '3 of 3',
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                             ),
                           )
@@ -122,7 +132,10 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                       child: TabBarView(
                         children: <Widget>[
-                          HomeTopTabs(colorVal: 0xffff5722,desc: widget.desc,), //ff5722
+                          HomeTopTabs(
+                            colorVal: 0xffff5722,
+                            desc: widget.desc,
+                          ), //ff5722
                         ],
                       ),
                     ),

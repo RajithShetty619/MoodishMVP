@@ -88,7 +88,7 @@ class _FoodFeedState extends State<FoodFeed> {
     DateTime now = DateTime.now();
     String date = DateFormat('EEE, M/d/y').format(now);
     if (date == saveDate) {
-      return 0;
+      return 1;
     } else {
       _box.put("date", date);
       return 0;
@@ -166,7 +166,7 @@ class _FoodFeedState extends State<FoodFeed> {
                                 height: 200.0,
                                 width: 160.0,
                                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(10),
                     gradient:
                         LinearGradient(begin: Alignment.bottomCenter, stops: [
                       .1,
