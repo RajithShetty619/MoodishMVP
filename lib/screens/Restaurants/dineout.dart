@@ -13,43 +13,43 @@ class _DineOutState extends State<DineOut> {
         image1: 'blackolive1.png',
         image2: 'blackolive2.png',
         name: 'Black Olive',
-        desc: 'Italian, Continental, Fast Food, Health Food \nVeera Desai, Andheri West'),
+        desc: '\u27A4 Italian, Continental, Fast Food, Health Food \n\u2691 Veera Desai, Andheri West'),
     _Restaurants(
         image: 'chaipecharcha.png',
         image1: 'chaipecharcha1.png',
         image2: 'chaipecharcha2.png',
         name: 'Chai pe Charcha',
-        desc:'North Indian ,Street Food ,Pure Vegetarian ,Breakfast ,Fast Food \nPrabhadevi, Mumbai '),
+        desc:'\u27A4 North Indian ,Street Food ,Pure Vegetarian ,Breakfast ,Fast Food \n\u2691 Prabhadevi, Mumbai '),
     _Restaurants(
         image: 'dominos.png',
         image1: 'dominos1.png',
         image2: 'dominos2.png',
         name: 'Dominos',
-        desc:'Italian ,Fast Food ,Breakfast \nChakala-andheri East, Mumbai\n'),
+        desc:'\u27A4 Italian ,Fast Food ,Breakfast \n\u2691 Chakala-andheri East, Mumbai'),
     _Restaurants(
         image: 'jimmys.png',
         image1: 'jimmys1.png',
         image2: 'jimmys2.png',
         name: 'Jimmy\'s',
-        desc: 'American ,Fast Food \nNagar-malad West, Mumbai'),
+        desc: '\u27A4 American ,Fast Food \n\u2691 Nagar-malad West, Mumbai'),
     _Restaurants(
         image: 'bayview.png',
         image1: 'bayview1.png',
         image2: 'bayview2.png',
         name: 'Bay View',
-        desc:'Chinese ,Mughlai ,North Indian ,Indian ,Tandoori ,American \nColaba, Mumba'),
+        desc:'\u27A4 Chinese ,Mughlai ,North Indian ,Indian ,Tandoori ,American \n\u2691 Colaba, Mumba'),
     _Restaurants(
         image: 'pizzaah.png',
         image1: 'pizzaah1.png',
         image2: 'pizzaah.png',
         name: 'PizzAah! District',
-        desc:'Italian ,Fast Food \nKandivali West, Mumbai'),
+        desc:'\u27A4 Italian ,Fast Food \n\u2691 Kandivali West, Mumbai'),
     _Restaurants(
         image: 'thambbi.png',
         image1: 'thambbi1.png',
         image2: 'thambbi2.png',
         name: 'Thambbi',
-        desc:'Pure Vegetarian ,Punjabi ,South Indian ,North Indian ,Indian ,Breakfast \nKurla West, Mumbai '),
+        desc:'\u27A4 Pure Vegetarian ,Punjabi ,South Indian ,North Indian ,Indian ,Breakfast \n\u2691 Kurla West, Mumbai '),
 
   ];
 

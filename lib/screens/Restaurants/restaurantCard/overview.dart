@@ -215,7 +215,7 @@ class _OverViewState extends State<OverView> {
                           SizedBox(height: 5),
                           Padding(
                               padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
-                              child: Text(widget.desc)),
+                              child: Container(alignment:Alignment.centerLeft,child: Text(widget.desc))),
                           SizedBox(height: 5.0),
                           Padding(
                             padding: EdgeInsets.fromLTRB(0, 20, 10, 10),
