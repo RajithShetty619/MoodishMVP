@@ -5,7 +5,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
-import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart';
+import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
 import 'package:moodish_mvp/screens/Food/components/Every_Situation.dart';
 import 'package:moodish_mvp/screens/Food/components/Every_Taste.dart';
 import 'package:moodish_mvp/screens/Food/components/Food_Situation.dart';
@@ -110,7 +110,7 @@ class _ExploreState extends State<Explore> {
     DateTime now = DateTime.now();
     String date = DateFormat('EEE, M/d/y').format(now);
     if (date == saveDate) {
-      return 1 ; //change to zero for testing purpose
+      return 0 ; //change to zero for testing purpose
     } else {
       _box.put("date", date);
       return 0;
@@ -265,13 +265,16 @@ class _ExploreState extends State<Explore> {
                                                             });
                                                           }),
                                                     )
-                                                  : Center(
-                                                      child:
-                                                          SpinKitFadingCircle(
-                                                              color: Colors
-                                                                  .blue[300],
-                                                              size: 30.0),
-                                                    );
+                                                  : Container(
+                                                    width: 50,
+                                                    child: Center(
+                                                        child:
+                                                            SpinKitFadingCircle(
+                                                                color: Colors
+                                                                    .blue[300],
+                                                                size: 30.0),
+                                                      ),
+                                                  );
                                             }
                                           },
                                         ),

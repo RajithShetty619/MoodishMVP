@@ -8,13 +8,13 @@ part of 'foodListModel.dart';
 
 class FoodListModelAdapter extends TypeAdapter<FoodListModel> {
   @override
-  final typeId = 0;
+  final int typeId = 0;
 
   @override
   FoodListModel read(BinaryReader reader) {
-    var numOfFields = reader.readByte();
-    var fields = <int, dynamic>{
-      for (var i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return FoodListModel(
       foodName: fields[0] as String,
@@ -94,4 +94,14 @@ class FoodListModelAdapter extends TypeAdapter<FoodListModel> {
       ..writeByte(22)
       ..write(obj.like);
   }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FoodListModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }

@@ -15,7 +15,7 @@ import 'package:moodish_mvp/screens/Food/myFeed/all.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/foodft.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/polls.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/recipe.dart';
-import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart';
+import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
 
 import 'package:intl/intl.dart';
 import 'package:moodish_mvp/screens/Restaurants/mood.dart';
@@ -88,7 +88,7 @@ class _FoodFeedState extends State<FoodFeed> {
     DateTime now = DateTime.now();
     String date = DateFormat('EEE, M/d/y').format(now);
     if (date == saveDate) {
-      return 1;
+      return 0;
     } else {
       _box.put("date", date);
       return 0;
@@ -424,17 +424,15 @@ class _FoodFeedState extends State<FoodFeed> {
                         if(indx == 2)
                        Column(
                       children: <Widget>[
-                        // Container(
+                        Container(child: PollTabs()),
+                        // if (numbr == 0)
+                        //   Container( child: YesNoTabs()),
+                        // if (numbr == 1)
+                        //   Container(
                         //   child:  PollTabs()
                         //   ),
-                        if (numbr == 0)
-                          Container( child: YesNoTabs()),
-                        if (numbr == 1)
-                          Container(
-                          child:  PollTabs()
-                          ),
-                        if (numbr == 2)
-                          Container( child: This_ThatTabs()),
+                        // if (numbr == 2)
+                        //   Container( child: This_ThatTabs()),
                       ],
                     ),
                     if(indx == 3)

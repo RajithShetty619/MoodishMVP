@@ -1,59 +1,86 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/pollsModel.dart';
 import 'package:moodish_mvp/models/this_thatModel.dart';
 import 'package:moodish_mvp/models/yesNo.dart';
+import 'package:moodish_mvp/screens/Food/blocs/pollsbloc/pollsBloc.dart';
+import 'package:moodish_mvp/screens/Food/events/pollsEvent.dart';
 import 'package:polls/polls.dart';
+
+import 'package:intl/intl.dart';
 
 class PollTabs extends StatefulWidget {
   @override
   _PollTabsState createState() => _PollTabsState();
 }
 
-class _PollTabsState extends State<PollTabs> with AutomaticKeepAliveClientMixin {
+class _PollTabsState extends State<PollTabs> {
+
+DatabaseQuery _dqpoll = DatabaseQuery(listName: 'p');
+
+@override
+  void initState() {
+    super.initState();
+    _dqpoll.getPoll().then((poll) {
+    BlocProvider.of<PollBloc>(context).add(PollEvent.add(poll, 'p'));
+    
+    });
+  }
+  //  Future<int> checkDate() async {
+  //   Box _box = await Hive.openBox("date");
+  //   String saveDate = await _box.get("date");
+  //   DateTime now = DateTime.now();
+  //   String date = DateFormat('EEE, M/d/y').format(now);
+  //   if (date == saveDate) {
+  //     return 0 ; //change to zero for testing purpose
+  //   } else {
+  //     _box.put("date", date);
+  //     return 0;
+  //   }
+  // }
+
   @override
-  bool keepAlive = false;
   Widget build(BuildContext context) {
-    keepAlive=true;
-    updateKeepAlive();
     /* used to get polls from the database */
-    return FutureBuilder<List<PollsModel>>(
-      future: DatabaseQuery().getPoll(),
-      initialData: [],
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          keepAlive=true;
-          updateKeepAlive();
-          List<PollsModel> _pollList = snapshot.data;
-          return 
-          ListView.builder(
-            shrinkWrap: true,
-            primary: false,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: _pollList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return GetListView1(poll: _pollList[index]);
-            },
-          );
-        } else {
-          keepAlive = false;
-          updateKeepAlive();
-          return Center(
-            child: SpinKitFadingCircle(
-              color: Colors.blueAccent,
-              size: 40,
-            ),
-          );
-        }
+    return BlocConsumer<PollBloc, Map<String, List<PollsModel>>>(
+      buildWhen: (Map<String, List<PollsModel>> previous,
+          Map<String, List<PollsModel>> current) {
+        return true;
+      },
+      listenWhen: (Map<String, List<PollsModel>> previous,
+          Map<String, List<PollsModel>> current) {
+        // if (current.length > previous.length) {
+        //   return true;
+        // }
+        return true;
+      },
+      builder: (BuildContext context, pollList) {
+        print(pollList['p'].length);
+        print('####################');
+       
+              return ListView.builder(
+                shrinkWrap: true,
+                primary: false,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: pollList['p'].length,
+                itemBuilder: (BuildContext context, index) {
+                  return GetListView1(poll: pollList['p'][index]);
+                },
+              );
+            
+          
+      },
+      listener: (context, pollList) {
+        Scaffold.of(context).showSnackBar(
+          SnackBar(content: Text('Added!')),
+        );
       },
     );
   }
-
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => keepAlive;
 }
 
 class This_ThatTabs extends StatefulWidget {
@@ -140,7 +167,12 @@ class _YesNoListState extends State<YesNoList> {
   int _index;
   bool _pressed = false;
   YesNoModel _yes;
-   Map usersWhoVoted = {'sam@mail.com': 3, 'mike@mail.com' : 4, 'john@mail.com' : 1, 'kenny@mail.com' : 1};
+  Map usersWhoVoted = {
+    'sam@mail.com': 3,
+    'mike@mail.com': 4,
+    'john@mail.com': 1,
+    'kenny@mail.com': 1
+  };
 
   @override
   void initState() {
@@ -153,44 +185,47 @@ class _YesNoListState extends State<YesNoList> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Polls(
-            children: [
-              // This cannot be less than 2, else will throw an exception
-              Polls.options(title:'Yes' , value: (_yes.yes *1.0) ),
-              Polls.options(title: 'No', value:(_yes.no *1.0) ),
-            ], question: Text(widget.yesno.Questions ?? '',style: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 18.0
-            ),),
-            currentUser: 'you',
-            creatorID: 'snapinsight',
-            voteData:  usersWhoVoted,
-            userChoice: usersWhoVoted['you'],
-            onVoteBackgroundColor: Colors.blue,
-            leadingBackgroundColor: Colors.blue,
-            backgroundColor: Colors.white,
-            onVote: (choice) async{
-              setState(() {
-                this.usersWhoVoted['you'] = choice;
-              });
-              print(choice);
-              if (choice == 1)  {
-                setState(() {
-                 _yes.yes += 1;
-                });
-                 await DatabaseService().likeTransction(collection: 'yesorno',sr_no: _yes.sr_no, field: 'yes');
-              }
-              if (choice == 2) {
-                setState(() {
-                  _yes.no += 1;
-                });
-                 await DatabaseService().likeTransction(collection: 'yesorno',sr_no: _yes.sr_no, field: 'no');
-              }
-             
-            },
+      child: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Polls(
+          children: [
+            // This cannot be less than 2, else will throw an exception
+            Polls.options(title: 'Yes', value: (_yes.yes * 1.0)),
+            Polls.options(title: 'No', value: (_yes.no * 1.0)),
+          ],
+          question: Text(
+            widget.yesno.Questions ?? '',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
           ),
+          currentUser: 'you',
+          creatorID: 'snapinsight',
+          voteData: usersWhoVoted,
+          userChoice: usersWhoVoted['you'],
+          onVoteBackgroundColor: Colors.blue,
+          leadingBackgroundColor: Colors.blue,
+          backgroundColor: Colors.white,
+          onVote: (choice) async {
+            setState(() {
+              this.usersWhoVoted['you'] = choice;
+            });
+            print(choice);
+            if (choice == 1) {
+              setState(() {
+                _yes.yes += 1;
+              });
+              await DatabaseService().likeTransction(
+                  collection: 'yesorno', sr_no: _yes.sr_no, field: 'yes');
+            }
+            if (choice == 2) {
+              setState(() {
+                _yes.no += 1;
+              });
+              await DatabaseService().likeTransction(
+                  collection: 'yesorno', sr_no: _yes.sr_no, field: 'no');
+            }
+          },
         ),
+      ),
     );
     // return Card(
     //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35.0)),
@@ -218,7 +253,7 @@ class _YesNoListState extends State<YesNoList> {
     //               _pressed = true;
     //             });
     //             await DatabaseService().likeTransction(collection: 'yesorno',sr_no: _yes.sr_no, field: 'yes');
-                
+
     //           }
     //         },
     //         child: Padding(
@@ -266,8 +301,7 @@ class _YesNoListState extends State<YesNoList> {
     //             });
     //             await DatabaseService().likeTransction(
     //                 collection: 'yesorno', sr_no: _yes.sr_no, field: 'no');
-                
-                
+
     //           }
     //         },
     //         child: Padding(
@@ -327,7 +361,12 @@ class _GetListViewState extends State<GetListView> {
   int _index;
   bool thispressed = false;
   This_thatModel _thisT;
-   Map usersWhoVoted = {'sam@mail.com': 3, 'mike@mail.com' : 4, 'john@mail.com' : 1, 'kenny@mail.com' : 1};
+  Map usersWhoVoted = {
+    'sam@mail.com': 3,
+    'mike@mail.com': 4,
+    'john@mail.com': 1,
+    'kenny@mail.com': 1
+  };
   @override
   void initState() {
     setState(() {
@@ -339,131 +378,132 @@ class _GetListViewState extends State<GetListView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Polls(
-            children: [
-              // This cannot be less than 2, else will throw an exception
-              Polls.options(title:_thisT.A ?? '' , value: (_thisT.aLike *1.0) ),
-              Polls.options(title: _thisT.B ?? '', value:(_thisT.bLike *1.0) ),
-            ], question: Text('Which one would You prefer?',style: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 18.0
-            ),),
-            currentUser: 'you',
-            creatorID: 'snapinsight',
-            voteData:  usersWhoVoted,
-            userChoice: usersWhoVoted['you'],
-            onVoteBackgroundColor: Colors.blue,
-            leadingBackgroundColor: Colors.blue,
-            backgroundColor: Colors.white,
-            onVote: (choice) async{
-              setState(() {
-                this.usersWhoVoted['you'] = choice;
-              });
-              print(choice);
-              if (choice == 1)  {
-                setState(() {
-                  _thisT.aLike+= 1;
-                });
-                 await DatabaseService().likeTransction(collection: 'this_that',sr_no: _thisT.sr_no, field: 'aLike');
-              }
-              if (choice == 2) {
-                setState(() {
-                  _thisT.bLike+= 1;
-                });
-                 await DatabaseService().likeTransction(collection: 'this_that',sr_no: _thisT.sr_no, field: 'bLike');
-              }
-             
-            },
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Polls(
+          children: [
+            // This cannot be less than 2, else will throw an exception
+            Polls.options(title: _thisT.A ?? '', value: (_thisT.aLike * 1.0)),
+            Polls.options(title: _thisT.B ?? '', value: (_thisT.bLike * 1.0)),
+          ],
+          question: Text(
+            'Which one would You prefer?',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
           ),
+          currentUser: 'you',
+          creatorID: 'snapinsight',
+          voteData: usersWhoVoted,
+          userChoice: usersWhoVoted['you'],
+          onVoteBackgroundColor: Colors.blue,
+          leadingBackgroundColor: Colors.blue,
+          backgroundColor: Colors.white,
+          onVote: (choice) async {
+            setState(() {
+              this.usersWhoVoted['you'] = choice;
+            });
+            print(choice);
+            if (choice == 1) {
+              setState(() {
+                _thisT.aLike += 1;
+              });
+              await DatabaseService().likeTransction(
+                  collection: 'this_that', sr_no: _thisT.sr_no, field: 'aLike');
+            }
+            if (choice == 2) {
+              setState(() {
+                _thisT.bLike += 1;
+              });
+              await DatabaseService().likeTransction(
+                  collection: 'this_that', sr_no: _thisT.sr_no, field: 'bLike');
+            }
+          },
         ),
-        //  Column(
-        //   children: <Widget>[
-        //     SizedBox(
-        //       height: 8.0,
-        //     ),
-        //     Padding(
-        //       padding: const EdgeInsets.all(8.0),
-        //       child: Container(
-        //         alignment: Alignment.center,
-        //         child: Text(
-        //           'Which one would You prefer?',
-        //           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-        //         ),
-        //       ),
-        //     ),
-        //     GestureDetector(
-        //       onTap: () async {
-        //         if (!thispressed) {
-        //           setState(() {
-        //             _index = 1;
-        //             ++_thisT.aLike;
-        //             thispressed = true;
-        //           });
-        //           await DatabaseService().likeTransction(collection: 'this_that',sr_no: _thisT.sr_no, field: 'aLike');
-                 
-        //         }
-        //       },
-        //       child: Padding(
-        //         padding: const EdgeInsets.all(10.0),
-        //         child: Container(
-        //           width: double.maxFinite,
-        //           decoration: BoxDecoration(
-        //             borderRadius: BorderRadius.circular(20.0),
-        //             border: Border.all(
-        //                 color: _index == 1 ? Colors.blueAccent : Colors.black12),
-        //             color: Colors.grey[200],
-        //           ),
-        //           child: Center(
-        //             child: Padding(
-        //               padding: EdgeInsets.all(5.0),
-        //               child: Text(
-        //                 (_thisT.A ?? '') + " ${_thisT.aLike}",
-        //                 style: TextStyle(fontSize: 22.0),
-        //               ),
-        //             ),
-        //           ),
-        //         ),
-        //       ),
-        //     ),
-        //     GestureDetector(
-        //       onTap: () async {
-        //         if (!thispressed) {
-        //           setState(() {
-        //             _index = 2;
-        //             thispressed = true;
-        //             ++_thisT.bLike;
-        //           });
-        //           await DatabaseService().likeTransction(collection: 'this_that',sr_no: _thisT.sr_no, field: 'bLike');
-                
-        //         }
-        //       },
-        //       child: Padding(
-        //         padding: const EdgeInsets.all(10.0),
-        //         child: Container(
-        //           width: double.maxFinite,
-        //           decoration: BoxDecoration(
-        //             borderRadius: BorderRadius.circular(20.0),
-        //             border: Border.all(
-        //                 color: _index == 2 ? Colors.blueAccent : Colors.black12),
-        //             color: Colors.grey[200],
-        //           ),
-        //           child: Center(
-        //             child: Padding(
-        //               padding: EdgeInsets.all(5.0),
-        //               child: Text(
-        //                 (_thisT.B ?? '') + " ${_thisT.bLike}",
-        //                 style: TextStyle(fontSize: 22.0),
-        //               ),
-        //             ),
-        //           ),
-        //         ),
-        //       ),
-        //     ),
-        //   ],
-        // ),
-     
+      ),
+      //  Column(
+      //   children: <Widget>[
+      //     SizedBox(
+      //       height: 8.0,
+      //     ),
+      //     Padding(
+      //       padding: const EdgeInsets.all(8.0),
+      //       child: Container(
+      //         alignment: Alignment.center,
+      //         child: Text(
+      //           'Which one would You prefer?',
+      //           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+      //         ),
+      //       ),
+      //     ),
+      //     GestureDetector(
+      //       onTap: () async {
+      //         if (!thispressed) {
+      //           setState(() {
+      //             _index = 1;
+      //             ++_thisT.aLike;
+      //             thispressed = true;
+      //           });
+      //           await DatabaseService().likeTransction(collection: 'this_that',sr_no: _thisT.sr_no, field: 'aLike');
+
+      //         }
+      //       },
+      //       child: Padding(
+      //         padding: const EdgeInsets.all(10.0),
+      //         child: Container(
+      //           width: double.maxFinite,
+      //           decoration: BoxDecoration(
+      //             borderRadius: BorderRadius.circular(20.0),
+      //             border: Border.all(
+      //                 color: _index == 1 ? Colors.blueAccent : Colors.black12),
+      //             color: Colors.grey[200],
+      //           ),
+      //           child: Center(
+      //             child: Padding(
+      //               padding: EdgeInsets.all(5.0),
+      //               child: Text(
+      //                 (_thisT.A ?? '') + " ${_thisT.aLike}",
+      //                 style: TextStyle(fontSize: 22.0),
+      //               ),
+      //             ),
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //     GestureDetector(
+      //       onTap: () async {
+      //         if (!thispressed) {
+      //           setState(() {
+      //             _index = 2;
+      //             thispressed = true;
+      //             ++_thisT.bLike;
+      //           });
+      //           await DatabaseService().likeTransction(collection: 'this_that',sr_no: _thisT.sr_no, field: 'bLike');
+
+      //         }
+      //       },
+      //       child: Padding(
+      //         padding: const EdgeInsets.all(10.0),
+      //         child: Container(
+      //           width: double.maxFinite,
+      //           decoration: BoxDecoration(
+      //             borderRadius: BorderRadius.circular(20.0),
+      //             border: Border.all(
+      //                 color: _index == 2 ? Colors.blueAccent : Colors.black12),
+      //             color: Colors.grey[200],
+      //           ),
+      //           child: Center(
+      //             child: Padding(
+      //               padding: EdgeInsets.all(5.0),
+      //               child: Text(
+      //                 (_thisT.B ?? '') + " ${_thisT.bLike}",
+      //                 style: TextStyle(fontSize: 22.0),
+      //               ),
+      //             ),
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //   ],
+      // ),
     );
   }
 }
@@ -484,7 +524,12 @@ class _GetListView1State extends State<GetListView1> {
   int _index;
   bool pollPressed = false;
   PollsModel _poll;
-   Map usersWhoVoted = {'sam@mail.com': 3, 'mike@mail.com' : 4, 'john@mail.com' : 1, 'kenny@mail.com' : 1};
+  Map usersWhoVoted = {
+    'sam@mail.com': 3,
+    'mike@mail.com': 4,
+    'john@mail.com': 1,
+    'kenny@mail.com': 1
+  };
   @override
   void initState() {
     setState(() {
@@ -496,61 +541,63 @@ class _GetListView1State extends State<GetListView1> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Polls(
-            children: [
-              // This cannot be less than 2, else will throw an exception
-              Polls.options(title:_poll.A ?? '' , value: (_poll.aLike*1.0) ),
-              Polls.options(title:_poll.B ?? '' , value: (_poll.bLike*1.0) ),
-              Polls.options(title:_poll.C ?? '' , value: (_poll.cLike*1.0) ),
-              Polls.options(title:_poll.D ?? '' , value: (_poll.dLike*1.0) ),
-            ], question: Text(_poll.question ?? '',style: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 18.0
-            ),),
-            currentUser: 'you',
-            creatorID: 'snapinsight',
-            voteData:  usersWhoVoted,
-            userChoice: usersWhoVoted['you'],
-            onVoteBackgroundColor: Colors.blue,
-            leadingBackgroundColor: Colors.blue,
-            backgroundColor: Colors.white,
-            onVote: (choice) async{
-              setState(() {
-                this.usersWhoVoted['you'] = choice;
-              });
-              print(choice);
-              if (choice == 1)  {
-                setState(() {
-                  _poll.aLike += 1;
-                });
-                 await DatabaseService().likeTransction(
-                    collection: 'polls', sr_no: _poll.sr_no, field: 'aLike');
-              }
-              if (choice == 2) {
-                setState(() {
-                  _poll.bLike += 1;
-                });
-                 await DatabaseService().likeTransction(
-                    collection: 'polls', sr_no: _poll.sr_no, field: 'bLike');
-              }
-              if (choice == 3) {
-                setState(() {
-                  _poll.cLike += 1;
-                });
-                 await DatabaseService().likeTransction(
-                    collection: 'polls', sr_no: _poll.sr_no, field: 'cLike');
-              }
-               if (choice == 4) {
-                setState(() {
-                  _poll.dLike += 1;
-                });
-                await DatabaseService().likeTransction(
-                    collection: 'polls', sr_no: _poll.sr_no, field: 'dLike');
-              }
-            },
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Polls(
+          children: [
+            // This cannot be less than 2, else will throw an exception
+            Polls.options(title: _poll.A ?? '', value: (_poll.aLike * 1.0)),
+            Polls.options(title: _poll.B ?? '', value: (_poll.bLike * 1.0)),
+            Polls.options(title: _poll.C ?? '', value: (_poll.cLike * 1.0)),
+            Polls.options(title: _poll.D ?? '', value: (_poll.dLike * 1.0)),
+          ],
+          question: Text(
+            _poll.question ?? '',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
           ),
+          currentUser: 'you',
+          creatorID: 'snapinsight',
+          voteData: usersWhoVoted,
+          userChoice: usersWhoVoted['you'],
+          onVoteBackgroundColor: Colors.blue,
+          leadingBackgroundColor: Colors.blue,
+          backgroundColor: Colors.white,
+          onVote: (choice) async {
+            setState(() {
+              this.usersWhoVoted['you'] = choice;
+            });
+            print(choice);
+            if (choice == 1) {
+              setState(() {
+                _poll.aLike += 1;
+              });
+              await DatabaseService().likeTransction(
+                  collection: 'polls', sr_no: _poll.sr_no, field: 'aLike');
+            }
+            if (choice == 2) {
+              setState(() {
+                _poll.bLike += 1;
+              });
+              await DatabaseService().likeTransction(
+                  collection: 'polls', sr_no: _poll.sr_no, field: 'bLike');
+            }
+            if (choice == 3) {
+              setState(() {
+                _poll.cLike += 1;
+              });
+              await DatabaseService().likeTransction(
+                  collection: 'polls', sr_no: _poll.sr_no, field: 'cLike');
+            }
+            if (choice == 4) {
+              setState(() {
+                _poll.dLike += 1;
+              });
+              await DatabaseService().likeTransction(
+                  collection: 'polls', sr_no: _poll.sr_no, field: 'dLike');
+            }
+          },
         ),
+      ),
     );
     // return Card(
     //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35.0)),
@@ -579,7 +626,7 @@ class _GetListView1State extends State<GetListView1> {
     //             });
     //             await DatabaseService().likeTransction(
     //                 collection: 'polls', sr_no: _poll.sr_no, field: 'aLike');
-              
+
     //           }
     //         },
     //         child: Padding(
@@ -649,7 +696,7 @@ class _GetListView1State extends State<GetListView1> {
     //             });
     //             await DatabaseService().likeTransction(
     //                 collection: 'polls', sr_no: _poll.sr_no, field: 'cLike');
-                
+
     //           }
     //         },
     //         child: Padding(
@@ -684,7 +731,7 @@ class _GetListView1State extends State<GetListView1> {
     //             });
     //             await DatabaseService().likeTransction(
     //                 collection: 'polls', sr_no: _poll.sr_no, field: 'dLike');
-                
+
     //           }
     //         },
     //         child: Padding(

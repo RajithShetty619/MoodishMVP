@@ -140,7 +140,7 @@ class DatabaseQuery {
   Future<List<PollsModel>> getPoll() async {
     /* retrieving last polls for querying */
     Box _box = await Hive.openBox('polls');
-    dynamic last = _box.get('lastpoll');
+    dynamic last = _box.get(listName);
     /*  */
     Query q = polls
         .where('value', isGreaterThan: '')
@@ -153,9 +153,9 @@ class DatabaseQuery {
     /* saving last poll to be displayed*/
     try {
       String _lastpoll = await _snapshot[_snapshot.length - 1].data['value'];
-      await _box.put('lastpoll', _lastpoll);
+      await _box.put(listName, _lastpoll);
     } catch (e) {
-      await _box.put('lastpoll', null);
+      await _box.put(listName, null);
     }
 
     /* list of polls is made and returned */
@@ -210,7 +210,7 @@ class DatabaseQuery {
 
     Query y = yesorno
         .where('Questions', isGreaterThan: '')
-        .startAfter([null])
+        .startAfter([end])
         .orderBy('Questions')
         .limit(3);
     List<DocumentSnapshot> _snapshot =
