@@ -15,7 +15,7 @@ class Authenticate {
     'email',
     'https://www.googleapis.com/auth/contacts.readonly',
   ]);
-  User _userFromFirebase(FirebaseUser user) {
+  User _userFromFirebase(FirebaseUser user) { 
     return user != null ? User(uid: user.uid) : null;
   }
   Future<String> returnUid() async {
