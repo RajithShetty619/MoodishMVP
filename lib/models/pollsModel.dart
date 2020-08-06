@@ -1,14 +1,29 @@
+import 'package:hive/hive.dart';
+
+part 'pollsModel.g.dart';
+
+@HiveType (typeId: 1)
 class PollsModel {
+  @HiveField(0)
   final String question;
+  @HiveField(1)
   final String A;
+  @HiveField(2)
   final String B;
+  @HiveField(3)
   final String C;
+  @HiveField(4)
   final String D;
+  @HiveField(5)
   final String sr_no;
-  final int aLike;
-  final int bLike;
-  final int cLike;
-  final int dLike;
+  @HiveField(6)
+  int aLike;
+  @HiveField(7)
+  int bLike;
+  @HiveField(8)
+  int cLike;
+  @HiveField(9)
+  int dLike;
 
   PollsModel(
       {this.question,

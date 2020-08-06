@@ -9,14 +9,11 @@ import 'package:moodish_mvp/screens/Food/foodInfo/tabs_info.dart';
 import 'package:moodish_mvp/screens/Restaurants/restaurantCard/homepage.dart';
 
 class Food_Info extends StatefulWidget {
-
-  const Food_Info ({
+  const Food_Info({
     Key key,
     this.foodList,
-
-  }):super (key:key);
-    final FoodListModel foodList;
-  
+  }) : super(key: key);
+  final FoodListModel foodList;
 
   @override
   _Food_InfoState createState() => _Food_InfoState();
@@ -24,7 +21,6 @@ class Food_Info extends StatefulWidget {
 
 class _Food_InfoState extends State<Food_Info> {
   int indx = 0;
-
 
   @override
   Widget build(BuildContext context) {
@@ -66,240 +62,166 @@ class _Food_InfoState extends State<Food_Info> {
     ];
     return Scaffold(
       body: SafeArea(
-        child: ListView.builder(
-          itemCount: rest.length,
-          shrinkWrap: true,
-          // physics: NeverScrollableScrollPhysics(),
-          scrollDirection: Axis.vertical,
-          itemBuilder: (context, index) {
-            return Column(
+        child: ListView(
+          children: <Widget>[
+            Column(
               children: <Widget>[
-                if (index == 0)
-                  Column(
+                CachedNetworkImage(
+                  imageUrl: widget.foodList.images,
+                  imageBuilder: (context, imageprovider) {
+                    return Container(
+                      height: 300.0,
+                      width: double.maxFinite,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(30.0),
+                            bottomRight: Radius.circular(30.0)),
+                        image: DecorationImage(
+                            image: imageprovider, fit: BoxFit.cover),
+                      ),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(45),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: IconButton(
+                                  icon: Icon(
+                                    Icons.arrow_back,
+                                    size: 30,
+                                    color: Colors.black,
+                                  ),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  }),
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                Wrap(
+                  direction: Axis.horizontal,
+                  children: <Widget>[
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          widget.foodList.foodName,
+
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                    )
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: Divider(
+                    thickness: 2.0,
+                  ),
+                ),
+                Row(
+                  children: <Widget>[
+                    f_desc(title: widget.foodList.taste),
+                    f_desc(title: widget.foodList.meal_type),
+                    f_desc(title: widget.foodList.deter),
+                    SizedBox(
+                      width: 5.0,
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      widget.foodList.cuisine,
+                      style: TextStyle(fontSize: 18.0),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      CachedNetworkImage(
-                        imageUrl: widget.foodList.images,
-                        imageBuilder: (context, imageprovider){
-                          return  Container(
-                          height: 300.0,
-                          width: double.maxFinite,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(30.0),
-                                bottomRight: Radius.circular(30.0)),
-                            image: DecorationImage(
-                                image: imageprovider,
-                                fit: BoxFit.cover),
-                          ),
-                          child: Align(
-                            alignment: Alignment.topLeft,
-                            child: IconButton(
-                                icon: Icon(
-                                  Icons.arrow_back,
-                                  size: 40,
-                                  color: Colors.white,
-                                ),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                }),
-                          ),
-                        );
+                      GestureDetector(
+                        child: PageTab(
+                          title: 'About',
+                          // isActive: true,
+                          index: indx,
+                          stIndex: 0,
+                          press: () {},
+                        ),
+                        onTap: () {
+                          setState(() {
+                            indx = 0;
+                          });
                         },
-                        
                       ),
-                      Row(
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              widget.foodList.foodName,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 30.0,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          // Spacer(),
-                          // Text(
-                          //   '',
-                          //   style: TextStyle(
-                          //     color: Colors.orange,
-                          //     fontSize: 24.0,
-                          //   ),
-                          // ),
-                          SizedBox(
-                            width: 10.0,
-                          )
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                        child: Divider(
-                          thickness: 2.0,
+                      GestureDetector(
+                        child: PageTab(
+                          title: 'Recipe',
+                          // isActive: true,
+                          index: indx,
+                          stIndex: 1,
+                          press: () {},
                         ),
+                        onTap: () {
+                          setState(() {
+                            indx = 1;
+                          });
+                        },
                       ),
-                      Row(
-                        children: <Widget>[
-                          f_desc(title: widget.foodList.taste),
-                          f_desc(title: widget.foodList.meal_type),
-                          f_desc(title: widget.foodList.deter),
-                          
-                          SizedBox(
-                            width: 5.0,
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(10.0),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            widget.foodList.cuisine ,
-                            style: TextStyle(fontSize: 18.0),
-                          ),
+                      GestureDetector(
+                        child: PageTab(
+                          title: 'Delivery',
+                          // isActive: true,
+                          index: indx,
+                          stIndex: 3,
+                          press: () {},
                         ),
+                        onTap: () {
+                          setState(() {
+                            indx = 3;
+                          });
+                        },
                       ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            GestureDetector(
-                              child: PageTab(
-                                title: 'About',
-                                // isActive: true,
-                                index: indx,
-                                stIndex: 0,
-                                press: () {},
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  indx = 0;
-                                });
-                              },
-                            ),
-                            GestureDetector(
-                              child: PageTab(
-                                title: 'Recipe',
-                                // isActive: true,
-                                index: indx,
-                                stIndex: 1,
-                                press: () {},
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  indx = 1;
-                                });
-                              },
-                            ),
-                            // GestureDetector(
-                            //   child: PageTab(
-                            //     title: 'Restaurants',
-                            //     // isActive: true,
-                            //     index: indx,
-                            //     stIndex: 2,
-                            //     press: () {},
-                            //   ),
-                            //   onTap: () {
-                            //     setState(() {
-                            //       indx = 2;
-                            //     });
-                            //   },
-                            // ),
-                            GestureDetector(
-                              child: PageTab(
-                                title: 'Delivery',
-                                // isActive: true,
-                                index: indx,
-                                stIndex: 3,
-                                press: () {},
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  indx = 3;
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                      if (indx == 0) Container(height: 700, child: FoodAbout(
-                        foodList: widget.foodList,
-                      )),
-                      if (indx == 1)
-                        Container(height: MediaQuery.of(context).size.height ,child: FoodRecipe(
-                          foodList: widget.foodList,
-                        )),
-                      if (indx == 3)
-                        Container(height: 800, child: FoodDelivery()),
                     ],
                   ),
-                //whatever gets repeated using index write down here
-                if (indx == 2)
-                  Padding(
-                      padding: EdgeInsets.only(top: 15.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return HomePage();
-                          }));
-                        },
-                        child: Card(
-                            elevation: 1.0,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0)),
-                            child: Row(
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Container(
-                                    alignment: Alignment.centerLeft,
-                                    height: 125,
-                                    width: 125.0,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                      image: DecorationImage(
-                                          image: AssetImage(
-                                              'assets/${rest[index].image}'),
-                                          fit: BoxFit.cover),
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(20.0),
-                                    child: Column(
-                                      children: <Widget>[
-                                        Container(
-                                          alignment: Alignment.centerLeft,
-                                          child: Text(
-                                            rest[index].name,
-                                            style: TextStyle(
-                                                fontSize: 22.0,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        Container(
-                                            alignment: Alignment.centerLeft,
-                                            child: Text('\u{02605}4.2')),
-                                        SizedBox(
-                                          height: 5.0,
-                                        ),
-                                        Text(rest[index].desc),
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              ],
-                            )),
-                      ))
+                ),
+                if (indx == 0)
+                  Container(
+                      height: 700,
+                      child: FoodAbout(
+                        foodList: widget.foodList,
+                      )),
+                if (indx == 1)
+                  Container(
+                    child: FoodRecipe(
+                      foodList: widget.foodList,
+                    ),
+                  ),
+                if (indx == 3) Container(height: 800, child: FoodDelivery()),
               ],
-            );
-          },
+            ),
+          ],
         ),
       ),
     );

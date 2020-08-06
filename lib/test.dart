@@ -8,7 +8,7 @@ import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/Services/searchFunction.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
-import 'package:moodish_mvp/screens/Food/bloc/foodBloc.dart';
+import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
 import 'package:moodish_mvp/screens/Food/components/TodaySpecial.dart';
 
 class Test extends StatefulWidget {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:moodish_mvp/Authenticate/forgotPassword.dart';
 import 'package:moodish_mvp/Authenticate/loading.dart';
 import 'package:moodish_mvp/Services/authenticate.dart';
@@ -39,12 +40,13 @@ class _SignInState extends State<SignIn> {
   }
 
 
+  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
 
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return loading ? Loading() : SafeArea(
+    return SafeArea(
         child : Scaffold(
             resizeToAvoidBottomPadding: false,
             resizeToAvoidBottomInset: true,
@@ -134,9 +136,12 @@ class _SignInState extends State<SignIn> {
                                     elevation: 6.0,
                                     onPressed: () async{
                                       if(_formKey.currentState.validate()){
-                                        setState(() => loading = true);
-
+                                      _handleSubmit(context);
                                         dynamic result = await _auth.signIn(_email, _password);
+                                        setState(() {
+                                          loading=false;
+                                        });
+
 
                                         if(result == null){
                                           setState(() => error = 'Wrong password or Email');
@@ -166,7 +171,7 @@ class _SignInState extends State<SignIn> {
                                 onPressed: () async{
                                   dynamic result = await _auth.googleSignIn();
                                     if(result == null){
-                                          setState(() => error = 'Something went');
+                                          setState(() => error = 'Something went Wrong!');
                                           loading = false;}
                                         else
                                           Navigator.push(context, MaterialPageRoute(builder: (context){
@@ -216,7 +221,7 @@ class _SignInState extends State<SignIn> {
                               SizedBox(height: 10.0,),
                               Text(
                                 error,
-                                style: TextStyle(color: Colors.red, fontSize:  12.0),
+                                style: TextStyle(color: Colors.red, fontSize:  16.0,fontWeight: FontWeight.bold),
                               )
 
                             ],
@@ -229,6 +234,15 @@ class _SignInState extends State<SignIn> {
             )
         )
     );
+  }
+  Future<void> _handleSubmit(BuildContext context) async {
+    try {
+      Dialogs.showLoadingDialog(context, _keyLoader);//invoking login
+      await _auth.signIn(_email, _password);
+      Navigator.of(_keyLoader.currentContext,rootNavigator: true).pop();//close the dialog
+    } catch (error) {
+      print(error);
+    }
   }
 }
 
@@ -244,4 +258,37 @@ Widget getImageAsset() {
     child: image,
     padding: EdgeInsets.only(top: 50.0, bottom: 50.0),
   );
+}
+
+class Dialogs {
+  static Future<void> showLoadingDialog(
+      BuildContext context, GlobalKey key) async {
+    return showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return new WillPopScope(
+              onWillPop: () async => false,
+              child: SimpleDialog(
+                  key: key,
+                  children: <Widget>[
+                    Center(
+                      child: Column(children: [
+                        Text(
+                        'Wait a Moment...',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    SizedBox(height: 20,),
+                    SpinKitHourGlass(
+                      color: Colors.blueAccent,
+                      size: 50.0,
+                    ),
+                      ]),
+                    )
+                  ]));
+        });
+  }
 }

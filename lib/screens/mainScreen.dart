@@ -9,8 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class MainScreen extends StatefulWidget {
-  final String mood;
-  MainScreen({this.mood});
+
   @override
   _MainScreenState createState() => _MainScreenState();
 }
@@ -30,7 +29,7 @@ class _MainScreenState extends State<MainScreen> {
     return WillPopScope(
       onWillPop: () async {
         bool value;
-        Alert(
+         await Alert(
           context: context,
           type: AlertType.warning,
           title: "Do You Want To Leave The App?",
@@ -42,8 +41,13 @@ class _MainScreenState extends State<MainScreen> {
                 style: TextStyle(color: Colors.white, fontSize: 20),
               ),
               onPressed: ()  {
-//                Navigator.of(context).pop(true);
+
+                Navigator.of(context,rootNavigator: true).pop();
+
+              setState(() {
                 value = true;
+              });
+
 
               },
               color: Colors.green[600],
@@ -55,7 +59,9 @@ class _MainScreenState extends State<MainScreen> {
               ),
               onPressed: () {
                 Navigator.of(context,rootNavigator: true).pop();
-                value = false;
+                setState(() {
+                  value =false;
+                });
               },
               color: Colors.red[700],
             )
@@ -70,7 +76,6 @@ class _MainScreenState extends State<MainScreen> {
           index: _selectedIndex,
           children: [
             FoodHome(
-              mood: widget.mood,
             ),
             Restaurant(),
             Search(),

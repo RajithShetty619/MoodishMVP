@@ -17,9 +17,8 @@ class DatabaseQuery {
 
   final CollectionReference this_that =
       Firestore.instance.collection('this_that');
-      
-  final CollectionReference yesorno =
-      Firestore.instance.collection('yesorno');
+
+  final CollectionReference yesorno = Firestore.instance.collection('yesorno');
 
   final CollectionReference facts = Firestore.instance.collection('facts');
   final String listName;
@@ -30,12 +29,11 @@ class DatabaseQuery {
       List<dynamic> value,
       int limit = 5,
       int check = 0,
-      String mood
-      }) async {
+      String mood}) async {
     List<String> _field = field;
     List<dynamic> _value = value;
     /* gets previous list saved by the name */
-    final _box = await Hive.openBox(listName+(mood??'')); 
+    final _box = await Hive.openBox(listName + (mood ?? ''));
     List<dynamic> _gfoodList = await _box.get(listName);
     print('getfood');
 
@@ -43,9 +41,8 @@ class DatabaseQuery {
         or new list to be retrieved coz of next day has arrived */
     if (_gfoodList == null || check == 0) {
       Query _finalQuery = _ref.where('description', isGreaterThan: '');
-
       /* last document to continue query from */
-      if (_gfoodList != null)
+      if (_gfoodList != null) if (_gfoodList.length != 0)
         _lastDocument =
             _gfoodList.cast<FoodListModel>()[_gfoodList.length - 1].description;
 
@@ -143,7 +140,7 @@ class DatabaseQuery {
   Future<List<PollsModel>> getPoll() async {
     /* retrieving last polls for querying */
     Box _box = await Hive.openBox('polls');
-    dynamic last = _box.get('lastpoll');
+    dynamic last = _box.get(listName);
     /*  */
     Query q = polls
         .where('value', isGreaterThan: '')
@@ -156,9 +153,9 @@ class DatabaseQuery {
     /* saving last poll to be displayed*/
     try {
       String _lastpoll = await _snapshot[_snapshot.length - 1].data['value'];
-      await _box.put('lastpoll', _lastpoll);
+      await _box.put(listName, _lastpoll);
     } catch (e) {
-      await _box.put('lastpoll', null);
+      await _box.put(listName, null);
     }
 
     /* list of polls is made and returned */
@@ -201,8 +198,8 @@ class DatabaseQuery {
       return This_thatModel(
         A: _docData['A'],
         B: _docData['B'] ?? '',
-        aLike: _docData['aLike'] ?? '',
-        bLike: _docData['bLike'] ?? '',
+        aLike: _docData['aLike'] ?? 0,
+        bLike: _docData['bLike'] ?? 0,
       );
     }).toList();
   }
@@ -228,8 +225,8 @@ class DatabaseQuery {
       Map<String, dynamic> _docData = doc.data;
       return YesNoModel(
         Questions: _docData['Questions'],
-        yes: _docData['yes'] ?? '',
-        no: _docData['no'] ?? '',
+        yes: _docData['yes'] ?? 0,
+        no: _docData['no'] ?? 0,
       );
     }).toList();
   }
@@ -243,7 +240,7 @@ class DatabaseQuery {
         .where('fact', isGreaterThan: '')
         .startAfter([last])
         .orderBy('fact')
-        .limit(3);
+        .limit(5);
     List<DocumentSnapshot> _snapshot =
         await q.getDocuments().then((value) => value.documents);
 

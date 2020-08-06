@@ -696,7 +696,8 @@
             "cuisine": "Spanish",
             "deter": "veg",
             "description": "Miguelitos are a type of cream filled puff pastry, which can also be referred to as a cake.",
-            "meal_type": "dessert"
+            "meal_type": "dessert",
+            "image":"miguelito.JPG"
         },
         {
             "sr_no": "20",
@@ -723,7 +724,9 @@
             "cuisine": "Japanese",
             "deter": "veg",
             "description": "Yōkan is a thick, jellied Japanese dessert made of red bean paste, agar, and sugar. It is usually sold in a block form, and eaten in slices.",
-            "meal_type": "dessert"
+            "meal_type": "dessert",
+            "image":"mizuyokan.JPG"
+
         },
         {
             "sr_no": "21",
@@ -752,7 +755,8 @@
             "cuisine": "Japanese",
             "deter": "veg",
             "description": "Mizutaki is a Japanese Chicken Hot Pot in which chicken, assorted vegetables, mushrooms, and tofu are cooked in a light kombu dashi broth.",
-            "meal_type": "main course"
+            "meal_type": "main course",
+            "image":"mizutaki.JPG"
         },
         {
             "sr_no": "22",
@@ -782,7 +786,8 @@
             "delivery": "Zomato",
             "cuisine": "Indian",
             "deter": "veg",
-            "description": "Modak is an Indian sweet popular in states of Maharashtra, Goa and in the regions of Konkan in India. The sweet filling on the inside of a modak consists of freshly grated coconut and jaggery while the outer soft shell is made from rice flour or wheat flour mixed with khava or maida flour."
+            "description": "Modak is an Indian sweet popular in states of Maharashtra, Goa and in the regions of Konkan in India. The sweet filling on the inside of a modak consists of freshly grated coconut and jaggery while the outer soft shell is made from rice flour or wheat flour mixed with khava or maida flour.",
+            "image":"modak.JPG"
         },
         {
             "sr_no": "23",
@@ -15335,7 +15340,7 @@
             "delivery": "2 tbsp Cashew nuts, chopped powder",
             "cuisine": "1/4 tsp Red chilli powder",
             "deter": "2-3 Green chillies",
-            "description": "2 tsp Ginger",
+            "description": "",
             "meal_type": "1 Lime",
             "image": "1 tbsp Coriander leaves"
         },

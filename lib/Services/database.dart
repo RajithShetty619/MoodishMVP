@@ -23,7 +23,7 @@ class DatabaseService {
     DocumentReference documentReference =
     Firestore.instance.collection(collection).document(sr_no);
 
-    return documentReference
+    return documentReference  
         .setData({
       field: FieldValue.increment(1) /* atomically increments data by 1 */
     }, merge: true)
@@ -126,7 +126,7 @@ class DatabaseService {
       return FoodListModel(
           foodName: _docData["food_item"] ?? '',
           deter: _docData["deter"] ?? '',
-          cuisine: _docData["cuisine"] ?? '',
+          cuisine: "${_docData['cuisine'][0].toUpperCase()}${_docData['cuisine'].substring(1)}"??'',
           meal_type: _docData["meal_type"] ?? '',
           images: _url ?? '',
           description: _docData["description"] ?? '',
@@ -145,8 +145,8 @@ class DatabaseService {
           mood: _docData["mood"] ?? '',
           restaurants: _docData["restaurants"] ?? '',
           delivery: _docData["delivery"] ?? '',
-          sr_no: _docData["sr_no"] ?? '',
-          like: _docData["like"] ?? '');
+          sr_no: _docData["sr_no"] ?? '');
+          // like: _docData["like"] ?? 0);
     }).toList());
   }
 

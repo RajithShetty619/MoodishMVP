@@ -4,14 +4,12 @@ import 'package:moodish_mvp/screens/Food/pages/explore.dart';
 import 'package:moodish_mvp/screens/Food/pages/foodFeed.dart';
 
 class FoodHome extends StatefulWidget {
-  final String mood;
-  FoodHome({this.mood});
+
   @override
   _FoodHomeState createState() => _FoodHomeState();
 }
 
-class _FoodHomeState extends State<FoodHome> { 
-
+class _FoodHomeState extends State<FoodHome> {
   final Map<int, Widget> logowidgets = const <int, Widget>{
     0: Text('Feed'),
     1: Text('Explore'),
@@ -20,6 +18,7 @@ class _FoodHomeState extends State<FoodHome> {
   int grpValue = 0;
 
   bool _switch = false;
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -28,15 +27,13 @@ class _FoodHomeState extends State<FoodHome> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            
             Container(
-              color: _switch ? Colors.blue[200]: Colors.white,
+              color: _switch ? Colors.blue[200] : Colors.white,
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                     
                     _switch
                         ? Padding(
                             padding: const EdgeInsets.only(left: 8.0),
@@ -68,8 +65,10 @@ class _FoodHomeState extends State<FoodHome> {
                           onValueChanged: (changeValue) {
                             print(_switch);
                             setState(() {
-                              if(grpValue!=changeValue){grpValue = changeValue;
-                              _switch = !_switch;}
+                              if (grpValue != changeValue) {
+                                grpValue = changeValue;
+                                _switch = !_switch;
+                              }
                             });
                           },
                           groupValue: grpValue,
@@ -80,7 +79,6 @@ class _FoodHomeState extends State<FoodHome> {
                 ),
               ),
             ),
-            
             Expanded(
               child: IndexedStack(
                 index: _switch
@@ -88,7 +86,7 @@ class _FoodHomeState extends State<FoodHome> {
                     : 1, // switch between Foo and Bar based on condition
                 children: [
                   Explore(),
-                  FoodFeed(mood:widget.mood),
+                  FoodFeed( ),
                 ],
               ),
             ),

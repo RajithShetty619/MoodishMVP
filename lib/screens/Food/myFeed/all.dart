@@ -23,15 +23,15 @@ class _AllTabsState extends State<AllTabs> {
                 child: RecipeListView(info: _info)
               ),
         ),
-        Expanded(
-          child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: 10,
-              itemBuilder: (context , index){
-                return PollListView(info: _info);
-              }),
-        ),
+        // Expanded(
+        //   child: ListView.builder(
+        //       shrinkWrap: true,
+        //       scrollDirection: Axis.horizontal,
+        //       itemCount: 10,
+        //       itemBuilder: (context , index){
+        //         return PollListView(info: _info);
+        //       }),
+        // ),
         Expanded(
           child: ListView.builder(
               shrinkWrap: true,
@@ -58,20 +58,20 @@ class _AllTabsState extends State<AllTabs> {
   }
 }
 
-class PollListView extends StatelessWidget {
-  const PollListView({
-    Key key,
-    @required List<AllCard> info,
-  }) : _info = info, super(key: key);
+// class PollListView extends StatelessWidget {
+//   const PollListView({
+//     Key key,
+//     @required List<AllCard> info,
+//   }) : _info = info, super(key: key);
 
-  final List<AllCard> _info;
+//   final List<AllCard> _info;
 
-  @override
-  Widget build(BuildContext context) {
-    return PollTabs();
+//   @override
+//   Widget build(BuildContext context) {
+//     return PollTabs();
     
-  }
-}
+//   }
+// }
 
 class RecipeListView extends StatelessWidget {
   const RecipeListView({

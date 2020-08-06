@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class About extends StatefulWidget {
   final Widget child;
@@ -56,7 +55,7 @@ class _AboutState extends State<About> {
                                 child: Tab(
                                     icon: Icon(
                                       Icons.call,
-                                      size: 70,
+                                      size: 50,
                                     ),
                                     child: Text("Phone"))),
                             SizedBox(
@@ -100,7 +99,7 @@ class _AboutState extends State<About> {
                                 child: Tab(
                                     icon: Icon(
                                       Icons.local_offer,
-                                      size: 70,
+                                      size: 50,
                                     ),
                                     child: Text("Offers"))),
                             SizedBox(
@@ -137,7 +136,7 @@ class _AboutState extends State<About> {
                                 child: Tab(
                                     icon: Icon(
                                       Icons.restaurant_menu,
-                                      size: 70,
+                                      size: 50,
                                     ),
                                     child: Text("Menu"))),
                             SizedBox(
@@ -163,7 +162,7 @@ class _AboutState extends State<About> {
                                 child: Tab(
                                   icon: Icon(
                                     Icons.share,
-                                    size: 70,
+                                    size: 50,
                                   ),
                                   child: Text("Share"),
                                 )),
@@ -196,8 +195,11 @@ class _AboutState extends State<About> {
                           SizedBox(height: 5),
                           Padding(
                               padding: EdgeInsets.all(5.0),
-                              child: Text(
-                                  widget.desc)),
+                              child: Container(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                    widget.desc),
+                              )),
 //                          SizedBox(height: 10.0),
 //                          Padding(
 //                            padding: const EdgeInsets.all(5.0),

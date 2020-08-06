@@ -15,48 +15,48 @@ class _PickUpState extends State<PickUp> {
         image2: 'bombayvintage2.png',
         name: 'Bombay Vintage',
         desc:
-            'Casual Dining, Bar - North Indian, South Indian, Maharashtrian\nColaba'),
+            '\u27A4 Casual Dining, Bar - North Indian, South Indian, Maharashtrian\n\u2691 Colaba'),
     _Restaurants(
         image: 'jamjar.png',
         image1: 'jamjar1.png',
         image2: 'jamjar2.png',
         name: 'JamJar Diner',
         desc:
-            'Casual Dining, Bar - American, Italian, Mexican, Healthy Food, Burger, Salad, Beverages\nHill Road, Bandra West'),
+            '\u27A4 Casual Dining, Bar - American, Italian, Mexican, Healthy Food, Burger, Salad, Beverages\n\u2691 Hill Road, Bandra West'),
     _Restaurants(
         image: 'mabruk.png',
         image1: 'mabruk1.png',
         image2: 'mabruk2.png',
         name: 'Mabruk- Sahara Star',
         desc:
-            'Fine Dining - Lebanese, Mediterranean \nVile Parle East'),
+            '\u27A4 Fine Dining - Lebanese, Mediterranean \n\u2691 Vile Parle East'),
     _Restaurants(
         image: 'masque.png',
         image1: 'masque1.png',
         image2: 'masque2.png',
         name: 'Masque',
-        desc: 'Fine Dining - Modern Indian\nMahalaxmi'),
+        desc: '\u27A4 Fine Dining - Modern Indian\n\u2691 Mahalaxmi'),
     _Restaurants(
         image: 'kfc.png',
         image1: 'kfc1.png',
         image2: 'kfc2.png',
         name: 'KFC',
         desc:
-            'Quick Bites - Burger, Fast Food, Finger Food, Beverages\nLinking Road, Bandra West'),
+            '\u27A4 Quick Bites - Burger, Fast Food, Finger Food, Beverages\n\u2691 Linking Road, Bandra West'),
     _Restaurants(
         image: 'mexichino.png',
         image1: 'mexichino1.png',
         image2: 'mexichino2.png',
         name: 'MexiChino',
         desc:
-            'Casual Dining - Mexican, Chinese, Continental\nBorivali West'),
+            '\u27A4 Casual Dining - Mexican, Chinese, Continental\n\u2691 Borivali West'),
     _Restaurants(
         image: 'rabdiwala.png',
         image1: 'rabdiwala1.png',
         image2: 'rabdiwala2.png',
         name: 'RabdiWala',
         desc:
-            'Casual Dining, Dessert Parlor - Rajasthani, Gujarati, Mithai, Desserts, Maharashtrian\nBorivali West'),
+            '\u27A4 Casual Dining, Dessert Parlor - Rajasthani, Gujarati, Mithai, Desserts, Maharashtrian\n\u2691 Borivali West'),
   ];
 
   @override
@@ -130,6 +130,7 @@ class _PickUpState extends State<PickUp> {
                                 right: 30.0,
                                 bottom: 10.0),
                             child: Container(
+                              height: 180,
                               width: double.maxFinite,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(30.0),
@@ -141,18 +142,10 @@ class _PickUpState extends State<PickUp> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Container(
-                                    padding: EdgeInsets.only(top: 20.0),
-                                    child: Icon(
-                                      Icons.location_on,
-                                      size: 75.0,
-                                      color: Colors.green,
-                                    ),
-                                  ),
-                                  Container(
                                     child: Text(
                                       'Pick Up',
                                       style: TextStyle(
-                                          fontSize: 20.0, color: Colors.white),
+                                          fontSize: 30.0,fontWeight: FontWeight.bold, color: Colors.white),
                                     ),
                                   ),
                                   Container(
@@ -189,64 +182,64 @@ class _PickUpState extends State<PickUp> {
                             ),
                           )
                         ]),
-                  Padding(
-                      padding: EdgeInsets.only(top: 15.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                                return HomePage(desc: rest[index].desc,imgName: rest[index].image,imgName1: rest[index].image1,imgName2: rest[index].image2,restName: rest[index].name,);
-                          }));
-                        },
-                        child: Card(
-                            elevation: 1.0,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0)),
-                            child: Row(
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Container(
-                                    alignment: Alignment.centerLeft,
-                                    height: 80,
-                                    width: 80.0,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20.0),
-                                      image: DecorationImage(
-                                          image: AssetImage(
-                                              'assets/${rest[index].image}'),
-                                          fit: BoxFit.cover),
-                                    ),
-                                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                            return HomePage(desc: rest[index].desc,imgName: rest[index].image,imgName1: rest[index].image1,imgName2: rest[index].image2,restName: rest[index].name,);
+                      }));
+                    },
+                    child: Card(
+                        elevation: 1.0,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)),
+                        child: Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Container(
+                                alignment: Alignment.centerLeft,
+                                height: 100,
+                                width: 100.0,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/${rest[index].image}'),
+                                      fit: BoxFit.cover),
                                 ),
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(20.0),
-                                    child: Column(
-                                      children: <Widget>[
-                                        Container(
-                                          alignment: Alignment.centerLeft,
-                                          child: Text(
-                                            rest[index].name,
-                                            style: TextStyle(
-                                                fontSize: 22.0,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        Container(
-                                            alignment: Alignment.centerLeft,
-                                            child: Text('\u{02605}4.2')),
-                                        SizedBox(
-                                          height: 5.0,
-                                        ),
-                                        Text(rest[index].desc),
-                                      ],
+                              ),
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        rest[index].name,
+                                        style: TextStyle(
+                                            fontSize: 22.0,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
-                                  ),
-                                )
-                              ],
-                            )),
-                      )),
+                                    Container(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text('\u{02605}4.2')),
+                                    SizedBox(
+                                      height: 5.0,
+                                    ),
+                                    Container(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(rest[index].desc)),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        )),
+                  ),
                 ]);
           }),
     ));

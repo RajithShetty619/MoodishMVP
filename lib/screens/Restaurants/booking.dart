@@ -14,55 +14,55 @@ class _BookingState extends State<Booking> {
         image2: 'burgerbresserie2.png',
         name: 'Burger Brasserie',
         desc:
-        'Quick Bites - Burger, Fast Food, Beverages \nAndheri Lokhandwala, Andheri West'),
+        '\u27A4 Quick Bites - Burger, Fast Food, Beverages \n\u2691 Andheri Lokhandwala, Andheri West'),
     _Restaurants(
         image: 'canto.png',
         image1: 'canto1.png',
         image2: 'canto2.png',
         name: 'Canto- Resto & Bar',
         desc:
-        'Casual Dining, Bar - North Indian, Continental, Italian, Lebanese\nLower Parel'),
+        '\u27A4 Casual Dining, Bar - North Indian, Continental, Italian, Lebanese\n\u2691 Lower Parel'),
     _Restaurants(
         image: 'bayview.png',
         image1: 'bayview1.png',
         image2: 'bayview2.png',
         name: 'Bay View',
         desc:
-        'Casual Dining - Seafood, North Indian, Chinese\nBorivali West'),
+        '\u27A4 Casual Dining - Seafood, North Indian, Chinese\n\u2691 Borivali West'),
     _Restaurants(
         image: 'blackolive.png',
         image1: 'blackolive1.png',
         image2: 'blackolive2.png',
         name: 'Black Olive',
-        desc: 'Healthy Food, Continental, Italian \nOshiwara, Andheri West'),
+        desc: '\u27A4 Healthy Food, Continental, Italian \n\u2691 Oshiwara, Andheri West'),
     _Restaurants(
         image: 'quessoristorante.png',
         image1: 'quessoristorante1.png',
         image2: 'quessoristorante2.png',
         name: 'Quesso Ristorante',
         desc:
-        'Casual Dining, Bar - Continental, Mexican, Italian, Mediterranean, Thai, Desserts\nOshiwara, Andheri West'),
+        '\u27A4 Casual Dining, Bar - Continental, Mexican, Italian, Mediterranean, Thai, Desserts\n\u2691 Oshiwara, Andheri West'),
     _Restaurants(
         image: 'sevenkitchen.png',
         image1: 'sevenkitchen1.png',
         image2: 'sevenkitchen2.png',
         name: 'Seven Kitchen',
         desc:
-        'Fine Dining - Chinese, North Indian, Italian, European, Desserts \nLower Parel'),
+        '\u27A4 Fine Dining - Chinese, North Indian, Italian, European, Desserts \n\u2691 Lower Parel'),
     _Restaurants(
         image: 'sincity.png',
         image1: 'sincity1.png',
         image2: 'sincity2.png',
         name: 'Sin City',
         desc:
-        'Bar, Casual Dining - Continental, North Indian, Thai, Italian \nAndheri Lokhandwala, Andheri West'),
+        '\u27A4 Bar, Casual Dining - Continental, North Indian, Thai, Italian \n\u2691 Andheri Lokhandwala, Andheri West'),
     _Restaurants(
         image: 'silvercoin.png',
         image1: 'silvercoin1.png',
         image2: 'silvercoin2.png',
         name: 'Silver Coin',
         desc:
-        'Casual Dining - Continental, North Indian, Chinese, Thai, Ice Cream, Beverages, South Indian, Seafood \nBorivali West')
+        '\u27A4 Casual Dining - Continental, North Indian, Chinese, Thai, Ice Cream, Beverages, South Indian, Seafood \n\u2691 Borivali West')
   ];
 
   @override
@@ -132,6 +132,7 @@ class _BookingState extends State<Booking> {
                               Padding(
                                 padding: EdgeInsets.only(top: 10.0,left: 30.0,right: 30.0,bottom: 10.0),
                                 child: Container(
+                                  height: 180,
                                   width: double.maxFinite,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(30.0),
@@ -143,18 +144,11 @@ class _BookingState extends State<Booking> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       Container(
-                                        padding: EdgeInsets.only(top: 20.0),
-                                        child: Icon(
-                                          Icons.calendar_today,
-                                          size: 75.0,
-                                          color: Colors.orangeAccent,
-                                        ),
-                                      ),
-                                      Container(
                                         child: Text(
                                           'Booking',
                                           style: TextStyle(
-                                              fontSize: 20.0,
+                                              fontSize: 30.0,
+                                              fontWeight: FontWeight.bold,
                                               color: Colors.white),
                                         ),
                                       ),
@@ -191,64 +185,64 @@ class _BookingState extends State<Booking> {
                                 ),
                               )
                             ]),
-                      Padding(
-                          padding: EdgeInsets.only(top: 15.0),
-                          child: GestureDetector(
-                            onTap: (){
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                    return HomePage(imgName: rest[index].image,imgName1: rest[index].image1,imgName2: rest[index].image2,restName: rest[index].name,desc: rest[index].desc,);
-                                  }));
-                            },
-                            child: Card(
-                                elevation: 1.0,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0)
-                                ),
-                                child: Row(
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Container(
-                                        alignment: Alignment.centerLeft,
-                                        height: 80,
-                                        width: 80.0,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20.0),
-                                          image: DecorationImage(
-                                              image: AssetImage('assets/${rest[index].image}'),
-                                              fit: BoxFit.cover),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(20.0),
-                                        child: Column(
-                                          children: <Widget>[
-                                            Container(
-                                              alignment: Alignment.centerLeft,
-                                              child: Text(rest[index].name,
-                                                style: TextStyle(
-                                                    fontSize: 22.0,
-                                                    fontWeight: FontWeight.bold
-                                                ),),
-                                            ),
-                                            Container(
-                                                alignment: Alignment.centerLeft,
-                                                child: Text('\u{02605}4.2')),
-                                            SizedBox(height: 5.0,),
-                                            Text(rest[index].desc),
-
-
-                                          ],
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                )
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                                return HomePage(imgName: rest[index].image,imgName1: rest[index].image1,imgName2: rest[index].image2,restName: rest[index].name,desc: rest[index].desc,);
+                              }));
+                        },
+                        child: Card(
+                            elevation: 1.0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0)
                             ),
-                          )),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Container(
+                                    alignment: Alignment.centerLeft,
+                                    height: 100,
+                                    width: 100.0,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      image: DecorationImage(
+                                          image: AssetImage('assets/${rest[index].image}'),
+                                          fit: BoxFit.cover),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Column(
+                                      children: <Widget>[
+                                        Container(
+                                          alignment: Alignment.centerLeft,
+                                          child: Text(rest[index].name,
+                                            style: TextStyle(
+                                                fontSize: 22.0,
+                                                fontWeight: FontWeight.bold
+                                            ),),
+                                        ),
+                                        Container(
+                                            alignment: Alignment.centerLeft,
+                                            child: Text('\u{02605}4.2')),
+                                        SizedBox(height: 5.0,),
+                                        Container(
+                                            alignment: Alignment.centerLeft,
+                                            child: Text(rest[index].desc)),
+
+
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              ],
+                            )
+                        ),
+                      ),
                     ]);
               }),
         ));
