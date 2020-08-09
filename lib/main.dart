@@ -18,8 +18,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 void main() async {
   BlocSupervisor.delegate = FoodBlocDelegate();
   BlocSupervisor.delegate = PollBlocDelegate();
-  await Hive.initFlutter();
-  // await Hive.openBox('foodlist');
+  await Hive.initFlutter(); 
   Hive.registerAdapter<FoodListModel>(FoodListModelAdapter());
   Hive.registerAdapter<PollsModel>(PollsModelAdapter());
   runApp(MaterialApp(  
@@ -43,8 +42,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp( 
           debugShowCheckedModeBanner: false,
           title: 'Moodish',
-          home: Wrapper(),
-          
+          home: Wrapper(), 
         ), 
       ),
     );

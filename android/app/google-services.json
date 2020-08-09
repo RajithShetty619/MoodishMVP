@@ -8,20 +8,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:430184247071:android:83e6710272810048f50a2a",
+        "mobilesdk_app_id": "1:430184247071:android:d24e104299fb58abf50a2a",
         "android_client_info": {
           "package_name": "net.moodishtest.snap"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "430184247071-6o7lopivi4giut6ptvqr84skmrc73j1h.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "net.moodishtest.snap",
-            "certificate_hash": "f7c24f5b6628e58f689cff9d8577382d9050cdc4"
-          }
-        },
         {
           "client_id": "430184247071-9mif774p3h0hfemak1uf2mssnce98foc.apps.googleusercontent.com",
           "client_type": 3
@@ -38,6 +30,13 @@
             {
               "client_id": "430184247071-9mif774p3h0hfemak1uf2mssnce98foc.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "430184247071-vnstr9k87jkk8iq4lqpgo5ga8jed0sp7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.moodishMvp"
+              }
             }
           ]
         }
