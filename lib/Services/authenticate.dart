@@ -31,11 +31,19 @@ class Authenticate {
     return _auth.onAuthStateChanged.map(_userFromFirebase);
   }
 
+  Future<String> getToken() async {
+    FirebaseUser user = await _auth.currentUser();
+    IdTokenResult _token = await user.getIdToken();
+    print(_token);
+    return _token.token;
+  }
+
   Future newRegister(String email, String name, String password) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
+
       await DatabaseService()
           .updateUserData(email: email, name: name, uid: user.uid);
       return _userFromFirebase(user);

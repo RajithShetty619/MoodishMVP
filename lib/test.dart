@@ -5,11 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
+import 'package:moodish_mvp/Services/authenticate.dart';
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/Services/searchFunction.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
-import 'package:moodish_mvp/screens/Food/components/TodaySpecial.dart';
+import 'package:http/http.dart';
 
 class Test extends StatefulWidget {
   @override
@@ -51,12 +52,12 @@ class _FoodListState extends State<FoodList> {
         child: Container(
           child: FlatButton(
             onPressed: () async {
-              await DatabaseService()
-                  .likeTransction(collection: "pol", field: "like", sr_no: "3");
-                  setState(() {
-                    count++;
-                  }); 
+              String token = await Authenticate().getToken();
+              var data = await get(
+                  'us-central1-moodishtest.cloudfunctions.net/restNotif?text=$token');
+              
             },
+            
             child: Center(child: Text("$count")),
           ),
         ),
