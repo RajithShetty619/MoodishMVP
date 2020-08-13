@@ -19,15 +19,15 @@ class PollTabs extends StatefulWidget {
 }
 
 class _PollTabsState extends State<PollTabs> {
+  DatabaseQuery _dqpoll = DatabaseQuery(listName: 'p');
 
-DatabaseQuery _dqpoll = DatabaseQuery(listName: 'p');
-
-@override
+  @override
   void initState() {
     super.initState();
-    _dqpoll.getPoll().then((poll) {
-    BlocProvider.of<PollBloc>(context).add(PollEvent.add(poll, 'p'));
-    
+    setState(() {
+      _dqpoll.getPoll().then((poll) {
+        BlocProvider.of<PollBloc>(context).add(PollEvent.add(poll, 'p'));
+      });
     });
   }
   //  Future<int> checkDate() async {
@@ -46,13 +46,13 @@ DatabaseQuery _dqpoll = DatabaseQuery(listName: 'p');
   @override
   Widget build(BuildContext context) {
     /* used to get polls from the database */
-    return BlocConsumer<PollBloc, Map<String, List<PollsModel>>>(
-      buildWhen: (Map<String, List<PollsModel>> previous,
-          Map<String, List<PollsModel>> current) {
+    return BlocConsumer<PollBloc, Map<String, List<dynamic>>>(
+      buildWhen: (Map<String, List<dynamic>> previous,
+          Map<String, List<dynamic>> current) {
         return true;
       },
-      listenWhen: (Map<String, List<PollsModel>> previous,
-          Map<String, List<PollsModel>> current) {
+      listenWhen: (Map<String, List<dynamic>> previous,
+          Map<String, List<dynamic>> current) {
         // if (current.length > previous.length) {
         //   return true;
         // }
@@ -61,18 +61,16 @@ DatabaseQuery _dqpoll = DatabaseQuery(listName: 'p');
       builder: (BuildContext context, pollList) {
         print(pollList['p'].length);
         print('####################');
-       
-              return ListView.builder(
-                shrinkWrap: true,
-                primary: false,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: pollList['p'].length,
-                itemBuilder: (BuildContext context, index) {
-                  return GetListView1(poll: pollList['p'][index]);
-                },
-              );
-            
-          
+
+        return ListView.builder(
+          shrinkWrap: true,
+          primary: false,
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: pollList['p'].length,
+          itemBuilder: (BuildContext context, index) {
+            return GetListView1(poll: pollList['p'][index]);
+          },
+        );
       },
       listener: (context, pollList) {
         Scaffold.of(context).showSnackBar(
