@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
+import 'package:moodish_mvp/Services/betaCount.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
@@ -28,10 +29,10 @@ class _ExploreState extends State<Explore> {
   /* index used for situation */
   int indx = 0;
   /* index used for taste */
-  int indxT = 0; 
+  int indxT = 0;
   /* dont remember mohit look into it :) */
   int _selected = 1;
-  bool _getFoodCalled = false; 
+  bool _getFoodCalled = false;
 
   /* constructor initialised with list name  */
   DatabaseQuery _dq = DatabaseQuery(listName: "0");
@@ -49,8 +50,8 @@ class _ExploreState extends State<Explore> {
     /* check to run it only once */
     if (!_getFoodCalled) {
       checkDate().then((check) {
-        _dqtsp.getFood(
-            field: ['cuisine'], value: ['indian'], check: 0).then((future) {
+        _dqtsp.getFood(field: ['cuisine'], value: ['indian'], check: 0).then(
+            (future) {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "tsp"));
         });
         _dqtaste0.getFood(
@@ -67,7 +68,7 @@ class _ExploreState extends State<Explore> {
             check: check).then((future) {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t1"));
         });
-       /*  _dqtaste2.getFood(
+        /*  _dqtaste2.getFood(
             field: ['taste'],
             value: getValue("t2"),
             limit: 7,
@@ -110,7 +111,7 @@ class _ExploreState extends State<Explore> {
     DateTime now = DateTime.now();
     String date = DateFormat('EEE, M/d/y').format(now);
     if (date == saveDate) {
-      return 0 ; //change to zero for testing purpose
+      return 0; //change to zero for testing purpose
     } else {
       _box.put("date", date);
       return 0;
@@ -222,7 +223,8 @@ class _ExploreState extends State<Explore> {
                                               (BuildContext context, index) {
                                             if (foodList["tsp"].length != index)
                                               return TodaySpecial(
-                                                foodList: foodList["tsp"][index],
+                                                foodList: foodList["tsp"]
+                                                    [index],
                                               );
                                             else {
                                               return !_loadingData
@@ -266,19 +268,19 @@ class _ExploreState extends State<Explore> {
                                                           }),
                                                     )
                                                   : Container(
-                                                    width: 50,
-                                                    child: Center(
+                                                      width: 50,
+                                                      child: Center(
                                                         child:
                                                             SpinKitFadingCircle(
                                                                 color: Colors
                                                                     .blue[300],
                                                                 size: 30.0),
                                                       ),
-                                                  );
+                                                    );
                                             }
                                           },
                                         ),
-                                      ), 
+                                      ),
                                     ],
                                   );
                                 },
@@ -328,7 +330,7 @@ class _ExploreState extends State<Explore> {
                           ],
                         ),
                       ),  */
-                      SizedBox(height: 20), 
+                      SizedBox(height: 20),
                       Padding(
                         padding: const EdgeInsets.only(left: 10.0),
                         child: Container(
@@ -363,7 +365,8 @@ class _ExploreState extends State<Explore> {
                                 stIndex: 0,
                                 press: () {},
                               ),
-                              onTap: () {
+                              onTap: () async {
+                                await BetaCount().count(field: 'taste');
                                 setState(() {
                                   indxT = 0;
                                 });
@@ -377,7 +380,8 @@ class _ExploreState extends State<Explore> {
                                 stIndex: 1,
                                 press: () {},
                               ),
-                              onTap: () {
+                              onTap: () async {
+                                await BetaCount().count(field: 'taste');
                                 setState(() {
                                   indxT = 1;
                                 });
@@ -500,7 +504,8 @@ class _ExploreState extends State<Explore> {
                                 stIndex: 0,
                                 press: () {},
                               ),
-                              onTap: () {
+                              onTap: () async {
+                                await BetaCount().count(field: 'situation');
                                 setState(() {
                                   indx = 0;
                                 });
@@ -514,7 +519,8 @@ class _ExploreState extends State<Explore> {
                                 stIndex: 1,
                                 press: () {},
                               ),
-                              onTap: () {
+                              onTap: () async {
+                                await BetaCount().count(field: 'situation');
                                 setState(() {
                                   indx = 1;
                                 });
@@ -528,7 +534,8 @@ class _ExploreState extends State<Explore> {
                                 stIndex: 2,
                                 press: () {},
                               ),
-                              onTap: () {
+                              onTap: () async {
+                                await BetaCount().count(field: 'situation');
                                 setState(() {
                                   indx = 2;
                                 });

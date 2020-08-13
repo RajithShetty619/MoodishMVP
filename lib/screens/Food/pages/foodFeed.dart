@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
+import 'package:moodish_mvp/Services/betaCount.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/models/pollsModel.dart';
@@ -352,10 +353,10 @@ class _FoodFeedState extends State<FoodFeed> {
                               title: 'Polls',
                               // isActive: true,
                               index: indx,
-                              stIndex: 2,
-                              press: () {},
+                              stIndex: 2, 
                             ),
-                            onTap: () {
+                            onTap: () async {
+                              await BetaCount().count(field:'polls');
                               setState(() {
                                 indx = 2;
                               });
@@ -369,7 +370,8 @@ class _FoodFeedState extends State<FoodFeed> {
                               stIndex: 3,
                               press: () {},
                             ),
-                            onTap: () {
+                            onTap: () async { 
+                              await BetaCount().count(field:'polls');
                               setState(() {
                                 indx = 3;
                               });
