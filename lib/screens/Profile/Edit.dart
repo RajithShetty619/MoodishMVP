@@ -356,14 +356,6 @@ class _EditProfileState extends State<EditProfile> {
                     ],
                   ),
                 ),
-<<<<<<< HEAD
-              ),
-              buttons: [
-                DialogButton(
-                  onPressed: (){
-                    
-                    Navigator.of(context, rootNavigator: true).pop();
-=======
                 Padding(
                   padding: EdgeInsets.only(left: 10.0, right: 10.0),
                   child: Divider(
@@ -375,7 +367,6 @@ class _EditProfileState extends State<EditProfile> {
                     getCurrentLocation();
                     _getAddressFromLatLng();
                     print(_currentAddress);
->>>>>>> 2f5a3bb13df24334978ec908acd6d404bbaa2c88
                   },
                   child: Row(
                     children: <Widget>[
