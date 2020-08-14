@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:moodish_mvp/Services/betaCount.dart';
 import 'package:moodish_mvp/screens/Food/pages/explore.dart';
 import 'package:moodish_mvp/screens/Food/pages/foodFeed.dart';
 
 class FoodHome extends StatefulWidget {
-
   @override
   _FoodHomeState createState() => _FoodHomeState();
 }
@@ -18,7 +18,6 @@ class _FoodHomeState extends State<FoodHome> {
   int grpValue = 0;
 
   bool _switch = false;
- 
 
   @override
   Widget build(BuildContext context) {
@@ -62,8 +61,10 @@ class _FoodHomeState extends State<FoodHome> {
                         width: 135,
                         child: CupertinoSlidingSegmentedControl(
                           children: logowidgets,
-                          onValueChanged: (changeValue) {
-                            print(_switch);
+                          onValueChanged: (changeValue) async {
+                            if (_switch == true) {
+                              await BetaCount().count(field: 'explore');
+                            }
                             setState(() {
                               if (grpValue != changeValue) {
                                 grpValue = changeValue;
@@ -86,7 +87,7 @@ class _FoodHomeState extends State<FoodHome> {
                     : 1, // switch between Foo and Bar based on condition
                 children: [
                   Explore(),
-                  FoodFeed( ),
+                  FoodFeed(),
                 ],
               ),
             ),

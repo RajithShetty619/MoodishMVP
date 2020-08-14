@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/Services/betaCount.dart';
 
 class About extends StatefulWidget {
   final Widget child;
@@ -37,7 +38,8 @@ class _AboutState extends State<About> {
                           scrollDirection: Axis.horizontal,
                           children: <Widget>[
                             InkWell(
-                                onTap: () {
+                                onTap: () async {
+                                  await BetaCount().count(field:'situation');
                                   showDialog(
                                       context: context,
                                       builder: (BuildContext context) {

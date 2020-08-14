@@ -1,6 +1,4 @@
-
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Services/authenticate.dart';
@@ -11,7 +9,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 class DatabaseService {
   final CollectionReference userName =
-  Firestore.instance.collection('Username');
+      Firestore.instance.collection('Username');
 /* ///////////////////////////////////////////////////// Transaction //////////////////////////////////////////////////////////////////////// */
 /* simple document increment method 
     collection is the name of collection in the db for eg food,facts,polls;
@@ -21,12 +19,12 @@ class DatabaseService {
 */
   Future<void> likeTransction({String collection, String sr_no, String field}) {
     DocumentReference documentReference =
-    Firestore.instance.collection(collection).document(sr_no);
+        Firestore.instance.collection(collection).document(sr_no);
 
-    return documentReference  
+    return documentReference
         .setData({
-      field: FieldValue.increment(1) /* atomically increments data by 1 */
-    }, merge: true)
+          field: FieldValue.increment(1) /* atomically increments data by 1 */
+        }, merge: true)
         .whenComplete(() => true)
         .catchError((onError) => print(onError));
   }
@@ -47,7 +45,7 @@ class DatabaseService {
   Future<Map<String, String>> returnUser() async {
     Map<String, String> _data = {};
     DocumentSnapshot user =
-    await userName.document(await Authenticate().returnUid()).get();
+        await userName.document(await Authenticate().returnUid()).get();
     user.data.forEach((key, value) {
       _data.putIfAbsent(key, () => value);
     });
@@ -126,7 +124,9 @@ class DatabaseService {
       return FoodListModel(
           foodName: _docData["food_item"] ?? '',
           deter: _docData["deter"] ?? '',
-          cuisine: "${_docData['cuisine'][0].toUpperCase()}${_docData['cuisine'].substring(1)}"??'',
+          cuisine:
+              "${_docData['cuisine'][0].toUpperCase()}${_docData['cuisine'].substring(1)}" ??
+                  '',
           meal_type: _docData["meal_type"] ?? '',
           images: _url ?? '',
           description: _docData["description"] ?? '',
@@ -146,7 +146,7 @@ class DatabaseService {
           restaurants: _docData["restaurants"] ?? '',
           delivery: _docData["delivery"] ?? '',
           sr_no: _docData["sr_no"] ?? '');
-          // like: _docData["like"] ?? 0);
+      // like: _docData["like"] ?? 0);
     }).toList());
   }
 
@@ -158,7 +158,6 @@ class DatabaseService {
         Firestore.instance.collection('polls').document(sr_no);
     _poll.setData({opt: like}, merge: true);
   }
-
 }
 
 /* //////////////////////////////////////////////////// THIS_THAT METHOD///////////////////////////////////// */

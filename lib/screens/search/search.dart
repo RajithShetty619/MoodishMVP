@@ -23,6 +23,7 @@ class _SearchState extends State<Search> {
             debounceDuration: Duration(seconds: 1),
             onSearch: SearchFunction().search,
             emptyWidget: Center(child: Text('not a thing found')),
+            placeHolder: Center(child: Text('  a thing found')),
             cancellationWidget: Icon(Icons.cancel,size: 45,color: Colors.grey[400],),
             onItemFound: (FoodListModel food, int index) { 
               return Container(

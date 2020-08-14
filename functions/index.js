@@ -5,9 +5,9 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 const sh = require("ss-search");
 // const fs = require('fs');
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
+// Create and Deploy Your First Cloud Functions
+// https://firebase.google.com/docs/functions/write-firebase-functions
+
 exports.helloWorld = functions.https.onRequest((request, response) => {
 
     let _dataArray = [
@@ -20232,8 +20232,9 @@ exports.restNotif = functions.https.onRequest((req,res)=>{
             body: 'Tap here to check it out!'
         }
    };
-
-   admin.messaging().sendToDevice(snapshot.val(), payload)
+   let text = req.query.text;
+   console.log(text);
+   admin.messaging().sendToDevice( text, payload).then((e)=>console.log(e)).catch((e)=>console.log(e));
 
    res.send({"result":"sent"})
 })
