@@ -54,7 +54,7 @@ class _FoodListState extends State<FoodList> {
             onPressed: () async {
               String token = await Authenticate().getToken();
               var data = await get(
-                  'us-central1-moodishtest.cloudfunctions.net/restNotif?text=$token');
+                  'https://us-central1-moodishtest.cloudfunctions.net/restNotif?text=$token');
               
             },
             
