@@ -10,8 +10,7 @@ import 'package:moodish_mvp/models/yesNo.dart';
 import 'package:moodish_mvp/screens/Food/blocs/pollsbloc/pollsBloc.dart';
 import 'package:moodish_mvp/screens/Food/events/pollsEvent.dart';
 import 'package:polls/polls.dart';
-
-import 'package:intl/intl.dart';
+ 
 
 class PollTabs extends StatefulWidget {
   @override
@@ -24,11 +23,6 @@ class _PollTabsState extends State<PollTabs> {
   @override
   void initState() {
     super.initState();
-    setState(() {
-      _dqpoll.getPoll().then((poll) {
-        BlocProvider.of<PollBloc>(context).add(PollEvent.add(poll, 'p'));
-      });
-    });
   }
   //  Future<int> checkDate() async {
   //   Box _box = await Hive.openBox("date");
@@ -68,7 +62,7 @@ class _PollTabsState extends State<PollTabs> {
           physics: NeverScrollableScrollPhysics(),
           itemCount: pollList['p'].length,
           itemBuilder: (BuildContext context, index) {
-            return GetListView1(poll: pollList['p'][index]);
+            return GetListView1(poll: pollList['p'][index],choice: pollList['choice'][index],index:index);
           },
         );
       },
@@ -509,10 +503,13 @@ class _GetListViewState extends State<GetListView> {
 /* poll card displayin widget */
 class GetListView1 extends StatefulWidget {
   final PollsModel poll;
+  final List<int> choice;
+  final int index;
   GetListView1({
+    this.choice,
     this.poll,
-    Key key,
-  }) : super(key: key);
+    this.index 
+  });
 
   @override
   _GetListView1State createState() => _GetListView1State();
@@ -520,6 +517,7 @@ class GetListView1 extends StatefulWidget {
 
 class _GetListView1State extends State<GetListView1> {
   int _index;
+  List<int> _choice = [];
   bool pollPressed = false;
   PollsModel _poll;
   Map usersWhoVoted = {
@@ -556,12 +554,14 @@ class _GetListView1State extends State<GetListView1> {
           currentUser: 'you',
           creatorID: 'snapinsight',
           voteData: usersWhoVoted,
-          userChoice: usersWhoVoted['you'],
+          userChoice: widget.index,
           onVoteBackgroundColor: Colors.blue,
           leadingBackgroundColor: Colors.blue,
           backgroundColor: Colors.white,
           onVote: (choice) async {
-            setState(() {
+            setState(() { 
+              BlocProvider.of<PollBloc>(context)
+                    .add(PollEvent.add(_choice, 'choice'));  
               this.usersWhoVoted['you'] = choice;
             });
             print(choice);

@@ -17,15 +17,18 @@ class DatabaseService {
     field is category you want to update 
     for eg:- in polls db has fields aLike ,bLike etc // MOHIT dhyan rakh ki models ke andar inke value int hai 
 */
-  Future<void> likeTransction({String collection, String sr_no, String field}) {
+  Future<void> likeTransction({String collection, String sr_no, String field,FoodListModel food}) async {
     DocumentReference documentReference =
         Firestore.instance.collection(collection).document(sr_no);
+
+    String uid = await Authenticate().returnUid();
+
+    Firestore.instance.collection("userName").document("uid").setData({"userData":{}});
 
     return documentReference
         .setData({
           field: FieldValue.increment(1) /* atomically increments data by 1 */
-        }, merge: true)
-        .whenComplete(() => true)
+        }, merge: true) 
         .catchError((onError) => print(onError));
   }
 /* ////////////////////////////////////////////////////////////////////// USERNAMEMETHODS ////////////////////////////////////////////////////////// */

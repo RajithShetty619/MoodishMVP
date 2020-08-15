@@ -8,10 +8,12 @@ import 'package:moodish_mvp/Services/betaCount.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/models/pollsModel.dart';
+import 'package:moodish_mvp/screens/Food/blocs/pollsbloc/pollsBloc.dart';
 import 'package:moodish_mvp/screens/Food/components/Every_Situation.dart';
 import 'package:moodish_mvp/screens/Food/components/foodMood.dart';
 import 'package:moodish_mvp/screens/Food/components/maFeed.dart';
 import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
+import 'package:moodish_mvp/screens/Food/events/pollsEvent.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/all.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/foodft.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/polls.dart';
@@ -52,6 +54,11 @@ class _FoodFeedState extends State<FoodFeed> {
   @override
   void initState() {
     super.initState();
+    setState(() {
+       DatabaseQuery(listName: 'p').getPoll().then((poll) {
+        BlocProvider.of<PollBloc>(context).add(PollEvent.add(poll, 'p'));
+      });
+    });
     checkDate().then((check) {
       _dqtaste2.getFood(
           field: ['cuisine'],

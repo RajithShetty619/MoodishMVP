@@ -1,22 +1,21 @@
-
-
-import 'package:moodish_mvp/models/pollsModel.dart';
-
-enum EventType{add,delete}
+enum EventType{add,replace}
 
 class PollEvent {
-  List<PollsModel> polls;
+  List<dynamic> polls;
   String listName;
+  int choiceIndex;
+  int choice;
   EventType eventType;
 
-  PollEvent.add(List<PollsModel> polls , String listName){
+  PollEvent.add(List<dynamic> polls , String listName){
     this.eventType = EventType.add;
     this.polls = polls ; 
     this.listName = listName ;
   }
 
-  PollEvent.delete(String listName){
-    this.eventType = EventType.delete;
-    this.listName = listName ;
+  PollEvent.replace(int choiceIndex,int choice){
+    this.eventType = EventType.replace;
+    this.choiceIndex = choiceIndex ;
+    this.choice = choice ;
   }
 }
