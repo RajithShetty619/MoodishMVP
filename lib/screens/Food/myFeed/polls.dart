@@ -60,7 +60,6 @@ class _PollTabsState extends State<PollTabs> {
       },
       builder: (BuildContext context, pollList) {
         print(pollList['p'].length);
-        print('####################');
 
         return ListView.builder(
           shrinkWrap: true,

@@ -54,7 +54,6 @@ class _SignInState extends State<SignIn> {
     try {
       setState(() => loading = true);
       GoogleIdentity user = await _googleSignIn.signIn();
-      print(user);
       setState(() {
         _googleLoggedIn = true;
       });
@@ -287,9 +286,9 @@ class _SignInState extends State<SignIn> {
       return AppleSignInButton(
         onPressed: () async {
           await _auth.signInWithApple();
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return MainScreen();
-          }));
+          // Navigator.push(context, MaterialPageRoute(builder: (context) {
+          //   return MainScreen();
+          // }));
         },
         style: button.ButtonStyle.whiteOutline,
       );

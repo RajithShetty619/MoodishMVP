@@ -15,9 +15,8 @@ class Wrapper extends StatelessWidget {
     final onAuthChanged = Provider.of<User>(context);
     if (onAuthChanged == null) {
       return SignIn();
-    }
-    else{
-      return  MainScreen();
+    } else {
+      return MainScreen();
     }
   }
 }

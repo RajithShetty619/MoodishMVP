@@ -15,10 +15,7 @@ class PollBloc extends Bloc<PollEvent, Map<String, List<dynamic>>> {
       case EventType.add:
         Map<String, List<dynamic>> newstate = state;
         if (event.polls != null) {
-          print('polllllllll');
-          print(event.polls);
           newstate[event.listName].addAll(event.polls);
-          print(newstate);
         }
         yield newstate;
         break;

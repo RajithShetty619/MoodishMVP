@@ -110,7 +110,7 @@ class Authenticate {
           accessToken: String.fromCharCodes(_aauth.authorizationCode),
         );
 
-        await _auth.signInWithCredential(credential);
+        AuthResult fireResult = await _auth.signInWithCredential(credential);
 
         //Update user Information::::
         if (_aauth.fullName != null) {
@@ -119,6 +119,10 @@ class Authenticate {
             user.displayName =
                 "${_aauth.fullName.givenName} ${_aauth.fullName.familyName}";
             await value.updateProfile(user);
+            await DatabaseService().updateUserData(
+                email: _aauth.email,
+                name: _aauth.fullName.givenName + _aauth.fullName.familyName,
+                uid: fireResult.user.uid);
           });
         }
 
