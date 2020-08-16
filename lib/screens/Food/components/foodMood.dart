@@ -5,6 +5,7 @@ import 'package:moodish_mvp/Services/betaCount.dart';
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/food_info.dart';
+import 'package:moodish_mvp/test.dart';
 
 class Mood_Food extends StatefulWidget {
   const Mood_Food({
@@ -92,7 +93,7 @@ class _Mood_FoodState extends State<Mood_Food> {
                                       ),
                                 onPressed: () async {
                                   if (!_like) {
-                                    await DatabaseService().likeTransction(
+                                    await DatabaseService().likeTransction(food: widget.foodList,
                                         sr_no: widget.foodList.sr_no,
                                         collection: "food",
                                         field: "like");

@@ -10,8 +10,7 @@ import 'package:moodish_mvp/models/yesNo.dart';
 import 'package:moodish_mvp/screens/Food/blocs/pollsbloc/pollsBloc.dart';
 import 'package:moodish_mvp/screens/Food/events/pollsEvent.dart';
 import 'package:polls/polls.dart';
-
-import 'package:intl/intl.dart';
+ 
 
 class PollTabs extends StatefulWidget {
   @override
@@ -24,11 +23,6 @@ class _PollTabsState extends State<PollTabs> {
   @override
   void initState() {
     super.initState();
-    setState(() {
-      _dqpoll.getPoll().then((poll) {
-        BlocProvider.of<PollBloc>(context).add(PollEvent.add(poll, 'p'));
-      });
-    });
   }
   //  Future<int> checkDate() async {
   //   Box _box = await Hive.openBox("date");
@@ -67,7 +61,7 @@ class _PollTabsState extends State<PollTabs> {
           physics: NeverScrollableScrollPhysics(),
           itemCount: pollList['p'].length,
           itemBuilder: (BuildContext context, index) {
-            return GetListView1(poll: pollList['p'][index]);
+            return GetListView1(poll: pollList['p'][index],choice: pollList['choice']  ,index:index);
           },
         );
       },
@@ -508,29 +502,29 @@ class _GetListViewState extends State<GetListView> {
 /* poll card displayin widget */
 class GetListView1 extends StatefulWidget {
   final PollsModel poll;
+  final List<dynamic> choice;
+  final int index;
   GetListView1({
+    this.choice,
     this.poll,
-    Key key,
-  }) : super(key: key);
+    this.index 
+  });
 
   @override
   _GetListView1State createState() => _GetListView1State();
 }
 
 class _GetListView1State extends State<GetListView1> {
-  int _index;
+   
   bool pollPressed = false;
   PollsModel _poll;
-  Map usersWhoVoted = {
-    'sam@mail.com': 3,
-    'mike@mail.com': 4,
-    'john@mail.com': 1,
-    'kenny@mail.com': 1
-  };
+  Map usersWhoVoted = {};
   @override
   void initState() {
     setState(() {
       _poll = widget.poll;
+      if(widget.choice[widget.index]!=0)
+      usersWhoVoted['you'] = widget.choice[widget.index];
     });
     super.initState();
   }
@@ -555,13 +549,15 @@ class _GetListView1State extends State<GetListView1> {
           currentUser: 'you',
           creatorID: 'snapinsight',
           voteData: usersWhoVoted,
-          userChoice: usersWhoVoted['you'],
+          userChoice: widget.choice[widget.index], 
           onVoteBackgroundColor: Colors.blue,
           leadingBackgroundColor: Colors.blue,
           backgroundColor: Colors.white,
           onVote: (choice) async {
-            setState(() {
-              this.usersWhoVoted['you'] = choice;
+            setState(() { 
+              BlocProvider.of<PollBloc>(context)
+                    .add(PollEvent.replace(widget.index, choice));  
+              usersWhoVoted['you'] = choice;
             });
             print(choice);
             if (choice == 1) {

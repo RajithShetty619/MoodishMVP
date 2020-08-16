@@ -6,7 +6,7 @@ class PollBloc extends Bloc<PollEvent, Map<String, List<dynamic>>> {
   @override
   // TODO: implement initialState
   Map<String, List<dynamic>> get initialState => {
-        "p": [],
+        "p": [],"choice":[0,0,0,0]
       };
 
   @override
@@ -17,6 +17,11 @@ class PollBloc extends Bloc<PollEvent, Map<String, List<dynamic>>> {
         if (event.polls != null) {
           newstate[event.listName].addAll(event.polls);
         }
+        yield newstate;
+        break;
+      case EventType.replace:
+        Map<String,List<dynamic>> newstate = state;
+        newstate['choice'][event.choiceIndex] = event.choice;
         yield newstate;
         break;
       default:
