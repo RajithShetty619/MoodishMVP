@@ -192,20 +192,20 @@ class _SignInState extends State<SignIn> {
                           SizedBox(
                             height: 15.0,
                           ),
-                          SignInButton(
-                            Buttons.Google,
-                            onPressed: () async {
-                              dynamic result = await _auth.googleSignIn();
-                              if (result == null) {
-                                setState(() => error = 'Something went Wrong!');
-                                loading = false;
-                              } else
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return MainScreen();
-                                }));
-                            },
-                          ),
+//                          SignInButton(
+//                            Buttons.Google,
+//                            onPressed: () async {
+//                              dynamic result = await _auth.googleSignIn();
+//                              if (result == null) {
+//                                setState(() => error = 'Something went Wrong!');
+//                                loading = false;
+//                              } else
+//                                Navigator.push(context,
+//                                    MaterialPageRoute(builder: (context) {
+//                                  return MainScreen();
+//                                }));
+//                            },
+//                          ),
                           //
                           Padding(
                             padding: const EdgeInsets.all(10.0),
