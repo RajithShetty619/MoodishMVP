@@ -667,7 +667,6 @@ class DataListView extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: foodList.length,
         itemBuilder: (BuildContext context, index) {
-          print(foodList[index].foodName);
           return FoodEveryTaste(
             foodList: foodList[index],
           );

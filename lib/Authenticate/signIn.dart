@@ -161,19 +161,12 @@ class _SignInState extends State<SignIn> {
                                     _handleSubmit(context);
                                     dynamic result =
                                         await _auth.signIn(_email, _password);
-                                    setState(() {
-                                      loading = false;
-                                    });
 
                                     if (result == null) {
                                       setState(() =>
                                           error = 'Wrong password or Email');
                                       loading = false;
-                                    } else
-                                      Navigator.push(context,
-                                          MaterialPageRoute(builder: (context) {
-                                        return MainScreen();
-                                      }));
+                                    }
                                   }
                                 },
                                 child: Center(
