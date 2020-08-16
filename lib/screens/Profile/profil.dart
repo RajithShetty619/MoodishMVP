@@ -33,7 +33,6 @@ class _ProfileState extends State<Profile> {
       setState(() {
         userData = _userData;
       });
-      print(userData);
     }
 
     data();
@@ -182,14 +181,18 @@ class _ProfileState extends State<Profile> {
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      SizedBox(height: 20,),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
                                       Padding(
                                         padding: EdgeInsets.all(10),
                                         child: Align(
                                           alignment: Alignment.centerRight,
                                           child: RaisedButton(
-                                            onPressed: () =>
-                                                Navigator.of(idcontext,rootNavigator: true).pop(),
+                                            onPressed: () => Navigator.of(
+                                                    idcontext,
+                                                    rootNavigator: true)
+                                                .pop(),
                                             child: Text('ok'),
                                           ),
                                         ),
@@ -228,14 +231,18 @@ class _ProfileState extends State<Profile> {
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      SizedBox(height: 20,),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
                                       Padding(
                                         padding: EdgeInsets.all(10),
                                         child: Align(
                                           alignment: Alignment.centerRight,
                                           child: RaisedButton(
-                                            onPressed: () =>
-                                                Navigator.of(idcontext,rootNavigator: true).pop(),
+                                            onPressed: () => Navigator.of(
+                                                    idcontext,
+                                                    rootNavigator: true)
+                                                .pop(),
                                             child: Text('ok'),
                                           ),
                                         ),
@@ -274,14 +281,18 @@ class _ProfileState extends State<Profile> {
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      SizedBox(height: 20,),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
                                       Padding(
                                         padding: EdgeInsets.all(10),
                                         child: Align(
                                           alignment: Alignment.centerRight,
                                           child: RaisedButton(
-                                            onPressed: () =>
-                                                Navigator.of(idcontext,rootNavigator: true).pop(),
+                                            onPressed: () => Navigator.of(
+                                                    idcontext,
+                                                    rootNavigator: true)
+                                                .pop(),
                                             child: Text('ok'),
                                           ),
                                         ),
@@ -392,7 +403,7 @@ class _ProfileState extends State<Profile> {
                                       child: Linkify(
                                         onOpen: _onOpen,
                                         text:
-                                        'To View Terms And Conditions\nClick https://snapinsight.net/termsandconditions.php',
+                                            'To View Terms And Conditions\nClick https://snapinsight.net/termsandconditions.php',
                                       ),
                                     ),
                                   ),
@@ -447,7 +458,7 @@ class _ProfileState extends State<Profile> {
                                       child: Linkify(
                                         onOpen: _onOpen,
                                         text:
-                                        'Contact Us?\nClick https://snapinsight.net/contacts.pho',
+                                            'Contact Us?\nClick https://snapinsight.net/contacts.pho',
                                       ),
                                     ),
                                   ),

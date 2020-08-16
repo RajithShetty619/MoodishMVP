@@ -160,6 +160,7 @@ class _Food_InfoState extends State<Food_Info> {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       GestureDetector(
                         child: PageTab(
@@ -189,20 +190,20 @@ class _Food_InfoState extends State<Food_Info> {
                           });
                         },
                       ),
-                      GestureDetector(
-                        child: PageTab(
-                          title: 'Delivery',
-                          // isActive: true,
-                          index: indx,
-                          stIndex: 3,
-                          press: () {},
-                        ),
-                        onTap: () {
-                          setState(() {
-                            indx = 3;
-                          });
-                        },
-                      ),
+                      // GestureDetector(
+                      //   child: PageTab(
+                      //     title: 'Delivery',
+                      //     // isActive: true,
+                      //     index: indx,
+                      //     stIndex: 3,
+                      //     press: () {},
+                      //   ),
+                      //   onTap: () {
+                      //     setState(() {
+                      //       indx = 3;
+                      //     });
+                      //   },
+                      // ),
                     ],
                   ),
                 ),

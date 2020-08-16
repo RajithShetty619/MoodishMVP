@@ -60,7 +60,6 @@ class _EditProfileState extends State<EditProfile> {
         .then((Position position) {
       _currentPosition = position;
     });
-    print(position);
   }
 
   _getAddressFromLatLng() async {
@@ -77,7 +76,6 @@ class _EditProfileState extends State<EditProfile> {
             "${place.subLocality},${place.locality}-${place.postalCode}";
         _user['location'] = _currentAddress;
       });
-      print(_currentAddress);
       userData1.editUserData(field: 'location', value: _currentAddress);
     } catch (e) {
       print(e);
@@ -369,7 +367,6 @@ class _EditProfileState extends State<EditProfile> {
                   onTap: () {
                     getCurrentLocation();
                     _getAddressFromLatLng();
-                    print(_currentAddress);
                   },
                   child: Row(
                     children: <Widget>[

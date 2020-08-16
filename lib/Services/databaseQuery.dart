@@ -35,7 +35,6 @@ class DatabaseQuery {
     /* gets previous list saved by the name */
     final _box = await Hive.openBox(listName + (mood ?? ''));
     List<dynamic> _gfoodList = await _box.get(listName);
-    print('getfood');
 
     /* condition satisfied when no list retrieved from memory
         or new list to be retrieved coz of next day has arrived */
@@ -49,7 +48,6 @@ class DatabaseQuery {
       /* used if value has more than item for single field*/
       if (_value[_value.length - 1].runtimeType != String) {
         dynamic _v = _value.removeLast();
-        print(_v);
         _finalQuery = _finalQuery.where(_field.removeLast(), whereIn: _v);
       }
       /* used lastdocument */
@@ -99,7 +97,6 @@ class DatabaseQuery {
 
       if (_value[_value.length - 1].runtimeType != String) {
         dynamic _v = _value.removeLast();
-        print(_v);
         _finalQuery = _finalQuery.where(_field.removeLast(), whereIn: _v);
       }
 
@@ -160,7 +157,6 @@ class DatabaseQuery {
 
     /* list of polls is made and returned */
     return _snapshot.map((doc) {
-      print(doc.data);
       Map<String, dynamic> _docData = doc.data;
       return PollsModel(
           question: _docData['value'],
@@ -193,7 +189,6 @@ class DatabaseQuery {
 
 /* list of this_that is made and returned */
     return _snapshot.map((doc) {
-      print(doc.data);
       Map<String, dynamic> _docData = doc.data;
       return This_thatModel(
         A: _docData['A'],
@@ -221,7 +216,6 @@ class DatabaseQuery {
 
 /* list of this_that is made and returned */
     return _snapshot.map((doc) {
-      print(doc.data);
       Map<String, dynamic> _docData = doc.data;
       return YesNoModel(
         Questions: _docData['Questions'],
@@ -254,7 +248,6 @@ class DatabaseQuery {
 
     /* list of polls is made and returned */
     return _snapshot.map((doc) {
-      print(doc.data);
       Map<String, dynamic> _docData = doc.data;
       return FactModel(
           factHeading: _docData['fact'],

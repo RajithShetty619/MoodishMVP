@@ -17,16 +17,35 @@ class DatabaseService {
     field is category you want to update 
     for eg:- in polls db has fields aLike ,bLike etc // MOHIT dhyan rakh ki models ke andar inke value int hai 
 */
-  Future<void> likeTransction({String collection, String sr_no, String field}) {
+  Future<void> likeTransction({
+    String collection,
+    String sr_no,
+    String field,
+    FoodListModel food,
+  }) async {
     DocumentReference documentReference =
         Firestore.instance.collection(collection).document(sr_no);
 
-    return documentReference
-        .setData({
-          field: FieldValue.increment(1) /* atomically increments data by 1 */
-        }, merge: true)
-        .whenComplete(() => true)
-        .catchError((onError) => print(onError));
+    if (food.mood != null) {
+      String uid = await Authenticate().returnUid();
+      Map<String, dynamic> _food = {};
+
+      _food = {
+        'foodName': food.foodName,
+        'meal_type': food.meal_type,
+        'deter': food.deter
+      };
+
+      Firestore.instance
+          .collection("username")
+          .document("$uid")
+          .collection("data")
+          .document("${food.mood}")
+          .setData({food.sr_no: _food}, merge: true);
+    }
+    return documentReference.setData({
+      field: FieldValue.increment(1) /* atomically increments data by 1 */
+    }, merge: true).catchError((onError) => print(onError));
   }
 /* ////////////////////////////////////////////////////////////////////// USERNAMEMETHODS ////////////////////////////////////////////////////////// */
 
@@ -98,29 +117,20 @@ class DatabaseService {
 
       while (_docData["step $i"] != null) {
         _preparation.add(_docData["step $i"]);
-        print(_docData["step $i"]);
         i++;
       }
       /* initialized */
       i = 2;
       /* same reason as preparation */
       _ingredients.add(_docData["ingredients"]);
-      print(_docData["ingredient2"]);
-      print("ingredient $i");
       /* converting step1,step2..... to List of preparation */
       while (_docData["ingredient $i"] != null) {
         _ingredients.add(_docData["ingredient $i"]);
-        print(_docData["ingredient $i"]);
 
         ++i;
       }
       /* might look overwhelming but just 
       initialized constructor of FoodListModel */
-      print(
-          "/////////////////////////////////////////////////////////////////////////////////");
-
-      print(_ingredients);
-      print(_preparation);
       return FoodListModel(
           foodName: _docData["food_item"] ?? '',
           deter: _docData["deter"] ?? '',
@@ -153,7 +163,6 @@ class DatabaseService {
   /* //////////////////////////////////////////////////// POLL METHOD///////////////////////////////////// */
 
   Future<void> likePoll({String sr_no, String opt, int like}) async {
-    print(sr_no + "  " + opt);
     DocumentReference _poll =
         Firestore.instance.collection('polls').document(sr_no);
     _poll.setData({opt: like}, merge: true);
