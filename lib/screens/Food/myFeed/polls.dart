@@ -62,7 +62,7 @@ class _PollTabsState extends State<PollTabs> {
           physics: NeverScrollableScrollPhysics(),
           itemCount: pollList['p'].length,
           itemBuilder: (BuildContext context, index) {
-            return GetListView1(poll: pollList['p'][index],choice: pollList['choice'][index],index:index);
+            return GetListView1(poll: pollList['p'][index],choice: pollList['choice']  ,index:index);
           },
         );
       },
@@ -503,7 +503,7 @@ class _GetListViewState extends State<GetListView> {
 /* poll card displayin widget */
 class GetListView1 extends StatefulWidget {
   final PollsModel poll;
-  final List<int> choice;
+  final List<dynamic> choice;
   final int index;
   GetListView1({
     this.choice,
@@ -516,20 +516,16 @@ class GetListView1 extends StatefulWidget {
 }
 
 class _GetListView1State extends State<GetListView1> {
-  int _index;
-  List<int> _choice = [];
+   
   bool pollPressed = false;
   PollsModel _poll;
-  Map usersWhoVoted = {
-    'sam@mail.com': 3,
-    'mike@mail.com': 4,
-    'john@mail.com': 1,
-    'kenny@mail.com': 1
-  };
+  Map usersWhoVoted = {};
   @override
   void initState() {
     setState(() {
       _poll = widget.poll;
+      if(widget.choice[widget.index]!=0)
+      usersWhoVoted['you'] = widget.choice[widget.index];
     });
     super.initState();
   }
@@ -554,15 +550,15 @@ class _GetListView1State extends State<GetListView1> {
           currentUser: 'you',
           creatorID: 'snapinsight',
           voteData: usersWhoVoted,
-          userChoice: widget.index,
+          userChoice: widget.choice[widget.index], 
           onVoteBackgroundColor: Colors.blue,
           leadingBackgroundColor: Colors.blue,
           backgroundColor: Colors.white,
           onVote: (choice) async {
             setState(() { 
               BlocProvider.of<PollBloc>(context)
-                    .add(PollEvent.add(_choice, 'choice'));  
-              this.usersWhoVoted['you'] = choice;
+                    .add(PollEvent.replace(widget.index, choice));  
+              usersWhoVoted['you'] = choice;
             });
             print(choice);
             if (choice == 1) {

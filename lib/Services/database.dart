@@ -17,19 +17,30 @@ class DatabaseService {
     field is category you want to update 
     for eg:- in polls db has fields aLike ,bLike etc // MOHIT dhyan rakh ki models ke andar inke value int hai 
 */
-  Future<void> likeTransction({String collection, String sr_no, String field,FoodListModel food}) async {
+  Future<void> likeTransction(
+      {String collection,
+      String sr_no,
+      String field,
+      FoodListModel food,
+       }) async {
     DocumentReference documentReference =
         Firestore.instance.collection(collection).document(sr_no);
 
-    String uid = await Authenticate().returnUid();
+    if (food.mood!=null) {
+      String uid = await Authenticate().returnUid();
+      Map <String,dynamic> _food= {};
 
-    Firestore.instance.collection("userName").document("uid").setData({"userData":{}});
+      _food= {'foodName':food.foodName,'meal_type':food.meal_type,'deter':food.deter};
 
-    return documentReference
-        .setData({
-          field: FieldValue.increment(1) /* atomically increments data by 1 */
-        }, merge: true) 
-        .catchError((onError) => print(onError));
+      Firestore.instance
+          .collection("username")
+          .document("$uid")
+           .collection("data")
+           .document("${food.mood}").setData({food.sr_no:_food},merge: true);
+    }
+    return documentReference.setData({
+      field: FieldValue.increment(1) /* atomically increments data by 1 */
+    }, merge: true).catchError((onError) => print(onError));
   }
 /* ////////////////////////////////////////////////////////////////////// USERNAMEMETHODS ////////////////////////////////////////////////////////// */
 

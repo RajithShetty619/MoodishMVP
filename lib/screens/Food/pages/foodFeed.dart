@@ -34,8 +34,8 @@ class FoodFeed extends StatefulWidget {
 }
 
 class _FoodFeedState extends State<FoodFeed> {
-  int numbr;
-  bool _getFoodCalled = false;
+  int numbr; 
+  String moodSelection ;
   bool loadingData1 = false;
   bool loadingData2 = false;
   DatabaseQuery _dq = DatabaseQuery(listName: "0");
@@ -81,6 +81,7 @@ class _FoodFeedState extends State<FoodFeed> {
       _dq.getFood(field: ['mood'], value: [mood], limit: 10, check: 0).then(
           (future) {
         setState(() {
+          moodSelection=mood;
           BlocProvider.of<FoodBloc>(dataContext)
               .add(FoodEvent.add(future, "0"));
         });
