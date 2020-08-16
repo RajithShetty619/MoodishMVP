@@ -26,7 +26,7 @@ class DatabaseService {
     DocumentReference documentReference =
         Firestore.instance.collection(collection).document(sr_no);
 
-    if (food.mood != null) {
+    if (food != null) {
       String uid = await Authenticate().returnUid();
       Map<String, dynamic> _food = {};
 
