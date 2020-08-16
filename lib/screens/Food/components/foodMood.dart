@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/Services/betaCount.dart';
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/food_info.dart';
+import 'package:moodish_mvp/test.dart';
 
 class Mood_Food extends StatefulWidget {
   const Mood_Food({
@@ -90,12 +92,13 @@ class _Mood_FoodState extends State<Mood_Food> {
                                         size: 30,
                                       ),
                                 onPressed: () async {
-                                  if (!_like)
-                                    await DatabaseService().likeTransction(
+                                  if (!_like) {
+                                    await DatabaseService().likeTransction(food: widget.foodList,
                                         sr_no: widget.foodList.sr_no,
                                         collection: "food",
-                                        field: "like"); 
-
+                                        field: "like");
+                                    await BetaCount().count(field: 'situation');
+                                  }
                                   setState(() {
                                     _like = !_like;
                                   });

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/Services/betaCount.dart';
 import 'package:moodish_mvp/Services/storage.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/components/shareDialog.dart';
@@ -35,115 +36,6 @@ class _TodaySpecialState extends State<TodaySpecial> {
                         foodList: widget.foodList,
                       )));
         },
-        //     child: FutureBuilder<String>(
-        //       future: Storage().getUrl(widget.image),
-        //       initialData: null,
-        //       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        //         if (snapshot.connectionState == ConnectionState.done) {
-        //           return CachedNetworkImage(
-        //             imageUrl: snapshot.data,
-        //             imageBuilder: (context, imageProvider) {
-        /* child: CachedNetworkImage(
-          imageUrl: widget.image,
-          imageBuilder: (context, imageProvider) {
-            return Container(
-              margin: EdgeInsets.only(right: 20),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  image: DecorationImage(
-                    image:  widget.image,
-                    fit: BoxFit.cover,
-                  )),
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    gradient:
-                        LinearGradient(begin: Alignment.bottomCenter, stops: [
-                      .1,
-                      .5
-                    ], colors: [
-                      Colors.black.withOpacity(.6),
-                      Colors.black.withOpacity(.3),
-                    ])),
-                child: Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.favorite_border,
-                            color: Colors.white,
-                          ),
-                          onPressed: () async {
-                            final action = await Dialogs.yesAbortDialog(
-                                context, 'My title', 'My Body');
-                          },
-                        ),
-                        onPressed: () async {
-                          final action = await Dialogs.yesAbortDialog(
-                              context, 'My title', 'My Body');
-                        },
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            widget.descrip1,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          widget.descrip2,
-                          style: TextStyle(color: Colors.white, fontSize: 18),
-                        ),
-                        SizedBox(height: 15),
-                        FlatButton(
-                          onPressed: () {},
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: Container(
-                              // color: Colors.blue[300],
-                              child: IconButton(
-                                icon: Icon(
-                                  Icons.restaurant,
-                                  color: Colors.white,
-                                  size: 35,
-                                ),
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              IntroScreen()));
-                                },
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            );
-          },
-          placeholder: (context, url) => CircularProgressIndicator(),
-          errorWidget: (context, url, error) => Icon(Icons.error),
-        ),*/
-
         child: Stack(
           children: <Widget>[
             CachedNetworkImage(
@@ -193,7 +85,8 @@ class _TodaySpecialState extends State<TodaySpecial> {
                                   color: Colors.white,
                                   size: 30,
                                 ),
-                          onPressed: () async {
+                          onPressed: () async { 
+                                await BetaCount().count(field:'foodliked');
                             if (_like != false)
                               final action = await Dialogs.yesAbortDialog(
                                   context, 'My title', 'My Body');
@@ -227,22 +120,6 @@ class _TodaySpecialState extends State<TodaySpecial> {
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 18),
                               ),
-                              // Padding(
-                              //   padding: const EdgeInsets.all(3.0),
-                              //   child: Container(
-                              //     height: 5,
-                              //     width: 5,
-                              //     decoration: BoxDecoration(
-                              //       borderRadius: BorderRadius.circular(300),
-                              //       color: Colors.white,
-                              //     ),
-                              //   ),
-                              // ),
-                              // Text(
-                              //   widget.preptime,
-                              //   style:
-                              //       TextStyle(color: Colors.white, fontSize: 18),
-                              // ),
                               Padding(
                                 padding: const EdgeInsets.all(3.0),
                                 child: Container(
@@ -270,7 +147,8 @@ class _TodaySpecialState extends State<TodaySpecial> {
                                 // color: Colors.blue[200],
                                 elevation: 20,
 
-                                onPressed: () {
+                                onPressed: () async {
+                                  await BetaCount().count(field: "let's cook");
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -287,59 +165,6 @@ class _TodaySpecialState extends State<TodaySpecial> {
                               ),
                             ),
                           )
-                          // FlatButton(
-                          //   onPressed: () {},
-                          //   child: ClipRRect(
-                          //     borderRadius: BorderRadius.circular(20),
-                          //     child: Container(
-                          //       // color: Colors.blue[300],
-                          //       child: IconButton(
-                          //         icon: Icon(
-                          //           Icons.restaurant,
-                          //           color: Colors.white,
-                          //           size: 35,
-                          //         ),
-                          //         onPressed: () {
-                          //           Navigator.push(
-                          //               context,
-                          //               MaterialPageRoute(
-                          //                   builder: (context) =>
-                          //                       IntroScreen()));
-                          //         },
-                          //       ),
-                          //     ),
-                          //   ),
-
-                          //   // label: Text(''),
-                          // ),
-                          // // SizedBox(height: 10),
-                          // Row(
-                          //   mainAxisAlignment:
-                          //       MainAxisAlignment.spaceBetween,
-                          //   crossAxisAlignment: CrossAxisAlignment.end,
-                          //   children: <Widget>[
-                          //     FlatButton.icon(
-                          //         onPressed: () {},
-                          //         icon: Icon(
-                          //           Icons.info_outline,
-                          //           color: Colors.white,
-                          //         ),
-                          //         label: Text(
-                          //           'More info',
-                          //           style: TextStyle(color: Colors.white),
-                          //         )),
-                          //     FlatButton.icon(
-                          //         onPressed: () => _onButtonPressed(),
-                          //         icon: Icon(
-                          //           Icons.filter_center_focus,
-                          //           color: Colors.white,
-                          //         ),
-                          //         label: Text(
-                          //           'Filter',
-                          //           style: TextStyle(color: Colors.white),
-                          //         ))
-                          //   ],
-                          // ),
                         ],
                       )
                     ],
@@ -349,16 +174,6 @@ class _TodaySpecialState extends State<TodaySpecial> {
             ),
           ],
         ),
-
-        //             },
-        //             placeholder: (context, url) => CircularProgressIndicator(),
-        //             errorWidget: (context, url, error) => Icon(Icons.error),
-        //           );
-        //         } else {
-        //           return Container();
-        //         }
-        //       },
-        // ),
       ),
     );
   }

@@ -1,4 +1,3 @@
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PollBlocDelegate extends BlocDelegate {
@@ -7,7 +6,6 @@ class PollBlocDelegate extends BlocDelegate {
     // TODO: implement onEvent
     super.onEvent(bloc, event);
     print(event);
-    print("0000000000000000000000000000000000");
   }
 
   @override

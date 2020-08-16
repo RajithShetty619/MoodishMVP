@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:moodish_mvp/Services/betaCount.dart';
 //import 'package:rest/starfeedback.dart';
 
 import 'map.dart';
@@ -64,7 +65,8 @@ class _OverViewState extends State<OverView> {
                               width: 20.0,
                             ),
                             InkWell(
-                                onTap: () {
+                                onTap: () async {
+                                  await BetaCount().count(field: 'situation');
                                   showDialog(
                                       context: context,
                                       builder: (BuildContext context) {
@@ -215,7 +217,9 @@ class _OverViewState extends State<OverView> {
                           SizedBox(height: 5),
                           Padding(
                               padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
-                              child: Container(alignment:Alignment.centerLeft,child: Text(widget.desc))),
+                              child: Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(widget.desc))),
                           SizedBox(height: 5.0),
                           Padding(
                             padding: EdgeInsets.fromLTRB(0, 20, 10, 10),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:moodish_mvp/Authenticate/forgotPassword.dart';
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:image_picker/image_picker.dart';
+// import 'package:image_picker/image_picker.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 
@@ -17,21 +17,21 @@ class EditProfile extends StatefulWidget {
 class _EditProfileState extends State<EditProfile> {
   Map<String, String> _user;
   ImageProvider _image;
-  final userData1 = DatabaseService(); 
+  final userData1 = DatabaseService();
   Position _currentPosition;
   String _currentAddress = 'Mumbai,Maharashtra';
   Geolocator geolocator = Geolocator();
   ImageProvider image;
   getImage() async {
-    final fileImage = await ImagePicker.pickImage(source: ImageSource.gallery);
-    ImageProvider image = FileImage(fileImage);
+    // final fileImage = await ImagePicker.pickImage(source: ImageSource.gallery);
+    // ImageProvider image = FileImage(fileImage);
 
     // final Directory _dir = await getApplicationDocumentsDirectory();
     // final String _path = _dir.path;
     setState(() {
       _image = image;
     });
-    DatabaseService().uploadPhoto(fileImage);
+    // DatabaseService().uploadPhoto(fileImage);
   }
 
   @override
@@ -60,7 +60,6 @@ class _EditProfileState extends State<EditProfile> {
         .then((Position position) {
       _currentPosition = position;
     });
-    print(position);
   }
 
   _getAddressFromLatLng() async {
@@ -75,9 +74,8 @@ class _EditProfileState extends State<EditProfile> {
       setState(() {
         _currentAddress =
             "${place.subLocality},${place.locality}-${place.postalCode}";
-            _user['location']=_currentAddress;
+        _user['location'] = _currentAddress;
       });
-      print(_currentAddress);
       userData1.editUserData(field: 'location', value: _currentAddress);
     } catch (e) {
       print(e);
@@ -85,8 +83,8 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   @override
-  Widget build(BuildContext context) { 
-    String birth = '( none )'; 
+  Widget build(BuildContext context) {
+    String birth = '( none )';
     birthDate() async {
       var datePicked = await DatePicker.showSimpleDatePicker(
         context,
@@ -100,16 +98,16 @@ class _EditProfileState extends State<EditProfile> {
       setState(() {
         birth =
             '${datePicked.day.toString()}/${datePicked.month.toString()}/${datePicked.year.toString()}';
-            _user['Birthdate'] = birth;
+        _user['Birthdate'] = birth;
       });
       userData1.editUserData(field: 'Birthdate', value: birth);
     }
 
     return WillPopScope(
-      onWillPop: ()async{
-         Navigator.pop(context,_user);
+      onWillPop: () async {
+        Navigator.pop(context, _user);
       },
-          child: Scaffold(
+      child: Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
@@ -179,10 +177,12 @@ class _EditProfileState extends State<EditProfile> {
                         buttons: [
                           DialogButton(
                             onPressed: () =>
-                                Navigator.of(context, rootNavigator: true).pop(),
+                                Navigator.of(context, rootNavigator: true)
+                                    .pop(),
                             child: Text(
                               "Save",
-                              style: TextStyle(color: Colors.white, fontSize: 20),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
                             ),
                           )
                         ]).show();
@@ -243,7 +243,8 @@ class _EditProfileState extends State<EditProfile> {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
                       return ForgotPassword();
                     }));
                   },
@@ -311,11 +312,11 @@ class _EditProfileState extends State<EditProfile> {
                         content: TextField(
                           keyboardType: TextInputType.number,
                           onChanged: (val) {
-                             setState(() {
-                               _user['Phoneno.']=val.toString();
-                             }); 
+                            setState(() {
+                              _user['Phoneno.'] = val.toString();
+                            });
                             userData1.editUserData(
-                                field: 'Phoneno.', value:  _user['Phoneno.']);
+                                field: 'Phoneno.', value: _user['Phoneno.']);
                           },
                           decoration: InputDecoration(
                             icon: Icon(Icons.edit),
@@ -326,12 +327,12 @@ class _EditProfileState extends State<EditProfile> {
                         buttons: [
                           DialogButton(
                             onPressed: () {
-                              Navigator.of(context, rootNavigator: true)
-                                  .pop( );
+                              Navigator.of(context, rootNavigator: true).pop();
                             },
                             child: Text(
                               "Save",
-                              style: TextStyle(color: Colors.white, fontSize: 20),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
                             ),
                           )
                         ]).show();
@@ -366,7 +367,6 @@ class _EditProfileState extends State<EditProfile> {
                   onTap: () {
                     getCurrentLocation();
                     _getAddressFromLatLng();
-                    print(_currentAddress);
                   },
                   child: Row(
                     children: <Widget>[
@@ -421,7 +421,7 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.pop(context,_user);
+                        Navigator.pop(context, _user);
                       },
                     ),
                   ),

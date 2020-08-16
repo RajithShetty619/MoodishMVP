@@ -9,7 +9,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class MainScreen extends StatefulWidget {
-
   @override
   _MainScreenState createState() => _MainScreenState();
 }
@@ -18,6 +17,7 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
   GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -29,7 +29,7 @@ class _MainScreenState extends State<MainScreen> {
     return WillPopScope(
       onWillPop: () async {
         bool value;
-         await Alert(
+        await Alert(
           context: context,
           type: AlertType.warning,
           title: "Do You Want To Leave The App?",
@@ -40,15 +40,12 @@ class _MainScreenState extends State<MainScreen> {
                 "Yes",
                 style: TextStyle(color: Colors.white, fontSize: 20),
               ),
-              onPressed: ()  {
+              onPressed: () {
+                Navigator.of(context, rootNavigator: true).pop();
 
-                Navigator.of(context,rootNavigator: true).pop();
-
-              setState(() {
-                value = true;
-              });
-
-
+                setState(() {
+                  value = true;
+                });
               },
               color: Colors.green[600],
             ),
@@ -58,9 +55,9 @@ class _MainScreenState extends State<MainScreen> {
                 style: TextStyle(color: Colors.white, fontSize: 20),
               ),
               onPressed: () {
-                Navigator.of(context,rootNavigator: true).pop();
+                Navigator.of(context, rootNavigator: true).pop();
                 setState(() {
-                  value =false;
+                  value = false;
                 });
               },
               color: Colors.red[700],
@@ -75,8 +72,7 @@ class _MainScreenState extends State<MainScreen> {
             child: IndexedStack(
           index: _selectedIndex,
           children: [
-            FoodHome(
-            ),
+            FoodHome(),
             Restaurant(),
             Search(),
             Profile(),

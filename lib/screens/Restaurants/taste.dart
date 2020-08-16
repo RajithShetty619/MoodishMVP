@@ -81,7 +81,6 @@ class _TasteState extends State<Taste> {
                           Future.delayed(Duration(milliseconds: 500), () {
                             setState(() {
                               taste.remove(_val);
-                              print(pref);
                               if (taste.length < 1) {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
@@ -153,7 +152,7 @@ class _TasteState extends State<Taste> {
                           }));
                         else
                           setState(() {
-                            err = 'Select  ${3-i} more!';
+                            err = 'Select  ${3 - i} more!';
                           });
                       },
                       color: Colors.green,

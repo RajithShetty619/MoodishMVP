@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
+import 'package:moodish_mvp/Services/betaCount.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/components/pageview1.dart';
 import 'package:moodish_mvp/screens/Food/components/stepSlider.dart';
@@ -150,12 +151,15 @@ class _FoodRecipeState extends State<FoodRecipe> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                onPressed: () {
-                  
-                          Navigator.push(context,
-          MaterialPageRoute(builder: (context) => PageViewer1(
-            foodList: widget.foodList,
-          )));
+                onPressed: () async {
+                  await BetaCount().count(field:"step by step");
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PageViewer1(
+                                foodList: widget.foodList,
+                              )));
+
                   // showDialog(
                   //     context: context,
                   //     builder: (BuildContext context) {
@@ -207,9 +211,9 @@ class _FoodRecipeState extends State<FoodRecipe> {
                   //           ],
                   //         ),
                   //       );
-                       
+
                   //     }
-                      
+
                   //     );
                 },
                 child: Text('Show More'),

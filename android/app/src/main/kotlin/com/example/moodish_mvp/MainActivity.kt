@@ -1,4 +1,4 @@
-package com.example.moodish_mvp
+package net.moodishtest.snap
 
 import io.flutter.embedding.android.FlutterActivity
 

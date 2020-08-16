@@ -92,7 +92,6 @@ class _CuisineState extends State<Cuisine> {
                           Future.delayed(Duration(milliseconds: 500), () {
                             setState(() {
                               cuisine.remove(_val);
-                              print(pref);
                               if (pref.length == 9) {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
