@@ -156,8 +156,6 @@ class _FoodRecipeState extends State<FoodRecipe> {
           MaterialPageRoute(builder: (context) => PageViewer1(
             foodList: widget.foodList,
           )));
-
-
                   // showDialog(
                   //     context: context,
                   //     builder: (BuildContext context) {
