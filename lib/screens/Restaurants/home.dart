@@ -261,7 +261,7 @@ class _RestaurantState extends State<Restaurant> {
                     text: TextSpan(
                         text: 'Restaurants',
                         style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.width / 6,
+                            fontSize: MediaQuery.of(context).size.width / 7,
                             color: Colors.black,
                             fontWeight: FontWeight.bold),
                         children: [
