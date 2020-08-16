@@ -10,7 +10,6 @@ import 'package:moodish_mvp/models/yesNo.dart';
 import 'package:moodish_mvp/screens/Food/blocs/pollsbloc/pollsBloc.dart';
 import 'package:moodish_mvp/screens/Food/events/pollsEvent.dart';
 import 'package:polls/polls.dart';
- 
 
 class PollTabs extends StatefulWidget {
   @override
@@ -53,15 +52,16 @@ class _PollTabsState extends State<PollTabs> {
         return true;
       },
       builder: (BuildContext context, pollList) {
-        print(pollList['p'].length);
-
         return ListView.builder(
           shrinkWrap: true,
           primary: false,
           physics: NeverScrollableScrollPhysics(),
           itemCount: pollList['p'].length,
           itemBuilder: (BuildContext context, index) {
-            return GetListView1(poll: pollList['p'][index],choice: pollList['choice']  ,index:index);
+            return GetListView1(
+                poll: pollList['p'][index],
+                choice: pollList['choice'],
+                index: index);
           },
         );
       },
@@ -199,7 +199,6 @@ class _YesNoListState extends State<YesNoList> {
             setState(() {
               this.usersWhoVoted['you'] = choice;
             });
-            print(choice);
             if (choice == 1) {
               setState(() {
                 _yes.yes += 1;
@@ -392,7 +391,6 @@ class _GetListViewState extends State<GetListView> {
             setState(() {
               this.usersWhoVoted['you'] = choice;
             });
-            print(choice);
             if (choice == 1) {
               setState(() {
                 _thisT.aLike += 1;
@@ -504,18 +502,13 @@ class GetListView1 extends StatefulWidget {
   final PollsModel poll;
   final List<dynamic> choice;
   final int index;
-  GetListView1({
-    this.choice,
-    this.poll,
-    this.index 
-  });
+  GetListView1({this.choice, this.poll, this.index});
 
   @override
   _GetListView1State createState() => _GetListView1State();
 }
 
 class _GetListView1State extends State<GetListView1> {
-   
   bool pollPressed = false;
   PollsModel _poll;
   Map usersWhoVoted = {};
@@ -523,8 +516,8 @@ class _GetListView1State extends State<GetListView1> {
   void initState() {
     setState(() {
       _poll = widget.poll;
-      if(widget.choice[widget.index]!=0)
-      usersWhoVoted['you'] = widget.choice[widget.index];
+      if (widget.choice[widget.index] != 0)
+        usersWhoVoted['you'] = widget.choice[widget.index];
     });
     super.initState();
   }
@@ -549,17 +542,16 @@ class _GetListView1State extends State<GetListView1> {
           currentUser: 'you',
           creatorID: 'snapinsight',
           voteData: usersWhoVoted,
-          userChoice: widget.choice[widget.index], 
+          userChoice: widget.choice[widget.index],
           onVoteBackgroundColor: Colors.blue,
           leadingBackgroundColor: Colors.blue,
           backgroundColor: Colors.white,
           onVote: (choice) async {
-            setState(() { 
+            setState(() {
               BlocProvider.of<PollBloc>(context)
-                    .add(PollEvent.replace(widget.index, choice));  
+                  .add(PollEvent.replace(widget.index, choice));
               usersWhoVoted['you'] = choice;
             });
-            print(choice);
             if (choice == 1) {
               setState(() {
                 _poll.aLike += 1;
