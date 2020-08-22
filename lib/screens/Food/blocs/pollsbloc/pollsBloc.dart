@@ -9,6 +9,8 @@ class PollBloc extends Bloc<PollEvent, Map<String, List<dynamic>>> {
         "choice": [0, 0, 0, 0],
         "fft": [],
         "like": [0, 0, 0, 0, 0],
+        "yn": [],
+        "tt": [],
       };
 
   @override

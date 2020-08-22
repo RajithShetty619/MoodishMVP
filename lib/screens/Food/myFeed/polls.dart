@@ -82,31 +82,38 @@ class This_ThatTabs extends StatefulWidget {
 class _This_ThatTabsState extends State<This_ThatTabs> {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<This_thatModel>>(
-        future: DatabaseQuery().getthis_that(),
-        initialData: [],
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            List<This_thatModel> _thisthat = snapshot.data;
-            return ListView.builder(
-                shrinkWrap: true,
-                primary: false,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: _thisthat.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return GetListView(
-                    this_that: _thisthat[index],
-                  );
-                });
-          } else {
-            return Center(
-              child: SpinKitFadingCircle(
-                color: Colors.greenAccent[400],
-                size: 40,
-              ),
-            );
-          }
-        });
+    return BlocConsumer<PollBloc, Map<String, List<dynamic>>>(
+      buildWhen: (Map<String, List<dynamic>> previous,
+          Map<String, List<dynamic>> current) {
+        return true;
+      },
+      listenWhen: (Map<String, List<dynamic>> previous,
+          Map<String, List<dynamic>> current) {
+        // if (current.length > previous.length) {
+        //   return true;
+        // }
+        return true;
+      },
+      builder: (BuildContext context, thislist) {
+        return ListView.builder(
+          shrinkWrap: true,
+          primary: false,
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: thislist['tt'].length,
+          itemBuilder: (BuildContext context, index) {
+            return GetListView(
+                this_that: thislist['tt'][index],
+                choice: thislist['choice'],
+                index: index);
+          },
+        );
+      },
+      listener: (context, thislist) {
+        Scaffold.of(context).showSnackBar(
+          SnackBar(content: Text('Added!')),
+        );
+      },
+    );
   }
 }
 
@@ -118,57 +125,62 @@ class YesNoTabs extends StatefulWidget {
 class _YesNoTabsState extends State<YesNoTabs> {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<YesNoModel>>(
-        future: DatabaseQuery().getYesno(),
-        initialData: [],
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            List<YesNoModel> _yesno = snapshot.data;
-            return ListView.builder(
-                shrinkWrap: true,
-                primary: false,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: _yesno.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return YesNoList(
-                    yesno: _yesno[index],
-                  );
-                });
-          } else {
-            return Center(
-              child: SpinKitFadingCircle(
-                color: Colors.greenAccent[400],
-                size: 40,
-              ),
-            );
-          }
-        });
+    return BlocConsumer<PollBloc, Map<String, List<dynamic>>>(
+      buildWhen: (Map<String, List<dynamic>> previous,
+          Map<String, List<dynamic>> current) {
+        return true;
+      },
+      listenWhen: (Map<String, List<dynamic>> previous,
+          Map<String, List<dynamic>> current) {
+        // if (current.length > previous.length) {
+        //   return true;
+        // }
+        return true;
+      },
+      builder: (BuildContext context, yesno) {
+        return ListView.builder(
+          shrinkWrap: true,
+          primary: false,
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: yesno['yn'].length,
+          itemBuilder: (BuildContext context, index) {
+            return YesNoList(
+                yesno: yesno['yn'][index],
+                choice: yesno['choice'],
+                index: index);
+          },
+        );
+      },
+      listener: (context, yesno) {
+        Scaffold.of(context).showSnackBar(
+          SnackBar(content: Text('Added!')),
+        );
+      },
+    );
   }
 }
 
 class YesNoList extends StatefulWidget {
   final YesNoModel yesno;
+  final List<dynamic> choice;
+  final int index;
 
-  const YesNoList({Key key, this.yesno}) : super(key: key);
+  const YesNoList({Key key, this.yesno, this.choice, this.index});
   @override
   _YesNoListState createState() => _YesNoListState();
 }
 
 class _YesNoListState extends State<YesNoList> {
-  int _index;
   bool _pressed = false;
   YesNoModel _yes;
-  Map usersWhoVoted = {
-    'sam@mail.com': 3,
-    'mike@mail.com': 4,
-    'john@mail.com': 1,
-    'kenny@mail.com': 1
-  };
+  Map usersWhoVoted = {};
 
   @override
   void initState() {
     setState(() {
       _yes = widget.yesno;
+      if (widget.choice[widget.index] != 0)
+        usersWhoVoted['you'] = widget.choice[widget.index];
     });
     super.initState();
   }
@@ -197,7 +209,9 @@ class _YesNoListState extends State<YesNoList> {
           backgroundColor: Colors.white,
           onVote: (choice) async {
             setState(() {
-              this.usersWhoVoted['you'] = choice;
+              BlocProvider.of<PollBloc>(context)
+                  .add(PollEvent.replace(widget.index, choice));
+              usersWhoVoted['you'] = choice;
             });
             if (choice == 1) {
               setState(() {
@@ -338,29 +352,30 @@ class _YesNoListState extends State<YesNoList> {
 // print this that on the screen
 class GetListView extends StatefulWidget {
   final This_thatModel this_that;
+  final List<dynamic> choice;
+  final int index;
   GetListView({
     this.this_that,
     Key key,
-  }) : super(key: key);
+    this.choice,
+    this.index,
+  });
 
   @override
   _GetListViewState createState() => _GetListViewState();
 }
 
 class _GetListViewState extends State<GetListView> {
-  int _index;
   bool thispressed = false;
   This_thatModel _thisT;
-  Map usersWhoVoted = {
-    'sam@mail.com': 3,
-    'mike@mail.com': 4,
-    'john@mail.com': 1,
-    'kenny@mail.com': 1
-  };
+  Map usersWhoVoted = {};
   @override
   void initState() {
     setState(() {
       _thisT = widget.this_that;
+
+      if (widget.choice[widget.index] != 0)
+        usersWhoVoted['you'] = widget.choice[widget.index];
     });
     super.initState();
   }
@@ -389,7 +404,9 @@ class _GetListViewState extends State<GetListView> {
           backgroundColor: Colors.white,
           onVote: (choice) async {
             setState(() {
-              this.usersWhoVoted['you'] = choice;
+              BlocProvider.of<PollBloc>(context)
+                  .add(PollEvent.replace(widget.index, choice));
+              usersWhoVoted['you'] = choice;
             });
             if (choice == 1) {
               setState(() {
