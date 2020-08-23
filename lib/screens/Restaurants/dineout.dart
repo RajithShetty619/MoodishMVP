@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/screens/Restaurants/restaurantCard/homepage.dart';
+import 'package:page_transition/page_transition.dart';
 
 class DineOut extends StatefulWidget {
   @override
@@ -173,6 +174,7 @@ class _DineOutState extends State<DineOut> {
                             ]),
                       GestureDetector(
                         onTap: (){
+//                          Navigator.push(context, PageTransition(type: PageTransitionType.downToUp, child: HomePage(desc: rest[index].desc,imgName: rest[index].image,imgName1: rest[index].image1,imgName2: rest[index].image2,restName: rest[index].name,)));
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
                                 return HomePage(desc: rest[index].desc,imgName: rest[index].image,imgName1: rest[index].image1,imgName2: rest[index].image2,restName: rest[index].name,);
