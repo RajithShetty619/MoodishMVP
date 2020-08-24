@@ -1,7 +1,10 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:moodish_mvp/Services/notification_helper.dart';
 
 import 'package:moodish_mvp/models/messageObject.dart';
+import 'package:moodish_mvp/test.dart';
 
 //ADD IN FIREBASE CUSTOM DATA IN CLOUD MESSAGING
 //click_action: FLUTTER_NOTIFICATION_CLICK
@@ -14,22 +17,37 @@ class Messaging extends StatefulWidget {
 
 class _MessagingState extends State<Messaging> {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
+    final notifications = FlutterLocalNotificationsPlugin();
+
   bool _initialized = false;
-  final List<Message> messages = []; //Input message list
+  final List<Messages> messages = []; //Input message list
 
   @override
   void initState() {
     super.initState();
+
+    final settingsAndroid = AndroidInitializationSettings('app_icon');
+    final settingsIOS = IOSInitializationSettings(
+        onDidReceiveLocalNotification: (id, title, body, payload) =>
+            onSelectNotification(payload));
+
+    notifications.initialize(
+        InitializationSettings(settingsAndroid, settingsIOS),
+        onSelectNotification: onSelectNotification);
+  
     _firebaseMessaging.configure(
         onMessage: (Map<String, dynamic> message) async {
       print("onMessage : $message");
       final notification = message['notification'];
       setState(() {
         messages.add(//adds message to message list
-            Message(title: notification['title'], body: notification['body']));
+            Messages(title: notification['title'], body: notification['body']));
       });
     }, onLaunch: (Map<String, dynamic> message) async {
       print("onLaunch : $message");
+      showOngoingNotification(notifications,
+                    title: 'Tite', body: 'Body');
     }, onResume: (Map<String, dynamic> message) async {
       print("onResume : $message");
     });
@@ -43,12 +61,17 @@ class _MessagingState extends State<Messaging> {
     }
   }
 
+  Future onSelectNotification(String payload) async => await Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Test(payload: payload)),
+      );
+
   @override
   Widget build(BuildContext context) => ListView(
         children: messages.map(buildMessage).toList(), // to show message
       );
 
-  Widget buildMessage(Message message) => ListTile(
+  Widget buildMessage(Messages message) => ListTile(
         title: Text(message.title), // to build message
         subtitle: Text(message.body), // to build message context
       );

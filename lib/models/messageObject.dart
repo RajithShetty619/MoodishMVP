@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 @immutable
-class Message{
+class Messages{
   final String title;
   final String body;
 
-  const Message({
+  const Messages({
     @required this.title,
     @required this.body,
 });
