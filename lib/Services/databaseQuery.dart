@@ -103,7 +103,7 @@ class DatabaseQuery {
       _finalQuery = recQuery(_field, _value, _finalQuery)
           .startAfter([_lastDocument])
           .orderBy('description')
-          .limit(2);
+          .limit(4);
 
       QuerySnapshot snapshot = await _finalQuery.getDocuments();
       List<FoodListModel> queryList =
@@ -143,7 +143,7 @@ class DatabaseQuery {
         .where('value', isGreaterThan: '')
         .startAfter([last])
         .orderBy('value')
-        .limit(3);
+        .limit(5);
     List<DocumentSnapshot> _snapshot =
         await q.getDocuments().then((value) => value.documents);
 
@@ -180,7 +180,7 @@ class DatabaseQuery {
         .where('A', isGreaterThan: '')
         .startAfter([end])
         .orderBy('A')
-        .limit(2);
+        .limit(4);
     List<DocumentSnapshot> _snapshot =
         await t.getDocuments().then((value) => value.documents);
     // saving last this_that to be shown
