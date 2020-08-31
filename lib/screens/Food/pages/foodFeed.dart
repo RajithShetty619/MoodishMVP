@@ -55,6 +55,12 @@ class _FoodFeedState extends State<FoodFeed> {
       DatabaseQuery(listName: 'p').getPoll().then((poll) {
         BlocProvider.of<PollBloc>(context).add(PollEvent.add(poll, 'p'));
       });
+      DatabaseQuery(listName: 'yn').getYesno().then((yesno) {
+        BlocProvider.of<PollBloc>(context).add(PollEvent.add(yesno, 'yn'));
+      });
+      DatabaseQuery(listName: 'tt').getPoll().then((thisthat) {
+        BlocProvider.of<PollBloc>(context).add(PollEvent.add(thisthat, 'p'));
+      });
       DatabaseQuery(listName: 'fft').getFact().then((fact) {
         BlocProvider.of<PollBloc>(context).add(PollEvent.add(fact, 'fft'));
       });
@@ -427,15 +433,15 @@ class _FoodFeedState extends State<FoodFeed> {
                         if (indx == 2)
                           Column(
                             children: <Widget>[
-                            //   Container(child: PollTabs()),
-                              if (numbr == 0)
-                                Container( child: YesNoTabs()),
-                              if (numbr == 1)
-                                Container(
-                                child:  PollTabs()
-                                ),
-                              if (numbr == 2)
-                                Container( child: This_ThatTabs()),
+                              Container(child: YesNoTabs()),
+                              // if (numbr == 0)
+                              //   Container( child: YesNoTabs()),
+                              // if (numbr == 1)
+                              //   Container(
+                              //   child:  PollTabs()
+                              //   ),
+                              // if (numbr == 2)
+                              //   Container( child: This_ThatTabs()),
                             ],
                           ),
                         if (indx == 3) Container(child: FoodftTab()),

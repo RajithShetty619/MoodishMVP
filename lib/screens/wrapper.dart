@@ -17,7 +17,7 @@ class Wrapper extends StatelessWidget {
     if (onAuthChanged == null) {
       return SignIn();
     } else {
-      return Persistent_notification();
+      return MainScreen();
     }
   }
 }

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/Services/betaCount.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/food_info.dart';
 
@@ -16,6 +17,8 @@ class FoodEveryTaste extends StatefulWidget {
 }
 
 class _FoodEveryTasteState extends State<FoodEveryTaste> {
+    bool _like = true;
+
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
@@ -61,27 +64,57 @@ class _FoodEveryTasteState extends State<FoodEveryTaste> {
                 child: Padding(
                   padding: EdgeInsets.all(10.0),
                   child: Column(
+                    
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
                       Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          widget.foodList.foodName,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold),
+                        alignment: Alignment.topRight,
+                        child: IconButton(
+                          icon: _like
+                              ? Icon(
+                                  Icons.favorite_border,
+                                  color: Colors.white,
+                                  size: 25,
+                                )
+                              : Icon(
+                                  Icons.favorite,
+                                  color: Colors.white,
+                                  size: 30,
+                                ),
+                          onPressed: () async { 
+                                await BetaCount().count(field:'foodliked');
+                            if (_like != false)
+                            setState(() {
+                              _like = !_like;
+                            });
+                          },
                         ),
                       ),
-                      SizedBox(height: 10),
-                      Text(
-                        widget.foodList.deter,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
-                      )
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              widget.foodList.foodName,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            widget.foodList.deter,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                          )
+                        ],
+                      ),
                     ],
                   ),
                 ),
