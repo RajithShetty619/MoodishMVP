@@ -1,33 +1,92 @@
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flappy_search_bar/search_bar_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/Services/searchFunction.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
+import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
+import 'package:moodish_mvp/screens/Food/components/Food_Taste.dart';
 import 'package:moodish_mvp/screens/Food/components/TodaySpecial.dart';
+import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 
 class Search extends StatefulWidget {
   @override
   _SearchState createState() => _SearchState();
 }
 
-class _SearchState extends State<Search> { 
-     String text = '';
+class _SearchState extends State<Search> {
+  DatabaseQuery _dqtaste0 = DatabaseQuery(listName: 't2');
+
+  @override
+  void initState() {
+    super.initState();
+    _dqtaste0.getFood(
+        field: ['taste'], value: ['Sweet'], limit: 10, check: 0).then((future) {
+      BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t2"));
+    });
+  }
+
+  String text = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container( 
+        child: Container(
           padding: EdgeInsets.symmetric(horizontal: 15),
           child: SearchBar<FoodListModel>(
             debounceDuration: Duration(seconds: 1),
             onSearch: SearchFunction().search,
             emptyWidget: Center(child: Text('not a thing found')),
-            placeHolder: Center(child: Text('try searching a food by name or just by mood')),
-            cancellationWidget: Icon(Icons.cancel,size: 45,color: Colors.grey[400],),
-            onItemFound: (FoodListModel food, int index) { 
+            placeHolder: Container(
+              padding: EdgeInsets.symmetric(vertical: 20),
+              margin: EdgeInsets.symmetric(vertical: 20),
+              child: BlocConsumer<FoodBloc, Map<String, List<FoodListModel>>>(
+                buildWhen: (Map<String, List<FoodListModel>> previous,
+                    Map<String, List<FoodListModel>> current) {
+                  return true;
+                },
+                listenWhen: (Map<String, List<FoodListModel>> previous,
+                    Map<String, List<FoodListModel>> current) {
+                  if (current.length > previous.length) {
+                    return true;
+                  }
+                  return false;
+                },
+                builder: (BuildContext context, foodList) {
+                  return Container(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: foodList["t2"].length,
+                      itemBuilder: (BuildContext context, index) {
+                        if (foodList["t2"].length == 0)
+                          return SpinKitChasingDots(
+                            color: Colors.blueAccent,
+                          );
+                        return FoodEveryTaste(
+                          foodList: foodList["t2"][index],
+                        );
+                      },
+                    ),
+                  );
+                },
+                listener: (context, foodList) {
+                  Scaffold.of(context).showSnackBar(
+                    SnackBar(content: Text('Added!')),
+                  );
+                },
+              ),
+            ),
+            cancellationWidget: Icon(
+              Icons.cancel,
+              size: 45,
+              color: Colors.grey[400],
+            ),
+            onItemFound: (FoodListModel food, int index) {
               return Container(
-                alignment: Alignment.topCenter,
+                  alignment: Alignment.topCenter,
                   padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
                   child: Center(child: TodaySpecial(foodList: food)));
             },
@@ -51,7 +110,10 @@ class _SearchState extends State<Search> {
             )),
             searchBarStyle: SearchBarStyle(
               backgroundColor: Colors.grey[400],
-              padding: EdgeInsets.only(top: 5,left: 5,),
+              padding: EdgeInsets.only(
+                top: 5,
+                left: 5,
+              ),
               borderRadius: BorderRadius.circular(10),
             ),
           ),

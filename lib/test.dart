@@ -1,4 +1,5 @@
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flappy_search_bar/search_bar_style.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'package:moodish_mvp/Services/authenticate.dart';
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/Services/searchFunction.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
+import 'package:moodish_mvp/models/user.dart';
 import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
 import 'package:http/http.dart';
 
@@ -56,6 +58,8 @@ class FoodList extends StatefulWidget {
 }
 
 class _FoodListState extends State<FoodList> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  
   String text = '';
   int count = 0;
   @override
@@ -65,10 +69,11 @@ class _FoodListState extends State<FoodList> {
         child: Container(
           child: FlatButton(
             onPressed: () async {
-              String token = await Authenticate().getToken();
+              FirebaseUser uid = await _auth.currentUser();
+              String token = uid.uid;
               var data = await get(
                   'https://us-central1-moodishtest.cloudfunctions.net/restNotif?text=$token');
-              
+              print(data);
             },
             
             child: Center(child: Text("$count")),
