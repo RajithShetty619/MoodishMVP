@@ -13,27 +13,40 @@ import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
 import 'package:http/http.dart';
 
 class Test extends StatefulWidget {
+  final String payload;
+
+  const Test({Key key, this.payload}) : super(key: key);
   @override
   _TestState createState() => _TestState();
 }
 
 class _TestState extends State<Test> {
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Box>(
-      future: Hive.openBox('foodlist'),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return BlocProvider<FoodBloc>(
-            create: (context) => FoodBloc(),
-            child: Scaffold(
-              body: FoodList(),
-            ),
-          );
-        }
-        return Scaffold();
-      },
-    );
+    return Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'Second page - Payload:',
+                style: Theme.of(context).textTheme.title,
+              ),
+              const SizedBox(height: 8),
+              Text(
+               widget.payload,
+                style: Theme.of(context).textTheme.subtitle,
+              ),
+              const SizedBox(height: 8),
+              RaisedButton(
+                child: Text('Back'),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ],
+          ),
+        ),
+      );
   }
 }
 
