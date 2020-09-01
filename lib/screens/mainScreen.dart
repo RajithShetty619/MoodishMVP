@@ -100,7 +100,7 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ],
           currentIndex: _selectedIndex,
-          selectedItemColor: Colors.lightBlue[300],
+          selectedItemColor: Colors.orange[400],
           // unselectedItemColor: Colors.grey[400],
           // unselectedLabelStyle: TextStyle(
           //   background: Paint(),
