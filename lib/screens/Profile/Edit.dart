@@ -129,6 +129,7 @@ class _EditProfileState extends State<EditProfile> {
                           width: 150,
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
+                              border: Border.all(color: Colors.grey[400],width: 1),
                               image: DecorationImage(
                                   image: _image == null
                                       ? AssetImage('assets/anonuser.png')

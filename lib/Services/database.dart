@@ -10,6 +10,28 @@ import 'package:firebase_storage/firebase_storage.dart';
 class DatabaseService {
   final CollectionReference userName =
       Firestore.instance.collection('Username');
+
+/* ///////////////////////////////////////////////////// save prefernce /////////////// */
+
+  Future<void> checkPreference() async {
+    Box box = await Hive.openBox('preferenceBox');
+    DocumentSnapshot userPref = await  userName.document(await Authenticate().returnUid()).get();
+    List<String> deter = await userPref.data["deter"];
+    print(deter);
+    List<String> cuisine = await userPref.data['cuisine'];
+    print(deter+cuisine);
+    box.put('deter', deter);
+    box.put('preference',cuisine);
+
+  }
+
+  Future<void> savePreference() async {
+    Box box = await Hive.openBox('preferenceBox');
+    List<String> deter = await box.get('deter');
+    List<String> cuisine = await box.get('preference'); 
+    userName.document(await Authenticate().returnUid()).setData({"cuisine":cuisine,"deter":deter},merge: true);
+  }
+
 /* ///////////////////////////////////////////////////// Transaction //////////////////////////////////////////////////////////////////////// */
 /* simple document increment method 
     collection is the name of collection in the db for eg food,facts,polls;

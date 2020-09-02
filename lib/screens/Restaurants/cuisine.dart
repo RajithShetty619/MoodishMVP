@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/screens/Restaurants/taste.dart';
+import 'package:hive/hive.dart';
 
 class Cuisine extends StatefulWidget {
   @override
@@ -7,6 +8,12 @@ class Cuisine extends StatefulWidget {
 }
 
 class _CuisineState extends State<Cuisine> {
+//  @override
+//  void initState()async{
+//    super.initState();
+//    box = await Hive.openBox('preferenceBox');
+//  }
+
   List<GridTileBuilder> cuisine = [
     GridTileBuilder(
         image: 'NorthIndian.jpeg', cuisine: 'North Indian', currentOpacity: 1),
@@ -152,13 +159,15 @@ class _CuisineState extends State<Cuisine> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: RaisedButton(
-                      onPressed: () {
-                        if (i + 1 > 3)
+                      onPressed: () async {
+                        if (i + 1 > 3) {
+                          Box box = await Hive.openBox('preferenceBox');
+                          box.put('preference', pref);
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
                             return Taste();
                           }));
-                        else
+                        } else
                           setState(() {
                             err = 'Select ${3 - i + 1} more!';
                           });

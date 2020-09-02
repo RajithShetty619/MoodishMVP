@@ -6,6 +6,7 @@ import 'package:moodish_mvp/screens/Restaurants/pickup.dart';
 import 'package:moodish_mvp/screens/Restaurants/restaurantCard/homepage.dart';
 import 'package:moodish_mvp/screens/Restaurants/toprated.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:page_transition/page_transition.dart';
 
 class Restaurant extends StatefulWidget {
   @override
@@ -289,7 +290,14 @@ class _RestaurantState extends State<Restaurant> {
                                   fontSize: 26,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black),
-                              children: []),
+                              children: [
+                                TextSpan(
+                                    text: '.',
+                                    style: TextStyle(
+                                        fontSize: 40,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.pinkAccent))
+                              ]),
                         ),
                       ),
                     ),
@@ -301,16 +309,7 @@ class _RestaurantState extends State<Restaurant> {
                           itemBuilder: (context, index) {
                             return GestureDetector(
                               onTap: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return HomePage(
-                                    desc: rest[index].desc,
-                                    imgName: rest[index].image,
-                                    imgName1: rest[index].image1,
-                                    imgName2: rest[index].image2,
-                                    restName: rest[index].name,
-                                  );
-                                }));
+                                Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: HomePage(desc: rest[index].desc,imgName: rest[index].image,imgName1: rest[index].image1,imgName2: rest[index].image2,restName: rest[index].name,)));
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(10.0),
@@ -513,7 +512,14 @@ class _RestaurantState extends State<Restaurant> {
                                   fontSize: 26,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black),
-                              children: []),
+                              children: [
+                                TextSpan(
+                                    text: '.',
+                                    style: TextStyle(
+                                        fontSize: 40,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.pinkAccent))
+                              ]),
                         ),
                       ),
                     ),
@@ -611,21 +617,14 @@ Widget getCategory(String imgName, String name, context, int tile) {
         borderRadius: BorderRadius.circular(90),
         onTap: () {
           if (tile == 1)
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return DineOut();
-            }));
+            Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: DineOut()));
+
           if (tile == 2)
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return Booking();
-            }));
+            Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: Booking()));
           if (tile == 3)
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return PickUp();
-            }));
+            Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: PickUp()));
           if (tile == 4)
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return TopRated();
-            }));
+            Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: TopRated()));
         },
         child: Container(
           height: 90,

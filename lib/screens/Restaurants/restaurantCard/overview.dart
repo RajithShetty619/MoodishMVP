@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:moodish_mvp/Services/betaCount.dart';
@@ -32,111 +33,113 @@ class _OverViewState extends State<OverView> {
           return Column(
             children: <Widget>[
               if (index == 0)
-                Stack(
+                Column(
                   children: <Widget>[
-                    Container(
-                        height: 150.0,
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: <Widget>[
-                            InkWell(
-                                onTap: () {
-                                  showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: new Text("+91-01237-12372"),
-                                          actions: <Widget>[
-                                            FlatButton(
-                                              child: Text("Call"),
-                                              onPressed: () {},
-                                            )
-                                          ],
-                                        );
-                                      });
-                                },
-                                child: Tab(
-                                    icon: Icon(
-                                      Icons.call,
-                                      size: 50.0,
-                                    ),
-                                    child: Text("Phone"))),
-                            SizedBox(
-                              width: 20.0,
-                            ),
-                            InkWell(
-                                onTap: () async {
-                                  await BetaCount().count(field: 'situation');
-                                  showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(10.0))),
-                                          content: SingleChildScrollView(
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  height: 500.0,
-                                                  width: 200.0,
-                                                  child: Stack(
-                                                    children: <Widget>[
-                                                      Text("Today/'s Offers"),
-                                                      Padding(
-                                                          padding: EdgeInsets
-                                                              .fromLTRB(
-                                                                  0, 80, 0, 0),
-                                                          //SizedBox(height: 50),
-                                                          child: Container(
-                                                              height: 100,
-                                                              width: 100,
-                                                              color:
-                                                                  Colors.blue,
-                                                              child: Stack(
-                                                                  children: <
-                                                                      Widget>[
-                                                                    Center(
-                                                                        child: Icon(
-                                                                            Icons
-                                                                                .menu,
-                                                                            size:
-                                                                                20)),
-                                                                  ]))),
-                                                    ],
-                                                  ),
-                                                ),
+                    SizedBox(height: 20,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        InkWell(
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: new Text("+91-01237-12372"),
+                                      actions: <Widget>[
+                                        FlatButton(
+                                          child: Text("Call"),
+                                          onPressed: () {},
+                                        )
+                                      ],
+                                    );
+                                  });
+                            },
+                            child: Column(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.call,
+                                  size: 50.0,
+                                ),
+                                Text("Phone")
+                              ],
+
+                            )),
+                        SizedBox(
+                          width: 20.0,
+                        ),
+                        InkWell(
+                            onTap: () async {
+                              await BetaCount().count(field: 'situation');
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10.0))),
+                                      content: SingleChildScrollView(
+                                        child: Column(
+                                          children: [
+                                            Stack(
+                                              children: <Widget>[
+                                                Text("Today/'s Offers"),
+                                                Padding(
+                                                    padding: EdgeInsets
+                                                        .fromLTRB(
+                                                        0, 80, 0, 0),
+                                                    //SizedBox(height: 50),
+                                                    child: Container(
+                                                        height: 100,
+                                                        width: 100,
+                                                        color:
+                                                        Colors.blue,
+                                                        child: Stack(
+                                                            children: <
+                                                                Widget>[
+                                                              Center(
+                                                                  child: Icon(
+                                                                      Icons
+                                                                          .menu,
+                                                                      size:
+                                                                      20)),
+                                                            ]))),
                                               ],
                                             ),
-                                          ),
-                                          actions: <Widget>[
-                                            FlatButton(
-                                              child: Text(""),
-                                              onPressed: () {},
-                                            )
                                           ],
-                                        );
-                                      });
-                                },
-                                child: Tab(
-                                    icon: Icon(
-                                      Icons.local_offer,
-                                      size: 50.0,
-                                    ),
-                                    child: Text("Offers"))),
-                            SizedBox(
-                              width: 20.0,
-                            ),
-                            InkWell(
-                                onTap: () {
-                                  showModalBottomSheet(
-                                      context: context,
-                                      builder: (Builder) {
-                                        return Container(
-                                          height: 900.0,
-                                          color: Colors.blue,
-                                          child: Scaffold(
-                                              appBar: AppBar(
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        FlatButton(
+                                          child: Text(""),
+                                          onPressed: () {},
+                                        )
+                                      ],
+                                    );
+                                  });
+                            },
+                            child: Column(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.local_offer,
+                                  size: 50.0,
+                                ),
+                                Text("Offers")
+                              ],
+                            )),
+                        SizedBox(
+                          width: 20.0,
+                        ),
+                        InkWell(
+                            onTap: () {
+                              showModalBottomSheet(
+                                  context: context,
+                                  builder: (Builder) {
+                                    return Container(
+                                      height: 900.0,
+                                      color: Colors.blue,
+                                      child: Scaffold(
+                                          appBar: AppBar(
                                             backgroundColor: Colors.white,
                                             title: TextField(
                                               decoration: InputDecoration(
@@ -152,53 +155,52 @@ class _OverViewState extends State<OverView> {
                                               )
                                             ],
                                           )),
-                                        );
-                                      });
-                                },
-                                child: Tab(
-                                    icon: Icon(
-                                      Icons.restaurant_menu,
-                                      size: 50.0,
-                                    ),
-                                    child: Text("Menu"))),
-                            SizedBox(
-                              width: 20.0,
-                            ),
-                            InkWell(
-                                onTap: () {
-                                  showModalBottomSheet(
-                                      context: context,
-                                      builder: (Builder) {
-                                        return Container(
-                                            height: 900.0,
-                                            color: Colors.white,
-                                            child: new Text(
-                                              "Share",
-                                              style: TextStyle(
-                                                fontSize: 50,
-                                              ),
-                                              textAlign: TextAlign.left,
-                                            ));
-                                      });
-                                },
-                                child: Tab(
-                                  icon: Icon(
-                                    Icons.share,
-                                    size: 50.0,
-                                  ),
-                                  child: Text("Share"),
-                                )),
-                            SizedBox(
-                              width: 15.0,
-                            ),
-                          ],
-                        )),
-                    Divider(
-                      color: Colors.black,
-                      height: 2,
+                                    );
+                                  });
+                            },
+                            child: Column(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.restaurant_menu,
+                                  size: 50.0,
+                                ),
+                                Text("Menu")
+                              ],
+                            )),
+                        SizedBox(
+                          width: 20.0,
+                        ),
+                        InkWell(
+                            onTap: () {
+                              showModalBottomSheet(
+                                  context: context,
+                                  builder: (Builder) {
+                                    return Container(
+                                        height: 900.0,
+                                        color: Colors.white,
+                                        child: new Text(
+                                          "Share",
+                                          style: TextStyle(
+                                            fontSize: 50,
+                                          ),
+                                          textAlign: TextAlign.left,
+                                        ));
+                                  });
+                            },
+                            child: Column(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.share,
+                                  size: 50.0,
+                                ),
+                                Text("Share"),
+                              ],
+                            )),
+                      ],
                     ),
+                    SizedBox(height: 8),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(0, 160, 0, 0),
+                      padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
                       child: Column(
                         children: <Widget>[
                           Padding(
@@ -220,37 +222,37 @@ class _OverViewState extends State<OverView> {
                               child: Container(
                                   alignment: Alignment.centerLeft,
                                   child: Text(widget.desc))),
+
                           SizedBox(height: 5.0),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(0, 20, 10, 10),
-                            child: InkWell(
-                              onTap: () {},
-                              child: Stack(
-                                children: <Widget>[
-                                  Container(
-                                    alignment: Alignment.centerRight,
-                                    child: Text(
-                                      'Read Me',
-                                      style: TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.w700,
-                                        color: Colors.black,
-                                      ),
-                                    ),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: EdgeInsets.all(10),
+                              child: Container(
+                                width: 145,
+                                child: RaisedButton(
+                                  onPressed: (){},
+                                  color: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10)
                                   ),
-                                  SizedBox(
-                                    width: 6,
+                                  child: Row(
+                                    children: <Widget>[
+                                      Text('Show More',style: TextStyle(fontSize: 16),),
+                                      Container(
+                                          width: 30,
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: Colors.black
+                                          ),
+                                          child: Icon(Icons.add,size: 16,color: Colors.white,)),
+                                    ],
                                   ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 30, 0, 0),
-                                    child:
-                                        Divider(color: Colors.black, height: 2),
-                                  ),
-                                ],
+                                ),
                               ),
                             ),
                           ),
+
                           Padding(
                             padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                             child: RaisedButton(
@@ -288,9 +290,16 @@ class _OverViewState extends State<OverView> {
                                       ),
                                     ),
                                     Spacer(),
-                                    Icon(
-                                      Icons.arrow_forward,
-                                      color: Colors.black,
+                                    Container(
+                                      width: 30,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.black
+                                      ),
+                                      child: Icon(
+                                        Icons.arrow_forward,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -331,9 +340,16 @@ class _OverViewState extends State<OverView> {
                                       ),
                                     ),
                                     Spacer(),
-                                    Icon(
-                                      Icons.arrow_forward,
-                                      color: Colors.black,
+                                    Container(
+                                      width: 30,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Colors.black
+                                      ),
+                                      child: Icon(
+                                        Icons.arrow_forward,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -374,9 +390,16 @@ class _OverViewState extends State<OverView> {
                                       ),
                                     ),
                                     Spacer(),
-                                    Icon(
-                                      Icons.arrow_forward,
-                                      color: Colors.black,
+                                    Container(
+                                      width: 30,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Colors.black
+                                      ),
+                                      child: Icon(
+                                        Icons.arrow_forward,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -571,10 +594,11 @@ class _OverViewState extends State<OverView> {
                                   allowHalfRating: true,
                                   itemCount: 5,
                                   itemPadding: EdgeInsets.all(2.0),
-                                  itemBuilder: (context, _) => Icon(
-                                    Icons.star,
-                                    color: Colors.amber,
-                                  ),
+                                  itemBuilder: (context, _) =>
+                                      Icon(
+                                        Icons.star,
+                                        color: Colors.amber,
+                                      ),
                                   onRatingUpdate: (rating) {
                                     _rating = rating;
                                     print(rating);
@@ -602,11 +626,11 @@ class _OverViewState extends State<OverView> {
                                         hintText: 'Optional',
                                         enabledBorder: OutlineInputBorder(
                                           borderRadius:
-                                              BorderRadius.circular(30.0),
+                                          BorderRadius.circular(30.0),
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderRadius:
-                                              BorderRadius.circular(30.0),
+                                          BorderRadius.circular(30.0),
                                         ),
                                       )),
                                 ),
@@ -617,22 +641,22 @@ class _OverViewState extends State<OverView> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Container(
                                       child: Align(
-                                    alignment: Alignment.bottomCenter,
-                                    child: RaisedButton(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
+                                        alignment: Alignment.bottomCenter,
+                                        child: RaisedButton(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
                                               new BorderRadius.circular(30.0)),
-                                      color: Colors.deepOrange,
-                                      child: Text(
-                                        'Submit',
-                                        style:
+                                          color: Colors.deepOrange,
+                                          child: Text(
+                                            'Submit',
+                                            style:
                                             TextStyle(color: Color(0xffffffff)),
-                                      ),
-                                      onPressed: () {
-                                        finalRating = _rating;
-                                      },
-                                    ),
-                                  )),
+                                          ),
+                                          onPressed: () {
+                                            finalRating = _rating;
+                                          },
+                                        ),
+                                      )),
                                 ),
                                 Divider(
                                   thickness: 2.0,
