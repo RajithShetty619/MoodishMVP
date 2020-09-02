@@ -64,7 +64,6 @@ class _FoodEveryTasteState extends State<FoodEveryTaste> {
                 child: Padding(
                   padding: EdgeInsets.all(10.0),
                   child: Column(
-                    
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
