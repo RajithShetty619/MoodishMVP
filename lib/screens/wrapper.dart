@@ -5,19 +5,25 @@ import 'package:moodish_mvp/models/user.dart';
 import 'package:moodish_mvp/screens/Food/pages/foodHome.dart';
 import 'package:moodish_mvp/screens/Restaurants/cuisine.dart';
 import 'package:moodish_mvp/screens/mainScreen.dart';
+import 'package:moodish_mvp/showScreen.dart';
 import 'package:moodish_mvp/test.dart';
 import 'package:provider/provider.dart';
 
 import 'Restaurants/mood.dart';
 
 class Wrapper extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     final onAuthChanged = Provider.of<User>(context);
     if (onAuthChanged == null) {
       return SignIn();
     } else {
-      return Persistent_notification();
+<<<<<<< HEAD
+      return ShowScreen();
+=======
+      return MainScreen();
+>>>>>>> 764199d945217e4f64558d8ed9591d27112e4fef
     }
   }
 }

@@ -5,7 +5,11 @@ class CurvePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     var paint = Paint();
     // TODO: Set properties to paint
-    paint.color = Colors.blue[200];
+<<<<<<< HEAD
+    paint.color = Colors.orange[400];
+=======
+    paint.color = Color.fromARGB(255,253,139,25);
+>>>>>>> 764199d945217e4f64558d8ed9591d27112e4fef
     paint.style = PaintingStyle.fill;
 
     var path = Path();

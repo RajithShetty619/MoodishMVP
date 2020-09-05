@@ -1,111 +1,93 @@
 import 'package:flutter/material.dart';
-//import 'package:rest/photo.dart';
-//import 'package:rest/starfeedback.dart';
-//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'about.dart';
-import 'overview.dart';
-import 'photo.dart';
+import 'package:moodish_mvp/screens/Restaurants/restaurantCard/restMenu.dart';
 import 'starfeedback.dart';
-
+import 'overview.dart';
+import 'about.dart';
 class HomeTopTabs extends StatefulWidget {
-String desc;
-  HomeTopTabs({this.colorVal,this.desc});
-  int colorVal;
-
+  String desc;
+  HomeTopTabs({this.desc});
+  @override
   _HomeTopTabsState createState() => _HomeTopTabsState();
 }
 
 class _HomeTopTabsState extends State<HomeTopTabs> with SingleTickerProviderStateMixin{
-TabController _tabController;
-
-@override
-     void initState() {
-       super.initState();
-      _tabController = new TabController(vsync: this, length: 3);
-      _tabController.addListener(_handleTabSelection);
-     }
-     void _handleTabSelection() {
-        setState(() {
-          widget.colorVal=0xffff5722;
-         });
-     }
+  TabController _tabController;
+  @override
+  void initState() {
+    super.initState();
+    _tabController = new TabController(vsync: this, length: 4);
+  }
+  @override
+  void dispose(){
+    _tabController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length:3,
+      length: 4,
       child: Scaffold(
         appBar: AppBar(
+          leading: Container(),
           backgroundColor: Colors.white,
-          bottom: TabBar(
-            controller: _tabController,
-            isScrollable: true,
-            indicatorWeight: 4.0,
-            indicatorColor:Color(0xffff5722),
-            unselectedLabelColor: Colors.grey,
-            
-            tabs: <Widget>[
-              Tab(
-               /* icon:Icon(FontAwesomeIcons.compass, color: _tabController.index == 0
-                          ? Color( widget.colorVal)
-                          : Colors.grey),*/
-                child:Padding(
-                  
-                  padding: EdgeInsets.fromLTRB(0,0,25,0),
-                    child: Text('OverView',style: TextStyle( color: _tabController.index == 0
-                              ?  Color( widget.colorVal)
-                              : Colors.grey)),
-                
+          flexibleSpace: PreferredSize(
+            preferredSize: Size.fromHeight(kToolbarHeight),
+            child: SafeArea(
+              child: Container(
+                child: Column(
+                  children: <Widget>[
+                    Expanded(child: Container(),),
+                    TabBar(
+                      isScrollable: true,
+                      unselectedLabelColor: Colors.grey[500],
+                      labelColor: Colors.black,
+                      indicatorWeight: 4.0,
+                      indicatorColor:Color(0xffff5722),
+                      controller: _tabController,
+                      tabs: <Widget>[
+                        Tab(
+                          child: Padding(
+                            padding: EdgeInsets.all(8),
+                            child: Text('Overview',style: TextStyle(fontSize: MediaQuery.of(context).size.width/20),),
+                          ),
+                        ),
+                        Tab(
+                          child: Padding(
+                            padding: EdgeInsets.all(8),
+                            child: Text('Rating',style: TextStyle(fontSize: MediaQuery.of(context).size.width/20),),
+                          ),
+                        ),
+                        Tab(
+                          child: Padding(
+                            padding: EdgeInsets.all(8),
+                            child: Text('About',style: TextStyle(fontSize: MediaQuery.of(context).size.width/20),),
+                          ),
+                        ),
+                        Tab(
+                          child: Padding(
+                            padding: EdgeInsets.all(8),
+                            child: Text('Menu',style: TextStyle(fontSize: MediaQuery.of(context).size.width/20),),
+                          ),
+                        )
+
+                      ],
+                    ),
+                  ],
                 ),
               ),
-              Tab(
-               /* icon: Icon(FontAwesomeIcons.chartBar, color: _tabController.index == 1
-                          ? Color( widget.colorVal)
-                          : Colors.grey),*/
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(25,0,25,0),
-                                  child: Text('Review',style: TextStyle( color: _tabController.index == 1
-                            ?  Color( widget.colorVal)
-                            : Colors.grey,fontSize: 15)),
-                ),
-                
-              ),
-//              Tab(
-//               /* icon: Icon(FontAwesomeIcons.shapes, color: _tabController.index == 2
-//                          ? Color( widget.colorVal)
-//                          : Colors.grey),*/
-//                child: Padding(
-//                  padding: EdgeInsets.fromLTRB(25,0,25,0),
-//                                  child: Text('Photo',style: TextStyle( color: _tabController.index == 2
-//                            ?  Color( widget.colorVal)
-//                            : Colors.grey)),
-//                ),
-//              ),
-              Tab(
-             /*   icon: Icon(FontAwesomeIcons.solidBookmark, color: _tabController.index == 3
-                          ? Color( widget.colorVal)
-                          : Colors.grey),*/
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(0,0,25,0),
-                                  child: Text('About',style: TextStyle( color: _tabController.index == 2
-                            ?  Color( widget.colorVal)
-                            : Colors.grey)),
-                ),
-              ),
-             
-            ],
+            ),
           ),
         ),
-         body: TabBarView(
-           controller: _tabController,
-            children: <Widget>[
-             OverView(desc: widget.desc,),
+        body: TabBarView(
+          controller: _tabController,
+          children: <Widget>[
+            OverView(desc: widget.desc,),
             StarFeedback(),
-              About(desc: widget.desc,),
-          
-            ],
-         ),
+            About(desc: widget.desc,),
+            RestMenu()
+          ],
+        ),
       ),
     );
   }
 }
-

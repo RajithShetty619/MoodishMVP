@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/screens/mainScreen.dart';
 
 class Taste extends StatefulWidget {
@@ -144,13 +146,16 @@ class _TasteState extends State<Taste> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: RaisedButton(
-                      onPressed: () {
-                        if (i + 1 > 3)
+                      onPressed: () async{
+                        if (i + 1 > 3) {
+                          Box box = await Hive.openBox('preferenceBox');
+                          box.put('deter', pref);
+                          DatabaseService().savePreference();
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
                             return MainScreen();
                           }));
-                        else
+                        } else
                           setState(() {
                             err = 'Select  ${3 - i} more!';
                           });
