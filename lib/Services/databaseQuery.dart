@@ -4,6 +4,7 @@ import 'package:hive/hive.dart';
 import 'package:moodish_mvp/models/factsModel.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/models/pollsModel.dart';
+import 'package:moodish_mvp/models/restaurantsModel.dart';
 import 'package:moodish_mvp/models/this_thatModel.dart';
 import 'package:moodish_mvp/models/yesNo.dart';
 import 'database.dart';
@@ -12,6 +13,8 @@ class DatabaseQuery {
   String _lastDocument;
   bool dataExists = true;
   final CollectionReference _ref = Firestore.instance.collection('food');
+
+  final CollectionReference rest = Firestore.instance.collection('restaurants');
 
   final CollectionReference polls = Firestore.instance.collection('polls');
 
@@ -23,6 +26,23 @@ class DatabaseQuery {
   final CollectionReference facts = Firestore.instance.collection('facts');
   final String listName;
   DatabaseQuery({this.listName});
+
+  Future<List<RestListModel>> getRest(
+    {List<String> field,
+    List<dynamic> value,
+    int limit = 5,
+    int check = 0,}
+  ) async{
+    List<String> _field = field;
+    List<dynamic> _value = value;
+    final _box = await Hive.openBox(listName);
+    List<dynamic> _restList = await _box.get(listName);
+
+    // if(_restList == null || check == 0){
+    //   Query _finalQuery = rest.where()
+    // }
+    
+  }
 
   Future<List<FoodListModel>> getFood(
       {List<String> field,
