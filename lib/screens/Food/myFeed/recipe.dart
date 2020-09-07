@@ -32,7 +32,14 @@ class _getListviewState extends State<getListview> {
     return Padding(
       padding: const EdgeInsets.only(left: 10, right: 10.0),
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Food_Info(
+                      foodList: widget.foodList
+                  )));
+        },
         child: Card(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
@@ -64,7 +71,7 @@ class _getListviewState extends State<getListview> {
                         child: Container(
                           alignment: Alignment.centerLeft,
                           child: Text(widget.foodList.foodName, 
-                          overflow: TextOverflow.clip,
+                          overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize:widget.foodList.foodName.length<=15 ?22.0:18.0),
                           ),

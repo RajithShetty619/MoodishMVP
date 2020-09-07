@@ -71,6 +71,7 @@ class _BookingState extends State<Booking> {
         body: SafeArea(
           child: ListView.builder(
               scrollDirection: Axis.vertical,
+              physics: BouncingScrollPhysics(),
               shrinkWrap: true,
               itemCount: rest.length,
               itemBuilder: (context, index) {

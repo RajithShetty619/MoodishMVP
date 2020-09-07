@@ -110,7 +110,7 @@ class _FoodFeedState extends State<FoodFeed> {
       index: _visible ? 0 : 1,
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(10),
           child: AnimatedOpacity(
             duration: Duration(milliseconds: 400),
             opacity: _visible ? 1.0 : 0.0,
@@ -140,8 +140,8 @@ class _FoodFeedState extends State<FoodFeed> {
                   child: GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        crossAxisSpacing: 7.0,
-                        mainAxisSpacing: 7.0,
+                        crossAxisSpacing: 0,
+                        mainAxisSpacing: 0,
                       ),
                       scrollDirection: Axis.vertical,
                       itemCount: mood.length,
@@ -160,8 +160,8 @@ class _FoodFeedState extends State<FoodFeed> {
                           child: Stack(
                             children: <Widget>[
                               Container(
-                                height: 200.0,
-                                width: 160.0,
+                                height: 250.0,
+                                width: MediaQuery.of(context).size.width/2.2,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
                                       image: AssetImage(
@@ -171,8 +171,8 @@ class _FoodFeedState extends State<FoodFeed> {
                                     borderRadius: BorderRadius.circular(10.0)),
                               ),
                               Container(
-                                height: 200.0,
-                                width: 160.0,
+                                height: 250.0,
+                                width: MediaQuery.of(context).size.width/2.2,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     gradient: LinearGradient(

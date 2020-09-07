@@ -28,7 +28,7 @@ class _FoodHomeState extends State<FoodHome> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Container(
-              color: _switch ? Color.fromARGB(255, 253, 139, 25) : Colors.white,
+              color: _switch ? Color.fromARGB(235, 253, 139, 25) : Colors.white,
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Row(

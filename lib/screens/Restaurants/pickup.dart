@@ -64,6 +64,7 @@ class _PickUpState extends State<PickUp> {
     return Scaffold(
         body: SafeArea(
       child: ListView.builder(
+          physics: BouncingScrollPhysics(),
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           itemCount: rest.length,

@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage> {
       child: SafeArea(
         child: Scaffold(
           body: ListView(
+            physics: BouncingScrollPhysics(),
             children: <Widget>[
               Stack(
                 children: <Widget>[
@@ -37,8 +38,8 @@ class _HomePageState extends State<HomePage> {
                         Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.circular(30),
-                                  bottomLeft: Radius.circular(30)),
+                                  bottomRight: Radius.circular(15),
+                                  bottomLeft: Radius.circular(15)),
                               image: DecorationImage(
                                   image:
                                   AssetImage('assets/${widget.imgName}'),
@@ -57,8 +58,8 @@ class _HomePageState extends State<HomePage> {
                         Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.circular(30),
-                                  bottomLeft: Radius.circular(30)),
+                                  bottomRight: Radius.circular(15),
+                                  bottomLeft: Radius.circular(15)),
                               image: DecorationImage(
                                   image:
                                   AssetImage('assets/${widget.imgName1}'),
@@ -77,8 +78,8 @@ class _HomePageState extends State<HomePage> {
                         Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.circular(30),
-                                  bottomLeft: Radius.circular(30)),
+                                  bottomRight: Radius.circular(15),
+                                  bottomLeft: Radius.circular(15)),
                               image: DecorationImage(
                                   image:
                                   AssetImage('assets/${widget.imgName2}'),
@@ -148,22 +149,22 @@ class _HomePageState extends State<HomePage> {
                         child: Container(
                             alignment: Alignment.centerLeft,
                             child: Text(widget.desc))),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                      child: Text.rich(
-                        TextSpan(children: [
-                          WidgetSpan(
-                              child: Icon(
-                                Icons.location_on,
-                                size: 16.0,
-                                color: Colors.black,
-                              )),
-                          TextSpan(text: "Mumbai, Maharashtra")
-                        ]),
-                        style: TextStyle(color: Colors.black, fontSize: 12.0),
-                      ),
-                    ),
+//                    Container(
+//                      alignment: Alignment.centerLeft,
+//                      padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+//                      child: Text.rich(
+//                        TextSpan(children: [
+//                          WidgetSpan(
+//                              child: Icon(
+//                                Icons.location_on,
+//                                size: 16.0,
+//                                color: Colors.black,
+//                              )),
+//                          TextSpan(text: "Mumbai, Maharashtra")
+//                        ]),
+//                        style: TextStyle(color: Colors.black, fontSize: 12.0),
+//                      ),
+//                    ),
                     Padding(
                       padding: EdgeInsets.all(10),
                       child: Row(
