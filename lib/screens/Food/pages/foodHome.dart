@@ -21,14 +21,14 @@ class _FoodHomeState extends State<FoodHome> {
 
   @override
   Widget build(BuildContext context) {
-    DateTime now= DateTime.now();
+    DateTime now = DateTime.now();
     return Scaffold(
       body: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Container(
-              color: _switch ? Color.fromARGB(255,253,139,25) : Colors.white,
+              color: _switch ? Color.fromARGB(235, 253, 139, 25) : Colors.white,
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Row(

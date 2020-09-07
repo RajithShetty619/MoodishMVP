@@ -4,6 +4,7 @@ import 'package:moodish_mvp/screens/Restaurants/booking.dart';
 import 'package:moodish_mvp/screens/Restaurants/dineout.dart';
 import 'package:moodish_mvp/screens/Restaurants/pickup.dart';
 import 'package:moodish_mvp/screens/Restaurants/restaurantCard/homepage.dart';
+import 'package:moodish_mvp/screens/Restaurants/restaurantCard/resataurantReview.dart';
 import 'package:moodish_mvp/screens/Restaurants/toprated.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:page_transition/page_transition.dart';
@@ -221,7 +222,7 @@ class _RestaurantState extends State<Restaurant> {
                     Padding(
                       padding: EdgeInsets.all(10),
                       child: Text(
-                        'The Listed Resturants are for testing purposes only..',
+                        'The Listed Restaurants are for testing purposes only..',
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -253,6 +254,7 @@ class _RestaurantState extends State<Restaurant> {
         : Container(
             child: SafeArea(
               child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
                 child: Column(
                   children: <Widget>[
                     Padding(
@@ -437,36 +439,40 @@ class _RestaurantState extends State<Restaurant> {
                                                       padding:
                                                           const EdgeInsets.all(
                                                               10.0),
-                                                      child: Column(
-                                                        children: <Widget>[
-                                                          Align(
-                                                              alignment: Alignment
-                                                                  .centerRight,
-                                                              child: Icon(
-                                                                Icons
-                                                                    .library_books,
-                                                                color: Colors
-                                                                    .black,
-                                                                size: 22,
-                                                              )),
-                                                          SizedBox(
-                                                            height: 2,
-                                                          ),
-                                                          Align(
-                                                            alignment: Alignment
-                                                                .centerRight,
-                                                            child: Text(
-                                                              'Review',
-                                                              style: TextStyle(
+                                                      child: GestureDetector(
+                                                        onTap:()=>Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: RestaurantReview(restName: rest[index].name,imgName: rest[index].image,))) ,
+                                                        child: Column(
+                                                          children: <Widget>[
+                                                            Align(
+                                                                alignment: Alignment
+                                                                    .centerRight,
+                                                                child: Icon(
+                                                                  Icons
+                                                                      .library_books,
                                                                   color: Colors
                                                                       .black,
-                                                                  fontSize: 12,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500),
+                                                                  size: 26,
+                                                                ),),
+                                                            //Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: RestaurantReview(restName: rest[index].name,imgName: rest[index].image,)))
+                                                            SizedBox(
+                                                              height: 2,
                                                             ),
-                                                          )
-                                                        ],
+                                                            Align(
+                                                              alignment: Alignment
+                                                                  .centerRight,
+                                                              child: Text(
+                                                                'Review',
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontSize: 12,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500),
+                                                              ),
+                                                            )
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
                                                   )

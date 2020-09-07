@@ -10,16 +10,20 @@ import 'package:moodish_mvp/test.dart';
 import 'package:provider/provider.dart';
 
 import 'Restaurants/mood.dart';
+import 'Restaurants/restaurantCard/resataurantReview.dart';
 
 class Wrapper extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final onAuthChanged = Provider.of<User>(context);
     if (onAuthChanged == null) {
       return SignIn();
     } else {
+<<<<<<< HEAD
       return ShowScreen();
+=======
+      return MainScreen();
+>>>>>>> 1441f949b170155c331e85b116884ed703753732
     }
   }
 }

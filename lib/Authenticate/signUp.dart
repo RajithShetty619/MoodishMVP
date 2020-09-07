@@ -183,7 +183,7 @@ class _SignUpState extends State<SignUp> {
                                   shadowColor: Colors.lightBlueAccent,
                                   color: Colors.blue,
                                   child: RaisedButton(
-                                    color: Colors.blue,
+                                    color: Colors.orange[600],
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(20.0)
                                     ),
@@ -292,16 +292,16 @@ class _SignUpState extends State<SignUp> {
 
 
 Widget getImageAsset() {
-  AssetImage assetImage = AssetImage('assets/snapinsightlogo.png');
+  AssetImage assetImage = AssetImage('assets/MoodishLogo.png');
   Image image = Image(
     image: assetImage,
-    width: 200.0,
-    height: 200.0,
+    width: 300.0,
+    height: 300.0,
   );
   return Container(
     alignment: Alignment(0.0, 0),
     child: image,
-    padding: EdgeInsets.only(top: 50.0, bottom: 25.0),
+    padding: EdgeInsets.only(top: 25.0, bottom: 15.0),
   );
 }
 
