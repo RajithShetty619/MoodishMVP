@@ -65,6 +65,7 @@ class _TopRatedState extends State<TopRated> {
           child: ListView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
+              physics: BouncingScrollPhysics(),
               itemCount: rest.length,
               itemBuilder: (context, index) {
                 return Column(

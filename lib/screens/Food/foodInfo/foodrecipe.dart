@@ -42,10 +42,10 @@ class _FoodRecipeState extends State<FoodRecipe> {
             ),
           ),
           AspectRatio(
-            aspectRatio: 10 / 5,
+            aspectRatio: 0.9,
             child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
+                    crossAxisCount: 4,
                     crossAxisSpacing: 2.0,
                     mainAxisSpacing: 2.0,
                     childAspectRatio: 0.3),
@@ -62,7 +62,7 @@ class _FoodRecipeState extends State<FoodRecipe> {
                         child: Card(
                           elevation: 2.0,
                           child: Container(
-                            margin: EdgeInsets.all(5.0),
+                            margin: EdgeInsets.all(2.0),
                             // decoration: BoxDecoration(
                             //   border: Border.all(color: Colors.black, width: 2),
                             //   borderRadius: BorderRadius.circular(15),
@@ -111,7 +111,7 @@ class _FoodRecipeState extends State<FoodRecipe> {
             child: Container(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Preparation',
+                'Preparation:',
                 style: TextStyle(
                   fontSize: 30,
                 ),
@@ -120,28 +120,33 @@ class _FoodRecipeState extends State<FoodRecipe> {
             ),
           ),
           SizedBox(height: 8),
-          ListView.builder(
-            itemCount: widget.foodList.preparation.length,
-            shrinkWrap: true,
-            primary: false,
-            physics: NeverScrollableScrollPhysics(),
-            // scrollDirection: Axis.vertical,
-            itemBuilder: (BuildContext context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  '* ${widget.foodList.preparation[index]}',
-                  textHeightBehavior: TextHeightBehavior(
-                      applyHeightToFirstAscent: false,
-                      applyHeightToLastDescent: true),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 3,
-                  style: TextStyle(
-                    fontSize: 16,
+          Container(
+            height: MediaQuery.of(context).size.height/2.8,
+            child: ListView.builder(
+              itemCount: widget.foodList.preparation.length,
+              scrollDirection: Axis.horizontal,
+              // scrollDirection: Axis.vertical,
+              itemBuilder: (BuildContext context, index) {
+                return Container(
+                  width:MediaQuery.of(context).size.width/1.5 ,
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        '* ${widget.foodList.preparation[index]}',
+                        textHeightBehavior: TextHeightBehavior(
+                            applyHeightToFirstAscent: false,
+                            applyHeightToLastDescent: true),
+                        maxLines: 4,
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
           Padding(
             padding: EdgeInsets.all(8),

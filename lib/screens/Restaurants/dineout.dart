@@ -60,6 +60,7 @@ class _DineOutState extends State<DineOut> {
           child: ListView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
+              physics: BouncingScrollPhysics(),
               itemCount: rest.length,
               itemBuilder: (context, index) {
                 return Column(

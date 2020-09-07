@@ -63,6 +63,7 @@ class _Food_InfoState extends State<Food_Info> {
     return Scaffold(
       body: SafeArea(
         child: ListView(
+          physics: BouncingScrollPhysics(),
           children: <Widget>[
             Column(
               children: <Widget>[
@@ -143,16 +144,6 @@ class _Food_InfoState extends State<Food_Info> {
                     ),
                   ],
                 ),
-                Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Container(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      widget.foodList.cuisine,
-                      style: TextStyle(fontSize: 18.0),
-                    ),
-                  ),
-                ),
                 SizedBox(
                   height: 10.0,
                 ),
@@ -231,19 +222,17 @@ class _Food_InfoState extends State<Food_Info> {
   Widget f_desc({title}) {
     return GestureDetector(
       onTap: () {}, //category
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: Container(
-          margin: EdgeInsets.all(10.0),
-          decoration: BoxDecoration(
-            color: Colors.grey[300],
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Text(
-              title,
-              style: TextStyle(fontSize: 16.0),
-            ),
+      child: Container(
+        margin: EdgeInsets.all(10.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: Colors.grey[300],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: Text(
+            title,
+            style: TextStyle(fontSize: 16.0),
           ),
         ),
       ),

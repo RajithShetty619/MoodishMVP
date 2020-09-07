@@ -10,6 +10,7 @@ import 'package:moodish_mvp/test.dart';
 import 'package:provider/provider.dart';
 
 import 'Restaurants/mood.dart';
+import 'Restaurants/restaurantCard/resataurantReview.dart';
 
 class Wrapper extends StatelessWidget {
 
@@ -19,11 +20,7 @@ class Wrapper extends StatelessWidget {
     if (onAuthChanged == null) {
       return SignIn();
     } else {
-<<<<<<< HEAD
-      return ShowScreen();
-=======
       return MainScreen();
->>>>>>> 764199d945217e4f64558d8ed9591d27112e4fef
     }
   }
 }
