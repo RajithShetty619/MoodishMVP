@@ -100,11 +100,7 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ],
           currentIndex: _selectedIndex,
-<<<<<<< HEAD
-          selectedItemColor: Colors.orange[400],
-=======
-          selectedItemColor: Color.fromARGB(255,253,139,25),
->>>>>>> 764199d945217e4f64558d8ed9591d27112e4fef
+          selectedItemColor: Color.fromARGB(255, 253, 139, 25),
           // unselectedItemColor: Colors.grey[400],
           // unselectedLabelStyle: TextStyle(
           //   background: Paint(),

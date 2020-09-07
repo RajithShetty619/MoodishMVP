@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart'; 
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moodish_mvp/Services/authenticate.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/models/pollsModel.dart';
@@ -18,35 +18,37 @@ import 'package:hive_flutter/hive_flutter.dart';
 void main() async {
   BlocSupervisor.delegate = FoodBlocDelegate();
   BlocSupervisor.delegate = PollBlocDelegate();
-  await Hive.initFlutter(); 
+  await Hive.initFlutter();
   Hive.registerAdapter<FoodListModel>(FoodListModelAdapter());
   Hive.registerAdapter<PollsModel>(PollsModelAdapter());
-  runApp(MaterialApp(  
+  runApp(MaterialApp(
     home: MyApp(),
     debugShowCheckedModeBanner: false,
   ));
 }
+
 GlobalKey<NavigatorState> mainNavigatorKey = GlobalKey<NavigatorState>();
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<FoodBloc>(create: (context)=> FoodBloc(),
+        BlocProvider<FoodBloc>(
+          create: (context) => FoodBloc(),
         ),
-        BlocProvider<PollBloc>(create: (context)=> PollBloc(), 
+        BlocProvider<PollBloc>(
+          create: (context) => PollBloc(),
         ),
       ],
       child: StreamProvider<User>.value(
         value: Authenticate().onAuthChanged,
-        child: MaterialApp( 
+        child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Moodish',
-          home: Wrapper(), 
-        ), 
+          home: Wrapper(),
+        ),
       ),
     );
-    
-     
   }
 }
