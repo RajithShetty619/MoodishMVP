@@ -309,7 +309,17 @@ class _RestaurantState extends State<Restaurant> {
                           itemBuilder: (context, index) {
                             return GestureDetector(
                               onTap: () {
-                                Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: HomePage(desc: rest[index].desc,imgName: rest[index].image,imgName1: rest[index].image1,imgName2: rest[index].image2,restName: rest[index].name,)));
+                                Navigator.push(
+                                    context,
+                                    PageTransition(
+                                        type: PageTransitionType.rightToLeft,
+                                        child: HomePage(
+                                          desc: rest[index].desc,
+                                          imgName: rest[index].image,
+                                          imgName1: rest[index].image1,
+                                          imgName2: rest[index].image2,
+                                          restName: rest[index].name,
+                                        )));
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(10.0),
@@ -617,14 +627,26 @@ Widget getCategory(String imgName, String name, context, int tile) {
         borderRadius: BorderRadius.circular(90),
         onTap: () {
           if (tile == 1)
-            Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: DineOut()));
+            Navigator.push(
+                context,
+                PageTransition(
+                    type: PageTransitionType.rightToLeft, child: DineOut()));
 
           if (tile == 2)
-            Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: Booking()));
+            Navigator.push(
+                context,
+                PageTransition(
+                    type: PageTransitionType.rightToLeft, child: Booking()));
           if (tile == 3)
-            Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: PickUp()));
+            Navigator.push(
+                context,
+                PageTransition(
+                    type: PageTransitionType.rightToLeft, child: PickUp()));
           if (tile == 4)
-            Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: TopRated()));
+            Navigator.push(
+                context,
+                PageTransition(
+                    type: PageTransitionType.rightToLeft, child: TopRated()));
         },
         child: Container(
           height: 90,

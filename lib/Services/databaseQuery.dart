@@ -27,6 +27,7 @@ class DatabaseQuery {
   final String listName;
   DatabaseQuery({this.listName});
 
+// restaurant data query
   Future<List<RestListModel>> getRest(
     {List<String> field,
     List<dynamic> value,
@@ -35,12 +36,43 @@ class DatabaseQuery {
   ) async{
     List<String> _field = field;
     List<dynamic> _value = value;
-    final _box = await Hive.openBox(listName);
-    List<dynamic> _restList = await _box.get(listName);
+    //opening hive box 
+    final _restbox = await Hive.openBox(listName);
+    List<dynamic> _restList = await _restbox.get(listName);
+    //when no list is called from memory or to get new list from memory coz checkdate func 
+    if(_restList == null || check == 0){
+      Query _finalQuery = rest.where("restcuisine", isGreaterThan: "");
 
-    // if(_restList == null || check == 0){
-    //   Query _finalQuery = rest.where()
-    // }
+      if(_restList != null) if(_restList.length != 0)
+        _lastDocument = _restList.cast<RestListModel>()[_restList.length -1].restcuisine;
+
+      if(_value[_value.length - 1].runtimeType != String){
+        dynamic _v = _value.removeLast();
+        _finalQuery = _finalQuery.where(_field.removeLast(), whereIn: _v);
+      }
+      if(_lastDocument != null)
+        _finalQuery = recQuery(_field, _value, _finalQuery)
+          .startAfter([_lastDocument])
+          .orderBy('restcuisine')
+          .limit(limit);
+      else 
+        _finalQuery = recQuery(_field, _value, _finalQuery)
+          .orderBy('restcuisine')
+          .limit(limit);
+      //converting data into list model
+      QuerySnapshot snapshot = await _finalQuery.getDocuments();
+      List<RestListModel> resqueryList = await DatabaseService().listfromSnapshot(snapshot);
+      //putting it in the box which was opened
+      await _restbox.put(listName, resqueryList);
+
+      return resqueryList;
+    }
+    //if list is already there in memory
+    else {
+      print('list directly from data');
+      List<RestListModel> _resList = _restList.cast<RestListModel>();
+      return _resList;
+    }
     
   }
 

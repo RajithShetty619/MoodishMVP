@@ -85,8 +85,8 @@ class _TodaySpecialState extends State<TodaySpecial> {
                                   color: Colors.white,
                                   size: 30,
                                 ),
-                          onPressed: () async { 
-                                await BetaCount().count(field:'foodliked');
+                          onPressed: () async {
+                            await BetaCount().count(field: 'foodliked');
                             if (_like != false)
                               final action = await Dialogs.yesAbortDialog(
                                   context, 'My title', 'My Body');
