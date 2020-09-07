@@ -21,17 +21,14 @@ import 'package:hive_flutter/hive_flutter.dart';
 void main() async {
   BlocSupervisor.delegate = FoodBlocDelegate();
   BlocSupervisor.delegate = PollBlocDelegate();
-<<<<<<< HEAD
   BlocSupervisor.delegate = RestaurantBlocDelegate();
   await Hive.initFlutter();
   Hive.registerAdapter<FoodListModel>(FoodListModelAdapter());
   Hive.registerAdapter<PollsModel>(PollsModelAdapter());
   Hive.registerAdapter<RestListModel>(RestListModelAdapter());
-=======
   await Hive.initFlutter();
   Hive.registerAdapter<FoodListModel>(FoodListModelAdapter());
   Hive.registerAdapter<PollsModel>(PollsModelAdapter());
->>>>>>> 1441f949b170155c331e85b116884ed703753732
   runApp(MaterialApp(
     home: MyApp(),
     debugShowCheckedModeBanner: false,
@@ -50,12 +47,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<PollBloc>(
           create: (context) => PollBloc(),
-<<<<<<< HEAD
         ),
         BlocProvider<RestaurantBloc>(
           create: (context) => RestaurantBloc(),
-=======
->>>>>>> 1441f949b170155c331e85b116884ed703753732
         ),
       ],
       child: StreamProvider<User>.value(
