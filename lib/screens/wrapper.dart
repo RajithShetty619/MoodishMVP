@@ -19,7 +19,11 @@ class Wrapper extends StatelessWidget {
     if (onAuthChanged == null) {
       return SignIn();
     } else {
+<<<<<<< HEAD
+      return ShowScreen();
+=======
       return MainScreen();
+>>>>>>> 1441f949b170155c331e85b116884ed703753732
     }
   }
 }

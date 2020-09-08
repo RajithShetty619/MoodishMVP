@@ -4,6 +4,7 @@ import 'package:hive/hive.dart';
 import 'package:moodish_mvp/models/factsModel.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/models/pollsModel.dart';
+import 'package:moodish_mvp/models/restaurantsModel.dart';
 import 'package:moodish_mvp/models/this_thatModel.dart';
 import 'package:moodish_mvp/models/yesNo.dart';
 import 'database.dart';
@@ -12,6 +13,8 @@ class DatabaseQuery {
   String _lastDocument;
   bool dataExists = true;
   final CollectionReference _ref = Firestore.instance.collection('food');
+
+  final CollectionReference rest = Firestore.instance.collection('restaurants');
 
   final CollectionReference polls = Firestore.instance.collection('polls');
 
@@ -23,6 +26,55 @@ class DatabaseQuery {
   final CollectionReference facts = Firestore.instance.collection('facts');
   final String listName;
   DatabaseQuery({this.listName});
+
+// restaurant data query
+  Future<List<RestListModel>> getRest(
+    {List<String> field,
+    List<dynamic> value,
+    int limit = 5,
+    int check = 0,}
+  ) async{
+    List<String> _field = field;
+    List<dynamic> _value = value;
+    //opening hive box 
+    final _restbox = await Hive.openBox(listName);
+    List<dynamic> _restList = await _restbox.get(listName);
+    //when no list is called from memory or to get new list from memory coz checkdate func 
+    if(_restList == null || check == 0){
+      Query _finalQuery = rest.where("restcuisine", isGreaterThan: "");
+
+      if(_restList != null) if(_restList.length != 0)
+        _lastDocument = _restList.cast<RestListModel>()[_restList.length -1].restcuisine;
+
+      if(_value[_value.length - 1].runtimeType != String){
+        dynamic _v = _value.removeLast();
+        _finalQuery = _finalQuery.where(_field.removeLast(), whereIn: _v);
+      }
+      if(_lastDocument != null)
+        _finalQuery = recQuery(_field, _value, _finalQuery)
+          .startAfter([_lastDocument])
+          .orderBy('restcuisine')
+          .limit(limit);
+      else 
+        _finalQuery = recQuery(_field, _value, _finalQuery)
+          .orderBy('restcuisine')
+          .limit(limit);
+      //converting data into list model
+      QuerySnapshot snapshot = await _finalQuery.getDocuments();
+      List<RestListModel> resqueryList = await DatabaseService().listfromSnapshot(snapshot);
+      //putting it in the box which was opened
+      await _restbox.put(listName, resqueryList);
+
+      return resqueryList;
+    }
+    //if list is already there in memory
+    else {
+      print('list directly from data');
+      List<RestListModel> _resList = _restList.cast<RestListModel>();
+      return _resList;
+    }
+    
+  }
 
   Future<List<FoodListModel>> getFood(
       {List<String> field,

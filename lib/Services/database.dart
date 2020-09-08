@@ -6,6 +6,7 @@ import 'package:moodish_mvp/Services/storage.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/models/name.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:moodish_mvp/models/restaurantsModel.dart';
 
 class DatabaseService {
   final CollectionReference userName =
@@ -110,6 +111,29 @@ class DatabaseService {
         .child('user/' + await Authenticate().returnUid() + '/profilePhoto/');
     String _url = await storageReference.getDownloadURL();
     return _url;
+  }
+
+/* ////////////////////////////////////////////////////////////////////// ResturantListMETHODS ////////////////////////////////////////////////////////// */
+
+  Future<List<RestListModel>> listfromSnapshot(QuerySnapshot snapshot) async {
+    return Future.wait(snapshot.documents.map((doc) async {
+      Map<String, dynamic> _docdata = doc.data;
+      //code to get images and info related to resturants in future
+
+
+      return RestListModel(
+        restname: _docdata["Restaurant_Name"] ?? '',
+        restcuisine: _docdata["Cuisines"] ?? '',
+        costForTwo: _docdata["Cost_for_two(Rs.)"] ?? '',
+        hrs: _docdata["Operational_hours"] ?? '',
+        features: _docdata["Features"] ??'',
+        homeDelivery: _docdata["Home_Delivery"] ?? '',
+        addnoutlet: _docdata["Additional_outlet_count"] ?? '',
+        location: _docdata["Restaurant_Location"] ?? '',
+        rating: _docdata["Rating"] ?? '',
+        avgRating: _docdata["Rating_Category"] ?? '',
+      );
+    }).toList());
   }
 
 /* ////////////////////////////////////////////////////////////////////// FOODLISTMETHODS ////////////////////////////////////////////////////////// */
