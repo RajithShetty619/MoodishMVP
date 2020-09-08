@@ -17,14 +17,13 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  DatabaseQuery _dqtaste0 = DatabaseQuery(listName: 't2');
-
   @override
   void initState() {
     super.initState();
-    _dqtaste0.getFood(
-        field: ['taste'], value: ['Sweet'], limit: 10, check: 0).then((future) {
-      BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t2"));
+    setState(() {
+      SearchFunction().recentSearch().then((future) {
+        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "search"));
+      });
     });
   }
 
@@ -59,14 +58,14 @@ class _SearchState extends State<Search> {
                     child: ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
-                      itemCount: foodList["t2"].length,
+                      itemCount: foodList["search"].length,
                       itemBuilder: (BuildContext context, index) {
-                        if (foodList["t2"].length == 0)
+                        if (foodList["search"].length == 0)
                           return SpinKitChasingDots(
                             color: Colors.blueAccent,
                           );
                         return FoodEveryTaste(
-                          foodList: foodList["t2"][index],
+                          foodList: foodList["search"][index],
                         );
                       },
                     ),

@@ -8,9 +8,9 @@ const sh = require("ss-search");
 // Create and Deploy Your First Cloud Functions
 // https://firebase.google.com/docs/functions/write-firebase-functions
 
-exports.helloWorld = functions.https.onRequest(async (request, response) => {
+exports.helloWorld = functions.https.onRequest((request, response) => {
 
-    let _dataArray = [
+    let _dataArray =  [
         {
             "sr_no": "0",
             "mood": "anger",
@@ -708,7 +708,7 @@ exports.helloWorld = functions.https.onRequest(async (request, response) => {
             "deter": "veg",
             "description": "Miguelitos are a type of cream filled puff pastry, which can also be referred to as a cake.",
             "meal_type": "dessert",
-            "image": "miguelito.JPG"
+            "image":"miguelito.JPG"
         },
         {
             "sr_no": "20",
@@ -736,7 +736,7 @@ exports.helloWorld = functions.https.onRequest(async (request, response) => {
             "deter": "veg",
             "description": "Yōkan is a thick, jellied Japanese dessert made of red bean paste, agar, and sugar. It is usually sold in a block form, and eaten in slices.",
             "meal_type": "dessert",
-            "image": "mizuyokan.JPG"
+            "image":"mizuyokan.JPG"
 
         },
         {
@@ -767,7 +767,7 @@ exports.helloWorld = functions.https.onRequest(async (request, response) => {
             "deter": "veg",
             "description": "Mizutaki is a Japanese Chicken Hot Pot in which chicken, assorted vegetables, mushrooms, and tofu are cooked in a light kombu dashi broth.",
             "meal_type": "main course",
-            "image": "mizutaki.JPG"
+            "image":"mizutaki.JPG"
         },
         {
             "sr_no": "22",
@@ -798,7 +798,7 @@ exports.helloWorld = functions.https.onRequest(async (request, response) => {
             "cuisine": "Indian",
             "deter": "veg",
             "description": "Modak is an Indian sweet popular in states of Maharashtra, Goa and in the regions of Konkan in India. The sweet filling on the inside of a modak consists of freshly grated coconut and jaggery while the outer soft shell is made from rice flour or wheat flour mixed with khava or maida flour.",
-            "image": "modak.JPG"
+            "image":"modak.JPG"
         },
         {
             "sr_no": "23",
@@ -15757,37 +15757,27 @@ exports.helloWorld = functions.https.onRequest(async (request, response) => {
             "image": "whitepeachtart.JPG"
         }
     ]
-    const searchKeys = ["food_item", "mood", "mood1", "meal_type"]
+    const searchKeys = ["food_item","mood","mood1","meal_type"]
     let searchText = request.query.text;
-    let _response = [];
-    const results = sh.search(_dataArray, searchKeys, searchText);
-    console.log(results);
-
-    var db = admin.firestore();
-    await Promise.all(results.map(async (e) => {
-        console.log('printed')
-        e['timestamp'] = admin.firestore.FieldValue.serverTimestamp();
-        await db.collection('recent').doc(e["sr_no"]).set(e).catch((e) => console.log(e));
-    })).catch(e => console.log(e));
-
-    var result_string = JSON.stringify(results);
-    return response.send({ result_string });
-
+    let _response =[];
+    const results = JSON.stringify(sh.search(_dataArray, searchKeys, searchText));
+    console.log(results);   
+    response.send({results});
 
 });
 
-// exports.restNotif = functions.https.onRequest((req, res) => {
+// exports.restNotif = functions.https.onRequest((req,res)=>{
 //     const payload = {
 //         notification: {
 //             title: 'You have been invited to a trip.',
 //             body: 'Tap here to check it out!'
 //         }
-//     };
-//     let text = req.query.text;
-//     console.log(text);
-//     admin.messaging().sendToDevice(text, payload).then((e) => console.log(e)).catch((e) => console.log(e));
-//     //    admin.firestore().collection('recent').add()
+//    };
+//    let text = req.query.text;
+//    console.log(text);
+//    admin.messaging().sendToDevice( text, payload).then((e)=>console.log(e)).catch((e)=>console.log(e));
+// //    admin.firestore().collection('recent').add()
 
-//     res.send({ "result": "sent" })
+//    res.send({"result":"sent"})
 // })
 

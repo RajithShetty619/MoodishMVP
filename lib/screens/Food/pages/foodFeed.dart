@@ -67,11 +67,20 @@ class _FoodFeedState extends State<FoodFeed> {
     });
     checkDate().then((check) {
       _dqtaste2.getFood(
-          field: ['cuisine'],
-          value: ['indian'],
-          limit: 5,
+          field: ['cuisine', 'deter'],
+          value: ['indian', 'veg'],
+          limit: 3,
           check: check).then((future) {
-        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t2"));
+        BlocProvider.of<FoodBloc>(context)
+            .add(FoodEvent.add(future, "vegrecipe"));
+      });
+      _dqtaste2.getFood(
+          field: ['cuisine', 'deter'],
+          value: ['indian', 'nonveg'],
+          limit: 3,
+          check: check).then((future) {
+        BlocProvider.of<FoodBloc>(context)
+            .add(FoodEvent.add(future, "nonvegrecipe"));
       });
     });
     Random random = new Random();
@@ -161,7 +170,7 @@ class _FoodFeedState extends State<FoodFeed> {
                             children: <Widget>[
                               Container(
                                 height: 250.0,
-                                width: MediaQuery.of(context).size.width/2.2,
+                                width: MediaQuery.of(context).size.width / 2.2,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
                                       image: AssetImage(
@@ -172,7 +181,7 @@ class _FoodFeedState extends State<FoodFeed> {
                               ),
                               Container(
                                 height: 250.0,
-                                width: MediaQuery.of(context).size.width/2.2,
+                                width: MediaQuery.of(context).size.width / 2.2,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     gradient: LinearGradient(
@@ -328,6 +337,7 @@ class _FoodFeedState extends State<FoodFeed> {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           // GestureDetector(
                           //   child: Feeed(
@@ -365,7 +375,7 @@ class _FoodFeedState extends State<FoodFeed> {
                               stIndex: 2,
                             ),
                             onTap: () async {
-                              await BetaCount().count(field: 'polls');
+                              BetaCount().count(field: 'polls');
                               setState(() {
                                 indx = 2;
                               });
@@ -380,7 +390,7 @@ class _FoodFeedState extends State<FoodFeed> {
                               press: () {},
                             ),
                             onTap: () async {
-                              await BetaCount().count(field: 'polls');
+                              BetaCount().count(field: 'fft');
                               setState(() {
                                 indx = 3;
                               });
