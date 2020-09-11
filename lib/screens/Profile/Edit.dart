@@ -110,6 +110,7 @@ class _EditProfileState extends State<EditProfile> {
       child: Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
             child: Column(
               children: <Widget>[
                 SizedBox(

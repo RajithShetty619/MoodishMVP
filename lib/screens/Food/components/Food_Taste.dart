@@ -89,7 +89,7 @@ class _FoodEveryTasteState extends State<FoodEveryTaste> {
                                         size: 30,
                                       ),
                                 onPressed: () async {
-                                  await BetaCount().count(field: 'foodliked');
+                                  BetaCount().count(field: 'foodliked');
                                   if (_like != false)
                                     setState(() {
                                       _like = !_like;

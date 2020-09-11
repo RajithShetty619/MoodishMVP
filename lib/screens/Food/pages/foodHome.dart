@@ -64,7 +64,7 @@ class _FoodHomeState extends State<FoodHome> {
                           children: logowidgets,
                           onValueChanged: (changeValue) async {
                             if (_switch == true) {
-                              await BetaCount().count(field: 'explore');
+                              BetaCount().count(field: 'explore');
                             }
                             setState(() {
                               if (grpValue != changeValue) {

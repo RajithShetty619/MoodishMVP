@@ -29,9 +29,9 @@ class _ShowScreenState extends State<ShowScreen> {
     return FutureBuilder(
       future: openBox(),
       builder: (context,snapShot){
-        
+
         if(snapShot.connectionState==ConnectionState.waiting)
-          { 
+          {
             return Scaffold(
               body: Center(
                 child: SpinKitHourGlass(

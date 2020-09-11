@@ -35,7 +35,9 @@ class _OverViewState extends State<OverView> {
               if (index == 0)
                 Column(
                   children: <Widget>[
-                    SizedBox(height: 20,),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
@@ -63,14 +65,13 @@ class _OverViewState extends State<OverView> {
                                 ),
                                 Text("Phone")
                               ],
-
                             )),
                         SizedBox(
                           width: 20.0,
                         ),
                         InkWell(
                             onTap: () async {
-                              await BetaCount().count(field: 'situation');
+                              BetaCount().count(field: 'situation');
                               showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
@@ -85,25 +86,21 @@ class _OverViewState extends State<OverView> {
                                               children: <Widget>[
                                                 Text("Today/'s Offers"),
                                                 Padding(
-                                                    padding: EdgeInsets
-                                                        .fromLTRB(
-                                                        0, 80, 0, 0),
+                                                    padding:
+                                                        EdgeInsets.fromLTRB(
+                                                            0, 80, 0, 0),
                                                     //SizedBox(height: 50),
                                                     child: Container(
                                                         height: 100,
                                                         width: 100,
-                                                        color:
-                                                        Colors.blue,
-                                                        child: Stack(
-                                                            children: <
-                                                                Widget>[
-                                                              Center(
-                                                                  child: Icon(
-                                                                      Icons
-                                                                          .menu,
-                                                                      size:
-                                                                      20)),
-                                                            ]))),
+                                                        color: Colors.blue,
+                                                        child: Stack(children: <
+                                                            Widget>[
+                                                          Center(
+                                                              child: Icon(
+                                                                  Icons.menu,
+                                                                  size: 20)),
+                                                        ]))),
                                               ],
                                             ),
                                           ],
@@ -140,21 +137,21 @@ class _OverViewState extends State<OverView> {
                                       color: Colors.blue,
                                       child: Scaffold(
                                           appBar: AppBar(
-                                            backgroundColor: Colors.white,
-                                            title: TextField(
-                                              decoration: InputDecoration(
-                                                  icon: Icon(Icons.search),
-                                                  hintText: "Search here"),
+                                        backgroundColor: Colors.white,
+                                        title: TextField(
+                                          decoration: InputDecoration(
+                                              icon: Icon(Icons.search),
+                                              hintText: "Search here"),
+                                        ),
+                                        actions: <Widget>[
+                                          IconButton(
+                                            icon: Icon(
+                                              Icons.search,
                                             ),
-                                            actions: <Widget>[
-                                              IconButton(
-                                                icon: Icon(
-                                                  Icons.search,
-                                                ),
-                                                onPressed: () {},
-                                              )
-                                            ],
-                                          )),
+                                            onPressed: () {},
+                                          )
+                                        ],
+                                      )),
                                     );
                                   });
                             },
@@ -222,7 +219,6 @@ class _OverViewState extends State<OverView> {
                               child: Container(
                                   alignment: Alignment.centerLeft,
                                   child: Text(widget.desc))),
-
                           SizedBox(height: 5.0),
                           Align(
                             alignment: Alignment.centerLeft,
@@ -231,28 +227,32 @@ class _OverViewState extends State<OverView> {
                               child: Container(
                                 width: 145,
                                 child: RaisedButton(
-                                  onPressed: (){},
+                                  onPressed: () {},
                                   color: Colors.white,
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10)
-                                  ),
+                                      borderRadius: BorderRadius.circular(10)),
                                   child: Row(
                                     children: <Widget>[
-                                      Text('Show More',style: TextStyle(fontSize: 16),),
+                                      Text(
+                                        'Show More',
+                                        style: TextStyle(fontSize: 16),
+                                      ),
                                       Container(
                                           width: 30,
                                           decoration: BoxDecoration(
                                               shape: BoxShape.circle,
-                                              color: Colors.black
-                                          ),
-                                          child: Icon(Icons.add,size: 16,color: Colors.white,)),
+                                              color: Colors.black),
+                                          child: Icon(
+                                            Icons.add,
+                                            size: 16,
+                                            color: Colors.white,
+                                          )),
                                     ],
                                   ),
                                 ),
                               ),
                             ),
                           ),
-
                           Padding(
                             padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                             child: RaisedButton(
@@ -293,9 +293,8 @@ class _OverViewState extends State<OverView> {
                                     Container(
                                       width: 30,
                                       decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.black
-                                      ),
+                                          shape: BoxShape.circle,
+                                          color: Colors.black),
                                       child: Icon(
                                         Icons.arrow_forward,
                                         color: Colors.white,
@@ -344,8 +343,7 @@ class _OverViewState extends State<OverView> {
                                       width: 30,
                                       decoration: BoxDecoration(
                                           shape: BoxShape.circle,
-                                          color: Colors.black
-                                      ),
+                                          color: Colors.black),
                                       child: Icon(
                                         Icons.arrow_forward,
                                         color: Colors.white,
@@ -394,8 +392,7 @@ class _OverViewState extends State<OverView> {
                                       width: 30,
                                       decoration: BoxDecoration(
                                           shape: BoxShape.circle,
-                                          color: Colors.black
-                                      ),
+                                          color: Colors.black),
                                       child: Icon(
                                         Icons.arrow_forward,
                                         color: Colors.white,
@@ -594,11 +591,10 @@ class _OverViewState extends State<OverView> {
                                   allowHalfRating: true,
                                   itemCount: 5,
                                   itemPadding: EdgeInsets.all(2.0),
-                                  itemBuilder: (context, _) =>
-                                      Icon(
-                                        Icons.star,
-                                        color: Colors.amber,
-                                      ),
+                                  itemBuilder: (context, _) => Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
                                   onRatingUpdate: (rating) {
                                     _rating = rating;
                                     print(rating);
@@ -626,11 +622,11 @@ class _OverViewState extends State<OverView> {
                                         hintText: 'Optional',
                                         enabledBorder: OutlineInputBorder(
                                           borderRadius:
-                                          BorderRadius.circular(30.0),
+                                              BorderRadius.circular(30.0),
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderRadius:
-                                          BorderRadius.circular(30.0),
+                                              BorderRadius.circular(30.0),
                                         ),
                                       )),
                                 ),
@@ -641,22 +637,22 @@ class _OverViewState extends State<OverView> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Container(
                                       child: Align(
-                                        alignment: Alignment.bottomCenter,
-                                        child: RaisedButton(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
+                                    alignment: Alignment.bottomCenter,
+                                    child: RaisedButton(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
                                               new BorderRadius.circular(30.0)),
-                                          color: Colors.deepOrange,
-                                          child: Text(
-                                            'Submit',
-                                            style:
+                                      color: Colors.deepOrange,
+                                      child: Text(
+                                        'Submit',
+                                        style:
                                             TextStyle(color: Color(0xffffffff)),
-                                          ),
-                                          onPressed: () {
-                                            finalRating = _rating;
-                                          },
-                                        ),
-                                      )),
+                                      ),
+                                      onPressed: () {
+                                        finalRating = _rating;
+                                      },
+                                    ),
+                                  )),
                                 ),
                                 Divider(
                                   thickness: 2.0,

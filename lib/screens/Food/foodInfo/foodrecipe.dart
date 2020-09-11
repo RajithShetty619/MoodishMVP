@@ -121,14 +121,14 @@ class _FoodRecipeState extends State<FoodRecipe> {
           ),
           SizedBox(height: 8),
           Container(
-            height: MediaQuery.of(context).size.height/2.8,
+            height: MediaQuery.of(context).size.height / 2.8,
             child: ListView.builder(
               itemCount: widget.foodList.preparation.length,
               scrollDirection: Axis.horizontal,
               // scrollDirection: Axis.vertical,
               itemBuilder: (BuildContext context, index) {
                 return Container(
-                  width:MediaQuery.of(context).size.width/1.5 ,
+                  width: MediaQuery.of(context).size.width / 1.5,
                   child: Card(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -157,7 +157,7 @@ class _FoodRecipeState extends State<FoodRecipe> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 onPressed: () async {
-                  await BetaCount().count(field:"step by step");
+                  BetaCount().count(field: "step by step");
                   Navigator.push(
                       context,
                       MaterialPageRoute(

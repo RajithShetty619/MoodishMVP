@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/screens/Restaurants/taste.dart';
 import 'package:hive/hive.dart';
+import 'prefVegNveg.dart';
 
 class Cuisine extends StatefulWidget {
+  int event;
+  Cuisine({this.event});
   @override
   _CuisineState createState() => _CuisineState();
 }
@@ -102,7 +106,7 @@ class _CuisineState extends State<Cuisine> {
                               if (pref.length == 9) {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return Taste();
+                                  return FoodPreference();
                                 }));
                               }
                             });
@@ -156,6 +160,7 @@ class _CuisineState extends State<Cuisine> {
                                 err,
                                 style: TextStyle(color: Colors.red),
                               ))),
+                  widget.event==1?
                   Align(
                     alignment: Alignment.centerRight,
                     child: RaisedButton(
@@ -163,9 +168,28 @@ class _CuisineState extends State<Cuisine> {
                         if (i + 1 > 3) {
                           Box box = await Hive.openBox('preferenceBox');
                           box.put('preference', pref);
+                          DatabaseService().savePreference();
+                          Navigator.of(context).pop();
+                        } else
+                          setState(() {
+                            err = 'Select ${3 - i} more!';
+                          });
+                      },
+                      color: Colors.green,
+                      child: Text('Change->'),
+                    ),
+                  )
+                  :Align(
+                    alignment: Alignment.centerRight,
+                    child: RaisedButton(
+                      onPressed: () async {
+                        if (i + 1 > 3) {
+                          Box box = await Hive.openBox('preferenceBox');
+                          box.put('preference', pref);
+                          DatabaseService().savePreference();
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
-                            return Taste();
+                            return FoodPreference();
                           }));
                         } else
                           setState(() {

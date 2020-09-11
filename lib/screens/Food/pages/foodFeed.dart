@@ -293,6 +293,7 @@ class _FoodFeedState extends State<FoodFeed> {
           child: Stack(
             children: <Widget>[
               SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -407,6 +408,7 @@ class _FoodFeedState extends State<FoodFeed> {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           // GestureDetector(
                           //   child: Feeed(
@@ -444,7 +446,7 @@ class _FoodFeedState extends State<FoodFeed> {
                               stIndex: 2,
                             ),
                             onTap: () async {
-                              await BetaCount().count(field: 'polls');
+                              BetaCount().count(field: 'polls');
                               setState(() {
                                 indx = 2;
                               });
@@ -459,7 +461,7 @@ class _FoodFeedState extends State<FoodFeed> {
                               press: () {},
                             ),
                             onTap: () async {
-                              await BetaCount().count(field: 'polls');
+                              BetaCount().count(field: 'fft');
                               setState(() {
                                 indx = 3;
                               });

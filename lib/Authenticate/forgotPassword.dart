@@ -107,8 +107,8 @@ Widget getImageAsset() {
   AssetImage assetImage = AssetImage('assets/MoodishLogo.png');
   Image image = Image(
     image: assetImage,
-    width: 300.0,
-    height: 300.0,
+    width: 250.0,
+    height: 250.0,
   );
   return Container(
     alignment: Alignment(0.0, 0),
