@@ -165,6 +165,7 @@ class _ExploreState extends State<Explore> {
           children: <Widget>[
             CurvedShape(),
             SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
               child: Column(
                 children: <Widget>[
                   Column(

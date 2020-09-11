@@ -26,9 +26,6 @@ void main() async {
   Hive.registerAdapter<FoodListModel>(FoodListModelAdapter());
   Hive.registerAdapter<PollsModel>(PollsModelAdapter());
   Hive.registerAdapter<RestListModel>(RestListModelAdapter());
-  await Hive.initFlutter();
-  Hive.registerAdapter<FoodListModel>(FoodListModelAdapter());
-  Hive.registerAdapter<PollsModel>(PollsModelAdapter());
   runApp(MaterialApp(
     home: MyApp(),
     debugShowCheckedModeBanner: false,

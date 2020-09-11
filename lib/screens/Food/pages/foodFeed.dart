@@ -214,6 +214,7 @@ class _FoodFeedState extends State<FoodFeed> {
           child: Stack(
             children: <Widget>[
               SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

@@ -213,7 +213,7 @@ class _RestaurantState extends State<Restaurant> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: Container(
-                height: MediaQuery.of(context).size.height / 4,
+                height: MediaQuery.of(context).size.height / 3.7,
                 child: Column(
                   children: <Widget>[
                     SizedBox(
@@ -441,37 +441,39 @@ class _RestaurantState extends State<Restaurant> {
                                                               10.0),
                                                       child: GestureDetector(
                                                         onTap:()=>Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: RestaurantReview(restName: rest[index].name,imgName: rest[index].image,))) ,
-                                                        child: Column(
-                                                          children: <Widget>[
-                                                            Align(
-                                                                alignment: Alignment
-                                                                    .centerRight,
-                                                                child: Icon(
-                                                                  Icons
-                                                                      .library_books,
-                                                                  color: Colors
-                                                                      .black,
-                                                                  size: 26,
-                                                                ),),
-                                                            //Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: RestaurantReview(restName: rest[index].name,imgName: rest[index].image,)))
-                                                            SizedBox(
-                                                              height: 2,
-                                                            ),
-                                                            Align(
-                                                              alignment: Alignment
-                                                                  .centerRight,
-                                                              child: Text(
-                                                                'Review',
-                                                                style: TextStyle(
+                                                        child: Container(
+                                                          child: Column(
+                                                            children: <Widget>[
+                                                              Align(
+                                                                  alignment: Alignment
+                                                                      .centerRight,
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .library_books,
                                                                     color: Colors
                                                                         .black,
-                                                                    fontSize: 12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500),
+                                                                    size: 26,
+                                                                  ),),
+                                                              //Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: RestaurantReview(restName: rest[index].name,imgName: rest[index].image,)))
+                                                              SizedBox(
+                                                                height: 2,
                                                               ),
-                                                            )
-                                                          ],
+                                                              Align(
+                                                                alignment: Alignment
+                                                                    .centerRight,
+                                                                child: Text(
+                                                                  'Review',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize: 12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500),
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
