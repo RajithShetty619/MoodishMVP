@@ -38,7 +38,7 @@ class RestListModel {
     this.avgRating,
   });
   /* 
-   AFTER ANY CHANGES RUN THIS COMMANDS OR ANY ERROR IN THIS FILE
+   AFTER ANY CHANGES OR ANY ERROR IN THIS FILE, RUN THIS COMMAND
 run command: flutter packages pub run build_runner build --delete-conflicting-outputs
   {
       "Additional_outlet_count": 1,

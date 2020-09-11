@@ -88,8 +88,8 @@ class _TodaySpecialState extends State<TodaySpecial> {
                           onPressed: () async {
                             await BetaCount().count(field: 'foodliked');
                             if (_like != false)
-                              final action = await Dialogs.yesAbortDialog(
-                                  context, 'My title', 'My Body');
+                              // final action = await Dialogs.yesAbortDialog(
+                              //     context, 'My title', 'My Body');
                             setState(() {
                               _like = !_like;
                             });
