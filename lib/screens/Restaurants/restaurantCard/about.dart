@@ -5,7 +5,7 @@ class About extends StatefulWidget {
   final Widget child;
   final String desc;
 
-  About({Key key, this.child,this.desc}) : super(key: key);
+  About({Key key, this.child, this.desc}) : super(key: key);
 
   _AboutState createState() => _AboutState();
 }
@@ -32,13 +32,15 @@ class _AboutState extends State<About> {
               if (index == 0)
                 Column(
                   children: <Widget>[
-                    SizedBox(height: 20,),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         InkWell(
                             onTap: () async {
-                              await BetaCount().count(field:'situation');
+                              BetaCount().count(field: 'situation');
                               showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
@@ -178,7 +180,6 @@ class _AboutState extends State<About> {
                                 Text("Share"),
                               ],
                             )),
-
                       ],
                     ),
                     Padding(
@@ -203,8 +204,7 @@ class _AboutState extends State<About> {
                               padding: EdgeInsets.all(5.0),
                               child: Container(
                                 alignment: Alignment.centerLeft,
-                                child: Text(
-                                    widget.desc),
+                                child: Text(widget.desc),
                               )),
 //                          SizedBox(height: 10.0),
 //                          Padding(
@@ -307,8 +307,9 @@ class _AboutState extends State<About> {
 //                                ],
 //                              ),
 //                          ),
-                          SizedBox(height: 10.0,),
-
+                          SizedBox(
+                            height: 10.0,
+                          ),
                         ],
                       ),
                     )

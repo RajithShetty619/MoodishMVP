@@ -367,7 +367,7 @@ class _ExploreState extends State<Explore> {
                                 press: () {},
                               ),
                               onTap: () async {
-                                await BetaCount().count(field: 'taste');
+                                BetaCount().count(field: 'taste');
                                 setState(() {
                                   indxT = 0;
                                 });
@@ -382,7 +382,7 @@ class _ExploreState extends State<Explore> {
                                 press: () {},
                               ),
                               onTap: () async {
-                                await BetaCount().count(field: 'taste');
+                                BetaCount().count(field: 'taste');
                                 setState(() {
                                   indxT = 1;
                                 });
@@ -506,7 +506,7 @@ class _ExploreState extends State<Explore> {
                                 press: () {},
                               ),
                               onTap: () async {
-                                await BetaCount().count(field: 'situation');
+                                BetaCount().count(field: 'situation');
                                 setState(() {
                                   indx = 0;
                                 });
@@ -521,7 +521,7 @@ class _ExploreState extends State<Explore> {
                                 press: () {},
                               ),
                               onTap: () async {
-                                await BetaCount().count(field: 'situation');
+                                BetaCount().count(field: 'situation');
                                 setState(() {
                                   indx = 1;
                                 });
@@ -536,7 +536,7 @@ class _ExploreState extends State<Explore> {
                                 press: () {},
                               ),
                               onTap: () async {
-                                await BetaCount().count(field: 'situation');
+                                BetaCount().count(field: 'situation');
                                 setState(() {
                                   indx = 2;
                                 });

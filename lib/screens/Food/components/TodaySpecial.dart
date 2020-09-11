@@ -86,7 +86,7 @@ class _TodaySpecialState extends State<TodaySpecial> {
                                   size: 30,
                                 ),
                           onPressed: () async {
-                            await BetaCount().count(field: 'foodliked');
+                            BetaCount().count(field: 'foodliked');
                             if (_like != false)
                               final action = await Dialogs.yesAbortDialog(
                                   context, 'My title', 'My Body');
@@ -148,7 +148,7 @@ class _TodaySpecialState extends State<TodaySpecial> {
                                 elevation: 20,
 
                                 onPressed: () async {
-                                  await BetaCount().count(field: "let's cook");
+                                  BetaCount().count(field: "let's cook");
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(

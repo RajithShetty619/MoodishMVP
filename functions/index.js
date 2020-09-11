@@ -15761,22 +15761,23 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
     let searchText = request.query.text;
     let _response =[];
     const results = JSON.stringify(sh.search(_dataArray, searchKeys, searchText));
-    console.log(results);  
+    console.log(results);   
     response.send({results});
 
 });
 
-exports.restNotif = functions.https.onRequest((req,res)=>{
-    const payload = {
-        notification: {
-            title: 'You have been invited to a trip.',
-            body: 'Tap here to check it out!'
-        }
-   };
-   let text = req.query.text;
-   console.log(text);
-   admin.messaging().sendToDevice( text, payload).then((e)=>console.log(e)).catch((e)=>console.log(e));
+// exports.restNotif = functions.https.onRequest((req,res)=>{
+//     const payload = {
+//         notification: {
+//             title: 'You have been invited to a trip.',
+//             body: 'Tap here to check it out!'
+//         }
+//    };
+//    let text = req.query.text;
+//    console.log(text);
+//    admin.messaging().sendToDevice( text, payload).then((e)=>console.log(e)).catch((e)=>console.log(e));
+// //    admin.firestore().collection('recent').add()
 
-   res.send({"result":"sent"})
-})
+//    res.send({"result":"sent"})
+// })
 

@@ -92,11 +92,12 @@ class _Mood_FoodState extends State<Mood_Food> {
                                       ),
                                 onPressed: () async {
                                   if (!_like) {
-                                    await DatabaseService().likeTransction(food: widget.foodList,
+                                    await DatabaseService().likeTransction(
+                                        food: widget.foodList,
                                         sr_no: widget.foodList.sr_no,
                                         collection: "food",
                                         field: "like");
-                                    await BetaCount().count(field: 'situation');
+                                    BetaCount().count(field: 'situation');
                                   }
                                   setState(() {
                                     _like = !_like;
