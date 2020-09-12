@@ -95,7 +95,7 @@ class SearchFunction {
     QuerySnapshot recent = await FirebaseFirestore.instance
         .collection('recent')
         .orderBy('timestamp', descending: true)
-        .limit(5)
+        .limit(6)
         .get();
     List<FoodListModel> recentDocs =
         await DatabaseService().listFromSnapshot(recent);

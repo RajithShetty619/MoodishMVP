@@ -7,6 +7,7 @@ import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/Services/searchFunction.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
+import 'package:moodish_mvp/screens/Food/components/Food_Situation.dart';
 import 'package:moodish_mvp/screens/Food/components/Food_Taste.dart';
 import 'package:moodish_mvp/screens/Food/components/TodaySpecial.dart';
 import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
@@ -55,7 +56,12 @@ class _SearchState extends State<Search> {
                 },
                 builder: (BuildContext context, foodList) {
                   return Container(
-                    child: ListView.builder(
+                    child: GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 5,
+                        mainAxisSpacing: 5,
+                      ),
                       physics: BouncingScrollPhysics(),
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
@@ -65,7 +71,7 @@ class _SearchState extends State<Search> {
                           return SpinKitChasingDots(
                             color: Colors.blueAccent,
                           );
-                        return FoodEveryTaste(
+                        return FoodEverySituation(
                           foodList: foodList["search"][index],
                         );
                       },
