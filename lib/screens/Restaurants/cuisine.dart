@@ -20,22 +20,22 @@ class _CuisineState extends State<Cuisine> {
 
   List<GridTileBuilder> cuisine = [
     GridTileBuilder(
-        image: 'NorthIndian.jpeg', cuisine: 'North Indian', currentOpacity: 1),
+        image: 'NorthIndian.jpeg', cuisine: 'Indian', currentOpacity: 1),
     GridTileBuilder(
-        image: 'SouthIndian.jpeg', cuisine: 'South Indian', currentOpacity: 1),
+        image: 'frenchCuisine.jpg', cuisine: 'French', currentOpacity: 1),
     GridTileBuilder(
         image: 'Chinese.png', cuisine: 'Chinese', currentOpacity: 1),
     GridTileBuilder(
-        image: 'Dessert.jpg', cuisine: 'Desserts', currentOpacity: 1),
+        image: 'spanishCuisine.jpg', cuisine: 'Spanish', currentOpacity: 1),
     GridTileBuilder(
-        image: 'FastFood.png', cuisine: 'Fast Food', currentOpacity: 1),
+        image: 'FastFood.png', cuisine: 'American', currentOpacity: 1),
     GridTileBuilder(
-        image: 'Beverage.jpg', cuisine: 'Beverages', currentOpacity: 1),
+        image: 'japaneseCuisine.jpg', cuisine: 'Japanese', currentOpacity: 1),
     GridTileBuilder(
         image: 'Italian.jpg', cuisine: 'Italian', currentOpacity: 1),
     GridTileBuilder(
         image: 'Mexican.jpg', cuisine: 'Mexican', currentOpacity: 1),
-    GridTileBuilder(image: 'Bakery.jpg', cuisine: 'Bakery', currentOpacity: 1),
+    GridTileBuilder(image: 'britishCuisine.jpg', cuisine: 'British', currentOpacity: 1),
   ];
 
   int i = 0;

@@ -12,14 +12,11 @@ import 'database.dart';
 class DatabaseQuery {
   String _lastDocument;
   bool dataExists = true;
-  final CollectionReference _ref =
-      FirebaseFirestore.instance.collection('food');
+  final CollectionReference _ref = FirebaseFirestore.instance.collection('food');
 
-  final CollectionReference rest =
-      FirebaseFirestore.instance.collection('restaurants');
+  final CollectionReference rest = FirebaseFirestore.instance.collection('restaurants');
 
-  final CollectionReference polls =
-      FirebaseFirestore.instance.collection('polls');
+  final CollectionReference polls = FirebaseFirestore.instance.collection('polls');
 
   final CollectionReference this_that =
       FirebaseFirestore.instance.collection('this_that');

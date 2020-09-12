@@ -141,7 +141,7 @@ class DatabaseService {
 
   /* get fooddocument from sr_no */
   Future<DocumentSnapshot> documentFrmSrno({String sr_no}) async {
-    return await Firestore.instance.collection('food').document(sr_no).get();
+    return await FirebaseFirestore.instance.collection('food').doc(sr_no).get();
   }
 
   Future<List<FoodListModel>> searchDocuments({dynamic data}) async {}
