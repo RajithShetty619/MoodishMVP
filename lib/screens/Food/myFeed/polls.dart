@@ -17,7 +17,6 @@ class PollTabs extends StatefulWidget {
 }
 
 class _PollTabsState extends State<PollTabs> {
-
   @override
   void initState() {
     super.initState();
@@ -518,7 +517,7 @@ class GetListView1 extends StatefulWidget {
   final PollsModel poll;
   final List<dynamic> choice;
   final int index;
-  GetListView1({Key key, this.choice, this.poll, this.index});
+  GetListView1({Key key, this.poll, this.choice, this.index});
 
   @override
   _GetListView1State createState() => _GetListView1State();
