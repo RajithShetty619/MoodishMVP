@@ -557,6 +557,7 @@ class _RestaurantState extends State<Restaurant> {
                       ),
                     ),
                     SingleChildScrollView(
+                      physics: BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

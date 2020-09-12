@@ -10,315 +10,176 @@ class FoodPreference extends StatefulWidget {
 }
 
 class _FoodPreferenceState extends State<FoodPreference> {
+  bool showShadow1 = false;
+  bool showShadow2 = false;
+  bool showShadow3 = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        physics: BouncingScrollPhysics(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          if(widget.event==1)
+            Navigator.of(context).pop();
+          else
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) {
+                  return MainScreen();
+                }));
+
+        },
+
+        backgroundColor: Colors.lightGreen,
+        child: Icon(Icons.chevron_right),
+      ),
+      body: Stack(
         children: <Widget>[
-          Center(
-            child: RichText(
-              text: TextSpan(
-                  text: 'Food Preference',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: MediaQuery.of(context).size.width/9,
-                      color: Colors.green),
-                  children: [
-                    TextSpan(
-                        text: '.',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 65,
-                            color: Colors.pinkAccent))
-                  ]),
+          Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/Fdprefbg.jpg'),
+                    fit: BoxFit.cover
+                )
             ),
           ),
-          SizedBox(height: 10,),
-          Padding(
-            padding: EdgeInsets.all(10),
-            child: Divider(thickness: 2,),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: GestureDetector(
-                  onTap: (){
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext idcontext) {
-                          return Dialog(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Container(
-                              height: MediaQuery.of(context).size.height/4,
-                              child: Column(
-                                children: <Widget>[
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    'Are you Sure you want this\nas your Food Preference',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: Align(
-                                      alignment: Alignment.centerRight,
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: <Widget>[
-                                          RaisedButton(
-                                            onPressed: () => Navigator.of(
-                                                idcontext,
-                                                rootNavigator: true)
-                                                .pop(),
-                                            child: Text('No'),
-                                          ),
-                                          RaisedButton(
-                                            onPressed: () async{
-                                              Box box = await Hive.openBox('preferenceBox');
-                                              box.put('deter', 'Vegetarian');
-                                              DatabaseService().savePreference();
-                                              Navigator.of(
-                                                  idcontext,
-                                                  rootNavigator: true)
-                                                  .pop();
-                                              if(widget.event==1){
-                                                Navigator.of(context).pop();
-                                              }
-                                              else
-                                              Navigator.push(context,
-                                                MaterialPageRoute(builder: (context) {
-                                                  return MainScreen();
-                                                }));
+          SafeArea(
+            child: ListView(
+              physics: BouncingScrollPhysics(),
+              children: <Widget>[
+                Center(
+                  child: Text('Food Preference',style: TextStyle(color: Colors.black,fontSize: 38,fontWeight: FontWeight.bold),),
+                ),
+                SizedBox(height: 10,),
+                Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Divider(thickness: 2,color: Colors.black,),
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height/5,),
 
-                                            },
-                                            child: Text('Yes'),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  )
-                                ],
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  physics: BouncingScrollPhysics(),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: GestureDetector(
+                                onTap: ()async{
+                                  setState(() {
+                                    showShadow1=false;
+                                    showShadow2=false;
+                                    showShadow3=false;
+                                  });
+                                  Box box = await Hive.openBox('preferenceBox');
+                                  box.put('deter', 'Vegetarian');
+                                  DatabaseService().savePreference();
+                                    setState(() {
+                                      showShadow1=true;
+                                    });
+                                },
+                                child: Container(
+                                  height: 120,
+                                  width: 120,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(color: showShadow1?Colors.blue[900]:Colors.transparent,width: 4),
+                                      image: DecorationImage(
+                                          image: AssetImage('assets/veg.jpg'),
+                                          fit: BoxFit.cover
+                                      )
+                                  ),
+                                ),
                               ),
                             ),
-                          );
-                        });
-                  },
-                  child: Container(
-                    height: 175,
-                    width: double.maxFinite,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                        image: AssetImage('assets/veg.jpg'),
-                        fit: BoxFit.cover
-                      )
-                    ),
-                    child: Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('Vegetarian',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.white),),
+                            Text('Vegetarian',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.black),)
+                          ],
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: GestureDetector(
-                  onTap: (){
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext idcontext) {
-                          return Dialog(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Container(
-                              height: MediaQuery.of(context).size.height/4,
-                              child: Column(
-                                children: <Widget>[
-                                  SizedBox(
-                                    height: 10,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: GestureDetector(
+                                onTap: ()async{
+                                  setState(() {
+                                    showShadow1=false;
+                                    showShadow2=false;
+                                    showShadow3=false;
+                                  });
+                                  Box box = await Hive.openBox('preferenceBox');
+                                  box.put('deter', 'Non-Vegetarian');
+                                  DatabaseService().savePreference();
+                                    setState(() {
+                                      showShadow2 = true;
+                                    });
+                                },
+                                child: Container(
+                                  height: 120,
+                                  width: 120,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(color: showShadow2?Colors.blue[900]:Colors.transparent,width: 4),
+                                      image: DecorationImage(
+                                          image: AssetImage('assets/nonveg.jpg'),
+                                          fit: BoxFit.cover
+                                      )
                                   ),
-                                  Text(
-                                    'Are you Sure you want this\nas your Food Preference',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: Align(
-                                      alignment: Alignment.centerRight,
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: <Widget>[
-                                          RaisedButton(
-                                            onPressed: () => Navigator.of(
-                                                idcontext,
-                                                rootNavigator: true)
-                                                .pop(),
-                                            child: Text('No'),
-                                          ),
-                                          RaisedButton(
-                                            onPressed: ()async{
-                                              Box box = await Hive.openBox('preferenceBox');
-                                              box.put('deter', 'Non-Vegetarian');
-                                              DatabaseService().savePreference();
-                                              Navigator.of(
-                                                  idcontext,
-                                                  rootNavigator: true)
-                                                  .pop();
-                                              if(widget.event==1){
-                                                Navigator.of(context).pop();
-                                              }
-                                              else
-                                                Navigator.push(context,
-                                                MaterialPageRoute(builder: (context) {
-                                                  return MainScreen();
-                                                }));},
-                                            child: Text('Yes'),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  )
-                                ],
+                                ),
                               ),
                             ),
-                          );
-                        });
-                  },
-                  child: Container(
-                    height: 175,
-                    width: double.maxFinite,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                            image: AssetImage('assets/nonveg.jpg'),
-                            fit: BoxFit.cover
-                        )
-                    ),
-                    child: Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('Non-Vegetarian',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.white),),
+                            Text('Non-Vegetarian',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.black),)
+                          ],
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: GestureDetector(
-                  onTap: (){
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext idcontext) {
-                          return Dialog(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Container(
-                              height: MediaQuery.of(context).size.height/4,
-                              child: Column(
-                                children: <Widget>[
-                                  SizedBox(
-                                    height: 10,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: GestureDetector(
+                                onTap: ()async{
+                                  setState(() {
+                                    showShadow1=false;
+                                    showShadow2=false;
+                                    showShadow3=false;
+                                  });
+                                  Box box = await Hive.openBox('preferenceBox');
+                                  box.put('deter', 'Veg&NonVeg');
+                                  DatabaseService().savePreference();
+                                    setState(() {
+                                      showShadow3=true;
+                                    });
+                                },
+                                child: Container(
+                                  height: 120,
+                                  width: 120,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(color: showShadow3?Colors.blue[900]:Colors.transparent,width: 4),
+                                      image: DecorationImage(
+                                          image: AssetImage('assets/vegnonveg.jpg'),
+                                          fit: BoxFit.cover
+                                      )
                                   ),
-                                  Text(
-                                    'Are you Sure you want this\nas your Food Preference',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: Align(
-                                      alignment: Alignment.centerRight,
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: <Widget>[
-                                          RaisedButton(
-                                            onPressed: () => Navigator.of(
-                                                idcontext,
-                                                rootNavigator: true)
-                                                .pop(),
-                                            child: Text('No'),
-                                          ),
-                                          RaisedButton(
-                                            onPressed: ()async{
-                                              Box box = await Hive.openBox('preferenceBox');
-                                              box.put('deter', 'Veg&NonVeg');
-                                              DatabaseService().savePreference();
-                                              Navigator.of(
-                                                  idcontext,
-                                                  rootNavigator: true)
-                                                  .pop();
-                                              if(widget.event==1){
-                                                Navigator.of(context).pop();
-                                              }
-                                              else
-                                              Navigator
-                                            .push(context,
-                                                MaterialPageRoute(builder: (context) {
-                                                  return MainScreen();
-                                                }));},
-                                            child: Text('Yes'),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  )
-                                ],
+                                ),
                               ),
                             ),
-                          );
-                        });
-                  },
-                  child: Container(
-                    height: 175,
-                    width: double.maxFinite,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                            image: AssetImage('assets/vegnonveg.jpg'),
-                            fit: BoxFit.cover
-                        )
-                    ),
-                    child: Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('Veg &\nNon-Vegetarian',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.white),),
+                            Text('Veg&Non-Veg',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.black),)
+                          ],
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
-              )
-            ],
+              ],
+            ),
           ),
         ],
       ),
