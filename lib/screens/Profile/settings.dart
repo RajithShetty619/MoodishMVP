@@ -31,13 +31,18 @@ class _ProfileSettingState extends State<ProfileSetting> {
                           icon: Icon(Icons.arrow_back,size: MediaQuery.of(context).size.width/10,),
                         ),
                       ),
-                      SizedBox(width: MediaQuery.of(context).size.width/13,),
-                      Icon(Icons.restaurant_menu,size: MediaQuery.of(context).size.width/10,color: Colors.orange[800],),
-                      Text('Preferences',
-                        style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width/11,
-                          fontWeight: FontWeight.bold,
-                        ),),
+                      Center(
+                        child: Row(
+                          children: <Widget>[
+                            Icon(Icons.restaurant_menu,size: MediaQuery.of(context).size.width/10,color: Colors.orange[800],),
+                            Text('Preferences',
+                              style: TextStyle(
+                                fontSize: MediaQuery.of(context).size.width/11,
+                                fontWeight: FontWeight.bold,
+                              ),)
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                   Padding(
