@@ -109,7 +109,7 @@ class _PageViewer1State extends State<PageViewer1> {
                                   Navigator.pop(context);
                                 },
                                 child: Text(
-                                  "Back to Info Screen",
+                                  "Finish!",
                                   style: TextStyle(
                                     fontSize: 20,
                                   ),

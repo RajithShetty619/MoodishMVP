@@ -10,13 +10,9 @@ class Taste extends StatefulWidget {
 
 class _TasteState extends State<Taste> {
   List<GridTileBuilder> taste = [
-    GridTileBuilder(image: 'Chocolate.jpg', taste: 'Sweet', currentOpacity: 1),
-    GridTileBuilder(image: 'Sour.jpeg', taste: 'Sour', currentOpacity: 1),
-    GridTileBuilder(
-        image: 'Spicy.jpg', taste: 'Hot n Spicy', currentOpacity: 1),
-    GridTileBuilder(image: 'Coffee.jpg', taste: 'Aromatic', currentOpacity: 1),
-    GridTileBuilder(image: 'Savory.jpg', taste: 'Savory', currentOpacity: 1),
-    GridTileBuilder(image: 'Salty.jpg', taste: 'Salty', currentOpacity: 1),
+    GridTileBuilder(image: '', taste: 'Veg', currentOpacity: 1),
+    GridTileBuilder(image: '', taste: 'NonVeg', currentOpacity: 1),
+    GridTileBuilder(image: '', taste: 'Veg/NonVeg', currentOpacity: 1),
   ];
   int i = 0;
   List<String> pref = []; //all the user preferences are saved here

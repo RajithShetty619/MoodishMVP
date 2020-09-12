@@ -56,6 +56,7 @@ class _SearchState extends State<Search> {
                 builder: (BuildContext context, foodList) {
                   return Container(
                     child: ListView.builder(
+                      physics: BouncingScrollPhysics(),
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       itemCount: foodList["search"].length,

@@ -6,6 +6,7 @@ import '../../Services/authenticate.dart';
 import 'Edit.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'settings.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -66,6 +67,7 @@ class _ProfileState extends State<Profile> {
             color: Colors.white,
           ),
           child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
             padding: const EdgeInsets.all(32.0),
             child: Column(
               children: <Widget>[
@@ -260,48 +262,52 @@ class _ProfileState extends State<Profile> {
                         size: 50,
                       ),
                       onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext idcontext) {
-                              return Dialog(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: Container(
-                                  height: 135,
-                                  child: Column(
-                                    children: <Widget>[
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        'Coming Soon.......!',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.all(10),
-                                        child: Align(
-                                          alignment: Alignment.centerRight,
-                                          child: RaisedButton(
-                                            onPressed: () => Navigator.of(
-                                                    idcontext,
-                                                    rootNavigator: true)
-                                                .pop(),
-                                            child: Text('ok'),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              );
-                            });
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProfileSetting()));
+//                        showDialog(
+//                            context: context,
+//                            builder: (BuildContext idcontext) {
+//                              return Dialog(
+//                                shape: RoundedRectangleBorder(
+//                                  borderRadius: BorderRadius.circular(10.0),
+//                                ),
+//                                child: Container(
+//                                  height: 135,
+//                                  child: Column(
+//                                    children: <Widget>[
+//                                      SizedBox(
+//                                        height: 10,
+//                                      ),
+//                                      Text(
+//                                        'Coming Soon.......!',
+//                                        style: TextStyle(
+//                                          fontSize: 20,
+//                                          fontWeight: FontWeight.bold,
+//                                        ),
+//                                      ),
+//                                      SizedBox(
+//                                        height: 20,
+//                                      ),
+//                                      Padding(
+//                                        padding: EdgeInsets.all(10),
+//                                        child: Align(
+//                                          alignment: Alignment.centerRight,
+//                                          child: RaisedButton(
+//                                            onPressed: () => Navigator.of(
+//                                                    idcontext,
+//                                                    rootNavigator: true)
+//                                                .pop(),
+//                                            child: Text('ok'),
+//                                          ),
+//                                        ),
+//                                      )
+//                                    ],
+//                                  ),
+//                                ),
+//                              );
+//                            });
                       },
                     ),
                   ],
@@ -555,9 +561,9 @@ class _ProfileState extends State<Profile> {
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
                             colors: [
-                              Colors.blue[900],
-                              Colors.blueAccent,
-                              Colors.blue[900],
+                              Colors.orange[900],
+                              Colors.orange,
+                              Colors.orange[900],
                             ],
                           ),
                           borderRadius: BorderRadius.circular(6),

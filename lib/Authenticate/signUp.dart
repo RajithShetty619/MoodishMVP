@@ -163,7 +163,7 @@ class _SignUpState extends State<SignUp> {
                                 alignment: Alignment(1.0, 0.0),
                                 child: Row(
                                   children: <Widget>[
-                                    Checkbox(value: _checkBoxValue, onChanged: (bool value){
+                                    Checkbox(value: _checkBoxValue,activeColor: Colors.black, onChanged: (bool value){
                                       setState(() {
                                         _checkBoxValue = value;
                                       },
@@ -295,8 +295,8 @@ Widget getImageAsset() {
   AssetImage assetImage = AssetImage('assets/MoodishLogo.png');
   Image image = Image(
     image: assetImage,
-    width: 300.0,
-    height: 300.0,
+    width: 250.0,
+    height: 250.0,
   );
   return Container(
     alignment: Alignment(0.0, 0),

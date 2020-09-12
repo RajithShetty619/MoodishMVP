@@ -17,10 +17,10 @@ class DatabaseService {
   Future<void> checkPreference() async {
     Box box = await Hive.openBox('preferenceBox');
     DocumentSnapshot userPref = await  userName.document(await Authenticate().returnUid()).get();
-    List<String> deter = await userPref.data["deter"];
+    String deter = await userPref.data["deter"];
     print(deter);
     List<String> cuisine = await userPref.data['cuisine'];
-    print(deter+cuisine);
+    print(cuisine);
     box.put('deter', deter);
     box.put('preference',cuisine);
 
@@ -28,7 +28,7 @@ class DatabaseService {
 
   Future<void> savePreference() async {
     Box box = await Hive.openBox('preferenceBox');
-    List<String> deter = await box.get('deter');
+    String deter = await box.get('deter');
     List<String> cuisine = await box.get('preference'); 
     userName.document(await Authenticate().returnUid()).setData({"cuisine":cuisine,"deter":deter},merge: true);
   }

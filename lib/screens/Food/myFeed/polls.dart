@@ -17,7 +17,6 @@ class PollTabs extends StatefulWidget {
 }
 
 class _PollTabsState extends State<PollTabs> {
-  DatabaseQuery _dqpoll = DatabaseQuery(listName: 'p');
 
   @override
   void initState() {
@@ -355,8 +354,8 @@ class GetListView extends StatefulWidget {
   final List<dynamic> choice;
   final int index;
   GetListView({
-    this.this_that,
     Key key,
+    this.this_that,
     this.choice,
     this.index,
   });
@@ -519,7 +518,7 @@ class GetListView1 extends StatefulWidget {
   final PollsModel poll;
   final List<dynamic> choice;
   final int index;
-  GetListView1({this.choice, this.poll, this.index});
+  GetListView1({Key key, this.choice, this.poll, this.index});
 
   @override
   _GetListView1State createState() => _GetListView1State();
