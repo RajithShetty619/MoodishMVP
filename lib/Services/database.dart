@@ -126,13 +126,13 @@ class DatabaseService {
         restname: _docdata["Restaurant_Name"] ?? '',
         restcuisine: _docdata["Cuisines"] ?? '',
         costForTwo: _docdata["Cost_for_two(Rs.)"] ?? '',
-        hrs: _docdata["Operational_hours"] ?? '',
+        operationalhrs: _docdata["Operational_hours"] ?? '',
         features: _docdata["Features"] ?? '',
         homeDelivery: _docdata["Home_Delivery"] ?? '',
         addnoutlet: _docdata["Additional_outlet_count"] ?? '',
         location: _docdata["Restaurant_Location"] ?? '',
         rating: _docdata["Rating"] ?? '',
-        avgRating: _docdata["Rating_Category"] ?? '',
+        catRating: _docdata["Rating_Category"] ?? '',
       );
     }).toList());
   }

@@ -190,7 +190,7 @@ class DatabaseQuery {
     Box _box = await Hive.openBox('polls');
     dynamic last = _box.get(listName);
     /*  */
-    Query q = polls.orderBy('value').startAfter([last]).limit(5);
+    Query q = polls.orderBy('value').startAfter([last]).limit(4);
     List<DocumentSnapshot> _snapshot =
         await q.get().then((value) => value.docs);
 

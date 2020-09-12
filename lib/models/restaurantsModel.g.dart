@@ -20,20 +20,23 @@ class RestListModelAdapter extends TypeAdapter<RestListModel> {
       restname: fields[0] as String,
       restcuisine: fields[1] as String,
       costForTwo: fields[2] as String,
-      hrs: fields[3] as String,
+      operationalhrs: fields[3] as String,
       features: fields[4] as String,
       homeDelivery: fields[5] as String,
       addnoutlet: fields[6] as String,
       location: fields[7] as String,
       rating: fields[8] as String,
-      avgRating: fields[9] as String,
+      catRating: fields[9] as String,
+      deliverytime: fields[10] as String,
+      restlocation: fields[11] as String,
+      votes: fields[12] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, RestListModel obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(13)
       ..writeByte(0)
       ..write(obj.restname)
       ..writeByte(1)
@@ -41,7 +44,7 @@ class RestListModelAdapter extends TypeAdapter<RestListModel> {
       ..writeByte(2)
       ..write(obj.costForTwo)
       ..writeByte(3)
-      ..write(obj.hrs)
+      ..write(obj.operationalhrs)
       ..writeByte(4)
       ..write(obj.features)
       ..writeByte(5)
@@ -53,7 +56,13 @@ class RestListModelAdapter extends TypeAdapter<RestListModel> {
       ..writeByte(8)
       ..write(obj.rating)
       ..writeByte(9)
-      ..write(obj.avgRating);
+      ..write(obj.catRating)
+      ..writeByte(10)
+      ..write(obj.deliverytime)
+      ..writeByte(11)
+      ..write(obj.restlocation)
+      ..writeByte(12)
+      ..write(obj.votes);
   }
 
   @override
