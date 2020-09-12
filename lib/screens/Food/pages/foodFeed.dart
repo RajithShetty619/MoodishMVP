@@ -424,10 +424,10 @@ class _FoodFeedState extends State<FoodFeed> {
                                     shrinkWrap: true,
                                     primary: false,
                                     physics: NeverScrollableScrollPhysics(),
-                                    itemCount: foodList["t2"].length,
+                                    itemCount: foodList["vegrecipe"].length,
                                     itemBuilder: (BuildContext context, index) {
                                       return RecipeTab(
-                                        foodList: foodList["t2"][index],
+                                        foodList: foodList["vegrecipe"][index],
                                       );
                                     },
                                   ),
