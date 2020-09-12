@@ -22,14 +22,15 @@ class SearchFunction {
 
   setRecent(List<dynamic> data) async {
     Future.wait(data.map((doc) async {
-      await Firestore.instance
+      await FirebaseFirestore.instance
           .collection('recent')
-          .document(doc['sr_no'])
-          .setData(doc);
-      await Firestore.instance
+          .doc(doc['sr_no'])
+          .set(doc);
+      await FirebaseFirestore.instance
           .collection('recent')
-          .document(doc['sr_no'])
-          .setData({'timestamp': FieldValue.serverTimestamp()}, merge: true);
+          .doc(doc['sr_no'])
+          .set({'timestamp': FieldValue.serverTimestamp()},
+              SetOptions(merge: true));
     }));
   }
 
@@ -91,11 +92,11 @@ class SearchFunction {
   }
 
   Future<List<FoodListModel>> recentSearch() async {
-    QuerySnapshot recent = await Firestore.instance
+    QuerySnapshot recent = await FirebaseFirestore.instance
         .collection('recent')
         .orderBy('timestamp', descending: true)
         .limit(5)
-        .getDocuments();
+        .get();
     List<FoodListModel> recentDocs =
         await DatabaseService().listFromSnapshot(recent);
 

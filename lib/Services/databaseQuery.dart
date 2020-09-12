@@ -271,11 +271,11 @@ class DatabaseQuery {
         .orderBy('value')
         .limit(5);
     List<DocumentSnapshot> _snapshot =
-        await q.getDocuments().then((value) => value.documents);
+        await q.get().then((value) => value.docs);
 
     /* saving last poll to be displayed*/
     try {
-      String _lastpoll = await _snapshot[_snapshot.length - 1].data['value'];
+      String _lastpoll = await _snapshot[_snapshot.length - 1].data()['value'];
       await _box.put(listName, _lastpoll);
     } catch (e) {
       await _box.put(listName, null);
@@ -283,7 +283,7 @@ class DatabaseQuery {
 
     /* list of polls is made and returned */
     return _snapshot.map((doc) {
-      Map<String, dynamic> _docData = doc.data;
+      Map<String, dynamic> _docData = doc.data();
       return PollsModel(
           question: _docData['value'],
           A: _docData['A'] ?? '',
@@ -310,12 +310,12 @@ class DatabaseQuery {
     List<DocumentSnapshot> _snapshot =
         await t.getDocuments().then((value) => value.documents);
     // saving last this_that to be shown
-    String _endthat = await _snapshot[_snapshot.length - 1].data['A'];
+    String _endthat = await _snapshot[_snapshot.length - 1].data()['A'];
     await _box.put('endthat', _endthat);
 
 /* list of this_that is made and returned */
     return _snapshot.map((doc) {
-      Map<String, dynamic> _docData = doc.data;
+      Map<String, dynamic> _docData = doc.data();
       return This_thatModel(
         A: _docData['A'],
         B: _docData['B'] ?? '',
@@ -335,14 +335,14 @@ class DatabaseQuery {
         .orderBy('Questions')
         .limit(3);
     List<DocumentSnapshot> _snapshot =
-        await y.getDocuments().then((value) => value.documents);
+        await y.get().then((value) => value.docs);
     // saving last this_that to be shown
-    String _end = await _snapshot[_snapshot.length - 1].data['Questions'];
+    String _end = await _snapshot[_snapshot.length - 1].data()['Questions'];
     await _box.put('end', _end);
 
 /* list of this_that is made and returned */
     return _snapshot.map((doc) {
-      Map<String, dynamic> _docData = doc.data;
+      Map<String, dynamic> _docData = doc.data();
       return YesNoModel(
         Questions: _docData['Questions'],
         yes: _docData['yes'] ?? 0,
@@ -362,11 +362,11 @@ class DatabaseQuery {
         .orderBy('fact')
         .limit(5);
     List<DocumentSnapshot> _snapshot =
-        await q.getDocuments().then((value) => value.documents);
+        await q.get().then((value) => value.docs);
 
     /* saving last poll to be displayed*/
     try {
-      String _lastfact = await _snapshot[_snapshot.length - 1].data['fact'];
+      String _lastfact = await _snapshot[_snapshot.length - 1].data()['fact'];
       await _box.put('lastfact', _lastfact);
     } catch (e) {
       await _box.put('lastfact', null);
@@ -374,7 +374,7 @@ class DatabaseQuery {
 
     /* list of polls is made and returned */
     return _snapshot.map((doc) {
-      Map<String, dynamic> _docData = doc.data;
+      Map<String, dynamic> _docData = doc.data();
       return FactModel(
           factHeading: _docData['fact'],
           factStatment: _docData['factStatement']);

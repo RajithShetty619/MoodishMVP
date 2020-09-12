@@ -142,16 +142,15 @@ class _FoodFeedState extends State<FoodFeed> {
     setState(() {
       _selectedDeter = selectedDeter;
     });
-    if(_selectedDeter.id == 1){
+    if (_selectedDeter.id == 1) {
       setState(() {
         det = 0;
       });
-    }
-    else if(_selectedDeter.id == 2){
+    } else if (_selectedDeter.id == 2) {
       setState(() {
         det = 1;
       });
-    }else {
+    } else {
       setState(() {
         det = 2;
       });
@@ -481,9 +480,7 @@ class _FoodFeedState extends State<FoodFeed> {
                                 child: Row(children: <Widget>[
                                   Text(
                                     'Filter : ',
-                                    style: TextStyle(
-                                      fontSize: 18
-                                    ),
+                                    style: TextStyle(fontSize: 18),
                                   ),
                                   SizedBox(width: 5),
                                   DropdownButton(
@@ -493,8 +490,6 @@ class _FoodFeedState extends State<FoodFeed> {
                                   )
                                 ]),
                               ),
-                      
-                              
                               Container(
                                 child: BlocConsumer<FoodBloc,
                                     Map<String, List<FoodListModel>>>(
