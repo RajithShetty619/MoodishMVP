@@ -129,7 +129,6 @@ class _RestaurantState extends State<Restaurant> {
 
   void initState() {
     super.initState();
-
     getCurrentLocation();
   }
 
@@ -440,20 +439,35 @@ class _RestaurantState extends State<Restaurant> {
                                                           const EdgeInsets.all(
                                                               10.0),
                                                       child: GestureDetector(
-                                                        onTap:()=>Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: RestaurantReview(restName: rest[index].name,imgName: rest[index].image,))) ,
+                                                        onTap: () =>
+                                                            Navigator.push(
+                                                                context,
+                                                                PageTransition(
+                                                                    type: PageTransitionType
+                                                                        .rightToLeft,
+                                                                    child:
+                                                                        RestaurantReview(
+                                                                      restName:
+                                                                          rest[index]
+                                                                              .name,
+                                                                      imgName: rest[
+                                                                              index]
+                                                                          .image,
+                                                                    ))),
                                                         child: Container(
                                                           child: Column(
                                                             children: <Widget>[
                                                               Align(
-                                                                  alignment: Alignment
-                                                                      .centerRight,
-                                                                  child: Icon(
-                                                                    Icons
-                                                                        .library_books,
-                                                                    color: Colors
-                                                                        .black,
-                                                                    size: 26,
-                                                                  ),),
+                                                                alignment: Alignment
+                                                                    .centerRight,
+                                                                child: Icon(
+                                                                  Icons
+                                                                      .library_books,
+                                                                  color: Colors
+                                                                      .black,
+                                                                  size: 26,
+                                                                ),
+                                                              ),
                                                               //Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: RestaurantReview(restName: rest[index].name,imgName: rest[index].image,)))
                                                               SizedBox(
                                                                 height: 2,
@@ -466,7 +480,8 @@ class _RestaurantState extends State<Restaurant> {
                                                                   style: TextStyle(
                                                                       color: Colors
                                                                           .black,
-                                                                      fontSize: 12,
+                                                                      fontSize:
+                                                                          12,
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .w500),

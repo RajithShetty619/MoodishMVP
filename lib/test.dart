@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geoflutterfire/geoflutterfire.dart';
+import 'package:http/http.dart';
 
 class Test extends StatefulWidget {
   final String payload;
@@ -27,21 +28,9 @@ class _TestState extends State<Test> {
             RaisedButton(
               onPressed: () async {
                 // Create a geoFirePoint
-                GeoFirePoint center =
-                    geo.point(latitude: 19.0100664, longitude: 73.0371634);
-                var collectionReference = _firestore.collection('places');
-                GeoFirePoint myLocation =
-                    geo.point(latitude: 19.0100664, longitude: 73.0371634);
 
-                double radius = 1;
-                String field = 'g';
-
-                var stream = geo
-                    .collection(collectionRef: collectionReference)
-                    .within(center: center, radius: radius, field: 'g');
-                stream.listen((event) {
-                  event.map((e) => print(e.data()));
-                });
+                var data = await get(
+                    "https://us-central1-moodishtest.cloudfunctions.net/returnRestaurants?lat=18.9580734&long=72.8322506");
               },
               child: Center(child: Text("press")),
             ),
@@ -49,5 +38,32 @@ class _TestState extends State<Test> {
         ),
       ),
     );
+  }
+}
+
+class StreamHandling {
+  final geo = Geoflutterfire();
+  final _firestore = FirebaseFirestore.instance;
+
+  Stream<List<DocumentSnapshot>> getData() {
+    GeoFirePoint center =
+        geo.point(latitude: 19.0100664, longitude: 73.0371634);
+    var collectionReference = _firestore.collection('restaurants');
+    GeoFirePoint myLocation =
+        geo.point(latitude: 19.0100664, longitude: 73.0371634);
+
+    double radius = 3;
+
+    var stream = geo
+        .collection(collectionRef: collectionReference)
+        .within(center: center, radius: radius, field: 'g');
+    stream.listen((event) {
+      event.map((e) {
+        e.data().forEach((key, value) {
+          print(key);
+        });
+      });
+    });
+    return stream;
   }
 }
