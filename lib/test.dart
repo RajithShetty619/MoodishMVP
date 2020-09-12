@@ -29,16 +29,18 @@ class _TestState extends State<Test> {
                 // Create a geoFirePoint
                 GeoFirePoint center =
                     geo.point(latitude: 19.0100664, longitude: 73.0371634);
-                var collectionReference = _firestore.collection('locations');
+                var collectionReference = _firestore.collection('places');
+                GeoFirePoint myLocation =
+                    geo.point(latitude: 19.0100664, longitude: 73.0371634);
 
-                double radius = 50;
-                String field = 'coordinates';
+                double radius = 1;
+                String field = 'g';
 
-                Stream<List<DocumentSnapshot>> stream = geo
+                var stream = geo
                     .collection(collectionRef: collectionReference)
-                    .within(center: center, radius: radius, field: field);
-                stream.listen((List<DocumentSnapshot> documentList) {
-                  documentList.map((e) => print(e.data()));
+                    .within(center: center, radius: radius, field: 'g');
+                stream.listen((event) {
+                  event.map((e) => print(e.data()));
                 });
               },
               child: Center(child: Text("press")),
