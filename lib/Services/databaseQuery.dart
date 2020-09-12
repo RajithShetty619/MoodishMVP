@@ -12,18 +12,18 @@ import 'database.dart';
 class DatabaseQuery {
   String _lastDocument;
   bool dataExists = true;
-  final CollectionReference _ref = Firestore.instance.collection('food');
+  final CollectionReference _ref = FirebaseFirestore.instance.collection('food');
 
-  final CollectionReference rest = Firestore.instance.collection('restaurants');
+  final CollectionReference rest = FirebaseFirestore.instance.collection('restaurants');
 
-  final CollectionReference polls = Firestore.instance.collection('polls');
+  final CollectionReference polls = FirebaseFirestore.instance.collection('polls');
 
   final CollectionReference this_that =
-      Firestore.instance.collection('this_that');
+      FirebaseFirestore.instance.collection('this_that');
 
-  final CollectionReference yesorno = Firestore.instance.collection('yesorno');
+  final CollectionReference yesorno = FirebaseFirestore.instance.collection('yesorno');
 
-  final CollectionReference facts = Firestore.instance.collection('facts');
+  final CollectionReference facts = FirebaseFirestore.instance.collection('facts');
   final String listName;
   DatabaseQuery({this.listName});
 
@@ -61,7 +61,7 @@ class DatabaseQuery {
             .orderBy('restcuisine')
             .limit(limit);
       //converting data into list model
-      QuerySnapshot snapshot = await _finalQuery.getDocuments();
+      QuerySnapshot snapshot = await _finalQuery.get();
       List<RestListModel> resqueryList =
           await DatabaseService().listfromSnapshot(snapshot);
       //putting it in the box which was opened
@@ -158,11 +158,11 @@ class DatabaseQuery {
           .orderBy('description')
           .limit(4);
 
-      QuerySnapshot snapshot = await _finalQuery.getDocuments();
+      QuerySnapshot snapshot = await _finalQuery.get();
       List<FoodListModel> queryList =
           await DatabaseService().listFromSnapshot(snapshot);
       _lastDocument = queryList[queryList.length - 1].description;
-      if (snapshot.documents.length == 0) {
+      if (snapshot.docs.length == 0) {
         dataExists = false;
         print("no data");
       }
@@ -308,7 +308,7 @@ class DatabaseQuery {
         .orderBy('A')
         .limit(4);
     List<DocumentSnapshot> _snapshot =
-        await t.getDocuments().then((value) => value.documents);
+        await t.get().then((value) => value.docs);
     // saving last this_that to be shown
     String _endthat = await _snapshot[_snapshot.length - 1].data()['A'];
     await _box.put('endthat', _endthat);
