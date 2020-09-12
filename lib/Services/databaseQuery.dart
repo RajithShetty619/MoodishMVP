@@ -87,7 +87,8 @@ class DatabaseQuery {
       List<dynamic> value,
       int limit = 5,
       int check = 0,
-      String mood}) async {
+      String mood,
+      bool recursive = false}) async {
     List<String> _field = field;
     List<dynamic> _value = value;
     /* gets previous list saved by the name */
@@ -99,7 +100,7 @@ class DatabaseQuery {
     if (_gfoodList == null || check == 0) {
       Query _finalQuery = _ref.orderBy('description');
       /* last document to continue query from */
-      if (_gfoodList != null) if (_gfoodList.length != 0)
+      if (_gfoodList != null) if (_gfoodList.length != 0 && recursive == false)
         _lastDocument =
             _gfoodList.cast<FoodListModel>()[_gfoodList.length - 1].description;
 
@@ -123,8 +124,16 @@ class DatabaseQuery {
 
       /* saving list for later use */
       await _box.put(listName, queryList);
-
-      return queryList;
+      if (queryList.length <= 0) {
+        return await getFood(
+            field: field,
+            value: value,
+            limit: limit,
+            mood: mood,
+            check: 0,
+            recursive: true);
+      } else
+        return queryList;
     }
     /* if got list readily from memory  */
     else {
