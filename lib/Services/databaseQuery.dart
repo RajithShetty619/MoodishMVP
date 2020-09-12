@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
 import 'package:moodish_mvp/models/factsModel.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/models/pollsModel.dart';
-import 'package:moodish_mvp/models/restaurantsModel.dart';
 import 'package:moodish_mvp/models/this_thatModel.dart';
 import 'package:moodish_mvp/models/yesNo.dart';
 import 'database.dart';
@@ -12,11 +10,14 @@ import 'database.dart';
 class DatabaseQuery {
   String _lastDocument;
   bool dataExists = true;
-  final CollectionReference _ref = FirebaseFirestore.instance.collection('food');
+  final CollectionReference _ref =
+      FirebaseFirestore.instance.collection('food');
 
-  final CollectionReference rest = FirebaseFirestore.instance.collection('restaurants');
+  final CollectionReference rest =
+      FirebaseFirestore.instance.collection('restaurants');
 
-  final CollectionReference polls = FirebaseFirestore.instance.collection('polls');
+  final CollectionReference polls =
+      FirebaseFirestore.instance.collection('polls');
 
   final CollectionReference this_that =
       FirebaseFirestore.instance.collection('this_that');
@@ -121,16 +122,7 @@ class DatabaseQuery {
 
       /* saving list for later use */
       await _box.put(listName, queryList);
-      if (queryList.length <= 0) {
-        return await getFood(
-            field: field,
-            value: value,
-            limit: limit,
-            mood: mood,
-            check: 0,
-            recursive: true);
-      } else
-        return queryList;
+      return queryList;
     }
     /* if got list readily from memory  */
     else {
@@ -153,7 +145,7 @@ class DatabaseQuery {
 
     if (dataExists) {
       print("getMoreFood");
-      Query _finalQuery = _ref.where('description', isGreaterThan: '');
+      Query _finalQuery = _ref.orderBy('description');
 
       if (_value[_value.length - 1].runtimeType != String) {
         dynamic _v = _value.removeLast();
@@ -161,9 +153,7 @@ class DatabaseQuery {
       }
 
       _finalQuery = recQuery(_field, _value, _finalQuery)
-          .startAfter([_lastDocument])
-          .orderBy('description')
-          .limit(4);
+          .startAfter([_lastDocument]).limit(4);
 
       QuerySnapshot snapshot = await _finalQuery.get();
       List<FoodListModel> queryList =
@@ -199,7 +189,7 @@ class DatabaseQuery {
     Box _box = await Hive.openBox('polls');
     dynamic last = _box.get(listName);
     /*  */
-    Query q = polls.orderBy('value').startAfter([last]).limit(5);
+    Query q = polls.orderBy('value').startAfter([last]).limit(4);
     List<DocumentSnapshot> _snapshot =
         await q.get().then((value) => value.docs);
 

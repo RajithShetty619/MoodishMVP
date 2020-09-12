@@ -13,7 +13,7 @@ class ShowScreen extends StatefulWidget {
 
 class _ShowScreenState extends State<ShowScreen> {
   List<dynamic> _state;
-  Future<List<String>> openBox() async {
+  Future<List<dynamic>> openBox() async {
     Box box = await Hive.openBox('preferenceBox');
     _state = await box.get('preference');
     if (_state == null) {

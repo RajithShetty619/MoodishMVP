@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/Services/database.dart';
-import 'package:moodish_mvp/screens/Restaurants/home.dart';
 import '../../Services/authenticate.dart';
 import 'Edit.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -43,20 +42,6 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-//        appBar: AppBar(backgroundColor: Colors.grey, actions: <Widget>[
-//          IconButton(
-//            icon: Icon(Icons.notifications),
-//            onPressed: () {},
-//          ),
-//          IconButton(
-//            icon: Icon(Icons.group),
-//            onPressed: () {},
-//          ),
-//          IconButton(
-//            icon: Icon(Icons.settings),
-//            onPressed: () {},
-//          ),
-//        ]),
       body: Theme(
         data: Theme.of(context).copyWith(
           brightness: Brightness.light,
@@ -266,48 +251,6 @@ class _ProfileState extends State<Profile> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => ProfileSetting()));
-//                        showDialog(
-//                            context: context,
-//                            builder: (BuildContext idcontext) {
-//                              return Dialog(
-//                                shape: RoundedRectangleBorder(
-//                                  borderRadius: BorderRadius.circular(10.0),
-//                                ),
-//                                child: Container(
-//                                  height: 135,
-//                                  child: Column(
-//                                    children: <Widget>[
-//                                      SizedBox(
-//                                        height: 10,
-//                                      ),
-//                                      Text(
-//                                        'Coming Soon.......!',
-//                                        style: TextStyle(
-//                                          fontSize: 20,
-//                                          fontWeight: FontWeight.bold,
-//                                        ),
-//                                      ),
-//                                      SizedBox(
-//                                        height: 20,
-//                                      ),
-//                                      Padding(
-//                                        padding: EdgeInsets.all(10),
-//                                        child: Align(
-//                                          alignment: Alignment.centerRight,
-//                                          child: RaisedButton(
-//                                            onPressed: () => Navigator.of(
-//                                                    idcontext,
-//                                                    rootNavigator: true)
-//                                                .pop(),
-//                                            child: Text('ok'),
-//                                          ),
-//                                        ),
-//                                      )
-//                                    ],
-//                                  ),
-//                                ),
-//                              );
-//                            });
                       },
                     ),
                   ],
