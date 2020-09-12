@@ -32,55 +32,55 @@ class DatabaseQuery {
   final String listName;
   DatabaseQuery({this.listName});
 
-// restaurant data query
-  Future<List<RestListModel>> getRest({
-    List<String> field,
-    List<dynamic> value,
-    int limit = 5,
-    int check = 0,
-  }) async {
-    List<String> _field = field;
-    List<dynamic> _value = value;
-    //opening hive box
-    final _restbox = await Hive.openBox(listName);
-    List<dynamic> _restList = await _restbox.get(listName);
-    //when no list is called from memory or to get new list from memory coz checkdate func
-    if (_restList == null || check == 0) {
-      Query _finalQuery = rest.where("restcuisine", isGreaterThan: "");
+// // restaurant data query
+//   Future<List<RestListModel>> getRest({
+//     List<String> field,
+//     List<dynamic> value,
+//     int limit = 5,
+//     int check = 0,
+//   }) async {
+//     List<String> _field = field;
+//     List<dynamic> _value = value;
+//     //opening hive box
+//     final _restbox = await Hive.openBox(listName);
+//     List<dynamic> _restList = await _restbox.get(listName);
+//     //when no list is called from memory or to get new list from memory coz checkdate func
+//     if (_restList == null || check == 0) {
+//       Query _finalQuery = rest.where("restcuisine", isGreaterThan: "");
 
-      if (_restList != null) if (_restList.length != 0)
-        _lastDocument =
-            _restList.cast<RestListModel>()[_restList.length - 1].restcuisine;
+//       if (_restList != null) if (_restList.length != 0)
+//         _lastDocument =
+//             _restList.cast<RestListModel>()[_restList.length - 1].restcuisine;
 
-      if (_value[_value.length - 1].runtimeType != String) {
-        dynamic _v = _value.removeLast();
-        _finalQuery = _finalQuery.where(_field.removeLast(), whereIn: _v);
-      }
-      if (_lastDocument != null)
-        _finalQuery = recQuery(_field, _value, _finalQuery)
-            .startAfter([_lastDocument])
-            .orderBy('restcuisine')
-            .limit(limit);
-      else
-        _finalQuery = recQuery(_field, _value, _finalQuery)
-            .orderBy('restcuisine')
-            .limit(limit);
-      //converting data into list model
-      QuerySnapshot snapshot = await _finalQuery.get();
-      List<RestListModel> resqueryList =
-          await DatabaseService().listfromSnapshot(snapshot);
-      //putting it in the box which was opened
-      await _restbox.put(listName, resqueryList);
+//       if (_value[_value.length - 1].runtimeType != String) {
+//         dynamic _v = _value.removeLast();
+//         _finalQuery = _finalQuery.where(_field.removeLast(), whereIn: _v);
+//       }
+//       if (_lastDocument != null)
+//         _finalQuery = recQuery(_field, _value, _finalQuery)
+//             .startAfter([_lastDocument])
+//             .orderBy('restcuisine')
+//             .limit(limit);
+//       else
+//         _finalQuery = recQuery(_field, _value, _finalQuery)
+//             .orderBy('restcuisine')
+//             .limit(limit);
+//       //converting data into list model
+//       QuerySnapshot snapshot = await _finalQuery.get();
+//       List<RestListModel> resqueryList =
+//           await DatabaseService().listfromSnapshot(snapshot);
+//       //putting it in the box which was opened
+//       await _restbox.put(listName, resqueryList);
 
-      return resqueryList;
-    }
-    //if list is already there in memory
-    else {
-      print('list directly from data');
-      List<RestListModel> _resList = _restList.cast<RestListModel>();
-      return _resList;
-    }
-  }
+//       return resqueryList;
+//     }
+//     //if list is already there in memory
+//     else {
+//       print('list directly from data');
+//       List<RestListModel> _resList = _restList.cast<RestListModel>();
+//       return _resList;
+//     }
+//   }
 
   Future<List<FoodListModel>> getFood(
       {List<String> field,
@@ -97,7 +97,7 @@ class DatabaseQuery {
     /* condition satisfied when no list retrieved from memory
         or new list to be retrieved coz of next day has arrived */
     if (_gfoodList == null || check == 0) {
-      Query _finalQuery = _ref.where('description', isGreaterThan: '');
+      Query _finalQuery = _ref.orderBy('description');
       /* last document to continue query from */
       if (_gfoodList != null) if (_gfoodList.length != 0)
         _lastDocument =
@@ -111,17 +111,13 @@ class DatabaseQuery {
       /* used lastdocument */
       if (_lastDocument != null)
         _finalQuery = recQuery(_field, _value, _finalQuery)
-            .startAfter([_lastDocument])
-            .orderBy('description')
-            .limit(limit);
+            .startAfter([_lastDocument]).limit(limit);
       /* not used lastdocument */
       else
-        _finalQuery = recQuery(_field, _value, _finalQuery)
-            .orderBy('description')
-            .limit(limit);
+        _finalQuery = recQuery(_field, _value, _finalQuery).limit(limit);
 
       /* convert query into useable foodListModel */
-      QuerySnapshot snapshot = await _finalQuery.getDocuments();
+      QuerySnapshot snapshot = await _finalQuery.get();
       List<FoodListModel> queryList =
           await DatabaseService().listFromSnapshot(snapshot);
 
@@ -192,89 +188,12 @@ class DatabaseQuery {
     }
   }
 
-//   Future<List<FoodListModel>> getRecipe(
-//       {List<String> field,
-//       List<dynamic> value,
-//       int limit = 5,
-//       int check = 0,
-//       String mood}) async {
-//     List<String> _field = field;
-//     List<dynamic> _value = value;
-//     /* gets previous list saved by the name */
-//     final _box = await Hive.openBox(listName + (mood ?? ''));
-//     List<dynamic> _veglast = await _box.get(listName+'veg');
-//     List<dynamic> _nonveglast = await _box.get(listName+'nonveg');
-
-//     /* condition satisfied when no list retrieved from memory
-//         or new list to be retrieved coz of next day has arrived */
-//     if (_veglast == null || check == 0) {
-//       Query _vegQuery = _ref.where('description', isGreaterThan: '');
-//       Query _nonvegQuery = _ref.where('description', isGreaterThan: '');
-//       /* last document to continue query from */
-//       if (_veglast != null) if (_veglast.length != 0)
-//         {_lastDocument =
-//             _gfoodList.cast<FoodListModel>()[_gfoodList.length - 1].description;
-// }
-
-//       /* used lastdocument */
-//       if (_lastDocument != null) {
-//         _vegQuery = recQuery(_field, _value, _vegQuery)
-//             .where('deter', isEqualTo: 'veg')
-//             .startAfter([_lastDocument])
-//             .orderBy('description')
-//             .limit(5);
-//         _nonvegQuery = recQuery(_field, _value, _nonvegQuery)
-//             .where('deter', isEqualTo: 'nonveg')
-//             .startAfter([_lastDocument])
-//             .orderBy('description')
-//             .limit(5);
-//       }
-
-//       /* not used lastdocument */
-//       else {
-//         _vegQuery = recQuery(_field, _value, _vegQuery)
-//             .where('deter', isEqualTo: 'veg')
-//             .startAfter([_lastDocument])
-//             .orderBy('description')
-//             .limit(5);
-//         _nonvegQuery = recQuery(_field, _value, _nonvegQuery)
-//             .where('deter', isEqualTo: 'nonveg')
-//             .startAfter([_lastDocument])
-//             .orderBy('description')
-//             .limit(5);
-//       }
-
-//       /* convert query into useable foodListModel */
-//       QuerySnapshot vegsnapshot = await _vegQuery.getDocuments();
-//       QuerySnapshot nonvegsnapshot = await _nonvegQuery.getDocuments();
-//       List<FoodListModel> queryListNon =
-//           await DatabaseService().listFromSnapshot(nonvegsnapshot);
-//       List<FoodListModel> queryListVeg =
-//           await DatabaseService().listFromSnapshot(vegsnapshot);
-//       List<FoodListModel> queryList = queryListNon + queryListVeg;
-//       /* saving list for later use */
-//       await _box.put(listName, queryList);
-
-//       return queryList;
-//     }
-//     /* if got list readily from memory  */
-//     else {
-//       print("from data");
-//       List<FoodListModel> _foodList = _gfoodList.cast<FoodListModel>();
-//       return _foodList;
-//     }
-//   }
-
   Future<List<PollsModel>> getPoll() async {
     /* retrieving last polls for querying */
     Box _box = await Hive.openBox('polls');
     dynamic last = _box.get(listName);
     /*  */
-    Query q = polls
-        .where('value', isGreaterThan: '')
-        .startAfter([last])
-        .orderBy('value')
-        .limit(5);
+    Query q = polls.orderBy('value').startAfter([last]).limit(5);
     List<DocumentSnapshot> _snapshot =
         await q.get().then((value) => value.docs);
 
@@ -307,13 +226,9 @@ class DatabaseQuery {
     Box _box = await Hive.openBox('this_that');
     dynamic end = _box.get('endthat');
 
-    Query t = this_that
-        .where('A', isGreaterThan: '')
-        .startAfter([end])
-        .orderBy('A')
-        .limit(4);
+    Query t = this_that.orderBy('A').startAfter([end]).limit(4);
     List<DocumentSnapshot> _snapshot =
-        await t.getDocuments().then((value) => value.documents);
+        await t.get().then((value) => value.docs);
     // saving last this_that to be shown
     String _endthat = await _snapshot[_snapshot.length - 1].data()['A'];
     await _box.put('endthat', _endthat);
@@ -334,11 +249,7 @@ class DatabaseQuery {
     Box _box = await Hive.openBox('yesorno');
     dynamic end = _box.get('end');
 
-    Query y = yesorno
-        .where('Questions', isGreaterThan: '')
-        .startAfter([end])
-        .orderBy('Questions')
-        .limit(3);
+    Query y = yesorno.orderBy('Questions').startAfter([end]).limit(3);
     List<DocumentSnapshot> _snapshot =
         await y.get().then((value) => value.docs);
     // saving last this_that to be shown
@@ -361,11 +272,7 @@ class DatabaseQuery {
     Box _box = await Hive.openBox('fact');
     dynamic last = _box.get('lastfact');
     /*  */
-    Query q = facts
-        .where('fact', isGreaterThan: '')
-        .startAfter([last])
-        .orderBy('fact')
-        .limit(5);
+    Query q = facts.orderBy('fact').startAfter([last]).limit(5);
     List<DocumentSnapshot> _snapshot =
         await q.get().then((value) => value.docs);
 

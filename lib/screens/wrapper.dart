@@ -9,9 +9,6 @@ import 'package:moodish_mvp/showScreen.dart';
 import 'package:moodish_mvp/test.dart';
 import 'package:provider/provider.dart';
 
-import 'Restaurants/mood.dart';
-import 'Restaurants/restaurantCard/resataurantReview.dart';
-
 class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -19,7 +16,7 @@ class Wrapper extends StatelessWidget {
     if (onAuthChanged == null) {
       return SignIn();
     } else {
-      return Test();
+      return ShowScreen();
     }
   }
 }

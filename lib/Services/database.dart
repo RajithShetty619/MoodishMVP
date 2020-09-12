@@ -20,7 +20,7 @@ class DatabaseService {
         await userName.doc(await Authenticate().returnUid()).get();
     String deter = await userPref.data()["deter"];
     print(deter);
-    List<String> cuisine = await userPref.data()['cuisine'];
+    dynamic cuisine = await userPref.data()['cuisine'];
     print(cuisine);
     box.put('deter', deter);
     box.put('preference', cuisine);
@@ -86,8 +86,8 @@ class DatabaseService {
   }
 
   /* used to display name and email in profile */
-  Future<Map<String, String>> returnUser() async {
-    Map<String, String> _data = {};
+  Future<Map<String, dynamic>> returnUser() async {
+    Map<String, dynamic> _data = {};
     DocumentSnapshot user =
         await userName.doc(await Authenticate().returnUid()).get();
     user.data().forEach((key, value) {

@@ -536,7 +536,7 @@ class _FoodFeedState extends State<FoodFeed> {
                         if (indx == 2)
                           Column(
                             children: <Widget>[
-                              Container(child: This_ThatTabs()),
+                              Container(child: PollTabs()),
                               // if (numbr == 0)
                               //   Container( child: YesNoTabs()),
                               // if (numbr == 1)
