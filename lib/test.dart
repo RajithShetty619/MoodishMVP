@@ -1,18 +1,6 @@
-import 'package:cloud_functions/cloud_functions.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flappy_search_bar/flappy_search_bar.dart';
-import 'package:flappy_search_bar/search_bar_style.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:hive/hive.dart';
-import 'package:moodish_mvp/Services/authenticate.dart';
-import 'package:moodish_mvp/Services/database.dart';
-import 'package:moodish_mvp/Services/searchFunction.dart';
-import 'package:moodish_mvp/models/foodListModel.dart';
-import 'package:moodish_mvp/models/user.dart';
-import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
-import 'package:http/http.dart';
+import 'package:geoflutterfire/geoflutterfire.dart';
 
 class Test extends StatefulWidget {
   final String payload;
@@ -23,61 +11,41 @@ class Test extends StatefulWidget {
 }
 
 class _TestState extends State<Test> {
-
+  final geo = Geoflutterfire();
+  final _firestore = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'Second page - Payload:',
-                style: Theme.of(context).textTheme.title,
-              ),
-              const SizedBox(height: 8),
-              Text(
-               widget.payload,
-                style: Theme.of(context).textTheme.subtitle,
-              ),
-              const SizedBox(height: 8),
-              RaisedButton(
-                child: Text('Back'),
-                onPressed: () => Navigator.pop(context),
-              ),
-            ],
-          ),
-        ),
-      );
-  }
-}
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Second page - Payload:',
+            ),
+            const SizedBox(height: 8),
+            RaisedButton(
+              onPressed: () async {
+                // Create a geoFirePoint
+                GeoFirePoint center =
+                    geo.point(latitude: 19.0100664, longitude: 73.0371634);
+                var collectionReference = _firestore.collection('places');
+                GeoFirePoint myLocation =
+                    geo.point(latitude: 19.0100664, longitude: 73.0371634);
 
-class FoodList extends StatefulWidget {
-  @override
-  _FoodListState createState() => _FoodListState();
-}
+                double radius = 1;
+                String field = 'g';
 
-class _FoodListState extends State<FoodList> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  
-  String text = '';
-  int count = 0;
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
-          child: FlatButton(
-            onPressed: () async {
-              FirebaseUser uid = await _auth.currentUser();
-              String token = uid.uid;
-              var data = await get(
-                  'https://us-central1-moodishtest.cloudfunctions.net/restNotif?text=$token');
-              print(data);
-            },
-            
-            child: Center(child: Text("$count")),
-          ),
+                var stream = geo
+                    .collection(collectionRef: collectionReference)
+                    .within(center: center, radius: radius, field: 'g');
+                stream.listen((event) {
+                  event.map((e) => print(e.data()));
+                });
+              },
+              child: Center(child: Text("press")),
+            ),
+          ],
         ),
       ),
     );

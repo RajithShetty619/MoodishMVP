@@ -15,7 +15,7 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   ImageProvider _image;
-  Map<String, String> userData = {};
+  Map<String, dynamic> userData = {};
   @override
   void initState() {
     super.initState();
@@ -30,7 +30,7 @@ class _ProfileState extends State<Profile> {
       } catch (e) {
         print(e);
       }
-      Map<String, String> _userData = await DatabaseService().returnUser();
+      Map<String, dynamic> _userData = await DatabaseService().returnUser();
       setState(() {
         userData = _userData;
       });

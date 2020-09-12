@@ -10,27 +10,29 @@ import 'package:moodish_mvp/models/restaurantsModel.dart';
 
 class DatabaseService {
   final CollectionReference userName =
-      Firestore.instance.collection('Username');
+      FirebaseFirestore.instance.collection('Username');
 
 /* ///////////////////////////////////////////////////// save prefernce /////////////// */
 
   Future<void> checkPreference() async {
     Box box = await Hive.openBox('preferenceBox');
-    DocumentSnapshot userPref = await  userName.document(await Authenticate().returnUid()).get();
-    String deter = await userPref.data["deter"];
+    DocumentSnapshot userPref =
+        await userName.doc(await Authenticate().returnUid()).get();
+    String deter = await userPref.data()["deter"];
     print(deter);
-    List<String> cuisine = await userPref.data['cuisine'];
+    dynamic cuisine = await userPref.data()['cuisine'];
     print(cuisine);
     box.put('deter', deter);
-    box.put('preference',cuisine);
-
+    box.put('preference', cuisine);
   }
 
   Future<void> savePreference() async {
     Box box = await Hive.openBox('preferenceBox');
     String deter = await box.get('deter');
-    List<String> cuisine = await box.get('preference'); 
-    userName.document(await Authenticate().returnUid()).setData({"cuisine":cuisine,"deter":deter},merge: true);
+    List<String> cuisine = await box.get('preference');
+    userName
+        .doc(await Authenticate().returnUid())
+        .set({"cuisine": cuisine, "deter": deter}, SetOptions(merge: true));
   }
 
 /* ///////////////////////////////////////////////////// Transaction //////////////////////////////////////////////////////////////////////// */
@@ -47,7 +49,7 @@ class DatabaseService {
     FoodListModel food,
   }) async {
     DocumentReference documentReference =
-        Firestore.instance.collection(collection).document(sr_no);
+        FirebaseFirestore.instance.collection(collection).doc(sr_no);
 
     if (food != null) {
       String uid = await Authenticate().returnUid();
@@ -59,36 +61,36 @@ class DatabaseService {
         'deter': food.deter
       };
 
-      Firestore.instance
+      FirebaseFirestore.instance
           .collection("username")
-          .document("$uid")
+          .doc("$uid")
           .collection("data")
-          .document("${food.mood}")
-          .setData({food.sr_no: _food}, merge: true);
+          .doc("${food.mood}")
+          .set({food.sr_no: _food}, SetOptions(merge: true));
     }
-    return documentReference.setData({
+    return documentReference.set({
       field: FieldValue.increment(1) /* atomically increments data by 1 */
-    }, merge: true).catchError((onError) => print(onError));
+    }, SetOptions(merge: true)).catchError((onError) => print(onError));
   }
 /* ////////////////////////////////////////////////////////////////////// USERNAMEMETHODS ////////////////////////////////////////////////////////// */
 
   Future<void> updateUserData({String uid, String email, String name}) async {
-    return await userName.document(uid).setData({'name': name, 'email': email});
+    return await userName.doc(uid).set({'name': name, 'email': email});
   }
 
   /* user data edit function for eg:- func(field:'name',value:'xyz')  then name field is update in db */
   Future<void> editUserData({String field, String value}) async {
     return await userName
-        .document(await Authenticate().returnUid())
-        .setData({field: value}, merge: true);
+        .doc(await Authenticate().returnUid())
+        .set({field: value}, SetOptions(merge: true));
   }
 
   /* used to display name and email in profile */
-  Future<Map<String, String>> returnUser() async {
-    Map<String, String> _data = {};
+  Future<Map<String, dynamic>> returnUser() async {
+    Map<String, dynamic> _data = {};
     DocumentSnapshot user =
-        await userName.document(await Authenticate().returnUid()).get();
-    user.data.forEach((key, value) {
+        await userName.doc(await Authenticate().returnUid()).get();
+    user.data().forEach((key, value) {
       _data.putIfAbsent(key, () => value);
     });
     return _data;
@@ -116,17 +118,16 @@ class DatabaseService {
 /* ////////////////////////////////////////////////////////////////////// ResturantListMETHODS ////////////////////////////////////////////////////////// */
 
   Future<List<RestListModel>> listfromSnapshot(QuerySnapshot snapshot) async {
-    return Future.wait(snapshot.documents.map((doc) async {
-      Map<String, dynamic> _docdata = doc.data;
+    return Future.wait(snapshot.docs.map((doc) async {
+      Map<String, dynamic> _docdata = doc.data();
       //code to get images and info related to resturants in future
-
 
       return RestListModel(
         restname: _docdata["Restaurant_Name"] ?? '',
         restcuisine: _docdata["Cuisines"] ?? '',
         costForTwo: _docdata["Cost_for_two(Rs.)"] ?? '',
         hrs: _docdata["Operational_hours"] ?? '',
-        features: _docdata["Features"] ??'',
+        features: _docdata["Features"] ?? '',
         homeDelivery: _docdata["Home_Delivery"] ?? '',
         addnoutlet: _docdata["Additional_outlet_count"] ?? '',
         location: _docdata["Restaurant_Location"] ?? '',
@@ -149,8 +150,8 @@ class DatabaseService {
   Future<List<FoodListModel>> listFromSnapshot(QuerySnapshot snapshot) async {
     /* Future wait is used to make sure each iteration
       of the map is awaited by the code */
-    return Future.wait(snapshot.documents.map((doc) async {
-      Map<String, dynamic> _docData = doc.data;
+    return Future.wait(snapshot.docs.map((doc) async {
+      Map<String, dynamic> _docData = doc.data();
       /* convert image name to url from storage */
       String _url = await Storage().getUrl(_docData["image"]);
 
@@ -210,8 +211,8 @@ class DatabaseService {
 
   Future<void> likePoll({String sr_no, String opt, int like}) async {
     DocumentReference _poll =
-        Firestore.instance.collection('polls').document(sr_no);
-    _poll.setData({opt: like}, merge: true);
+        FirebaseFirestore.instance.collection('polls').doc(sr_no);
+    _poll.set({opt: like}, SetOptions(merge: true));
   }
 }
 
