@@ -54,7 +54,7 @@ class _FoodPreferenceState extends State<FoodPreference> {
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Container(
-                              height: MediaQuery.of(context).size.height/5,
+                              height: MediaQuery.of(context).size.height/4,
                               child: Column(
                                 children: <Widget>[
                                   SizedBox(
@@ -129,7 +129,7 @@ class _FoodPreferenceState extends State<FoodPreference> {
                       alignment: Alignment.bottomLeft,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text('Vegetarian',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.green),),
+                        child: Text('Vegetarian',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.white),),
                       ),
                     ),
                   ),
@@ -147,7 +147,7 @@ class _FoodPreferenceState extends State<FoodPreference> {
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Container(
-                              height: MediaQuery.of(context).size.height/5,
+                              height: MediaQuery.of(context).size.height/4,
                               child: Column(
                                 children: <Widget>[
                                   SizedBox(
@@ -220,7 +220,7 @@ class _FoodPreferenceState extends State<FoodPreference> {
                       alignment: Alignment.bottomLeft,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text('Non-Vegetarian',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.red[900]),),
+                        child: Text('Non-Vegetarian',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.white),),
                       ),
                     ),
                   ),
@@ -238,7 +238,7 @@ class _FoodPreferenceState extends State<FoodPreference> {
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Container(
-                              height: MediaQuery.of(context).size.height/5,
+                              height: MediaQuery.of(context).size.height/4,
                               child: Column(
                                 children: <Widget>[
                                   SizedBox(
@@ -312,7 +312,7 @@ class _FoodPreferenceState extends State<FoodPreference> {
                       alignment: Alignment.bottomLeft,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text('Veg&\nNon-Vegetarian',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.white),),
+                        child: Text('Veg &\nNon-Vegetarian',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.white),),
                       ),
                     ),
                   ),

@@ -101,15 +101,15 @@ class _FoodFeedState extends State<FoodFeed> {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "d2"));
       });
       _dqtaste0.getFood(
-          field: ['deter'],
-          value: ['veg'],
+          field: ['cuisine','deter'],
+          value: ['indian','veg'],
           limit: 7,
           check: check).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "d0"));
       });
       _dqtaste1.getFood(
-          field: ['deter'],
-          value: ['nonveg'],
+          field: ['cuisine','deter'],
+          value: ['indian','nonveg'],
           limit: 7,
           check: check).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "d1"));
