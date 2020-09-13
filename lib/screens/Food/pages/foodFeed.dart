@@ -82,9 +82,9 @@ class _FoodFeedState extends State<FoodFeed> {
       DatabaseQuery(listName: 'p').getPoll().then((poll) {
         BlocProvider.of<PollBloc>(context).add(PollEvent.add(poll, 'p'));
       });
-      DatabaseQuery(listName: 'yn').getYesno().then((yesno) {
-        BlocProvider.of<PollBloc>(context).add(PollEvent.add(yesno, 'yn'));
-      });
+      // DatabaseQuery(listName: 'yn').getYesno().then((yesno) {
+      //   BlocProvider.of<PollBloc>(context).add(PollEvent.add(yesno, 'yn'));
+      // });
       DatabaseQuery(listName: 'tt').getthis_that().then((thisthat) {
         BlocProvider.of<PollBloc>(context).add(PollEvent.add(thisthat, 'tt'));
       });

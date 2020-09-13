@@ -131,10 +131,10 @@ class DatabaseService {
           restaurant_Location: _docdata["Restaurant_Location"] ?? '',
           international_phone_number:
               _docdata["International_phone_number"] ?? '',
-          rating: _docdata["rating"] ?? '',
+          rating: _docdata["rating"].toString() ?? '',
           website: _docdata["website"] ?? '',
           photo_url: _docdata["photo_url"] ?? '',
-          reviews: _docdata["reviews"] ?? '',
+          reviews: _docdata["reviews"] ?? null,
           restaurant_Type: _docdata["Restaurant_Type"] ?? '',
           sr_no: _docdata["sr_no"] ?? '');
     }).toList());

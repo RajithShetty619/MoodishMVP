@@ -8,6 +8,7 @@ class RestaurantBloc
   // TODO: implement initialState
   Map<String, List<RestListModel>> get initialState => {
         "r1": [],
+        "r2": [],
       };
 
   @override

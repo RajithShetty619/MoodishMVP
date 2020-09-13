@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,8 +13,8 @@ import 'package:moodish_mvp/screens/Restaurants/restaurantCard/resataurantReview
 import 'package:moodish_mvp/screens/Restaurants/toprated.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:bloc/bloc.dart';
 import '../Food/blocs/restBloc/restBloc.dart';
+import '../../Services/geolocationRest.dart';
 
 class Restaurant extends StatefulWidget {
   @override
@@ -135,9 +136,19 @@ class _RestaurantState extends State<Restaurant> {
 
   void initState() {
     super.initState();
-    getCurrentLocation();
-    setState(() {
-      DatabaseQuery(listName: 'r1').getRest().then((rest) {
+
+    loadRest();
+  }
+
+  loadRest() async {
+    await DatabaseQuery().getRest().then((rest) {
+      setState(() {
+        BlocProvider.of<RestaurantBloc>(context)
+            .add(RestaurantEvent.add(rest, 'r2'));
+      });
+    });
+    await GeolocationRest().getRestFromLocation().then((rest) {
+      setState(() {
         BlocProvider.of<RestaurantBloc>(context)
             .add(RestaurantEvent.add(rest, 'r1'));
       });
@@ -152,6 +163,7 @@ class _RestaurantState extends State<Restaurant> {
       _currentPosition = position;
     });
     print(position);
+    return position;
   }
 
   _getAddressFromLatLng() async {
@@ -170,49 +182,6 @@ class _RestaurantState extends State<Restaurant> {
     } catch (e) {
       print(e);
     }
-  }
-
-  tempRestaurantDialog() {
-    return showDialog(
-        context: context,
-        builder: (BuildContext idcontext) {
-          return Dialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            child: Container(
-              height: 135,
-              child: Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'All the Restaurants used here are used as Dummy Data...',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: RaisedButton(
-                        onPressed: () =>
-                            Navigator.of(idcontext, rootNavigator: true).pop(),
-                        child: Text('ok'),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          );
-        });
   }
 
   @override
@@ -289,9 +258,22 @@ class _RestaurantState extends State<Restaurant> {
                       );
                     },
                     builder: (context, restList) {
+                      if (restList["r1"].length < 1) {
+                        return Container(
+                          child: Center(
+                            child: FlatButton.icon(
+                                onPressed: () async {
+                                  await loadRest();
+                                },
+                                icon: Icon(Icons.error),
+                                label: Text(
+                                    "Some error has occurred, please retry!")),
+                          ),
+                        );
+                      }
                       return ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: rest.length,
+                          itemCount: restList["r1"].length,
                           itemBuilder: (context, index) {
                             return GestureDetector(
                               onTap: () {
@@ -300,11 +282,7 @@ class _RestaurantState extends State<Restaurant> {
                                     PageTransition(
                                         type: PageTransitionType.rightToLeft,
                                         child: HomePage(
-                                          desc: rest[index].desc,
-                                          imgName: rest[index].image,
-                                          imgName1: rest[index].image1,
-                                          imgName2: rest[index].image2,
-                                          restName: rest[index].name,
+                                          restaurant: restList['r1'][index],
                                         )));
                               },
                               child: Padding(
@@ -317,20 +295,27 @@ class _RestaurantState extends State<Restaurant> {
                                     children: <Widget>[
                                       Stack(
                                         children: <Widget>[
-                                          Container(
-                                            height: 200,
-                                            width: 250,
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(20),
-                                                    topRight:
-                                                        Radius.circular(20)),
-                                                image: DecorationImage(
-                                                    image: AssetImage(
-                                                        'assets/${rest[index].image}'),
-                                                    fit: BoxFit.cover)),
-                                          ),
+                                          CachedNetworkImage(
+                                              imageUrl: restList['r1'][index]
+                                                  .photo_url,
+                                              imageBuilder:
+                                                  (context, imageProvider) {
+                                                return Container(
+                                                  height: 200,
+                                                  width: 250,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                              topLeft: Radius
+                                                                  .circular(20),
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      20)),
+                                                      image: DecorationImage(
+                                                          image: imageProvider,
+                                                          fit: BoxFit.cover)),
+                                                );
+                                              }),
                                           Container(
                                             child: Container(
                                               height: 200,
@@ -404,7 +389,7 @@ class _RestaurantState extends State<Restaurant> {
                                                             height: 2,
                                                           ),
                                                           Text(
-                                                            '4.5',
+                                                            "${restList["r1"][index].rating}",
                                                             style: TextStyle(
                                                                 color: Colors
                                                                     .black,
@@ -491,7 +476,8 @@ class _RestaurantState extends State<Restaurant> {
                                           child: Align(
                                             alignment: Alignment.centerLeft,
                                             child: Text(
-                                              rest[index].name,
+                                              restList["r1"][index]
+                                                  .restaurant_Name,
                                               style: TextStyle(
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold),
@@ -505,7 +491,12 @@ class _RestaurantState extends State<Restaurant> {
                                           padding: const EdgeInsets.all(8.0),
                                           child: Align(
                                             alignment: Alignment.centerLeft,
-                                            child: Text(rest[index].desc),
+                                            child: Text(restList["r1"][index]
+                                                        .features !=
+                                                    "nan"
+                                                ? restList["r1"][index].features
+                                                : restList["r1"][index]
+                                                    .cuisines),
                                           ),
                                         ),
                                       )
@@ -520,52 +511,52 @@ class _RestaurantState extends State<Restaurant> {
               SizedBox(
                 height: 3.0,
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
-                child: Container(
-                  alignment: Alignment.centerLeft,
-                  child: RichText(
-                    text: TextSpan(
-                        text: 'Categories',
-                        style: TextStyle(
-                            fontSize: 26,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black),
-                        children: [
-                          TextSpan(
-                              text: '.',
-                              style: TextStyle(
-                                  fontSize: 40,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.pinkAccent))
-                        ]),
-                  ),
-                ),
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    getCategory('Dine_out.png', 'Dineout', context, 1),
-                    SizedBox(
-                      width: 10.0,
-                    ),
-                    getCategory('Booking.png', 'Booking', context, 2),
-                    SizedBox(
-                      width: 10.0,
-                    ),
-                    getCategory('Pickup.png', 'Pick Up', context, 3),
-                    SizedBox(
-                      width: 10.0,
-                    ),
-                    getCategory('Top_Rated.png', 'Top Rated', context, 4),
-                    SizedBox(
-                      width: 10.0,
-                    ),
-                  ],
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
+              //   child: Container(
+              //     alignment: Alignment.centerLeft,
+              //     child: RichText(
+              //       text: TextSpan(
+              //           text: 'Categories',
+              //           style: TextStyle(
+              //               fontSize: 26,
+              //               fontWeight: FontWeight.bold,
+              //               color: Colors.black),
+              //           children: [
+              //             TextSpan(
+              //                 text: '.',
+              //                 style: TextStyle(
+              //                     fontSize: 40,
+              //                     fontWeight: FontWeight.bold,
+              //                     color: Colors.pinkAccent))
+              //           ]),
+              //     ),
+              //   ),
+              // ),
+              // SingleChildScrollView(
+              //   scrollDirection: Axis.horizontal,
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //     children: <Widget>[
+              //       getCategory('Dine_out.png', 'Dineout', context, 1),
+              //       SizedBox(
+              //         width: 10.0,
+              //       ),
+              //       getCategory('Booking.png', 'Booking', context, 2),
+              //       SizedBox(
+              //         width: 10.0,
+              //       ),
+              //       getCategory('Pickup.png', 'Pick Up', context, 3),
+              //       SizedBox(
+              //         width: 10.0,
+              //       ),
+              //       getCategory('Top_Rated.png', 'Top Rated', context, 4),
+              //       SizedBox(
+              //         width: 10.0,
+              //       ),
+              //     ],
+              //   ),
+              // ),
               SizedBox(
                 height: 8,
               ),
@@ -591,26 +582,33 @@ class _RestaurantState extends State<Restaurant> {
                   ),
                 ),
               ),
-              Container(
-                height: 400,
-                child: restura(rest[0].image, rest[0].name, rest[0].desc, rest,
-                    context, 1),
-              ),
-              Container(
-                height: 400,
-                child: restura(rest[1].image, rest[1].name, rest[1].desc, rest,
-                    context, 2),
-              ),
-              Container(
-                height: 400,
-                child: restura(rest[2].image, rest[2].name, rest[2].desc, rest,
-                    context, 3),
-              ),
-              Container(
-                height: 400,
-                child: restura(rest[3].image, rest[3].name, rest[3].desc, rest,
-                    context, 4),
-              ),
+              BlocConsumer<RestaurantBloc, Map<String, List<RestListModel>>>(
+                  buildWhen: (Map<String, List<RestListModel>> previous,
+                      Map<String, List<RestListModel>> current) {
+                return true;
+              }, listenWhen: (Map<String, List<RestListModel>> previous,
+                      Map<String, List<RestListModel>> current) {
+                if (current.length > previous.length) {
+                  return true;
+                }
+                return false;
+              }, listener: (context, foodList) {
+                Scaffold.of(context).showSnackBar(
+                  SnackBar(content: Text('Added!')),
+                );
+              }, builder: (context, restList) {
+                return ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    primary: false,
+                    itemCount: restList["r2"].length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        height: 400,
+                        child: restura(restList["r2"][index]),
+                      );
+                    });
+              }),
             ],
           ),
         ),
@@ -672,53 +670,11 @@ Widget getCategory(String imgName, String name, context, int tile) {
   );
 }
 
-Widget restura(String imgName, String name, String desc,
-    List<_Restaurants> rest, BuildContext context, int tile) {
+Widget restura(RestListModel rest) {
   return Padding(
     padding: const EdgeInsets.all(10.0),
     child: GestureDetector(
-      onTap: () {
-        if (tile == 1)
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return HomePage(
-              imgName1: rest[0].image1,
-              imgName: rest[0].image,
-              imgName2: rest[0].image2,
-              restName: rest[0].name,
-              desc: rest[0].desc,
-            );
-          }));
-        if (tile == 2)
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return HomePage(
-              imgName1: rest[1].image1,
-              imgName: rest[1].image,
-              imgName2: rest[1].image2,
-              restName: rest[1].name,
-              desc: rest[1].desc,
-            );
-          }));
-        if (tile == 3)
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return HomePage(
-              imgName1: rest[2].image1,
-              imgName: rest[2].image,
-              imgName2: rest[2].image2,
-              restName: rest[2].name,
-              desc: rest[2].desc,
-            );
-          }));
-        if (tile == 4)
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return HomePage(
-              imgName1: rest[3].image1,
-              imgName: rest[3].image,
-              imgName2: rest[3].image2,
-              restName: rest[3].name,
-              desc: rest[3].desc,
-            );
-          }));
-      },
+      onTap: () {},
       child: Card(
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
@@ -726,17 +682,21 @@ Widget restura(String imgName, String name, String desc,
           children: <Widget>[
             Stack(
               children: <Widget>[
-                Container(
-                  height: 250,
-                  width: double.maxFinite,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20)),
-                    image: DecorationImage(
-                        image: AssetImage('assets/${imgName}'),
-                        fit: BoxFit.cover),
-                  ),
+                CachedNetworkImage(
+                  imageUrl: rest.photo_url,
+                  imageBuilder: (context, imageProvider) {
+                    return Container(
+                      height: 250,
+                      width: double.maxFinite,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20)),
+                        image: DecorationImage(
+                            image: imageProvider, fit: BoxFit.cover),
+                      ),
+                    );
+                  },
                 ),
                 Container(
                   child: Container(
@@ -745,7 +705,6 @@ Widget restura(String imgName, String name, String desc,
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
                             begin: Alignment.topLeft,
-//                          stops: [.6,.5],
                             end: Alignment.centerRight,
                             colors: [
                           Colors.transparent,
@@ -850,7 +809,7 @@ Widget restura(String imgName, String name, String desc,
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    name,
+                    rest.restaurant_Name,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -861,7 +820,8 @@ Widget restura(String imgName, String name, String desc,
                 padding: const EdgeInsets.all(8.0),
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: Text(desc),
+                  child: Text(
+                      rest.features == "nan" ? rest.features : rest.cuisines),
                 ),
               ),
             )

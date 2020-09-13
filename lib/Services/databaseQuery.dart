@@ -87,7 +87,10 @@ class DatabaseQuery {
           await DatabaseService().listFromSnapshot(snapshot);
       await _box.put(listName, queryList);
       if (queryList.length < limit - 1) {
-        _finalQuery = _ref.orderBy('description').limit(limit);
+        _finalQuery = _ref
+            .orderBy('description')
+            .where("deter", isEqualTo: "veg")
+            .limit(limit);
         snapshot = await _finalQuery.get();
         queryList = await DatabaseService().listFromSnapshot(snapshot);
         await _box.put(listName, null);
