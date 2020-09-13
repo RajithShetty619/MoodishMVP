@@ -204,44 +204,44 @@ class _RestaurantState extends State<Restaurant> {
                                                   ])),
                                               child: Column(
                                                 children: <Widget>[
-                                                  Align(
-                                                    alignment:
-                                                        Alignment.topRight,
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              10.0),
-                                                      child: Column(
-                                                        children: <Widget>[
-                                                          Align(
-                                                              alignment: Alignment
-                                                                  .centerRight,
-                                                              child: Icon(
-                                                                Icons.av_timer,
-                                                                color: Colors
-                                                                    .black,
-                                                                size: 28,
-                                                              )),
-                                                          SizedBox(
-                                                            height: 2,
-                                                          ),
-                                                          Align(
-                                                            alignment: Alignment
-                                                                .centerRight,
-                                                            child: Text(
-                                                              '30mins',
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500),
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
+                                                  // Align(
+                                                  //   alignment:
+                                                  //       Alignment.topRight,
+                                                  //   child: Padding(
+                                                  //     padding:
+                                                  //         const EdgeInsets.all(
+                                                  //             10.0),
+                                                  //     child: Column(
+                                                  //       children: <Widget>[
+                                                  //         Align(
+                                                  //             alignment: Alignment
+                                                  //                 .centerRight,
+                                                  //             child: Icon(
+                                                  //               Icons.av_timer,
+                                                  //               color: Colors
+                                                  //                   .black,
+                                                  //               size: 28,
+                                                  //             )),
+                                                  //         SizedBox(
+                                                  //           height: 2,
+                                                  //         ),
+                                                  //         Align(
+                                                  //           alignment: Alignment
+                                                  //               .centerRight,
+                                                  //           child: Text(
+                                                  //             '30mins',
+                                                  //             style: TextStyle(
+                                                  //                 color: Colors
+                                                  //                     .black,
+                                                  //                 fontWeight:
+                                                  //                     FontWeight
+                                                  //                         .w500),
+                                                  //           ),
+                                                  //         )
+                                                  //       ],
+                                                  //     ),
+                                                  //   ),
+                                                  // ),
                                                   Align(
                                                     alignment:
                                                         Alignment.centerRight,
@@ -272,62 +272,62 @@ class _RestaurantState extends State<Restaurant> {
                                                       ),
                                                     ),
                                                   ),
-                                                  Align(
-                                                    alignment:
-                                                        Alignment.bottomRight,
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              10.0),
-                                                      child: GestureDetector(
-                                                        onTap: () => Navigator.push(
-                                                            context,
-                                                            PageTransition(
-                                                                type: PageTransitionType
-                                                                    .rightToLeft,
-                                                                child: RestaurantReview(
-                                                                    rest: restList[
-                                                                            "r1"]
-                                                                        [
-                                                                        index]))),
-                                                        child: Container(
-                                                          child: Column(
-                                                            children: <Widget>[
-                                                              Align(
-                                                                alignment: Alignment
-                                                                    .centerRight,
-                                                                child: Icon(
-                                                                  Icons
-                                                                      .library_books,
-                                                                  color: Colors
-                                                                      .black,
-                                                                  size: 26,
-                                                                ),
-                                                              ),
-                                                              SizedBox(
-                                                                height: 2,
-                                                              ),
-                                                              Align(
-                                                                alignment: Alignment
-                                                                    .centerRight,
-                                                                child: Text(
-                                                                  'Review',
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .black,
-                                                                      fontSize:
-                                                                          12,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500),
-                                                                ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  )
+                                                  // Align(
+                                                  //   alignment:
+                                                  //       Alignment.bottomRight,
+                                                  //   child: Padding(
+                                                  //     padding:
+                                                  //         const EdgeInsets.all(
+                                                  //             10.0),
+                                                  //     child: GestureDetector(
+                                                  //       onTap: /* () => Navigator.push(
+                                                  //           context,
+                                                  //           PageTransition(
+                                                  //               type: PageTransitionType
+                                                  //                   .rightToLeft,
+                                                  //               child: RestaurantReview(
+                                                  //                   rest: restList[
+                                                  //                           "r1"]
+                                                  //                       [
+                                                  //                       index]))) */null,
+                                                  //       child: Container(
+                                                  //         child: Column(
+                                                  //           children: <Widget>[
+                                                  //             Align(
+                                                  //               alignment: Alignment
+                                                  //                   .centerRight,
+                                                  //               child: Icon(
+                                                  //                 Icons
+                                                  //                     .library_books,
+                                                  //                 color: Colors
+                                                  //                     .black,
+                                                  //                 size: 26,
+                                                  //               ),
+                                                  //             ),
+                                                  //             SizedBox(
+                                                  //               height: 2,
+                                                  //             ),
+                                                  //             Align(
+                                                  //               alignment: Alignment
+                                                  //                   .centerRight,
+                                                  //               child: Text(
+                                                  //                 'Review',
+                                                  //                 style: TextStyle(
+                                                  //                     color: Colors
+                                                  //                         .black,
+                                                  //                     fontSize:
+                                                  //                         12,
+                                                  //                     fontWeight:
+                                                  //                         FontWeight
+                                                  //                             .w500),
+                                                  //               ),
+                                                  //             )
+                                                  //           ],
+                                                  //         ),
+                                                  //       ),
+                                                  //     ),
+                                                  //   ),
+                                                  // )
                                                 ],
                                               ),
                                             ),
@@ -468,9 +468,20 @@ class _RestaurantState extends State<Restaurant> {
                     primary: false,
                     itemCount: restList["r2"].length,
                     itemBuilder: (context, index) {
-                      return Container(
-                        height: 400,
-                        child: restura(restList["r2"][index]),
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              PageTransition(
+                                  type: PageTransitionType.rightToLeft,
+                                  child: HomePage(
+                                    restaurant: restList['r2'][index],
+                                  )));
+                        },
+                        child: Container(
+                          height: 400,
+                          child: restura(restList["r2"][index]),
+                        ),
                       );
                     });
               }),

@@ -16,6 +16,7 @@ class RestListModel {
   final String photo_url;
   final List<dynamic> reviews;
   final String sr_no;
+  final String address;
 
   RestListModel(
       {this.restaurant_Name,
@@ -30,7 +31,8 @@ class RestListModel {
       this.website,
       this.photo_url,
       this.sr_no,
-      this.reviews});
+      this.reviews,
+      this.address});
   /* 
    AFTER ANY CHANGES OR ANY ERROR IN THIS FILE, RUN THIS COMMAND
 run command: flutter packages pub run build_runner build --delete-conflicting-outputs
