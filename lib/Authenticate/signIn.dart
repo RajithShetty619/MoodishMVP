@@ -8,8 +8,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:moodish_mvp/Authenticate/forgotPassword.dart';
 import 'package:moodish_mvp/Authenticate/loading.dart';
 import 'package:moodish_mvp/Services/authenticate.dart';
-import 'package:moodish_mvp/screens/mainScreen.dart';
-import 'package:provider/provider.dart';
 import 'signUp.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -184,21 +182,6 @@ class _SignInState extends State<SignIn> {
                           SizedBox(
                             height: 15.0,
                           ),
-//                          SignInButton(
-//                            Buttons.Google,
-//                            onPressed: () async {
-//                              dynamic result = await _auth.googleSignIn();
-//                              if (result == null) {
-//                                setState(() => error = 'Something went Wrong!');
-//                                loading = false;
-//                              } else
-//                                Navigator.push(context,
-//                                    MaterialPageRoute(builder: (context) {
-//                                  return MainScreen();
-//                                }));
-//                            },
-//                          ),
-                          //
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: appleSignIn(_auth),
