@@ -49,6 +49,7 @@ class _OverViewState extends State<OverView> {
                                     height: 7.0,
                                   ),
                                   Container(
+                                      width: MediaQuery.of(context).size.width/1.4,
                                       margin: EdgeInsets.all(5),
                                       child: Text(
                                         '${widget.rest.international_phone_number}',
@@ -87,6 +88,7 @@ class _OverViewState extends State<OverView> {
                                       height: 7.0,
                                     ),
                                     Container(
+                                      width: MediaQuery.of(context).size.width/1.4,
                                         child: GestureDetector(
                                             onTap: () {
                                               launch(('${widget.rest.website}'));
