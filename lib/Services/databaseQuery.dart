@@ -52,11 +52,12 @@ class DatabaseQuery {
       int limit = 5,
       int check = 0,
       String mood,
+      String deter,
       bool recursive = false}) async {
     List<String> _field = field;
     List<dynamic> _value = value;
     /* gets previous list saved by the name */
-    final _box = await Hive.openBox(listName + (mood ?? ''));
+    final _box = await Hive.openBox(listName + (mood ?? '') + (deter ?? ''));
     List<dynamic> _gfoodList = await _box.get(listName);
 
     /* condition satisfied when no list retrieved from memory

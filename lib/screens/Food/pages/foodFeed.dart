@@ -122,8 +122,22 @@ class _FoodFeedState extends State<FoodFeed> {
   }
 
   data(BuildContext dataContext, String mood) async {
-    _dq.getFood(field: ['mood'], value: [mood], limit: 10, check: 0).then(
-        (future) {
+    Box _box = await Hive.openBox("preferenceBox");
+    String deter = _box.get("deter");
+
+    if (deter != "veg" && deter != "nonveg") {
+      Random random = new Random();
+      int randomNumber = random.nextInt(2);
+      if (randomNumber == 1)
+        deter = "veg";
+      else
+        deter = "nonveg";
+    }
+    _dq.getFood(
+        field: ['mood', 'deter'],
+        value: [mood, deter],
+        limit: 10,
+        check: 0).then((future) {
       setState(() {
         moodSelection = mood;
         BlocProvider.of<FoodBloc>(dataContext).add(FoodEvent.add(future, "0"));
@@ -493,14 +507,9 @@ class _FoodFeedState extends State<FoodFeed> {
                           Column(
                             children: <Widget>[
                               // Container(child: PollTabs()),
-                              if (numbr == 0)
-                                Container( child: YesNoTabs()),
-                              if (numbr == 1)
-                                Container(
-                                child:  PollTabs()
-                                ),
-                              if (numbr == 2)
-                                Container( child: This_ThatTabs()),
+                              if (numbr == 0) Container(child: YesNoTabs()),
+                              if (numbr == 1) Container(child: PollTabs()),
+                              if (numbr == 2) Container(child: This_ThatTabs()),
                             ],
                           ),
                         if (indx == 3) Container(child: FoodftTab()),

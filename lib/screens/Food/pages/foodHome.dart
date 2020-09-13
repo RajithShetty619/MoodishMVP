@@ -16,6 +16,7 @@ class _FoodHomeState extends State<FoodHome> {
   };
 
   int grpValue = 0;
+  String name;
 
   bool _switch = false;
 
@@ -35,16 +36,7 @@ class _FoodHomeState extends State<FoodHome> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     _switch
-                        ? Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Text(
-                              'Hello Username,\n Hungry yet?',
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          )
+                        ? Container()
                         : Padding(
                             padding: const EdgeInsets.only(left: 8.0),
                             child: Text(

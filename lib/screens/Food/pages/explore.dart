@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,7 +35,7 @@ class _ExploreState extends State<Explore> {
   /* dont remember mohit look into it :) */
   int _selected = 1;
   bool _getFoodCalled = false;
-
+  String _deter;
   /* constructor initialised with list name  */
   DatabaseQuery _dq = DatabaseQuery(listName: "0");
   DatabaseQuery _dqtsp = DatabaseQuery(listName: "tsp");
@@ -48,59 +50,81 @@ class _ExploreState extends State<Explore> {
   void initState() {
     super.initState();
     /* check to run it only once */
-    if (!_getFoodCalled) {
-      checkDate().then((check) {
-        _dqtsp.getFood(field: ['cuisine'], value: ['indian'], check: 0).then(
-            (future) {
+    checkDate().then((check) async {
+      Box _box = await Hive.openBox("preferenceBox");
+      String deter = _box.get("deter");
+
+      if (deter != "veg" && deter != "nonveg") {
+        Random random = new Random();
+        int randomNumber = random.nextInt(2);
+        if (randomNumber == 1)
+          deter = "veg";
+        else
+          deter = "nonveg";
+      }
+      setState(() {
+        _deter = deter;
+      });
+      _dqtsp.getFood(
+          field: ['cuisine', "deter"],
+          value: ['indian', deter],
+          deter: deter,
+          check: 0).then((future) {
+        setState(() {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "tsp"));
         });
-        _dqtaste0.getFood(
-            field: ['taste'],
-            value: getValue("t0"),
-            limit: 7,
-            check: check).then((future) {
+      });
+      _dqtaste0.getFood(
+          field: ['taste', "deter"],
+          value: getValue("t0", deter),
+          limit: 7,
+          deter: deter,
+          check: check).then((future) {
+        setState(() {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t0"));
         });
-        _dqtaste1.getFood(
-            field: ['taste'],
-            value: getValue("t1"),
-            limit: 7,
-            check: check).then((future) {
+      });
+      _dqtaste1.getFood(
+          field: ['taste', 'deter'],
+          value: getValue("t1", deter),
+          limit: 7,
+          deter: deter,
+          check: check).then((future) {
+        setState(() {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t1"));
         });
-        /*  _dqtaste2.getFood(
-            field: ['taste'],
-            value: getValue("t2"),
-            limit: 7,
-            check: check).then((future) {
-          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t2"));
-        }); */
-        _dqsituation0.getFood(
-            field: ['situation'],
-            value: getValue("s0"),
-            limit: 7,
-            check: check).then((future) {
+      });
+      _dqsituation0.getFood(
+          field: ['situation', "deter"],
+          value: getValue("s0", deter),
+          limit: 7,
+          deter: deter,
+          check: check).then((future) {
+        setState(() {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s0"));
         });
-        _dqsituation1.getFood(
-            field: ['situation'],
-            value: getValue("s1"),
-            limit: 7,
-            check: check).then((future) {
+      });
+      _dqsituation1.getFood(
+          field: ['situation', "deter"],
+          value: getValue("s1", deter),
+          limit: 7,
+          deter: deter,
+          check: check).then((future) {
+        setState(() {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s1"));
         });
-        _dqsituation2.getFood(
-            field: ['situation'],
-            value: getValue("s2"),
-            limit: 7,
-            check: check).then((future) {
+      });
+      _dqsituation2.getFood(
+          field: ['situation', "deter"],
+          value: getValue("s2", deter),
+          limit: 7,
+          deter: deter,
+          check: check).then((future) {
+        setState(() {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s2"));
         });
       });
-      setState(() {
-        _getFoodCalled = true;
-      });
-    }
+    });
   }
 
   /* this function returns 0 if app opened on new day
@@ -119,38 +143,28 @@ class _ExploreState extends State<Explore> {
   }
 
   /* used to get value associated with list  */
-  List<dynamic> getValue(String _list) {
+  List<dynamic> getValue(String _list, String deter) {
     switch (_list) {
       case 't0':
-        return [
-          ["Savory"]
-        ];
+        return ["Savory", deter];
         break;
       case 't1':
-        return [
-          ["Sweet"]
-        ];
+        return ["Sweet", deter];
         break;
       // case 't2':
       //   return [["Salty"]];
       //   break;
       case 's0':
-        return [
-          ["At Home"]
-        ];
+        return ["At Home", deter];
         break;
       case 's1':
-        return [
-          ["Romantic"]
-        ];
+        return ["Romantic", deter];
         break;
       case 's2':
-        return [
-          ["Easy"]
-        ];
+        return ["Easy", deter];
         break;
       default:
-        return ["Savory"];
+        return ["Savory", deter];
     }
   }
 
@@ -248,10 +262,12 @@ class _ExploreState extends State<Explore> {
                                                             await _dqtsp
                                                                 .getMoreFood(
                                                                     field: [
-                                                                  'taste'
+                                                                  'cuisine',
+                                                                  'deter'
                                                                 ],
                                                                     value: [
-                                                                  'Sweet'
+                                                                  'indian',
+                                                                  _deter
                                                                 ]).then(
                                                                     (future) {
                                                               BlocProvider.of<
@@ -295,42 +311,7 @@ class _ExploreState extends State<Explore> {
                           ],
                         ),
                       ),
-                      /*  SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10.0),
-                        child: Container(
-                          width: 220.0,
-                          margin: EdgeInsets.all(10.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black, width: 2),
-                            borderRadius: BorderRadius.circular(15),
-                            // color: Colors.blue[200],
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Text(
-                              'Browse By Meal Type',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 20.0, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      Container(
-                        // color: Colors.grey[300],
-                        height: 180,
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: <Widget>[
-                            MealType(image: 'assets/img.jpg', types: 'breakfast'),
-                            MealType(image: 'assets/img.jpg', types: 'lunch'),
-                            MealType(image: 'assets/img.jpg', types: 'snacks'),
-                            MealType(image: 'assets/img.jpg', types: 'dinner'),
-                          ],
-                        ),
-                      ),  */
+
                       SizedBox(height: 20),
                       Padding(
                         padding: const EdgeInsets.only(left: 10.0),
@@ -388,20 +369,6 @@ class _ExploreState extends State<Explore> {
                                 });
                               },
                             ),
-                            /* GestureDetector(
-                              child: EveryTaste(
-                                title: "Salty",
-                                // isActive: true,
-                                index: indxT,
-                                stIndex: 2,
-                                press: () {},
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  indxT = 2;
-                                });
-                              },
-                            ), */
                           ],
                         ),
                       ),
@@ -435,40 +402,7 @@ class _ExploreState extends State<Explore> {
                               SnackBar(content: Text('Added!')),
                             );
                           },
-                          // child: ListView.builder(
-                          //   scrollDirection: Axis.horizontal,
-                          //   itemCount: 5,
-                          //   itemBuilder: (BuildContext context,int index) {
-                          //     return FoodEverySituation(
-                          //       image: 'assets/img.jpg',
-                          //       title: 'food1',
-                          //       desc: 'description'
-                          //     );
-                          //   }
-                          // ),
                         ),
-
-                        // child: ListView(
-                        //   scrollDirection: Axis.horizontal,
-                        //   children: <Widget>[
-                        //     FoodEveryTaste(
-                        //         image: 'assets/img.jpg',
-                        //         title: 'food1',
-                        //         desc: 'description'),
-                        //     FoodEveryTaste(
-                        //         image: 'assets/img.jpg',
-                        //         title: 'food2',
-                        //         desc: 'description'),
-                        //     FoodEveryTaste(
-                        //         image: 'assets/img.jpg',
-                        //         title: 'food3',
-                        //         desc: 'description'),
-                        //     FoodEveryTaste(
-                        //         image: 'assets/img.jpg',
-                        //         title: 'food4',
-                        //         desc: 'description'),
-                        //   ],
-                        // ),
                       ),
                       SizedBox(height: 20),
                       Padding(
