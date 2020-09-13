@@ -122,7 +122,7 @@ class _OverViewState extends State<OverView> {
                                   ),
                                   Container(
                                       child: Text(
-                                        '${widget.rest}',
+                                        '${widget.rest.address}',
                                         style: TextStyle(
                                           fontSize: 20
                                         ),
