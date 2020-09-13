@@ -22,113 +22,6 @@ class Restaurant extends StatefulWidget {
 }
 
 class _RestaurantState extends State<Restaurant> {
-  List<_Restaurants> rest = [
-    _Restaurants(
-        image: 'downtown_china.jpg',
-        image1: 'downtown_china1.jpg',
-        image2: 'downtown_china2.png',
-        name: 'Downtown China',
-        desc:
-            '\u27A4 Casual Dining - Chinese, Thai, Asian, Seafood, Momos, Beverages, Desserts \n\u2691 Andheri Lokhandwala, Andheri West'),
-    _Restaurants(
-        image: 'family_tree.jpg',
-        image1: 'family_tree1.jpg',
-        image2: 'family_tree2.png',
-        name: 'Family Tree',
-        desc:
-            '\u27A4 Casual Dining - Biryani, Chinese, North Indian, Pizza, South Indian, Desserts \n\u2691 Ghatkopar East'),
-    _Restaurants(
-        image: 'frozen_bottle.jpg',
-        image1: 'frozen_bottle1.jpg',
-        image2: 'frozen_bottle2.png',
-        name: 'Frozen Bottle',
-        desc:
-            '\u27A4 Beverage Shop, Dessert Parlor - Beverages, Desserts, Ice Cream \n\u2691 Matunga East'),
-    _Restaurants(
-        image: 'irish_house.png',
-        image1: 'irish_house1.png',
-        image2: 'irish_house2.png',
-        name: 'The Irish House',
-        desc:
-            '\u27A4 Pub, Casual Dining - European, American \n\u2691 Lower Parel'),
-    _Restaurants(
-        image: 'Mainland_China.jpg',
-        image1: 'Mainland_China.png',
-        image2: 'Mainland_China2.jpg',
-        name: 'Mainland China',
-        desc:
-            '\u27A4 Casual Dining - Chinese, Asian, Sushi, Japanese, Thai \n\u2691 Sakinaka'),
-    _Restaurants(
-        image: 'pop_tates.jpg',
-        image1: 'pop_tates1.jpg',
-        image2: 'pop_tates2.png',
-        name: 'Pop Tates',
-        desc:
-            '\u27A4 Bar, Casual Dining - Continental, Chinese, Italian, Beverages \n\u2691 Lower Parel'),
-    _Restaurants(
-        image: 'tipsy_gipsy.jpg',
-        image1: 'tipsy_gipsy1.jpg',
-        image2: 'tipsy_gipsy2.jpg',
-        name: 'Tipsy Gipsy',
-        desc:
-            '\u27A4 Bar, Casual Dining - Continental, Mediterranean, Italian \n\u2691 Veera Desai Area'),
-    _Restaurants(
-        image: 'burgerbrasserie.png',
-        image1: 'burgerbrasserie1.png',
-        image2: 'burgerbresserie2.png',
-        name: 'Burger Brasserie',
-        desc:
-            '\u27A4 Quick Bites - Burger, Fast Food, Beverages \n\u2691 Andheri Lokhandwala, Andheri West'),
-    _Restaurants(
-        image: 'canto.png',
-        image1: 'canto1.png',
-        image2: 'canto2.png',
-        name: 'Canto- Resto & Bar',
-        desc:
-            '\u27A4 Casual Dining, Bar - North Indian, Continental, Italian, Lebanese\n\u2691 Lower Parel'),
-    _Restaurants(
-        image: 'bayview.png',
-        image1: 'bayview1.png',
-        image2: 'bayview2.png',
-        name: 'Bay View',
-        desc:
-            '\u27A4 Casual Dining - Seafood, North Indian, Chinese\n\u2691 Borivali West'),
-    _Restaurants(
-        image: 'blackolive.png',
-        image1: 'blackolive1.png',
-        image2: 'blackolive2.png',
-        name: 'Black Olive',
-        desc:
-            '\u27A4 Healthy Food, Continental, Italian \n\u2691 Oshiwara, Andheri West'),
-    _Restaurants(
-        image: 'quessoristorante.png',
-        image1: 'quessoristorante1.png',
-        image2: 'quessoristorante2.png',
-        name: 'Quesso Ristorante',
-        desc:
-            '\u27A4 Casual Dining, Bar - Continental, Mexican, Italian, Mediterranean, Thai, Desserts\n\u2691 Oshiwara, Andheri West'),
-    _Restaurants(
-        image: 'sevenkitchen.png',
-        image1: 'sevenkitchen1.png',
-        image2: 'sevenkitchen2.png',
-        name: 'Seven Kitchen',
-        desc:
-            '\u27A4 Fine Dining - Chinese, North Indian, Italian, European, Desserts \n\u2691 Lower Parel'),
-    _Restaurants(
-        image: 'sincity.png',
-        image1: 'sincity1.png',
-        image2: 'sincity2.png',
-        name: 'Sin City',
-        desc:
-            '\u27A4 Bar, Casual Dining - Continental, North Indian, Thai, Italian \n\u2691 Andheri Lokhandwala, Andheri West'),
-    _Restaurants(
-        image: 'silvercoin.png',
-        image1: 'silvercoin1.png',
-        image2: 'silvercoin2.png',
-        name: 'Silver Coin',
-        desc:
-            '\u27A4 Casual Dining - Continental, North Indian, Chinese, Thai, Ice Cream, Beverages, South Indian, Seafood \n\u2691 Borivali West')
-  ];
   Position _currentPosition;
   bool dialogShow = true;
   String location = 'Mumbai,Maharashtra';
@@ -200,18 +93,8 @@ class _RestaurantState extends State<Restaurant> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      IconButton(
-                        icon: Icon(Icons.location_on),
-                        onPressed: () => _getAddressFromLatLng(),
-                      ),
+                      Icon(Icons.location_on),
                       Text(location),
-                      IconButton(
-                        icon: Icon(
-                          Icons.arrow_drop_down,
-                          size: 37,
-                        ),
-                        onPressed: () {},
-                      )
                     ],
                   ),
                 ),
@@ -410,21 +293,16 @@ class _RestaurantState extends State<Restaurant> {
                                                           const EdgeInsets.all(
                                                               10.0),
                                                       child: GestureDetector(
-                                                        onTap: () =>
-                                                            Navigator.push(
-                                                                context,
-                                                                PageTransition(
-                                                                    type: PageTransitionType
-                                                                        .rightToLeft,
-                                                                    child:
-                                                                        RestaurantReview(
-                                                                      restName:
-                                                                          rest[index]
-                                                                              .name,
-                                                                      imgName: rest[
-                                                                              index]
-                                                                          .image,
-                                                                    ))),
+                                                        onTap: () => Navigator.push(
+                                                            context,
+                                                            PageTransition(
+                                                                type: PageTransitionType
+                                                                    .rightToLeft,
+                                                                child: RestaurantReview(
+                                                                    rest: restList[
+                                                                            "r1"]
+                                                                        [
+                                                                        index]))),
                                                         child: Container(
                                                           child: Column(
                                                             children: <Widget>[
@@ -439,7 +317,6 @@ class _RestaurantState extends State<Restaurant> {
                                                                   size: 26,
                                                                 ),
                                                               ),
-                                                              //Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: RestaurantReview(restName: rest[index].name,imgName: rest[index].image,)))
                                                               SizedBox(
                                                                 height: 2,
                                                               ),
