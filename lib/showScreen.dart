@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/screens/Restaurants/cuisine.dart';
 import 'package:moodish_mvp/screens/mainScreen.dart';

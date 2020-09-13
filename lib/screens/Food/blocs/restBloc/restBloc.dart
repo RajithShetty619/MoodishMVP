@@ -8,6 +8,7 @@ class RestaurantBloc
   // TODO: implement initialState
   Map<String, List<RestListModel>> get initialState => {
         "r1": [],
+        "r2": [],
       };
 
   @override
@@ -16,12 +17,12 @@ class RestaurantBloc
     // TODO: implement mapEventToState
     switch (event.eventType) {
       case EventType.add:
-      Map<String,List<RestListModel>> newstate = state;
-      if(event.restaurant != null){
-        newstate[event.listName].addAll(event.restaurant);
-      }
-      yield newstate;
-      break;
+        Map<String, List<RestListModel>> newstate = state;
+        if (event.restaurant != null) {
+          newstate[event.listName].addAll(event.restaurant);
+        }
+        yield newstate;
+        break;
       default:
         throw Exception('event not found $event');
     }

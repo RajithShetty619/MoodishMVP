@@ -1,50 +1,36 @@
+import 'dart:ffi';
+
 import 'package:hive/hive.dart';
 
-part 'restaurantsModel.g.dart';
-
-@HiveType(typeId: 2)
 class RestListModel {
-  @HiveField(0)
-  final String restname;
-  @HiveField(1)
-  final String restcuisine;
-  @HiveField(2)
-  final String costForTwo;
-  @HiveField(3)
-  final String operationalhrs;
-  @HiveField(4)
+  final String restaurant_Name;
+  final String cuisines;
   final String features;
-  @HiveField(5)
-  final String homeDelivery;
-  @HiveField(6)
-  final String addnoutlet;
-  @HiveField(7)
-  final String location;
-  @HiveField(8)
+  final String restaurant_Type;
+  final String operational_after_Midnight;
+  final String restaurant_Location;
   final String rating;
-  @HiveField(9)
-  final String catRating;
-  @HiveField(10)
-  final String deliverytime;
-  @HiveField(11)
-  final String restlocation;
-  @HiveField(12)
-  final String votes;
+  final String international_phone_number;
+  final String price_level;
+  final String website;
+  final String photo_url;
+  final List<dynamic> reviews;
+  final String sr_no;
 
-
-  RestListModel( {
-    this.restname,
-    this.restcuisine,
-    this.costForTwo,
-    this.operationalhrs,
-    this.features,
-    this.homeDelivery,
-    this.addnoutlet,
-    this.location,
-    this.rating,
-    this.catRating,
-    this.deliverytime, this.restlocation, this.votes,
-  });
+  RestListModel(
+      {this.restaurant_Name,
+      this.cuisines,
+      this.features,
+      this.restaurant_Type,
+      this.operational_after_Midnight,
+      this.restaurant_Location,
+      this.rating,
+      this.international_phone_number,
+      this.price_level,
+      this.website,
+      this.photo_url,
+      this.sr_no,
+      this.reviews});
   /* 
    AFTER ANY CHANGES OR ANY ERROR IN THIS FILE, RUN THIS COMMAND
 run command: flutter packages pub run build_runner build --delete-conflicting-outputs
