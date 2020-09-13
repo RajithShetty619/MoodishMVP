@@ -10,7 +10,7 @@ class ProfileSetting extends StatefulWidget {
 
 class _ProfileSettingState extends State<ProfileSetting> {
   String fdPref = Hive.box('preferenceBox').get('deter');
-  List<String> cuisinePref =  Hive.box('preferenceBox').get('preference');
+  List<dynamic> cuisinePref =  Hive.box('preferenceBox').get('preference');
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +73,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           child: Container(
-                            height: cuisinePref.length>=4?MediaQuery.of(context).size.height/3.2:MediaQuery.of(context).size.height/4,
+                            height: cuisinePref.length>=4?MediaQuery.of(context).size.height/3.1:MediaQuery.of(context).size.height/4,
                             child: Column(
                               children: <Widget>[
                                 SizedBox(
