@@ -285,20 +285,6 @@ class _FoodFeedState extends State<FoodFeed> {
                             ),
                           ),
                         ),
-                        // Padding(
-                        //   padding: const EdgeInsets.all(8.0),
-                        //   child: Container(
-                        //     height: 30,
-                        //     width: 60,
-                        //     child: Center(
-                        //       child: Text('Happy',
-                        //           style: TextStyle(
-                        //             fontSize: 20,
-                        //             fontWeight: FontWeight.bold,
-                        //           )),
-                        //     ),
-                        //   ),
-                        // ),
                         SizedBox(width: 5)
                       ],
                     ),
@@ -506,7 +492,6 @@ class _FoodFeedState extends State<FoodFeed> {
                         if (indx == 2)
                           Column(
                             children: <Widget>[
-                              // Container(child: PollTabs()),
                               if (numbr == 0) Container(child: YesNoTabs()),
                               if (numbr == 1) Container(child: PollTabs()),
                               if (numbr == 2) Container(child: This_ThatTabs()),
