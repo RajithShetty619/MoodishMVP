@@ -227,11 +227,11 @@ class DatabaseQuery {
     Box _box = await Hive.openBox('yesorno');
     dynamic end = _box.get('end');
 
-    Query y = yesorno.orderBy('Questions').startAfter([end]).limit(3);
+    Query y = yesorno.orderBy('Questions').startAfter([end]).limit(4);
     List<DocumentSnapshot> _snapshot =
         await y.get().then((value) => value.docs);
     if (_snapshot.length < 3) {
-      y = polls.orderBy('Questions').limit(3);
+      y = yesorno.orderBy('Questions').limit(4);
       _snapshot = await y.get().then((value) => value.docs);
     }
     // saving last this_that to be shown
