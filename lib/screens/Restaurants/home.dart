@@ -141,16 +141,17 @@ class _RestaurantState extends State<Restaurant> {
   }
 
   loadRest() async {
-    await DatabaseQuery().getRest().then((rest) {
-      setState(() {
-        BlocProvider.of<RestaurantBloc>(context)
-            .add(RestaurantEvent.add(rest, 'r2'));
-      });
-    });
     await GeolocationRest().getRestFromLocation().then((rest) {
       setState(() {
         BlocProvider.of<RestaurantBloc>(context)
             .add(RestaurantEvent.add(rest, 'r1'));
+      });
+    });
+
+    await DatabaseQuery().getRest().then((rest) {
+      setState(() {
+        BlocProvider.of<RestaurantBloc>(context)
+            .add(RestaurantEvent.add(rest, 'r2'));
       });
     });
   }
@@ -758,7 +759,7 @@ Widget restura(RestListModel rest) {
                                   height: 2,
                                 ),
                                 Text(
-                                  '4.5',
+                                  rest.rating,
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w500),
@@ -821,7 +822,7 @@ Widget restura(RestListModel rest) {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                      rest.features == "nan" ? rest.features : rest.cuisines),
+                      rest.features != "nan" ? rest.features : rest.cuisines),
                 ),
               ),
             )
