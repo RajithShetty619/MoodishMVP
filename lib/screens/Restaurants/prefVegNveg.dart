@@ -85,7 +85,7 @@ class _FoodPreferenceState extends State<FoodPreference> {
                                     showShadow3 = false;
                                   });
                                   Box box = await Hive.openBox('preferenceBox');
-                                  box.put('deter', 'Vegetarian');
+                                  box.put('deter', 'veg');
                                   DatabaseService().savePreference();
                                   setState(() {
                                     showShadow1 = true;
@@ -131,7 +131,7 @@ class _FoodPreferenceState extends State<FoodPreference> {
                                     showShadow3 = false;
                                   });
                                   Box box = await Hive.openBox('preferenceBox');
-                                  box.put('deter', 'Non-Vegetarian');
+                                  box.put('deter', 'nonveg');
                                   DatabaseService().savePreference();
                                   setState(() {
                                     showShadow2 = true;
