@@ -429,22 +429,11 @@ class _RestaurantState extends State<Restaurant> {
                 padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                 child: Container(
                   alignment: Alignment.centerLeft,
-                  child: RichText(
-                    text: TextSpan(
-                        text: 'Top Restaurant',
-                        style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black),
-                        children: [
-                          TextSpan(
-                              text: '.',
-                              style: TextStyle(
-                                  fontSize: 40,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.pinkAccent))
-                        ]),
-                  ),
+                  child: Text('Top Restaurant',
+                    style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),),
                 ),
               ),
               BlocConsumer<RestaurantBloc, Map<String, List<RestListModel>>>(
@@ -468,9 +457,21 @@ class _RestaurantState extends State<Restaurant> {
                     primary: false,
                     itemCount: restList["r2"].length,
                     itemBuilder: (context, index) {
-                      return Container(
-                        height: 400,
-                        child: restura(restList["r2"][index]),
+                      return GestureDetector(
+                        onTap: () => Navigator.push(
+                            context,
+                            PageTransition(
+                                type: PageTransitionType
+                                    .rightToLeft,
+                                child: RestaurantReview(
+                                    rest: restList[
+                                    "r2"]
+                                    [
+                                    index]))),
+                        child: Container(
+                          height: 400,
+                          child: restura(restList["r2"][index]),
+                        ),
                       );
                     });
               }),
