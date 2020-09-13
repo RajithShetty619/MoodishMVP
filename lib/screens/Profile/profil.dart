@@ -84,11 +84,6 @@ class _ProfileState extends State<Profile> {
                                     : _image),
                             color: Colors.grey,
                             shape: BoxShape.circle,
-                            //From here u can add a profile pic
-                            //   image: DecorationImage(
-                            //image: CachedNetworkImageProvider(avatars[1]),
-                            //   fit: BoxFit.cover,
-                            // ),
                             border: Border.all(
                               color: Colors.black,
                               width: 0.7,
