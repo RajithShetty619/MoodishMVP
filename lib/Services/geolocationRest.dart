@@ -34,7 +34,7 @@ class GeolocationRest {
           features: _docdata["Features"] ?? '',
           restaurant_Location: _docdata["Restaurant_Location"] ?? '',
           international_phone_number:
-              _docdata["International_phone_number"] ?? '',
+              _docdata["international_phone_number"] ?? '',
           rating: _docdata["rating"].toString() ?? '',
           website: _docdata["website"] ?? '',
           photo_url: _docdata["photo_url"] ?? '',
