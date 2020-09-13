@@ -88,7 +88,9 @@ class _PickUpState extends State<PickUp> {
                                   Navigator.pop(context);
                                 }),
                           ),
-                          SizedBox(height: 5.0,),
+                          SizedBox(
+                            height: 5.0,
+                          ),
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: TextField(
@@ -146,7 +148,9 @@ class _PickUpState extends State<PickUp> {
                                     child: Text(
                                       'Pick Up',
                                       style: TextStyle(
-                                          fontSize: 30.0,fontWeight: FontWeight.bold, color: Colors.white),
+                                          fontSize: 30.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white),
                                     ),
                                   ),
                                   Container(
@@ -185,10 +189,10 @@ class _PickUpState extends State<PickUp> {
                         ]),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                            return HomePage(desc: rest[index].desc,imgName: rest[index].image,imgName1: rest[index].image1,imgName2: rest[index].image2,restName: rest[index].name,);
-                      }));
+                      // Navigator.push(context,
+                      //     MaterialPageRoute(builder: (context) {
+                      //       return HomePage(desc: rest[index].desc,imgName: rest[index].image,imgName1: rest[index].image1,imgName2: rest[index].image2,restName: rest[index].name,);
+                      // }));
                     },
                     child: Card(
                         elevation: 1.0,
@@ -254,5 +258,5 @@ class _Restaurants {
   String image1;
   String image2;
 
-  _Restaurants({this.image, this.name, this.desc,this.image1,this.image2});
+  _Restaurants({this.image, this.name, this.desc, this.image1, this.image2});
 }

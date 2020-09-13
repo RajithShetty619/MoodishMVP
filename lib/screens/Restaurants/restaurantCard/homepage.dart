@@ -1,19 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/models/restaurantsModel.dart';
 import 'hometoptabs.dart';
+
 class HomePage extends StatefulWidget {
-  final String imgName;
-  final String imgName1;
-  final String imgName2;
-  final String restName;
-  final String desc;
-  HomePage(
-      {Key key,
-        this.imgName,
-        this.imgName1,
-        this.imgName2,
-        this.restName,
-        this.desc})
-      : super(key: key);
+  final RestListModel restaurant;
+  HomePage({Key key, this.restaurant}) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -32,72 +24,33 @@ class _HomePageState extends State<HomePage> {
               Stack(
                 children: <Widget>[
                   Container(
-                    height: 250.0,
-                    child: PageView(
-                      children: <Widget>[
-                        Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.circular(15),
-                                  bottomLeft: Radius.circular(15)),
-                              image: DecorationImage(
-                                  image:
-                                  AssetImage('assets/${widget.imgName}'),
-                                  fit: BoxFit.cover)),
-                          child: Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Align(
-                              alignment: Alignment.bottomRight,
-                              child: Text(
-                                '1 of 3',
-                                style: TextStyle(color: Colors.white),
+                      height: 250.0,
+                      child: CachedNetworkImage(
+                        imageUrl: widget.restaurant.photo_url,
+                        imageBuilder: (context, imageprovider) {
+                          return Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                    bottomRight: Radius.circular(15),
+                                    bottomLeft: Radius.circular(15)),
+                                image: DecorationImage(
+                                    image: imageprovider
+
+                                    /*  AssetImage('assets/${widget.imgName}') */,
+                                    fit: BoxFit.cover)),
+                            child: Padding(
+                              padding: EdgeInsets.all(10),
+                              child: Align(
+                                alignment: Alignment.bottomRight,
+                                child: Text(
+                                  '1 of 3',
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.circular(15),
-                                  bottomLeft: Radius.circular(15)),
-                              image: DecorationImage(
-                                  image:
-                                  AssetImage('assets/${widget.imgName1}'),
-                                  fit: BoxFit.cover)),
-                          child: Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Align(
-                              alignment: Alignment.bottomRight,
-                              child: Text(
-                                '2 of 3',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.circular(15),
-                                  bottomLeft: Radius.circular(15)),
-                              image: DecorationImage(
-                                  image:
-                                  AssetImage('assets/${widget.imgName2}'),
-                                  fit: BoxFit.cover)),
-                          child: Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Align(
-                              alignment: Alignment.bottomRight,
-                              child: Text(
-                                '3 of 3',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+                          );
+                        },
+                      )),
                   Align(
                     alignment: Alignment.topLeft,
                     child: Padding(
@@ -131,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        widget.restName,
+                        widget.restaurant.restaurant_Name,
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 28.0,
@@ -148,23 +101,7 @@ class _HomePageState extends State<HomePage> {
                         padding: EdgeInsets.all(10),
                         child: Container(
                             alignment: Alignment.centerLeft,
-                            child: Text(widget.desc))),
-//                    Container(
-//                      alignment: Alignment.centerLeft,
-//                      padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-//                      child: Text.rich(
-//                        TextSpan(children: [
-//                          WidgetSpan(
-//                              child: Icon(
-//                                Icons.location_on,
-//                                size: 16.0,
-//                                color: Colors.black,
-//                              )),
-//                          TextSpan(text: "Mumbai, Maharashtra")
-//                        ]),
-//                        style: TextStyle(color: Colors.black, fontSize: 12.0),
-//                      ),
-//                    ),
+                            child: Text(widget.restaurant.features))),
                     Padding(
                       padding: EdgeInsets.all(10),
                       child: Row(
@@ -188,13 +125,13 @@ class _HomePageState extends State<HomePage> {
                           IconButton(
                             icon: _favourite
                                 ? Icon(
-                              Icons.favorite,
-                              color: Colors.pinkAccent,
-                            )
+                                    Icons.favorite,
+                                    color: Colors.pinkAccent,
+                                  )
                                 : Icon(
-                              Icons.favorite_border,
-                              color: Colors.pinkAccent,
-                            ),
+                                    Icons.favorite_border,
+                                    color: Colors.pinkAccent,
+                                  ),
                             onPressed: () {
                               setState(() {
                                 _favourite = !_favourite;
@@ -213,17 +150,16 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.black,
                   )),
               Container(
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height/1.5,
-                  child: TabBarView(children: < Widget > [HomeTopTabs(desc: widget.desc,)],))
-
-
-
+                  height: MediaQuery.of(context).size.height / 1.5,
+                  child: TabBarView(
+                    children: <Widget>[
+                      HomeTopTabs(
+                        desc: widget.restaurant.features,
+                      )
+                    ],
+                  ))
             ],
           ),
-
         ),
       ),
     );

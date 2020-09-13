@@ -9,12 +9,12 @@ class RestListModel {
   final String restaurant_Type;
   final String operational_after_Midnight;
   final String restaurant_Location;
-  final double rating;
+  final String rating;
   final String international_phone_number;
   final String price_level;
   final String website;
   final String photo_url;
-  final String reviews;
+  final List<dynamic> reviews;
   final String sr_no;
 
   RestListModel(
