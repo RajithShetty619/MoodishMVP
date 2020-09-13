@@ -24,6 +24,7 @@ class _OverViewState extends State<OverView> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              SizedBox(height: 10),
               widget.rest.international_phone_number == ''
                   ? Container()
                   : Container(
@@ -67,34 +68,37 @@ class _OverViewState extends State<OverView> {
                           onTap: () {
                             launch(('${widget.rest.website}'));
                           },
-                          child: Card(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    child: IconButton(
-                                        iconSize: 40,
-                                        icon: Icon(Icons.language),
-                                        onPressed: () {
-                                          launch(('${widget.rest.website}'));
-                                        }),
-                                  ),
-                                  SizedBox(
-                                    height: 7.0,
-                                  ),
-                                  Container(
-                                      child: GestureDetector(
-                                          onTap: () {
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Card(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      child: IconButton(
+                                          iconSize: 40,
+                                          icon: Icon(Icons.language),
+                                          onPressed: () {
                                             launch(('${widget.rest.website}'));
-                                          },
-                                          child: Text(
-                                            '${widget.rest.website}',
-                                            style: TextStyle(
-                                              fontSize: 20
-                                            ),
-                                          ))),
-                                ],
+                                          }),
+                                    ),
+                                    SizedBox(
+                                      height: 7.0,
+                                    ),
+                                    Container(
+                                        child: GestureDetector(
+                                            onTap: () {
+                                              launch(('${widget.rest.website}'));
+                                            },
+                                            child: Text(
+                                              '${widget.rest.website}',
+                                              style: TextStyle(
+                                                fontSize: 20
+                                              ),
+                                            ))),
+                                  ],
+                                ),
                               ),
                             ),
                           )),
@@ -104,32 +108,35 @@ class _OverViewState extends State<OverView> {
                           onTap: () {
 
                           },
-                          child: Card(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    child: IconButton(
-                                        iconSize: 40,
-                                        icon: Icon(Icons.location_on),
-                                        onPressed: () {
+                          child: Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Card(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      child: IconButton(
+                                          iconSize: 40,
+                                          icon: Icon(Icons.location_on),
+                                          onPressed: () {
 
-                                        }),
-                                  ),
-                                  SizedBox(
-                                    height: 7.0,
-                                  ),
-                                  Container(
-                                    width: MediaQuery.of(context).size.width/1.4,
-                                      child: Text(
-                                        '${widget.rest.address}',
-                                        
-                                        style: TextStyle(
-                                          fontSize: 20
-                                        ),
-                                      )),
-                                ],
+                                          }),
+                                    ),
+                                    SizedBox(
+                                      height: 7.0,
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width/1.4,
+                                        child: Text(
+                                          '${widget.rest.address}',
+                                          
+                                          style: TextStyle(
+                                            fontSize: 20
+                                          ),
+                                        )),
+                                  ],
+                                ),
                               ),
                             ),
                           )),
