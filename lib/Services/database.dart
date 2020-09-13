@@ -12,7 +12,25 @@ class DatabaseService {
   final CollectionReference userName =
       FirebaseFirestore.instance.collection('Username');
 
-/* ///////////////////////////////////////////////////// save prefernce /////////////// */
+/* /////////////////////////////////////////// rating&& reviews  /////////////////////////////////// */
+
+  Future<void> restRating({String sr_no, String review, double rating}) async {
+    if (review != null) {
+      dynamic user = await Authenticate().returnUser();
+      await FirebaseFirestore.instance
+          .collection("restaurant")
+          .doc(sr_no)
+          .collection("review")
+          .doc(user.uid)
+          .set({
+        "author_name": user.email,
+        "rating": rating.toString(),
+        "text": review
+      });
+    }
+  }
+
+///////////////////////////////////////////////////// save prefernce ///////////////
 
   Future<void> checkPreference() async {
     Box box = await Hive.openBox('preferenceBox');
