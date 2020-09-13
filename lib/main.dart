@@ -21,13 +21,9 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
-  BlocSupervisor.delegate = FoodBlocDelegate();
-  BlocSupervisor.delegate = PollBlocDelegate();
-  BlocSupervisor.delegate = RestaurantBlocDelegate();
   await Hive.initFlutter();
   Hive.registerAdapter<FoodListModel>(FoodListModelAdapter());
   Hive.registerAdapter<PollsModel>(PollsModelAdapter());
-  Hive.registerAdapter<RestListModel>(RestListModelAdapter());
   runApp(MaterialApp(
     home: MyApp(),
     debugShowCheckedModeBanner: false,
