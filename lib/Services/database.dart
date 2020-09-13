@@ -136,7 +136,8 @@ class DatabaseService {
           photo_url: _docdata["photo_url"] ?? '',
           reviews: _docdata["reviews"] ?? null,
           restaurant_Type: _docdata["Restaurant_Type"] ?? '',
-          sr_no: _docdata["sr_no"] ?? '');
+          sr_no: _docdata["sr_no"] ?? '',
+          address: _docdata["address"] ?? '');
     }).toList());
   }
 
