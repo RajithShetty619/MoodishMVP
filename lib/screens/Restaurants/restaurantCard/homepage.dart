@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
                               child: Align(
                                 alignment: Alignment.bottomRight,
                                 child: Text(
-                                  '1 of 3',
+                                  '',
                                   style: TextStyle(color: Colors.white),
                                 ),
                               ),
@@ -102,6 +102,11 @@ class _HomePageState extends State<HomePage> {
                         padding: EdgeInsets.all(10),
                         child: Container(
                             alignment: Alignment.centerLeft,
+                            child: Text('Cuisines:- ${widget.restaurant.cuisines}',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),))),
+                    Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Container(
+                            alignment: Alignment.centerLeft,
                             child: Text(widget.restaurant.features))),
                     Padding(
                       padding: EdgeInsets.all(10),
@@ -109,19 +114,20 @@ class _HomePageState extends State<HomePage> {
                         children: <Widget>[
                           const SizedBox(width: 16.0),
                           Container(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 8.0,
-                                horizontal: 16.0,
-                              ),
+                              padding: const EdgeInsets.only(top: 5,bottom: 5,left: 10,right: 8),
                               decoration: BoxDecoration(
-                                  color: Colors.blue,
+                                  color: Colors.amber[700],
                                   borderRadius: BorderRadius.circular(60.0)),
-                              child: IconButton(
-                                  icon: Icon(
+                              child: Row(
+                                children: <Widget>[
+
+                                  Text(widget.restaurant.rating),
+                                  Icon(
                                     Icons.star,
                                     size: 10,
                                   ),
-                                  onPressed: null)),
+                                ],
+                              )),
                           Spacer(),
                           IconButton(
                             icon: _favourite
