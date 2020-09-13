@@ -1,30 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/screens/Restaurants/taste.dart';
+import 'package:hive/hive.dart';
+import 'prefVegNveg.dart';
 
 class Cuisine extends StatefulWidget {
+  int event;
+  Cuisine({this.event});
   @override
   _CuisineState createState() => _CuisineState();
 }
 
 class _CuisineState extends State<Cuisine> {
+//  @override
+//  void initState()async{
+//    super.initState();
+//    box = await Hive.openBox('preferenceBox');
+//  }
+
   List<GridTileBuilder> cuisine = [
     GridTileBuilder(
-        image: 'NorthIndian.jpeg', cuisine: 'North Indian', currentOpacity: 1),
+        image: 'NorthIndian.jpeg', cuisine: 'Indian', currentOpacity: 1),
     GridTileBuilder(
-        image: 'SouthIndian.jpeg', cuisine: 'South Indian', currentOpacity: 1),
+        image: 'frenchCuisine.jpg', cuisine: 'French', currentOpacity: 1),
     GridTileBuilder(
         image: 'Chinese.png', cuisine: 'Chinese', currentOpacity: 1),
     GridTileBuilder(
-        image: 'Dessert.jpg', cuisine: 'Desserts', currentOpacity: 1),
+        image: 'spanishCuisine.jpg', cuisine: 'Spanish', currentOpacity: 1),
     GridTileBuilder(
-        image: 'FastFood.png', cuisine: 'Fast Food', currentOpacity: 1),
+        image: 'FastFood.png', cuisine: 'American', currentOpacity: 1),
     GridTileBuilder(
-        image: 'Beverage.jpg', cuisine: 'Beverages', currentOpacity: 1),
+        image: 'japaneseCuisine.jpg', cuisine: 'Japanese', currentOpacity: 1),
     GridTileBuilder(
         image: 'Italian.jpg', cuisine: 'Italian', currentOpacity: 1),
     GridTileBuilder(
         image: 'Mexican.jpg', cuisine: 'Mexican', currentOpacity: 1),
-    GridTileBuilder(image: 'Bakery.jpg', cuisine: 'Bakery', currentOpacity: 1),
+    GridTileBuilder(image: 'britishCuisine.jpg', cuisine: 'British', currentOpacity: 1),
   ];
 
   int i = 0;
@@ -95,7 +106,7 @@ class _CuisineState extends State<Cuisine> {
                               if (pref.length == 9) {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return Taste();
+                                  return FoodPreference();
                                 }));
                               }
                             });
@@ -149,16 +160,38 @@ class _CuisineState extends State<Cuisine> {
                                 err,
                                 style: TextStyle(color: Colors.red),
                               ))),
+                  widget.event==1?
                   Align(
                     alignment: Alignment.centerRight,
                     child: RaisedButton(
-                      onPressed: () {
-                        if (i + 1 > 3)
+                      onPressed: () async {
+                        if (i + 1 > 3) {
+                          Box box = await Hive.openBox('preferenceBox');
+                          box.put('preference', pref);
+                          DatabaseService().savePreference();
+                          Navigator.of(context).pop();
+                        } else
+                          setState(() {
+                            err = 'Select ${3 - i} more!';
+                          });
+                      },
+                      color: Colors.green,
+                      child: Text('Change->'),
+                    ),
+                  )
+                  :Align(
+                    alignment: Alignment.centerRight,
+                    child: RaisedButton(
+                      onPressed: () async {
+                        if (i + 1 > 3) {
+                          Box box = await Hive.openBox('preferenceBox');
+                          box.put('preference', pref);
+                          DatabaseService().savePreference();
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
-                            return Taste();
+                            return FoodPreference();
                           }));
-                        else
+                        } else
                           setState(() {
                             err = 'Select ${3 - i + 1} more!';
                           });

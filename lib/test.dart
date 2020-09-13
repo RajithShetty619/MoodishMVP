@@ -1,67 +1,69 @@
-import 'package:cloud_functions/cloud_functions.dart';
-import 'package:flappy_search_bar/flappy_search_bar.dart';
-import 'package:flappy_search_bar/search_bar_style.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:hive/hive.dart';
-import 'package:moodish_mvp/Services/authenticate.dart';
-import 'package:moodish_mvp/Services/database.dart';
-import 'package:moodish_mvp/Services/searchFunction.dart';
-import 'package:moodish_mvp/models/foodListModel.dart';
-import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
+import 'package:geoflutterfire/geoflutterfire.dart';
 import 'package:http/http.dart';
 
 class Test extends StatefulWidget {
+  final String payload;
+
+  const Test({Key key, this.payload}) : super(key: key);
   @override
   _TestState createState() => _TestState();
 }
 
 class _TestState extends State<Test> {
+  final geo = Geoflutterfire();
+  final _firestore = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Box>(
-      future: Hive.openBox('foodlist'),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return BlocProvider<FoodBloc>(
-            create: (context) => FoodBloc(),
-            child: Scaffold(
-              body: FoodList(),
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Second page - Payload:',
             ),
-          );
-        }
-        return Scaffold();
-      },
+            const SizedBox(height: 8),
+            RaisedButton(
+              onPressed: () async {
+                // Create a geoFirePoint
+
+                var data = await get(
+                    "https://us-central1-moodishtest.cloudfunctions.net/returnRestaurants?lat=18.9580734&long=72.8322506");
+              },
+              child: Center(child: Text("press")),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
 
-class FoodList extends StatefulWidget {
-  @override
-  _FoodListState createState() => _FoodListState();
-}
+class StreamHandling {
+  final geo = Geoflutterfire();
+  final _firestore = FirebaseFirestore.instance;
 
-class _FoodListState extends State<FoodList> {
-  String text = '';
-  int count = 0;
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
-          child: FlatButton(
-            onPressed: () async {
-              String token = await Authenticate().getToken();
-              var data = await get(
-                  'https://us-central1-moodishtest.cloudfunctions.net/restNotif?text=$token');
-              
-            },
-            
-            child: Center(child: Text("$count")),
-          ),
-        ),
-      ),
-    );
+  Stream<List<DocumentSnapshot>> getData() {
+    GeoFirePoint center =
+        geo.point(latitude: 19.0100664, longitude: 73.0371634);
+    var collectionReference = _firestore.collection('restaurants');
+    GeoFirePoint myLocation =
+        geo.point(latitude: 19.0100664, longitude: 73.0371634);
+
+    double radius = 3;
+
+    var stream = geo
+        .collection(collectionRef: collectionReference)
+        .within(center: center, radius: radius, field: 'g');
+    stream.listen((event) {
+      event.map((e) {
+        e.data().forEach((key, value) {
+          print(key);
+        });
+      });
+    });
+    return stream;
   }
 }

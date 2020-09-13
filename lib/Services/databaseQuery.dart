@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
 import 'package:moodish_mvp/models/factsModel.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/models/pollsModel.dart';
+import 'package:moodish_mvp/models/restaurantsModel.dart';
 import 'package:moodish_mvp/models/this_thatModel.dart';
 import 'package:moodish_mvp/models/yesNo.dart';
 import 'database.dart';
@@ -11,25 +11,48 @@ import 'database.dart';
 class DatabaseQuery {
   String _lastDocument;
   bool dataExists = true;
-  final CollectionReference _ref = Firestore.instance.collection('food');
+  final CollectionReference _ref =
+      FirebaseFirestore.instance.collection('food');
 
-  final CollectionReference polls = Firestore.instance.collection('polls');
+  final CollectionReference rest =
+      FirebaseFirestore.instance.collection('restaurants');
+
+  final CollectionReference polls =
+      FirebaseFirestore.instance.collection('polls');
 
   final CollectionReference this_that =
-      Firestore.instance.collection('this_that');
+      FirebaseFirestore.instance.collection('this_that');
 
-  final CollectionReference yesorno = Firestore.instance.collection('yesorno');
+  final CollectionReference yesorno =
+      FirebaseFirestore.instance.collection('yesorno');
 
-  final CollectionReference facts = Firestore.instance.collection('facts');
+  final CollectionReference facts =
+      FirebaseFirestore.instance.collection('facts');
+
+  final CollectionReference restaurants =
+      FirebaseFirestore.instance.collection('restaurants');
   final String listName;
   DatabaseQuery({this.listName});
+
+// // restaurant data query
+  Future<List<RestListModel>> getRest({
+    List<String> field,
+    List<dynamic> value,
+    int limit = 5,
+    int check = 0,
+  }) async {
+    Query q = restaurants.orderBy("rating", descending: true).limit(10);
+    QuerySnapshot snapshot = await q.get();
+    return await DatabaseService().listfromSnapshot(snapshot);
+  }
 
   Future<List<FoodListModel>> getFood(
       {List<String> field,
       List<dynamic> value,
       int limit = 5,
       int check = 0,
-      String mood}) async {
+      String mood,
+      bool recursive = false}) async {
     List<String> _field = field;
     List<dynamic> _value = value;
     /* gets previous list saved by the name */
@@ -39,9 +62,9 @@ class DatabaseQuery {
     /* condition satisfied when no list retrieved from memory
         or new list to be retrieved coz of next day has arrived */
     if (_gfoodList == null || check == 0) {
-      Query _finalQuery = _ref.where('description', isGreaterThan: '');
+      Query _finalQuery = _ref.orderBy('description');
       /* last document to continue query from */
-      if (_gfoodList != null) if (_gfoodList.length != 0)
+      if (_gfoodList != null) if (_gfoodList.length != 0 && recursive == false)
         _lastDocument =
             _gfoodList.cast<FoodListModel>()[_gfoodList.length - 1].description;
 
@@ -53,23 +76,26 @@ class DatabaseQuery {
       /* used lastdocument */
       if (_lastDocument != null)
         _finalQuery = recQuery(_field, _value, _finalQuery)
-            .startAfter([_lastDocument])
-            .orderBy('description')
-            .limit(limit);
+            .startAfter([_lastDocument]).limit(limit);
       /* not used lastdocument */
       else
-        _finalQuery = recQuery(_field, _value, _finalQuery)
-            .orderBy('description')
-            .limit(limit);
+        _finalQuery = recQuery(_field, _value, _finalQuery).limit(limit);
 
       /* convert query into useable foodListModel */
-      QuerySnapshot snapshot = await _finalQuery.getDocuments();
+      QuerySnapshot snapshot = await _finalQuery.get();
       List<FoodListModel> queryList =
           await DatabaseService().listFromSnapshot(snapshot);
-
-      /* saving list for later use */
       await _box.put(listName, queryList);
-
+      if (queryList.length < limit - 1) {
+        _finalQuery = _ref
+            .orderBy('description')
+            .where("deter", isEqualTo: "veg")
+            .limit(limit);
+        snapshot = await _finalQuery.get();
+        queryList = await DatabaseService().listFromSnapshot(snapshot);
+        await _box.put(listName, null);
+      }
+      /* saving list for later use */
       return queryList;
     }
     /* if got list readily from memory  */
@@ -93,7 +119,7 @@ class DatabaseQuery {
 
     if (dataExists) {
       print("getMoreFood");
-      Query _finalQuery = _ref.where('description', isGreaterThan: '');
+      Query _finalQuery = _ref.orderBy('description');
 
       if (_value[_value.length - 1].runtimeType != String) {
         dynamic _v = _value.removeLast();
@@ -101,15 +127,13 @@ class DatabaseQuery {
       }
 
       _finalQuery = recQuery(_field, _value, _finalQuery)
-          .startAfter([_lastDocument])
-          .orderBy('description')
-          .limit(2);
+          .startAfter([_lastDocument]).limit(4);
 
-      QuerySnapshot snapshot = await _finalQuery.getDocuments();
+      QuerySnapshot snapshot = await _finalQuery.get();
       List<FoodListModel> queryList =
           await DatabaseService().listFromSnapshot(snapshot);
       _lastDocument = queryList[queryList.length - 1].description;
-      if (snapshot.documents.length == 0) {
+      if (snapshot.docs.length == 0) {
         dataExists = false;
         print("no data");
       }
@@ -139,17 +163,16 @@ class DatabaseQuery {
     Box _box = await Hive.openBox('polls');
     dynamic last = _box.get(listName);
     /*  */
-    Query q = polls
-        .where('value', isGreaterThan: '')
-        .startAfter([last])
-        .orderBy('value')
-        .limit(3);
+    Query q = polls.orderBy('value').startAfter([last]).limit(4);
     List<DocumentSnapshot> _snapshot =
-        await q.getDocuments().then((value) => value.documents);
-
+        await q.get().then((value) => value.docs);
+    if (_snapshot.length < 3) {
+      q = polls.orderBy('value').limit(4);
+      _snapshot = await q.get().then((value) => value.docs);
+    }
     /* saving last poll to be displayed*/
     try {
-      String _lastpoll = await _snapshot[_snapshot.length - 1].data['value'];
+      String _lastpoll = await _snapshot[_snapshot.length - 1].data()['value'];
       await _box.put(listName, _lastpoll);
     } catch (e) {
       await _box.put(listName, null);
@@ -157,7 +180,7 @@ class DatabaseQuery {
 
     /* list of polls is made and returned */
     return _snapshot.map((doc) {
-      Map<String, dynamic> _docData = doc.data;
+      Map<String, dynamic> _docData = doc.data();
       return PollsModel(
           question: _docData['value'],
           A: _docData['A'] ?? '',
@@ -176,20 +199,20 @@ class DatabaseQuery {
     Box _box = await Hive.openBox('this_that');
     dynamic end = _box.get('endthat');
 
-    Query t = this_that
-        .where('A', isGreaterThan: '')
-        .startAfter([end])
-        .orderBy('A')
-        .limit(2);
+    Query t = this_that.orderBy('A').startAfter([end]).limit(4);
     List<DocumentSnapshot> _snapshot =
-        await t.getDocuments().then((value) => value.documents);
+        await t.get().then((value) => value.docs);
+    if (_snapshot.length < 3) {
+      t = polls.orderBy('A').limit(4);
+      _snapshot = await t.get().then((value) => value.docs);
+    }
     // saving last this_that to be shown
-    String _endthat = await _snapshot[_snapshot.length - 1].data['A'];
+    String _endthat = await _snapshot[_snapshot.length - 1].data()['A'];
     await _box.put('endthat', _endthat);
 
 /* list of this_that is made and returned */
     return _snapshot.map((doc) {
-      Map<String, dynamic> _docData = doc.data;
+      Map<String, dynamic> _docData = doc.data();
       return This_thatModel(
         A: _docData['A'],
         B: _docData['B'] ?? '',
@@ -203,20 +226,20 @@ class DatabaseQuery {
     Box _box = await Hive.openBox('yesorno');
     dynamic end = _box.get('end');
 
-    Query y = yesorno
-        .where('Questions', isGreaterThan: '')
-        .startAfter([end])
-        .orderBy('Questions')
-        .limit(3);
+    Query y = yesorno.orderBy('Questions').startAfter([end]).limit(3);
     List<DocumentSnapshot> _snapshot =
-        await y.getDocuments().then((value) => value.documents);
+        await y.get().then((value) => value.docs);
+    if (_snapshot.length < 3) {
+      y = polls.orderBy('Questions').limit(3);
+      _snapshot = await y.get().then((value) => value.docs);
+    }
     // saving last this_that to be shown
-    String _end = await _snapshot[_snapshot.length - 1].data['Questions'];
+    String _end = await _snapshot[_snapshot.length - 1].data()['Questions'];
     await _box.put('end', _end);
 
 /* list of this_that is made and returned */
     return _snapshot.map((doc) {
-      Map<String, dynamic> _docData = doc.data;
+      Map<String, dynamic> _docData = doc.data();
       return YesNoModel(
         Questions: _docData['Questions'],
         yes: _docData['yes'] ?? 0,
@@ -230,17 +253,13 @@ class DatabaseQuery {
     Box _box = await Hive.openBox('fact');
     dynamic last = _box.get('lastfact');
     /*  */
-    Query q = facts
-        .where('fact', isGreaterThan: '')
-        .startAfter([last])
-        .orderBy('fact')
-        .limit(5);
+    Query q = facts.orderBy('fact').startAfter([last]).limit(5);
     List<DocumentSnapshot> _snapshot =
-        await q.getDocuments().then((value) => value.documents);
+        await q.get().then((value) => value.docs);
 
     /* saving last poll to be displayed*/
     try {
-      String _lastfact = await _snapshot[_snapshot.length - 1].data['fact'];
+      String _lastfact = await _snapshot[_snapshot.length - 1].data()['fact'];
       await _box.put('lastfact', _lastfact);
     } catch (e) {
       await _box.put('lastfact', null);
@@ -248,7 +267,7 @@ class DatabaseQuery {
 
     /* list of polls is made and returned */
     return _snapshot.map((doc) {
-      Map<String, dynamic> _docData = doc.data;
+      Map<String, dynamic> _docData = doc.data();
       return FactModel(
           factHeading: _docData['fact'],
           factStatment: _docData['factStatement']);

@@ -33,7 +33,7 @@ class _MainScreenState extends State<MainScreen> {
           context: context,
           type: AlertType.warning,
           title: "Do You Want To Leave The App?",
-          desc: "Press No to continue or Yes to Exit!",
+          desc: "Press Yes to Exit!",
           buttons: [
             DialogButton(
               child: Text(
@@ -100,7 +100,7 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ],
           currentIndex: _selectedIndex,
-          selectedItemColor: Colors.lightBlue[300],
+          selectedItemColor: Color.fromARGB(255, 253, 139, 25),
           // unselectedItemColor: Colors.grey[400],
           // unselectedLabelStyle: TextStyle(
           //   background: Paint(),

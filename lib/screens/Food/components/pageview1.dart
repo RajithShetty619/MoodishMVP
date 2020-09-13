@@ -16,6 +16,7 @@ class _PageViewer1State extends State<PageViewer1> {
     return Scaffold(
       body: SafeArea(
         child: PageView.builder(
+          physics: BouncingScrollPhysics(),
             itemCount: widget.foodList.preparation.length,
             //List count idhar use kar
             itemBuilder: (BuildContext context, int index) {
@@ -108,7 +109,7 @@ class _PageViewer1State extends State<PageViewer1> {
                                   Navigator.pop(context);
                                 },
                                 child: Text(
-                                  "Back to Info Screen",
+                                  "Finish!",
                                   style: TextStyle(
                                     fontSize: 20,
                                   ),

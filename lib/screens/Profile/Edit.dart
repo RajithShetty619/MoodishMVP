@@ -2,20 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:moodish_mvp/Authenticate/forgotPassword.dart';
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-// import 'package:image_picker/image_picker.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 
 class EditProfile extends StatefulWidget {
   final ImageProvider image;
-  final Map<String, String> user;
+  final Map<String, dynamic> user;
   EditProfile({this.image, this.user});
   @override
   _EditProfileState createState() => _EditProfileState();
 }
 
 class _EditProfileState extends State<EditProfile> {
-  Map<String, String> _user;
+  Map<String, dynamic> _user;
   ImageProvider _image;
   final userData1 = DatabaseService();
   Position _currentPosition;
@@ -23,22 +22,16 @@ class _EditProfileState extends State<EditProfile> {
   Geolocator geolocator = Geolocator();
   ImageProvider image;
   getImage() async {
-    // final fileImage = await ImagePicker.pickImage(source: ImageSource.gallery);
-    // ImageProvider image = FileImage(fileImage);
-
-    // final Directory _dir = await getApplicationDocumentsDirectory();
-    // final String _path = _dir.path;
     setState(() {
       _image = image;
     });
-    // DatabaseService().uploadPhoto(fileImage);
   }
 
   @override
   void initState() {
     super.initState();
 
-    data() async {
+    data() {
       try {
         setState(() {
           _image = widget.image;
@@ -110,6 +103,7 @@ class _EditProfileState extends State<EditProfile> {
       child: Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
             child: Column(
               children: <Widget>[
                 SizedBox(
@@ -129,6 +123,8 @@ class _EditProfileState extends State<EditProfile> {
                           width: 150,
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
+                              border:
+                                  Border.all(color: Colors.grey[400], width: 1),
                               image: DecorationImage(
                                   image: _image == null
                                       ? AssetImage('assets/anonuser.png')
@@ -199,7 +195,7 @@ class _EditProfileState extends State<EditProfile> {
                       ),
                       Flexible(
                         child: Text(
-                          _user['name'] ?? 'name',
+                          _user['name'] == null ? 'name' : _user['name'],
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(fontSize: 20.0),
                         ),

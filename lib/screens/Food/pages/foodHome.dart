@@ -21,13 +21,14 @@ class _FoodHomeState extends State<FoodHome> {
 
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
     return Scaffold(
       body: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Container(
-              color: _switch ? Colors.blue[200] : Colors.white,
+              color: _switch ? Color.fromARGB(235, 253, 139, 25) : Colors.white,
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Row(
@@ -47,7 +48,7 @@ class _FoodHomeState extends State<FoodHome> {
                         : Padding(
                             padding: const EdgeInsets.only(left: 8.0),
                             child: Text(
-                              "Today,\n Hungry yet?",
+                              "${now.day}/${now.month}/${now.year},\n Hungry yet?",
                               style: TextStyle(
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold,
@@ -63,7 +64,7 @@ class _FoodHomeState extends State<FoodHome> {
                           children: logowidgets,
                           onValueChanged: (changeValue) async {
                             if (_switch == true) {
-                              await BetaCount().count(field: 'explore');
+                              BetaCount().count(field: 'explore');
                             }
                             setState(() {
                               if (grpValue != changeValue) {

@@ -74,7 +74,6 @@ class _Mood_FoodState extends State<Mood_Food> {
                         child: Container(
                           // margin: EdgeInsets.all(2.0),
                           decoration: BoxDecoration(
-                            color: Colors.white,
                             borderRadius: BorderRadius.circular(45),
                           ),
                           child: Padding(
@@ -83,21 +82,22 @@ class _Mood_FoodState extends State<Mood_Food> {
                                 icon: _like
                                     ? Icon(
                                         Icons.favorite_border,
-                                        color: Colors.black,
+                                        color: Colors.white,
                                         size: 30,
                                       )
                                     : Icon(
                                         Icons.favorite,
-                                        color: Colors.red[700],
-                                        size: 30,
+                                        color: Colors.red[900],
+                                        size: 35,
                                       ),
                                 onPressed: () async {
                                   if (!_like) {
-                                    await DatabaseService().likeTransction(food: widget.foodList,
+                                    await DatabaseService().likeTransction(
+                                        food: widget.foodList,
                                         sr_no: widget.foodList.sr_no,
                                         collection: "food",
                                         field: "like");
-                                    await BetaCount().count(field: 'situation');
+                                    BetaCount().count(field: 'situation');
                                   }
                                   setState(() {
                                     _like = !_like;

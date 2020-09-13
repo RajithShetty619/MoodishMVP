@@ -14,230 +14,243 @@ class _TopRatedState extends State<TopRated> {
         image2: 'bayview2.png',
         name: 'Bay View',
         desc:
-        '\u27A4 Casual Dining - Seafood, North Indian, Chinese\n\u2691 Borivali West'),
+            '\u27A4 Casual Dining - Seafood, North Indian, Chinese\n\u2691 Borivali West'),
     _Restaurants(
         image: 'canto.png',
         image1: 'canto1.png',
         image2: 'canto2.png',
         name: 'Canto- Resto & Bar',
         desc:
-        '\u27A4 Casual Dining, Bar - North Indian, Continental, Italian, Lebanese\n\u2691 Lower Parel'),
+            '\u27A4 Casual Dining, Bar - North Indian, Continental, Italian, Lebanese\n\u2691 Lower Parel'),
     _Restaurants(
         image: 'quessoristorante.png',
         image1: 'quessoristorante1.png',
         image2: 'quessoristorante2.png',
         name: 'Quesso Ristorante',
         desc:
-        '\u27A4 Casual Dining, Bar - Continental, Mexican, Italian, Mediterranean, Thai, Desserts\n\u2691 Oshiwara, Andheri West'),
+            '\u27A4 Casual Dining, Bar - Continental, Mexican, Italian, Mediterranean, Thai, Desserts\n\u2691 Oshiwara, Andheri West'),
     _Restaurants(
         image: 'burgerbrasserie.png',
         image1: 'burgerbrasserie1.png',
         image2: 'burgerbrasserie2.png',
         name: 'Burger Brasserie',
         desc:
-        '\u27A4 Quick Bites - Burger, Fast Food, Beverages \n\u2691 Andheri Lokhandwala, Andheri West'),
+            '\u27A4 Quick Bites - Burger, Fast Food, Beverages \n\u2691 Andheri Lokhandwala, Andheri West'),
     _Restaurants(
         image: 'blackolive.png',
         image1: 'blackolive1.png',
         image2: 'blackolive2.png',
         name: 'Black Olive',
-        desc: '\u27A4 Healthy Food, Continental, Italian \n\u2691 Oshiwara, Andheri West'),
+        desc:
+            '\u27A4 Healthy Food, Continental, Italian \n\u2691 Oshiwara, Andheri West'),
     _Restaurants(
         image: 'sevenkitchen.png',
         image1: 'sevenkitchen1.png',
         image2: 'sevenkitchen2.png',
         name: 'Seven Kitchen',
         desc:
-        '\u27A4 Fine Dining - Chinese, North Indian, Italian, European, Desserts \n\u2691 Lower Parel'),
+            '\u27A4 Fine Dining - Chinese, North Indian, Italian, European, Desserts \n\u2691 Lower Parel'),
     _Restaurants(
         image: 'sincity.png',
         image1: 'sincity1.png',
         image2: 'sincity2.png',
         name: 'Sin City',
         desc:
-        '\u27A4 Bar, Casual Dining - Continental, North Indian, Thai, Italian \n\u2691 Andheri Lokhandwala, Andheri West'),
+            '\u27A4 Bar, Casual Dining - Continental, North Indian, Thai, Italian \n\u2691 Andheri Lokhandwala, Andheri West'),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-          child: ListView.builder(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              itemCount: rest.length,
-              itemBuilder: (context, index) {
-                return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      if (index == 0)
-                        Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: IconButton(
-                                    icon: Icon(
-                                      Icons.arrow_back,
-                                      size: 40,
-                                      color: Colors.black,
-                                    ),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    }),
+      child: ListView.builder(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          physics: BouncingScrollPhysics(),
+          itemCount: rest.length,
+          itemBuilder: (context, index) {
+            return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  if (index == 0)
+                    Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: IconButton(
+                                icon: Icon(
+                                  Icons.arrow_back,
+                                  size: 40,
+                                  color: Colors.black,
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                }),
+                          ),
+                          SizedBox(
+                            height: 5.0,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: TextField(
+                              autocorrect: true,
+                              style: TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                hintText: 'Where do you want to go?',
+                                hintStyle: TextStyle(color: Colors.white),
+                                prefixIcon: Icon(
+                                  Icons.search,
+                                  color: Colors.white,
+                                ),
+                                filled: true,
+                                fillColor: Colors.black,
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ),
                               ),
-                              SizedBox(height: 5.0,),
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: TextField(
-                                  autocorrect: true,
-                                  style: TextStyle(color: Colors.white),
-                                  decoration: InputDecoration(
-                                    hintText: 'Where do you want to go?',
-                                    hintStyle: TextStyle(color: Colors.white),
-                                    prefixIcon: Icon(
-                                      Icons.search,
-                                      color: Colors.white,
-                                    ),
-                                    filled: true,
-                                    fillColor: Colors.black,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(30.0),
+                            ),
+                          ),
+                          Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Icon(Icons.location_on),
+                                Text('Mumbai,Maharashtra')
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                top: 10.0,
+                                left: 30.0,
+                                right: 30.0,
+                                bottom: 10.0),
+                            child: Container(
+                              height: 180,
+                              width: double.maxFinite,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30.0),
+                                image: DecorationImage(
+                                    image: AssetImage('assets/Top_Rated.png'),
+                                    fit: BoxFit.cover),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  SizedBox(
+                                    height: 5.0,
+                                  ),
+                                  Container(
+                                    child: Text(
+                                      'Top Rated',
+                                      style: TextStyle(
+                                          fontSize: 30.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white),
                                     ),
                                   ),
-                                ),
+                                  Container(
+                                      child: Text(
+                                    '5+ Options',
+                                    style: TextStyle(color: Colors.white),
+                                  )),
+                                  SizedBox(
+                                    height: 10.0,
+                                  )
+                                ],
                               ),
-                              Center(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Icon(Icons.location_on),
-                                    Text('Mumbai,Maharashtra')
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10.0,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(top: 10.0,left: 30.0,right: 30.0,bottom: 10.0),
-                                child: Container(
-                                  height: 180,
-                                  width: double.maxFinite,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(30.0),
-                                    image: DecorationImage(
-                                        image: AssetImage('assets/Top_Rated.png'),
-                                        fit: BoxFit.cover),                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      SizedBox(height: 5.0,),
-                                      Container(
-                                        child: Text(
-                                          'Top Rated',
-                                          style: TextStyle(
-                                              fontSize: 30.0,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white),
-                                        ),
-                                      ),
-                                      Container(
-                                          child: Text(
-                                            '5+ Options',
-                                            style:
-                                            TextStyle(color: Colors.white),
-                                          )),
-                                      SizedBox(height: 10.0,)
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                alignment: Alignment.centerLeft,
-                                child: Container(
+                            ),
+                          ),
+                          Container(
+                            alignment: Alignment.centerLeft,
+                            child: Container(
 //                                    width: 175.0,
 //                                    margin: EdgeInsets.all(10.0),
 //                                    decoration: BoxDecoration(
 //                                        border: Border.all(color: Colors.transparent),
 //                                        color: Colors.orange[200]
 //                                    ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(5.0),
-                                    child: Text(
-                                      'Top Restaurants :',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: 20.0, fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Text(
+                                  'Top Restaurants :',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.bold),
                                 ),
-                              )
-                            ]),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                                return HomePage(desc: rest[index].desc,imgName: rest[index].image,imgName1: rest[index].image1,imgName2: rest[index].image2,restName: rest[index].name,);
-                              }));
-                        },
-                        child: Card(
-                            elevation: 1.0,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0)),
-                            child: Row(
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Container(
-                                    alignment: Alignment.centerLeft,
-                                    height: 100,
-                                    width: 100.0,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                      image: DecorationImage(
-                                          image: AssetImage(
-                                              'assets/${rest[index].image}'),
-                                          fit: BoxFit.cover),
-                                    ),
-                                  ),
+                              ),
+                            ),
+                          )
+                        ]),
+                  GestureDetector(
+                    onTap: () {
+                      // Navigator.push(context,
+                      //     MaterialPageRoute(builder: (context) {
+                      //       return HomePage(desc: rest[index].desc,imgName: rest[index].image,imgName1: rest[index].image1,imgName2: rest[index].image2,restName: rest[index].name,);
+                      //     }));
+                    },
+                    child: Card(
+                        elevation: 1.0,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)),
+                        child: Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Container(
+                                alignment: Alignment.centerLeft,
+                                height: 100,
+                                width: 100.0,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/${rest[index].image}'),
+                                      fit: BoxFit.cover),
                                 ),
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(20.0),
-                                    child: Column(
-                                      children: <Widget>[
-                                        Container(
-                                          alignment: Alignment.centerLeft,
-                                          child: Text(
-                                            rest[index].name,
-                                            style: TextStyle(
-                                                fontSize: 22.0,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        Container(
-                                            alignment: Alignment.centerLeft,
-                                            child: Text('\u{02605}4.2')),
-                                        SizedBox(
-                                          height: 5.0,
-                                        ),
-                                        Container(
-                                            alignment: Alignment.centerLeft,
-                                            child: Text(rest[index].desc)),
-                                      ],
+                              ),
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        rest[index].name,
+                                        style: TextStyle(
+                                            fontSize: 22.0,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
-                                  ),
-                                )
-                              ],
-                            )),
-                      ),
-                    ]);
-              }),
-        ));
+                                    Container(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text('\u{02605}4.2')),
+                                    SizedBox(
+                                      height: 5.0,
+                                    ),
+                                    Container(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(rest[index].desc)),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        )),
+                  ),
+                ]);
+          }),
+    ));
   }
 }
 
@@ -248,5 +261,5 @@ class _Restaurants {
   String image1;
   String image2;
 
-  _Restaurants({this.image, this.name, this.desc,this.image1,this.image2});
+  _Restaurants({this.image, this.name, this.desc, this.image1, this.image2});
 }

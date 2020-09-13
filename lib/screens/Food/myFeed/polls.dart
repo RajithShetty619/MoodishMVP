@@ -17,24 +17,10 @@ class PollTabs extends StatefulWidget {
 }
 
 class _PollTabsState extends State<PollTabs> {
-  DatabaseQuery _dqpoll = DatabaseQuery(listName: 'p');
-
   @override
   void initState() {
     super.initState();
   }
-  //  Future<int> checkDate() async {
-  //   Box _box = await Hive.openBox("date");
-  //   String saveDate = await _box.get("date");
-  //   DateTime now = DateTime.now();
-  //   String date = DateFormat('EEE, M/d/y').format(now);
-  //   if (date == saveDate) {
-  //     return 0 ; //change to zero for testing purpose
-  //   } else {
-  //     _box.put("date", date);
-  //     return 0;
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -89,9 +75,6 @@ class _This_ThatTabsState extends State<This_ThatTabs> {
       },
       listenWhen: (Map<String, List<dynamic>> previous,
           Map<String, List<dynamic>> current) {
-        // if (current.length > previous.length) {
-        //   return true;
-        // }
         return true;
       },
       builder: (BuildContext context, thislist) {
@@ -355,8 +338,8 @@ class GetListView extends StatefulWidget {
   final List<dynamic> choice;
   final int index;
   GetListView({
-    this.this_that,
     Key key,
+    this.this_that,
     this.choice,
     this.index,
   });
@@ -519,7 +502,7 @@ class GetListView1 extends StatefulWidget {
   final PollsModel poll;
   final List<dynamic> choice;
   final int index;
-  GetListView1({this.choice, this.poll, this.index});
+  GetListView1({Key key, this.poll, this.choice, this.index});
 
   @override
   _GetListView1State createState() => _GetListView1State();

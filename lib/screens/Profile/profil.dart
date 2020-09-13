@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/Services/database.dart';
-import 'package:moodish_mvp/screens/Restaurants/home.dart';
 import '../../Services/authenticate.dart';
 import 'Edit.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'settings.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -14,7 +14,7 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   ImageProvider _image;
-  Map<String, String> userData = {};
+  Map<String, dynamic> userData = {};
   @override
   void initState() {
     super.initState();
@@ -29,7 +29,7 @@ class _ProfileState extends State<Profile> {
       } catch (e) {
         print(e);
       }
-      Map<String, String> _userData = await DatabaseService().returnUser();
+      Map<String, dynamic> _userData = await DatabaseService().returnUser();
       setState(() {
         userData = _userData;
       });
@@ -42,20 +42,6 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-//        appBar: AppBar(backgroundColor: Colors.grey, actions: <Widget>[
-//          IconButton(
-//            icon: Icon(Icons.notifications),
-//            onPressed: () {},
-//          ),
-//          IconButton(
-//            icon: Icon(Icons.group),
-//            onPressed: () {},
-//          ),
-//          IconButton(
-//            icon: Icon(Icons.settings),
-//            onPressed: () {},
-//          ),
-//        ]),
       body: Theme(
         data: Theme.of(context).copyWith(
           brightness: Brightness.light,
@@ -66,6 +52,7 @@ class _ProfileState extends State<Profile> {
             color: Colors.white,
           ),
           child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
             padding: const EdgeInsets.all(32.0),
             child: Column(
               children: <Widget>[
@@ -260,48 +247,10 @@ class _ProfileState extends State<Profile> {
                         size: 50,
                       ),
                       onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext idcontext) {
-                              return Dialog(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: Container(
-                                  height: 135,
-                                  child: Column(
-                                    children: <Widget>[
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        'Coming Soon.......!',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.all(10),
-                                        child: Align(
-                                          alignment: Alignment.centerRight,
-                                          child: RaisedButton(
-                                            onPressed: () => Navigator.of(
-                                                    idcontext,
-                                                    rootNavigator: true)
-                                                .pop(),
-                                            child: Text('ok'),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              );
-                            });
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProfileSetting()));
                       },
                     ),
                   ],
@@ -555,9 +504,9 @@ class _ProfileState extends State<Profile> {
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
                             colors: [
-                              Colors.blue[900],
-                              Colors.blueAccent,
-                              Colors.blue[900],
+                              Colors.orange[900],
+                              Colors.orange,
+                              Colors.orange[900],
                             ],
                           ),
                           borderRadius: BorderRadius.circular(6),

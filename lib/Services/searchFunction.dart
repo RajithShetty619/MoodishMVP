@@ -1,5 +1,8 @@
 import 'package:http/http.dart';
+import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/Services/storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'dart:convert';
 
 import 'package:moodish_mvp/models/foodListModel.dart';
@@ -13,7 +16,22 @@ class SearchFunction {
 
     List<dynamic> _passData = json.decode(info["results"]);
     List<FoodListModel> _list = await listFromSnapshot(_passData);
+    await setRecent(_passData);
     return _list;
+  }
+
+  setRecent(List<dynamic> data) async {
+    Future.wait(data.map((doc) async {
+      await FirebaseFirestore.instance
+          .collection('recent')
+          .doc(doc['sr_no'])
+          .set(doc);
+      await FirebaseFirestore.instance
+          .collection('recent')
+          .doc(doc['sr_no'])
+          .set({'timestamp': FieldValue.serverTimestamp()},
+              SetOptions(merge: true));
+    }));
   }
 
   Future<List<FoodListModel>> listFromSnapshot(List<dynamic> snapshot) async {
@@ -71,5 +89,17 @@ class SearchFunction {
           delivery: _docData["delivery"] ?? '',
           sr_no: _docData["sr_no"] ?? '');
     }).toList());
+  }
+
+  Future<List<FoodListModel>> recentSearch() async {
+    QuerySnapshot recent = await FirebaseFirestore.instance
+        .collection('recent')
+        .orderBy('timestamp', descending: true)
+        .limit(5)
+        .get();
+    List<FoodListModel> recentDocs =
+        await DatabaseService().listFromSnapshot(recent);
+
+    return recentDocs;
   }
 }

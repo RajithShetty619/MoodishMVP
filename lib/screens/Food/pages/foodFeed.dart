@@ -30,13 +30,29 @@ class FoodFeed extends StatefulWidget {
   _FoodFeedState createState() => _FoodFeedState();
 }
 
+class Deter {
+  int id;
+  String deter;
+
+  Deter(this.id, this.deter);
+  static List<Deter> getDeter() {
+    return <Deter>[
+      Deter(1, 'veg'),
+      Deter(2, 'non-veg'),
+      Deter(3, 'both'),
+    ];
+  }
+}
+
 class _FoodFeedState extends State<FoodFeed> {
   int numbr;
   String moodSelection;
   bool loadingData1 = false;
   bool loadingData2 = false;
   DatabaseQuery _dq = DatabaseQuery(listName: "0");
-  DatabaseQuery _dqtaste2 = DatabaseQuery(listName: "t2");
+  DatabaseQuery _dqtaste2 = DatabaseQuery(listName: "d2");
+  DatabaseQuery _dqtaste0 = DatabaseQuery(listName: "d0");
+  DatabaseQuery _dqtaste1 = DatabaseQuery(listName: "d1");
   int indx = 1;
   bool _visible = true;
   List<GridTileBuilder> mood = [
@@ -47,13 +63,30 @@ class _FoodFeedState extends State<FoodFeed> {
     GridTileBuilder(image: 'sluggish.png', mood: 'sluggish', currentOpacity: 1),
     GridTileBuilder(image: 'stress.png', mood: 'stress', currentOpacity: 1),
   ];
+  int det = 2;
+  List<Deter> _deter = Deter.getDeter();
+  List<DropdownMenuItem<Deter>> _dropdown;
+  Deter _selectedDeter;
 
   @override
   void initState() {
     super.initState();
     setState(() {
+      Random random = new Random();
+      int randomNumber = random.nextInt(3);
+      setState(() {
+        numbr = randomNumber;
+        print("pppppppppppppppppppp");
+        print(numbr);
+      });
       DatabaseQuery(listName: 'p').getPoll().then((poll) {
         BlocProvider.of<PollBloc>(context).add(PollEvent.add(poll, 'p'));
+      });
+      // DatabaseQuery(listName: 'yn').getYesno().then((yesno) {
+      //   BlocProvider.of<PollBloc>(context).add(PollEvent.add(yesno, 'yn'));
+      // });
+      DatabaseQuery(listName: 'tt').getthis_that().then((thisthat) {
+        BlocProvider.of<PollBloc>(context).add(PollEvent.add(thisthat, 'tt'));
       });
       DatabaseQuery(listName: 'fft').getFact().then((fact) {
         BlocProvider.of<PollBloc>(context).add(PollEvent.add(fact, 'fft'));
@@ -63,16 +96,66 @@ class _FoodFeedState extends State<FoodFeed> {
       _dqtaste2.getFood(
           field: ['cuisine'],
           value: ['indian'],
-          limit: 5,
+          limit: 7,
           check: check).then((future) {
-        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t2"));
+        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "d2"));
+      });
+      _dqtaste0.getFood(
+          field: ['cuisine', 'deter'],
+          value: ['indian', 'veg'],
+          limit: 7,
+          check: check).then((future) {
+        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "d0"));
+      });
+      _dqtaste1.getFood(
+          field: ['cuisine', 'deter'],
+          value: ['indian', 'nonveg'],
+          limit: 7,
+          check: check).then((future) {
+        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "d1"));
       });
     });
-    Random random = new Random();
-    int randomNumber = random.nextInt(3);
+
+    _dropdown = buildDropDown(_deter);
+    _selectedDeter = _dropdown[2].value;
+  }
+
+  List<DropdownMenuItem<Deter>> buildDropDown(List deters) {
+    List<DropdownMenuItem<Deter>> items = List();
+    for (Deter deter in deters) {
+      items.add(DropdownMenuItem(
+        value: deter,
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Center(
+            child: Text(
+              deter.deter,
+            ),
+          ),
+        ),
+      ));
+    }
+    return items;
+  }
+
+  onChangedDeter(Deter selectedDeter) {
     setState(() {
-      numbr = randomNumber;
+      _selectedDeter = selectedDeter;
     });
+    if (_selectedDeter.id == 1) {
+      setState(() {
+        det = 0;
+      });
+    } else if (_selectedDeter.id == 2) {
+      setState(() {
+        det = 1;
+      });
+    } else {
+      setState(() {
+        det = 2;
+      });
+    }
+    print(det);
   }
 
   data(BuildContext dataContext, String mood) async {
@@ -90,6 +173,7 @@ class _FoodFeedState extends State<FoodFeed> {
     String saveDate = await _box.get("date");
     DateTime now = DateTime.now();
     String date = DateFormat('EEE, M/d/y').format(now);
+
     if (date == saveDate) {
       return 0;
     } else {
@@ -104,7 +188,7 @@ class _FoodFeedState extends State<FoodFeed> {
       index: _visible ? 0 : 1,
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(10),
           child: AnimatedOpacity(
             duration: Duration(milliseconds: 400),
             opacity: _visible ? 1.0 : 0.0,
@@ -134,8 +218,8 @@ class _FoodFeedState extends State<FoodFeed> {
                   child: GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        crossAxisSpacing: 7.0,
-                        mainAxisSpacing: 7.0,
+                        crossAxisSpacing: 0,
+                        mainAxisSpacing: 0,
                       ),
                       scrollDirection: Axis.vertical,
                       itemCount: mood.length,
@@ -154,8 +238,8 @@ class _FoodFeedState extends State<FoodFeed> {
                           child: Stack(
                             children: <Widget>[
                               Container(
-                                height: 200.0,
-                                width: 160.0,
+                                height: 250.0,
+                                width: MediaQuery.of(context).size.width / 2.2,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
                                       image: AssetImage(
@@ -165,8 +249,8 @@ class _FoodFeedState extends State<FoodFeed> {
                                     borderRadius: BorderRadius.circular(10.0)),
                               ),
                               Container(
-                                height: 200.0,
-                                width: 160.0,
+                                height: 250.0,
+                                width: MediaQuery.of(context).size.width / 2.2,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     gradient: LinearGradient(
@@ -208,6 +292,7 @@ class _FoodFeedState extends State<FoodFeed> {
           child: Stack(
             children: <Widget>[
               SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -322,6 +407,7 @@ class _FoodFeedState extends State<FoodFeed> {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           // GestureDetector(
                           //   child: Feeed(
@@ -359,7 +445,7 @@ class _FoodFeedState extends State<FoodFeed> {
                               stIndex: 2,
                             ),
                             onTap: () async {
-                              await BetaCount().count(field: 'polls');
+                              BetaCount().count(field: 'polls');
                               setState(() {
                                 indx = 2;
                               });
@@ -374,7 +460,7 @@ class _FoodFeedState extends State<FoodFeed> {
                               press: () {},
                             ),
                             onTap: () async {
-                              await BetaCount().count(field: 'polls');
+                              BetaCount().count(field: 'fft');
                               setState(() {
                                 indx = 3;
                               });
@@ -386,43 +472,66 @@ class _FoodFeedState extends State<FoodFeed> {
                     Column(
                       children: <Widget>[
                         if (indx == 1)
-                          Container(
-                            child: BlocConsumer<FoodBloc,
-                                Map<String, List<FoodListModel>>>(
-                              buildWhen: (Map<String, List<FoodListModel>>
-                                      previous,
-                                  Map<String, List<FoodListModel>> current) {
-                                return true;
-                              },
-                              listenWhen: (Map<String, List<FoodListModel>>
-                                      previous,
-                                  Map<String, List<FoodListModel>> current) {
-                                if (current.length > previous.length) {
-                                  return true;
-                                }
-                                return false;
-                              },
-                              builder: (BuildContext context, foodList) {
-                                return Container(
-                                  child: ListView.builder(
-                                    shrinkWrap: true,
-                                    primary: false,
-                                    physics: NeverScrollableScrollPhysics(),
-                                    itemCount: foodList["t2"].length,
-                                    itemBuilder: (BuildContext context, index) {
-                                      return RecipeTab(
-                                        foodList: foodList["t2"][index],
-                                      );
-                                    },
+                          Column(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 1),
+                                child: Row(children: <Widget>[
+                                  Text(
+                                    'Filter : ',
+                                    style: TextStyle(fontSize: 18),
                                   ),
-                                );
-                              },
-                              listener: (context, foodList) {
-                                Scaffold.of(context).showSnackBar(
-                                  SnackBar(content: Text('Added!')),
-                                );
-                              },
-                            ),
+                                  SizedBox(width: 5),
+                                  DropdownButton(
+                                    value: _selectedDeter,
+                                    items: _dropdown,
+                                    onChanged: onChangedDeter,
+                                  )
+                                ]),
+                              ),
+                              Container(
+                                child: BlocConsumer<FoodBloc,
+                                    Map<String, List<FoodListModel>>>(
+                                  buildWhen: (Map<String, List<FoodListModel>>
+                                          previous,
+                                      Map<String, List<FoodListModel>>
+                                          current) {
+                                    return true;
+                                  },
+                                  listenWhen: (Map<String, List<FoodListModel>>
+                                          previous,
+                                      Map<String, List<FoodListModel>>
+                                          current) {
+                                    if (current.length > previous.length) {
+                                      return true;
+                                    }
+                                    return false;
+                                  },
+                                  builder: (BuildContext context, foodList) {
+                                    return Container(
+                                      child: ListView.builder(
+                                        shrinkWrap: true,
+                                        primary: false,
+                                        physics: NeverScrollableScrollPhysics(),
+                                        itemCount: foodList["d$det"].length,
+                                        itemBuilder:
+                                            (BuildContext context, index) {
+                                          return RecipeTab(
+                                            foodList: foodList["d$det"][index],
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  },
+                                  listener: (context, foodList) {
+                                    Scaffold.of(context).showSnackBar(
+                                      SnackBar(content: Text('Added!')),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
                           ),
                         if (indx == 2)
                           Column(

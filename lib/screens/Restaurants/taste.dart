@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/screens/mainScreen.dart';
 
 class Taste extends StatefulWidget {
@@ -8,13 +10,9 @@ class Taste extends StatefulWidget {
 
 class _TasteState extends State<Taste> {
   List<GridTileBuilder> taste = [
-    GridTileBuilder(image: 'Chocolate.jpg', taste: 'Sweet', currentOpacity: 1),
-    GridTileBuilder(image: 'Sour.jpeg', taste: 'Sour', currentOpacity: 1),
-    GridTileBuilder(
-        image: 'Spicy.jpg', taste: 'Hot n Spicy', currentOpacity: 1),
-    GridTileBuilder(image: 'Coffee.jpg', taste: 'Aromatic', currentOpacity: 1),
-    GridTileBuilder(image: 'Savory.jpg', taste: 'Savory', currentOpacity: 1),
-    GridTileBuilder(image: 'Salty.jpg', taste: 'Salty', currentOpacity: 1),
+    GridTileBuilder(image: '', taste: 'Veg', currentOpacity: 1),
+    GridTileBuilder(image: '', taste: 'NonVeg', currentOpacity: 1),
+    GridTileBuilder(image: '', taste: 'Veg/NonVeg', currentOpacity: 1),
   ];
   int i = 0;
   List<String> pref = []; //all the user preferences are saved here
@@ -144,13 +142,16 @@ class _TasteState extends State<Taste> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: RaisedButton(
-                      onPressed: () {
-                        if (i + 1 > 3)
+                      onPressed: () async{
+                        if (i + 1 > 3) {
+                          Box box = await Hive.openBox('preferenceBox');
+                          box.put('deter', pref);
+                          DatabaseService().savePreference();
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
                             return MainScreen();
                           }));
-                        else
+                        } else
                           setState(() {
                             err = 'Select  ${3 - i} more!';
                           });

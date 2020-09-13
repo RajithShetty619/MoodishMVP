@@ -2,15 +2,30 @@ const functions = require('firebase-functions');
 
 // The Firebase Admin SDK to access Cloud Firestore.
 const admin = require('firebase-admin');
-admin.initializeApp();
+admin.initializeApp({
+    credential: admin.credential.cert({
+        "type": "service_account",
+        "project_id": "moodishtest",
+        "private_key_id": "627efd90701362f8ee3d6acfabbca08332ac14a6",
+        "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDjo3OB8mKz++iP\nkd9NZNRxdp0OBQzegZi0rnRw2DUjriIxw8bZwpuKsfuFAPkJ71YAL/24Ccg9xXYD\nsVvxuPVbZ2qvV+gF2IGnVjj2yu3NGVwpy080ciZnqU87jGkcl0JM8f6vyDrIgnci\nG4mHI214upF7S4V+qT+eEV8hi3CgyJ2kI2jvPFFq6AdcFFxkOXNIBxkkSHS/on+M\noMrJn8U2trKIqf7lRGQJnEub1NK39WU0M0rXAkFS2m1vl2JJjxqqXssY32QJFSq9\n3qH9lv2EQtDuJ3aLlV0yaq9zGzkvbVWWgmwHD92wzBm6f5hraObEzbhNPnY6YMLp\nIrI4sVTVAgMBAAECggEAAzSCNBZwVtXpapoUcY/FoPpZUED4cyqSdprNN2iH6QJy\n5035HwhLLdr/Llp65y2oQZTrZtu2Zs5AsOEeqQrgY4LTgPgFI43ul2dSooDtc7mT\nb2A2M4gW69c5rx41PaqQi6pNmnaAg2G44TFPkKhKSoyf70M7NDMYWvamJwACXDUo\nG71nUW7X8kDWH7Hy2Jzz9ZXK0/VMXyU1zlUNgcCkbQzPn2HCjgAvE4w/usNvORrz\ndLszB1C8psRfCIxv7sgiwk8m3tVIJyooClAJzDBlMT82zCrwyuMl3Y2vh71nKcUT\nOcZDcRO38MfcgU4+IcNwocXKcejBeiVKalaG4ByLqQKBgQD57jZzFD5n8hmghCqN\nyy9L7dscnHlZjV353T8msSiPan9jKSX5tPeuhwD4AT34AH+6ujfjFnoG9eC8N8Hp\nG5O0eq92QoihxWCb09fMDOUEmQhbHj7S59evvLzaR0fU5p0paNsh3IzWfQKndvr1\ns+pgMloGibBE/w71ZNnlWa8tKQKBgQDpKqbSzkEnPjCTx1ERydqfm7bvNrHQpvlr\nzYWc77YReF2vuiEz7tQ2hVw0CudQMqkLCp6aCFAyLYc825iVEfFC97zgLnNWkQXb\ns7KayMLKM5g4QU/slR94sRrFTxP9p/m4HW0/HPFNZIf2ad+mh54LDli5ITPH+Ukv\ne9a3eHMzzQKBgCucscurAKjKykYEShisF/i77Lw1YceKr5dmUBrEVzuPbeMzzvif\n54iA7l5YeSPJkoBW9mGeDnUgerLdV+0BbujTb8LHIWh5NL58XO+yYFRJD/g2cugC\npNR5rsq4HYS9KTeMoJBsF/dloQzv6iLt3jwjDSqO5D9l8opHqu4mlDbhAoGBAMCb\nnAz9ljKNm+EnP9+659766WW3v7FFjToxHxNhrPvHe1SjI7RbsG+NQHo5G5VTE/Ls\nBdHl1iFtHI74M5XIqYyRSzPBC0PSLo2rZnmYJ9iSQEcQJK6hDMtNOXkN9syNiqo9\nnLYK+YXd6rZyBO7yjmpBoqbjN3wUgBE6ckdCt59tAoGASztect+bxEriM3yli2d9\n9pxA06ErEiE/2vDtZ0cex92BRifkHc3IwzXzaOKjQohz69KRcFZWaS+H/3vAKjmC\nkXZwXez5iWbiHDsk35VQevKhBhSDR9fXbO3lgQIzv20U4YH70h2if2mybOpEvNnl\neeqn2/NV513UTFeYIvyLZrQ=\n-----END PRIVATE KEY-----\n",
+        "client_email": "firebase-adminsdk-o4azs@moodishtest.iam.gserviceaccount.com",
+        "client_id": "114096620564315965909",
+        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+        "token_uri": "https://oauth2.googleapis.com/token",
+        "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+        "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-o4azs%40moodishtest.iam.gserviceaccount.com"
+    }),
+    databaseURL: "https://fir-ce12e.firebaseio.com"
+});
 const sh = require("ss-search");
+const geofirestore = require("geofirestore");
 // const fs = require('fs');
 // Create and Deploy Your First Cloud Functions
 // https://firebase.google.com/docs/functions/write-firebase-functions
 
 exports.helloWorld = functions.https.onRequest((request, response) => {
 
-    let _dataArray =  [
+    let _dataArray = [
         {
             "sr_no": "0",
             "mood": "anger",
@@ -708,7 +723,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "deter": "veg",
             "description": "Miguelitos are a type of cream filled puff pastry, which can also be referred to as a cake.",
             "meal_type": "dessert",
-            "image":"miguelito.JPG"
+            "image": "miguelito.JPG"
         },
         {
             "sr_no": "20",
@@ -736,7 +751,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "deter": "veg",
             "description": "Yōkan is a thick, jellied Japanese dessert made of red bean paste, agar, and sugar. It is usually sold in a block form, and eaten in slices.",
             "meal_type": "dessert",
-            "image":"mizuyokan.JPG"
+            "image": "mizuyokan.JPG"
 
         },
         {
@@ -767,7 +782,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "deter": "veg",
             "description": "Mizutaki is a Japanese Chicken Hot Pot in which chicken, assorted vegetables, mushrooms, and tofu are cooked in a light kombu dashi broth.",
             "meal_type": "main course",
-            "image":"mizutaki.JPG"
+            "image": "mizutaki.JPG"
         },
         {
             "sr_no": "22",
@@ -798,7 +813,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "Indian",
             "deter": "veg",
             "description": "Modak is an Indian sweet popular in states of Maharashtra, Goa and in the regions of Konkan in India. The sweet filling on the inside of a modak consists of freshly grated coconut and jaggery while the outer soft shell is made from rice flour or wheat flour mixed with khava or maida flour.",
-            "image":"modak.JPG"
+            "image": "modak.JPG"
         },
         {
             "sr_no": "23",
@@ -15757,26 +15772,66 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "image": "whitepeachtart.JPG"
         }
     ]
-    const searchKeys = ["food_item","mood","mood1","meal_type"]
+    const searchKeys = ["food_item", "mood", "mood1", "meal_type"]
     let searchText = request.query.text;
-    let _response =[];
+    let _response = [];
     const results = JSON.stringify(sh.search(_dataArray, searchKeys, searchText));
-    console.log(results);  
-    response.send({results});
+    console.log(results);
+    response.send({ results });
 
 });
 
-exports.restNotif = functions.https.onRequest((req,res)=>{
-    const payload = {
-        notification: {
-            title: 'You have been invited to a trip.',
-            body: 'Tap here to check it out!'
+exports.returnRestaurants = functions.https.onRequest(async (req, res) => {
+    let lat = req.query.lat;
+    let long = req.query.long;
+    lat = parseFloat(lat);
+    long = parseFloat(long);
+    console.log(lat, long);
+    const GeoFirestore = geofirestore.initializeApp(admin.firestore());
+
+    // Create a GeoCollection reference
+    const geocollection = GeoFirestore.collection('restaurants');
+    const query = geocollection.near({ center: new admin.firestore.GeoPoint(lat, long), radius: 1000 });
+
+    async function recurGeolocation(radius) {
+        let _querySnapshot;
+        if (radius > 45) {
+            return null
         }
-   };
-   let text = req.query.text;
-   console.log(text);
-   admin.messaging().sendToDevice( text, payload).then((e)=>console.log(e)).catch((e)=>console.log(e));
+        else {
+            let query = geocollection.near({ center: new admin.firestore.GeoPoint(lat, long), radius: radius }).limit(10);
+            let snapshot = await query.get().catch(e => console.log(e));
+            if (snapshot.docs.length <= 8) {
+                _querySnapshot = await recurGeolocation(radius * 2);
+                return _querySnapshot
+            }
+            else {
+                return snapshot;
+            }
+        }
+    }
+    async function addData(value, length, result) {
+        let _data = result;
+        if (length < 0) {
+          return _data;
+        }
+        else { 
+          const doc = await geocollection.doc(value[length].id).get();
+          let _snap = doc.data() ;
+          _data.push(_snap)
+          _data = await addData(value, length - 1, _data);
+        }
+        return _data;
+      }
+      
+      recurGeolocation(1).then(async(value) => {
+        result = await addData(value.docs,value.docs.length-1,[]) 
+        return res.send({ "restaurants": JSON.stringify(result) });
+      }).catch(e => {
+        console.log(e);
+        return res.send({ "restaurants": "[]" });
+      });
 
-   res.send({"result":"sent"})
-})
+     
 
+}) 
