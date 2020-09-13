@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:moodish_mvp/Services/databaseQuery.dart';
+import 'package:moodish_mvp/models/restaurantsModel.dart';
+import 'package:moodish_mvp/screens/Food/events/restEvent.dart';
 import 'package:moodish_mvp/screens/Restaurants/booking.dart';
 import 'package:moodish_mvp/screens/Restaurants/dineout.dart';
 import 'package:moodish_mvp/screens/Restaurants/pickup.dart';
@@ -8,6 +12,8 @@ import 'package:moodish_mvp/screens/Restaurants/restaurantCard/resataurantReview
 import 'package:moodish_mvp/screens/Restaurants/toprated.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:bloc/bloc.dart';
+import '../Food/blocs/restBloc/restBloc.dart';
 
 class Restaurant extends StatefulWidget {
   @override
@@ -130,6 +136,12 @@ class _RestaurantState extends State<Restaurant> {
   void initState() {
     super.initState();
     getCurrentLocation();
+    setState(() {
+      DatabaseQuery(listName: 'r1').getRest().then((rest) {
+        BlocProvider.of<RestaurantBloc>(context)
+            .add(RestaurantEvent.add(rest, 'r1'));
+      });
+    });
   }
 
   getCurrentLocation() async {
@@ -205,106 +217,79 @@ class _RestaurantState extends State<Restaurant> {
 
   @override
   Widget build(BuildContext context) {
-    return dialogShow
-        ? Scaffold(
-            body: Dialog(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Container(
-                height: MediaQuery.of(context).size.height / 3.7,
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        'The Listed Restaurants are for testing purposes only..',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
+    return Container(
+      child: SafeArea(
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      IconButton(
+                        icon: Icon(Icons.location_on),
+                        onPressed: () => _getAddressFromLatLng(),
                       ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: RaisedButton(
-                          onPressed: () {
-                            setState(() {
-                              dialogShow = false;
-                            });
-                          },
-                          child: Text('OK'),
+                      Text(location),
+                      IconButton(
+                        icon: Icon(
+                          Icons.arrow_drop_down,
+                          size: 37,
                         ),
-                      ),
-                    )
-                  ],
+                        onPressed: () {},
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-          )
-        : Container(
-            child: SafeArea(
-              child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                child: Column(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 8),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            IconButton(
-                              icon: Icon(Icons.location_on),
-                              onPressed: () => _getAddressFromLatLng(),
-                            ),
-                            Text(location),
-                            IconButton(
-                              icon: Icon(
-                                Icons.arrow_drop_down,
-                                size: 37,
-                              ),
-                              onPressed: () {},
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
-                      child: Container(
-                        alignment: Alignment.centerLeft,
-                        child: RichText(
-                          text: TextSpan(
-                              text: 'For Today',
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  child: RichText(
+                    text: TextSpan(
+                        text: 'For Today',
+                        style: TextStyle(
+                            fontSize: 26,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                        children: [
+                          TextSpan(
+                              text: '.',
                               style: TextStyle(
-                                  fontSize: 26,
+                                  fontSize: 40,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black),
-                              children: [
-                                TextSpan(
-                                    text: '.',
-                                    style: TextStyle(
-                                        fontSize: 40,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.pinkAccent))
-                              ]),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 380,
-                      child: ListView.builder(
+                                  color: Colors.pinkAccent))
+                        ]),
+                  ),
+                ),
+              ),
+              Container(
+                  height: 380,
+                  child: BlocConsumer<RestaurantBloc,
+                      Map<String, List<RestListModel>>>(
+                    buildWhen: (Map<String, List<RestListModel>> previous,
+                        Map<String, List<RestListModel>> current) {
+                      return true;
+                    },
+                    listenWhen: (Map<String, List<RestListModel>> previous,
+                        Map<String, List<RestListModel>> current) {
+                      if (current.length > previous.length) {
+                        return true;
+                      }
+                      return false;
+                    },
+                    listener: (context, foodList) {
+                      Scaffold.of(context).showSnackBar(
+                        SnackBar(content: Text('Added!')),
+                      );
+                    },
+                    builder: (context, restList) {
+                      return ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: rest.length,
                           itemBuilder: (context, index) {
@@ -529,108 +514,108 @@ class _RestaurantState extends State<Restaurant> {
                                 ),
                               ),
                             );
-                          }),
-                    ),
-                    SizedBox(
-                      height: 3.0,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
-                      child: Container(
-                        alignment: Alignment.centerLeft,
-                        child: RichText(
-                          text: TextSpan(
-                              text: 'Categories',
+                          });
+                    },
+                  )),
+              SizedBox(
+                height: 3.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  child: RichText(
+                    text: TextSpan(
+                        text: 'Categories',
+                        style: TextStyle(
+                            fontSize: 26,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                        children: [
+                          TextSpan(
+                              text: '.',
                               style: TextStyle(
-                                  fontSize: 26,
+                                  fontSize: 40,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black),
-                              children: [
-                                TextSpan(
-                                    text: '.',
-                                    style: TextStyle(
-                                        fontSize: 40,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.pinkAccent))
-                              ]),
-                        ),
-                      ),
-                    ),
-                    SingleChildScrollView(
-                      physics: BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          getCategory('Dine_out.png', 'Dineout', context, 1),
-                          SizedBox(
-                            width: 10.0,
-                          ),
-                          getCategory('Booking.png', 'Booking', context, 2),
-                          SizedBox(
-                            width: 10.0,
-                          ),
-                          getCategory('Pickup.png', 'Pick Up', context, 3),
-                          SizedBox(
-                            width: 10.0,
-                          ),
-                          getCategory('Top_Rated.png', 'Top Rated', context, 4),
-                          SizedBox(
-                            width: 10.0,
-                          ),
-                        ],
-                      ),
-                    ),
+                                  color: Colors.pinkAccent))
+                        ]),
+                  ),
+                ),
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    getCategory('Dine_out.png', 'Dineout', context, 1),
                     SizedBox(
-                      height: 8,
+                      width: 10.0,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                      child: Container(
-                        alignment: Alignment.centerLeft,
-                        child: RichText(
-                          text: TextSpan(
-                              text: 'Top Restaurant',
-                              style: TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black),
-                              children: [
-                                TextSpan(
-                                    text: '.',
-                                    style: TextStyle(
-                                        fontSize: 40,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.pinkAccent))
-                              ]),
-                        ),
-                      ),
+                    getCategory('Booking.png', 'Booking', context, 2),
+                    SizedBox(
+                      width: 10.0,
                     ),
-                    Container(
-                      height: 400,
-                      child: restura(rest[0].image, rest[0].name, rest[0].desc,
-                          rest, context, 1),
+                    getCategory('Pickup.png', 'Pick Up', context, 3),
+                    SizedBox(
+                      width: 10.0,
                     ),
-                    Container(
-                      height: 400,
-                      child: restura(rest[1].image, rest[1].name, rest[1].desc,
-                          rest, context, 2),
-                    ),
-                    Container(
-                      height: 400,
-                      child: restura(rest[2].image, rest[2].name, rest[2].desc,
-                          rest, context, 3),
-                    ),
-                    Container(
-                      height: 400,
-                      child: restura(rest[3].image, rest[3].name, rest[3].desc,
-                          rest, context, 4),
+                    getCategory('Top_Rated.png', 'Top Rated', context, 4),
+                    SizedBox(
+                      width: 10.0,
                     ),
                   ],
                 ),
               ),
-            ),
-          );
+              SizedBox(
+                height: 8,
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  child: RichText(
+                    text: TextSpan(
+                        text: 'Top Restaurant',
+                        style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                        children: [
+                          TextSpan(
+                              text: '.',
+                              style: TextStyle(
+                                  fontSize: 40,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.pinkAccent))
+                        ]),
+                  ),
+                ),
+              ),
+              Container(
+                height: 400,
+                child: restura(rest[0].image, rest[0].name, rest[0].desc, rest,
+                    context, 1),
+              ),
+              Container(
+                height: 400,
+                child: restura(rest[1].image, rest[1].name, rest[1].desc, rest,
+                    context, 2),
+              ),
+              Container(
+                height: 400,
+                child: restura(rest[2].image, rest[2].name, rest[2].desc, rest,
+                    context, 3),
+              ),
+              Container(
+                height: 400,
+                child: restura(rest[3].image, rest[3].name, rest[3].desc, rest,
+                    context, 4),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 

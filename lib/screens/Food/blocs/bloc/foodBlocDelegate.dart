@@ -1,4 +1,3 @@
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FoodBlocDelegate extends BlocDelegate {
@@ -17,10 +16,10 @@ class FoodBlocDelegate extends BlocDelegate {
     print(transition.nextState);
   }
 
-  @override
-  void onError(Bloc bloc, Object error, StackTrace stackTrace) {
-    // TODO: implement onError
-    super.onError(bloc, error, stackTrace);
-    print(error);
-  }
+  // @override
+  // void onError(Bloc bloc, Object error, StackTrace stackTrace) {
+  //   // TODO: implement onError
+  //   super.onError(bloc, error, stackTrace);
+  //   print(error);
+  // }
 }

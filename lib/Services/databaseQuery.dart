@@ -3,6 +3,7 @@ import 'package:hive/hive.dart';
 import 'package:moodish_mvp/models/factsModel.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/models/pollsModel.dart';
+import 'package:moodish_mvp/models/restaurantsModel.dart';
 import 'package:moodish_mvp/models/this_thatModel.dart';
 import 'package:moodish_mvp/models/yesNo.dart';
 import 'database.dart';
@@ -27,58 +28,23 @@ class DatabaseQuery {
 
   final CollectionReference facts =
       FirebaseFirestore.instance.collection('facts');
+
+  final CollectionReference restaurants =
+      FirebaseFirestore.instance.collection('restaurants');
   final String listName;
   DatabaseQuery({this.listName});
 
 // // restaurant data query
-//   Future<List<RestListModel>> getRest({
-//     List<String> field,
-//     List<dynamic> value,
-//     int limit = 5,
-//     int check = 0,
-//   }) async {
-//     List<String> _field = field;
-//     List<dynamic> _value = value;
-//     //opening hive box
-//     final _restbox = await Hive.openBox(listName);
-//     List<dynamic> _restList = await _restbox.get(listName);
-//     //when no list is called from memory or to get new list from memory coz checkdate func
-//     if (_restList == null || check == 0) {
-//       Query _finalQuery = rest.where("restcuisine", isGreaterThan: "");
-
-//       if (_restList != null) if (_restList.length != 0)
-//         _lastDocument =
-//             _restList.cast<RestListModel>()[_restList.length - 1].restcuisine;
-
-//       if (_value[_value.length - 1].runtimeType != String) {
-//         dynamic _v = _value.removeLast();
-//         _finalQuery = _finalQuery.where(_field.removeLast(), whereIn: _v);
-//       }
-//       if (_lastDocument != null)
-//         _finalQuery = recQuery(_field, _value, _finalQuery)
-//             .startAfter([_lastDocument])
-//             .orderBy('restcuisine')
-//             .limit(limit);
-//       else
-//         _finalQuery = recQuery(_field, _value, _finalQuery)
-//             .orderBy('restcuisine')
-//             .limit(limit);
-//       //converting data into list model
-//       QuerySnapshot snapshot = await _finalQuery.get();
-//       List<RestListModel> resqueryList =
-//           await DatabaseService().listfromSnapshot(snapshot);
-//       //putting it in the box which was opened
-//       await _restbox.put(listName, resqueryList);
-
-//       return resqueryList;
-//     }
-//     //if list is already there in memory
-//     else {
-//       print('list directly from data');
-//       List<RestListModel> _resList = _restList.cast<RestListModel>();
-//       return _resList;
-//     }
-//   }
+  Future<List<RestListModel>> getRest({
+    List<String> field,
+    List<dynamic> value,
+    int limit = 5,
+    int check = 0,
+  }) async {
+    Query q = restaurants.orderBy("rating", descending: true).limit(10);
+    QuerySnapshot snapshot = await q.get();
+    return await DatabaseService().listfromSnapshot(snapshot);
+  }
 
   Future<List<FoodListModel>> getFood(
       {List<String> field,
@@ -119,9 +85,14 @@ class DatabaseQuery {
       QuerySnapshot snapshot = await _finalQuery.get();
       List<FoodListModel> queryList =
           await DatabaseService().listFromSnapshot(snapshot);
-
-      /* saving list for later use */
       await _box.put(listName, queryList);
+      if (queryList.length < limit - 1) {
+        _finalQuery = _ref.orderBy('description').limit(limit);
+        snapshot = await _finalQuery.get();
+        queryList = await DatabaseService().listFromSnapshot(snapshot);
+        await _box.put(listName, null);
+      }
+      /* saving list for later use */
       return queryList;
     }
     /* if got list readily from memory  */
@@ -192,7 +163,10 @@ class DatabaseQuery {
     Query q = polls.orderBy('value').startAfter([last]).limit(4);
     List<DocumentSnapshot> _snapshot =
         await q.get().then((value) => value.docs);
-
+    if (_snapshot.length < 3) {
+      q = polls.orderBy('value').limit(4);
+      _snapshot = await q.get().then((value) => value.docs);
+    }
     /* saving last poll to be displayed*/
     try {
       String _lastpoll = await _snapshot[_snapshot.length - 1].data()['value'];
@@ -225,6 +199,10 @@ class DatabaseQuery {
     Query t = this_that.orderBy('A').startAfter([end]).limit(4);
     List<DocumentSnapshot> _snapshot =
         await t.get().then((value) => value.docs);
+    if (_snapshot.length < 3) {
+      t = polls.orderBy('A').limit(4);
+      _snapshot = await t.get().then((value) => value.docs);
+    }
     // saving last this_that to be shown
     String _endthat = await _snapshot[_snapshot.length - 1].data()['A'];
     await _box.put('endthat', _endthat);
@@ -248,6 +226,10 @@ class DatabaseQuery {
     Query y = yesorno.orderBy('Questions').startAfter([end]).limit(3);
     List<DocumentSnapshot> _snapshot =
         await y.get().then((value) => value.docs);
+    if (_snapshot.length < 3) {
+      y = polls.orderBy('Questions').limit(3);
+      _snapshot = await y.get().then((value) => value.docs);
+    }
     // saving last this_that to be shown
     String _end = await _snapshot[_snapshot.length - 1].data()['Questions'];
     await _box.put('end', _end);

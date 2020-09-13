@@ -123,17 +123,20 @@ class DatabaseService {
       //code to get images and info related to resturants in future
 
       return RestListModel(
-        restname: _docdata["Restaurant_Name"] ?? '',
-        restcuisine: _docdata["Cuisines"] ?? '',
-        costForTwo: _docdata["Cost_for_two(Rs.)"] ?? '',
-        hrs: _docdata["Operational_hours"] ?? '',
-        features: _docdata["Features"] ?? '',
-        homeDelivery: _docdata["Home_Delivery"] ?? '',
-        addnoutlet: _docdata["Additional_outlet_count"] ?? '',
-        location: _docdata["Restaurant_Location"] ?? '',
-        rating: _docdata["Rating"] ?? '',
-        avgRating: _docdata["Rating_Category"] ?? '',
-      );
+          restaurant_Name: _docdata["Restaurant_Name"] ?? '',
+          cuisines: _docdata["Cuisines"] ?? '',
+          operational_after_Midnight:
+              _docdata["Operational_after_Midnight"] ?? '',
+          features: _docdata["Features"] ?? '',
+          restaurant_Location: _docdata["Restaurant_Location"] ?? '',
+          international_phone_number:
+              _docdata["International_phone_number"] ?? '',
+          rating: _docdata["rating"] ?? '',
+          website: _docdata["website"] ?? '',
+          photo_url: _docdata["photo_url"] ?? '',
+          reviews: _docdata["reviews"] ?? '',
+          restaurant_Type: _docdata["Restaurant_Type"] ?? '',
+          sr_no: _docdata["sr_no"] ?? '');
     }).toList());
   }
 
