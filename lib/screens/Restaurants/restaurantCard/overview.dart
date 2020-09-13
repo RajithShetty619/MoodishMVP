@@ -19,7 +19,7 @@ class _OverViewState extends State<OverView> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
+          scrollDirection: Axis.vertical,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,8 +121,10 @@ class _OverViewState extends State<OverView> {
                                     height: 7.0,
                                   ),
                                   Container(
+                                    width: MediaQuery.of(context).size.width/1.4,
                                       child: Text(
                                         '${widget.rest.address}',
+                                        
                                         style: TextStyle(
                                           fontSize: 20
                                         ),
