@@ -48,7 +48,7 @@ class _RestaurantReviewState extends State<RestaurantReview> {
                               color: Colors.black),
                           children: [
                             TextSpan(
-                                text: '.',
+                                text: '',
                                 style: TextStyle(
                                     fontSize: 80,
                                     fontWeight: FontWeight.bold,
@@ -93,7 +93,7 @@ class _RestaurantReviewState extends State<RestaurantReview> {
                                     color: Colors.white),
                               ),
                               Text(
-                                widget.rest.rating,
+                                '\u{02605}${widget.rest.rating}',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
@@ -186,22 +186,25 @@ class _RestaurantReviewState extends State<RestaurantReview> {
                     ),
                   ),
                   ListView.builder(
-                      itemCount: 5,
+                      itemCount: widget.rest.reviews.length,
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
+                      primary: false,
                       itemBuilder: (context, index) {
                         return Card(
                             elevation: 1.0,
                             child: ListTile(
                               title: Row(
                                 children: <Widget>[
-                                  Text('Username'),
+                                  Text(widget.rest.reviews[index]
+                                  ["author_name"]),
                                   Spacer(),
-                                  Text('\u{02605}4.2'),
+                                  Text(
+                                      '\u{02605}${widget.rest.reviews[index]["rating"]}'),
                                 ],
                               ),
-                              subtitle: Text(
-                                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
+                              subtitle:
+                              Text(widget.rest.reviews[index]["text"]),
                             ));
                       })
                 ],
