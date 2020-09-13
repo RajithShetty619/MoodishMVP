@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/models/restaurantsModel.dart';
+import 'package:moodish_mvp/screens/Restaurants/restaurantCard/gallery.dart';
 import 'package:moodish_mvp/screens/Restaurants/restaurantCard/restMenu.dart';
 import 'starfeedback.dart';
 import 'overview.dart';
@@ -78,7 +79,7 @@ class _HomeTopTabsState extends State<HomeTopTabs>
                           child: Padding(
                             padding: EdgeInsets.all(8),
                             child: Text(
-                              'About',
+                              'Gallery',
                               style: TextStyle(
                                   fontSize:
                                       MediaQuery.of(context).size.width / 20),
@@ -100,9 +101,7 @@ class _HomeTopTabsState extends State<HomeTopTabs>
               rest: widget.rest,
             ),
             StarFeedback(widget.rest),
-            About(
-              rest: widget.rest,
-            )
+            Gallery(restaurant: widget.rest,)
           ],
         ),
       ),
