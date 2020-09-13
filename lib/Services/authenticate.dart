@@ -17,7 +17,7 @@ class Authenticate {
     'email',
     'https://www.googleapis.com/auth/contacts.readonly',
   ]);
-  User _userFromFirebase(FirebaseUser user) {
+  User _userFromFirebase(User) {
     return user != null ? User(uid: user.uid) : null;
   }
 
@@ -103,9 +103,9 @@ class Authenticate {
       case AuthorizationStatus.authorized:
         final AppleIdCredential _aauth = result.credential;
         final OAuthProvider oAuthProvider =
-            new OAuthProvider(providerId: "apple.com");
+            new OAuthProvider( "apple.com");
 
-        final AuthCredential credential = oAuthProvider.getCredential(
+        final AuthCredential credential = oAuthProvider.credential(
           idToken: String.fromCharCodes(_aauth.identityToken),
           accessToken: String.fromCharCodes(_aauth.authorizationCode),
         );
