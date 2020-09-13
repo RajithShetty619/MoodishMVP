@@ -457,21 +457,9 @@ class _RestaurantState extends State<Restaurant> {
                     primary: false,
                     itemCount: restList["r2"].length,
                     itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () => Navigator.push(
-                            context,
-                            PageTransition(
-                                type: PageTransitionType
-                                    .rightToLeft,
-                                child: RestaurantReview(
-                                    rest: restList[
-                                    "r2"]
-                                    [
-                                    index]))),
-                        child: Container(
-                          height: 400,
-                          child: restura(restList["r2"][index]),
-                        ),
+                      return Container(
+                        height: 400,
+                        child: restura(restList["r2"][index],context),
                       );
                     });
               }),
@@ -536,11 +524,19 @@ Widget getCategory(String imgName, String name, context, int tile) {
   );
 }
 
-Widget restura(RestListModel rest) {
+Widget restura(RestListModel rest,BuildContext context,) {
   return Padding(
     padding: const EdgeInsets.all(10.0),
     child: GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+            context,
+            PageTransition(
+                type: PageTransitionType.rightToLeft,
+                child: HomePage(
+                  restaurant: rest,
+                )));
+      },
       child: Card(
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
@@ -569,6 +565,9 @@ Widget restura(RestListModel rest) {
                     height: 250,
                     width: double.maxFinite,
                     decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20)),
                         gradient: LinearGradient(
                             begin: Alignment.topLeft,
                             end: Alignment.centerRight,
@@ -681,16 +680,16 @@ Widget restura(RestListModel rest) {
                 ),
               ),
             ),
-            Container(
+            rest.features != "nan"?Container(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                      rest.features != "nan" ? rest.features : rest.cuisines),
+                      rest.features),
                 ),
               ),
-            )
+            ):Container()
           ],
         ),
       ),
