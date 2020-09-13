@@ -25,6 +25,12 @@ class Authenticate {
     return _uid;
   }
 
+  Future<User> returnUser() async {
+    User user = _auth.currentUser;
+
+    return user;
+  }
+
   Stream<User> get onAuthChanged {
     return _auth.authStateChanges();
   }

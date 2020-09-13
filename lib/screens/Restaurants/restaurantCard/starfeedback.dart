@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:moodish_mvp/models/restaurantsModel.dart';
+import '../../../Services/database.dart';
 
 class StarFeedback extends StatefulWidget {
   final RestListModel rest;
@@ -10,12 +11,13 @@ class StarFeedback extends StatefulWidget {
 }
 
 class _StarFeedbackState extends State<StarFeedback> {
-  var _rating;
+  var _rating = 4.0;
+
+  String review;
+  bool submit = false;
 
   @override
   Widget build(BuildContext context) {
-    List<String> review = [];
-    List<String> rating = [];
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -46,7 +48,7 @@ class _StarFeedbackState extends State<StarFeedback> {
                       height: 10.0,
                     ),
                     RatingBar(
-                      initialRating: 1,
+                      initialRating: 4,
                       minRating: 1,
                       direction: Axis.horizontal,
                       allowHalfRating: true,
@@ -69,7 +71,7 @@ class _StarFeedbackState extends State<StarFeedback> {
                       child: TextField(
                           maxLines: 5,
                           onChanged: (val) {
-                            review.add(val);
+                            review = val;
                           },
                           decoration: InputDecoration(
                             hintText: 'Optional',
@@ -84,45 +86,55 @@ class _StarFeedbackState extends State<StarFeedback> {
                     SizedBox(
                       height: 10.0,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                          child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: RaisedButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(30.0)),
-                          color: Colors.deepOrange,
-                          child: Text(
-                            'Submit',
-                            style: TextStyle(color: Color(0xffffffff)),
+                    if (!submit)
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                            child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: RaisedButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(30.0)),
+                            color: Colors.deepOrange,
+                            child: Text(
+                              'Submit',
+                              style: TextStyle(color: Color(0xffffffff)),
+                            ),
+                            onPressed: () async {
+                              await DatabaseService().restRating(
+                                  sr_no: widget.rest.sr_no,
+                                  review: review,
+                                  rating: _rating);
+                              setState(() {
+                                submit = true;
+                              });
+                            },
                           ),
-                          onPressed: () {
-                            rating.add(_rating.toString());
-                          },
-                        ),
-                      )),
-                    ),
+                        )),
+                      ),
                     SizedBox(
                       height: 20.0,
                     ),
                     ListView.builder(
-                        itemCount: 5,
+                        itemCount: widget.rest.reviews.length,
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
+                        primary: false,
                         itemBuilder: (context, index) {
                           return Card(
                               elevation: 1.0,
                               child: ListTile(
                                 title: Row(
                                   children: <Widget>[
-                                    Text('Username'),
+                                    Text(widget.rest.reviews[index]
+                                        ["author_name"]),
                                     Spacer(),
-                                    Text('\u{02605}4.2'),
+                                    Text(
+                                        '\u{02605}${widget.rest.reviews[index]["rating"]}'),
                                   ],
                                 ),
-                                subtitle: Text(
-                                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
+                                subtitle:
+                                    Text(widget.rest.reviews[index]["text"]),
                               ));
                         })
                   ],
