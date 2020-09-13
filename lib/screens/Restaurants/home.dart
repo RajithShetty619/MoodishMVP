@@ -356,12 +356,8 @@ class _RestaurantState extends State<Restaurant> {
                                           padding: const EdgeInsets.all(8.0),
                                           child: Align(
                                             alignment: Alignment.centerLeft,
-                                            child: Text(restList["r1"][index]
-                                                        .features !=
-                                                    "nan"
-                                                ? restList["r1"][index].features
-                                                : restList["r1"][index]
-                                                    .cuisines),
+                                            child: Text(
+                                                restList["r1"][index].cuisines),
                                           ),
                                         ),
                                       )
@@ -429,11 +425,13 @@ class _RestaurantState extends State<Restaurant> {
                 padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                 child: Container(
                   alignment: Alignment.centerLeft,
-                  child: Text('Top Restaurant',
+                  child: Text(
+                    'Top Restaurant',
                     style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black),),
+                        color: Colors.black),
+                  ),
                 ),
               ),
               BlocConsumer<RestaurantBloc, Map<String, List<RestListModel>>>(
@@ -459,7 +457,7 @@ class _RestaurantState extends State<Restaurant> {
                     itemBuilder: (context, index) {
                       return Container(
                         height: 400,
-                        child: restura(restList["r2"][index],context),
+                        child: restura(restList["r2"][index], context),
                       );
                     });
               }),
@@ -524,7 +522,10 @@ Widget getCategory(String imgName, String name, context, int tile) {
   );
 }
 
-Widget restura(RestListModel rest,BuildContext context,) {
+Widget restura(
+  RestListModel rest,
+  BuildContext context,
+) {
   return Padding(
     padding: const EdgeInsets.all(10.0),
     child: GestureDetector(
@@ -572,10 +573,10 @@ Widget restura(RestListModel rest,BuildContext context,) {
                             begin: Alignment.topLeft,
                             end: Alignment.centerRight,
                             colors: [
-                          Colors.transparent,
-                          Colors.transparent,
-                          Colors.white,
-                        ])),
+                              Colors.transparent,
+                              Colors.transparent,
+                              Colors.white,
+                            ])),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
@@ -680,16 +681,15 @@ Widget restura(RestListModel rest,BuildContext context,) {
                 ),
               ),
             ),
-            rest.features != "nan"?Container(
+            Container(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                      rest.features),
+                  child: Text(rest.cuisines),
                 ),
               ),
-            ):Container()
+            )
           ],
         ),
       ),

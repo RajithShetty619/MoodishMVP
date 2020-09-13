@@ -18,7 +18,7 @@ class DatabaseService {
     if (review != null) {
       dynamic user = await Authenticate().returnUser();
       await FirebaseFirestore.instance
-          .collection("restaurant")
+          .collection("restaurants")
           .doc(sr_no)
           .collection("review")
           .doc(user.uid)
