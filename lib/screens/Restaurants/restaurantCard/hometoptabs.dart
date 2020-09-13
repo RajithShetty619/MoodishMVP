@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/models/restaurantsModel.dart';
 import 'package:moodish_mvp/screens/Restaurants/restaurantCard/restMenu.dart';
 import 'starfeedback.dart';
 import 'overview.dart';
 import 'about.dart';
 
 class HomeTopTabs extends StatefulWidget {
-  String desc;
-  HomeTopTabs({this.desc});
+  final RestListModel rest;
+  HomeTopTabs({this.rest});
   @override
   _HomeTopTabsState createState() => _HomeTopTabsState();
 }
@@ -17,7 +18,7 @@ class _HomeTopTabsState extends State<HomeTopTabs>
   @override
   void initState() {
     super.initState();
-    _tabController = new TabController(vsync: this, length: 4);
+    _tabController = new TabController(vsync: this, length: 3);
   }
 
   @override
@@ -29,7 +30,7 @@ class _HomeTopTabsState extends State<HomeTopTabs>
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           leading: Container(),
@@ -84,17 +85,6 @@ class _HomeTopTabsState extends State<HomeTopTabs>
                             ),
                           ),
                         ),
-                        Tab(
-                          child: Padding(
-                            padding: EdgeInsets.all(8),
-                            child: Text(
-                              'Menu',
-                              style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.width / 20),
-                            ),
-                          ),
-                        )
                       ],
                     ),
                   ],
@@ -107,11 +97,11 @@ class _HomeTopTabsState extends State<HomeTopTabs>
           controller: _tabController,
           children: <Widget>[
             OverView(
-              desc: widget.desc,
+              rest: widget.rest,
             ),
-            StarFeedback(),
+            StarFeedback(widget.rest),
             About(
-              desc: widget.desc,
+              rest: widget.rest,
             )
           ],
         ),

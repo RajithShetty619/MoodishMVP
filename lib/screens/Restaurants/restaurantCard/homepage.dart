@@ -85,6 +85,7 @@ class _HomePageState extends State<HomePage> {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         widget.restaurant.restaurant_Name,
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 28.0,
@@ -108,19 +109,19 @@ class _HomePageState extends State<HomePage> {
                         children: <Widget>[
                           const SizedBox(width: 16.0),
                           Container(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 8.0,
-                              horizontal: 16.0,
-                            ),
-                            decoration: BoxDecoration(
-                                color: Colors.blue,
-                                borderRadius: BorderRadius.circular(20.0)),
-                            child: Text(
-                              "1294 reviews",
-                              style: TextStyle(
-                                  color: Colors.black, fontSize: 13.0),
-                            ),
-                          ),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 8.0,
+                                horizontal: 16.0,
+                              ),
+                              decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius: BorderRadius.circular(60.0)),
+                              child: IconButton(
+                                  icon: Icon(
+                                    Icons.star,
+                                    size: 10,
+                                  ),
+                                  onPressed: null)),
                           Spacer(),
                           IconButton(
                             icon: _favourite
@@ -154,7 +155,7 @@ class _HomePageState extends State<HomePage> {
                   child: TabBarView(
                     children: <Widget>[
                       HomeTopTabs(
-                        desc: widget.restaurant.features,
+                        rest: widget.restaurant,
                       )
                     ],
                   ))

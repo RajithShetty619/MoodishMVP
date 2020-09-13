@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/Services/betaCount.dart';
+import 'package:moodish_mvp/models/restaurantsModel.dart';
 
 class About extends StatefulWidget {
-  final Widget child;
-  final String desc;
+  final RestListModel rest;
 
-  About({Key key, this.child, this.desc}) : super(key: key);
+  About({Key key, this.rest}) : super(key: key);
 
   _AboutState createState() => _AboutState();
 }
@@ -204,7 +204,7 @@ class _AboutState extends State<About> {
                               padding: EdgeInsets.all(5.0),
                               child: Container(
                                 alignment: Alignment.centerLeft,
-                                child: Text(widget.desc),
+                                child: Text(widget.rest.features),
                               )),
 //                          SizedBox(height: 10.0),
 //                          Padding(
