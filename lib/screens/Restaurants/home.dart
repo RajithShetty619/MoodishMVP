@@ -27,12 +27,6 @@ class _RestaurantState extends State<Restaurant> {
   String location = 'Mumbai,Maharashtra';
   Geolocator geolocator = Geolocator();
 
-  void initState() {
-    super.initState();
-
-    loadRest();
-  }
-
   loadRest() async {
     await GeolocationRest().getRestFromLocation().then((rest) {
       setState(() {
