@@ -99,19 +99,12 @@ class _RestaurantState extends State<Restaurant> {
                   alignment: Alignment.centerLeft,
                   child: RichText(
                     text: TextSpan(
-                        text: 'For Today',
-                        style: TextStyle(
-                            fontSize: 26,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black),
-                        children: [
-                          TextSpan(
-                              text: '.',
-                              style: TextStyle(
-                                  fontSize: 40,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.pinkAccent))
-                        ]),
+                      text: 'Near you',
+                      style: TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
+                    ),
                   ),
                 ),
               ),

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:moodish_mvp/models/restaurantsModel.dart';
 
 class StarFeedback extends StatefulWidget {
+  final RestListModel rest;
+  StarFeedback(this.rest);
   @override
   _StarFeedbackState createState() => _StarFeedbackState();
 }
@@ -9,11 +12,10 @@ class StarFeedback extends StatefulWidget {
 class _StarFeedbackState extends State<StarFeedback> {
   var _rating;
 
-
   @override
   Widget build(BuildContext context) {
-    List<String>review = [];
-    List<String>rating = [];
+    List<String> review = [];
+    List<String> rating = [];
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -30,7 +32,9 @@ class _StarFeedbackState extends State<StarFeedback> {
                   ),
                 ),
               ),
-              SizedBox(height: 20.0,),
+              SizedBox(
+                height: 20.0,
+              ),
               Material(
                 color: Colors.white,
                 elevation: 0.0,
@@ -38,7 +42,9 @@ class _StarFeedbackState extends State<StarFeedback> {
                 shadowColor: Color(0x802196F3),
                 child: Column(
                   children: <Widget>[
-                    SizedBox(height: 10.0,),
+                    SizedBox(
+                      height: 10.0,
+                    ),
                     RatingBar(
                       initialRating: 1,
                       minRating: 1,
@@ -46,17 +52,18 @@ class _StarFeedbackState extends State<StarFeedback> {
                       allowHalfRating: true,
                       itemCount: 5,
                       itemPadding: EdgeInsets.all(2.0),
-                      itemBuilder: (context, _) =>
-                          Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
+                      itemBuilder: (context, _) => Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
                       onRatingUpdate: (rating) {
                         _rating = rating;
                         print(rating);
                       },
                     ),
-                    SizedBox(height: 5.0,),
+                    SizedBox(
+                      height: 5.0,
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(left: 5.0, right: 5.0),
                       child: TextField(
@@ -74,28 +81,31 @@ class _StarFeedbackState extends State<StarFeedback> {
                             ),
                           )),
                     ),
-                    SizedBox(height: 10.0,),
+                    SizedBox(
+                      height: 10.0,
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                           child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: RaisedButton(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: new BorderRadius.circular(
-                                      30.0)),
-                              color: Colors.deepOrange,
-                              child: Text(
-                                'Submit',
-                                style: TextStyle(color: Color(0xffffffff)),
-                              ),
-                              onPressed: () {
-                                rating.add(_rating.toString());
-                              },
-                            ),
-                          )),
+                        alignment: Alignment.bottomCenter,
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(30.0)),
+                          color: Colors.deepOrange,
+                          child: Text(
+                            'Submit',
+                            style: TextStyle(color: Color(0xffffffff)),
+                          ),
+                          onPressed: () {
+                            rating.add(_rating.toString());
+                          },
+                        ),
+                      )),
                     ),
-                    SizedBox(height: 20.0,),
+                    SizedBox(
+                      height: 20.0,
+                    ),
                     ListView.builder(
                         itemCount: 5,
                         shrinkWrap: true,
@@ -108,15 +118,12 @@ class _StarFeedbackState extends State<StarFeedback> {
                                   children: <Widget>[
                                     Text('Username'),
                                     Spacer(),
-                                    Text(
-                                        '\u{02605}4.2'
-                                    ),
+                                    Text('\u{02605}4.2'),
                                   ],
                                 ),
                                 subtitle: Text(
                                     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
-                              )
-                          );
+                              ));
                         })
                   ],
                 ),
