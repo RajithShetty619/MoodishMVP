@@ -144,7 +144,7 @@ class _FoodFeedState extends State<FoodFeed> {
       });
     });
   }
-
+  bool isSwitched = false;
   @override
   Widget build(BuildContext context) {
     return IndexedStack(
@@ -430,21 +430,29 @@ class _FoodFeedState extends State<FoodFeed> {
                         if (indx == 1)
                           Column(
                             children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 1),
-                                child: Row(children: <Widget>[
-                                  Text(
-                                    'Filter : ',
-                                    style: TextStyle(fontSize: 18),
-                                  ),
-                                  SizedBox(width: 5),
-                                  DropdownButton(
-                                    value: _selectedDeter,
-                                    items: _dropdown,
-                                    onChanged: onChangedDeter,
-                                  )
-                                ]),
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 1),
+                                  child: Row(children: <Widget>[
+                                    Text(
+                                      'Veg Only',
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                                    SizedBox(width: 5),
+                                    CupertinoSwitch(
+                                      value: isSwitched,
+                                      onChanged: (val){
+                                        setState(() {
+                                          isSwitched=val;
+                                        });
+                                      },
+                                      trackColor: Colors.grey,
+                                      activeColor: Colors.lightGreen,
+                                    )
+                                  ]),
+                                ),
                               ),
                               Container(
                                 child: BlocConsumer<FoodBloc,
