@@ -69,7 +69,7 @@ class _SearchState extends State<Search> {
                       itemBuilder: (BuildContext context, index) {
                         if (foodList["search"].length == 0)
                           return SpinKitChasingDots(
-                            color: Colors.blueAccent,
+                            color: Color.fromARGB(235, 253, 139, 25),
                           );
                         return FoodEverySituation(
                           foodList: foodList["search"][index],

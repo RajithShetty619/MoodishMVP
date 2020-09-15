@@ -231,7 +231,7 @@
             "restaurants": "Go Biryan ,m Andheri | Dum Matka , Powai | Biryani By Kilo , Mahakali | Behrouz Biryani",
             "delivery": "Zomato",
             "cuisine": "indian",
-            "deter": "veg",
+            "deter": "nonveg",
             "description": "Biryani is a mixed rice dish with its origins among the Muslims of the Indian subcontinent. It can be compared to mixing a curry, later combining it with semi-cooked rice separately. This dish is especially popular throughout the Indian subcontinent, as well as among the diaspora from the region.",
             "meal_type": "maincourse",
             "image": "biryani.JPG"

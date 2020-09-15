@@ -38,7 +38,7 @@ class _FoodHomeState extends State<FoodHome> {
                         ? Padding(
                             padding: const EdgeInsets.only(left: 8.0),
                             child: Text(
-                              'Hello Username,\n Hungry yet?',
+                              '',
                               style: TextStyle(
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold,
@@ -48,7 +48,7 @@ class _FoodHomeState extends State<FoodHome> {
                         : Padding(
                             padding: const EdgeInsets.only(left: 8.0),
                             child: Text(
-                              "${now.day}/${now.month}/${now.year},\n Hungry yet?",
+                              "${now.day}/${now.month}/${now.year}",
                               style: TextStyle(
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold,
