@@ -182,7 +182,7 @@ class _FoodFeedState extends State<FoodFeed> {
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 0,
-                        mainAxisSpacing: 0,
+                        mainAxisSpacing: 6,
                       ),
                       scrollDirection: Axis.vertical,
                       itemCount: mood.length,

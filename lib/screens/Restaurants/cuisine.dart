@@ -35,7 +35,8 @@ class _CuisineState extends State<Cuisine> {
         image: 'Italian.jpg', cuisine: 'Italian', currentOpacity: 1),
     GridTileBuilder(
         image: 'Mexican.jpg', cuisine: 'Mexican', currentOpacity: 1),
-    GridTileBuilder(image: 'britishCuisine.jpg', cuisine: 'British', currentOpacity: 1),
+    GridTileBuilder(
+        image: 'britishCuisine.jpg', cuisine: 'British', currentOpacity: 1),
   ];
 
   int i = 0;
@@ -49,35 +50,32 @@ class _CuisineState extends State<Cuisine> {
         child: Padding(
           padding: EdgeInsets.all(8.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              RichText(
-                text: TextSpan(
-                    text: 'Cuisine',
+              Align(
+                alignment: Alignment.center,
+                child: RichText(
+                  text: TextSpan(
+                    text: 'Which Cuisines would you prefer?',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 75,
-                        color: Colors.orange),
-                    children: [
-                      TextSpan(
-                          text: '.',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 90,
-                              color: Colors.black))
-                    ]),
+                        fontSize: 30,
+                        color: Colors.black),
+                  ),
+                ),
               ),
               SizedBox(
-                height: 25.0,
+                height: 20.0,
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Select Any 3 Cuisine of your type :',
+                    'Please select any 5, We will personalise the app for you ',
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                        fontSize: 20.0,
+                        fontSize: 18.0,
                         fontStyle: FontStyle.italic,
                         fontWeight: FontWeight.w400),
                   ),
@@ -90,8 +88,8 @@ class _CuisineState extends State<Cuisine> {
                 child: GridView.builder(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
-                      crossAxisSpacing: 7.0,
-                      mainAxisSpacing: 7.0,
+                      crossAxisSpacing: 3.0,
+                      mainAxisSpacing: 1.0,
                     ),
                     scrollDirection: Axis.vertical,
                     itemCount: cuisine.length,
@@ -117,88 +115,128 @@ class _CuisineState extends State<Cuisine> {
                             cuisine[index]._visible = !cuisine[index]._visible;
                           });
                         },
-                        child: AnimatedOpacity(
-                          duration: Duration(milliseconds: 500),
-                          opacity: cuisine[index]._visible ? 1.0 : 0.0,
-                          child: Container(
-                            height: 175.0,
-                            width: 110.0,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                      'assets/${cuisine[index].image}'),
-                                  fit: BoxFit.cover,
-                                ),
-                                borderRadius: BorderRadius.circular(10.0)),
-                            child: Center(
-                              child: Text(
-                                '${cuisine[index].cuisine}',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    fontSize: 18.0),
-                              ),
-                            ),
-                          ),
+                        child: cuisineFilter(
+                          name: '${cuisine[index].cuisine}',
                         ),
+                        // AnimatedOpacity(
+                        //   duration: Duration(milliseconds: 500),
+                        //   opacity: cuisine[index]._visible ? 1.0 : 0.0,
+                        //   child: Container(
+                        //     height: 175.0,
+                        //     width: 110.0,
+                        //     decoration: BoxDecoration(
+                        //         image: DecorationImage(
+                        //           image: AssetImage(
+                        //               'assets/${cuisine[index].image}'),
+                        //           fit: BoxFit.cover,
+                        //         ),
+                        //         borderRadius: BorderRadius.circular(10.0)),
+                        //     child: Center(
+                        //       child: Text(
+                        //         '${cuisine[index].cuisine}',
+                        //         style: TextStyle(
+                        //             fontWeight: FontWeight.bold,
+                        //             color: Colors.white,
+                        //             fontSize: 18.0),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                       );
                     }),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
+              Column(
+                children: [
                   Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: (i + 1 > 3)
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                      child: Text(
+                        "don't worry, You can change this later! ",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                            fontSize: 16.0,
+                            fontStyle: FontStyle.italic,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: (i + 1 > 3)
+                              ? Align(
+                                  alignment: Alignment.center,
+                                  child: Text(''),
+                                )
+                              : Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    err,
+                                    style: TextStyle(color: Colors.red),
+                                  ))),
+                      widget.event == 1
                           ? Align(
-                              alignment: Alignment.center,
-                              child: Text(''),
+                              alignment: Alignment.centerRight,
+                              child: RaisedButton(
+                                onPressed: () async {
+                                  if (i + 1 > 3) {
+                                    Box box =
+                                        await Hive.openBox('preferenceBox');
+                                    box.put('preference', pref);
+                                    DatabaseService().savePreference();
+                                    Navigator.of(context).pop();
+                                  } else
+                                    setState(() {
+                                      err = 'Select ${3 - i} more!';
+                                    });
+                                },
+                                color: Colors.green,
+                                child: Text('Change->'),
+                              ),
                             )
-                          : Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                err,
-                                style: TextStyle(color: Colors.red),
-                              ))),
-                  widget.event==1?
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: RaisedButton(
-                      onPressed: () async {
-                        if (i + 1 > 3) {
-                          Box box = await Hive.openBox('preferenceBox');
-                          box.put('preference', pref);
-                          DatabaseService().savePreference();
-                          Navigator.of(context).pop();
-                        } else
-                          setState(() {
-                            err = 'Select ${3 - i} more!';
-                          });
-                      },
-                      color: Colors.green,
-                      child: Text('Change->'),
-                    ),
-                  )
-                  :Align(
-                    alignment: Alignment.centerRight,
-                    child: RaisedButton(
-                      onPressed: () async {
-                        if (i + 1 > 3) {
-                          Box box = await Hive.openBox('preferenceBox');
-                          box.put('preference', pref);
-                          DatabaseService().savePreference();
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return FoodPreference();
-                          }));
-                        } else
-                          setState(() {
-                            err = 'Select ${3 - i + 1} more!';
-                          });
-                      },
-                      color: Colors.green,
-                      child: Text('Next->'),
-                    ),
+                          : Center(
+                            child: Align(
+                                alignment: Alignment.center,
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    if (i + 1 > 3) {
+                                      Box box =
+                                          await Hive.openBox('preferenceBox');
+                                      box.put('preference', pref);
+                                      DatabaseService().savePreference();
+                                      Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) {
+                                        return FoodPreference();
+                                      }));
+                                    } else
+                                      setState(() {
+                                        err = 'Select ${3 - i + 1} more!';
+                                      });
+                                  },
+                                  child: Container(
+                                    width: 100,
+                                    margin: EdgeInsets.all(10.0),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.black, width: 2),
+                                      borderRadius: BorderRadius.circular(15),
+                                      // color: Colors.blue[200],
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: Text(
+                                        'Next',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 20.0, fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                          ),
+                    ],
                   ),
                 ],
               )
@@ -216,4 +254,64 @@ class GridTileBuilder {
   double currentOpacity;
   bool _visible = true;
   GridTileBuilder({this.cuisine, this.image, this.currentOpacity});
+}
+
+class cuisineFilter extends StatefulWidget {
+  final String name;
+
+  cuisineFilter({Key key, this.name}) : super(key: key);
+
+  @override
+  _cuisineFilterState createState() => _cuisineFilterState();
+}
+
+class _cuisineFilterState extends State<cuisineFilter> {
+  bool isSelected = false;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          isSelected = !isSelected;
+        });
+      },
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: Container(
+            margin: EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              border: isSelected
+                  ? Border.all(color: Colors.orange, width: 2)
+                  : Border.all(color: Colors.black, width: 2),
+              borderRadius: BorderRadius.circular(250),
+            ),
+            child: Center(
+                child: isSelected
+                    ? Text(
+                        widget.name,
+                        style: TextStyle(color: Colors.orange),
+                      )
+                    : Text(widget.name))),
+      ),
+    );
+    //  FilterChip(
+    //   label: ClipRRect(
+    //     borderRadius: BorderRadius.circular(20),
+    //     child: Container(
+    //       margin: EdgeInsets.all(8),
+    //       decoration: BoxDecoration(
+    //         border:isSelected? Border.all(color: Colors.black, width: 2) : Border.all(color: Colors.deepOrange, width: 2),
+    //         borderRadius: BorderRadius.circular(300),
+    //       ),
+    //       child: Text(widget.name),
+    //     ),
+    //   ),
+    //   backgroundColor: Colors.blue[400],
+    //   onSelected: (selected){
+    //     setState(() {
+    //       isSelected = selected;
+    //     });
+    //   }
+    // );
+  }
 }
