@@ -25,12 +25,138 @@ class FoodRecipe extends StatefulWidget {
 class _FoodRecipeState extends State<FoodRecipe> {
   bool showMore = false;
   bool showMoreDelay = false;
+  List<String> nutri = ['Carbs.png', 'Protien.png', 'Fats.png', 'Sugar.png'];
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
       child: Column(
         children: <Widget>[
+          Row(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Preparation Time:',
+                    style: TextStyle(
+                      fontSize: 26,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+              ),
+              Spacer(),
+              if(widget.foodList.preparation != null)
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                      padding: EdgeInsets.all(16),
+                      child:Text(widget.foodList.time)),
+                ),
+              if(widget.foodList.preparation == null)
+                Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child:Text('empty')),
+
+
+            ],
+          ),
+          SizedBox(height: 15),
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Container(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Nutrients:',
+                style: TextStyle(
+                  fontSize: 30,
+                ),
+                textAlign: TextAlign.left,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20,bottom: 20),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Column(
+                    children: <Widget>[
+                      Container(
+                        height: 80.0,
+                        width: 80.0,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: AssetImage('assets/${nutri[0]}'),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 7.0,
+                      ),
+                      Text('${widget.foodList.carbohydrates} Carbs' )
+                    ],
+                  ),
+                  SizedBox(
+                    width: 20.0,
+                  ),
+                  Column(
+                    children: <Widget>[
+                      Container(
+                        height: 80.0,
+                        width: 80.0,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: AssetImage('assets/${nutri[1]}'),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 7.0,
+                      ),
+                      Text('${widget.foodList.protein} Protien')
+                    ],
+                  ),
+                  SizedBox(
+                    width: 20.0,
+                  ),
+                  Column(
+                    children: <Widget>[
+                      Container(
+                        height: 80.0,
+                        width: 80.0,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: AssetImage('assets/${nutri[2]}'),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 7.0,
+                      ),
+                      Text('${widget.foodList.fat} Fats')
+                    ],
+                  ),
+                  SizedBox(
+                    width: 20.0,
+                  ),
+                  SizedBox(
+                    width: 20.0,
+                  ),
+                ],
+              ),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.all(5.0),
             child: Container(
@@ -64,12 +190,12 @@ class _FoodRecipeState extends State<FoodRecipe> {
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "\u2713 ${widget.foodList.ingredients[index]}",
+                          "\u2714 ${widget.foodList.ingredients[index]}",
                           maxLines: 3,
                           softWrap: true,
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
+                               fontSize: 20),
                         ),
                       ),
                     ));
@@ -140,7 +266,7 @@ class _FoodRecipeState extends State<FoodRecipe> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        '* ${widget.foodList.preparation[index]}',
+                        'Step ${index+1}\n ${widget.foodList.preparation[index]}',
                         textHeightBehavior: TextHeightBehavior(
                             applyHeightToFirstAscent: false,
                             applyHeightToLastDescent: true),
