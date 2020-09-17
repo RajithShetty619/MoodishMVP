@@ -15,6 +15,7 @@ class GeolocationRest {
 
       return listfromSnapshot(send);
     } catch (e) {
+      print(e.toString());
       var data = await get(
           "https://us-central1-moodishtest.cloudfunctions.net/returnRestaurants?lat=${position.latitude}&long=${position.longitude}");
       var info = await json.decode(data.body);

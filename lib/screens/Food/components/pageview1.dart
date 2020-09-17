@@ -16,9 +16,8 @@ class _PageViewer1State extends State<PageViewer1> {
     return Scaffold(
       body: SafeArea(
         child: PageView.builder(
-          physics: BouncingScrollPhysics(),
+            physics: BouncingScrollPhysics(),
             itemCount: widget.foodList.preparation.length,
-            //List count idhar use kar
             itemBuilder: (BuildContext context, int index) {
               return SingleChildScrollView(
                 child: Container(
@@ -120,7 +119,7 @@ class _PageViewer1State extends State<PageViewer1> {
                         ),
                       if (index + 1 < widget.foodList.preparation.length)
                         Text(
-                          'Page ${index +1} of ${widget.foodList.preparation.length} ',
+                          'Page ${index + 1} of ${widget.foodList.preparation.length} ',
                           style:
                               TextStyle(color: Colors.grey[400], fontSize: 18),
                         ),

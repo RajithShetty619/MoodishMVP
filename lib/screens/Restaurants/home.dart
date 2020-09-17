@@ -26,6 +26,7 @@ class _RestaurantState extends State<Restaurant> {
   bool dialogShow = true;
   String location = 'Mumbai,Maharashtra';
   Geolocator geolocator = Geolocator();
+  Widget error_loadIcon = Icon(Icons.error);
 
   loadRest() async {
     await GeolocationRest().getRestFromLocation().then((rest) {
@@ -39,6 +40,15 @@ class _RestaurantState extends State<Restaurant> {
       setState(() {
         BlocProvider.of<RestaurantBloc>(context)
             .add(RestaurantEvent.add(rest, 'r2'));
+      });
+    });
+  }
+
+  errGeorest() async {
+    await GeolocationRest().getRestFromLocation().then((rest) {
+      setState(() {
+        BlocProvider.of<RestaurantBloc>(context)
+            .add(RestaurantEvent.add(rest, 'r1'));
       });
     });
   }
@@ -134,11 +144,21 @@ class _RestaurantState extends State<Restaurant> {
                           child: Center(
                             child: FlatButton.icon(
                                 onPressed: () async {
-                                  await loadRest();
+                                  await errGeorest();
+                                  setState(() {
+                                    error_loadIcon = Icon(Icons.hourglass_full);
+                                  });
+                                  Future.delayed(
+                                      const Duration(milliseconds: 5000), () {
+                                    setState(() {
+                                      error_loadIcon = Icon(Icons.error);
+                                    });
+                                  });
                                 },
-                                icon: Icon(Icons.error),
-                                label: Text(
-                                    "Some error has occurred, please retry!")),
+                                icon: error_loadIcon,
+                                label: Text(error_loadIcon == Icon(Icons.error)
+                                    ? "Some error has occurred, please retry!"
+                                    : "Retrying please wait.")),
                           ),
                         );
                       }
@@ -166,8 +186,8 @@ class _RestaurantState extends State<Restaurant> {
                                   child: Column(
                                     children: <Widget>[
                                       CachedNetworkImage(
-                                          imageUrl: restList['r1'][index]
-                                              .photo_url,
+                                          imageUrl:
+                                              restList['r1'][index].photo_url,
                                           imageBuilder:
                                               (context, imageProvider) {
                                             return Container(
@@ -176,10 +196,11 @@ class _RestaurantState extends State<Restaurant> {
                                               decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.only(
-                                                          topLeft: Radius
-                                                              .circular(20),
-                                                          topRight: Radius
-                                                              .circular(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  20),
+                                                          topRight:
+                                                              Radius.circular(
                                                                   20)),
                                                   image: DecorationImage(
                                                       image: imageProvider,
@@ -199,19 +220,31 @@ class _RestaurantState extends State<Restaurant> {
                                                   child: Text(
                                                     restList["r1"][index]
                                                         .restaurant_Name,
-                                                    overflow: TextOverflow.ellipsis,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
                                                     style: TextStyle(
                                                         fontSize: 18,
-                                                        fontWeight: FontWeight.bold),
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   ),
                                                 ),
                                                 Spacer(),
                                                 Padding(
-                                                  padding: const EdgeInsets.only(right: 5,top: 3),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 5, top: 3),
                                                   child: Row(
                                                     children: <Widget>[
-                                                      Icon(Icons.star,size: 18,),
-                                                      Text(restList["r1"][index].rating,style: TextStyle(fontSize: 12),),
+                                                      Icon(
+                                                        Icons.star,
+                                                        size: 18,
+                                                      ),
+                                                      Text(
+                                                        restList["r1"][index]
+                                                            .rating,
+                                                        style: TextStyle(
+                                                            fontSize: 12),
+                                                      ),
                                                     ],
                                                   ),
                                                 )
@@ -223,27 +256,35 @@ class _RestaurantState extends State<Restaurant> {
                                       Container(
                                         width: 250,
                                         child: Padding(
-                                          padding: const EdgeInsets.only(left: 5,bottom: 5),
-                                          child: Text(restList["r1"][index].cuisines),
+                                          padding: const EdgeInsets.only(
+                                              left: 5, bottom: 5),
+                                          child: Text(
+                                              restList["r1"][index].cuisines),
                                         ),
                                       ),
                                       Container(
                                         width: 250,
                                         child: Padding(
-                                          padding:  EdgeInsets.only(left: 3,top: 5),
+                                          padding:
+                                              EdgeInsets.only(left: 3, top: 5),
                                           child: Align(
                                             alignment: Alignment.centerLeft,
                                             child: Row(
                                               children: <Widget>[
-                                                Icon(Icons.location_on,size: 20,),
-                                                Text(restList["r1"][index].restaurant_Location),
+                                                Icon(
+                                                  Icons.location_on,
+                                                  size: 20,
+                                                ),
+                                                Text(restList["r1"][index]
+                                                    .restaurant_Location),
                                               ],
                                             ),
                                           ),
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.only(left: 5,top: 5),
+                                        padding: const EdgeInsets.only(
+                                            left: 5, top: 5),
                                         child: Container(
                                           width: 250,
                                           child: Align(
@@ -251,46 +292,47 @@ class _RestaurantState extends State<Restaurant> {
                                             child: Row(
                                               children: <Widget>[
                                                 Padding(
-                                                  padding: const EdgeInsets.only(left: 3),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 3),
                                                   child: GestureDetector(
                                                     onTap: () => Navigator.push(
                                                         context,
                                                         PageTransition(
-                                                            type: PageTransitionType
-                                                                .rightToLeft,
+                                                            type:
+                                                                PageTransitionType
+                                                                    .rightToLeft,
                                                             child: RestaurantReview(
                                                                 rest: restList[
-                                                                "r1"]
-                                                                [
-                                                                index]))),
+                                                                        "r1"]
+                                                                    [index]))),
                                                     child: Row(
                                                       children: <Widget>[
                                                         Align(
                                                           alignment: Alignment
                                                               .centerRight,
                                                           child: Icon(
-                                                            Icons
-                                                                .library_books,
-                                                            color: Colors
-                                                                .black,
+                                                            Icons.library_books,
+                                                            color: Colors.black,
                                                             size: 20,
                                                           ),
                                                         ),
                                                         Padding(
-                                                          padding: const EdgeInsets.all(8.0),
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
                                                           child: Text(
                                                             'Review',
                                                             style: TextStyle(
-                                                                color: Colors
-                                                                    .black,
-                                                                ),
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
                                                           ),
                                                         )
                                                       ],
                                                     ),
                                                   ),
                                                 )
-
                                               ],
                                             ),
                                           ),
@@ -360,11 +402,13 @@ class _RestaurantState extends State<Restaurant> {
                 padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                 child: Container(
                   alignment: Alignment.centerLeft,
-                  child: Text('Top Restaurant',
+                  child: Text(
+                    'Top Restaurant',
                     style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black),),
+                        color: Colors.black),
+                  ),
                 ),
               ),
               BlocConsumer<RestaurantBloc, Map<String, List<RestListModel>>>(
@@ -390,7 +434,7 @@ class _RestaurantState extends State<Restaurant> {
                     itemBuilder: (context, index) {
                       return Container(
                         height: 400,
-                        child: restura(restList["r2"][index],context),
+                        child: restura(restList["r2"][index], context),
                       );
                     });
               }),
@@ -455,7 +499,10 @@ Widget getCategory(String imgName, String name, context, int tile) {
   );
 }
 
-Widget restura(RestListModel rest,BuildContext context,) {
+Widget restura(
+  RestListModel rest,
+  BuildContext context,
+) {
   return Padding(
     padding: const EdgeInsets.all(10.0),
     child: GestureDetector(
@@ -499,18 +546,25 @@ Widget restura(RestListModel rest,BuildContext context,) {
                     child: Text(
                       rest.restaurant_Name,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 8,bottom: 8),
+              padding: const EdgeInsets.only(left: 8, bottom: 8),
               child: Row(
                 children: <Widget>[
-                  Icon(Icons.star,size: 18,),
-                  Text(rest.rating,style: TextStyle(fontSize: 12),),
+                  Icon(
+                    Icons.star,
+                    size: 18,
+                  ),
+                  Text(
+                    rest.rating,
+                    style: TextStyle(fontSize: 12),
+                  ),
                 ],
               ),
             ),
@@ -518,7 +572,7 @@ Widget restura(RestListModel rest,BuildContext context,) {
               alignment: Alignment.centerLeft,
               child: Container(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 8,bottom: 5,right: 5),
+                  padding: const EdgeInsets.only(left: 8, bottom: 5, right: 5),
                   child: Text(rest.cuisines),
                 ),
               ),
@@ -530,9 +584,11 @@ Widget restura(RestListModel rest,BuildContext context,) {
                   alignment: Alignment.centerLeft,
                   child: Row(
                     children: <Widget>[
-                      Icon(Icons.location_on,size: 20,),
-                      Text(
-                          rest.restaurant_Location),
+                      Icon(
+                        Icons.location_on,
+                        size: 20,
+                      ),
+                      Text(rest.restaurant_Location),
                     ],
                   ),
                 ),

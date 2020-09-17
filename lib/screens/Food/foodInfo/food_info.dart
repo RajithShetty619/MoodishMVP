@@ -24,42 +24,6 @@ class _Food_InfoState extends State<Food_Info> {
 
   @override
   Widget build(BuildContext context) {
-    List<_Restaurants> rest = [
-      _Restaurants(
-          image: 'downtown_china.jpg',
-          name: 'Downtown China',
-          desc:
-              'Casual Dining - Chinese, Thai, Asian, Seafood, Momos, Beverages, Desserts \nAndheri Lokhandwala, Andheri West'),
-      _Restaurants(
-          image: 'family_tree.jpg',
-          name: 'Family Tree',
-          desc:
-              'Casual Dining - Biryani, Chinese, North Indian, Pizza, South Indian, Desserts \nGhatkopar East'),
-      _Restaurants(
-          image: 'frozen_bottle.jpg',
-          name: 'Frozen Bottle',
-          desc:
-              'Beverage Shop, Dessert Parlor - Beverages, Desserts, Ice Cream \nMatunga East'),
-      _Restaurants(
-          image: 'irish_house.png',
-          name: 'The Irish House',
-          desc: 'Pub, Casual Dining - European, American \nLower Parel'),
-      _Restaurants(
-          image: 'Mainland_China.jpg',
-          name: 'Mainland China',
-          desc:
-              'Casual Dining - Chinese, Asian, Sushi, Japanese, Thai \nSakinaka'),
-      _Restaurants(
-          image: 'pop_tates.jpg',
-          name: 'Pop Tates',
-          desc:
-              'Bar, Casual Dining - Continental, Chinese, Italian, Beverages \nLower Parel'),
-      _Restaurants(
-          image: 'tipsy_gipsy.jpg',
-          name: 'Tipsy Gipsy',
-          desc:
-              'Bar, Casual Dining - Continental, Mediterranean, Italian \nVeera Desai Area'),
-    ];
     return Scaffold(
       body: SafeArea(
         child: ListView(
@@ -115,7 +79,6 @@ class _Food_InfoState extends State<Food_Info> {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           widget.foodList.foodName,
-
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 30.0,
@@ -181,20 +144,6 @@ class _Food_InfoState extends State<Food_Info> {
                           });
                         },
                       ),
-                      // GestureDetector(
-                      //   child: PageTab(
-                      //     title: 'Delivery',
-                      //     // isActive: true,
-                      //     index: indx,
-                      //     stIndex: 3,
-                      //     press: () {},
-                      //   ),
-                      //   onTap: () {
-                      //     setState(() {
-                      //       indx = 3;
-                      //     });
-                      //   },
-                      // ),
                     ],
                   ),
                 ),
