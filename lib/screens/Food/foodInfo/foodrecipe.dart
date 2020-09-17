@@ -63,15 +63,9 @@ class _FoodRecipeState extends State<FoodRecipe> {
                           elevation: 2.0,
                           child: Container(
                             margin: EdgeInsets.all(2.0),
-                            // decoration: BoxDecoration(
-                            //   border: Border.all(color: Colors.black, width: 2),
-                            //   borderRadius: BorderRadius.circular(15),
-                            //   // color: Colors.blue[200],
-                            // ),
                             child: Center(
                               child: Text(
                                 "${widget.foodList.ingredients[index]}",
-                                // textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 20),
                               ),
@@ -81,28 +75,6 @@ class _FoodRecipeState extends State<FoodRecipe> {
                   );
                 }),
           ),
-          //            Align(
-          //           alignment: Alignment.centerLeft,
-          //           child: Container(
-          //             child: RaisedButton(
-          //               shape: RoundedRectangleBorder(
-          //                   borderRadius: BorderRadius.circular(20.0)
-          //               ),
-          //               elevation: 4.0,
-          //               onPressed: () async {
-          //                 final action = await IngredientDialogs.yesAbortDialog(
-          //                     context, 'Ingredients:', widget.foodList);
-
-          // //                 Navigator.push(context,
-          // // MaterialPageRoute(builder: (context) => IntroScreen()));
-          //               },
-          //               child: Padding(
-          //                 padding: const EdgeInsets.all(8.0),
-          //                 child: Text('Show Ingredients'),
-          //               ),
-          //             ),
-          //           ),
-          //         ),
           SizedBox(
             height: 10.0,
           ),

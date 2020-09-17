@@ -122,15 +122,29 @@ class _FoodFeedState extends State<FoodFeed> {
   }
 
   data(BuildContext dataContext, String mood) async {
-    _dq.getFood(field: ['mood'], value: [mood], limit: 10, check: 0).then(
-        (future) {
+    Box _box = await Hive.openBox("preferenceBox");
+    String deter = _box.get("deter");
+
+    if (deter != "veg" && deter != "nonveg") {
+      Random random = new Random();
+      int randomNumber = random.nextInt(2);
+      if (randomNumber == 1)
+        deter = "veg";
+      else
+        deter = "nonveg";
+    }
+    _dq.getFood(
+        field: ['mood', 'deter'],
+        value: [mood, deter],
+        limit: 10,
+        check: 0).then((future) {
       setState(() {
         moodSelection = mood;
         BlocProvider.of<FoodBloc>(dataContext).add(FoodEvent.add(future, "0"));
       });
     });
   }
-
+  bool isSwitched = false;
   @override
   Widget build(BuildContext context) {
     return IndexedStack(
@@ -168,7 +182,7 @@ class _FoodFeedState extends State<FoodFeed> {
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 0,
-                        mainAxisSpacing: 0,
+                        mainAxisSpacing: 6,
                       ),
                       scrollDirection: Axis.vertical,
                       itemCount: mood.length,
@@ -271,20 +285,6 @@ class _FoodFeedState extends State<FoodFeed> {
                             ),
                           ),
                         ),
-                        // Padding(
-                        //   padding: const EdgeInsets.all(8.0),
-                        //   child: Container(
-                        //     height: 30,
-                        //     width: 60,
-                        //     child: Center(
-                        //       child: Text('Happy',
-                        //           style: TextStyle(
-                        //             fontSize: 20,
-                        //             fontWeight: FontWeight.bold,
-                        //           )),
-                        //     ),
-                        //   ),
-                        // ),
                         SizedBox(width: 5)
                       ],
                     ),
@@ -430,21 +430,29 @@ class _FoodFeedState extends State<FoodFeed> {
                         if (indx == 1)
                           Column(
                             children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 1),
-                                child: Row(children: <Widget>[
-                                  Text(
-                                    'Filter : ',
-                                    style: TextStyle(fontSize: 18),
-                                  ),
-                                  SizedBox(width: 5),
-                                  DropdownButton(
-                                    value: _selectedDeter,
-                                    items: _dropdown,
-                                    onChanged: onChangedDeter,
-                                  )
-                                ]),
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 1),
+                                  child: Row(children: <Widget>[
+                                    Text(
+                                      'Veg Only',
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                                    SizedBox(width: 5),
+                                    CupertinoSwitch(
+                                      value: isSwitched,
+                                      onChanged: (val){
+                                        setState(() {
+                                          isSwitched=val;
+                                        });
+                                      },
+                                      trackColor: Colors.grey,
+                                      activeColor: Colors.lightGreen,
+                                    )
+                                  ]),
+                                ),
                               ),
                               Container(
                                 child: BlocConsumer<FoodBloc,
@@ -492,15 +500,9 @@ class _FoodFeedState extends State<FoodFeed> {
                         if (indx == 2)
                           Column(
                             children: <Widget>[
-                              // Container(child: PollTabs()),
-                              if (numbr == 0)
-                                Container( child: YesNoTabs()),
-                              if (numbr == 1)
-                                Container(
-                                child:  PollTabs()
-                                ),
-                              if (numbr == 2)
-                                Container( child: This_ThatTabs()),
+                              if (numbr == 0) Container(child: YesNoTabs()),
+                              if (numbr == 1) Container(child: PollTabs()),
+                              if (numbr == 2) Container(child: This_ThatTabs()),
                             ],
                           ),
                         if (indx == 3) Container(child: FoodftTab()),

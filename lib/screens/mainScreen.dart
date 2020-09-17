@@ -7,6 +7,7 @@ import 'package:moodish_mvp/screens/Restaurants/mood.dart';
 import 'package:moodish_mvp/screens/search/search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -72,8 +73,8 @@ class _MainScreenState extends State<MainScreen> {
             child: IndexedStack(
           index: _selectedIndex,
           children: [
-            FoodHome(),
-            Restaurant(),
+            ShowCaseWidget(builder: Builder(builder: (context) => FoodHome())),
+            ShowCaseWidget(builder: Builder(builder: (context) => Restaurant())),
             Search(),
             Profile(),
           ],

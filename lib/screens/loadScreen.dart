@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -6,6 +8,8 @@ import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:intl/intl.dart';
 import 'package:moodish_mvp/Services/geolocationRest.dart';
 import 'package:moodish_mvp/screens/Food/events/restEvent.dart';
+import 'package:moodish_mvp/screens/Restaurants/cuisine.dart';
+import 'package:moodish_mvp/screens/Restaurants/prefVegNveg.dart';
 import 'package:moodish_mvp/screens/mainScreen.dart';
 import 'Food/blocs/bloc/foodBloc.dart';
 import 'Food/blocs/pollsbloc/pollsBloc.dart';
@@ -22,39 +26,50 @@ class LoadingScreen extends StatefulWidget {
 
 class _LoadingScreenState extends State<LoadingScreen> {
   Future loadAllData() async {
+    Box _box = await Hive.openBox("preferenceBox");
+    String deter = _box.get("deter");
+
+    if (deter != "veg" && deter != "nonveg") {
+      Random random = new Random();
+      int randomNumber = random.nextInt(2);
+      if (randomNumber == 1)
+        deter = "veg";
+      else
+        deter = "nonveg";
+    }
     DatabaseQuery _dqtaste2 = DatabaseQuery(listName: "d2");
     DatabaseQuery _dqtaste0 = DatabaseQuery(listName: "d0");
     DatabaseQuery _dqtaste1 = DatabaseQuery(listName: "d1");
 
-    await DatabaseQuery(listName: 'p').getPoll().then((poll) {
+    DatabaseQuery(listName: 'p').getPoll().then((poll) {
       BlocProvider.of<PollBloc>(context).add(PollEvent.add(poll, 'p'));
     });
-    // await DatabaseQuery(listName: 'yn').getYesno().then((yesno) {
-    //   BlocProvider.of<PollBloc>(context).add(PollEvent.add(yesno, 'yn'));
-    // });
-    await DatabaseQuery(listName: 'tt').getthis_that().then((thisthat) {
+    DatabaseQuery(listName: 'yn').getYesno().then((yesno) {
+      BlocProvider.of<PollBloc>(context).add(PollEvent.add(yesno, 'yn'));
+    });
+    DatabaseQuery(listName: 'tt').getthis_that().then((thisthat) {
       BlocProvider.of<PollBloc>(context).add(PollEvent.add(thisthat, 'tt'));
     });
-    await DatabaseQuery(listName: 'fft').getFact().then((fact) {
+    DatabaseQuery(listName: 'fft').getFact().then((fact) {
       BlocProvider.of<PollBloc>(context).add(PollEvent.add(fact, 'fft'));
     });
 
-    await checkDate().then((check) async {
-      await _dqtaste2.getFood(
+    checkDate().then((check) async {
+      _dqtaste2.getFood(
           field: ['cuisine'],
           value: ['indian'],
           limit: 7,
           check: check).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "d2"));
       });
-      await _dqtaste0.getFood(
+      _dqtaste0.getFood(
           field: ['cuisine', 'deter'],
           value: ['indian', 'veg'],
           limit: 7,
           check: check).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "d0"));
       });
-      await _dqtaste1.getFood(
+      _dqtaste1.getFood(
           field: ['cuisine', 'deter'],
           value: ['indian', 'nonveg'],
           limit: 7,
@@ -62,7 +77,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "d1"));
       });
     });
-    await GeolocationRest().getRestFromLocation().then((rest) {
+    GeolocationRest().getRestFromLocation().then((rest) {
       BlocProvider.of<RestaurantBloc>(context)
           .add(RestaurantEvent.add(rest, 'r1'));
     });
@@ -80,7 +95,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     String date = DateFormat('EEE, M/d/y').format(now);
 
     if (date == saveDate) {
-      return 0;
+      return 1;
     } else {
       _box.put("date", date);
       return 0;

@@ -13,6 +13,8 @@ import 'package:moodish_mvp/screens/Restaurants/restaurantCard/resataurantReview
 import 'package:moodish_mvp/screens/Restaurants/toprated.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:showcaseview/showcaseview.dart';
 import '../Food/blocs/restBloc/restBloc.dart';
 import '../../Services/geolocationRest.dart';
 
@@ -22,6 +24,9 @@ class Restaurant extends StatefulWidget {
 }
 
 class _RestaurantState extends State<Restaurant> {
+
+  GlobalKey _rest = GlobalKey();
+
   Position _currentPosition;
   bool dialogShow = true;
   String location = 'Mumbai,Maharashtra';
@@ -74,6 +79,33 @@ class _RestaurantState extends State<Restaurant> {
 
   @override
   Widget build(BuildContext context) {
+
+SharedPreferences preferences;
+
+    // displayShowCase() async {
+    //   preferences = await SharedPreferences.getInstance();
+    //   bool showCaseVisibilityStstus = preferences.getBool("displayShowCase");
+    //   preferences.setBool('displayShowCase', false);
+    //   if(showCaseVisibilityStstus == null){
+    //     return true;
+    //   }
+    //   return false;
+    // }
+
+    // displayShowCase().then((status) {
+    //   if(status){
+    //      ShowCaseWidget.of(context).startShowCase([
+    //     _rest,
+    //   ]);
+    //   }
+    // });
+
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   ShowCaseWidget.of(context).startShowCase([
+    //     _rest,
+    //   ]);
+    // });
+
     return Container(
       child: SafeArea(
         child: SingleChildScrollView(
@@ -97,13 +129,17 @@ class _RestaurantState extends State<Restaurant> {
                 padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
                 child: Container(
                   alignment: Alignment.centerLeft,
-                  child: RichText(
-                    text: TextSpan(
-                      text: 'Near you',
-                      style: TextStyle(
-                          fontSize: 26,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
+                  child: Showcase(
+                    key: _rest,
+                    description: "Find the restaurants near u",
+                    child: RichText(
+                      text: TextSpan(
+                        text: 'Near you',
+                        style: TextStyle(
+                            fontSize: 26,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                      ),
                     ),
                   ),
                 ),
@@ -144,6 +180,7 @@ class _RestaurantState extends State<Restaurant> {
                       }
                       return ListView.builder(
                           scrollDirection: Axis.horizontal,
+                          physics: BouncingScrollPhysics(),
                           itemCount: restList["r1"].length,
                           itemBuilder: (context, index) {
                             return GestureDetector(
@@ -164,188 +201,57 @@ class _RestaurantState extends State<Restaurant> {
                                           BorderRadius.circular(20.0)),
                                   child: Column(
                                     children: <Widget>[
-                                      Stack(
-                                        children: <Widget>[
-                                          CachedNetworkImage(
-                                              imageUrl: restList['r1'][index]
-                                                  .photo_url,
-                                              imageBuilder:
-                                                  (context, imageProvider) {
-                                                return Container(
-                                                  height: 200,
-                                                  width: 250,
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                              topLeft: Radius
-                                                                  .circular(20),
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      20)),
-                                                      image: DecorationImage(
-                                                          image: imageProvider,
-                                                          fit: BoxFit.cover)),
-                                                );
-                                              }),
-                                          Container(
-                                            child: Container(
-                                              height: 200,
+                                      CachedNetworkImage(
+                                          imageUrl: restList['r1'][index]
+                                              .photo_url,
+                                          imageBuilder:
+                                              (context, imageProvider) {
+                                            return Container(
+                                              height: 205,
                                               width: 250,
                                               decoration: BoxDecoration(
-                                                  gradient: LinearGradient(
-                                                      begin:
-                                                          Alignment.centerLeft,
-                                                      end:
-                                                          Alignment.centerRight,
-                                                      colors: [
-                                                    Colors.transparent,
-                                                    Colors.transparent,
-                                                    Colors.white
-                                                  ])),
-                                              child: Column(
-                                                children: <Widget>[
-                                                  Align(
-                                                    alignment:
-                                                        Alignment.topRight,
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              10.0),
-                                                      child: Column(
-                                                        children: <Widget>[
-                                                          Align(
-                                                              alignment: Alignment
-                                                                  .centerRight,
-                                                              child: Icon(
-                                                                Icons.av_timer,
-                                                                color: Colors
-                                                                    .black,
-                                                                size: 28,
-                                                              )),
-                                                          SizedBox(
-                                                            height: 2,
-                                                          ),
-                                                          Align(
-                                                            alignment: Alignment
-                                                                .centerRight,
-                                                            child: Text(
-                                                              '30mins',
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500),
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Align(
-                                                    alignment:
-                                                        Alignment.centerRight,
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              10.0),
-                                                      child: Column(
-                                                        children: <Widget>[
-                                                          Icon(
-                                                            Icons.star,
-                                                            color: Colors.black,
-                                                            size: 28,
-                                                          ),
-                                                          SizedBox(
-                                                            height: 2,
-                                                          ),
-                                                          Text(
-                                                            "${restList["r1"][index].rating}",
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .black,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Align(
-                                                    alignment:
-                                                        Alignment.bottomRight,
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              10.0),
-                                                      child: GestureDetector(
-                                                        onTap: () => Navigator.push(
-                                                            context,
-                                                            PageTransition(
-                                                                type: PageTransitionType
-                                                                    .rightToLeft,
-                                                                child: RestaurantReview(
-                                                                    rest: restList[
-                                                                            "r1"]
-                                                                        [
-                                                                        index]))),
-                                                        child: Container(
-                                                          child: Column(
-                                                            children: <Widget>[
-                                                              Align(
-                                                                alignment: Alignment
-                                                                    .centerRight,
-                                                                child: Icon(
-                                                                  Icons
-                                                                      .library_books,
-                                                                  color: Colors
-                                                                      .black,
-                                                                  size: 26,
-                                                                ),
-                                                              ),
-                                                              SizedBox(
-                                                                height: 2,
-                                                              ),
-                                                              Align(
-                                                                alignment: Alignment
-                                                                    .centerRight,
-                                                                child: Text(
-                                                                  'Review',
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .black,
-                                                                      fontSize:
-                                                                          12,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500),
-                                                                ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      ),
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                          topLeft: Radius
+                                                              .circular(20),
+                                                          topRight: Radius
+                                                              .circular(
+                                                                  20)),
+                                                  image: DecorationImage(
+                                                      image: imageProvider,
+                                                      fit: BoxFit.cover)),
+                                            );
+                                          }),
                                       Container(
                                         width: 250,
                                         child: Padding(
-                                          padding: EdgeInsets.all(8),
+                                          padding: EdgeInsets.all(5),
                                           child: Align(
                                             alignment: Alignment.centerLeft,
-                                            child: Text(
-                                              restList["r1"][index]
-                                                  .restaurant_Name,
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold),
+                                            child: Row(
+                                              children: <Widget>[
+                                                Container(
+                                                  width: 180,
+                                                  child: Text(
+                                                    restList["r1"][index]
+                                                        .restaurant_Name,
+                                                    overflow: TextOverflow.ellipsis,
+                                                    style: TextStyle(
+                                                        fontSize: 18,
+                                                        fontWeight: FontWeight.bold),
+                                                  ),
+                                                ),
+                                                Spacer(),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(right: 5,top: 3),
+                                                  child: Row(
+                                                    children: <Widget>[
+                                                      Icon(Icons.star,size: 18,),
+                                                      Text(restList["r1"][index].rating,style: TextStyle(fontSize: 12),),
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
                                             ),
                                           ),
                                         ),
@@ -353,15 +259,76 @@ class _RestaurantState extends State<Restaurant> {
                                       Container(
                                         width: 250,
                                         child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
+                                          padding: const EdgeInsets.only(left: 5,bottom: 5),
+                                          child: Text(restList["r1"][index].cuisines),
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 250,
+                                        child: Padding(
+                                          padding:  EdgeInsets.only(left: 3,top: 5),
                                           child: Align(
                                             alignment: Alignment.centerLeft,
-                                            child: Text(restList["r1"][index]
-                                                        .features !=
-                                                    "nan"
-                                                ? restList["r1"][index].features
-                                                : restList["r1"][index]
-                                                    .cuisines),
+                                            child: Row(
+                                              children: <Widget>[
+                                                Icon(Icons.location_on,size: 20,),
+                                                Text(restList["r1"][index].restaurant_Location),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 5,top: 5),
+                                        child: Container(
+                                          width: 250,
+                                          child: Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Row(
+                                              children: <Widget>[
+                                                Padding(
+                                                  padding: const EdgeInsets.only(left: 3),
+                                                  child: GestureDetector(
+                                                    onTap: () => Navigator.push(
+                                                        context,
+                                                        PageTransition(
+                                                            type: PageTransitionType
+                                                                .rightToLeft,
+                                                            child: RestaurantReview(
+                                                                rest: restList[
+                                                                "r1"]
+                                                                [
+                                                                index]))),
+                                                    child: Row(
+                                                      children: <Widget>[
+                                                        Align(
+                                                          alignment: Alignment
+                                                              .centerRight,
+                                                          child: Icon(
+                                                            Icons
+                                                                .library_books,
+                                                            color: Colors
+                                                                .black,
+                                                            size: 20,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding: const EdgeInsets.all(8.0),
+                                                          child: Text(
+                                                            'Review',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                ),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                )
+
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       )
@@ -542,154 +509,71 @@ Widget restura(RestListModel rest,BuildContext context,) {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         child: Column(
           children: <Widget>[
-            Stack(
-              children: <Widget>[
-                CachedNetworkImage(
-                  imageUrl: rest.photo_url,
-                  imageBuilder: (context, imageProvider) {
-                    return Container(
-                      height: 250,
-                      width: double.maxFinite,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20)),
-                        image: DecorationImage(
-                            image: imageProvider, fit: BoxFit.cover),
-                      ),
-                    );
-                  },
-                ),
-                Container(
-                  child: Container(
-                    height: 250,
-                    width: double.maxFinite,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20)),
-                        gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.centerRight,
-                            colors: [
-                          Colors.transparent,
-                          Colors.transparent,
-                          Colors.white,
-                        ])),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        Align(
-                          alignment: Alignment.topRight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Column(
-                              children: <Widget>[
-                                Align(
-                                    alignment: Alignment.centerRight,
-                                    child: Icon(
-                                      Icons.av_timer,
-                                      color: Colors.black,
-                                      size: 28,
-                                    )),
-                                SizedBox(
-                                  height: 2,
-                                ),
-                                Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Text(
-                                    '30mins',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Column(
-                              children: <Widget>[
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.black,
-                                  size: 28,
-                                ),
-                                SizedBox(
-                                  height: 2,
-                                ),
-                                Text(
-                                  rest.rating,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Column(
-                              children: <Widget>[
-                                Align(
-                                    alignment: Alignment.centerRight,
-                                    child: Icon(
-                                      Icons.library_books,
-                                      color: Colors.black,
-                                      size: 22,
-                                    )),
-                                SizedBox(
-                                  height: 2,
-                                ),
-                                Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Text(
-                                    'Review',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
+            CachedNetworkImage(
+              imageUrl: rest.photo_url,
+              imageBuilder: (context, imageProvider) {
+                return Container(
+                  height: 220,
+                  width: double.maxFinite,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20)),
+                    image: DecorationImage(
+                        image: imageProvider, fit: BoxFit.cover),
                   ),
-                ),
-              ],
+                );
+              },
             ),
-            Container(
-              child: Padding(
-                padding: EdgeInsets.all(8),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    rest.restaurant_Name,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                child: Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      rest.restaurant_Name,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
               ),
             ),
-            rest.features != "nan"?Container(
+            Padding(
+              padding: const EdgeInsets.only(left: 8,bottom: 8),
+              child: Row(
+                children: <Widget>[
+                  Icon(Icons.star,size: 18,),
+                  Text(rest.rating,style: TextStyle(fontSize: 12),),
+                ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8,bottom: 5,right: 5),
+                  child: Text(rest.cuisines),
+                ),
+              ),
+            ),
+            Container(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                      rest.features),
+                  child: Row(
+                    children: <Widget>[
+                      Icon(Icons.location_on,size: 20,),
+                      Text(
+                          rest.restaurant_Location),
+                    ],
+                  ),
                 ),
               ),
-            ):Container()
+            )
           ],
         ),
       ),

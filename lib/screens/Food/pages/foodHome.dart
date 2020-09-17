@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:moodish_mvp/Services/betaCount.dart';
 import 'package:moodish_mvp/screens/Food/pages/explore.dart';
 import 'package:moodish_mvp/screens/Food/pages/foodFeed.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 class FoodHome extends StatefulWidget {
   @override
@@ -15,12 +16,22 @@ class _FoodHomeState extends State<FoodHome> {
     1: Text('Explore'),
   };
 
+  GlobalKey _tabs = GlobalKey();
+
   int grpValue = 0;
+  String name;
 
   bool _switch = false;
 
   @override
   Widget build(BuildContext context) {
+
+    WidgetsBinding.instance.addPostFrameCallback((_) { 
+      ShowCaseWidget.of(context).startShowCase([
+        _tabs,
+      ]);
+    });
+
     DateTime now = DateTime.now();
     return Scaffold(
       body: SafeArea(
@@ -35,16 +46,7 @@ class _FoodHomeState extends State<FoodHome> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     _switch
-                        ? Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Text(
-                              '',
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          )
+                        ? Container()
                         : Padding(
                             padding: const EdgeInsets.only(left: 8.0),
                             child: Text(

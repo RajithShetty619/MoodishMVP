@@ -52,11 +52,12 @@ class DatabaseQuery {
       int limit = 5,
       int check = 0,
       String mood,
+      String deter,
       bool recursive = false}) async {
     List<String> _field = field;
     List<dynamic> _value = value;
     /* gets previous list saved by the name */
-    final _box = await Hive.openBox(listName + (mood ?? ''));
+    final _box = await Hive.openBox(listName + (mood ?? '') + (deter ?? ''));
     List<dynamic> _gfoodList = await _box.get(listName);
 
     /* condition satisfied when no list retrieved from memory
@@ -226,11 +227,11 @@ class DatabaseQuery {
     Box _box = await Hive.openBox('yesorno');
     dynamic end = _box.get('end');
 
-    Query y = yesorno.orderBy('Questions').startAfter([end]).limit(3);
+    Query y = yesorno.orderBy('Questions').startAfter([end]).limit(4);
     List<DocumentSnapshot> _snapshot =
         await y.get().then((value) => value.docs);
     if (_snapshot.length < 3) {
-      y = polls.orderBy('Questions').limit(3);
+      y = yesorno.orderBy('Questions').limit(4);
       _snapshot = await y.get().then((value) => value.docs);
     }
     // saving last this_that to be shown
