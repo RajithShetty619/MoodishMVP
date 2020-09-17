@@ -210,7 +210,7 @@ class _Food_InfoState extends State<Food_Info> {
                       foodList: widget.foodList,
                     ),
                   ),
-                if (indx == 3) Container(height: 800, child: FoodRest()),
+                if (indx == 3) Container( child: FoodRest()),
               ],
             ),
           ],

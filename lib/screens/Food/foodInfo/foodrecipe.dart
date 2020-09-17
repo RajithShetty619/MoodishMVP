@@ -140,7 +140,7 @@ class _FoodRecipeState extends State<FoodRecipe> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        '* ${widget.foodList.preparation[index]}',
+                        'Step ${index+1}\n ${widget.foodList.preparation[index]}',
                         textHeightBehavior: TextHeightBehavior(
                             applyHeightToFirstAscent: false,
                             applyHeightToLastDescent: true),
