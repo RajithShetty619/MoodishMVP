@@ -102,11 +102,6 @@ class _HomePageState extends State<HomePage> {
                         padding: EdgeInsets.all(10),
                         child: Container(
                             alignment: Alignment.centerLeft,
-                            child: Text('Cuisines:- ${widget.restaurant.cuisines}',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),))),
-                    Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Container(
-                            alignment: Alignment.centerLeft,
                             child: Row(
                               children: <Widget>[
                                 Icon(Icons.location_on,size: 20,),
