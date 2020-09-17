@@ -196,46 +196,44 @@ class _CuisineState extends State<Cuisine> {
                                 child: Text('Change->'),
                               ),
                             )
-                          : Center(
-                            child: Align(
-                                alignment: Alignment.center,
-                                child: GestureDetector(
-                                  onTap: () async {
-                                    if (i + 1 > 3) {
-                                      Box box =
-                                          await Hive.openBox('preferenceBox');
-                                      box.put('preference', pref);
-                                      DatabaseService().savePreference();
-                                      Navigator.push(context,
-                                          MaterialPageRoute(builder: (context) {
-                                        return FoodPreference();
-                                      }));
-                                    } else
-                                      setState(() {
-                                        err = 'Select ${3 - i + 1} more!';
-                                      });
-                                  },
-                                  child: Container(
-                                    width: 100,
-                                    margin: EdgeInsets.all(10.0),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.black, width: 2),
-                                      borderRadius: BorderRadius.circular(15),
-                                      // color: Colors.blue[200],
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Text(
-                                        'Next',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: 20.0, fontWeight: FontWeight.bold),
-                                      ),
+                          : Align(
+                              alignment: Alignment.center,
+                              child: GestureDetector(
+                                onTap: () async {
+                                  if (i + 1 > 3) {
+                                    Box box =
+                                        await Hive.openBox('preferenceBox');
+                                    box.put('preference', pref);
+                                    DatabaseService().savePreference();
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return FoodPreference();
+                                    }));
+                                  } else
+                                    setState(() {
+                                      err = 'Select ${3 - i + 1} more!';
+                                    });
+                                },
+                                child: Container(
+                                  width: 100,
+                                  margin: EdgeInsets.all(10.0),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black, width: 2),
+                                    borderRadius: BorderRadius.circular(15),
+                                    // color: Colors.blue[200],
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Text(
+                                      'Next',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 20.0, fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ),
                               ),
-                          ),
+                            ),
                     ],
                   ),
                 ],
