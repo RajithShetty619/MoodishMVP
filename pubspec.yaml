@@ -60,6 +60,7 @@ dependencies:
   flutter_local_notifications: ^1.4.4+4
   page_transition: ^1.1.6
   geoflutterfire: ^2.2.1
+  app_settings: ^4.0.3
 
 
 dev_dependencies:
