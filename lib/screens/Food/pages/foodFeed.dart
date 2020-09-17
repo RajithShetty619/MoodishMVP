@@ -446,7 +446,7 @@ class _FoodFeedState extends State<FoodFeed> {
                                       onChanged: (val){
                                         setState(() {
                                           isSwitched=val;
-                                          det = 0
+                                          det = 0;
                                         });
                                       },
                                       trackColor: Colors.grey,
