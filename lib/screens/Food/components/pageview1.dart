@@ -24,9 +24,13 @@ class _PageViewer1State extends State<PageViewer1> {
             });
           },
           onSwipeRight: () {
-            setState(() {
-              if (index != 0) index--;
-            });
+            if (index == 0) {
+              Navigator.pop(context);
+            } else {
+              setState(() {
+                if (index != 0) index--;
+              });
+            }
           },
           child: SingleChildScrollView(
             child: Container(
@@ -34,30 +38,30 @@ class _PageViewer1State extends State<PageViewer1> {
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(45),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(2.0),
-                              child: IconButton(
-                                  icon: Icon(
-                                    Icons.arrow_back,
-                                    size: 30,
-                                    color: Colors.black,
-                                  ),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  }),
-                            ),
-                          ),
-                        ),
-                      ),
+                      // Align(
+                      //   alignment: Alignment.topLeft,
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.all(8.0),
+                      //     child: Container(
+                      //       decoration: BoxDecoration(
+                      //         color: Colors.white,
+                      //         borderRadius: BorderRadius.circular(45),
+                      //       ),
+                      //       child: Padding(
+                      //         padding: const EdgeInsets.all(2.0),
+                      //         child: IconButton(
+                      //             icon: Icon(
+                      //               Icons.arrow_back,
+                      //               size: 30,
+                      //               color: Colors.black,
+                      //             ),
+                      //             onPressed: () {
+                      //               Navigator.pop(context);
+                      //             }),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                       Padding(
                         padding: EdgeInsets.all(10),
                         child: Align(
