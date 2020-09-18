@@ -23,7 +23,8 @@ class _SearchState extends State<Search> {
     super.initState();
     setState(() {
       SearchFunction().recentSearch().then((future) {
-        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "search"));
+        BlocProvider.of<FoodBloc>(context)
+            .add(FoodEvent.add(future, "search"));
       });
     });
   }

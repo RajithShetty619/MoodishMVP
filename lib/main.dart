@@ -43,12 +43,15 @@ class _MyAppState extends State<MyApp> {
             child: MultiBlocProvider(
               providers: [
                 BlocProvider<FoodBloc>(
+                  lazy: false,
                   create: (context) => FoodBloc(),
                 ),
                 BlocProvider<PollBloc>(
+                  lazy: false,
                   create: (context) => PollBloc(),
                 ),
                 BlocProvider<RestaurantBloc>(
+                  lazy: false,
                   create: (context) => RestaurantBloc(),
                 ),
               ],

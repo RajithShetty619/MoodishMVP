@@ -154,35 +154,6 @@ class _Mood_FoodState extends State<Mood_Food> {
                               ),
                             ],
                           ),
-
-                          // SizedBox(height: 10),
-                          /* Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                      children: <Widget>[
-                                        FlatButton.icon(
-                                            onPressed: () {},
-                                            icon: Icon(
-                                              Icons.info_outline,
-                                              color: Colors.white,
-                                            ),
-                                            label: Text(
-                                              'More info',
-                                              style: TextStyle(color: Colors.white),
-                                            )),
-                                        FlatButton.icon(
-                                            onPressed: () {},
-                                            icon: Icon(
-                                              Icons.filter_center_focus,
-                                              color: Colors.white,
-                                            ),
-                                            label: Text(
-                                              'Filter',
-                                              style: TextStyle(color: Colors.white),
-                                            ))
-                                      ],
-                                    ),*/
                         ],
                       ),
                     ],

@@ -134,11 +134,19 @@ class _getListViewState extends State<getListView> {
                             size: 30,
                           ),
                     onPressed: () {
-                      setState(() {
-                        BlocProvider.of<PollBloc>(context)
-                            .add(PollEvent.like(widget.index));
-                        _like = true;
-                      });
+                      if (_like == false)
+                        setState(() {
+                          BlocProvider.of<PollBloc>(context)
+                              .add(PollEvent.like(widget.index));
+                          _like = true;
+                        });
+                      else {
+                        setState(() {
+                          BlocProvider.of<PollBloc>(context)
+                              .add(PollEvent.like(widget.index));
+                          _like = false;
+                        });
+                      }
                     },
                   ),
                   // IconButton(

@@ -70,7 +70,7 @@ class DatabaseService {
         FirebaseFirestore.instance.collection(collection).doc(sr_no);
 
     if (food != null) {
-      String uid = await Authenticate().returnUid();
+      String uid = Authenticate().returnUid();
       Map<String, dynamic> _food = {};
 
       _food = {
@@ -79,14 +79,14 @@ class DatabaseService {
         'deter': food.deter
       };
 
-      FirebaseFirestore.instance
-          .collection("username")
+      await FirebaseFirestore.instance
+          .collection("Username")
           .doc("$uid")
           .collection("data")
           .doc("${food.mood}")
           .set({food.sr_no: _food}, SetOptions(merge: true));
     }
-    return documentReference.set({
+    await documentReference.set({
       field: FieldValue.increment(1) /* atomically increments data by 1 */
     }, SetOptions(merge: true)).catchError((onError) => print(onError));
   }

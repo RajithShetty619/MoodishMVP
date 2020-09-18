@@ -119,7 +119,8 @@ GlobalKey _explore = GlobalKey();
           deter: deter,
           check: check).then((future) {
         setState(() {
-          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t1"));
+          BlocProvider.of<FoodBloc>(context)
+              .mapEventToState(FoodEvent.add(future, "t1"));
         });
       });
       _dqsituation0.getFood(
