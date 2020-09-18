@@ -33,7 +33,7 @@ class KeysToBeInherited extends InheritedWidget {
   }): super(child: child);
 
   static KeysToBeInherited of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType(aspect: KeysToBeInherited);
+    return context.dependOnInheritedWidgetOfExactType<KeysToBeInherited>();
   }
 
   @override
@@ -220,11 +220,11 @@ GlobalKey _explore = GlobalKey();
     //   }
     // });
 
-    WidgetsBinding.instance.addPostFrameCallback((_){
-      ShowCaseWidget.of(context).startShowCase([
-        _explore,
-      ]);
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_){
+    //   ShowCaseWidget.of(context).startShowCase([
+    //     _explore,
+    //   ]);
+    // });
 
 
     // DateTime now = DateTime.now();
@@ -383,11 +383,15 @@ GlobalKey _explore = GlobalKey();
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(5.0),
-                              child: Text(
-                                'Food for Every Taste',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 20.0, fontWeight: FontWeight.bold),
+                              child: Showcase(
+                                key: _explore,
+                                description: "ksdvnejnfvfn",
+                                child: Text(
+                                  'Food for Every Taste',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 20.0, fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
                           ),

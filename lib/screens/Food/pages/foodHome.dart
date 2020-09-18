@@ -25,8 +25,7 @@ class _FoodHomeState extends State<FoodHome> {
 
   @override
   Widget build(BuildContext context) {
-
-    WidgetsBinding.instance.addPostFrameCallback((_) { 
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       ShowCaseWidget.of(context).startShowCase([
         _tabs,
       ]);
@@ -73,6 +72,7 @@ class _FoodHomeState extends State<FoodHome> {
                                 grpValue = changeValue;
                                 _switch = !_switch;
                               }
+                              
                             });
                           },
                           groupValue: grpValue,
