@@ -8,6 +8,8 @@ import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:intl/intl.dart';
 import 'package:moodish_mvp/Services/geolocationRest.dart';
 import 'package:moodish_mvp/screens/Food/events/restEvent.dart';
+import 'package:moodish_mvp/screens/Restaurants/cuisine.dart';
+import 'package:moodish_mvp/screens/Restaurants/prefVegNveg.dart';
 import 'package:moodish_mvp/screens/mainScreen.dart';
 import 'Food/blocs/bloc/foodBloc.dart';
 import 'Food/blocs/pollsbloc/pollsBloc.dart';
@@ -67,13 +69,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
           check: check).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "d0"));
       });
-      _dqtaste1.getFood(
-          field: ['cuisine', 'deter'],
-          value: ['indian', 'nonveg'],
-          limit: 7,
-          check: check).then((future) {
-        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "d1"));
-      });
+     
     });
     GeolocationRest().getRestFromLocation().then((rest) {
       BlocProvider.of<RestaurantBloc>(context)

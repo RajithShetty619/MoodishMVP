@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
-import 'package:moodish_mvp/screens/Food/foodInfo/foodDelivery.dart';
+import 'package:moodish_mvp/screens/Food/foodInfo/foodRest.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/foodabout.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/foodrecipe.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/restaurantTab.dart';
@@ -144,6 +144,20 @@ class _Food_InfoState extends State<Food_Info> {
                           });
                         },
                       ),
+                      GestureDetector(
+                        child: PageTab(
+                          title: 'Restaurant',
+                          // isActive: true,
+                          index: indx,
+                          stIndex: 3,
+                          press: () {},
+                        ),
+                        onTap: () {
+                          setState(() {
+                            indx = 3;
+                          });
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -159,7 +173,7 @@ class _Food_InfoState extends State<Food_Info> {
                       foodList: widget.foodList,
                     ),
                   ),
-                if (indx == 3) Container(height: 800, child: FoodDelivery()),
+                if (indx == 3) Container(child: FoodRest()),
               ],
             ),
           ],

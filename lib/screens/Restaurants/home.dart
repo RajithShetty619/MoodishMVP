@@ -13,6 +13,8 @@ import 'package:moodish_mvp/screens/Restaurants/restaurantCard/resataurantReview
 import 'package:moodish_mvp/screens/Restaurants/toprated.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:showcaseview/showcaseview.dart';
 import '../Food/blocs/restBloc/restBloc.dart';
 import '../../Services/geolocationRest.dart';
 
@@ -22,6 +24,9 @@ class Restaurant extends StatefulWidget {
 }
 
 class _RestaurantState extends State<Restaurant> {
+
+  GlobalKey _rest = GlobalKey();
+
   Position _currentPosition;
   bool dialogShow = true;
   String location = 'Mumbai,Maharashtra';
@@ -84,6 +89,33 @@ class _RestaurantState extends State<Restaurant> {
 
   @override
   Widget build(BuildContext context) {
+
+SharedPreferences preferences;
+
+    // displayShowCase() async {
+    //   preferences = await SharedPreferences.getInstance();
+    //   bool showCaseVisibilityStstus = preferences.getBool("displayShowCase");
+    //   preferences.setBool('displayShowCase', false);
+    //   if(showCaseVisibilityStstus == null){
+    //     return true;
+    //   }
+    //   return false;
+    // }
+
+    // displayShowCase().then((status) {
+    //   if(status){
+    //      ShowCaseWidget.of(context).startShowCase([
+    //     _rest,
+    //   ]);
+    //   }
+    // });
+
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   ShowCaseWidget.of(context).startShowCase([
+    //     _rest,
+    //   ]);
+    // });
+
     return Container(
       child: SafeArea(
         child: SingleChildScrollView(
@@ -107,13 +139,17 @@ class _RestaurantState extends State<Restaurant> {
                 padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
                 child: Container(
                   alignment: Alignment.centerLeft,
-                  child: RichText(
-                    text: TextSpan(
-                      text: 'Near you',
-                      style: TextStyle(
-                          fontSize: 26,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
+                  child: Showcase(
+                    key: _rest,
+                    description: "Find the restaurants near u",
+                    child: RichText(
+                      text: TextSpan(
+                        text: 'Near you',
+                        style: TextStyle(
+                            fontSize: 26,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                      ),
                     ),
                   ),
                 ),

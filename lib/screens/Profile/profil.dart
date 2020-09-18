@@ -6,7 +6,8 @@ import 'Edit.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'settings.dart';
-
+import 'notificationSettings.dart';
+import 'likedFood.dart';
 class Profile extends StatefulWidget {
   @override
   _ProfileState createState() => _ProfileState();
@@ -139,113 +140,37 @@ class _ProfileState extends State<Profile> {
                     IconButton(
                       icon: Icon(
                         Icons.notifications,
-                        size: 50.0,
-                      ),
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext idcontext) {
-                              return Dialog(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: Container(
-                                  height: 135,
-                                  child: Column(
-                                    children: <Widget>[
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        'Coming Soon.......!',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.all(10),
-                                        child: Align(
-                                          alignment: Alignment.centerRight,
-                                          child: RaisedButton(
-                                            onPressed: () => Navigator.of(
-                                                    idcontext,
-                                                    rootNavigator: true)
-                                                .pop(),
-                                            child: Text('ok'),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              );
-                            });
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.group,
-                        size: 50,
-                      ),
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext idcontext) {
-                              return Dialog(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: Container(
-                                  height: 135,
-                                  child: Column(
-                                    children: <Widget>[
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        'Coming Soon.......!',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.all(10),
-                                        child: Align(
-                                          alignment: Alignment.centerRight,
-                                          child: RaisedButton(
-                                            onPressed: () => Navigator.of(
-                                                    idcontext,
-                                                    rootNavigator: true)
-                                                .pop(),
-                                            child: Text('ok'),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              );
-                            });
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.settings,
-                        size: 50,
+                        size: 40.0,
                       ),
                       onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ProfileSetting()));
+                                builder: (context) => NotificationSettings()));
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.settings,
+                        size: 40,
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Settings()));
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.favorite,
+                        size: 40,
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LikedFood()));
                       },
                     ),
                   ],
