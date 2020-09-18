@@ -140,7 +140,8 @@ class _FoodFeedState extends State<FoodFeed> {
         check: 0).then((future) {
       setState(() {
         moodSelection = mood;
-        BlocProvider.of<FoodBloc>(dataContext).add(FoodEvent.add(future, "0"));
+        BlocProvider.of<FoodBloc>(dataContext)
+            .add(FoodEvent.add(future, "0"));
       });
     });
   }

@@ -4,17 +4,10 @@ import 'package:moodish_mvp/screens/Food/events/restEvent.dart';
 
 class RestaurantBloc
     extends Bloc<RestaurantEvent, Map<String, List<RestListModel>>> {
-  @override
-  // TODO: implement initialState
-  Map<String, List<RestListModel>> get initialState => {
-        "r1": [],
-        "r2": [],
-      };
+  RestaurantBloc() : super({"r1": [], "r2": []});
 
-  @override
   Stream<Map<String, List<RestListModel>>> mapEventToState(
       RestaurantEvent event) async* {
-    // TODO: implement mapEventToState
     switch (event.eventType) {
       case EventType.add:
         Map<String, List<RestListModel>> newstate = state;

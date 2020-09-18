@@ -144,19 +144,22 @@ class _RestaurantState extends State<Restaurant> {
                           child: Center(
                             child: FlatButton.icon(
                                 onPressed: () async {
-                                  await errGeorest();
                                   setState(() {
                                     error_loadIcon = Icon(Icons.hourglass_full);
                                   });
+
+                                  await errGeorest();
+
                                   Future.delayed(
-                                      const Duration(milliseconds: 5000), () {
+                                      const Duration(milliseconds: 3000), () {
                                     setState(() {
                                       error_loadIcon = Icon(Icons.error);
                                     });
                                   });
                                 },
                                 icon: error_loadIcon,
-                                label: Text(error_loadIcon == Icon(Icons.error)
+                                label: Text(error_loadIcon !=
+                                        Icon(Icons.hourglass_full)
                                     ? "Some error has occurred, please retry!"
                                     : "Retrying please wait.")),
                           ),

@@ -10,7 +10,9 @@ class GeolocationRest {
     try {
       var data = await get(
           "https://us-central1-moodishtest.cloudfunctions.net/returnRestaurants?lat=${position.latitude}&long=${position.longitude}");
+      if (data.body == "Error: could not handle the request") throw Error();
       var info = await json.decode(data.body);
+      print(info);
       List<dynamic> send = await json.decode(info["restaurants"]);
 
       return listfromSnapshot(send);
@@ -18,7 +20,9 @@ class GeolocationRest {
       print(e.toString());
       var data = await get(
           "https://us-central1-moodishtest.cloudfunctions.net/returnRestaurants?lat=${position.latitude}&long=${position.longitude}");
+      if (data.body == "Error: could not handle the request") return [];
       var info = await json.decode(data.body);
+      print(info);
       List<dynamic> send = await json.decode(info["restaurants"]);
       return listfromSnapshot(send);
     }

@@ -1,15 +1,15 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class RestaurantBlocDelegate extends BlocDelegate {
+class RestaurantBlocDelegate extends BlocObserver {
   @override
-  void onEvent(Bloc bloc, Object event) {
+  void onEvent(Cubit bloc, Object event) {
     // TODO: implement onEvent
     super.onEvent(bloc, event);
     print(event);
   }
 
   @override
-  void onTransition(Bloc bloc, Transition transition) {
+  void onTransition(Cubit bloc, Transition transition) {
     // TODO: implement onTransition
     super.onTransition(bloc, transition);
     print(transition.currentState);
@@ -17,7 +17,7 @@ class RestaurantBlocDelegate extends BlocDelegate {
   }
 
   @override
-  void onError(Bloc bloc, Object error, StackTrace stackTrace) {
+  void onError(Cubit bloc, Object error, StackTrace stackTrace) {
     // TODO: implement onError
     super.onError(bloc, error, stackTrace);
     print(error);
