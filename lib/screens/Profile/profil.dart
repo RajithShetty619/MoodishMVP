@@ -135,44 +135,59 @@ class _ProfileState extends State<Profile> {
                   thickness: 2.0,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    IconButton(
-                      icon: Icon(
-                        Icons.notifications,
-                        size: 40.0,
-                      ),
-                      onPressed: () {
+                    GestureDetector(
+                      onTap: (){
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => NotificationSettings()));
                       },
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.settings,
-                        size: 40,
+                      child: Column(
+                        children: <Widget>[
+                          Icon(
+                            Icons.notifications,
+                            size: 40.0,
+                          ),
+                          Center(child: Text('Notification',style: TextStyle(color: Colors.black),))
+                        ],
                       ),
-                      onPressed: () {
+                    ),
+                    GestureDetector(
+                      onTap: (){
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => Settings( user: userData,
                                   image: _image,)));
                       },
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.favorite,
-                        size: 40,
+                      child: Column(
+                        children: <Widget>[
+                          Icon(
+                            Icons.settings,
+                            size: 40,
+                          ),
+                          Center(child: Text('Settings',style: TextStyle(color: Colors.black),))
+                        ],
                       ),
-                      onPressed: () {
+                    ),
+                    GestureDetector(
+                      onTap: (){
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => LikedFood()));
                       },
+                      child: Column(
+                        children: <Widget>[
+                          Icon(
+                            Icons.favorite,
+                            size: 40,
+                          ),
+                          Center(child: Text('Liked',style: TextStyle(color: Colors.black),))
+                        ],
+                      ),
                     ),
                   ],
                 ),

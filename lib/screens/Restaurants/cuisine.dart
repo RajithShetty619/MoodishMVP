@@ -42,7 +42,8 @@ class _CuisineState extends State<Cuisine> {
   int i = 0;
   List<String> pref = []; //all the user preferences are saved here
   String err = '';
-  bool _visible = true;
+  List<dynamic> cuisinePref =  Hive.box('preferenceBox').get('preference');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,21 +99,9 @@ class _CuisineState extends State<Cuisine> {
                       return GestureDetector(
                         onTap: () {
                           dynamic _val = cuisine[index];
-                          Future.delayed(Duration(milliseconds: 500), () {
-                            setState(() {
-                              cuisine.remove(_val);
-                              if (pref.length == 9) {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return FoodPreference();
-                                }));
-                              }
-                            });
-                          });
                           setState(() {
                             pref.add(_val.cuisine);
                             i++;
-                            cuisine[index]._visible = !cuisine[index]._visible;
                           });
                         },
                         child: cuisineFilter(
@@ -145,12 +134,21 @@ class _CuisineState extends State<Cuisine> {
                       );
                     }),
               ),
+
               Column(
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Center(
-                      child: Text(
+                      child:
+                      widget.event==1?Text(
+                        "Previously Selected:-${cuisinePref.join(',')}\ndon't worry, You can change this later! ",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                            fontSize: 16.0,
+                            fontStyle: FontStyle.italic,
+                            fontWeight: FontWeight.w400),
+                      ):Text(
                         "don't worry, You can change this later! ",
                         textAlign: TextAlign.left,
                         style: TextStyle(
@@ -181,6 +179,9 @@ class _CuisineState extends State<Cuisine> {
                               alignment: Alignment.centerRight,
                               child: RaisedButton(
                                 onPressed: () async {
+                                  setState(() {
+                                    cuisinePref = Hive.box('preferenceBox').get('preference');
+                                  });
                                   print(i);
                                   if (i + 1 > 3) {
                                     Box box =

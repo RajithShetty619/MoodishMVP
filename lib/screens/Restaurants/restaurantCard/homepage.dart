@@ -97,7 +97,16 @@ class _HomePageState extends State<HomePage> {
                         child: Divider(
                           color: Colors.black,
                         )),
+
                     SizedBox(height: 5),
+                    Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Container(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              '${widget.restaurant.cuisines}',
+                              style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),
+                            ))),
                     Padding(
                         padding: EdgeInsets.all(10),
                         child: Container(

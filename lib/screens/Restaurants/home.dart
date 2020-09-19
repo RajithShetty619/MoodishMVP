@@ -311,10 +311,9 @@ class _RestaurantState extends State<Restaurant> {
                                                 Icon(
                                                   Icons.location_on,
                                                   size: 20,
-                                                  color: Colors.grey[600],
                                                 ),
                                                 Text(restList["r1"][index]
-                                                    .restaurant_Location,style: TextStyle(color: Colors.grey[600],),),
+                                                    .restaurant_Location,),
                                               ],
                                             ),
                                           ),
