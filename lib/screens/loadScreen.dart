@@ -69,13 +69,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
           check: check).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "d0"));
       });
-      _dqtaste1.getFood(
-          field: ['cuisine', 'deter'],
-          value: ['indian', 'nonveg'],
-          limit: 7,
-          check: check).then((future) {
-        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "d1"));
-      });
+     
     });
     GeolocationRest().getRestFromLocation().then((rest) {
       BlocProvider.of<RestaurantBloc>(context)

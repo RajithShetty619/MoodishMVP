@@ -19,7 +19,7 @@ class Authenticate {
   //   return user != null ? User(uid: user.uid) : null;
   // }
 
-  Future<String> returnUid() async {
+  String returnUid() {
     User user = _auth.currentUser;
     String _uid = user.uid;
     return _uid;
