@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:moodish_mvp/Authenticate/forgotPassword.dart';
 import 'package:moodish_mvp/screens/Profile/Edit.dart';
 import 'package:moodish_mvp/screens/Profile/preferenceSettings.dart';
 import 'package:app_settings/app_settings.dart';
@@ -55,20 +56,15 @@ class _SettingsState extends State<Settings> {
               ),
 
               ListTile(
-                onTap: (){},
-                title: Text('Account Settings',),
-                subtitle: Text('Change your password or delete account',style: TextStyle(color: Colors.grey),),
-              ),
-              ListTile(
                 onTap: (){
                   Navigator
                       .push(context,
                       MaterialPageRoute(builder: (context) {
-                        return EditProfile();
+                        return ForgotPassword();
                       }));
                 },
-                title: Text('Edit Profile',),
-                subtitle: Text('Edit username, profile pic, etc.',style: TextStyle(color: Colors.grey),),
+                title: Text('Account Settings',),
+                subtitle: Text('Change your password',style: TextStyle(color: Colors.grey),),
               ),
               ListTile(
                 onTap: (){
