@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
@@ -64,14 +63,14 @@ class _LikedFoodState extends State<LikedFood> {
                 print(foodList.length);
                 return foodList.length == 0
                     ? Container(
-                  height: MediaQuery.of(context).size.height/1.5,
-                      child: Center(
+                        height: MediaQuery.of(context).size.height / 1.5,
+                        child: Center(
                           child: Text(
                             'No Food Liked Yet!',
-                            style: TextStyle(color: Colors.grey,fontSize: 18),
+                            style: TextStyle(color: Colors.grey, fontSize: 18),
                           ),
                         ),
-                    )
+                      )
                     : Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
