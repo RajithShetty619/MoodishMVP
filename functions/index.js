@@ -12236,8 +12236,5 @@ exports.returnRestaurants = functions.https.onRequest(async (req, res) => {
       }).catch(e => {
         console.log(e);
         return res.send({ "restaurants": "[]" });
-      });
-
-     
-
+      }); s
 }) 

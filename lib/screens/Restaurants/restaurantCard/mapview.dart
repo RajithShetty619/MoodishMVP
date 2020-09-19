@@ -1,31 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:geoflutterfire/geoflutterfire.dart';
-import 'package:http/http.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'dart:async';
-import 'package:geolocator/geolocator.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'dart:math' show cos, sqrt, asin;
-
-class Test extends StatefulWidget {
-  final String payload;
-
-  const Test({Key key, this.payload}) : super(key: key);
-  @override
-  _TestState createState() => _TestState();
-}
-
-class _TestState extends State<Test> {
-// Replace the "TODO" with this widget
-
-  @override
-  Widget build(BuildContext context) {
-    return MapView(
-        '31, Mahatma Gandhi Vidya Marg, Government Colony, Bandra East, Mumbai, Maharashtra 400051, India');
-  }
-}
 
 class MapView extends StatefulWidget {
   String restAddress;
