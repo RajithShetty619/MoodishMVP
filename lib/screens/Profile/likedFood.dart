@@ -97,7 +97,7 @@ class _LikedFoodState extends State<LikedFood> {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      Food_Info()));
+                                                      Food_Info(foodList: foodList[indexg],)));
                                         },
                                         child: CachedNetworkImage(
                                           imageUrl: foodList[index].images,
@@ -118,7 +118,7 @@ class _LikedFoodState extends State<LikedFood> {
                                         ),
                                       ),
                                       Positioned(
-                                        top: 165,
+                                        top: MediaQuery.of(context).size.height/4.7,
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -155,7 +155,7 @@ class _LikedFoodState extends State<LikedFood> {
                                         ),
                                       ),
                                       Positioned(
-                                        left: 167,
+                                        left: MediaQuery.of(context).size.width/2.5,
                                         top: 10,
                                         child: Padding(
                                           padding: EdgeInsets.all(10),
