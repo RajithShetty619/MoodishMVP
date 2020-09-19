@@ -17,8 +17,6 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
-  GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -74,7 +72,8 @@ class _MainScreenState extends State<MainScreen> {
           index: _selectedIndex,
           children: [
             ShowCaseWidget(builder: Builder(builder: (context) => FoodHome())),
-            ShowCaseWidget(builder: Builder(builder: (context) => Restaurant())),
+            ShowCaseWidget(
+                builder: Builder(builder: (context) => Restaurant())),
             Search(),
             Profile(),
           ],

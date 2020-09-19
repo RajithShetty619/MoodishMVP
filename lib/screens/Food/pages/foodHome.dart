@@ -25,8 +25,7 @@ class _FoodHomeState extends State<FoodHome> {
 
   @override
   Widget build(BuildContext context) {
-
-    WidgetsBinding.instance.addPostFrameCallback((_) { 
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       ShowCaseWidget.of(context).startShowCase([
         _tabs,
       ]);
@@ -85,9 +84,7 @@ class _FoodHomeState extends State<FoodHome> {
             ),
             Expanded(
               child: IndexedStack(
-                index: _switch
-                    ? 0
-                    : 1, // switch between Foo and Bar based on condition
+                index: _switch ? 0 : 1,
                 children: [
                   Explore(),
                   FoodFeed(),

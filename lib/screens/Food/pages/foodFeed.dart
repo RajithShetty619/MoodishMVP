@@ -140,11 +140,11 @@ class _FoodFeedState extends State<FoodFeed> {
         check: 0).then((future) {
       setState(() {
         moodSelection = mood;
-        BlocProvider.of<FoodBloc>(dataContext)
-            .add(FoodEvent.add(future, "0"));
+        BlocProvider.of<FoodBloc>(dataContext).add(FoodEvent.add(future, "0"));
       });
     });
   }
+
   bool isSwitched = false;
   @override
   Widget build(BuildContext context) {
@@ -165,14 +165,6 @@ class _FoodFeedState extends State<FoodFeed> {
                         fontWeight: FontWeight.bold,
                         fontSize: 30,
                         color: Colors.pinkAccent),
-                    /* children: [
-                        TextSpan(
-                            text: 'mood',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 30,
-                                color: Colors.orange))
-                      ] */
                   ),
                 ),
                 SizedBox(
@@ -444,9 +436,9 @@ class _FoodFeedState extends State<FoodFeed> {
                                     SizedBox(width: 5),
                                     CupertinoSwitch(
                                       value: isSwitched,
-                                      onChanged: (val){
+                                      onChanged: (val) {
                                         setState(() {
-                                          isSwitched=val;
+                                          isSwitched = val;
                                           det = 0;
                                         });
                                       },

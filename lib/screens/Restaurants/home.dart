@@ -24,7 +24,6 @@ class Restaurant extends StatefulWidget {
 }
 
 class _RestaurantState extends State<Restaurant> {
-
   GlobalKey _rest = GlobalKey();
 
   Position _currentPosition;
@@ -89,8 +88,7 @@ class _RestaurantState extends State<Restaurant> {
 
   @override
   Widget build(BuildContext context) {
-
-SharedPreferences preferences;
+    SharedPreferences preferences;
 
     // displayShowCase() async {
     //   preferences = await SharedPreferences.getInstance();
