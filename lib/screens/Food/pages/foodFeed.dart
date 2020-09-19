@@ -423,7 +423,8 @@ class _FoodFeedState extends State<FoodFeed> {
                         if (indx == 1)
                           Column(
                             children: <Widget>[
-                              Align(
+                              Container(
+                                width:MediaQuery.of(context).size.width,
                                 alignment: Alignment.centerRight,
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(

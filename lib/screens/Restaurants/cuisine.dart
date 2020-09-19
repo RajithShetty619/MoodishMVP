@@ -181,6 +181,7 @@ class _CuisineState extends State<Cuisine> {
                               alignment: Alignment.centerRight,
                               child: RaisedButton(
                                 onPressed: () async {
+                                  print(i);
                                   if (i + 1 > 3) {
                                     Box box =
                                         await Hive.openBox('preferenceBox');
@@ -200,6 +201,7 @@ class _CuisineState extends State<Cuisine> {
                               alignment: Alignment.center,
                               child: GestureDetector(
                                 onTap: () async {
+                                  print(i);
                                   if (i + 1 > 3) {
                                     Box box =
                                         await Hive.openBox('preferenceBox');
