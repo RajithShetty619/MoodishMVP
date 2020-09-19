@@ -198,48 +198,7 @@ class _ProfileState extends State<Profile> {
                     color: Colors.grey.shade400,
                   ),
                   onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Dialog(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Container(
-                              height: 150.0,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Align(
-                                      alignment: Alignment.center,
-                                      child: Linkify(
-                                        onOpen: _onOpen,
-                                        text:
-                                            'You have got Questions? We have answers\nClick https://snapinsight.net/faq.php',
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 15.0,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: Align(
-                                      alignment: Alignment.centerRight,
-                                      child: RaisedButton(
-                                        onPressed: () =>
-                                            Navigator.of(context).pop(),
-                                        child: Text('ok'),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          );
-                        });
+                    launch('https://snapinsight.net/faq.php');
                   },
                 ),
                 Divider(),
@@ -253,48 +212,7 @@ class _ProfileState extends State<Profile> {
                     color: Colors.grey.shade400,
                   ),
                   onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Dialog(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Container(
-                              height: 150.0,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Align(
-                                      alignment: Alignment.center,
-                                      child: Linkify(
-                                        onOpen: _onOpen,
-                                        text:
-                                            'To View Terms And Conditions\nClick https://snapinsight.net/termsandconditions.php',
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 15.0,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: Align(
-                                      alignment: Alignment.centerRight,
-                                      child: RaisedButton(
-                                        onPressed: () =>
-                                            Navigator.of(context).pop(),
-                                        child: Text('ok'),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          );
-                        });
+                    launch('https://snapinsight.net/termsandconditions.php');
                   },
                 ),
                 Divider(),
@@ -308,48 +226,7 @@ class _ProfileState extends State<Profile> {
                     color: Colors.grey.shade400,
                   ),
                   onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Dialog(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Container(
-                              height: 150.0,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Align(
-                                      alignment: Alignment.center,
-                                      child: Linkify(
-                                        onOpen: _onOpen,
-                                        text:
-                                            'Contact Us?\nClick https://snapinsight.net/contacts.pho',
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 15.0,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: Align(
-                                      alignment: Alignment.centerRight,
-                                      child: RaisedButton(
-                                        onPressed: () =>
-                                            Navigator.of(context).pop(),
-                                        child: Text('ok'),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          );
-                        });
+                    launch('https://snapinsight.net/contacts.pho');
                   },
                 ),
                 Divider(),
@@ -462,15 +339,15 @@ class _ProfileState extends State<Profile> {
   }
 }
 
-Future<void> _onOpen(LinkableElement link) async {
-  if (await canLaunch(link.url)) {
-    await launch(
-      link.url,
-      enableJavaScript: true,
-      forceSafariVC: false,
-      forceWebView: false,
-    );
-  } else {
-    throw 'Could not launch $link';
-  }
-}
+//Future<void> _onOpen(LinkableElement link) async {
+//  if (await canLaunch(link.url)) {
+//    await launch(
+//      link.url,
+//      enableJavaScript: true,
+//      forceSafariVC: false,
+//      forceWebView: false,
+//    );
+//  } else {
+//    throw 'Could not launch $link';
+//  }
+//}

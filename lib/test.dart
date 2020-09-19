@@ -44,13 +44,17 @@ class _TestState extends State<Test> {
 class StreamHandling {
   final geo = Geoflutterfire();
   final _firestore = FirebaseFirestore.instance;
-
+   double latitudeC;
+  double longitudeC;
+  double latitudeP;
+  double longitudeP;
+  StreamHandling({this.longitudeP,this.latitudeP,this.longitudeC,this.latitudeC});
   Stream<List<DocumentSnapshot>> getData() {
     GeoFirePoint center =
-        geo.point(latitude: 19.0100664, longitude: 73.0371634);
+        geo.point(latitude: latitudeC, longitude: longitudeC);
     var collectionReference = _firestore.collection('restaurants');
     GeoFirePoint myLocation =
-        geo.point(latitude: 19.0100664, longitude: 73.0371634);
+        geo.point(latitude: latitudeP, longitude: longitudeP);
 
     double radius = 3;
 

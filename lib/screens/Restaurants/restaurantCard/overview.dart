@@ -1,8 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:moodish_mvp/Services/betaCount.dart';
 import 'package:moodish_mvp/models/restaurantsModel.dart';
+import 'package:moodish_mvp/test.dart';
+import 'package:url_launcher/url_launcher.dart';
 //import 'package:rest/starfeedback.dart';
 
 import 'map.dart';
@@ -22,6 +26,26 @@ class _OverViewState extends State<OverView> {
   String finalRating;
   var _rating;
   String review = '';
+  bool copyDelay=false;
+  Position _currentPosition;
+  Position _restAddress;
+  Geolocator geolocator = Geolocator();
+  getCurrentLocation() async {
+    geolocator.isLocationServiceEnabled();
+    final position = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+        .then((Position position) {
+      _currentPosition = position;
+    });
+    return position;
+  }
+  getLatLngfromAddress(String restAddress)async{
+    List<Placemark> placemark = await Geolocator().placemarkFromAddress(restAddress);
+    Placemark place=placemark[0];
+    _restAddress = place.position;
+    return placemark;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -38,19 +62,7 @@ class _OverViewState extends State<OverView> {
                       children: <Widget>[
                         InkWell(
                             onTap: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: new Text("+91-01237-12372"),
-                                      actions: <Widget>[
-                                        FlatButton(
-                                          child: Text("Call"),
-                                          onPressed: () {},
-                                        )
-                                      ],
-                                    );
-                                  });
+                              launch('tel:${widget.rest.international_phone_number}');
                             },
                             child: Column(
                               children: <Widget>[
@@ -67,49 +79,8 @@ class _OverViewState extends State<OverView> {
                         InkWell(
                             onTap: () async {
                               BetaCount().count(field: 'situation');
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10.0))),
-                                      content: SingleChildScrollView(
-                                        child: Column(
-                                          children: [
-                                            Stack(
-                                              children: <Widget>[
-                                                Text("Today/'s Offers"),
-                                                Padding(
-                                                    padding:
-                                                        EdgeInsets.fromLTRB(
-                                                            0, 80, 0, 0),
-                                                    //SizedBox(height: 50),
-                                                    child: Container(
-                                                        height: 100,
-                                                        width: 100,
-                                                        color: Colors.blue,
-                                                        child: Stack(children: <
-                                                            Widget>[
-                                                          Center(
-                                                              child: Icon(
-                                                                  Icons.menu,
-                                                                  size: 20)),
-                                                        ]))),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      actions: <Widget>[
-                                        FlatButton(
-                                          child: Text(""),
-                                          onPressed: () {},
-                                        )
-                                      ],
-                                    );
-                                  });
-                            },
+                              launch('${widget.rest.website}');
+                              },
                             child: Column(
                               children: <Widget>[
                                 Icon(
@@ -123,32 +94,10 @@ class _OverViewState extends State<OverView> {
                           width: 20.0,
                         ),
                         InkWell(
-                            onTap: () {
-                              showModalBottomSheet(
-                                  context: context,
-                                  builder: (Builder) {
-                                    return Container(
-                                      height: 900.0,
-                                      color: Colors.blue,
-                                      child: Scaffold(
-                                          appBar: AppBar(
-                                        backgroundColor: Colors.white,
-                                        title: TextField(
-                                          decoration: InputDecoration(
-                                              icon: Icon(Icons.search),
-                                              hintText: "Search here"),
-                                        ),
-                                        actions: <Widget>[
-                                          IconButton(
-                                            icon: Icon(
-                                              Icons.search,
-                                            ),
-                                            onPressed: () {},
-                                          )
-                                        ],
-                                      )),
-                                    );
-                                  });
+                            onTap: ()async{
+                              await getCurrentLocation();
+                              await getLatLngfromAddress(widget.rest.address);
+                              StreamHandling(latitudeC: _currentPosition.latitude,longitudeC: _currentPosition.longitude,latitudeP: _restAddress.latitude,longitudeP: _restAddress.longitude);
                             },
                             child: Column(
                               children: <Widget>[
@@ -163,22 +112,7 @@ class _OverViewState extends State<OverView> {
                           width: 20.0,
                         ),
                         InkWell(
-                            onTap: () {
-                              showModalBottomSheet(
-                                  context: context,
-                                  builder: (Builder) {
-                                    return Container(
-                                        height: 900.0,
-                                        color: Colors.white,
-                                        child: new Text(
-                                          "Share",
-                                          style: TextStyle(
-                                            fontSize: 50,
-                                          ),
-                                          textAlign: TextAlign.left,
-                                        ));
-                                  });
-                            },
+                            onTap: () {},
                             child: Column(
                               children: <Widget>[
                                 Icon(
@@ -214,7 +148,35 @@ class _OverViewState extends State<OverView> {
                               child: Container(
                                   alignment: Alignment.centerLeft,
                                   child:
-                                      Text(widget.rest.restaurant_Location,style: TextStyle(fontSize: 16)))),
+                                      Text(widget.rest.address,style: TextStyle(fontSize: 16)))),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: EdgeInsets.all(8),
+                              child: Container(
+                                child: RaisedButton(
+                                  color: copyDelay?Colors.green:Colors.white,
+                                  onPressed: (){
+                                    setState(() {
+                                      copyDelay = true;
+                                      Future.delayed(Duration(milliseconds: 200), (){
+                                        setState(() {
+                                          copyDelay = false;
+                                        });
+                                      });
+                                    });
+                                    Clipboard.setData(ClipboardData(text: widget.rest.address));
+                                  },
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+
+                                  child: Text('Copy Location'),
+
+                                ),
+                              ),
+                            ),
+                          ),
                           Padding(
                             padding: const EdgeInsets.only(left: 5.0),
                             child: Container(
