@@ -16,8 +16,10 @@ import 'package:moodish_mvp/screens/Food/myFeed/foodft.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/polls.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/recipe.dart';
 import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
+import 'package:moodish_mvp/screens/Food/pages/explore.dart';
 
 import 'package:moodish_mvp/screens/Restaurants/mood.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 class FoodFeed extends StatefulWidget {
   final int number;
@@ -101,25 +103,22 @@ class _FoodFeedState extends State<FoodFeed> {
     return items;
   }
 
-  onChangedDeter(Deter selectedDeter) {
-    setState(() {
-      _selectedDeter = selectedDeter;
-    });
-    if (_selectedDeter.id == 1) {
-      setState(() {
-        det = 0;
-      });
-    } else if (_selectedDeter.id == 2) {
-      setState(() {
-        det = 1;
-      });
-    } else {
-      setState(() {
-        det = 2;
-      });
-    }
-    print(det);
-  }
+  bool isSwitched = false;
+
+  // onChangedDeter(value) {
+  //   setState(() {
+  //     isSwitched = value;
+  //   });
+  //   if(isSwitched == true){
+  //     setState(() {
+  //       det = 0;
+  //     });
+  //   }else{
+  //     setState(() {
+  //       det = 2;
+  //     });
+  //   }
+  // }
 
   data(BuildContext dataContext, String mood) async {
     Box _box = await Hive.openBox("preferenceBox");
@@ -145,7 +144,6 @@ class _FoodFeedState extends State<FoodFeed> {
     });
   }
 
-  bool isSwitched = false;
   @override
   Widget build(BuildContext context) {
     return IndexedStack(
@@ -188,6 +186,8 @@ class _FoodFeedState extends State<FoodFeed> {
                             Future.delayed(Duration(milliseconds: 400), () {
                               setState(() {
                                 _visible = false;
+                                ShowCaseWidget.of(context).startShowCase(
+                                    [KeysToBeInherited.of(context).explore]);
                               });
                             });
                           },
@@ -439,8 +439,17 @@ class _FoodFeedState extends State<FoodFeed> {
                                       onChanged: (val) {
                                         setState(() {
                                           isSwitched = val;
-                                          det = 0;
                                         });
+                                        if (isSwitched == true) {
+                                          setState(() {
+                                            det = 0;
+                                          });
+                                        } else {
+                                          setState(() {
+                                            det = 2;
+                                          });
+                                        }
+                                        print(isSwitched);
                                       },
                                       trackColor: Colors.grey,
                                       activeColor: Colors.lightGreen,

@@ -215,11 +215,11 @@ class _ExploreState extends State<Explore> {
     //   }
     // });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ShowCaseWidget.of(context).startShowCase([
-        _explore,
-      ]);
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   ShowCaseWidget.of(context).startShowCase([
+    //     _explore,
+    //   ]);
+    // });
 
     // DateTime now = DateTime.now();
     // String day = DateFormat('MMMMEEEEd').format(now);
