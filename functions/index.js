@@ -15795,13 +15795,13 @@ exports.returnRestaurants = functions.https.onRequest(async (req, res) => {
 
     async function recurGeolocation(radius) {
         let _querySnapshot;
-        if (radius > 45) {
+        if (radius > 30) {
             return null
         }
         else {
             let query = geocollection.near({ center: new admin.firestore.GeoPoint(lat, long), radius: radius }).limit(10);
             let snapshot = await query.get().catch(e => console.log(e));
-            if (snapshot.docs.length <= 8) {
+            if (snapshot.docs.length <= 6) {
                 _querySnapshot = await recurGeolocation(radius * 2);
                 return _querySnapshot
             }

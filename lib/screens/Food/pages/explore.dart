@@ -22,18 +22,17 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:showcaseview/showcaseview.dart';
 
-
 class KeysToBeInherited extends InheritedWidget {
-
   final GlobalKey explore;
 
   KeysToBeInherited({
     this.explore,
     Widget child,
-  }): super(child: child);
+  }) : super(child: child);
 
   static KeysToBeInherited of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<KeysToBeInherited>();
+    return context.dependOnInheritedWidgetOfExactType(
+        aspect: KeysToBeInherited);
   }
 
   @override
@@ -41,7 +40,6 @@ class KeysToBeInherited extends InheritedWidget {
     // TODO: implement updateShouldNotify
     return true;
   }
-
 }
 
 class Explore extends StatefulWidget {
@@ -50,9 +48,7 @@ class Explore extends StatefulWidget {
 }
 
 class _ExploreState extends State<Explore> {
-
-GlobalKey _explore = GlobalKey();
-
+  GlobalKey _explore = GlobalKey();
 
   bool keepAlive = false;
 
@@ -119,40 +115,39 @@ GlobalKey _explore = GlobalKey();
           deter: deter,
           check: check).then((future) {
         setState(() {
-          BlocProvider.of<FoodBloc>(context)
-              .mapEventToState(FoodEvent.add(future, "t1"));
+          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t1"));
         });
       });
-      _dqsituation0.getFood(
-          field: ['situation', "deter"],
-          value: getValue("s0", deter),
-          limit: 7,
-          deter: deter,
-          check: check).then((future) {
-        setState(() {
-          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s0"));
-        });
-      });
-      _dqsituation1.getFood(
-          field: ['situation', "deter"],
-          value: getValue("s1", deter),
-          limit: 7,
-          deter: deter,
-          check: check).then((future) {
-        setState(() {
-          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s1"));
-        });
-      });
-      _dqsituation2.getFood(
-          field: ['situation', "deter"],
-          value: getValue("s2", deter),
-          limit: 7,
-          deter: deter,
-          check: check).then((future) {
-        setState(() {
-          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s2"));
-        });
-      });
+      // _dqsituation0.getFood(
+      //     field: ['situation', "deter"],
+      //     value: getValue("s0", deter),
+      //     limit: 7,
+      //     deter: deter,
+      //     check: check).then((future) {
+      //   setState(() {
+      //     BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s0"));
+      //   });
+      // });
+      // _dqsituation1.getFood(
+      //     field: ['situation', "deter"],
+      //     value: getValue("s1", deter),
+      //     limit: 7,
+      //     deter: deter,
+      //     check: check).then((future) {
+      //   setState(() {
+      //     BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s1"));
+      //   });
+      // });
+      // _dqsituation2.getFood(
+      //     field: ['situation', "deter"],
+      //     value: getValue("s2", deter),
+      //     limit: 7,
+      //     deter: deter,
+      //     check: check).then((future) {
+      //   setState(() {
+      //     BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s2"));
+      //   });
+      // });
     });
   }
 
@@ -160,13 +155,13 @@ GlobalKey _explore = GlobalKey();
     and zero if opened on the same day used to update data daily */
   Future<int> checkDate() async {
     Box _box = await Hive.openBox("date");
-    String saveDate = await _box.get("date");
+    String saveDate = await _box.get("date2");
     DateTime now = DateTime.now();
     String date = DateFormat('EEE, M/d/y').format(now);
     if (date == saveDate) {
-      return 1; //change to zero for testing purpose
+      return 0; //change to zero for testing purpose
     } else {
-      _box.put("date", date);
+      _box.put("date2", date);
       return 0;
     }
   }
@@ -175,10 +170,10 @@ GlobalKey _explore = GlobalKey();
   List<dynamic> getValue(String _list, String deter) {
     switch (_list) {
       case 't0':
-        return ["Savory", deter];
+        return ["spicy", deter];
         break;
       case 't1':
-        return ["Sweet", deter];
+        return ["sweet", deter];
         break;
       // case 't2':
       //   return [["Salty"]];
@@ -200,7 +195,6 @@ GlobalKey _explore = GlobalKey();
   bool _loadingData = false;
   @override
   Widget build(BuildContext context) {
-
     SharedPreferences preferences;
 
     // displayShowCase() async {
@@ -221,12 +215,11 @@ GlobalKey _explore = GlobalKey();
     //   }
     // });
 
-    // WidgetsBinding.instance.addPostFrameCallback((_){
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
     //   ShowCaseWidget.of(context).startShowCase([
     //     _explore,
     //   ]);
     // });
-
 
     // DateTime now = DateTime.now();
     // String day = DateFormat('MMMMEEEEd').format(now);
@@ -275,12 +268,14 @@ GlobalKey _explore = GlobalKey();
                                     Map<String, List<FoodListModel>>>(
                                   buildWhen: (Map<String, List<FoodListModel>>
                                           previous,
-                                      Map<String, List<FoodListModel>> current) {
+                                      Map<String, List<FoodListModel>>
+                                          current) {
                                     return true;
                                   },
                                   listenWhen: (Map<String, List<FoodListModel>>
                                           previous,
-                                      Map<String, List<FoodListModel>> current) {
+                                      Map<String, List<FoodListModel>>
+                                          current) {
                                     if (current.length > previous.length) {
                                       return true;
                                     }
@@ -292,10 +287,12 @@ GlobalKey _explore = GlobalKey();
                                         Expanded(
                                           child: ListView.builder(
                                             scrollDirection: Axis.horizontal,
-                                            itemCount: foodList["tsp"].length + 1,
+                                            itemCount:
+                                                foodList["tsp"].length + 1,
                                             itemBuilder:
                                                 (BuildContext context, index) {
-                                              if (foodList["tsp"].length != index)
+                                              if (foodList["tsp"].length !=
+                                                  index)
                                                 return TodaySpecial(
                                                   foodList: foodList["tsp"]
                                                       [index],
@@ -311,9 +308,11 @@ GlobalKey _explore = GlobalKey();
                                                               color: !_loadingData
                                                                   ? Colors
                                                                       .blue[300]
-                                                                  : Colors.black,
+                                                                  : Colors
+                                                                      .black,
                                                             ),
-                                                            onPressed: () async {
+                                                            onPressed:
+                                                                () async {
                                                               setState(() {
                                                                 _loadingData =
                                                                     true;
@@ -332,10 +331,9 @@ GlobalKey _explore = GlobalKey();
                                                                 BlocProvider.of<
                                                                             FoodBloc>(
                                                                         context)
-                                                                    .add(FoodEvent
-                                                                        .add(
-                                                                            future,
-                                                                            "tsp"));
+                                                                    .add(FoodEvent.add(
+                                                                        future,
+                                                                        "tsp"));
                                                                 setState(() {
                                                                   _loadingData =
                                                                       false;
@@ -349,7 +347,8 @@ GlobalKey _explore = GlobalKey();
                                                           child:
                                                               SpinKitFadingCircle(
                                                                   color: Colors
-                                                                      .blue[300],
+                                                                          .blue[
+                                                                      300],
                                                                   size: 30.0),
                                                         ),
                                                       );
@@ -384,15 +383,12 @@ GlobalKey _explore = GlobalKey();
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(5.0),
-                              child: Showcase(
-                                key: _explore,
-                                description: "ksdvnejnfvfn",
-                                child: Text(
-                                  'Food for Every Taste',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 20.0, fontWeight: FontWeight.bold),
-                                ),
+                              child: Text(
+                                'Food for Every Taste',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
@@ -404,7 +400,7 @@ GlobalKey _explore = GlobalKey();
                             children: <Widget>[
                               GestureDetector(
                                 child: EveryTaste(
-                                  title: "Savoury",
+                                  title: "Spicy",
                                   // isActive: true,
                                   index: indxT,
                                   stIndex: 0,
@@ -441,8 +437,9 @@ GlobalKey _explore = GlobalKey();
                           height: 300,
                           child: BlocConsumer<FoodBloc,
                               Map<String, List<FoodListModel>>>(
-                            buildWhen: (Map<String, List<FoodListModel>> previous,
-                                Map<String, List<FoodListModel>> current) {
+                            buildWhen:
+                                (Map<String, List<FoodListModel>> previous,
+                                    Map<String, List<FoodListModel>> current) {
                               return true;
                             },
                             listenWhen:
@@ -468,7 +465,7 @@ GlobalKey _explore = GlobalKey();
                           ),
                         ),
                         SizedBox(height: 20),
-                        Padding(
+                        /* Padding(
                           padding: const EdgeInsets.only(left: 10.0),
                           child: Container(
                             width: 270.0,
@@ -484,7 +481,8 @@ GlobalKey _explore = GlobalKey();
                                 'Food for Every Situation',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontSize: 20.0, fontWeight: FontWeight.bold),
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
@@ -546,8 +544,9 @@ GlobalKey _explore = GlobalKey();
                           height: 300,
                           child: BlocConsumer<FoodBloc,
                               Map<String, List<FoodListModel>>>(
-                            buildWhen: (Map<String, List<FoodListModel>> previous,
-                                Map<String, List<FoodListModel>> current) {
+                            buildWhen:
+                                (Map<String, List<FoodListModel>> previous,
+                                    Map<String, List<FoodListModel>> current) {
                               return true;
                             },
                             listenWhen:
@@ -603,7 +602,7 @@ GlobalKey _explore = GlobalKey();
                           //         desc: 'description'),
                           //   ],
                           // ),
-                        ),
+                        ), */
                       ],
                     ),
                   ],

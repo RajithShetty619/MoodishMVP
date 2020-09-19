@@ -102,6 +102,7 @@ class _FoodFeedState extends State<FoodFeed> {
     }
     return items;
   }
+
   bool isSwitched = false;
 
   // onChangedDeter(value) {
@@ -138,8 +139,7 @@ class _FoodFeedState extends State<FoodFeed> {
         check: 0).then((future) {
       setState(() {
         moodSelection = mood;
-        BlocProvider.of<FoodBloc>(dataContext)
-            .add(FoodEvent.add(future, "0"));
+        BlocProvider.of<FoodBloc>(dataContext).add(FoodEvent.add(future, "0"));
       });
     });
   }
@@ -163,14 +163,6 @@ class _FoodFeedState extends State<FoodFeed> {
                         fontWeight: FontWeight.bold,
                         fontSize: 30,
                         color: Colors.pinkAccent),
-                    /* children: [
-                        TextSpan(
-                            text: 'mood',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 30,
-                                color: Colors.orange))
-                      ] */
                   ),
                 ),
                 SizedBox(
@@ -195,7 +187,7 @@ class _FoodFeedState extends State<FoodFeed> {
                               setState(() {
                                 _visible = false;
                                 ShowCaseWidget.of(context).startShowCase(
-                                  [KeysToBeInherited.of(context).explore]);
+                                    [KeysToBeInherited.of(context).explore]);
                               });
                             });
                           },
@@ -445,20 +437,20 @@ class _FoodFeedState extends State<FoodFeed> {
                                     SizedBox(width: 5),
                                     CupertinoSwitch(
                                       value: isSwitched,
-                                      onChanged: (val)  {
-                                        setState(()  {
+                                      onChanged: (val) {
+                                        setState(() {
                                           isSwitched = val;
                                         });
-                                        if(isSwitched == true){
-                                            setState(() {
-                                              det = 0;
-                                            });
-                                          }else {
-                                            setState(() {
-                                              det = 2;
-                                            });
-                                          }
-                                          print(isSwitched);
+                                        if (isSwitched == true) {
+                                          setState(() {
+                                            det = 0;
+                                          });
+                                        } else {
+                                          setState(() {
+                                            det = 2;
+                                          });
+                                        }
+                                        print(isSwitched);
                                       },
                                       trackColor: Colors.grey,
                                       activeColor: Colors.lightGreen,

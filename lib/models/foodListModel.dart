@@ -1,8 +1,8 @@
 import 'package:hive/hive.dart';
 
-part 'foodListModel.g.dart';/* put this to generate hive file  (if theres an error here run the command give at the bottom) */
+part 'foodListModel.g.dart'; /* put this to generate hive file  (if theres an error here run the command give at the bottom) */
 
-@HiveType(typeId: 0)/* put different typeId for different class */
+@HiveType(typeId: 0) /* put different typeId for different class */
 class FoodListModel {
   @HiveField(0)
   final String foodName;
@@ -43,38 +43,39 @@ class FoodListModel {
   @HiveField(18)
   final String protein;
   @HiveField(19)
-  final String restaurants;
+  final List<String> restaurants;
   @HiveField(20)
   final String delivery;
   @HiveField(21)
-  final String sr_no ;
+  final String sr_no;
   @HiveField(22)
-  final int like ;
+  final int like;
 
-  FoodListModel(
-      {this.foodName,
-      this.deter,
-      this.cuisine,
-      this.meal_type,
-      this.images,
-      this.description,
-      this.recipe,
-      this.ingredients,
-      this.servings,
-      this.time,
-      this.nutrients,
-      this.situation,
-      this.taste,
-      this.preparation,
-      this.delivery,
-      this.calories,
-      this.fat,
-      this.carbohydrates,
-      this.mood,
-      this.protein,
-      this.restaurants,
-      this.sr_no,
-      this.like});
+  FoodListModel({
+    this.foodName,
+    this.deter,
+    this.cuisine,
+    this.meal_type,
+    this.images,
+    this.description,
+    this.recipe,
+    this.ingredients,
+    this.servings,
+    this.time,
+    this.nutrients,
+    this.situation,
+    this.taste,
+    this.preparation,
+    this.delivery,
+    this.calories,
+    this.fat,
+    this.carbohydrates,
+    this.mood,
+    this.protein,
+    this.restaurants,
+    this.sr_no,
+    this.like,
+  });
 
 /*  
  AFTER ANY CHANGES RUN THIS COMMANDS 

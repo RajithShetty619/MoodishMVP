@@ -85,9 +85,7 @@ class _FoodHomeState extends State<FoodHome> {
             ),
             Expanded(
               child: IndexedStack(
-                index: _switch
-                    ? 0
-                    : 1, // switch between Foo and Bar based on condition
+                index: _switch ? 0 : 1,
                 children: [
                   Explore(),
                   FoodFeed(),

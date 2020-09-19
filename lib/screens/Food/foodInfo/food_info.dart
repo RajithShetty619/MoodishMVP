@@ -4,9 +4,7 @@ import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/foodRest.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/foodabout.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/foodrecipe.dart';
-import 'package:moodish_mvp/screens/Food/foodInfo/restaurantTab.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/tabs_info.dart';
-import 'package:moodish_mvp/screens/Restaurants/restaurantCard/homepage.dart';
 
 class Food_Info extends StatefulWidget {
   const Food_Info({
@@ -173,7 +171,7 @@ class _Food_InfoState extends State<Food_Info> {
                       foodList: widget.foodList,
                     ),
                   ),
-                if (indx == 3) Container(child: FoodRest()),
+                if (indx == 3) Container(child: FoodRest(foodList:widget.foodList)),
               ],
             ),
           ],

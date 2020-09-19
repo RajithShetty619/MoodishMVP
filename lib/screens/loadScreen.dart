@@ -69,7 +69,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
           check: check).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "d0"));
       });
-     
     });
     GeolocationRest().getRestFromLocation().then((rest) {
       BlocProvider.of<RestaurantBloc>(context)
@@ -84,14 +83,14 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   Future<int> checkDate() async {
     Box _box = await Hive.openBox("date");
-    String saveDate = await _box.get("date");
+    String saveDate = await _box.get("date1");
     DateTime now = DateTime.now();
     String date = DateFormat('EEE, M/d/y').format(now);
 
     if (date == saveDate) {
       return 1;
     } else {
-      _box.put("date", date);
+      _box.put("date1", date);
       return 0;
     }
   }

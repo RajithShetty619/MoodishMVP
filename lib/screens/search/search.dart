@@ -3,12 +3,10 @@ import 'package:flappy_search_bar/search_bar_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/Services/searchFunction.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
 import 'package:moodish_mvp/screens/Food/components/Food_Situation.dart';
-import 'package:moodish_mvp/screens/Food/components/Food_Taste.dart';
 import 'package:moodish_mvp/screens/Food/components/TodaySpecial.dart';
 import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 
@@ -23,8 +21,7 @@ class _SearchState extends State<Search> {
     super.initState();
     setState(() {
       SearchFunction().recentSearch().then((future) {
-        BlocProvider.of<FoodBloc>(context)
-            .add(FoodEvent.add(future, "search"));
+        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "search"));
       });
     });
   }

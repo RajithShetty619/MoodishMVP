@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hive/hive.dart';
+import 'package:moodish_mvp/Services/authenticate.dart';
+import 'package:moodish_mvp/Services/storage.dart';
 import 'package:moodish_mvp/models/factsModel.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/models/pollsModel.dart';
@@ -7,6 +9,7 @@ import 'package:moodish_mvp/models/restaurantsModel.dart';
 import 'package:moodish_mvp/models/this_thatModel.dart';
 import 'package:moodish_mvp/models/yesNo.dart';
 import 'database.dart';
+import 'dart:convert';
 
 class DatabaseQuery {
   String _lastDocument;
@@ -273,5 +276,60 @@ class DatabaseQuery {
           factHeading: _docData['fact'],
           factStatment: _docData['factStatement']);
     }).toList();
+  }
+
+  Future<List<FoodListModel>> getLikedFood() async {
+    String uid = Authenticate().returnUid();
+    CollectionReference _ref = FirebaseFirestore.instance
+        .collection('Username')
+        .doc(uid)
+        .collection("data");
+
+    QuerySnapshot recent =
+        await _ref.orderBy('timestamp', descending: true).limit(6).get();
+
+    Future<List<FoodListModel>> listFromSnapshot(QuerySnapshot snapshot) async {
+      /* Future wait is used to make sure each iteration
+      of the map is awaited by the code */
+      return Future.wait(snapshot.docs.map((doc) async {
+        Map<String, dynamic> _docData = doc.data();
+        /* convert image name to url from storage */
+
+        List<String> _preparation = [];
+        List<String> _ingredients = [];
+        _docData["preparation"].map((e) => _preparation.add(e));
+        _docData["ingredients"].map((e) => _preparation.add(e));
+
+        return FoodListModel(
+            foodName: _docData["food_item"] ?? '',
+            deter: _docData["deter"] ?? '',
+            cuisine:
+                "${_docData['cuisine'][0].toUpperCase()}${_docData['cuisine'].substring(1)}" ??
+                    '',
+            meal_type: _docData["meal_type"] ?? '',
+            images: _docData['images'] ?? '',
+            description: _docData["description"] ?? '',
+            recipe: _docData["recipe"] ?? '',
+            ingredients: _ingredients ?? '',
+            servings: _docData["serving"] ?? '',
+            time: _docData["time"] ?? '',
+            nutrients: _docData["nutrients"] ?? '',
+            taste: _docData["taste"] ?? '',
+            situation: _docData["situation"] ?? '',
+            preparation: _preparation ?? '',
+            calories: _docData["calories"] ?? '',
+            fat: _docData["fat"] ?? '',
+            carbohydrates: _docData["carbohydrates"] ?? '',
+            protein: _docData["protein"] ?? '',
+            mood: _docData["mood"] ?? '',
+            // restaurants: _docData["restaurants"] ?? '',
+            delivery: _docData["delivery"] ?? '',
+            sr_no: _docData["sr_no"] ?? '');
+      }).toList());
+    }
+
+    List<FoodListModel> recentDocs = await listFromSnapshot(recent);
+
+    return recentDocs;
   }
 }

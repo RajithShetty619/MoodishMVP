@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/models/foodListModel.dart';
+
 class FoodRest extends StatefulWidget {
+  final FoodListModel foodList;
+  FoodRest({this.foodList});
   @override
   _FoodRestState createState() => _FoodRestState();
 }

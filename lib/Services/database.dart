@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hive/hive.dart';
@@ -7,6 +8,7 @@ import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/models/name.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:moodish_mvp/models/restaurantsModel.dart';
+import 'dart:convert';
 
 class DatabaseService {
   final CollectionReference userName =
@@ -73,18 +75,62 @@ class DatabaseService {
       String uid = Authenticate().returnUid();
       Map<String, dynamic> _food = {};
 
-      _food = {
-        'foodName': food.foodName,
-        'meal_type': food.meal_type,
-        'deter': food.deter
-      };
+      // _food = {
+      //   "foodName": food.foodName,
+      //   "deter": food.deter,
+      //   "cuisine": food.cuisine,
+      //   "meal_type": food.meal_type,
+      //   "images": food.images,
+      //   "description": food.description,
+      //   "recipe": food.recipe,
+      //   "ingredients": food.ingredients,
+      //   "servings": food.servings,
+      //   "time": food.time,
+      //   "nutrients": food.nutrients,
+      //   "taste": food.taste,
+      //   "situation": food.situation,
+      //   "preparation": food.preparation,
+      //   "calories": food.calories,
+      //   "fat": food.fat,
+      //   "carbohydrates": food.carbohydrates,
+      //   "protein": food.protein,
+      //   "mood": food.mood,
+      //   "restaurants": food.restaurants,
+      //   "delivery": food.delivery,
+      //   "sr_no": food.sr_no,
+      //   "timestamp": FieldValue.serverTimestamp()
+      // };
 
       await FirebaseFirestore.instance
           .collection("Username")
           .doc("$uid")
           .collection("data")
-          .doc("${food.mood}")
-          .set({food.sr_no: _food}, SetOptions(merge: true));
+          .doc("${food.sr_no}")
+          .set({
+        "foodName": food.foodName,
+        "deter": food.deter,
+        "cuisine": food.cuisine,
+        "meal_type": food.meal_type,
+        "images": food.images,
+        "description": food.description,
+        "recipe": food.recipe,
+        "ingredients": food.ingredients,
+        "servings": food.servings,
+        "time": food.time,
+        "nutrients": food.nutrients,
+        "taste": food.taste,
+        "situation": food.situation,
+        "preparation": food.preparation,
+        "calories": food.calories,
+        "fat": food.fat,
+        "carbohydrates": food.carbohydrates,
+        "protein": food.protein,
+        "mood": food.mood,
+        "restaurants": food.restaurants,
+        "delivery": food.delivery,
+        "sr_no": food.sr_no,
+        "timestamp": FieldValue.serverTimestamp()
+      }, SetOptions(merge: true));
     }
     await documentReference.set({
       field: FieldValue.increment(1) /* atomically increments data by 1 */
@@ -175,7 +221,7 @@ class DatabaseService {
     return Future.wait(snapshot.docs.map((doc) async {
       Map<String, dynamic> _docData = doc.data();
       /* convert image name to url from storage */
-      String _url = await Storage().getUrl(_docData["image"]);
+      String _url = await Storage().getUrl(_docData["food_item"]);
 
       List<String> _preparation = [];
       List<String> _ingredients = [];
@@ -191,21 +237,24 @@ class DatabaseService {
       /* initialized */
       i = 2;
       /* same reason as preparation */
-      _ingredients.add(_docData["ingredients"]);
+      _ingredients.add(_docData["ingredient"]);
       /* converting step1,step2..... to List of preparation */
       while (_docData["ingredient $i"] != null) {
         _ingredients.add(_docData["ingredient $i"]);
 
         ++i;
       }
+      // String data = _docData["restaurants"];
+      // data =
+      //     data.replaceAll("'", "`").replaceAll('"', "\'").replaceAll('`', '"');
+      // List<dynamic> list = await json.decode(data) as List;
+
       /* might look overwhelming but just 
       initialized constructor of FoodListModel */
       return FoodListModel(
           foodName: _docData["food_item"] ?? '',
           deter: _docData["deter"] ?? '',
-          cuisine:
-              "${_docData['cuisine'][0].toUpperCase()}${_docData['cuisine'].substring(1)}" ??
-                  '',
+          cuisine: _docData["cuisine"] ?? '',
           meal_type: _docData["meal_type"] ?? '',
           images: _url ?? '',
           description: _docData["description"] ?? '',
@@ -222,7 +271,7 @@ class DatabaseService {
           carbohydrates: _docData["carbohydrates"] ?? '',
           protein: _docData["protein"] ?? '',
           mood: _docData["mood"] ?? '',
-          restaurants: _docData["restaurants"] ?? '',
+          // restaurants: _docData["restaurants"] ?? [],
           delivery: _docData["delivery"] ?? '',
           sr_no: _docData["sr_no"] ?? '');
       // like: _docData["like"] ?? 0);

@@ -20,7 +20,7 @@ class Mood_Food extends StatefulWidget {
 }
 
 class _Mood_FoodState extends State<Mood_Food> {
-  bool _like = true;
+  bool _like = false;
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +79,7 @@ class _Mood_FoodState extends State<Mood_Food> {
                           child: Padding(
                             padding: const EdgeInsets.all(2.0),
                             child: IconButton(
-                                icon: _like
+                                icon: !_like
                                     ? Icon(
                                         Icons.favorite_border,
                                         color: Colors.white,
@@ -92,6 +92,9 @@ class _Mood_FoodState extends State<Mood_Food> {
                                       ),
                                 onPressed: () async {
                                   if (!_like) {
+                                    setState(() {
+                                      _like = !_like;
+                                    });
                                     await DatabaseService().likeTransction(
                                         food: widget.foodList,
                                         sr_no: widget.foodList.sr_no,
@@ -99,9 +102,6 @@ class _Mood_FoodState extends State<Mood_Food> {
                                         field: "like");
                                     BetaCount().count(field: 'situation');
                                   }
-                                  setState(() {
-                                    _like = !_like;
-                                  });
                                 }),
                           ),
                         ),

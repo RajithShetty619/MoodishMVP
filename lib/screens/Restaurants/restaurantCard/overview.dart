@@ -97,8 +97,6 @@ class _OverViewState extends State<OverView> {
                             onTap: ()async{
                               await getCurrentLocation();
                               await getLatLngfromAddress(widget.rest.address);
-//                              StreamHandling(latitudeC: _currentPosition.latitude,longitudeC: _currentPosition.longitude,latitudeP: _restAddress.latitude,longitudeP: _restAddress.longitude);
-//
                             },
                             child: Column(
                               children: <Widget>[
