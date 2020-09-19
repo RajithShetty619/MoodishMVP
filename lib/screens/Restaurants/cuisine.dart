@@ -54,13 +54,16 @@ class _CuisineState extends State<Cuisine> {
             children: <Widget>[
               Align(
                 alignment: Alignment.center,
-                child: RichText(
-                  text: TextSpan(
-                    text: 'Which Cuisines would you prefer?',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
-                        color: Colors.black),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(10,10,10,0),
+                  child: RichText(
+                    text: TextSpan(
+                      text: 'Which Cuisines would you prefer?',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30,
+                          color: Colors.black),
+                    ),
                   ),
                 ),
               ),
@@ -68,14 +71,14 @@ class _CuisineState extends State<Cuisine> {
                 height: 20.0,
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.fromLTRB(10,10,10,0),
                 child: Container(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'Please select any 5, We will personalise the app for you ',
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                        fontSize: 18.0,
+                        fontSize: 16.0,
                         fontStyle: FontStyle.italic,
                         fontWeight: FontWeight.w400),
                   ),
@@ -98,21 +101,10 @@ class _CuisineState extends State<Cuisine> {
                       return GestureDetector(
                         onTap: () {
                           dynamic _val = cuisine[index];
-                          Future.delayed(Duration(milliseconds: 500), () {
-                            setState(() {
-                              cuisine.remove(_val);
-                              if (pref.length == 9) {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return FoodPreference();
-                                }));
-                              }
-                            });
-                          });
+                         
                           setState(() {
                             pref.add(_val.cuisine);
                             i++;
-                            cuisine[index]._visible = !cuisine[index]._visible;
                           });
                         },
                         child: cuisineFilter(
@@ -154,7 +146,7 @@ class _CuisineState extends State<Cuisine> {
                         "don't worry, You can change this later! ",
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                            fontSize: 16.0,
+                            fontSize: 15.0,
                             fontStyle: FontStyle.italic,
                             fontWeight: FontWeight.w400),
                       ),
@@ -181,6 +173,7 @@ class _CuisineState extends State<Cuisine> {
                               alignment: Alignment.centerRight,
                               child: RaisedButton(
                                 onPressed: () async {
+                                  i++;
                                   if (i + 1 > 3) {
                                     Box box =
                                         await Hive.openBox('preferenceBox');
@@ -200,7 +193,8 @@ class _CuisineState extends State<Cuisine> {
                               alignment: Alignment.center,
                               child: GestureDetector(
                                 onTap: () async {
-                                  if (i + 1 > 3) {
+                                  i++;
+                                  if (i + 1 > 2) {
                                     Box box =
                                         await Hive.openBox('preferenceBox');
                                     box.put('preference', pref);
@@ -211,7 +205,8 @@ class _CuisineState extends State<Cuisine> {
                                     }));
                                   } else
                                     setState(() {
-                                      err = 'Select ${3 - i + 1} more!';
+                                      err = 'Select ${2 - i + 1} more!';
+                                      print(i);
                                     });
                                 },
                                 child: Container(
