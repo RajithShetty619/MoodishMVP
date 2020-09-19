@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
-import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
-import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 
 class LikedFood extends StatefulWidget {
   @override
