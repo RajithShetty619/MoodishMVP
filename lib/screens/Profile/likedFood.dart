@@ -97,7 +97,7 @@ class _LikedFoodState extends State<LikedFood> {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      Food_Info(foodList: foodList[indexg],)));
+                                                      Food_Info(foodList: foodList[index],)));
                                         },
                                         child: CachedNetworkImage(
                                           imageUrl: foodList[index].images,
