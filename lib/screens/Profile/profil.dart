@@ -158,7 +158,8 @@ class _ProfileState extends State<Profile> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Settings()));
+                                builder: (context) => Settings( user: userData,
+                                  image: _image,)));
                       },
                     ),
                     IconButton(

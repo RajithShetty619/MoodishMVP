@@ -48,14 +48,14 @@ class _FoodRecipeState extends State<FoodRecipe> {
                 ),
               ),
               Spacer(),
-              if(widget.foodList.preparation != null)
+              if(widget.foodList.time != null)
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
                       padding: EdgeInsets.all(16),
                       child:Text(widget.foodList.time)),
                 ),
-              if(widget.foodList.preparation == null)
+              if(widget.foodList.time == null)
                 Padding(
                     padding: EdgeInsets.all(8.0),
                     child:Text('empty')),

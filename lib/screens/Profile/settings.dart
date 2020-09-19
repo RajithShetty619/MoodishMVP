@@ -6,6 +6,9 @@ import 'package:moodish_mvp/screens/Profile/preferenceSettings.dart';
 import 'package:app_settings/app_settings.dart';
 
 class Settings extends StatefulWidget {
+  final ImageProvider image;
+  final Map<String, dynamic> user;
+  Settings({this.image, this.user});
   @override
   _SettingsState createState() => _SettingsState();
 }
@@ -65,6 +68,17 @@ class _SettingsState extends State<Settings> {
                 },
                 title: Text('Account Settings',),
                 subtitle: Text('Change your password',style: TextStyle(color: Colors.grey),),
+              ),
+              ListTile(
+                onTap: (){
+                  Navigator
+                      .push(context,
+                      MaterialPageRoute(builder: (context) {
+                        return EditProfile(user: widget.user,image: widget.image,);
+                      }));
+                },
+                title: Text('Edit Profile',),
+                subtitle: Text('Change Profile pic ,Phone no. etc',style: TextStyle(color: Colors.grey),),
               ),
               ListTile(
                 onTap: (){
