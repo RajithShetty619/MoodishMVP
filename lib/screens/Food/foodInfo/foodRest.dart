@@ -1,8 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/models/restaurantsModel.dart';
+import 'package:moodish_mvp/screens/Restaurants/restaurantCard/homepage.dart';
+import 'package:page_transition/page_transition.dart';
 
 class FoodRest extends StatefulWidget {
   final FoodListModel foodList;
@@ -19,91 +22,144 @@ class _FoodRestState extends State<FoodRest> {
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           List<RestListModel> _rest = snapshot.data;
-          return ListView(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            children: <Widget>[
-              ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: _rest.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Material(
-                          child: Row(
-                            children: <Widget>[
-                              Container(
-                                height:
-                                    MediaQuery.of(context).size.height / 7.5,
-                                width: 110,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(color: Colors.black),
-                                ),
-                              ),
-                              Spacer(),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    'Restaurant Name',
-                                    style: TextStyle(
-                                        fontSize:
-                                            MediaQuery.of(context).size.width /
-                                                15),
-                                  ),
-                                  Text(
-                                    'Cuisine',
-                                    style: TextStyle(
-                                        fontSize:
-                                            MediaQuery.of(context).size.width /
-                                                16,
-                                        color: Colors.grey),
-                                  ),
-                                ],
-                              ),
-                              Spacer(),
-                              Container(
+          return ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              primary: false,
+              shrinkWrap: true,
+              itemCount: _rest.length,
+              itemBuilder: (context, index) {
+                print('###################################');
+                print(_rest.length);
+                if (_rest.length != 0) {
+                  return Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            PageTransition(
+                                type: PageTransitionType.rightToLeft,
+                                child: HomePage(
+                                  restaurant: _rest[index],
+                                )));
+                      },
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0)),
+                        child: Row(
+                          children: <Widget>[
+                            CachedNetworkImage(
+                              imageUrl: _rest[index].photo_url,
+                              imageBuilder: (context, imageProvider) {
+                                return Container(
+                                  height: 120,
+                                  width: 110,
                                   decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.black),
+                                    borderRadius: BorderRadius.circular(20),
+                                    image: DecorationImage(
+                                        image: imageProvider,
+                                        fit: BoxFit.cover),
+                                  ),
+                                );
+                              },
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width -
+                                                190,
+                                        child: Padding(
+                                          padding: EdgeInsets.all(8),
+                                          child: Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Text(
+                                              _rest[index].restaurant_Name,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 8, bottom: 8),
+                                      child: Row(
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.star,
+                                            size: 18,
+                                          ),
+                                          _rest[index].rating == '5'
+                                              ? Text(
+                                                  '${_rest[index].rating}.0',
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                )
+                                              : Text(
+                                                  _rest[index].rating,
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width - 145,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8),
+                                      child: Text(
+                                        _rest[index].cuisines,
+                                        maxLines: 3,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Container(
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Icon(
-                                      Icons.chevron_right,
-                                      color: Colors.white,
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Row(
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.location_on,
+                                            size: 20,
+                                          ),
+                                          Text(
+                                              _rest[index].restaurant_Location),
+                                        ],
+                                      ),
                                     ),
-                                  )),
-                            ],
-                          ),
-                        )
-
-//        ListTile(
-//          leading: Container(
-//            height: MediaQuery.of(context).size.height*10,
-//            width: 100,
-//            decoration: BoxDecoration(
-//              borderRadius: BorderRadius.circular(10),
-//              border: Border.all(color: Colors.black)
-//            ),
-//          ),
-//          title: Text('Restaurant Name',style: TextStyle(fontSize: MediaQuery.of(context).size.width/15),),
-//          subtitle: Text('Cuisine',style: TextStyle(fontSize: MediaQuery.of(context).size.width/16,color: Colors.grey),),
-//          trailing: Container(
-//              decoration: BoxDecoration(
-//                  shape: BoxShape.circle,
-//                  color: Colors.black
-//              ),
-//              child: Padding(
-//                padding: const EdgeInsets.all(8.0),
-//                child: Icon(Icons.chevron_right,color: Colors.white,),
-//              )),
-//        ),
-                        );
-                  }),
-            ],
-          );
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                } else {
+                  return Container();
+                }
+              });
         } else {
           return Center(
             child: SpinKitChasingDots(

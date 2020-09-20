@@ -41,7 +41,7 @@ class _FoodRecipeState extends State<FoodRecipe> {
                   child: Text(
                     'Preparation Time:',
                     style: TextStyle(
-                      fontSize: 26,
+                      fontSize: 24,
                     ),
                     textAlign: TextAlign.left,
                   ),
@@ -59,8 +59,6 @@ class _FoodRecipeState extends State<FoodRecipe> {
                 Padding(
                     padding: EdgeInsets.all(8.0),
                     child:Text('empty')),
-
-
             ],
           ),
           SizedBox(height: 15),
@@ -195,7 +193,7 @@ class _FoodRecipeState extends State<FoodRecipe> {
                           softWrap: true,
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                               fontSize: 20),
+                               fontSize: 18),
                         ),
                       ),
                     ));

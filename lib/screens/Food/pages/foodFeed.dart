@@ -186,8 +186,7 @@ class _FoodFeedState extends State<FoodFeed> {
                             Future.delayed(Duration(milliseconds: 400), () {
                               setState(() {
                                 _visible = false;
-                                ShowCaseWidget.of(context).startShowCase(
-                                    [KeysToBeInherited.of(context).explore]);
+                                
                               });
                             });
                           },
