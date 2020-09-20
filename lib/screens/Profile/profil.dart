@@ -135,7 +135,7 @@ class _ProfileState extends State<Profile> {
                   thickness: 2.0,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     GestureDetector(
                       onTap: (){
@@ -300,45 +300,47 @@ class _ProfileState extends State<Profile> {
                 //   value: false,
                 //   onChanged: (val){},
                 //  ),
-                Container(
-                  height: 50,
-                  child: FlatButton(
-                    onPressed: () async {
-                      await Authenticate().signOut();
-                    },
-                    padding: EdgeInsets.all(0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: InkWell(
-                      child: Ink(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                            colors: [
-                              Colors.orange[900],
-                              Colors.orange,
-                              Colors.orange[900],
-                            ],
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 40,
+                    child: FlatButton(
+                      onPressed: () async {
+                        await Authenticate().signOut();
+                      },
+                      padding: EdgeInsets.all(0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: InkWell(
+                        child: Ink(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              colors: [
+                                Colors.white,
+                                Colors.white,
+                              ],
+                            ),
+                            borderRadius: BorderRadius.circular(6),
                           ),
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: FlatButton(
-                          onPressed: () async {
-                            await Authenticate().signOut();
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            constraints: BoxConstraints(
-                                minHeight: 50, maxWidth: double.infinity),
-                            child: Text(
-                              'Logout',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                          child: FlatButton(
+                            onPressed: () async {
+                              await Authenticate().signOut();
+                            },
+                            child: Container(
+                              alignment: Alignment.center,
+                              constraints: BoxConstraints(
+                                  minHeight: 50, maxWidth: double.infinity),
+                              child: Text(
+                                'Logout',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.orange[600],
+                                ),
+                                textAlign: TextAlign.left,
                               ),
-                              textAlign: TextAlign.left,
                             ),
                           ),
                         ),

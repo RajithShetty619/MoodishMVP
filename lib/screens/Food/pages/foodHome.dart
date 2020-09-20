@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:moodish_mvp/Services/betaCount.dart';
 import 'package:moodish_mvp/screens/Food/pages/explore.dart';
 import 'package:moodish_mvp/screens/Food/pages/foodFeed.dart';
-import 'package:showcaseview/showcaseview.dart';
 
 class FoodHome extends StatefulWidget {
   @override
