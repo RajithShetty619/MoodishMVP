@@ -54,12 +54,16 @@ class _DeleteAccSettingsState extends State<DeleteAccSettings> {
               child: Divider(thickness: 2.0,),
             ),
             ListTile(
-              onTap: (){
-                Navigator
+              onTap: ()async{
+                dynamic data = await  Navigator
                     .push(context,
                     MaterialPageRoute(builder: (context) {
                       return DeleteAcc();
                     }));
+                if(data=="pop")
+                  {
+                    Navigator.of(context).pop('pop');
+                  }
 
               },
               title: Text('Delete Account',),

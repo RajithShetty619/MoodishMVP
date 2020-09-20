@@ -8,10 +8,12 @@ class DeleteAcc extends StatefulWidget {
 
 class _DeleteAccState extends State<DeleteAcc> {
   final _formKey = new GlobalKey<FormState>();
-  String _email = '', _password = '';
+  String _email = '',
+      _password = '';
   bool _obscureText = true;
   String error = '';
   final GlobalKey<State> _keyLoader = new GlobalKey<State>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,31 +86,39 @@ class _DeleteAccState extends State<DeleteAcc> {
                   obscureText: _obscureText,
                 ),
                 SizedBox(height: 30.0),
-                Container(
-                  height: 40.0,
-                  child: Material(
-                    borderRadius: BorderRadius.circular(20.0),
-                    shadowColor: Colors.lightBlueAccent,
-                    color: Colors.blue,
-                    child: RaisedButton(
-                      color: Colors.orange[600],
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0)),
-                      elevation: 6.0,
-                      onPressed: () async {
-                        if (_formKey.currentState.validate()) {
-                          _handleSubmit(context);
-                          await Authenticate().deleteUser(_email, _password);
-                          await Authenticate().signOut();
-
-                        }
-                      },
-                      child: Center(
-                        child: Text(
-                          'LOGIN',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 40.0,
+                    child: Material(
+                      borderRadius: BorderRadius.circular(20.0),
+                      shadowColor: Colors.lightBlueAccent,
+                      color: Colors.blue,
+                      child: RaisedButton(
+                        color: Colors.orange[600],
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0)),
+                        elevation: 6.0,
+                        onPressed: () async {
+                          if (_formKey.currentState.validate()) {
+                            dynamic result =
+                            await Authenticate().deleteUser(_email, _password);
+                            if (result == null) {
+                              setState(() =>
+                              error = 'Wrong password or Email');
+                            }
+                            else
+                              await Authenticate().deleteUser(_email, _password);
+                            Navigator.of(context).pop('pop');
+                          }
+                        },
+                        child: Center(
+                          child: Text(
+                            'Delete Account',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
@@ -133,18 +143,8 @@ class _DeleteAccState extends State<DeleteAcc> {
       ),
     );
   }
-  Future<void> _handleSubmit(BuildContext context) async {
-    try {
-      Dialogs.showLoadingDialog(context, _keyLoader); //invoking login
-      await Authenticate().signOut();
-      Navigator.of(_keyLoader.currentContext, rootNavigator: true)
-          .pop(); //close the dialog
-    } catch (error) {
-      print(error);
-    }
-  }
-
 }
+
 
 Widget getImageAsset() {
   AssetImage assetImage = AssetImage('assets/MoodishLogo.png');
@@ -160,37 +160,4 @@ Widget getImageAsset() {
   );
 }
 
-
-class Dialogs {
-  static Future<void> showLoadingDialog(
-      BuildContext context, GlobalKey key) async {
-    return showDialog<void>(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return new WillPopScope(
-              onWillPop: () async => false,
-              child: SimpleDialog(key: key, children: <Widget>[
-                Center(
-                  child: Column(children: [
-                    Text(
-                      'Wait a Moment...',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    SpinKitCircle(
-                      color: Colors.deepOrange,
-                      size: 50.0,
-                    ),
-                  ]),
-                )
-              ]));
-        });
-  }
-}
 
