@@ -77,7 +77,6 @@ class _FoodFeedState extends State<FoodFeed> {
     int randomNumber = random.nextInt(3);
     setState(() {
       numbr = randomNumber;
-      print("pppppppppppppppppppp");
       print(numbr);
     });
 
