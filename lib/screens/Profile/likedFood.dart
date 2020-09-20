@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
-import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
-import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/food_info.dart';
 
 class LikedFood extends StatefulWidget {
@@ -78,10 +76,10 @@ class _LikedFoodState extends State<LikedFood> {
                           child: GridView.builder(
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      crossAxisSpacing: 5,
-                                      mainAxisSpacing: 5,
-                                     ),
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 5,
+                                mainAxisSpacing: 5,
+                              ),
                               itemCount: foodList.length,
                               shrinkWrap: true,
                               physics: BouncingScrollPhysics(),
@@ -97,7 +95,10 @@ class _LikedFoodState extends State<LikedFood> {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      Food_Info(foodList: foodList[index],)));
+                                                      Food_Info(
+                                                        foodList:
+                                                            foodList[index],
+                                                      )));
                                         },
                                         child: CachedNetworkImage(
                                           imageUrl: foodList[index].images,
@@ -135,7 +136,8 @@ class _LikedFoodState extends State<LikedFood> {
                                                                   .size
                                                                   .width /
                                                               20,
-                                                      fontWeight: FontWeight.bold,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                       color: Colors.white),
                                                 ),
                                               ),
@@ -176,9 +178,10 @@ class _LikedFoodState extends State<LikedFood> {
                                           padding: EdgeInsets.all(10),
                                           child: Container(
                                             decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              border: Border.all(color: Colors.white,width: 2)
-                                            ),
+                                                shape: BoxShape.circle,
+                                                border: Border.all(
+                                                    color: Colors.white,
+                                                    width: 2)),
                                             child: Icon(
                                               Icons.chevron_right,
                                               size: 30,
@@ -187,7 +190,6 @@ class _LikedFoodState extends State<LikedFood> {
                                           ),
                                         ),
                                       )
-
                                     ],
                                   ),
                                 );

@@ -77,7 +77,6 @@ class _FoodFeedState extends State<FoodFeed> {
     int randomNumber = random.nextInt(3);
     setState(() {
       numbr = randomNumber;
-      print("pppppppppppppppppppp");
       print(numbr);
     });
 
@@ -168,15 +167,11 @@ class _FoodFeedState extends State<FoodFeed> {
                           onTap: () {
                             String _val = mood[index].mood;
                             data(context, _val);
-                            // Future.delayed(Duration(milliseconds: 400), () {
-                            //   setState(() {
-                            //     _visible = false;
-                            //     ShowCaseWidget.of(context).startShowCase(
-                            //         [KeysToBeInherited.of(context).explore]);
-                            //   });
-                            // });
-                            setState(() {
-                              _visible = false;
+                            Future.delayed(Duration(milliseconds: 400), () {
+                              setState(() {
+                                _visible = false;
+                                
+                              });
                             });
                           },
                           child: Stack(
