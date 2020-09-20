@@ -16,10 +16,8 @@ import 'package:moodish_mvp/screens/Food/myFeed/foodft.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/polls.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/recipe.dart';
 import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
-import 'package:moodish_mvp/screens/Food/pages/explore.dart';
 
 import 'package:moodish_mvp/screens/Restaurants/mood.dart';
-import 'package:showcaseview/showcaseview.dart';
 
 class FoodFeed extends StatefulWidget {
   final int number;

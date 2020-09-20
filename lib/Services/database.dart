@@ -49,7 +49,7 @@ class DatabaseService {
     String deter = await box.get('deter');
     List<String> cuisine = await box.get('preference');
     userName
-        .doc(await Authenticate().returnUid())
+        .doc(Authenticate().returnUid())
         .set({"cuisine": cuisine, "deter": deter}, SetOptions(merge: true));
   }
 
