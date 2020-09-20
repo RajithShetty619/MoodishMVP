@@ -55,12 +55,15 @@ class _FoodFeedState extends State<FoodFeed> {
   int indx = 1;
   bool _visible = true;
   List<GridTileBuilder> mood = [
-    GridTileBuilder(image: 'happy.png', mood: 'happy', currentOpacity: 1),
-    GridTileBuilder(image: 'healthy.png', mood: 'healthy', currentOpacity: 1),
-    GridTileBuilder(image: 'sad.png', mood: 'sad', currentOpacity: 1),
-    GridTileBuilder(image: 'angry.jpg', mood: 'anger', currentOpacity: 1),
-    GridTileBuilder(image: 'sluggish.png', mood: 'sluggish', currentOpacity: 1),
-    GridTileBuilder(image: 'stress.png', mood: 'stress', currentOpacity: 1),
+    GridTileBuilder(image: 'happy-face.png', mood: 'happy', currentOpacity: 1),
+    GridTileBuilder(
+        image: 'healthy-face.png', mood: 'healthy', currentOpacity: 1),
+    GridTileBuilder(image: 'sad-face.png', mood: 'sad', currentOpacity: 1),
+    GridTileBuilder(image: 'angry-face.png', mood: 'anger', currentOpacity: 1),
+    GridTileBuilder(
+        image: 'sluggish-face.png', mood: 'sluggish', currentOpacity: 1),
+    GridTileBuilder(
+        image: 'stress-face.png', mood: 'stress', currentOpacity: 1),
   ];
   int det = 2;
   List<Deter> _deter = Deter.getDeter();
@@ -193,13 +196,9 @@ class _FoodFeedState extends State<FoodFeed> {
                                     borderRadius: BorderRadius.circular(10),
                                     gradient: LinearGradient(
                                         begin: Alignment.bottomCenter,
-                                        stops: [
-                                          .1,
-                                          .9
-                                        ],
                                         colors: [
-                                          Colors.black.withOpacity(.5),
                                           Colors.black.withOpacity(.1),
+                                          Colors.black.withOpacity(.3),
                                         ])),
                                 child: Align(
                                   alignment: Alignment.bottomCenter,

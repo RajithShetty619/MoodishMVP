@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:moodish_mvp/Authenticate/loading.dart';
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/screens/loadScreen.dart';
-import 'package:moodish_mvp/screens/mainScreen.dart';
 
 class FoodPreference extends StatefulWidget {
   int event;

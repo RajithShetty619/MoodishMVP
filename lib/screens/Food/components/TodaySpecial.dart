@@ -12,7 +12,6 @@ import 'package:moodish_mvp/screens/Food/foodInfo/food_info.dart';
 import 'package:moodish_mvp/screens/Food/pages/explore.dart';
 import 'package:moodish_mvp/test.dart';
 
-
 class TodaySpecial extends StatefulWidget {
   const TodaySpecial({
     Key key,
