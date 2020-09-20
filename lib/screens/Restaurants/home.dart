@@ -493,48 +493,48 @@ class _Restaurants {
   _Restaurants({this.image, this.name, this.desc, this.image1, this.image2});
 }
 
-Widget getCategory(String imgName, String name, context, int tile) {
-  return Column(
-    children: <Widget>[
-      InkWell(
-        borderRadius: BorderRadius.circular(90),
-        onTap: () {
-          if (tile == 1)
-            Navigator.push(
-                context,
-                PageTransition(
-                    type: PageTransitionType.rightToLeft, child: DineOut()));
-
-          if (tile == 2)
-            Navigator.push(
-                context,
-                PageTransition(
-                    type: PageTransitionType.rightToLeft, child: Booking()));
-          if (tile == 3)
-            Navigator.push(
-                context,
-                PageTransition(
-                    type: PageTransitionType.rightToLeft, child: PickUp()));
-          if (tile == 4)
-            Navigator.push(
-                context,
-                PageTransition(
-                    type: PageTransitionType.rightToLeft, child: TopRated()));
-        },
-        child: Container(
-          height: 90,
-          width: 90,
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.orange, width: 2.0),
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                  image: AssetImage('assets/${imgName}'), fit: BoxFit.cover)),
-        ),
-      ),
-      Text(name),
-    ],
-  );
-}
+//Widget getCategory(String imgName, String name, context, int tile) {
+//  return Column(
+//    children: <Widget>[
+//      InkWell(
+//        borderRadius: BorderRadius.circular(90),
+//        onTap: () {
+//          if (tile == 1)
+//            Navigator.push(
+//                context,
+//                PageTransition(
+//                    type: PageTransitionType.rightToLeft, child: DineOut()));
+//
+//          if (tile == 2)
+//            Navigator.push(
+//                context,
+//                PageTransition(
+//                    type: PageTransitionType.rightToLeft, child: Booking()));
+//          if (tile == 3)
+//            Navigator.push(
+//                context,
+//                PageTransition(
+//                    type: PageTransitionType.rightToLeft, child: PickUp()));
+//          if (tile == 4)
+//            Navigator.push(
+//                context,
+//                PageTransition(
+//                    type: PageTransitionType.rightToLeft, child: TopRated()));
+//        },
+//        child: Container(
+//          height: 90,
+//          width: 90,
+//          decoration: BoxDecoration(
+//              border: Border.all(color: Colors.orange, width: 2.0),
+//              shape: BoxShape.circle,
+//              image: DecorationImage(
+//                  image: AssetImage('assets/${imgName}'), fit: BoxFit.cover)),
+//        ),
+//      ),
+//      Text(name),
+//    ],
+//  );
+//}
 
 Widget restura(
   RestListModel rest,
@@ -667,42 +667,7 @@ Widget restura(
 //}
 //
 //class _RestaurantState extends State<Restaurant> {
-//  List<_Restaurants> rest = [
-//    _Restaurants(
-//        image: 'downtown_china.jpg',
-//        name: 'Downtown China',
-//        desc:
-//            'Casual Dining - Chinese, Thai, Asian, Seafood, Momos, Beverages, Desserts \nAndheri Lokhandwala, Andheri West'),
-//    _Restaurants(
-//        image: 'family_tree.jpg',
-//        name: 'Family Tree',
-//        desc:
-//            'Casual Dining - Biryani, Chinese, North Indian, Pizza, South Indian, Desserts \nGhatkopar East'),
-//    _Restaurants(
-//        image: 'frozen_bottle.jpg',
-//        name: 'Frozen Bottle',
-//        desc:
-//            'Beverage Shop, Dessert Parlor - Beverages, Desserts, Ice Cream \nMatunga East'),
-//    _Restaurants(
-//        image: 'irish_house.png',
-//        name: 'The Irish House',
-//        desc: 'Pub, Casual Dining - European, American \nLower Parel'),
-//    _Restaurants(
-//        image: 'Mainland_China.jpg',
-//        name: 'Mainland China',
-//        desc:
-//            'Casual Dining - Chinese, Asian, Sushi, Japanese, Thai \nSakinaka'),
-//    _Restaurants(
-//        image: 'pop_tates.jpg',
-//        name: 'Pop Tates',
-//        desc:
-//            'Bar, Casual Dining - Continental, Chinese, Italian, Beverages \nLower Parel'),
-//    _Restaurants(
-//        image: 'tipsy_gipsy.jpg',
-//        name: 'Tipsy Gipsy',
-//        desc:
-//            'Bar, Casual Dining - Continental, Mediterranean, Italian \nVeera Desai Area'),
-//  ];
+
 //
 //  @override
 //  Widget build(BuildContext context) {
