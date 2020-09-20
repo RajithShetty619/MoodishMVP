@@ -1,26 +1,34 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moodish_mvp/Services/betaCount.dart';
+import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
+import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
+import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/food_info.dart';
 
 class FoodEverySituation extends StatefulWidget {
   const FoodEverySituation({
     Key key,
     this.foodList,
+    this.listName,
+    this.index,
   }) : super(key: key);
 
   final FoodListModel foodList;
-
+  final String listName;
+  final int index;
   @override
   _FoodEverySituationState createState() => _FoodEverySituationState();
 }
 
 class _FoodEverySituationState extends State<FoodEverySituation> {
-    bool _like = true;
+  bool _like = false;
 
   @override
   Widget build(BuildContext context) {
+    _like = widget.foodList.heart;
     return AspectRatio(
       aspectRatio: 0.9 / 1.1,
       child: GestureDetector(
@@ -89,10 +97,32 @@ class _FoodEverySituationState extends State<FoodEverySituation> {
                                       ),
                                 onPressed: () async {
                                   BetaCount().count(field: 'foodliked');
-                                  if (_like != false)
+                                  setState(() {
+                                    _like = !_like;
+                                  });
+                                  if (_like) {
                                     setState(() {
-                                      _like = !_like;
+                                      BlocProvider.of<FoodBloc>(context).add(
+                                          FoodEvent.like(
+                                              widget.index, widget.listName));
                                     });
+                                    await DatabaseService().likeTransction(
+                                        food: widget.foodList,
+                                        sr_no: widget.foodList.sr_no,
+                                        collection: "food",
+                                        field: "like");
+                                  } else {
+                                    setState(() {
+                                      BlocProvider.of<FoodBloc>(context).add(
+                                          FoodEvent.like(
+                                              widget.index, widget.listName));
+                                    });
+                                    await DatabaseService().disLikeTransction(
+                                        food: widget.foodList,
+                                        sr_no: widget.foodList.sr_no,
+                                        collection: "food",
+                                        field: "like");
+                                  }
                                 }),
                           ),
                         ),
@@ -126,22 +156,22 @@ class _FoodEverySituationState extends State<FoodEverySituation> {
                               //         Border.all(color: Colors.white, width: 2),
                               //     borderRadius: BorderRadius.circular(300),
                               //   ),
-                                // color: Colors.blue[300],
-                                // child: IconButton(
-                                //   icon: Icon(
-                                //     Icons.arrow_forward,
-                                //     color: Colors.white,
-                                //     size: 25,
-                                //   ),
-                                //   onPressed: () {
-                                //     Navigator.push(
-                                //         context,
-                                //         MaterialPageRoute(
-                                //             builder: (context) => Food_Info(
-                                //                   foodList: widget.foodList,
-                                //                 )));
-                                //   },
-                                // ),
+                              // color: Colors.blue[300],
+                              // child: IconButton(
+                              //   icon: Icon(
+                              //     Icons.arrow_forward,
+                              //     color: Colors.white,
+                              //     size: 25,
+                              //   ),
+                              //   onPressed: () {
+                              //     Navigator.push(
+                              //         context,
+                              //         MaterialPageRoute(
+                              //             builder: (context) => Food_Info(
+                              //                   foodList: widget.foodList,
+                              //                 )));
+                              //   },
+                              // ),
                               // ),
                             ],
                           ),

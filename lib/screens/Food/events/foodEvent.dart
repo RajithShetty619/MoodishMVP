@@ -1,22 +1,26 @@
- 
 import 'package:moodish_mvp/models/foodListModel.dart';
- 
 
-enum EventType{add,delete}
+enum EventType { add, delete, like }
 
 class FoodEvent {
   List<FoodListModel> food;
   String listName;
   EventType eventType;
+  int index;
 
-  FoodEvent.add(List<FoodListModel> food , String listName){
+  FoodEvent.add(List<FoodListModel> food, String listName) {
     this.eventType = EventType.add;
-    this.food = food ; 
-    this.listName = listName ;
+    this.food = food;
+    this.listName = listName;
+  }
+  FoodEvent.like(int index, String listName) {
+    this.eventType = EventType.like;
+    this.index = index;
+    this.listName = listName;
   }
 
-  FoodEvent.delete(String listName){
+  FoodEvent.delete(String listName) {
     this.eventType = EventType.delete;
-    this.listName = listName ;
+    this.listName = listName;
   }
 }

@@ -107,6 +107,30 @@ class DatabaseService {
       field: FieldValue.increment(1) /* atomically increments data by 1 */
     }, SetOptions(merge: true)).catchError((onError) => print(onError));
   }
+
+  Future<void> disLikeTransction({
+    String collection,
+    String sr_no,
+    String field,
+    FoodListModel food,
+  }) async {
+    DocumentReference documentReference =
+        FirebaseFirestore.instance.collection(collection).doc(sr_no);
+
+    if (food != null) {
+      String uid = Authenticate().returnUid();
+
+      await FirebaseFirestore.instance
+          .collection("Username")
+          .doc("$uid")
+          .collection("data")
+          .doc("${food.sr_no}")
+          .delete();
+    }
+    await documentReference.set({
+      field: FieldValue.increment(-1) /* atomically increments data by 1 */
+    }, SetOptions(merge: true)).catchError((onError) => print(onError));
+  }
 /* ////////////////////////////////////////////////////////////////////// USERNAMEMETHODS ////////////////////////////////////////////////////////// */
 
   Future<void> updateUserData({String uid, String email, String name}) async {

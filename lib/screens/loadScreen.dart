@@ -8,8 +8,6 @@ import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:intl/intl.dart';
 import 'package:moodish_mvp/Services/geolocationRest.dart';
 import 'package:moodish_mvp/screens/Food/events/restEvent.dart';
-import 'package:moodish_mvp/screens/Restaurants/cuisine.dart';
-import 'package:moodish_mvp/screens/Restaurants/prefVegNveg.dart';
 import 'package:moodish_mvp/screens/mainScreen.dart';
 import 'Food/blocs/bloc/foodBloc.dart';
 import 'Food/blocs/pollsbloc/pollsBloc.dart';
@@ -40,45 +38,44 @@ class _LoadingScreenState extends State<LoadingScreen> {
     DatabaseQuery _dqtaste2 = DatabaseQuery(listName: "d2");
     DatabaseQuery _dqtaste0 = DatabaseQuery(listName: "d0");
     DatabaseQuery _dqtaste1 = DatabaseQuery(listName: "d1");
-
-    DatabaseQuery(listName: 'p').getPoll().then((poll) {
-      BlocProvider.of<PollBloc>(context).add(PollEvent.add(poll, 'p'));
-    });
-    DatabaseQuery(listName: 'yn').getYesno().then((yesno) {
-      BlocProvider.of<PollBloc>(context).add(PollEvent.add(yesno, 'yn'));
-    });
-    DatabaseQuery(listName: 'tt').getthis_that().then((thisthat) {
-      BlocProvider.of<PollBloc>(context).add(PollEvent.add(thisthat, 'tt'));
-    });
-    DatabaseQuery(listName: 'fft').getFact().then((fact) {
-      BlocProvider.of<PollBloc>(context).add(PollEvent.add(fact, 'fft'));
-    });
-
-    checkDate().then((check) async {
-      _dqtaste2.getFood(
-          field: ['cuisine'],
-          value: ['indian'],
-          limit: 7,
-          check: check).then((future) {
-        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "d2"));
-      });
-      _dqtaste0.getFood(
-          field: ['cuisine', 'deter'],
-          value: ['indian', 'veg'],
-          limit: 7,
-          check: check).then((future) {
-        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "d0"));
-      });
-    });
-    GeolocationRest().getRestFromLocation().then((rest) {
-      BlocProvider.of<RestaurantBloc>(context)
-          .add(RestaurantEvent.add(rest, 'r1'));
-    });
-
-    await DatabaseQuery().getRest().then((rest) {
-      BlocProvider.of<RestaurantBloc>(context)
-          .add(RestaurantEvent.add(rest, 'r2'));
-    });
+    await Future.wait([
+      DatabaseQuery(listName: 'p').getPoll().then((poll) {
+        BlocProvider.of<PollBloc>(context).add(PollEvent.add(poll, 'p'));
+      }),
+      DatabaseQuery(listName: 'yn').getYesno().then((yesno) {
+        BlocProvider.of<PollBloc>(context).add(PollEvent.add(yesno, 'yn'));
+      }),
+      DatabaseQuery(listName: 'tt').getthis_that().then((thisthat) {
+        BlocProvider.of<PollBloc>(context).add(PollEvent.add(thisthat, 'tt'));
+      }),
+      DatabaseQuery(listName: 'fft').getFact().then((fact) {
+        BlocProvider.of<PollBloc>(context).add(PollEvent.add(fact, 'fft'));
+      }),
+      checkDate().then((check) async {
+        _dqtaste2.getFood(
+            field: ['cuisine'],
+            value: ['indian'],
+            limit: 7,
+            check: check).then((future) {
+          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "d2"));
+        });
+        _dqtaste0.getFood(
+            field: ['cuisine', 'deter'],
+            value: ['indian', 'veg'],
+            limit: 7,
+            check: check).then((future) {
+          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "d0"));
+        });
+      }),
+      GeolocationRest().getRestFromLocation().then((rest) {
+        BlocProvider.of<RestaurantBloc>(context)
+            .add(RestaurantEvent.add(rest, 'r1'));
+      }),
+      DatabaseQuery().getRest().then((rest) {
+        BlocProvider.of<RestaurantBloc>(context)
+            .add(RestaurantEvent.add(rest, 'r2'));
+      }),
+    ]);
   }
 
   Future<int> checkDate() async {
@@ -88,7 +85,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     String date = DateFormat('EEE, M/d/y').format(now);
 
     if (date == saveDate) {
-      return 1;
+      return 0;
     } else {
       _box.put("date1", date);
       return 0;

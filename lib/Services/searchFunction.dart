@@ -40,7 +40,8 @@ class SearchFunction {
       print(_docData);
       print("////////////////////////////////////////////////////");
       /* convert image name to url from storage */
-      String _url = await Storage().getUrl(_docData["image"]);
+      String _url = await Storage().getUrl(_docData["food_item"]);
+
       List<String> _preparation = [];
       List<String> _ingredients = [];
       int i = 2;
@@ -55,19 +56,28 @@ class SearchFunction {
       /* initialized */
       i = 2;
       /* same reason as preparation */
-      _ingredients.add(_docData["ingredients"]);
+      _ingredients.add(_docData["ingredient"]);
       /* converting step1,step2..... to List of preparation */
       while (_docData["ingredient $i"] != null) {
         _ingredients.add(_docData["ingredient $i"]);
+
         ++i;
       }
+      List<String> _restaurants = [];
+      try {
+        _restaurants = (jsonDecode(_docData["restaurants"]) as List<dynamic>)
+            .cast<String>();
+      } catch (e) {
+        _restaurants = [];
+      }
+
       /* might look overwhelming but just 
       initialized constructor of FoodListModel */
       return FoodListModel(
           foodName: _docData["food_item"] ?? '',
           deter: _docData["deter"] ?? '',
           cuisine: _docData["cuisine"] ?? '',
-          meal_type: _docData["meal_type"] ?? '',
+          meal_type: _docData["mealtype"] ?? '',
           images: _url ?? '',
           description: _docData["description"] ?? '',
           recipe: _docData["recipe"] ?? '',
@@ -83,9 +93,9 @@ class SearchFunction {
           carbohydrates: _docData["carbohydrates"] ?? '',
           protein: _docData["protein"] ?? '',
           mood: _docData["mood"] ?? '',
-          // restaurants: _docData["restaurants"] ?? '',
           delivery: _docData["delivery"] ?? '',
-          sr_no: _docData["sr_no"] ?? '');
+          sr_no: _docData["sr_no"] ?? '',
+          restaurants: _restaurants ?? []);
     }).toList());
   }
 

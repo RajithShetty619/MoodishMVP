@@ -30,7 +30,7 @@ class _FoodRestState extends State<FoodRest> {
               itemBuilder: (context, index) {
                 print('###################################');
                 print(_rest.length);
-                if (_rest.length != 0) {
+                if (_rest.length > 0) {
                   return Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: GestureDetector(

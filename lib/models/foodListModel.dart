@@ -50,6 +50,8 @@ class FoodListModel {
   final String sr_no;
   @HiveField(22)
   final int like;
+  @HiveField(23)
+  bool heart = false;
 
   FoodListModel({
     this.foodName,
