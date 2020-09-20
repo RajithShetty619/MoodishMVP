@@ -5,7 +5,6 @@ import 'package:intro_slider/intro_slider.dart';
 import 'package:moodish_mvp/Services/betaCount.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/components/pageview1.dart';
-import 'package:moodish_mvp/screens/Food/components/stepSlider.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/ingredients.dart';
 //import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
