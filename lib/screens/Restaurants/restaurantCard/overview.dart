@@ -70,9 +70,18 @@ class _OverViewState extends State<OverView> {
                     },
                     child: Column(
                       children: <Widget>[
-                        Icon(
-                          Icons.call,
-                          size: 50.0,
+                        Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.black)
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Icon(
+                              Icons.call,
+                              size: 50.0,
+                            ),
+                          ),
                         ),
                         Text("Phone")
                       ],
@@ -87,9 +96,18 @@ class _OverViewState extends State<OverView> {
                     },
                     child: Column(
                       children: <Widget>[
-                        Icon(
-                          Icons.language,
-                          size: 50.0,
+                        Container(
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(color: Colors.black)
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Icon(
+                              Icons.language,
+                              size: 50.0,
+                            ),
+                          ),
                         ),
                         Text("Website")
                       ],
@@ -106,9 +124,18 @@ class _OverViewState extends State<OverView> {
                     },
                     child: Column(
                       children: <Widget>[
-                        Icon(
-                          Icons.directions,
-                          size: 50.0,
+                        Container(
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(color: Colors.black)
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Icon(
+                              Icons.directions,
+                              size: 50.0,
+                            ),
+                          ),
                         ),
                         Text("Direction")
                       ],
@@ -127,9 +154,18 @@ class _OverViewState extends State<OverView> {
                     },
                     child: Column(
                       children: <Widget>[
-                        Icon(
-                          Icons.share,
-                          size: 50.0,
+                        Container(
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(color: Colors.black)
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Icon(
+                              Icons.share,
+                              size: 50.0,
+                            ),
+                          ),
                         ),
                         Text("Share"),
                       ],

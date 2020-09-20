@@ -84,7 +84,7 @@ class _FoodEverySituationState extends State<FoodEverySituation> {
                           child: Padding(
                             padding: const EdgeInsets.all(2.0),
                             child: IconButton(
-                                icon: _like
+                                icon: !_like
                                     ? Icon(
                                         Icons.favorite_border,
                                         color: Colors.white,

@@ -5,7 +5,6 @@ import 'package:intro_slider/intro_slider.dart';
 import 'package:moodish_mvp/Services/betaCount.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/components/pageview1.dart';
-import 'package:moodish_mvp/screens/Food/components/stepSlider.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/ingredients.dart';
 //import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -201,9 +200,9 @@ class _FoodRecipeState extends State<FoodRecipe> {
           widget.foodList.ingredients.length>8?
               showMoreDelay?
               Center(
-                child: SpinKitHourGlass(
+                child: SpinKitCircle(
                   duration: Duration(milliseconds: 700),
-                  color: Colors.orange,
+                  color: Colors.deepOrange,
                 ),
               )
                   :showMore==false?Align(

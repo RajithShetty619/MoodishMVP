@@ -71,6 +71,8 @@ class _SearchState extends State<Search> {
                           );
                         return FoodEverySituation(
                           foodList: foodList["search"][index],
+                          index: index,
+                          listName: "search",
                         );
                       },
                     ),

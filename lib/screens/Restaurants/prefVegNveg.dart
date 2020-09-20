@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:moodish_mvp/Authenticate/loading.dart';
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/screens/loadScreen.dart';
-import 'package:moodish_mvp/screens/mainScreen.dart';
 
 class FoodPreference extends StatefulWidget {
   int event;
@@ -21,7 +19,6 @@ class _FoodPreferenceState extends State<FoodPreference> {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(10.0),
@@ -42,7 +39,7 @@ class _FoodPreferenceState extends State<FoodPreference> {
               child: Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'We will personalise the app primarily based on this. ',
+                  'We will personalise the app primarily based on this.',
                   textAlign: TextAlign.left,
                   style: TextStyle(
                       fontSize: 18.0,
@@ -85,10 +82,8 @@ class _FoodPreferenceState extends State<FoodPreference> {
                             margin: EdgeInsets.all(8),
                             decoration: BoxDecoration(
                               border: showShadow1
-                                  ? Border.all(
-                                      color: Colors.green, width: 2)
-                                  : Border.all(
-                                      color: Colors.black, width: 2),
+                                  ? Border.all(color: Colors.green, width: 2)
+                                  : Border.all(color: Colors.black, width: 2),
                               borderRadius: BorderRadius.circular(250),
                             ),
                             child: Center(
@@ -127,16 +122,15 @@ class _FoodPreferenceState extends State<FoodPreference> {
                             decoration: BoxDecoration(
                               border: showShadow2
                                   ? Border.all(color: Colors.red, width: 2)
-                                  : Border.all(
-                                      color: Colors.black, width: 2),
+                                  : Border.all(color: Colors.black, width: 2),
                               borderRadius: BorderRadius.circular(250),
                             ),
                             child: Center(
                                 child: showShadow2
                                     ? Text(
                                         'nonveg',
-                                        style: TextStyle(
-                                            color: Colors.redAccent),
+                                        style:
+                                            TextStyle(color: Colors.redAccent),
                                       )
                                     : Text('nonveg'))),
                       ),
@@ -166,18 +160,15 @@ class _FoodPreferenceState extends State<FoodPreference> {
                             margin: EdgeInsets.all(8),
                             decoration: BoxDecoration(
                               border: showShadow3
-                                  ? Border.all(
-                                      color: Colors.orange, width: 2)
-                                  : Border.all(
-                                      color: Colors.black, width: 2),
+                                  ? Border.all(color: Colors.orange, width: 2)
+                                  : Border.all(color: Colors.black, width: 2),
                               borderRadius: BorderRadius.circular(250),
                             ),
                             child: Center(
                                 child: showShadow3
                                     ? Text(
                                         'both',
-                                        style:
-                                            TextStyle(color: Colors.orange),
+                                        style: TextStyle(color: Colors.orange),
                                       )
                                     : Text('both'))),
                       ),
@@ -190,25 +181,27 @@ class _FoodPreferenceState extends State<FoodPreference> {
               height: 60,
             ),
             Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Center(
-                  child: Text(
-                    "don't worry, You can change this later! ",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        fontSize: 16.0,
-                        fontStyle: FontStyle.italic,
-                        fontWeight: FontWeight.w400),
-                  ),
+              padding: const EdgeInsets.all(20.0),
+              child: Center(
+                child: Text(
+                  "don't worry, You can change this later! ",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                      fontSize: 16.0,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w400),
                 ),
               ),
+            ),
             Align(
               alignment: Alignment.center,
               child: GestureDetector(
-                onTap: () {
-                  if (widget.event == 1)
-                    Navigator.of(context).pop();
-                  else
+                onTap: () async {
+                  if (widget.event == 1) {
+                    Box box = await Hive.openBox('preferenceBox');
+                    dynamic data = box.get('deter');
+                    Navigator.of(context).pop(data);
+                  } else
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
                       return LoadingScreen();

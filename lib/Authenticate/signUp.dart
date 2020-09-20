@@ -347,8 +347,8 @@ class Dialogs {
                     SizedBox(
                       height: 20,
                     ),
-                    SpinKitHourGlass(
-                      color: Colors.blueAccent,
+                    SpinKitCircle(
+                      color: Colors.deepOrange,
                       size: 50.0,
                     ),
                   ]),

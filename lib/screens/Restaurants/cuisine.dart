@@ -44,7 +44,7 @@ class _CuisineState extends State<Cuisine> {
   String err = '';
   bool _visible = true;
   bool isSelected = false;
-  List<dynamic> cuisinePref =  Hive.box('preferenceBox').get('preference');
+  List<dynamic> cuisinePref = Hive.box('preferenceBox').get('preference');
 
   @override
   Widget build(BuildContext context) {
@@ -107,26 +107,23 @@ class _CuisineState extends State<Cuisine> {
                           dynamic _val = cuisine[index];
                           setState(() {
                             i++;
-                            if(cuisine[index].isSelected==true)
-                            {
+                            if (cuisine[index].isSelected == true) {
                               pref.remove(cuisine[index].cuisine);
                             }
-                            if(cuisine[index].isSelected==false)
-                            {
+                            if (cuisine[index].isSelected == false) {
                               pref.add(_val.cuisine);
                             }
                             print(pref);
                             print(pref.contains(_val.cuisine));
                           });
-                              setState(() {
-                                cuisine[index].isSelected = !cuisine[index].isSelected;
-                              });
-
+                          setState(() {
+                            cuisine[index].isSelected =
+                                !cuisine[index].isSelected;
+                          });
                         },
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(20),
                           child: Container(
-                            
                               margin: EdgeInsets.all(8),
                               decoration: BoxDecoration(
                                 border: cuisine[index].isSelected
@@ -143,7 +140,7 @@ class _CuisineState extends State<Cuisine> {
                                         )
                                       : Text('${cuisine[index].cuisine}'))),
                         ),
-                      ); 
+                      );
                       /* cuisineFilter(
                           name: '${cuisine[index].cuisine}',
                         ),*/
@@ -173,28 +170,28 @@ class _CuisineState extends State<Cuisine> {
                       // ),
                     }),
               ),
-
               Column(
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Center(
-                      child:
-                      widget.event==1?Text(
-                        "Previously Selected:-${cuisinePref.join(',')}\ndon't worry, You can change this later! ",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            fontStyle: FontStyle.italic,
-                            fontWeight: FontWeight.w400),
-                      ):Text(
-                        "don't worry, You can change this later! ",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                            fontSize: 15.0,
-                            fontStyle: FontStyle.italic,
-                            fontWeight: FontWeight.w400),
-                      ),
+                      child: widget.event == 1
+                          ? Text(
+                              "Previously Selected:-${cuisinePref.join(',')}\ndon't worry, You can change this later! ",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                  fontSize: 16.0,
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.w400),
+                            )
+                          : Text(
+                              "don't worry, You can change this later! ",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                  fontSize: 15.0,
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.w400),
+                            ),
                     ),
                   ),
                   Row(
@@ -224,7 +221,7 @@ class _CuisineState extends State<Cuisine> {
                                         await Hive.openBox('preferenceBox');
                                     box.put('preference', pref);
                                     DatabaseService().savePreference();
-                                    Navigator.of(context).pop();
+                                    Navigator.of(context).pop(pref);
                                   } else
                                     setState(() {
                                       err = 'Select ${3 - i} more!';
