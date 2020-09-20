@@ -198,11 +198,15 @@ class _ProfileSettingState extends State<ProfileSetting> {
                 setState(() {
                   fdPref = Hive.box('preferenceBox').get('deter');
                 });
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                dynamic data = await Navigator.push(context,
+                    MaterialPageRoute(builder: (context) {
                   return FoodPreference(
                     event: 1,
                   );
                 }));
+                setState(() {
+                  fdPref = data;
+                });
               },
               // color: Colors.green,
               child: Container(
