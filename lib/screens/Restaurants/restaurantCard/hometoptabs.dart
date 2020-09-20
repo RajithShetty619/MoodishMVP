@@ -49,7 +49,8 @@ class _HomeTopTabsState extends State<HomeTopTabs>
                       isScrollable: true,
                       unselectedLabelColor: Colors.grey[500],
                       labelColor: Colors.black,
-                      indicatorWeight: 4.0,
+                      indicatorWeight: 2.3,
+                      indicatorSize: TabBarIndicatorSize.label,
                       indicatorColor: Color(0xffff5722),
                       controller: _tabController,
                       tabs: <Widget>[

@@ -43,6 +43,9 @@ class _CuisineState extends State<Cuisine> {
   List<String> pref = []; //all the user preferences are saved here
   String err = '';
   bool _visible = true;
+  bool isSelected = false;
+  List<dynamic> cuisinePref =  Hive.box('preferenceBox').get('preference');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,13 +57,16 @@ class _CuisineState extends State<Cuisine> {
             children: <Widget>[
               Align(
                 alignment: Alignment.center,
-                child: RichText(
-                  text: TextSpan(
-                    text: 'Which Cuisines would you prefer?',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
-                        color: Colors.black),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                  child: RichText(
+                    text: TextSpan(
+                      text: 'Which Cuisines would you prefer?',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30,
+                          color: Colors.black),
+                    ),
                   ),
                 ),
               ),
@@ -68,14 +74,14 @@ class _CuisineState extends State<Cuisine> {
                 height: 20.0,
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                 child: Container(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'Please select any 5, We will personalise the app for you ',
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                        fontSize: 18.0,
+                        fontSize: 16.0,
                         fontStyle: FontStyle.italic,
                         fontWeight: FontWeight.w400),
                   ),
@@ -97,64 +103,90 @@ class _CuisineState extends State<Cuisine> {
                     itemBuilder: (BuildContext context, index) {
                       return GestureDetector(
                         onTap: () {
+                          print("pressesesesesesd5362");
                           dynamic _val = cuisine[index];
-                          Future.delayed(Duration(milliseconds: 500), () {
-                            setState(() {
-                              cuisine.remove(_val);
-                              if (pref.length == 9) {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return FoodPreference();
-                                }));
-                              }
-                            });
-                          });
+                          
                           setState(() {
-                            pref.add(_val.cuisine);
                             i++;
-                            cuisine[index]._visible = !cuisine[index]._visible;
+                            pref.add(_val.cuisine);
+                            print(_val.cuisine);
+                            print(pref.contains(_val.cuisine));
                           });
+                          if(pref.contains(_val.cuisine)){
+                              setState(() {
+                                isSelected = !isSelected;
+                              });
+                            }
                         },
-                        child: cuisineFilter(
-                          name: '${cuisine[index].cuisine}',
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            
+                              margin: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                border: isSelected
+                                    ? Border.all(color: Colors.orange, width: 2)
+                                    : Border.all(color: Colors.black, width: 2),
+                                borderRadius: BorderRadius.circular(250),
+                              ),
+                              child: Center(
+                                  child: isSelected
+                                      ? Text(
+                                          '${cuisine[index].cuisine}',
+                                          style:
+                                              TextStyle(color: Colors.orange),
+                                        )
+                                      : Text('${cuisine[index].cuisine}'))),
                         ),
-                        // AnimatedOpacity(
-                        //   duration: Duration(milliseconds: 500),
-                        //   opacity: cuisine[index]._visible ? 1.0 : 0.0,
-                        //   child: Container(
-                        //     height: 175.0,
-                        //     width: 110.0,
-                        //     decoration: BoxDecoration(
-                        //         image: DecorationImage(
-                        //           image: AssetImage(
-                        //               'assets/${cuisine[index].image}'),
-                        //           fit: BoxFit.cover,
-                        //         ),
-                        //         borderRadius: BorderRadius.circular(10.0)),
-                        //     child: Center(
-                        //       child: Text(
-                        //         '${cuisine[index].cuisine}',
-                        //         style: TextStyle(
-                        //             fontWeight: FontWeight.bold,
-                        //             color: Colors.white,
-                        //             fontSize: 18.0),
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
-                      );
+                      ); 
+                      /* cuisineFilter(
+                          name: '${cuisine[index].cuisine}',
+                        ),*/
+                      // AnimatedOpacity(
+                      //   duration: Duration(milliseconds: 500),
+                      //   opacity: cuisine[index]._visible ? 1.0 : 0.0,
+                      //   child: Container(
+                      //     height: 175.0,
+                      //     width: 110.0,
+                      //     decoration: BoxDecoration(
+                      //         image: DecorationImage(
+                      //           image: AssetImage(
+                      //               'assets/${cuisine[index].image}'),
+                      //           fit: BoxFit.cover,
+                      //         ),
+                      //         borderRadius: BorderRadius.circular(10.0)),
+                      //     child: Center(
+                      //       child: Text(
+                      //         '${cuisine[index].cuisine}',
+                      //         style: TextStyle(
+                      //             fontWeight: FontWeight.bold,
+                      //             color: Colors.white,
+                      //             fontSize: 18.0),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                     }),
               ),
+
               Column(
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Center(
-                      child: Text(
-                        "don't worry, You can change this later! ",
+                      child:
+                      widget.event==1?Text(
+                        "Previously Selected:-${cuisinePref.join(',')}\ndon't worry, You can change this later! ",
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             fontSize: 16.0,
+                            fontStyle: FontStyle.italic,
+                            fontWeight: FontWeight.w400),
+                      ):Text(
+                        "don't worry, You can change this later! ",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                            fontSize: 15.0,
                             fontStyle: FontStyle.italic,
                             fontWeight: FontWeight.w400),
                       ),
@@ -179,8 +211,8 @@ class _CuisineState extends State<Cuisine> {
                       widget.event == 1
                           ? Align(
                               alignment: Alignment.centerRight,
-                              child: RaisedButton(
-                                onPressed: () async {
+                              child: GestureDetector(
+                                onTap: () async {
                                   print(i);
                                   if (i + 1 > 3) {
                                     Box box =
@@ -193,16 +225,34 @@ class _CuisineState extends State<Cuisine> {
                                       err = 'Select ${3 - i} more!';
                                     });
                                 },
-                                color: Colors.green,
-                                child: Text('Change->'),
+                                // color: Colors.green,
+                                child: Container(
+                                  width: 100,
+                                  margin: EdgeInsets.all(10.0),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.black, width: 2),
+                                    borderRadius: BorderRadius.circular(15),
+                                    // color: Colors.blue[200],
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Text(
+                                      'Change',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
                               ),
                             )
                           : Align(
                               alignment: Alignment.center,
                               child: GestureDetector(
                                 onTap: () async {
-                                  print(i);
-                                  if (i + 1 > 3) {
+                                  if (i + 1 > 2) {
                                     Box box =
                                         await Hive.openBox('preferenceBox');
                                     box.put('preference', pref);
@@ -213,14 +263,16 @@ class _CuisineState extends State<Cuisine> {
                                     }));
                                   } else
                                     setState(() {
-                                      err = 'Select ${3 - i + 1} more!';
+                                      err = 'Select ${2 - i + 1} more!';
+                                      print(i);
                                     });
                                 },
                                 child: Container(
                                   width: 100,
                                   margin: EdgeInsets.all(10.0),
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black, width: 2),
+                                    border: Border.all(
+                                        color: Colors.black, width: 2),
                                     borderRadius: BorderRadius.circular(15),
                                     // color: Colors.blue[200],
                                   ),
@@ -230,7 +282,8 @@ class _CuisineState extends State<Cuisine> {
                                       'Next',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                          fontSize: 20.0, fontWeight: FontWeight.bold),
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ),
@@ -271,6 +324,7 @@ class _cuisineFilterState extends State<cuisineFilter> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        print("pressesesesesesd5362");
         setState(() {
           isSelected = !isSelected;
         });

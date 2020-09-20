@@ -65,70 +65,11 @@ class _ProfileSettingState extends State<ProfileSetting> {
                   setState(() {
                     cuisinePref = Hive.box('preferenceBox').get('preference');
                   });
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext idcontext) {
-                        return Dialog(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Container(
-                            height: cuisinePref.length>=4?MediaQuery.of(context).size.height/3.1:MediaQuery.of(context).size.height/4,
-                            child: Column(
-                              children: <Widget>[
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Text(
-                                    'Do You Want to Change Your\nCuisine? \n${cuisinePref.join(',')}',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(10),
-                                  child: Align(
-                                    alignment: Alignment.centerRight,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                      children: <Widget>[
-                                        RaisedButton(
-                                          onPressed: () => Navigator.of(
-                                              idcontext,
-                                              rootNavigator: true)
-                                              .pop(),
-                                          child: Text('No'),
-                                        ),
-                                        RaisedButton(
-                                          onPressed: () async{
-                                            Navigator.of(
-                                                idcontext,
-                                                rootNavigator: true)
-                                                .pop();
-                                            Navigator
-                                                .push(context,
-                                                MaterialPageRoute(builder: (context) {
-                                                  return Cuisine(event:1,);
-                                                }));
-                                          },
-                                          child: Text('Yes'),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        );
-                      });
+                  Navigator
+                      .push(context,
+                      MaterialPageRoute(builder: (context) {
+                        return Cuisine(event:1,);
+                      }));
                 },
                 child: Row(
                   children: <Widget>[

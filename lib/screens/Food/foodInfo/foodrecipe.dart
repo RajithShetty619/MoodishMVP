@@ -53,7 +53,7 @@ class _FoodRecipeState extends State<FoodRecipe> {
                   alignment: Alignment.centerLeft,
                   child: Padding(
                       padding: EdgeInsets.all(16),
-                      child:Text(widget.foodList.time)),
+                      child:Container(width:MediaQuery.of(context).size.width/3.5,child: Text(widget.foodList.time,overflow: TextOverflow.ellipsis,))),
                 ),
               if(widget.foodList.time == null)
                 Padding(
@@ -175,7 +175,7 @@ class _FoodRecipeState extends State<FoodRecipe> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 0.0,
                   mainAxisSpacing: 0.0,
-                childAspectRatio: 2
+                childAspectRatio: 2.2
                   ),
               // primary: true,
               physics: NeverScrollableScrollPhysics(),
