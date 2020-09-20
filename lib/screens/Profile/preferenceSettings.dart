@@ -8,15 +8,14 @@ class ProfileSetting extends StatefulWidget {
   _ProfileSettingState createState() => _ProfileSettingState();
 }
 
-
 class _ProfileSettingState extends State<ProfileSetting> {
   String fdPref = Hive.box('preferenceBox').get('deter');
   List<dynamic> cuisinePref = Hive.box('preferenceBox').get('preference');
   loadData() async {
-  Box box = await Hive.openBox('preferenceBox');
-  String det = await box.get('deter');
-  List<String> cui = await box.get('preference');
-}
+    Box box = await Hive.openBox('preferenceBox');
+    String det = await box.get('deter');
+    List<String> cui = await box.get('preference');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,6 +107,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                 setState(() {
                   cuisinePref = Hive.box('preferenceBox').get('preference');
                 });
+                Navigator.pop(context);
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return Cuisine(
                     event: 1,
@@ -163,30 +163,32 @@ class _ProfileSettingState extends State<ProfileSetting> {
           Align(
             alignment: Alignment.center,
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Container(
-                  height: 100,
-                  width: 100,
-                  margin: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    border: (fdPref != 'both')
-                        ? ((fdPref == 'veg')
-                            ? Border.all(color: Colors.green, width: 2)
-                            : Border.all(color: Colors.red, width: 2))
-                        : Border.all(color: Colors.orange, width: 2),
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  child: Center(
+                borderRadius: BorderRadius.circular(20),
+                child: Container(
+                    height: 100,
+                    width: 100,
+                    margin: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      border: (fdPref != 'both')
+                          ? ((fdPref == 'veg')
+                              ? Border.all(color: Colors.green, width: 2)
+                              : Border.all(color: Colors.red, width: 2))
+                          : Border.all(color: Colors.orange, width: 2),
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    child: Center(
                       child: Text(
-                    '${fdPref}',
-                    style: TextStyle(color: (fdPref != 'both')
-                        ? ((fdPref == 'veg')
-                            ? Colors.green
-                            : Colors.red)
-                        : Colors.orangeAccent), ),
-                  ))),
-            ),
-           Align(
+                        '${fdPref}',
+                        style: TextStyle(
+                            color: (fdPref != 'both')
+                                ? ((fdPref == 'veg')
+                                    ? Colors.green
+                                    : Colors.red)
+                                : Colors.orangeAccent),
+                      ),
+                    ))),
+          ),
+          Align(
             alignment: Alignment.centerRight,
             child: GestureDetector(
               onTap: () async {
