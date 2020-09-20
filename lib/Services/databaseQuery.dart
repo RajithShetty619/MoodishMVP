@@ -108,7 +108,7 @@ class DatabaseQuery {
     }
   }
 
-  /* almost same working as getFood exceot it add to and existing list */
+  /* almost same working as getFood except it add to and existing list */
   Future<List<FoodListModel>> getMoreFood({
     List<String> field,
     List<dynamic> value,
