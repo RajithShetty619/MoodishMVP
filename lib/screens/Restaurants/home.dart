@@ -312,8 +312,10 @@ class _RestaurantState extends State<Restaurant> {
                                                   Icons.location_on,
                                                   size: 20,
                                                 ),
-                                                Text(restList["r1"][index]
-                                                    .restaurant_Location,),
+                                                Text(
+                                                  restList["r1"][index]
+                                                      .restaurant_Location,
+                                                ),
                                               ],
                                             ),
                                           ),
@@ -500,7 +502,7 @@ class _Restaurants {
 //        borderRadius: BorderRadius.circular(90),
 //        onTap: () {
 //          if (tile == 1)
-//            Navigator.push(
+
 //                context,
 //                PageTransition(
 //                    type: PageTransitionType.rightToLeft, child: DineOut()));
@@ -553,25 +555,24 @@ Widget restura(
                 )));
       },
       child: Card(
-       shape: RoundedRectangleBorder(
-           borderRadius: BorderRadius.circular(20.0)
-       ),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         child: Row(
           children: <Widget>[
             CachedNetworkImage(
-              imageUrl: rest.photo_url,
-              imageBuilder: (context, imageProvider) {
-                return Container(
-                  height: 120,
-                  width: 110,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    image: DecorationImage(
-                        image: imageProvider, fit: BoxFit.cover),
+                    imageUrl: rest.photo_url==''?'https://firebasestorage.googleapis.com/v0/b/moodishtest.appspot.com/o/error-image-generic.png?alt=media&token=462d1ab9-ff67-40d9-ae25-8388720dc89b':rest.photo_url,
+                    imageBuilder: (context, imageProvider) {
+                      return Container(
+                        height: 120,
+                        width: 110,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(
+                              image: imageProvider, fit: BoxFit.cover),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -581,7 +582,7 @@ Widget restura(
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Container(
-                        width: MediaQuery.of(context).size.width-190,
+                        width: MediaQuery.of(context).size.width - 190,
                         child: Padding(
                           padding: EdgeInsets.all(8),
                           child: Align(
@@ -589,8 +590,8 @@ Widget restura(
                             child: Text(
                               rest.restaurant_Name,
                               overflow: TextOverflow.ellipsis,
-                              style:
-                              TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
@@ -604,12 +605,15 @@ Widget restura(
                             Icons.star,
                             size: 18,
                           ),
-                          rest.rating=='5'?
-                          Text(
-                            '${rest.rating}.0',
-                            style: TextStyle(fontSize: 12),
-                          ):
-                          Text(rest.rating,style: TextStyle(fontSize: 12),),
+                          rest.rating == '5'
+                              ? Text(
+                                  '${rest.rating}.0',
+                                  style: TextStyle(fontSize: 12),
+                                )
+                              : Text(
+                                  rest.rating,
+                                  style: TextStyle(fontSize: 12),
+                                ),
                         ],
                       ),
                     ),
@@ -618,10 +622,14 @@ Widget restura(
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Container(
-                    width: MediaQuery.of(context).size.width-145,
+                    width: MediaQuery.of(context).size.width - 145,
                     child: Padding(
                       padding: const EdgeInsets.all(8),
-                      child: Text(rest.cuisines,maxLines: 3,overflow: TextOverflow.ellipsis,),
+                      child: Text(
+                        rest.cuisines,
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                   ),
                 ),
@@ -642,11 +650,8 @@ Widget restura(
                     ),
                   ),
                 )
-
               ],
             )
-
-
           ],
         ),
       ),

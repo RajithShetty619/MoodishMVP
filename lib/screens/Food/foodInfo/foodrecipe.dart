@@ -201,9 +201,9 @@ class _FoodRecipeState extends State<FoodRecipe> {
           widget.foodList.ingredients.length>8?
               showMoreDelay?
               Center(
-                child: SpinKitHourGlass(
+                child: SpinKitCircle(
                   duration: Duration(milliseconds: 700),
-                  color: Colors.orange,
+                  color: Colors.deepOrange,
                 ),
               )
                   :showMore==false?Align(

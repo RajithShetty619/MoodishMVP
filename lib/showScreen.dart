@@ -33,8 +33,8 @@ class _ShowScreenState extends State<ShowScreen> {
         if (snapShot.connectionState == ConnectionState.waiting) {
           return Scaffold(
             body: Center(
-              child: SpinKitHourGlass(
-                color: Colors.blueAccent,
+              child: SpinKitCircle(
+                color: Colors.deepOrange,
                 size: 50.0,
               ),
             ),
