@@ -225,7 +225,7 @@ class _FoodPreferenceState extends State<FoodPreference> {
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Text(
-                      'Next',
+                      'OK',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 20.0, fontWeight: FontWeight.bold),
