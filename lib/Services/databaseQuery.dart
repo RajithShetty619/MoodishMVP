@@ -47,14 +47,14 @@ class DatabaseQuery {
     return await DatabaseService().listfromSnapshot(snapshot);
   }
 
-  Future<List<FoodListModel>> getFood(
-      {List<String> field,
-      List<dynamic> value,
-      int limit = 5,
-      int check = 0,
-      String mood,
-      String deter,
-      bool recursive = false}) async {
+  Future<List<FoodListModel>> getFood({
+    List<String> field,
+    List<dynamic> value,
+    int limit = 5,
+    int check = 0,
+    String mood,
+    String deter,
+  }) async {
     List<String> _field = field;
     List<dynamic> _value = value;
     /* gets previous list saved by the name */
@@ -66,7 +66,7 @@ class DatabaseQuery {
     if (_gfoodList == null || check == 0) {
       Query _finalQuery = _ref.orderBy('description');
       /* last document to continue query from */
-      if (_gfoodList != null) if (_gfoodList.length != 0 && recursive == false)
+      if (_gfoodList != null) if (_gfoodList.length != 0)
         _lastDocument =
             _gfoodList.cast<FoodListModel>()[_gfoodList.length - 1].description;
 
@@ -88,14 +88,14 @@ class DatabaseQuery {
       List<FoodListModel> queryList =
           await DatabaseService().listFromSnapshot(snapshot);
       await _box.put(listName, queryList);
-      if (queryList.length < limit - 1) {
+      if (queryList.length < 5) {
+        await _box.put(listName, null);
         _finalQuery = _ref
             .orderBy('description')
             .where("deter", isEqualTo: "veg")
             .limit(limit);
         snapshot = await _finalQuery.get();
         queryList = await DatabaseService().listFromSnapshot(snapshot);
-        await _box.put(listName, null);
       }
       /* saving list for later use */
       return queryList;
