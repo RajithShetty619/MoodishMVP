@@ -24,8 +24,6 @@ class Restaurant extends StatefulWidget {
 }
 
 class _RestaurantState extends State<Restaurant> {
-  GlobalKey _rest = GlobalKey();
-
   Position _currentPosition;
   bool dialogShow = true;
   String location = 'Mumbai,Maharashtra';
@@ -137,17 +135,13 @@ class _RestaurantState extends State<Restaurant> {
                 padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
                 child: Container(
                   alignment: Alignment.centerLeft,
-                  child: Showcase(
-                    key: _rest,
-                    description: "Find the restaurants near u",
-                    child: RichText(
-                      text: TextSpan(
-                        text: 'Near you',
-                        style: TextStyle(
-                            fontSize: 26,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black),
-                      ),
+                  child: RichText(
+                    text: TextSpan(
+                      text: 'Near you',
+                      style: TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
                     ),
                   ),
                 ),

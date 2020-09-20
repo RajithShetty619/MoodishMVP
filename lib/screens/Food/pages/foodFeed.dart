@@ -16,10 +16,8 @@ import 'package:moodish_mvp/screens/Food/myFeed/foodft.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/polls.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/recipe.dart';
 import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
-import 'package:moodish_mvp/screens/Food/pages/explore.dart';
 
 import 'package:moodish_mvp/screens/Restaurants/mood.dart';
-import 'package:showcaseview/showcaseview.dart';
 
 class FoodFeed extends StatefulWidget {
   final int number;
@@ -119,7 +117,9 @@ class _FoodFeedState extends State<FoodFeed> {
     _dq.getFood(
         field: ['mood', 'deter'],
         value: [mood, deter],
-        limit: 10,
+        limit: 7,
+        mood: mood,
+        deter: deter,
         check: 0).then((future) {
       setState(() {
         moodSelection = mood;
@@ -170,7 +170,6 @@ class _FoodFeedState extends State<FoodFeed> {
                             Future.delayed(Duration(milliseconds: 400), () {
                               setState(() {
                                 _visible = false;
-                                
                               });
                             });
                           },

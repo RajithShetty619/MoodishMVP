@@ -49,7 +49,7 @@ class DatabaseService {
     String deter = await box.get('deter');
     List<String> cuisine = await box.get('preference');
     userName
-        .doc(await Authenticate().returnUid())
+        .doc(Authenticate().returnUid())
         .set({"cuisine": cuisine, "deter": deter}, SetOptions(merge: true));
   }
 
@@ -285,9 +285,9 @@ class DatabaseService {
           situation: _docData["situation"] ?? '',
           preparation: _preparation ?? '',
           calories: _docData["calories"] ?? '',
-          fat: _docData["fat"] ?? '',
+          fat: _docData["fats"] ?? '',
           carbohydrates: _docData["carbohydrates"] ?? '',
-          protein: _docData["protein"] ?? '',
+          protein: _docData["proteins"] ?? '',
           mood: _docData["mood"] ?? '',
           delivery: _docData["delivery"] ?? '',
           sr_no: _docData["sr_no"] ?? '',
