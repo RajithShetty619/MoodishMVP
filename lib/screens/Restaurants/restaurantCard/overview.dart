@@ -5,6 +5,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:moodish_mvp/Services/betaCount.dart';
 import 'package:moodish_mvp/models/restaurantsModel.dart';
+import 'package:moodish_mvp/screens/Restaurants/restaurantCard/mapview.dart';
 import 'package:moodish_mvp/test.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -98,8 +99,10 @@ class _OverViewState extends State<OverView> {
                 ),
                 InkWell(
                     onTap: () async {
-                      await getCurrentLocation();
-                      await getLatLngfromAddress(widget.rest.address);
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return MapView(widget.rest.address);
+                      }));
                     },
                     child: Column(
                       children: <Widget>[

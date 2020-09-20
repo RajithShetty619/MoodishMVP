@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hive/hive.dart';
@@ -70,33 +71,6 @@ class DatabaseService {
 
     if (food != null) {
       String uid = Authenticate().returnUid();
-      Map<String, dynamic> _food = {};
-
-      // _food = {
-      //   "foodName": food.foodName,
-      //   "deter": food.deter,
-      //   "cuisine": food.cuisine,
-      //   "meal_type": food.meal_type,
-      //   "images": food.images,
-      //   "description": food.description,
-      //   "recipe": food.recipe,
-      //   "ingredients": food.ingredients,
-      //   "servings": food.servings,
-      //   "time": food.time,
-      //   "nutrients": food.nutrients,
-      //   "taste": food.taste,
-      //   "situation": food.situation,
-      //   "preparation": food.preparation,
-      //   "calories": food.calories,
-      //   "fat": food.fat,
-      //   "carbohydrates": food.carbohydrates,
-      //   "protein": food.protein,
-      //   "mood": food.mood,
-      //   "restaurants": food.restaurants,
-      //   "delivery": food.delivery,
-      //   "sr_no": food.sr_no,
-      //   "timestamp": FieldValue.serverTimestamp()
-      // };
 
       await FirebaseFirestore.instance
           .collection("Username")
@@ -209,8 +183,6 @@ class DatabaseService {
     return await FirebaseFirestore.instance.collection('food').doc(sr_no).get();
   }
 
-  Future<List<FoodListModel>> searchDocuments({dynamic data}) async {}
-
   /* converts snapshot from db into foodListModel */
   Future<List<FoodListModel>> listFromSnapshot(QuerySnapshot snapshot) async {
     /* Future wait is used to make sure each iteration
@@ -241,10 +213,13 @@ class DatabaseService {
 
         ++i;
       }
-      // String data = _docData["restaurants"];
-      // data =
-      //     data.replaceAll("'", "`").replaceAll('"', "\'").replaceAll('`', '"');
-      // List<dynamic> list = await json.decode(data) as List;
+      List<String> _restaurants = [];
+      try {
+        _restaurants = (jsonDecode(_docData["restaurants"]) as List<dynamic>)
+            .cast<String>();
+      } catch (e) {
+        _restaurants = [];
+      }
 
       /* might look overwhelming but just 
       initialized constructor of FoodListModel */
@@ -252,7 +227,7 @@ class DatabaseService {
           foodName: _docData["food_item"] ?? '',
           deter: _docData["deter"] ?? '',
           cuisine: _docData["cuisine"] ?? '',
-          meal_type: _docData["meal_type"] ?? '',
+          meal_type: _docData["mealtype"] ?? '',
           images: _url ?? '',
           description: _docData["description"] ?? '',
           recipe: _docData["recipe"] ?? '',
@@ -269,7 +244,8 @@ class DatabaseService {
           protein: _docData["protein"] ?? '',
           mood: _docData["mood"] ?? '',
           delivery: _docData["delivery"] ?? '',
-          sr_no: _docData["sr_no"] ?? '');
+          sr_no: _docData["sr_no"] ?? '',
+          restaurants: _restaurants ?? []);
     }).toList());
   }
 

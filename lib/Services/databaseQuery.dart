@@ -297,11 +297,20 @@ class DatabaseQuery {
 
         List<String> _preparation = [];
         List<String> _ingredients = [];
-        _docData["preparation"].map((e) => _preparation.add(e));
-        _docData["ingredients"].map((e) => _preparation.add(e));
+        var data = _docData["preparation"].cast<String>();
+        print(data);
+        try {
+          _preparation = await data;
+          data = _docData["ingredients"];
+          _ingredients = await data;
+        } catch (E) {
+          print(E);
+        }
 
+        print(_preparation);
+        print(_ingredients);
         return FoodListModel(
-            foodName: _docData["food_item"] ?? '',
+            foodName: _docData["foodName"] ?? '',
             deter: _docData["deter"] ?? '',
             cuisine:
                 "${_docData['cuisine'][0].toUpperCase()}${_docData['cuisine'].substring(1)}" ??
@@ -310,19 +319,18 @@ class DatabaseQuery {
             images: _docData['images'] ?? '',
             description: _docData["description"] ?? '',
             recipe: _docData["recipe"] ?? '',
-            ingredients: _ingredients ?? '',
+            ingredients: _ingredients ?? [],
             servings: _docData["serving"] ?? '',
             time: _docData["time"] ?? '',
             nutrients: _docData["nutrients"] ?? '',
             taste: _docData["taste"] ?? '',
             situation: _docData["situation"] ?? '',
-            preparation: _preparation ?? '',
+            preparation: _preparation ?? [],
             calories: _docData["calories"] ?? '',
             fat: _docData["fat"] ?? '',
             carbohydrates: _docData["carbohydrates"] ?? '',
             protein: _docData["protein"] ?? '',
             mood: _docData["mood"] ?? '',
-            // restaurants: _docData["restaurants"] ?? '',
             delivery: _docData["delivery"] ?? '',
             sr_no: _docData["sr_no"] ?? '');
       }).toList());

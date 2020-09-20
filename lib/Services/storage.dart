@@ -15,7 +15,8 @@ class Storage {
 
   Future<String> getUrl(String path) async {
     try {
-      final dynamic _url = await _ref.child(path + ".jpg").getDownloadURL();
+      final dynamic _url =
+          await _ref.child(path + ".jpg").getDownloadURL().catchError(() {});
       String url = _url;
       return url;
     } catch (e) {
