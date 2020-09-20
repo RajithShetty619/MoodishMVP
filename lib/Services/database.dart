@@ -11,6 +11,13 @@ import 'package:moodish_mvp/models/restaurantsModel.dart';
 class DatabaseService {
   final CollectionReference userName =
       FirebaseFirestore.instance.collection('Username');
+  ////Delete user////////
+  final String uid;
+
+  DatabaseService({this.uid});
+  Future deleteuser()async {
+    return await userName.doc(uid).delete();
+  }
 
 /* /////////////////////////////////////////// rating&& reviews  /////////////////////////////////// */
 

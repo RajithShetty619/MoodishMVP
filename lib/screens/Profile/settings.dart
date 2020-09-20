@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:moodish_mvp/Authenticate/deleteAccSettings.dart';
 import 'package:moodish_mvp/Authenticate/forgotPassword.dart';
 import 'package:moodish_mvp/screens/Profile/Edit.dart';
 import 'package:moodish_mvp/screens/Profile/preferenceSettings.dart';
@@ -63,7 +64,7 @@ class _SettingsState extends State<Settings> {
                   Navigator
                       .push(context,
                       MaterialPageRoute(builder: (context) {
-                        return ForgotPassword();
+                        return DeleteAccSettings();
                       }));
                 },
                 title: Text('Account Settings',),

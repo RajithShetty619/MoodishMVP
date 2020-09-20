@@ -284,7 +284,9 @@ class _ProfileState extends State<Profile> {
                     Icons.keyboard_arrow_right,
                     color: Colors.grey.shade400,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    launch('http://play.google.com/store/apps/details?id=net.moodish.snapinsight');
+                  },
                 ),
                 Divider(),
 
@@ -330,12 +332,13 @@ class _ProfileState extends State<Profile> {
                               await Authenticate().signOut();
                             },
                             child: Container(
-                              alignment: Alignment.center,
+                              alignment: Alignment.centerLeft,
                               constraints: BoxConstraints(
                                   minHeight: 50, maxWidth: double.infinity),
                               child: Text(
                                 'Logout',
                                 style: TextStyle(
+                                  fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.orange[600],
                                 ),

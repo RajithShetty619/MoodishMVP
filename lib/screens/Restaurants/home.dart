@@ -14,7 +14,6 @@ import 'package:moodish_mvp/screens/Restaurants/toprated.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:showcaseview/showcaseview.dart';
 import '../Food/blocs/restBloc/restBloc.dart';
 import '../../Services/geolocationRest.dart';
 

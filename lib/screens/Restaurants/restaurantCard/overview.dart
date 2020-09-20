@@ -147,7 +147,7 @@ class _OverViewState extends State<OverView> {
                     onTap: () {
                       final RenderBox box = context.findRenderObject();
                       Share.share(
-                          '${widget.rest.restaurant_Name}\n${widget.rest.website}',
+                          '${widget.rest.restaurant_Name}\nhttp://play.google.com/store/apps/details?id=net.moodish.snapinsight',
                           subject: widget.rest.website,
                           sharePositionOrigin:
                               box.localToGlobal(Offset.zero) & box.size);
