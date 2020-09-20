@@ -24,12 +24,6 @@ class _FoodHomeState extends State<FoodHome> {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ShowCaseWidget.of(context).startShowCase([
-        _tabs,
-      ]);
-    });
-
     DateTime now = DateTime.now();
     return Scaffold(
       body: SafeArea(
@@ -71,7 +65,6 @@ class _FoodHomeState extends State<FoodHome> {
                                 grpValue = changeValue;
                                 _switch = !_switch;
                               }
-                              
                             });
                           },
                           groupValue: grpValue,

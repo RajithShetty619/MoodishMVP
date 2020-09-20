@@ -14,7 +14,6 @@ import 'package:moodish_mvp/screens/Restaurants/toprated.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:showcaseview/showcaseview.dart';
 import '../Food/blocs/restBloc/restBloc.dart';
 import '../../Services/geolocationRest.dart';
 
@@ -554,19 +553,21 @@ Widget restura(
         child: Row(
           children: <Widget>[
             CachedNetworkImage(
-                    imageUrl: rest.photo_url==''?'https://firebasestorage.googleapis.com/v0/b/moodishtest.appspot.com/o/error-image-generic.png?alt=media&token=462d1ab9-ff67-40d9-ae25-8388720dc89b':rest.photo_url,
-                    imageBuilder: (context, imageProvider) {
-                      return Container(
-                        height: 120,
-                        width: 110,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(
-                              image: imageProvider, fit: BoxFit.cover),
-                        ),
-                      );
-                    },
+              imageUrl: rest.photo_url == ''
+                  ? 'https://firebasestorage.googleapis.com/v0/b/moodishtest.appspot.com/o/error-image-generic.png?alt=media&token=462d1ab9-ff67-40d9-ae25-8388720dc89b'
+                  : rest.photo_url,
+              imageBuilder: (context, imageProvider) {
+                return Container(
+                  height: 120,
+                  width: 110,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    image: DecorationImage(
+                        image: imageProvider, fit: BoxFit.cover),
                   ),
+                );
+              },
+            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
