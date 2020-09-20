@@ -297,12 +297,12 @@ class DatabaseQuery {
 
         List<String> _preparation = [];
         List<String> _ingredients = [];
-        var data = _docData["preparation"].cast<String>();
-        print(data);
+
         try {
-          _preparation = await data;
-          data = _docData["ingredients"];
-          _ingredients = await data;
+          var data = (_docData["preparation"] as List<dynamic>).cast<String>();
+          _preparation = data;
+          data = (_docData["preparation"] as List<dynamic>).cast<String>();
+          _ingredients = data;
         } catch (E) {
           print(E);
         }

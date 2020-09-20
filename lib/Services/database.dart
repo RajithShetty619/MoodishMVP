@@ -152,6 +152,28 @@ class DatabaseService {
 
 /* ////////////////////////////////////////////////////////////////////// ResturantListMETHODS ////////////////////////////////////////////////////////// */
 
+  Future<List<RestListModel>> getRestFromList(List<String> list) async {
+    list = list
+        .map((e) => e
+            .split(" ")
+            .map((str) => '${str[0].toUpperCase()}${str.substring(1)}')
+            .join(" "))
+        .toList();
+    List<String> data = [];
+    for (int i = 0; i < 5; i++) {
+      data.add(list[i]);
+    }
+    print(data);
+    CollectionReference _ref =
+        FirebaseFirestore.instance.collection('restaurants');
+    Query q = _ref.where("Restaurant_Name", whereIn: data);
+    QuerySnapshot snapshot = await q.get();
+    print(snapshot.docs);
+    List<RestListModel> _rest =
+        await DatabaseService().listfromSnapshot(snapshot);
+    return _rest;
+  }
+
   Future<List<RestListModel>> listfromSnapshot(QuerySnapshot snapshot) async {
     return Future.wait(snapshot.docs.map((doc) async {
       Map<String, dynamic> _docdata = doc.data();
