@@ -107,12 +107,15 @@ class _ProfileSettingState extends State<ProfileSetting> {
                 setState(() {
                   cuisinePref = Hive.box('preferenceBox').get('preference');
                 });
-                Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                dynamic data = await Navigator.push(context,
+                    MaterialPageRoute(builder: (context) {
                   return Cuisine(
                     event: 1,
                   );
                 }));
+                setState(() {
+                  cuisinePref = data;
+                });
               },
               // color: Colors.green,
               child: Container(
