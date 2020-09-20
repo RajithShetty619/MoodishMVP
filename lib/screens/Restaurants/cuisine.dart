@@ -43,6 +43,7 @@ class _CuisineState extends State<Cuisine> {
   List<String> pref = []; //all the user preferences are saved here
   String err = '';
   bool _visible = true;
+  bool isSelected = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +56,7 @@ class _CuisineState extends State<Cuisine> {
               Align(
                 alignment: Alignment.center,
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(10,10,10,0),
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: RichText(
                     text: TextSpan(
                       text: 'Which Cuisines would you prefer?',
@@ -71,7 +72,7 @@ class _CuisineState extends State<Cuisine> {
                 height: 20.0,
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(10,10,10,0),
+                padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                 child: Container(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -100,41 +101,69 @@ class _CuisineState extends State<Cuisine> {
                     itemBuilder: (BuildContext context, index) {
                       return GestureDetector(
                         onTap: () {
+                          print("pressesesesesesd5362");
                           dynamic _val = cuisine[index];
-                         
+                          
                           setState(() {
-                            pref.add(_val.cuisine);
                             i++;
+                            pref.add(_val.cuisine);
+                            print(_val.cuisine);
+                            print(pref.contains(_val.cuisine));
                           });
+                          if(pref.contains(_val.cuisine)){
+                              setState(() {
+                                isSelected = !isSelected;
+                              });
+                            }
                         },
-                        child: cuisineFilter(
-                          name: '${cuisine[index].cuisine}',
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            
+                              margin: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                border: isSelected
+                                    ? Border.all(color: Colors.orange, width: 2)
+                                    : Border.all(color: Colors.black, width: 2),
+                                borderRadius: BorderRadius.circular(250),
+                              ),
+                              child: Center(
+                                  child: isSelected
+                                      ? Text(
+                                          '${cuisine[index].cuisine}',
+                                          style:
+                                              TextStyle(color: Colors.orange),
+                                        )
+                                      : Text('${cuisine[index].cuisine}'))),
                         ),
-                        // AnimatedOpacity(
-                        //   duration: Duration(milliseconds: 500),
-                        //   opacity: cuisine[index]._visible ? 1.0 : 0.0,
-                        //   child: Container(
-                        //     height: 175.0,
-                        //     width: 110.0,
-                        //     decoration: BoxDecoration(
-                        //         image: DecorationImage(
-                        //           image: AssetImage(
-                        //               'assets/${cuisine[index].image}'),
-                        //           fit: BoxFit.cover,
-                        //         ),
-                        //         borderRadius: BorderRadius.circular(10.0)),
-                        //     child: Center(
-                        //       child: Text(
-                        //         '${cuisine[index].cuisine}',
-                        //         style: TextStyle(
-                        //             fontWeight: FontWeight.bold,
-                        //             color: Colors.white,
-                        //             fontSize: 18.0),
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
-                      );
+                      ); 
+                      /* cuisineFilter(
+                          name: '${cuisine[index].cuisine}',
+                        ),*/
+                      // AnimatedOpacity(
+                      //   duration: Duration(milliseconds: 500),
+                      //   opacity: cuisine[index]._visible ? 1.0 : 0.0,
+                      //   child: Container(
+                      //     height: 175.0,
+                      //     width: 110.0,
+                      //     decoration: BoxDecoration(
+                      //         image: DecorationImage(
+                      //           image: AssetImage(
+                      //               'assets/${cuisine[index].image}'),
+                      //           fit: BoxFit.cover,
+                      //         ),
+                      //         borderRadius: BorderRadius.circular(10.0)),
+                      //     child: Center(
+                      //       child: Text(
+                      //         '${cuisine[index].cuisine}',
+                      //         style: TextStyle(
+                      //             fontWeight: FontWeight.bold,
+                      //             color: Colors.white,
+                      //             fontSize: 18.0),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                     }),
               ),
               Column(
@@ -171,9 +200,9 @@ class _CuisineState extends State<Cuisine> {
                       widget.event == 1
                           ? Align(
                               alignment: Alignment.centerRight,
-                              child: RaisedButton(
-                                onPressed: () async {
-                                  i++;
+                              child: GestureDetector(
+                                onTap: () async {
+                                  print(i);
                                   if (i + 1 > 3) {
                                     Box box =
                                         await Hive.openBox('preferenceBox');
@@ -185,15 +214,33 @@ class _CuisineState extends State<Cuisine> {
                                       err = 'Select ${3 - i} more!';
                                     });
                                 },
-                                color: Colors.green,
-                                child: Text('Change->'),
+                                // color: Colors.green,
+                                child: Container(
+                                  width: 100,
+                                  margin: EdgeInsets.all(10.0),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.black, width: 2),
+                                    borderRadius: BorderRadius.circular(15),
+                                    // color: Colors.blue[200],
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Text(
+                                      'Change',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
                               ),
                             )
                           : Align(
                               alignment: Alignment.center,
                               child: GestureDetector(
                                 onTap: () async {
-                                  i++;
                                   if (i + 1 > 2) {
                                     Box box =
                                         await Hive.openBox('preferenceBox');
@@ -213,7 +260,8 @@ class _CuisineState extends State<Cuisine> {
                                   width: 100,
                                   margin: EdgeInsets.all(10.0),
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black, width: 2),
+                                    border: Border.all(
+                                        color: Colors.black, width: 2),
                                     borderRadius: BorderRadius.circular(15),
                                     // color: Colors.blue[200],
                                   ),
@@ -223,7 +271,8 @@ class _CuisineState extends State<Cuisine> {
                                       'Next',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                          fontSize: 20.0, fontWeight: FontWeight.bold),
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ),
@@ -264,6 +313,7 @@ class _cuisineFilterState extends State<cuisineFilter> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        print("pressesesesesesd5362");
         setState(() {
           isSelected = !isSelected;
         });

@@ -48,14 +48,14 @@ class _FoodRecipeState extends State<FoodRecipe> {
                 ),
               ),
               Spacer(),
-              if(widget.foodList.preparation != null)
+              if(widget.foodList.time != null)
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
                       padding: EdgeInsets.all(16),
-                      child:Text(widget.foodList.time)),
+                      child:Container(width:MediaQuery.of(context).size.width/3.5,child: Text(widget.foodList.time,overflow: TextOverflow.ellipsis,))),
                 ),
-              if(widget.foodList.preparation == null)
+              if(widget.foodList.time == null)
                 Padding(
                     padding: EdgeInsets.all(8.0),
                     child:Text('empty')),
@@ -175,7 +175,7 @@ class _FoodRecipeState extends State<FoodRecipe> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 0.0,
                   mainAxisSpacing: 0.0,
-                childAspectRatio: 2
+                childAspectRatio: 2.2
                   ),
               // primary: true,
               physics: NeverScrollableScrollPhysics(),

@@ -2,9 +2,7 @@ import 'package:http/http.dart';
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/Services/storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'dart:convert';
-
 import 'package:moodish_mvp/models/foodListModel.dart';
 
 class SearchFunction {
@@ -85,7 +83,7 @@ class SearchFunction {
           carbohydrates: _docData["carbohydrates"] ?? '',
           protein: _docData["protein"] ?? '',
           mood: _docData["mood"] ?? '',
-          restaurants: _docData["restaurants"] ?? '',
+          // restaurants: _docData["restaurants"] ?? '',
           delivery: _docData["delivery"] ?? '',
           sr_no: _docData["sr_no"] ?? '');
     }).toList());

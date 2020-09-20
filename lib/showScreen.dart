@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Authenticate/loading.dart';
 import 'package:moodish_mvp/Services/database.dart';
+import 'package:moodish_mvp/introScreen.dart';
 import 'package:moodish_mvp/screens/Restaurants/cuisine.dart';
 import 'package:moodish_mvp/screens/loadScreen.dart';
 import 'package:moodish_mvp/screens/mainScreen.dart';
@@ -39,7 +40,7 @@ class _ShowScreenState extends State<ShowScreen> {
             ),
           );
         } else if (snapShot.data == null) {
-          return Cuisine();
+          return IntroScreen();
         }
         return LoadingScreen();
       },

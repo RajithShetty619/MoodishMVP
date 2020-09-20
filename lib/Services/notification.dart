@@ -1,6 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Services/notification_helper.dart';
 
 import 'package:moodish_mvp/models/messageObject.dart';
@@ -61,10 +62,17 @@ class _MessagingState extends State<Messaging> {
     }
   }
 
-  Future onSelectNotification(String payload) async => await Navigator.push(
+  Future onSelectNotification(String payload) async {
+    await Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => Test(payload: payload)),
+        MaterialPageRoute(builder: (context) => Test(payload: payload))
+        
       );
+      Box _box = await Hive.openBox('notif');
+      _box.put('notif', payload);
+    
+      print(payload);
+  }
 
   @override
   Widget build(BuildContext context) => ListView(

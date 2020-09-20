@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:moodish_mvp/Authenticate/forgotPassword.dart';
 import 'package:moodish_mvp/screens/Profile/Edit.dart';
 import 'package:moodish_mvp/screens/Profile/preferenceSettings.dart';
 import 'package:app_settings/app_settings.dart';
 
 class Settings extends StatefulWidget {
+  final ImageProvider image;
+  final Map<String, dynamic> user;
+  Settings({this.image, this.user});
   @override
   _SettingsState createState() => _SettingsState();
 }
@@ -55,20 +59,26 @@ class _SettingsState extends State<Settings> {
               ),
 
               ListTile(
-                onTap: (){},
+                onTap: (){
+                  Navigator
+                      .push(context,
+                      MaterialPageRoute(builder: (context) {
+                        return ForgotPassword();
+                      }));
+                },
                 title: Text('Account Settings',),
-                subtitle: Text('Change your password or delete account',style: TextStyle(color: Colors.grey),),
+                subtitle: Text('Change your password',style: TextStyle(color: Colors.grey),),
               ),
               ListTile(
                 onTap: (){
                   Navigator
                       .push(context,
                       MaterialPageRoute(builder: (context) {
-                        return EditProfile();
+                        return EditProfile(user: widget.user,image: widget.image,);
                       }));
                 },
                 title: Text('Edit Profile',),
-                subtitle: Text('Edit username, profile pic, etc.',style: TextStyle(color: Colors.grey),),
+                subtitle: Text('Change Profile pic ,Phone no. etc',style: TextStyle(color: Colors.grey),),
               ),
               ListTile(
                 onTap: (){

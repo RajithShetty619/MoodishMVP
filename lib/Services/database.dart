@@ -1,14 +1,11 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Services/authenticate.dart';
 import 'package:moodish_mvp/Services/storage.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
-import 'package:moodish_mvp/models/name.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:moodish_mvp/models/restaurantsModel.dart';
-import 'dart:convert';
 
 class DatabaseService {
   final CollectionReference userName =
@@ -271,10 +268,8 @@ class DatabaseService {
           carbohydrates: _docData["carbohydrates"] ?? '',
           protein: _docData["protein"] ?? '',
           mood: _docData["mood"] ?? '',
-          // restaurants: _docData["restaurants"] ?? [],
           delivery: _docData["delivery"] ?? '',
           sr_no: _docData["sr_no"] ?? '');
-      // like: _docData["like"] ?? 0);
     }).toList());
   }
 

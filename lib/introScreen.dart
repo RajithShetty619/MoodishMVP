@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:moodish_mvp/screens/Restaurants/cuisine.dart';
 
 class IntroScreen extends StatefulWidget {
   @override
@@ -56,19 +57,30 @@ class _IntroScreenState extends State<IntroScreen> {
     return IntroductionScreen(
       showSkipButton: true,
       showNextButton: true,
-      next: Text('Next',style: TextStyle(
-        color: Colors.deepOrange,
-      ),),
-      skip: Text('Skip',style: TextStyle(
-        color: Colors.deepOrange,
-      ),),
+      next: Text(
+        'Next',
+        style: TextStyle(
+          color: Colors.deepOrange,
+        ),
+      ),
+      skip: Text(
+        'Skip',
+        style: TextStyle(
+          color: Colors.deepOrange,
+        ),
+      ),
       done: Text(
         'Done',
         style: TextStyle(
           color: Colors.deepOrange,
         ),
       ),
-      onDone: () {},
+      onDone: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Cuisine()));
+      },
       pages: getPages(),
     );
   }

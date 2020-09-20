@@ -311,9 +311,10 @@ class _RestaurantState extends State<Restaurant> {
                                                 Icon(
                                                   Icons.location_on,
                                                   size: 20,
+                                                  color: Colors.grey[600],
                                                 ),
                                                 Text(restList["r1"][index]
-                                                    .restaurant_Location),
+                                                    .restaurant_Location,style: TextStyle(color: Colors.grey[600],),),
                                               ],
                                             ),
                                           ),
@@ -470,7 +471,7 @@ class _RestaurantState extends State<Restaurant> {
                     itemCount: restList["r2"].length,
                     itemBuilder: (context, index) {
                       return Container(
-                        height: 400,
+                        width: MediaQuery.of(context).size.width,
                         child: restura(restList["r2"][index], context),
                       );
                     });
@@ -553,84 +554,100 @@ Widget restura(
                 )));
       },
       child: Card(
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-        child: Column(
+       shape: RoundedRectangleBorder(
+           borderRadius: BorderRadius.circular(20.0)
+       ),
+        child: Row(
           children: <Widget>[
             CachedNetworkImage(
               imageUrl: rest.photo_url,
               imageBuilder: (context, imageProvider) {
                 return Container(
-                  height: 220,
-                  width: double.maxFinite,
+                  height: 120,
+                  width: 110,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20)),
+                    borderRadius: BorderRadius.circular(20),
                     image: DecorationImage(
                         image: imageProvider, fit: BoxFit.cover),
                   ),
                 );
               },
             ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                child: Padding(
-                  padding: EdgeInsets.all(8),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      rest.restaurant_Name,
-                      overflow: TextOverflow.ellipsis,
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width-190,
+                        child: Padding(
+                          padding: EdgeInsets.all(8),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              rest.restaurant_Name,
+                              overflow: TextOverflow.ellipsis,
+                              style:
+                              TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8, bottom: 8),
+                      child: Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.star,
+                            size: 18,
+                          ),
+                          rest.rating=='5'?
+                          Text(
+                            '${rest.rating}.0',
+                            style: TextStyle(fontSize: 12),
+                          ):
+                          Text(rest.rating,style: TextStyle(fontSize: 12),),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width-145,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Text(rest.cuisines,maxLines: 3,overflow: TextOverflow.ellipsis,),
                     ),
                   ),
                 ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8, bottom: 8),
-              child: Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.star,
-                    size: 18,
-                  ),
-                  Text(
-                    rest.rating,
-                    style: TextStyle(fontSize: 12),
-                  ),
-                ],
-              ),
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8, bottom: 5, right: 5),
-                  child: Text(rest.cuisines),
-                ),
-              ),
-            ),
-            Container(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Row(
-                    children: <Widget>[
-                      Icon(
-                        Icons.location_on,
-                        size: 20,
+                Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.location_on,
+                            size: 20,
+                          ),
+                          Text(rest.restaurant_Location),
+                        ],
                       ),
-                      Text(rest.restaurant_Location),
-                    ],
+                    ),
                   ),
-                ),
-              ),
+                )
+
+              ],
             )
+
+
           ],
         ),
       ),
