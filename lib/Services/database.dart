@@ -279,7 +279,7 @@ class DatabaseService {
           recipe: _docData["recipe"] ?? '',
           ingredients: _ingredients ?? '',
           servings: _docData["serving"] ?? '',
-          time: _docData["time"] ?? '',
+          time: _docData["timing"] ?? '',
           nutrients: _docData["nutrients"] ?? '',
           taste: _docData["taste"] ?? '',
           situation: _docData["situation"] ?? '',
