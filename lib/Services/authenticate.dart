@@ -24,6 +24,21 @@ class Authenticate {
     String _uid = user.uid;
     return _uid;
   }
+  Future deleteUser(String email, String password) async {
+    try {
+      User user = _auth.currentUser;
+      AuthCredential credentials =
+      EmailAuthProvider.credential(email: email, password: password);
+      print(user);
+       UserCredential result = await user.reauthenticateWithCredential(credentials);
+      await DatabaseService(uid: result.user.uid).deleteuser(); // called from database class
+      await result.user.delete();
+      return true;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
 
   Future<User> returnUser() async {
     User user = _auth.currentUser;

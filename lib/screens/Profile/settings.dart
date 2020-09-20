@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:moodish_mvp/Authenticate/deleteAccSettings.dart';
 import 'package:moodish_mvp/Authenticate/forgotPassword.dart';
 import 'package:moodish_mvp/screens/Profile/Edit.dart';
 import 'package:moodish_mvp/screens/Profile/preferenceSettings.dart';
@@ -57,17 +58,28 @@ class _SettingsState extends State<Settings> {
                 title: Text('Change Preferences',),
                 subtitle: Text('Cuisine, Food Preference(Veg or NonVeg)',style: TextStyle(color: Colors.grey),),
               ),
-
+              Padding(
+                padding: EdgeInsets.only(left: 10,right: 10),
+                child: Divider(thickness: 2.0,),
+              ),
               ListTile(
-                onTap: (){
-                  Navigator
+                onTap: ()async{
+                  dynamic data = await  Navigator
                       .push(context,
                       MaterialPageRoute(builder: (context) {
-                        return ForgotPassword();
+                        return DeleteAccSettings();
                       }));
+                  if(data=="pop")
+                  {
+                    Navigator.of(context).pop();
+                  }
                 },
                 title: Text('Account Settings',),
-                subtitle: Text('Change your password',style: TextStyle(color: Colors.grey),),
+                subtitle: Text('Change your password and Delete Account',style: TextStyle(color: Colors.grey),),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 10,right: 10),
+                child: Divider(thickness: 2.0,),
               ),
               ListTile(
                 onTap: (){
@@ -80,6 +92,10 @@ class _SettingsState extends State<Settings> {
                 title: Text('Edit Profile',),
                 subtitle: Text('Change Profile pic ,Phone no. etc',style: TextStyle(color: Colors.grey),),
               ),
+              Padding(
+                padding: EdgeInsets.only(left: 10,right: 10),
+                child: Divider(thickness: 2.0,),
+              ),
               ListTile(
                 onTap: (){
                   AppSettings.openAppSettings();
@@ -87,12 +103,20 @@ class _SettingsState extends State<Settings> {
                 title: Text('App Permission',),
                 subtitle: Text('Change App Permissions',style: TextStyle(color: Colors.grey),),
               ),
+              Padding(
+                padding: EdgeInsets.only(left: 10,right: 10),
+                child: Divider(thickness: 2.0,),
+              ),
               ListTile(
                 onTap: (){
                   AppSettings.openNotificationSettings();
                 },
                 title: Text('Notification Settings',),
                 subtitle: Text('Modify Notification Settings',style: TextStyle(color: Colors.grey),),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 10,right: 10),
+                child: Divider(thickness: 2.0,),
               )
             ],
           )
