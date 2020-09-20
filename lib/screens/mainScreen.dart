@@ -71,9 +71,8 @@ class _MainScreenState extends State<MainScreen> {
             child: IndexedStack(
           index: _selectedIndex,
           children: [
-            ShowCaseWidget(builder: Builder(builder: (context) => FoodHome())),
-            ShowCaseWidget(
-                builder: Builder(builder: (context) => Restaurant())),
+            FoodHome(),
+            Restaurant(),
             Search(),
             Profile(),
           ],
