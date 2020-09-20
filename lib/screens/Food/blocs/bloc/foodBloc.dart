@@ -18,8 +18,7 @@ class FoodBloc extends Bloc<FoodEvent, Map<String, List<FoodListModel>>> {
           "d0": [],
           "d1": [],
           "d2": [],
-          "search": [],
-          "like": []
+          "search": []
         });
   @override
   Stream<Map<String, List<FoodListModel>>> mapEventToState(
@@ -29,6 +28,14 @@ class FoodBloc extends Bloc<FoodEvent, Map<String, List<FoodListModel>>> {
         Map<String, List<FoodListModel>> newstate = state;
         if (event.food != null) {
           newstate[event.listName].addAll(event.food);
+        }
+        yield newstate;
+        break;
+      case EventType.like:
+        Map<String, List<FoodListModel>> newstate = state;
+        if (event.index > -1) {
+          newstate[event.listName][event.index].heart =
+              !newstate[event.listName][event.index].heart;
         }
         yield newstate;
         break;

@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Services/authenticate.dart';
-import 'package:moodish_mvp/Services/storage.dart';
 import 'package:moodish_mvp/models/factsModel.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/models/pollsModel.dart';
@@ -9,7 +8,6 @@ import 'package:moodish_mvp/models/restaurantsModel.dart';
 import 'package:moodish_mvp/models/this_thatModel.dart';
 import 'package:moodish_mvp/models/yesNo.dart';
 import 'database.dart';
-import 'dart:convert';
 
 class DatabaseQuery {
   String _lastDocument;
@@ -111,12 +109,16 @@ class DatabaseQuery {
   }
 
   /* almost same working as getFood exceot it add to and existing list */
-  Future<List<FoodListModel>> getMoreFood(
-      {List<String> field, List<dynamic> value}) async {
+  Future<List<FoodListModel>> getMoreFood({
+    List<String> field,
+    List<dynamic> value,
+    String mood,
+    String deter,
+  }) async {
     List<String> _field = field;
     List<dynamic> _value = value;
     List<dynamic> _gfoodList = [];
-    final _box = Hive.box(listName);
+    final _box = await Hive.openBox(listName + (mood ?? '') + (deter ?? ''));
     _gfoodList = await _box.get(listName);
     _lastDocument =
         _gfoodList.cast<FoodListModel>()[_gfoodList.length - 1].description;

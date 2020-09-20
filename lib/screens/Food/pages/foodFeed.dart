@@ -105,21 +105,6 @@ class _FoodFeedState extends State<FoodFeed> {
 
   bool isSwitched = false;
 
-  // onChangedDeter(value) {
-  //   setState(() {
-  //     isSwitched = value;
-  //   });
-  //   if(isSwitched == true){
-  //     setState(() {
-  //       det = 0;
-  //     });
-  //   }else{
-  //     setState(() {
-  //       det = 2;
-  //     });
-  //   }
-  // }
-
   data(BuildContext dataContext, String mood) async {
     Box _box = await Hive.openBox("preferenceBox");
     String deter = _box.get("deter");
@@ -183,12 +168,15 @@ class _FoodFeedState extends State<FoodFeed> {
                           onTap: () {
                             String _val = mood[index].mood;
                             data(context, _val);
-                            Future.delayed(Duration(milliseconds: 400), () {
-                              setState(() {
-                                _visible = false;
-                                ShowCaseWidget.of(context).startShowCase(
-                                    [KeysToBeInherited.of(context).explore]);
-                              });
+                            // Future.delayed(Duration(milliseconds: 400), () {
+                            //   setState(() {
+                            //     _visible = false;
+                            //     ShowCaseWidget.of(context).startShowCase(
+                            //         [KeysToBeInherited.of(context).explore]);
+                            //   });
+                            // });
+                            setState(() {
+                              _visible = false;
                             });
                           },
                           child: Stack(
@@ -319,6 +307,8 @@ class _FoodFeedState extends State<FoodFeed> {
                                     );
                                   return Mood_Food(
                                     foodList: foodList["0"][index],
+                                    index: index,
+                                    listName: "0",
                                   );
                                 },
                               ),
@@ -424,7 +414,7 @@ class _FoodFeedState extends State<FoodFeed> {
                           Column(
                             children: <Widget>[
                               Container(
-                                width:MediaQuery.of(context).size.width,
+                                width: MediaQuery.of(context).size.width,
                                 alignment: Alignment.centerRight,
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(

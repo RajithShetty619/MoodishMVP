@@ -296,6 +296,8 @@ class _ExploreState extends State<Explore> {
                                                 return TodaySpecial(
                                                   foodList: foodList["tsp"]
                                                       [index],
+                                                  index: index,
+                                                  listName: "tsp",
                                                 );
                                               else {
                                                 return !_loadingData
@@ -319,15 +321,16 @@ class _ExploreState extends State<Explore> {
                                                               });
                                                               await _dqtsp
                                                                   .getMoreFood(
-                                                                      field: [
-                                                                    'cuisine',
-                                                                    'deter'
-                                                                  ],
-                                                                      value: [
-                                                                    'indian',
-                                                                    _deter
-                                                                  ]).then(
-                                                                      (future) {
+                                                                field: [
+                                                                  'cuisine',
+                                                                  "deter"
+                                                                ],
+                                                                value: [
+                                                                  'indian',
+                                                                  _deter
+                                                                ],
+                                                                deter: _deter,
+                                                              ).then((future) {
                                                                 BlocProvider.of<
                                                                             FoodBloc>(
                                                                         context)
@@ -453,7 +456,10 @@ class _ExploreState extends State<Explore> {
                             builder: (BuildContext context, foodList) {
                               return Row(
                                 children: <Widget>[
-                                  DataListView(foodList: foodList['t$indxT']),
+                                  DataListView(
+                                    foodList: foodList['t$indxT'],
+                                    listName: "t$indxT",
+                                  ),
                                 ],
                               );
                             },
@@ -650,23 +656,32 @@ class _ExploreState extends State<Explore> {
   }
 }
 
-class DataListView extends StatelessWidget {
+class DataListView extends StatefulWidget {
   const DataListView({
     Key key,
     @required this.foodList,
+    @required this.listName,
   }) : super(key: key);
 
   final List<FoodListModel> foodList;
+  final String listName;
 
+  @override
+  _DataListViewState createState() => _DataListViewState();
+}
+
+class _DataListViewState extends State<DataListView> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: foodList.length,
+        itemCount: widget.foodList.length,
         itemBuilder: (BuildContext context, index) {
           return FoodEveryTaste(
-            foodList: foodList[index],
+            foodList: widget.foodList[index],
+            index: index,
+            listName: widget.listName,
           );
         },
       ),

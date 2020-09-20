@@ -1,9 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moodish_mvp/Services/betaCount.dart';
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
+import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
+import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/food_info.dart';
 import 'package:moodish_mvp/test.dart';
 
@@ -11,9 +14,13 @@ class Mood_Food extends StatefulWidget {
   const Mood_Food({
     Key key,
     this.foodList,
+    this.listName,
+    this.index,
   }) : super(key: key);
 
   final FoodListModel foodList;
+  final String listName;
+  final int index;
 
   @override
   _Mood_FoodState createState() => _Mood_FoodState();
@@ -24,6 +31,7 @@ class _Mood_FoodState extends State<Mood_Food> {
 
   @override
   Widget build(BuildContext context) {
+    _like = widget.foodList.heart;
     return AspectRatio(
       aspectRatio: 0.9 / 1.2,
       child: GestureDetector(
@@ -91,16 +99,31 @@ class _Mood_FoodState extends State<Mood_Food> {
                                         size: 35,
                                       ),
                                 onPressed: () async {
-                                  if (!_like) {
+                                  setState(() {
+                                    _like = !_like;
+                                  });
+                                  if (_like) {
                                     setState(() {
-                                      _like = !_like;
+                                      BlocProvider.of<FoodBloc>(context).add(
+                                          FoodEvent.like(
+                                              widget.index, widget.listName));
                                     });
                                     await DatabaseService().likeTransction(
                                         food: widget.foodList,
                                         sr_no: widget.foodList.sr_no,
                                         collection: "food",
                                         field: "like");
-                                    BetaCount().count(field: 'situation');
+                                  } else {
+                                    setState(() {
+                                      BlocProvider.of<FoodBloc>(context).add(
+                                          FoodEvent.like(
+                                              widget.index, widget.listName));
+                                    });
+                                    await DatabaseService().disLikeTransction(
+                                        food: widget.foodList,
+                                        sr_no: widget.foodList.sr_no,
+                                        collection: "food",
+                                        field: "like");
                                   }
                                 }),
                           ),
