@@ -44,6 +44,8 @@ class _CuisineState extends State<Cuisine> {
   String err = '';
   bool _visible = true;
   bool isSelected = false;
+  List<dynamic> cuisinePref =  Hive.box('preferenceBox').get('preference');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -166,12 +168,21 @@ class _CuisineState extends State<Cuisine> {
                       // ),
                     }),
               ),
+
               Column(
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Center(
-                      child: Text(
+                      child:
+                      widget.event==1?Text(
+                        "Previously Selected:-${cuisinePref.join(',')}\ndon't worry, You can change this later! ",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                            fontSize: 16.0,
+                            fontStyle: FontStyle.italic,
+                            fontWeight: FontWeight.w400),
+                      ):Text(
                         "don't worry, You can change this later! ",
                         textAlign: TextAlign.left,
                         style: TextStyle(
