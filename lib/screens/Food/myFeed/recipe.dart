@@ -49,7 +49,7 @@ class _getListviewState extends State<getListview> {
               imageUrl: widget.foodList.images,
               imageBuilder: (context, imageProvider) {
                 return Container(
-                  height: 300,
+                  height: 250,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       image: DecorationImage(

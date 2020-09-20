@@ -169,7 +169,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                   width: 100,
                   margin: EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    border: (fdPref != 'both')
+                    border: (fdPref != 'Veg&NonVeg')
                         ? ((fdPref == 'veg')
                             ? Border.all(color: Colors.green, width: 2)
                             : Border.all(color: Colors.red, width: 2))
@@ -179,7 +179,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                   child: Center(
                       child: Text(
                     '${fdPref}',
-                    style: TextStyle(color: (fdPref != 'both')
+                    style: TextStyle(color: (fdPref != 'Veg&NonVeg')
                         ? ((fdPref == 'veg')
                             ? Colors.green
                             : Colors.red)

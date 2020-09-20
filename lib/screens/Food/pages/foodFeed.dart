@@ -415,10 +415,12 @@ class _FoodFeedState extends State<FoodFeed> {
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 10, vertical: 1),
-                                  child: Row(children: <Widget>[
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: <Widget>[
                                     Text(
                                       'Veg Only',
-                                      style: TextStyle(fontSize: 18),
+                                      style: TextStyle(fontSize: 16),
                                     ),
                                     SizedBox(width: 5),
                                     CupertinoSwitch(
