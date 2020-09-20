@@ -6,42 +6,7 @@
 //}
 //
 //class _RestaurantTabState extends State<RestaurantTab> {
-//  List<_Restaurants> rest = [
-//    _Restaurants(
-//        image: 'downtown_china.jpg',
-//        name: 'Downtown China',
-//        desc:
-//        'Casual Dining - Chinese, Thai, Asian, Seafood, Momos, Beverages, Desserts \nAndheri Lokhandwala, Andheri West'),
-//    _Restaurants(
-//        image: 'family_tree.jpg',
-//        name: 'Family Tree',
-//        desc:
-//        'Casual Dining - Biryani, Chinese, North Indian, Pizza, South Indian, Desserts \nGhatkopar East'),
-//    _Restaurants(
-//        image: 'frozen_bottle.jpg',
-//        name: 'Frozen Bottle',
-//        desc:
-//        'Beverage Shop, Dessert Parlor - Beverages, Desserts, Ice Cream \nMatunga East'),
-//    _Restaurants(
-//        image: 'irish_house.png',
-//        name: 'The Irish House',
-//        desc: 'Pub, Casual Dining - European, American \nLower Parel'),
-//    _Restaurants(
-//        image: 'Mainland_China.jpg',
-//        name: 'Mainland China',
-//        desc:
-//        'Casual Dining - Chinese, Asian, Sushi, Japanese, Thai \nSakinaka'),
-//    _Restaurants(
-//        image: 'pop_tates.jpg',
-//        name: 'Pop Tates',
-//        desc:
-//        'Bar, Casual Dining - Continental, Chinese, Italian, Beverages \nLower Parel'),
-//    _Restaurants(
-//        image: 'tipsy_gipsy.jpg',
-//        name: 'Tipsy Gipsy',
-//        desc:
-//        'Bar, Casual Dining - Continental, Mediterranean, Italian \nVeera Desai Area'),
-//  ];
+
 //  @override
 //  Widget build(BuildContext context) {
 //    return ListView.builder(

@@ -119,7 +119,9 @@ class _FoodFeedState extends State<FoodFeed> {
     _dq.getFood(
         field: ['mood', 'deter'],
         value: [mood, deter],
-        limit: 10,
+        limit: 7,
+        mood: mood,
+        deter: deter,
         check: 0).then((future) {
       setState(() {
         moodSelection = mood;
@@ -170,7 +172,6 @@ class _FoodFeedState extends State<FoodFeed> {
                             Future.delayed(Duration(milliseconds: 400), () {
                               setState(() {
                                 _visible = false;
-                                
                               });
                             });
                           },

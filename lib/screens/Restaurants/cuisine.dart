@@ -20,23 +20,23 @@ class _CuisineState extends State<Cuisine> {
 
   List<GridTileBuilder> cuisine = [
     GridTileBuilder(
-        image: 'NorthIndian.jpeg', cuisine: 'Indian', currentOpacity: 1),
+        image: 'NorthIndian.jpeg', cuisine: 'Indian', isSelected: false),
     GridTileBuilder(
-        image: 'frenchCuisine.jpg', cuisine: 'French', currentOpacity: 1),
+        image: 'frenchCuisine.jpg', cuisine: 'French', isSelected: false),
     GridTileBuilder(
-        image: 'Chinese.png', cuisine: 'Chinese', currentOpacity: 1),
+        image: 'Chinese.png', cuisine: 'Chinese', isSelected: false),
     GridTileBuilder(
-        image: 'spanishCuisine.jpg', cuisine: 'Spanish', currentOpacity: 1),
+        image: 'spanishCuisine.jpg', cuisine: 'Spanish', isSelected: false),
     GridTileBuilder(
-        image: 'FastFood.png', cuisine: 'American', currentOpacity: 1),
+        image: 'FastFood.png', cuisine: 'American', isSelected: false),
     GridTileBuilder(
-        image: 'japaneseCuisine.jpg', cuisine: 'Japanese', currentOpacity: 1),
+        image: 'japaneseCuisine.jpg', cuisine: 'Japanese', isSelected: false),
     GridTileBuilder(
-        image: 'Italian.jpg', cuisine: 'Italian', currentOpacity: 1),
+        image: 'Italian.jpg', cuisine: 'Italian', isSelected: false),
     GridTileBuilder(
-        image: 'Mexican.jpg', cuisine: 'Mexican', currentOpacity: 1),
+        image: 'Mexican.jpg', cuisine: 'Mexican', isSelected: false),
     GridTileBuilder(
-        image: 'britishCuisine.jpg', cuisine: 'British', currentOpacity: 1),
+        image: 'britishCuisine.jpg', cuisine: 'British', isSelected: false),
   ];
 
   int i = 0;
@@ -105,18 +105,23 @@ class _CuisineState extends State<Cuisine> {
                         onTap: () {
                           print("pressesesesesesd5362");
                           dynamic _val = cuisine[index];
-                          
                           setState(() {
                             i++;
-                            pref.add(_val.cuisine);
-                            print(_val.cuisine);
+                            if(cuisine[index].isSelected==true)
+                            {
+                              pref.remove(cuisine[index].cuisine);
+                            }
+                            if(cuisine[index].isSelected==false)
+                            {
+                              pref.add(_val.cuisine);
+                            }
+                            print(pref);
                             print(pref.contains(_val.cuisine));
                           });
-                          if(pref.contains(_val.cuisine)){
                               setState(() {
-                                isSelected = !isSelected;
+                                cuisine[index].isSelected = !cuisine[index].isSelected;
                               });
-                            }
+
                         },
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(20),
@@ -124,13 +129,13 @@ class _CuisineState extends State<Cuisine> {
                             
                               margin: EdgeInsets.all(8),
                               decoration: BoxDecoration(
-                                border: isSelected
+                                border: cuisine[index].isSelected
                                     ? Border.all(color: Colors.orange, width: 2)
                                     : Border.all(color: Colors.black, width: 2),
                                 borderRadius: BorderRadius.circular(250),
                               ),
                               child: Center(
-                                  child: isSelected
+                                  child: cuisine[index].isSelected
                                       ? Text(
                                           '${cuisine[index].cuisine}',
                                           style:
@@ -304,9 +309,8 @@ class _CuisineState extends State<Cuisine> {
 class GridTileBuilder {
   String image;
   String cuisine;
-  double currentOpacity;
-  bool _visible = true;
-  GridTileBuilder({this.cuisine, this.image, this.currentOpacity});
+  bool isSelected;
+  GridTileBuilder({this.cuisine, this.image, this.isSelected});
 }
 
 class cuisineFilter extends StatefulWidget {
