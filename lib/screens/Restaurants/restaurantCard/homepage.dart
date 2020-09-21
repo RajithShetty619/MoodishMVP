@@ -511,7 +511,16 @@ class _HomePageState extends State<HomePage> {
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(10),
                                       ),
-                                      child: Text('Copy Location'),
+                                      child: Row(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(3.0),
+                                            child: Icon(Icons.content_copy ,color: Colors.black, ),
+                                          ),
+                                          
+                                          Text('Copy'),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
