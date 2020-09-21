@@ -108,9 +108,9 @@ class _DeleteAccState extends State<DeleteAcc> {
                               setState(() =>
                               error = 'Wrong password or Email');
                             }
-                            else
-                              await Authenticate().deleteUser(_email, _password);
-                            Navigator.of(context).pop('pop');
+                            else{
+                              _handleSubmit(context);
+                            Navigator.of(context).pop('pop');}
                           }
                         },
                         child: Center(
