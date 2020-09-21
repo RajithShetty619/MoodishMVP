@@ -23,6 +23,7 @@ class _HomePageState extends State<HomePage> {
   int _selected = 1;
   bool copyDelay = false;
   String finalRating;
+  var _textController = TextEditingController();
   var _rating;
   bool submit = false;
   String review = '';
@@ -882,6 +883,7 @@ class _HomePageState extends State<HomePage> {
                               padding:
                                   const EdgeInsets.only(left: 5.0, right: 5.0),
                               child: TextField(
+                                controller: _textController,
                                   maxLines: 5,
                                   onChanged: (val) {
                                     review = val;
@@ -916,6 +918,7 @@ class _HomePageState extends State<HomePage> {
                                           TextStyle(color: Color(0xffffffff)),
                                     ),
                                     onPressed: () async {
+                                      _textController.clear();
                                       await DatabaseService().restRating(
                                           sr_no: widget.restaurant.sr_no,
                                           review: review,
