@@ -55,7 +55,7 @@ class foodAbout extends StatelessWidget {
                       child: Text(
                         'Description',
                         style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 24,
                         ),
                         textAlign: TextAlign.left,
                       ),
@@ -109,7 +109,7 @@ class foodAbout extends StatelessWidget {
                       child: Text(
                         'Nutrients',
                         style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 24,
                         ),
                         textAlign: TextAlign.left,
                       ),
