@@ -13,8 +13,11 @@ class _IntroScreenState extends State<IntroScreen> {
       PageViewModel(
         image: ClipRRect(
           borderRadius: BorderRadius.circular(100),
-          child: Image.asset(
-            'assets/1.png',
+          child: Padding(
+            padding: const EdgeInsets.only(top: 50),
+            child: Image.asset(
+              'assets/1.png',
+            ),
           ),
         ),
         title: "Food For Mood",
@@ -23,8 +26,11 @@ class _IntroScreenState extends State<IntroScreen> {
       PageViewModel(
         image: ClipRRect(
           borderRadius: BorderRadius.circular(100),
-          child: Image.asset(
-            'assets/1_1.png',
+          child: Padding(
+            padding: const EdgeInsets.only(top:50.0),
+            child: Image.asset(
+              'assets/1_1.png',
+            ),
           ),
         ),
         title: "Food Information",
@@ -34,8 +40,11 @@ class _IntroScreenState extends State<IntroScreen> {
       PageViewModel(
         image: ClipRRect(
           borderRadius: BorderRadius.circular(100),
-          child: Image.asset(
-            'assets/2.png',
+          child: Padding(
+            padding: const EdgeInsets.only(top:50.0),
+            child: Image.asset(
+              'assets/2.png',
+            ),
           ),
         ),
         title: "Restaurants",
@@ -44,8 +53,11 @@ class _IntroScreenState extends State<IntroScreen> {
       PageViewModel(
         image: ClipRRect(
           borderRadius: BorderRadius.circular(100),
-          child: Image.asset(
-            'assets/2_1.png',
+          child: Padding(
+            padding: const EdgeInsets.only(top:50.0),
+            child: Image.asset(
+              'assets/2_1.png',
+            ),
           ),
         ),
         title: "Information About Restaurants",

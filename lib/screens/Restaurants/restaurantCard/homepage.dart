@@ -94,24 +94,27 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.all(10),
                 child: Column(
                   children: <Widget>[
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        widget.restaurant.restaurant_Name,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 28.0,
-                            fontWeight: FontWeight.bold),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 10, 0, 5),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          widget.restaurant.restaurant_Name,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 28.0,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                     Padding(
-                        padding: EdgeInsets.fromLTRB(10, 0, 5, 0),
+                        padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
                         child: Divider(
                           color: Colors.black,
                         )),
                     Padding(
-                        padding: EdgeInsets.all(5),
+                        padding: EdgeInsets.all(8),
                         child: Container(
                             alignment: Alignment.centerLeft,
                             child: Text(
@@ -120,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                               style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),
                             ))),
                     Padding(
-                      padding: EdgeInsets.only(top: 8,left: 5),
+                      padding: EdgeInsets.only(top: 8,left: 8),
                       child: Container(
                           alignment: Alignment.centerLeft,
                           child: Row(
@@ -186,6 +189,7 @@ class _HomePageState extends State<HomePage> {
                                         style: TextStyle(
                                           color:
                                           Colors.black,
+                                          fontSize: 20
                                         ),
                                       ),
                                     )
@@ -900,7 +904,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               if(_selected==3)
                 Padding(
-                  padding: EdgeInsets.only(top: 8,left: 5),
+                  padding: EdgeInsets.only(top: 12,left: 0),
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: Container(

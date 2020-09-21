@@ -19,8 +19,7 @@ class _RestaurantReviewState extends State<RestaurantReview> {
     return Scaffold(
       body: SafeArea(
         child: ListView(
-          primary: false,
-          physics: NeverScrollableScrollPhysics(),
+          physics: BouncingScrollPhysics(),
           children: <Widget>[
             Row(
               children: <Widget>[
@@ -39,23 +38,12 @@ class _RestaurantReviewState extends State<RestaurantReview> {
                   alignment: Alignment.center,
                   child: Padding(
                     padding: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width / 12),
-                    child: RichText(
-                      text: TextSpan(
-                          text: 'Reviews',
-                          style: TextStyle(
-                              fontSize: MediaQuery.of(context).size.height / 12,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
-                          children: [
-                            TextSpan(
-                                text: '',
-                                style: TextStyle(
-                                    fontSize: 80,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.pinkAccent))
-                          ]),
-                    ),
+                        left: 0,),
+                    child: Text('Reviews',
+                    style: TextStyle(
+                        fontSize: MediaQuery.of(context).size.height / 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),),
                   ),
                 ),
               ],
@@ -93,7 +81,14 @@ class _RestaurantReviewState extends State<RestaurantReview> {
                                     fontSize: 24,
                                     color: Colors.white),
                               ),
+                              widget.rest.rating=='5'?
                               Text(
+                                '\u{02605}${widget.rest.rating}.0',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    color: Colors.white),
+                              ):                              Text(
                                 '\u{02605}${widget.rest.rating}',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
