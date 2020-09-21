@@ -424,7 +424,8 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.pop(context, _user);
+                        Navigator.pop(
+                            context, {"_user": _user, "_image": _image});
                       },
                     ),
                   ),

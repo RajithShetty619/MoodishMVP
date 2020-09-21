@@ -197,8 +197,6 @@ class _SignUpState extends State<SignUp> {
                                     borderRadius: BorderRadius.circular(20.0)),
                                 onPressed: () async {
                                   if (_formKey.currentState.validate()) {
-                                    // dynamic result =
-                                    //     await _handleSubmit(context);
                                     if (_checkBoxValue == false) {
                                       setState(() => error =
                                           'Please Accept the Terms and Conditions!');
@@ -267,7 +265,9 @@ class _SignUpState extends State<SignUp> {
                                             error = 'Email already exists');
                                         loading = false;
                                       } else {
-                                        Navigator.pop(context);
+                                        Navigator.of(
+                                          context,
+                                        ).pop();
                                       }
                                     }
                                   }
@@ -303,12 +303,14 @@ class _SignUpState extends State<SignUp> {
             ))));
   }
 
-  Future<User> _handleSubmit(BuildContext context) async {
+  Future _handleSubmit(BuildContext context) async {
     try {
       Dialogs.showLoadingDialog(context, _keyLoader); //invoking login
       dynamic result = await _auth.newRegister(_email, _name, _password);
-      Navigator.of(_keyLoader.currentContext, rootNavigator: false).pop();
-      return result; //close the dialog
+      Navigator.of(
+        _keyLoader.currentContext,
+      ).pop(result);
+      return result;
     } catch (error) {
       print(error);
       return null;

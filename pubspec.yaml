@@ -63,6 +63,7 @@ dependencies:
   swipedetector: ^1.2.0
   app_settings: ^4.0.3
   image_picker: ^0.6.7+9
+  location: ^3.0.0
 
 
 dev_dependencies:

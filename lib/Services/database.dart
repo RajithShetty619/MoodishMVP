@@ -42,7 +42,7 @@ class DatabaseService {
   Future<void> checkPreference() async {
     Box box = await Hive.openBox('preferenceBox');
     DocumentSnapshot userPref =
-        await userName.doc(await Authenticate().returnUid()).get();
+        await userName.doc(Authenticate().returnUid()).get();
     String deter = await userPref.data()["deter"];
     print(deter);
     dynamic cuisine = await userPref.data()['cuisine'];
@@ -147,7 +147,7 @@ class DatabaseService {
   /* user data edit function for eg:- func(field:'name',value:'xyz')  then name field is update in db */
   Future<void> editUserData({String field, String value}) async {
     return await userName
-        .doc(await Authenticate().returnUid())
+        .doc(Authenticate().returnUid())
         .set({field: value}, SetOptions(merge: true));
   }
 
@@ -155,7 +155,7 @@ class DatabaseService {
   Future<Map<String, dynamic>> returnUser() async {
     Map<String, dynamic> _data = {};
     DocumentSnapshot user =
-        await userName.doc(await Authenticate().returnUid()).get();
+        await userName.doc(Authenticate().returnUid()).get();
     user.data().forEach((key, value) {
       _data.putIfAbsent(key, () => value);
     });
@@ -167,7 +167,7 @@ class DatabaseService {
   Future uploadPhoto(File image) async {
     StorageReference storageReference = FirebaseStorage.instance
         .ref()
-        .child('user/' + await Authenticate().returnUid() + '/profilePhoto/');
+        .child('user/' + Authenticate().returnUid() + '/profilePhoto/');
     StorageUploadTask uploadTask = storageReference.putFile(image);
     await uploadTask.onComplete;
     print('File Uploaded');
@@ -176,7 +176,7 @@ class DatabaseService {
   Future<String> downloadPhoto() async {
     StorageReference storageReference = FirebaseStorage.instance
         .ref()
-        .child('user/' + await Authenticate().returnUid() + '/profilePhoto/');
+        .child('user/' + Authenticate().returnUid() + '/profilePhoto/');
     String _url = await storageReference.getDownloadURL();
     return _url;
   }
