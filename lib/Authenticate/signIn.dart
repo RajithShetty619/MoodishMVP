@@ -1,4 +1,4 @@
-import 'dart:io'; 
+import 'dart:io';
 import 'package:apple_sign_in/apple_sign_in.dart';
 import 'package:apple_sign_in/apple_sign_in_button.dart' as button;
 import 'package:flutter/material.dart';
@@ -153,14 +153,15 @@ class _SignInState extends State<SignIn> {
                                 elevation: 6.0,
                                 onPressed: () async {
                                   if (_formKey.currentState.validate()) {
-                                    _handleSubmit(context);
                                     dynamic result =
-                                        await _auth.signIn(_email, _password);
+                                        await _handleSubmit(context);
 
                                     if (result == null) {
                                       setState(() =>
                                           error = 'Wrong password or Email');
                                       loading = false;
+                                    } else {
+                                      Navigator.pop(context);
                                     }
                                   }
                                 },
@@ -243,14 +244,15 @@ class _SignInState extends State<SignIn> {
             ))));
   }
 
-  Future<void> _handleSubmit(BuildContext context) async {
+  Future _handleSubmit(BuildContext context) async {
     try {
       Dialogs.showLoadingDialog(context, _keyLoader); //invoking login
-      await _auth.signIn(_email, _password);
+      dynamic result = await _auth.signIn(_email, _password);
       Navigator.of(_keyLoader.currentContext, rootNavigator: true)
-          .pop(); //close the dialog
+          .pop(result); //close the dialog
     } catch (error) {
       print(error);
+      return null;
     }
   }
 

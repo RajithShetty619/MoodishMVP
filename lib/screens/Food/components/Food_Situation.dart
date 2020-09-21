@@ -77,7 +77,6 @@ class _FoodEverySituationState extends State<FoodEverySituation> {
                       Align(
                         alignment: Alignment.centerRight,
                         child: Container(
-                          // margin: EdgeInsets.all(2.0),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(45),
                           ),
@@ -156,21 +155,21 @@ class _FoodEverySituationState extends State<FoodEverySituation> {
                                       Border.all(color: Colors.white, width: 2),
                                   borderRadius: BorderRadius.circular(300),
                                 ),
-                              child: IconButton(
-                                icon: Icon(
-                                  Icons.arrow_forward,
-                                  color: Colors.white,
-                                  size: 22,
+                                child: IconButton(
+                                  icon: Icon(
+                                    Icons.arrow_forward,
+                                    color: Colors.white,
+                                    size: 22,
+                                  ),
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Food_Info(
+                                                  foodList: widget.foodList,
+                                                )));
+                                  },
                                 ),
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Food_Info(
-                                                foodList: widget.foodList,
-                                              )));
-                                },
-                              ),
                               ),
                             ],
                           ),
