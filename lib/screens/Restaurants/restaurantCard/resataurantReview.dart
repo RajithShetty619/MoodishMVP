@@ -19,7 +19,8 @@ class _RestaurantReviewState extends State<RestaurantReview> {
     return Scaffold(
       body: SafeArea(
         child: ListView(
-          physics: BouncingScrollPhysics(),
+          primary: false,
+          physics: NeverScrollableScrollPhysics(),
           children: <Widget>[
             Row(
               children: <Widget>[
@@ -197,14 +198,14 @@ class _RestaurantReviewState extends State<RestaurantReview> {
                               title: Row(
                                 children: <Widget>[
                                   Text(widget.rest.reviews[index]
-                                  ["author_name"]),
+                                      ["author_name"]),
                                   Spacer(),
                                   Text(
                                       '\u{02605}${widget.rest.reviews[index]["rating"]}'),
                                 ],
                               ),
                               subtitle:
-                              Text(widget.rest.reviews[index]["text"]),
+                                  Text(widget.rest.reviews[index]["text"]),
                             ));
                       })
                 ],

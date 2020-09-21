@@ -91,7 +91,7 @@ class _ExploreState extends State<Explore> {
           field: ['cuisine', "deter"],
           value: ['indian', deter],
           deter: deter,
-          check: 0).then((future) {
+          check: check).then((future) {
         setState(() {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "tsp"));
         });
@@ -116,11 +116,22 @@ class _ExploreState extends State<Explore> {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t1"));
         });
       });
+      _dqtaste1.getFood(
+          field: ['taste', 'deter'],
+          value: getValue("t2", deter),
+          limit: 7,
+          deter: deter,
+          check: check).then((future) {
+        setState(() {
+          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t2"));
+        });
+      });
       // _dqsituation0.getFood(
       //     field: ['situation', "deter"],
       //     value: getValue("s0", deter),
       //     limit: 7,
-      //     deter: deter,
+      //     deter: deter,People are now paying for robot rides.
+
       //     check: check).then((future) {
       //   setState(() {
       //     BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s0"));
@@ -157,7 +168,7 @@ class _ExploreState extends State<Explore> {
     DateTime now = DateTime.now();
     String date = DateFormat('EEE, M/d/y').format(now);
     if (date == saveDate) {
-      return 0; //change to zero for testing purpose
+      return 1; //change to zero for testing purpose
     } else {
       _box.put("date2", date);
       return 0;
@@ -173,9 +184,9 @@ class _ExploreState extends State<Explore> {
       case 't1':
         return ["sweet", deter];
         break;
-      // case 't2':
-      //   return [["Salty"]];
-      //   break;
+      case 't2':
+        return ["salty", deter];
+        break;
       case 's0':
         return ["At Home", deter];
         break;
@@ -429,12 +440,26 @@ class _ExploreState extends State<Explore> {
                                   });
                                 },
                               ),
+                              GestureDetector(
+                                child: EveryTaste(
+                                  title: "Salty",
+                                  // isActive: true,
+                                  index: indxT,
+                                  stIndex: 2,
+                                  press: () {},
+                                ),
+                                onTap: () async {
+                                  BetaCount().count(field: 'taste');
+                                  setState(() {
+                                    indxT = 2;
+                                  });
+                                },
+                              ),
                             ],
                           ),
                         ),
                         // SizedBox(height: 20),
                         Container(
-                          // color: Colors.grey[300],
                           height: 300,
                           child: BlocConsumer<FoodBloc,
                               Map<String, List<FoodListModel>>>(

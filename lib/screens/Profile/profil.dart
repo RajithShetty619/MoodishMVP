@@ -8,6 +8,7 @@ import 'package:flutter_linkify/flutter_linkify.dart';
 import 'settings.dart';
 import 'notificationSettings.dart';
 import 'likedFood.dart';
+
 class Profile extends StatefulWidget {
   @override
   _ProfileState createState() => _ProfileState();
@@ -59,7 +60,7 @@ class _ProfileState extends State<Profile> {
               children: <Widget>[
                 InkWell(
                   onTap: () async {
-                    final _userdata = await Navigator.push(
+                    final data = await Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => EditProfile(
@@ -67,7 +68,8 @@ class _ProfileState extends State<Profile> {
                                   image: _image,
                                 )));
                     setState(() {
-                      userData = _userdata;
+                      userData = data["_user"];
+                      _image = data["_image"];
                     });
                   },
                   child: Padding(
@@ -138,7 +140,7 @@ class _ProfileState extends State<Profile> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -150,17 +152,23 @@ class _ProfileState extends State<Profile> {
                             Icons.notifications,
                             size: 40.0,
                           ),
-                          Center(child: Text('Notification',style: TextStyle(color: Colors.black),))
+                          Center(
+                              child: Text(
+                            'Notification',
+                            style: TextStyle(color: Colors.black),
+                          ))
                         ],
                       ),
                     ),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Settings( user: userData,
-                                  image: _image,)));
+                                builder: (context) => Settings(
+                                      user: userData,
+                                      image: _image,
+                                    )));
                       },
                       child: Column(
                         children: <Widget>[
@@ -168,12 +176,16 @@ class _ProfileState extends State<Profile> {
                             Icons.settings,
                             size: 40,
                           ),
-                          Center(child: Text('Settings',style: TextStyle(color: Colors.black),))
+                          Center(
+                              child: Text(
+                            'Settings',
+                            style: TextStyle(color: Colors.black),
+                          ))
                         ],
                       ),
                     ),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -185,7 +197,11 @@ class _ProfileState extends State<Profile> {
                             Icons.favorite,
                             size: 40,
                           ),
-                          Center(child: Text('Liked',style: TextStyle(color: Colors.black),))
+                          Center(
+                              child: Text(
+                            'Liked',
+                            style: TextStyle(color: Colors.black),
+                          ))
                         ],
                       ),
                     ),
@@ -285,7 +301,8 @@ class _ProfileState extends State<Profile> {
                     color: Colors.grey.shade400,
                   ),
                   onTap: () {
-                    launch('http://play.google.com/store/apps/details?id=net.moodish.snapinsight');
+                    launch(
+                        'http://play.google.com/store/apps/details?id=net.moodish.snapinsight');
                   },
                 ),
                 Divider(),
