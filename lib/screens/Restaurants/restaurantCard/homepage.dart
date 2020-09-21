@@ -904,7 +904,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               if(_selected==3)
                 Padding(
-                  padding: EdgeInsets.only(top: 12,left: 0),
+                  padding: EdgeInsets.only(top: 12,left: 12),
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: Container(

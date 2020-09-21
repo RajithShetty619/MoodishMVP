@@ -179,7 +179,7 @@ class _FoodFeedState extends State<FoodFeed> {
                           child: Stack(
                             children: <Widget>[
                               Container(
-                                height: 250.0,
+                                height: 220.0,
                                 width: MediaQuery.of(context).size.width / 2.2,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
@@ -190,7 +190,7 @@ class _FoodFeedState extends State<FoodFeed> {
                                     borderRadius: BorderRadius.circular(10.0)),
                               ),
                               Container(
-                                height: 250.0,
+                                height: 220.0,
                                 width: MediaQuery.of(context).size.width / 2.2,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
