@@ -91,7 +91,7 @@ class _FoodPreferenceState extends State<FoodPreference> {
                                     ? Text(
                                         'veg',
                                         style: TextStyle(
-                                            color: Colors.greenAccent),
+                                            color: Colors.green[400]),
                                       )
                                     : Text('veg'))),
                       ),
@@ -146,7 +146,7 @@ class _FoodPreferenceState extends State<FoodPreference> {
                           showShadow3 = false;
                         });
                         Box box = await Hive.openBox('preferenceBox');
-                        box.put('deter', 'Veg&NonVeg');
+                        box.put('deter', 'Veg &\nNonVeg');
                         DatabaseService().savePreference();
                         setState(() {
                           showShadow3 = true;
