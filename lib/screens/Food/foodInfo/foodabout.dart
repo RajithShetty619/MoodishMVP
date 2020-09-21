@@ -325,7 +325,7 @@ class foodAbout extends StatelessWidget {
                         child: Container(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            'Preparation Time:',
+                            'Preparation Time',
                             style: TextStyle(
                               fontSize: 24,
                             ),
