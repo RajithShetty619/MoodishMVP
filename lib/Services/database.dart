@@ -15,7 +15,7 @@ class DatabaseService {
   final String uid;
 
   DatabaseService({this.uid});
-  Future deleteuser()async {
+  Future deleteuser() async {
     return await userName.doc(uid).delete();
   }
 
@@ -279,7 +279,9 @@ class DatabaseService {
       return FoodListModel(
           foodName: _docData["food_item"] ?? '',
           deter: _docData["deter"] ?? '',
-          cuisine: _docData["cuisine"] ?? '',
+          cuisine:
+              "${_docData['cuisine'][0].toUpperCase()}${_docData['cuisine'].substring(1)}" ??
+                  '',
           meal_type: _docData["mealtype"] ?? '',
           images: _url ?? '',
           description: _docData["description"] ?? '',

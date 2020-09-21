@@ -37,8 +37,6 @@ class SearchFunction {
       of the map is awaited by the code */
     return Future.wait(snapshot.map((doc) async {
       dynamic _docData = doc;
-      print(_docData);
-      print("////////////////////////////////////////////////////");
       /* convert image name to url from storage */
       String _url = await Storage().getUrl(_docData["food_item"]);
 
@@ -76,7 +74,9 @@ class SearchFunction {
       return FoodListModel(
           foodName: _docData["food_item"] ?? '',
           deter: _docData["deter"] ?? '',
-          cuisine: _docData["cuisine"] ?? '',
+          cuisine:
+              "${_docData['cuisine'][0].toUpperCase()}${_docData['cuisine'].substring(1)}" ??
+                  '',
           meal_type: _docData["mealtype"] ?? '',
           images: _url ?? '',
           description: _docData["description"] ?? '',
