@@ -15,23 +15,22 @@ class Authenticate {
     'email',
     'https://www.googleapis.com/auth/contacts.readonly',
   ]);
-  // User _userFromFirebase(User user) {
-  //   return user != null ? User(uid: user.uid) : null;
-  // }
 
   String returnUid() {
     User user = _auth.currentUser;
     String _uid = user.uid;
     return _uid;
   }
+
   Future deleteUser(String email, String password) async {
     try {
       User user = _auth.currentUser;
       AuthCredential credentials =
-      EmailAuthProvider.credential(email: email, password: password);
-      print(user);
-       UserCredential result = await user.reauthenticateWithCredential(credentials);
-      await DatabaseService(uid: result.user.uid).deleteuser(); // called from database class
+          EmailAuthProvider.credential(email: email, password: password);
+      UserCredential result =
+          await user.reauthenticateWithCredential(credentials);
+      await DatabaseService(uid: result.user.uid)
+          .deleteuser(); // called from database class
       await result.user.delete();
       return true;
     } catch (e) {
@@ -50,13 +49,6 @@ class Authenticate {
     return _auth.authStateChanges();
   }
 
-  // Future<String> getToken() async {
-  //   User user = await _auth.currentUser();
-  //   IdTokenResult _token = await user.getIdToken();
-  //   print(_token);
-  //   return _token.token;
-  // }
-
   Future newRegister(String email, String name, String password) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
@@ -65,7 +57,7 @@ class Authenticate {
 
       await DatabaseService()
           .updateUserData(email: email, name: name, uid: user.uid);
-      return User;
+      return "success";
     } catch (e) {
       print(e.toString());
       return null;
@@ -154,9 +146,9 @@ class Authenticate {
 
   Future signOut() async {
     try {
+      await _auth.signOut();
       await Hive.openBox("preferenceBox").then((value) async {
         await value.clear();
-        await _auth.signOut();
       });
     } catch (e) {
       print(e.toString());

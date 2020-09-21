@@ -2,15 +2,40 @@ import 'dart:convert';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart';
 import 'package:moodish_mvp/models/restaurantsModel.dart';
+import 'package:location/location.dart';
 
 class GeolocationRest {
   Future<List<RestListModel>> getRestFromLocation() async {
-    final position = await Geolocator()
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+    Location location = new Location();
+
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
+    LocationData _locationData;
+
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        print("stingy");
+      }
+    }
+
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        print("yay");
+      }
+    }
+
+    _locationData = await location.getLocation();
+
+    // final position = await Geolocator().getCurrentPosition();
+    // print(position);
     try {
       var data = await get(
-          "https://us-central1-moodishtest.cloudfunctions.net/returnRestaurants?lat=${position.latitude}&long=${position.longitude}");
-      if (data.body == "Error: could not handle the request") throw Error();
+          "https://us-central1-moodishtest.cloudfunctions.net/returnRestaurants?lat=${_locationData.latitude}&long=${_locationData.longitude}");
+      // if (data.body == "Error: could not handle the request") throw Error();
       var info = await json.decode(data.body);
       print(info);
       List<dynamic> send = await json.decode(info["restaurants"]);
@@ -20,8 +45,8 @@ class GeolocationRest {
       try {
         print(e.toString());
         var data = await get(
-            "https://us-central1-moodishtest.cloudfunctions.net/returnRestaurants?lat=${position.latitude}&long=${position.longitude}");
-        if (data.body == "Error: could not handle the request") return [];
+            "https://us-central1-moodishtest.cloudfunctions.net/returnRestaurants?lat=${_locationData.latitude}&long=${_locationData.longitude}");
+        // if (data.body == "Error: could not handle the request") return [];
         var info = await json.decode(data.body);
         print(info);
         List<dynamic> send = await json.decode(info["restaurants"]);

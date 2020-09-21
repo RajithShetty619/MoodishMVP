@@ -106,12 +106,13 @@ class _CuisineState extends State<Cuisine> {
                           print("pressesesesesesd5362");
                           dynamic _val = cuisine[index];
                           setState(() {
-                            i++;
                             if (cuisine[index].isSelected == true) {
                               pref.remove(cuisine[index].cuisine);
+                              
                             }
                             if (cuisine[index].isSelected == false) {
                               pref.add(_val.cuisine);
+                              i++;
                             }
                             print(pref);
                             print(pref.contains(_val.cuisine));
@@ -141,33 +142,6 @@ class _CuisineState extends State<Cuisine> {
                                       : Text('${cuisine[index].cuisine}'))),
                         ),
                       );
-                      /* cuisineFilter(
-                          name: '${cuisine[index].cuisine}',
-                        ),*/
-                      // AnimatedOpacity(
-                      //   duration: Duration(milliseconds: 500),
-                      //   opacity: cuisine[index]._visible ? 1.0 : 0.0,
-                      //   child: Container(
-                      //     height: 175.0,
-                      //     width: 110.0,
-                      //     decoration: BoxDecoration(
-                      //         image: DecorationImage(
-                      //           image: AssetImage(
-                      //               'assets/${cuisine[index].image}'),
-                      //           fit: BoxFit.cover,
-                      //         ),
-                      //         borderRadius: BorderRadius.circular(10.0)),
-                      //     child: Center(
-                      //       child: Text(
-                      //         '${cuisine[index].cuisine}',
-                      //         style: TextStyle(
-                      //             fontWeight: FontWeight.bold,
-                      //             color: Colors.white,
-                      //             fontSize: 18.0),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
                     }),
               ),
               Column(
@@ -259,7 +233,11 @@ class _CuisineState extends State<Cuisine> {
                                         await Hive.openBox('preferenceBox');
                                     box.put('preference', pref);
                                     DatabaseService().savePreference();
-                                    Navigator.push(context,
+                                    // Navigator.push(context,
+                                    //     MaterialPageRoute(builder: (context) {
+                                    //   return FoodPreference();
+                                    // }));
+                                    Navigator.pushReplacement(context,
                                         MaterialPageRoute(builder: (context) {
                                       return FoodPreference();
                                     }));

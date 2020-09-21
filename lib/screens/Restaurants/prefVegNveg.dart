@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Services/database.dart';
+import 'package:moodish_mvp/restartApp.dart';
 import 'package:moodish_mvp/screens/loadScreen.dart';
 
 class FoodPreference extends StatefulWidget {
@@ -90,8 +91,8 @@ class _FoodPreferenceState extends State<FoodPreference> {
                                 child: showShadow1
                                     ? Text(
                                         'veg',
-                                        style: TextStyle(
-                                            color: Colors.greenAccent),
+                                        style:
+                                            TextStyle(color: Colors.green[400]),
                                       )
                                     : Text('veg'))),
                       ),
@@ -146,7 +147,7 @@ class _FoodPreferenceState extends State<FoodPreference> {
                           showShadow3 = false;
                         });
                         Box box = await Hive.openBox('preferenceBox');
-                        box.put('deter', 'Veg&NonVeg');
+                        box.put('deter', 'Veg &\nNonVeg');
                         DatabaseService().savePreference();
                         setState(() {
                           showShadow3 = true;
@@ -201,11 +202,13 @@ class _FoodPreferenceState extends State<FoodPreference> {
                     Box box = await Hive.openBox('preferenceBox');
                     dynamic data = box.get('deter');
                     Navigator.of(context).pop(data);
-                  } else
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return LoadingScreen();
-                    }));
+                  } else {
+                    RestartWidget.restartApp(context);
+                    // Navigator.pushReplacement(context,
+                    //     MaterialPageRoute(builder: (context) {
+                    //   return LoadingScreen();
+                    // }));
+                  }
                 },
                 child: Container(
                   width: 100,

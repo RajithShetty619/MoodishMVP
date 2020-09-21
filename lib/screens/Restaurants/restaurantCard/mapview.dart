@@ -5,6 +5,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'dart:math' show cos, sqrt, asin;
 
+import 'package:location/location.dart';
+
 class MapView extends StatefulWidget {
   String restAddress;
   MapView(this.restAddress);
@@ -18,7 +20,7 @@ class _MapViewState extends State<MapView> {
 
   final Geolocator _geolocator = Geolocator();
 
-  Position _currentPosition;
+  LocationData _currentPosition;
   String _currentAddress;
 
   final startAddressController = TextEditingController();
@@ -87,9 +89,29 @@ class _MapViewState extends State<MapView> {
 
   // Method for retrieving the current location
   _getCurrentLocation() async {
-    await _geolocator
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
-        .then((Position position) async {
+    Location location = new Location();
+
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
+    LocationData _locationData;
+
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        print("stingy");
+      }
+    }
+
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        print("yay");
+      }
+    }
+
+    await location.getLocation().then((LocationData position) async {
       setState(() {
         _currentPosition = position;
 

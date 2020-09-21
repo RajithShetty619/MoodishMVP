@@ -39,16 +39,7 @@ class _FoodHomeState extends State<FoodHome> {
                   children: <Widget>[
                     _switch
                         ? Container()
-                        : Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Text(
-                              "${now.day}/${now.month}/${now.year}",
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
+                        : Container(),
                     Flexible(
                       flex: 1,
                       child: Container(

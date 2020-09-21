@@ -166,6 +166,10 @@ class _FoodFeedState extends State<FoodFeed> {
                       itemCount: mood.length,
                       shrinkWrap: true,
                       itemBuilder: (BuildContext itemContext, index) {
+                        switch ('${mood[index].mood[0].toUpperCase()}${mood[index].mood.substring(1)}') {
+                          case 'Anger': 'Angry';
+                            break;
+                        }
                         return GestureDetector(
                           onTap: () {
                             String _val = mood[index].mood;
@@ -179,7 +183,7 @@ class _FoodFeedState extends State<FoodFeed> {
                           child: Stack(
                             children: <Widget>[
                               Container(
-                                height: 250.0,
+                                height: 220.0,
                                 width: MediaQuery.of(context).size.width / 2.2,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
@@ -190,25 +194,20 @@ class _FoodFeedState extends State<FoodFeed> {
                                     borderRadius: BorderRadius.circular(10.0)),
                               ),
                               Container(
-                                height: 250.0,
+                                height: 220.0,
                                 width: MediaQuery.of(context).size.width / 2.2,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    gradient: LinearGradient(
-                                        begin: Alignment.bottomCenter,
-                                        colors: [
-                                          Colors.black.withOpacity(.1),
-                                          Colors.black.withOpacity(.3),
-                                        ])),
+                                   ),
                                 child: Align(
                                   alignment: Alignment.bottomCenter,
                                   child: Padding(
-                                    padding: const EdgeInsets.all(4.0),
+                                    padding: const EdgeInsets.all(8.0),
                                     child: Text(
                                       '${mood[index].mood[0].toUpperCase()}${mood[index].mood.substring(1)}',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.white,
+                                          color: Colors.black,
                                           fontSize: 20.0),
                                     ),
                                   ),

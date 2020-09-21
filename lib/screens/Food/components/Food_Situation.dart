@@ -77,7 +77,6 @@ class _FoodEverySituationState extends State<FoodEverySituation> {
                       Align(
                         alignment: Alignment.centerRight,
                         child: Container(
-                          // margin: EdgeInsets.all(2.0),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(45),
                           ),
@@ -137,7 +136,7 @@ class _FoodEverySituationState extends State<FoodEverySituation> {
                               widget.foodList.foodName,
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 22,
+                                  fontSize: 24,
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
@@ -149,30 +148,29 @@ class _FoodEverySituationState extends State<FoodEverySituation> {
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 18),
                               ),
-                              // Container(
-                              //   margin: EdgeInsets.all(5.0),
-                              //   decoration: BoxDecoration(
-                              //     border:
-                              //         Border.all(color: Colors.white, width: 2),
-                              //     borderRadius: BorderRadius.circular(300),
-                              //   ),
-                              // color: Colors.blue[300],
-                              // child: IconButton(
-                              //   icon: Icon(
-                              //     Icons.arrow_forward,
-                              //     color: Colors.white,
-                              //     size: 25,
-                              //   ),
-                              //   onPressed: () {
-                              //     Navigator.push(
-                              //         context,
-                              //         MaterialPageRoute(
-                              //             builder: (context) => Food_Info(
-                              //                   foodList: widget.foodList,
-                              //                 )));
-                              //   },
-                              // ),
-                              // ),
+                              Container(
+                                margin: EdgeInsets.all(5.0),
+                                decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.white, width: 2),
+                                  borderRadius: BorderRadius.circular(300),
+                                ),
+                                child: IconButton(
+                                  icon: Icon(
+                                    Icons.arrow_forward,
+                                    color: Colors.white,
+                                    size: 22,
+                                  ),
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Food_Info(
+                                                  foodList: widget.foodList,
+                                                )));
+                                  },
+                                ),
+                              ),
                             ],
                           ),
                         ],

@@ -251,7 +251,7 @@ class _FoodRecipeState extends State<FoodRecipe> {
           ),
           SizedBox(height: 8),
           Container(
-            height: MediaQuery.of(context).size.height / 2.8,
+            height: MediaQuery.of(context).size.height / 3,
             child: ListView.builder(
               itemCount: widget.foodList.preparation.length,
               scrollDirection: Axis.horizontal,

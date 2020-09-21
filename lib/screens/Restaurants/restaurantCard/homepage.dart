@@ -11,6 +11,7 @@ import 'package:moodish_mvp/screens/Restaurants/restaurantCard/resataurantReview
 import 'package:page_transition/page_transition.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 class HomePage extends StatefulWidget {
   final RestListModel restaurant;
   HomePage({Key key, this.restaurant}) : super(key: key);
@@ -120,21 +121,25 @@ class _HomePageState extends State<HomePage> {
                             child: Text(
                               '${widget.restaurant.cuisines}',
 //                            'Cuisine',
-                              style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
                             ))),
                     Padding(
-                      padding: EdgeInsets.only(top: 8,left: 8),
+                      padding: EdgeInsets.only(top: 8, left: 8),
                       child: Container(
                           alignment: Alignment.centerLeft,
                           child: Row(
                             children: <Widget>[
-                              Icon(Icons.location_on,size: 20,),
+                              Icon(
+                                Icons.location_on,
+                                size: 20,
+                              ),
                               Text(widget.restaurant.restaurant_Location),
                             ],
                           )),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 8,bottom: 8,left: 8),
+                      padding: EdgeInsets.only(top: 8, bottom: 8, left: 8),
                       child: Row(
                         children: <Widget>[
                           Row(
@@ -145,15 +150,15 @@ class _HomePageState extends State<HomePage> {
                               ),
                               widget.restaurant.rating == '5'
                                   ? Text(
-                                '${widget.restaurant.rating}.0',
-                                style: TextStyle(fontSize: 28),
-                              )
+                                      '${widget.restaurant.rating}.0',
+                                      style: TextStyle(fontSize: 28),
+                                    )
                                   : Text(
-                                widget.restaurant.rating,
-                                style: TextStyle(fontSize: 28),
-                              ),
+                                      widget.restaurant.rating,
+                                      style: TextStyle(fontSize: 28),
+                                    ),
                               Padding(
-                                padding: EdgeInsets.only(left: 10,right: 10),
+                                padding: EdgeInsets.only(left: 10, right: 10),
                                 child: Container(
                                   height: 25,
                                   width: 2,
@@ -164,16 +169,13 @@ class _HomePageState extends State<HomePage> {
                                 onTap: () => Navigator.push(
                                     context,
                                     PageTransition(
-                                        type:
-                                        PageTransitionType
-                                            .rightToLeft,
+                                        type: PageTransitionType.rightToLeft,
                                         child: RestaurantReview(
                                             rest: widget.restaurant))),
                                 child: Row(
                                   children: <Widget>[
                                     Align(
-                                      alignment: Alignment
-                                          .centerRight,
+                                      alignment: Alignment.centerRight,
                                       child: Icon(
                                         Icons.library_books,
                                         color: Colors.black,
@@ -181,22 +183,16 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                     Padding(
-                                      padding:
-                                      const EdgeInsets
-                                          .all(8.0),
+                                      padding: const EdgeInsets.all(8.0),
                                       child: Text(
                                         'Review',
                                         style: TextStyle(
-                                          color:
-                                          Colors.black,
-                                          fontSize: 20
-                                        ),
+                                            color: Colors.black, fontSize: 20),
                                       ),
                                     )
                                   ],
                                 ),
                               )
-
                             ],
                           ),
                         ],
@@ -207,11 +203,8 @@ class _HomePageState extends State<HomePage> {
               ),
               Container(
                 decoration: BoxDecoration(
-                  border: Border(bottom: BorderSide(
-                    color: Colors.grey[400],
-                    width: 2
-                  ))
-                ),
+                    border: Border(
+                        bottom: BorderSide(color: Colors.grey[400], width: 2))),
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Container(
@@ -220,95 +213,128 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             setState(() {
-                              _selected=1;
+                              _selected = 1;
                             });
                           },
                           child: Container(
                             child: Padding(
-                              padding: const EdgeInsets.fromLTRB(5,10,5,0),
+                              padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
                               child: Column(
                                 children: <Widget>[
-                                  Text('Overview',
-                                  style: _selected==1?TextStyle(fontSize: 20,fontWeight: FontWeight.w500):TextStyle(fontSize: 19,color: Colors.grey),),
-                                  _selected==1?
-                                  Container(
-                                    height: 5,
-                                    width: 45,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
-                                      color: Colors.black,
-                                    ),
-                                  ):Container(height: 5,)
-
+                                  Text(
+                                    'Overview',
+                                    style: _selected == 1
+                                        ? TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500)
+                                        : TextStyle(
+                                            fontSize: 19, color: Colors.grey),
+                                  ),
+                                  _selected == 1
+                                      ? Container(
+                                          height: 5,
+                                          width: 45,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(20),
+                                                topRight: Radius.circular(20)),
+                                            color: Colors.black,
+                                          ),
+                                        )
+                                      : Container(
+                                          height: 5,
+                                        )
                                 ],
                               ),
                             ),
                           ),
                         ),
                         GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             setState(() {
                               _selected = 2;
                             });
                           },
                           child: Container(
                             child: Padding(
-                              padding: const EdgeInsets.fromLTRB(5,10,5,0),
+                              padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
                               child: Column(
                                 children: <Widget>[
-                                  Text('Rating',
-                                   style: _selected==2?TextStyle(fontSize: 20,fontWeight: FontWeight.w500):TextStyle(fontSize: 19,color: Colors.grey),),
-                                  _selected==2?
-                                  Container(
-                                    height: 5,
-                                    width: 45,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
-                                      color: Colors.black,
-                                    ),
-                                  ):Container(height: 5,)
+                                  Text(
+                                    'Rating',
+                                    style: _selected == 2
+                                        ? TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500)
+                                        : TextStyle(
+                                            fontSize: 19, color: Colors.grey),
+                                  ),
+                                  _selected == 2
+                                      ? Container(
+                                          height: 5,
+                                          width: 45,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(20),
+                                                topRight: Radius.circular(20)),
+                                            color: Colors.black,
+                                          ),
+                                        )
+                                      : Container(
+                                          height: 5,
+                                        )
                                 ],
                               ),
                             ),
                           ),
                         ),
                         GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             setState(() {
                               _selected = 3;
                             });
                           },
                           child: Container(
                             child: Padding(
-                              padding: const EdgeInsets.fromLTRB(5,10,5,0),
+                              padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
                               child: Column(
                                 children: <Widget>[
-                                  Text('Gallery',
-                                  style: _selected==3?TextStyle(fontSize: 20,fontWeight: FontWeight.w500):TextStyle(fontSize: 19,color: Colors.grey),),
-                                  _selected==3?
-                                  Container(
-                                    height: 5,
-                                    width: 45,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
-                                      color: Colors.black,
-                                    ),
-                                  ):Container(height: 5,
-                                  )
+                                  Text(
+                                    'Gallery',
+                                    style: _selected == 3
+                                        ? TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500)
+                                        : TextStyle(
+                                            fontSize: 19, color: Colors.grey),
+                                  ),
+                                  _selected == 3
+                                      ? Container(
+                                          height: 5,
+                                          width: 45,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(20),
+                                                topRight: Radius.circular(20)),
+                                            color: Colors.black,
+                                          ),
+                                        )
+                                      : Container(
+                                          height: 5,
+                                        )
                                 ],
                               ),
                             ),
                           ),
                         )
-
                       ],
                     ),
                   ),
                 ),
               ),
-              if(_selected==1)
+              if (_selected == 1)
                 ListView(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
@@ -323,15 +349,16 @@ class _HomePageState extends State<HomePage> {
                           children: <Widget>[
                             InkWell(
                                 onTap: () {
-                                  launch('tel:${widget.restaurant.international_phone_number}');
+                                  launch(
+                                      'tel:${widget.restaurant.international_phone_number}');
                                 },
                                 child: Column(
                                   children: <Widget>[
                                     Container(
                                       decoration: BoxDecoration(
                                           shape: BoxShape.circle,
-                                          border: Border.all(color: Colors.black)
-                                      ),
+                                          border:
+                                              Border.all(color: Colors.black)),
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Icon(
@@ -356,8 +383,8 @@ class _HomePageState extends State<HomePage> {
                                     Container(
                                       decoration: BoxDecoration(
                                           shape: BoxShape.circle,
-                                          border: Border.all(color: Colors.black)
-                                      ),
+                                          border:
+                                              Border.all(color: Colors.black)),
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Icon(
@@ -376,16 +403,16 @@ class _HomePageState extends State<HomePage> {
                                 onTap: () async {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                        return MapView(widget.restaurant.address);
-                                      }));
+                                    return MapView(widget.restaurant.address);
+                                  }));
                                 },
                                 child: Column(
                                   children: <Widget>[
                                     Container(
                                       decoration: BoxDecoration(
                                           shape: BoxShape.circle,
-                                          border: Border.all(color: Colors.black)
-                                      ),
+                                          border:
+                                              Border.all(color: Colors.black)),
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Icon(
@@ -402,20 +429,22 @@ class _HomePageState extends State<HomePage> {
                             ),
                             InkWell(
                                 onTap: () {
-                                  final RenderBox box = context.findRenderObject();
+                                  final RenderBox box =
+                                      context.findRenderObject();
                                   Share.share(
                                       '${widget.restaurant.restaurant_Name}-A 5 star Restaurant\nhttp://play.google.com/store/apps/details?id=net.moodish.snapinsight',
                                       subject: widget.restaurant.website,
                                       sharePositionOrigin:
-                                      box.localToGlobal(Offset.zero) & box.size);
+                                          box.localToGlobal(Offset.zero) &
+                                              box.size);
                                 },
                                 child: Column(
                                   children: <Widget>[
                                     Container(
                                       decoration: BoxDecoration(
                                           shape: BoxShape.circle,
-                                          border: Border.all(color: Colors.black)
-                                      ),
+                                          border:
+                                              Border.all(color: Colors.black)),
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Icon(
@@ -430,7 +459,9 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                         SizedBox(height: 8),
-                        Divider(thickness: 2,),
+                        Divider(
+                          thickness: 2,
+                        ),
                         Padding(
                           padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
                           child: Column(
@@ -453,8 +484,7 @@ class _HomePageState extends State<HomePage> {
                                   padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
                                   child: Container(
                                       alignment: Alignment.centerLeft,
-                                      child: Text(
-                                          widget.restaurant.address,
+                                      child: Text(widget.restaurant.address,
                                           style: TextStyle(fontSize: 16)))),
                               Align(
                                 alignment: Alignment.centerLeft,
@@ -462,18 +492,21 @@ class _HomePageState extends State<HomePage> {
                                   padding: EdgeInsets.all(8),
                                   child: Container(
                                     child: RaisedButton(
-                                      color: copyDelay ? Colors.green : Colors.white,
+                                      color: copyDelay
+                                          ? Colors.green
+                                          : Colors.white,
                                       onPressed: () {
                                         setState(() {
                                           copyDelay = true;
-                                          Future.delayed(Duration(milliseconds: 200), () {
+                                          Future.delayed(
+                                              Duration(milliseconds: 200), () {
                                             setState(() {
                                               copyDelay = false;
                                             });
                                           });
                                         });
-                                        Clipboard.setData(
-                                            ClipboardData(text: widget.restaurant.address));
+                                        Clipboard.setData(ClipboardData(
+                                            text: widget.restaurant.address));
                                       },
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(10),
@@ -505,7 +538,7 @@ class _HomePageState extends State<HomePage> {
                                         style: TextStyle(fontSize: 16),
                                       ))),
                               SizedBox(height: 5),
-                              Padding(
+                              /* Padding(
                                 padding: EdgeInsets.all(5.0),
                                 child: Column(
 //                    mainAxisAlignment: MainAxisAlignment.center,
@@ -525,10 +558,12 @@ class _HomePageState extends State<HomePage> {
                                     Row(
                                       children: <Widget>[
                                         Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: <Widget>[
                                             Padding(
-                                              padding: const EdgeInsets.all(5.0),
+                                              padding:
+                                                  const EdgeInsets.all(5.0),
                                               child: Row(
                                                 children: <Widget>[
                                                   Text('5'),
@@ -561,7 +596,8 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: const EdgeInsets.all(5.0),
+                                              padding:
+                                                  const EdgeInsets.all(5.0),
                                               child: Row(
                                                 children: <Widget>[
                                                   Text('4'),
@@ -589,7 +625,8 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: const EdgeInsets.all(5.0),
+                                              padding:
+                                                  const EdgeInsets.all(5.0),
                                               child: Row(
                                                 children: <Widget>[
                                                   Text('3'),
@@ -612,7 +649,8 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: const EdgeInsets.all(5.0),
+                                              padding:
+                                                  const EdgeInsets.all(5.0),
                                               child: Row(
                                                 children: <Widget>[
                                                   Text('2'),
@@ -630,7 +668,8 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: const EdgeInsets.all(5.0),
+                                              padding:
+                                                  const EdgeInsets.all(5.0),
                                               child: Row(
                                                 children: <Widget>[
                                                   Text('1'),
@@ -656,13 +695,15 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                               widget.restaurant.rating == '5'
                                                   ? Text(
-                                                '${widget.restaurant.rating}.0',
-                                                style: TextStyle(fontSize: 32),
-                                              )
+                                                      '${widget.restaurant.rating}.0',
+                                                      style: TextStyle(
+                                                          fontSize: 32),
+                                                    )
                                                   : Text(
-                                                widget.restaurant.rating,
-                                                style: TextStyle(fontSize: 32),
-                                              )
+                                                      widget.restaurant.rating,
+                                                      style: TextStyle(
+                                                          fontSize: 32),
+                                                    )
                                             ],
                                           ),
                                         )
@@ -706,7 +747,8 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                                      padding: const EdgeInsets.only(
+                                          left: 5.0, right: 5.0),
                                       child: TextField(
                                           maxLines: 5,
                                           onChanged: (val) {
@@ -715,10 +757,12 @@ class _HomePageState extends State<HomePage> {
                                           decoration: InputDecoration(
                                             hintText: 'Optional',
                                             enabledBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(30.0),
+                                              borderRadius:
+                                                  BorderRadius.circular(30.0),
                                             ),
                                             focusedBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(30.0),
+                                              borderRadius:
+                                                  BorderRadius.circular(30.0),
                                             ),
                                           )),
                                     ),
@@ -729,21 +773,26 @@ class _HomePageState extends State<HomePage> {
                                       padding: const EdgeInsets.all(8.0),
                                       child: Container(
                                           child: Align(
-                                            alignment: Alignment.bottomCenter,
-                                            child: RaisedButton(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  new BorderRadius.circular(30.0)),
-                                              color: Colors.deepOrange,
-                                              child: Text(
-                                                'Submit',
-                                                style: TextStyle(color: Color(0xffffffff)),
-                                              ),
-                                              onPressed: () {
-                                                finalRating = _rating;
-                                              },
-                                            ),
-                                          )),
+                                        alignment: Alignment.bottomCenter,
+                                        child: RaisedButton(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  new BorderRadius.circular(
+                                                      30.0)),
+                                          color: Colors.deepOrange,
+                                          child: Text(
+                                            'Submit',
+                                            style: TextStyle(
+                                                color: Color(0xffffffff)),
+                                          ),
+                                          onPressed: () async {
+                                            review = '';
+                                            finalRating = _rating;
+                                            await DatabaseService()
+                                                .restRating();
+                                          },
+                                        ),
+                                      )),
                                     ),
                                     Divider(
                                       thickness: 2.0,
@@ -751,12 +800,13 @@ class _HomePageState extends State<HomePage> {
                                   ],
                                 ),
                               ),
+                             */
                             ],
                           ),
                         )
                       ],
                     ),
-                    ListView.builder(
+                    /* ListView.builder(
                         itemCount: widget.restaurant.reviews.length,
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
@@ -767,25 +817,28 @@ class _HomePageState extends State<HomePage> {
                               child: ListTile(
                                 title: Row(
                                   children: <Widget>[
-                                    Text(widget.restaurant.reviews[index]["author_name"]),
+                                    Text(widget.restaurant.reviews[index]
+                                        ["author_name"]),
                                     Spacer(),
                                     Text(
                                         '\u{02605}${widget.restaurant.reviews[index]["rating"]}'),
                                   ],
                                 ),
-                                subtitle: Text(widget.restaurant.reviews[index]["text"]),
+                                subtitle: Text(
+                                    widget.restaurant.reviews[index]["text"]),
                               ));
                         })
+                   */
                   ],
                 ),
-              if(_selected==2)
+              if (_selected == 2)
                 SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
                       Padding(
                         padding: EdgeInsets.all(10.0),
                         child: Text(
-                          '# On a scale of 1 to 5, how do you rate this Restaurant?',
+                          'Share your experience with this restaurant',
                           style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
@@ -826,7 +879,8 @@ class _HomePageState extends State<HomePage> {
                               height: 5.0,
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                              padding:
+                                  const EdgeInsets.only(left: 5.0, right: 5.0),
                               child: TextField(
                                   maxLines: 5,
                                   onChanged: (val) {
@@ -850,26 +904,28 @@ class _HomePageState extends State<HomePage> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
                                     child: Align(
-                                      alignment: Alignment.bottomCenter,
-                                      child: RaisedButton(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius: new BorderRadius.circular(30.0)),
-                                        color: Colors.deepOrange,
-                                        child: Text(
-                                          'Submit',
-                                          style: TextStyle(color: Color(0xffffffff)),
-                                        ),
-                                        onPressed: () async {
-                                          await DatabaseService().restRating(
-                                              sr_no: widget.restaurant.sr_no,
-                                              review: review,
-                                              rating: _rating);
-                                          setState(() {
-                                            submit = true;
-                                          });
-                                        },
-                                      ),
-                                    )),
+                                  alignment: Alignment.bottomCenter,
+                                  child: RaisedButton(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            new BorderRadius.circular(30.0)),
+                                    color: Colors.deepOrange,
+                                    child: Text(
+                                      'Submit',
+                                      style:
+                                          TextStyle(color: Color(0xffffffff)),
+                                    ),
+                                    onPressed: () async {
+                                      await DatabaseService().restRating(
+                                          sr_no: widget.restaurant.sr_no,
+                                          review: review,
+                                          rating: _rating);
+                                      setState(() {
+                                        submit = true;
+                                      });
+                                    },
+                                  ),
+                                )),
                               ),
                             SizedBox(
                               height: 20.0,
@@ -885,15 +941,15 @@ class _HomePageState extends State<HomePage> {
                                       child: ListTile(
                                         title: Row(
                                           children: <Widget>[
-                                            Text(widget.restaurant.reviews[index]
-                                            ["author_name"]),
+                                            Text(widget.restaurant
+                                                .reviews[index]["author_name"]),
                                             Spacer(),
                                             Text(
                                                 '\u{02605}${widget.restaurant.reviews[index]["rating"]}'),
                                           ],
                                         ),
-                                        subtitle:
-                                        Text(widget.restaurant.reviews[index]["text"]),
+                                        subtitle: Text(widget
+                                            .restaurant.reviews[index]["text"]),
                                       ));
                                 })
                           ],
@@ -902,9 +958,9 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-              if(_selected==3)
+              if (_selected == 3)
                 Padding(
-                  padding: EdgeInsets.only(top: 12,left: 0),
+                  padding: EdgeInsets.only(top: 12, left: 12),
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: Container(
@@ -923,11 +979,9 @@ class _HomePageState extends State<HomePage> {
                           );
                         },
                       ),
-
                     ),
                   ),
                 )
-
             ],
           ),
         ),
