@@ -13,29 +13,26 @@ class _IntroScreenState extends State<IntroScreen> {
       PageViewModel(
         image: Container(
           decoration: BoxDecoration(),
-          margin: EdgeInsets.all(20),
-          padding: const EdgeInsets.only(top: 60),
+          margin: EdgeInsets.only(top: 20),
+          padding: const EdgeInsets.only(top: 5),
           child: Image.asset(
             'assets/1.png',
-            width: 300,
+            width: 150,
             alignment: Alignment.bottomCenter,
-            fit: BoxFit.cover,
+            fit: BoxFit.fitHeight,
           ),
         ),
         title: "Food For Mood",
         body: "Find food for every mood and a lot more in your feed",
       ),
       PageViewModel(
-        image: ClipRRect(
-          borderRadius: BorderRadius.circular(100),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 60),
-            child: Image.asset(
-              'assets/1.2.png',
-              width: 300.0,
-              alignment: Alignment.bottomCenter,
-              fit: BoxFit.cover,
-            ),
+        image: Padding(
+          padding: const EdgeInsets.only(top: 60),
+          child: Image.asset(
+            'assets/1.2.png',
+            width: 300.0,
+            alignment: Alignment.bottomCenter,
+            fit: BoxFit.cover,
           ),
         ),
         title: "Food Information",
@@ -44,12 +41,12 @@ class _IntroScreenState extends State<IntroScreen> {
       ),
       PageViewModel(
         image: Padding(
-          padding: const EdgeInsets.only(top: 60),
+          padding: const EdgeInsets.only(top: 40),
           child: Image.asset(
             'assets/2.png',
             width: 300,
             alignment: Alignment.bottomCenter,
-            fit: BoxFit.cover,
+            fit: BoxFit.fitHeight,
           ),
         ),
         title: "Restaurants",
@@ -62,7 +59,7 @@ class _IntroScreenState extends State<IntroScreen> {
             'assets/2.1.png',
             width: 300,
             alignment: Alignment.bottomCenter,
-            fit: BoxFit.cover,
+            fit: BoxFit.fitHeight,
           ),
         ),
         title: "Information About Restaurants",
@@ -96,7 +93,7 @@ class _IntroScreenState extends State<IntroScreen> {
         ),
       ),
       onDone: () {
-        Navigator.push(
+        Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Cuisine()));
       },
       pages: getPages(),
