@@ -194,12 +194,7 @@ class _FoodFeedState extends State<FoodFeed> {
                                 width: MediaQuery.of(context).size.width / 2.2,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    gradient: LinearGradient(
-                                        begin: Alignment.bottomCenter,
-                                        colors: [
-                                          Colors.black.withOpacity(.1),
-                                          Colors.black.withOpacity(.3),
-                                        ])),
+                                   ),
                                 child: Align(
                                   alignment: Alignment.bottomCenter,
                                   child: Padding(
@@ -208,7 +203,7 @@ class _FoodFeedState extends State<FoodFeed> {
                                       '${mood[index].mood[0].toUpperCase()}${mood[index].mood.substring(1)}',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.white,
+                                          color: Colors.black,
                                           fontSize: 20.0),
                                     ),
                                   ),
