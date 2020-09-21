@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:moodish_mvp/Services/authenticate.dart';
+
 class DeleteAcc extends StatefulWidget {
   @override
   _DeleteAccState createState() => _DeleteAccState();
@@ -8,8 +9,7 @@ class DeleteAcc extends StatefulWidget {
 
 class _DeleteAccState extends State<DeleteAcc> {
   final _formKey = new GlobalKey<FormState>();
-  String _email = '',
-      _password = '';
+  String _email = '', _password = '';
   bool _obscureText = true;
   String error = '';
   final GlobalKey<State> _keyLoader = new GlobalKey<State>();
@@ -44,8 +44,7 @@ class _DeleteAccState extends State<DeleteAcc> {
                       labelStyle: TextStyle(color: Colors.blueGrey),
                       prefixIcon: Icon(Icons.email),
                       focusedBorder: UnderlineInputBorder(
-                          borderSide:
-                          BorderSide(color: Colors.lightBlue)),
+                          borderSide: BorderSide(color: Colors.lightBlue)),
                       hintText: '@gmail.com'),
                 ),
                 SizedBox(
@@ -79,10 +78,8 @@ class _DeleteAccState extends State<DeleteAcc> {
                             });
                           }),
                       focusedBorder: UnderlineInputBorder(
-                          borderSide:
-                          BorderSide(color: Colors.lightBlue)),
-                      hintText:
-                      'Please Enter more than 6 characters'),
+                          borderSide: BorderSide(color: Colors.lightBlue)),
+                      hintText: 'Please Enter more than 6 characters'),
                   obscureText: _obscureText,
                 ),
                 SizedBox(height: 30.0),
@@ -102,15 +99,15 @@ class _DeleteAccState extends State<DeleteAcc> {
                         onPressed: () async {
                           if (_formKey.currentState.validate()) {
                             _handleSubmit(context);
-                            dynamic result =
-                            await Authenticate().deleteUser(_email, _password);
+                            dynamic result = await Authenticate()
+                                .deleteUser(_email, _password);
                             if (result == null) {
-                              setState(() =>
-                              error = 'Wrong password or Email');
+                              setState(() => error = 'Wrong password or Email');
+                            } else {
+                              await Authenticate()
+                                  .deleteUser(_email, _password);
+                              Navigator.of(context).pop('pop');
                             }
-                            else
-                              await Authenticate().deleteUser(_email, _password);
-                            Navigator.of(context).pop('pop');
                           }
                         },
                         child: Center(
@@ -136,7 +133,6 @@ class _DeleteAccState extends State<DeleteAcc> {
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold),
                 )
-
               ],
             ),
           ),
@@ -144,6 +140,7 @@ class _DeleteAccState extends State<DeleteAcc> {
       ),
     );
   }
+
   Future<void> _handleSubmit(BuildContext context) async {
     try {
       Dialogs.showLoadingDialog(context, _keyLoader); //invoking login
@@ -155,7 +152,6 @@ class _DeleteAccState extends State<DeleteAcc> {
     }
   }
 }
-
 
 Widget getImageAsset() {
   AssetImage assetImage = AssetImage('assets/MoodishLogo.png');
@@ -170,7 +166,6 @@ Widget getImageAsset() {
     padding: EdgeInsets.only(top: 30.0, bottom: 25.0),
   );
 }
-
 
 class Dialogs {
   static Future<void> showLoadingDialog(
@@ -204,6 +199,3 @@ class Dialogs {
         });
   }
 }
-
-
-
