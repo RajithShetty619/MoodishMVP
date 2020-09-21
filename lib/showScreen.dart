@@ -43,7 +43,7 @@ class _ShowScreenState extends State<ShowScreen> {
         } else if (snapShot.data == null) {
           return IntroScreen();
         }
-        return ShowScreen();
+        return LoadingScreen();
       },
     );
   }
