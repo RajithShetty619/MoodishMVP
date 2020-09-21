@@ -272,7 +272,9 @@ class _ProfileState extends State<Profile> {
                     Icons.keyboard_arrow_right,
                     color: Colors.grey.shade400,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    launch('https://snapinsight.net/moodish/restreg.php');
+                  },
                 ),
                 Divider(),
                 SizedBox(height: 5.0),
