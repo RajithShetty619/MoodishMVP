@@ -281,7 +281,7 @@ class _ProfileState extends State<Profile> {
                       style: TextStyle(color: Colors.black38, fontSize: 24.0)),
                 ),
                 ListTile(
-                  title: Text("Send FeedBacks",
+                  title: Text("Send FeedBack",
                       style: TextStyle(
                         color: Colors.black,
                       )),

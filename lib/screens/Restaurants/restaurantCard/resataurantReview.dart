@@ -13,6 +13,7 @@ class RestaurantReview extends StatefulWidget {
 class _RestaurantReviewState extends State<RestaurantReview> {
   List<String> review = [];
   List<String> rating = [];
+  var _textController = TextEditingController();
   var _rating;
   @override
   Widget build(BuildContext context) {
@@ -139,6 +140,7 @@ class _RestaurantReviewState extends State<RestaurantReview> {
                   Padding(
                     padding: const EdgeInsets.only(left: 5.0, right: 5.0),
                     child: TextField(
+                      controller: _textController,
                         maxLines: 5,
                         onChanged: (val) {
                           review.add(val);
@@ -170,6 +172,7 @@ class _RestaurantReviewState extends State<RestaurantReview> {
                           style: TextStyle(color: Color(0xffffffff)),
                         ),
                         onPressed: () {
+                          _textController.clear();
                           rating.add(_rating.toString());
                         },
                       ),

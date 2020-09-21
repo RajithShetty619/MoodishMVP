@@ -39,7 +39,7 @@ class _FoodRecipeState extends State<FoodRecipe> {
                 child: Container(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Preparation Time:',
+                    'Preparation Time',
                     style: TextStyle(
                       fontSize: 24,
                     ),
@@ -215,7 +215,7 @@ class _FoodRecipeState extends State<FoodRecipe> {
             child: Container(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Ingredients:',
+                'Ingredients',
                 style: TextStyle(
                   fontSize: 30,
                 ),
@@ -299,7 +299,7 @@ class _FoodRecipeState extends State<FoodRecipe> {
             child: Container(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Preparation:',
+                'Preparation',
                 style: TextStyle(
                   fontSize: 30,
                 ),
@@ -309,26 +309,36 @@ class _FoodRecipeState extends State<FoodRecipe> {
           ),
           SizedBox(height: 8),
           Container(
-            height: MediaQuery.of(context).size.height / 3,
+            height: MediaQuery.of(context).size.height / 5,
             child: ListView.builder(
               itemCount: widget.foodList.preparation.length,
               scrollDirection: Axis.horizontal,
               // scrollDirection: Axis.vertical,
               itemBuilder: (BuildContext context, index) {
                 return Container(
-                  width: MediaQuery.of(context).size.width / 1.5,
+                  width: MediaQuery.of(context).size.width / 2,
                   child: Card(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Step ${index + 1}\n ${widget.foodList.preparation[index]}',
-                        textHeightBehavior: TextHeightBehavior(
-                            applyHeightToFirstAscent: false,
-                            applyHeightToLastDescent: true),
-                        maxLines: 4,
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'Step ${index + 1}',
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            '${widget.foodList.preparation[index]}....',
+                            textHeightBehavior: TextHeightBehavior(
+                                applyHeightToFirstAscent: false,
+                                applyHeightToLastDescent: true),
+                            maxLines: 4,
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
