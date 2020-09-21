@@ -351,7 +351,7 @@ class _EditProfileState extends State<EditProfile> {
                       ),
                       Flexible(
                         child: Text(
-                          _user['PhoneNo.'] ?? '( none )',
+                          _user['PhoneNo.'] ?? ' none ',
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(fontSize: 20.0),
                         ),
