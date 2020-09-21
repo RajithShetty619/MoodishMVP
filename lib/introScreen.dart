@@ -14,40 +14,43 @@ class _IntroScreenState extends State<IntroScreen> {
         image: ClipRRect(
           borderRadius: BorderRadius.circular(100),
           child: Image.asset(
-            'assets/Coffee.jpg',
-            height: 130,
+            'assets/1.png',
           ),
         ),
-        title: "welcome to the intro screen",
-        body:
-            "ncjjdnnvjkdcnndkckdnnkdn  knvndfvnjav jndvbsfvnvv kajdvjafvkjav kajjanvjakv",
-        footer: Text("@meliodas"),
+        title: "Food For Mood",
+        body: "Find food for every mood and a lot more in your feed",
       ),
       PageViewModel(
         image: ClipRRect(
           borderRadius: BorderRadius.circular(100),
           child: Image.asset(
-            'assets/Coffee.jpg',
-            height: 130,
+            'assets/1_1.png',
           ),
         ),
-        title: "welcome to the intro screen",
+        title: "Food Information",
         body:
-            "ncjjdnnvjkdcnndkckdnnkdn  knvndfvnjav jndvbsfvnvv kajdvjafvkjav kajjanvjakv",
-        footer: Text("@meliodas"),
+            "Nutrional information to step-by-step guided recipes and top restaurants for it",
       ),
       PageViewModel(
         image: ClipRRect(
           borderRadius: BorderRadius.circular(100),
           child: Image.asset(
-            'assets/Coffee.jpg',
-            height: 130,
+            'assets/2.png',
           ),
         ),
-        title: "welcome to the intro screen",
+        title: "Restaurants",
+        body: "Find restaurants based on your location and other preferences",
+      ),
+      PageViewModel(
+        image: ClipRRect(
+          borderRadius: BorderRadius.circular(100),
+          child: Image.asset(
+            'assets/2_1.png',
+          ),
+        ),
+        title: "Information About Restaurants",
         body:
-            "ncjjdnnvjkdcnndkckdnnkdn  knvndfvnjav jndvbsfvnvv kajdvjafvkjav kajjanvjakv",
-        footer: Text("@meliodas"),
+            "Find information about the restaurants, from directions to it’s specialities",
       ),
     ];
   }
@@ -77,9 +80,7 @@ class _IntroScreenState extends State<IntroScreen> {
       ),
       onDone: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => Cuisine()));
+            context, MaterialPageRoute(builder: (context) => Cuisine()));
       },
       pages: getPages(),
     );

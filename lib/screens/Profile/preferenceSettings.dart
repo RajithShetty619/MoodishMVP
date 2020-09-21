@@ -168,8 +168,8 @@ class _ProfileSettingState extends State<ProfileSetting> {
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Container(
-                    height: 100,
-                    width: 100,
+                    height: 110,
+                    width: 110,
                     margin: EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       border: (fdPref != 'both')
@@ -187,7 +187,8 @@ class _ProfileSettingState extends State<ProfileSetting> {
                                 ? ((fdPref == 'veg')
                                     ? Colors.green
                                     : Colors.red)
-                                : Colors.orangeAccent),
+                                : Colors.orangeAccent,
+                                fontSize: 16),
                       ),
                     ))),
           ),
