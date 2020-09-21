@@ -346,7 +346,9 @@ class _ProfileState extends State<Profile> {
                           ),
                           child: FlatButton(
                             onPressed: () async {
-                              await Authenticate().signOut();
+                              setState(() {
+                                Authenticate().signOut();
+                              });
                             },
                             child: Container(
                               alignment: Alignment.centerLeft,

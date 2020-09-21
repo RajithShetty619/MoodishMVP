@@ -57,7 +57,7 @@ class Authenticate {
 
       await DatabaseService()
           .updateUserData(email: email, name: name, uid: user.uid);
-      return User;
+      return "success";
     } catch (e) {
       print(e.toString());
       return null;
@@ -146,9 +146,9 @@ class Authenticate {
 
   Future signOut() async {
     try {
+      await _auth.signOut();
       await Hive.openBox("preferenceBox").then((value) async {
         await value.clear();
-        await _auth.signOut();
       });
     } catch (e) {
       print(e.toString());

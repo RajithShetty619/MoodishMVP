@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:moodish_mvp/Services/authenticate.dart';
+import 'package:moodish_mvp/Services/database.dart';
 
 class DeleteAcc extends StatefulWidget {
   @override
@@ -102,8 +103,6 @@ class _DeleteAccState extends State<DeleteAcc> {
                             if (result == null) {
                               setState(() => error = 'Wrong password or Email');
                             } else {
-                              await Authenticate()
-                                  .deleteUser(_email, _password);
                               Navigator.of(context).pop('pop');
                             }
                           }
@@ -145,6 +144,7 @@ class _DeleteAccState extends State<DeleteAcc> {
       dynamic result = await Authenticate().deleteUser(_email, _password);
       Navigator.of(_keyLoader.currentContext, rootNavigator: true)
           .pop(result); //close the dialog
+      return result;
     } catch (error) {
       print(error);
       return null;
