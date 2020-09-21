@@ -85,7 +85,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     String date = DateFormat('EEE, M/d/y').format(now);
 
     if (date == saveDate) {
-      return 0;
+      return 1;
     } else {
       _box.put("date1", date);
       return 0;

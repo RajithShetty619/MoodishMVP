@@ -55,6 +55,7 @@ class _OverViewState extends State<OverView> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: ListView(
+      physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
         Column(
           children: <Widget>[
@@ -72,9 +73,8 @@ class _OverViewState extends State<OverView> {
                       children: <Widget>[
                         Container(
                           decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.black)
-                          ),
+                              shape: BoxShape.circle,
+                              border: Border.all(color: Colors.black)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Icon(
@@ -99,8 +99,7 @@ class _OverViewState extends State<OverView> {
                         Container(
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              border: Border.all(color: Colors.black)
-                          ),
+                              border: Border.all(color: Colors.black)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Icon(
@@ -127,8 +126,7 @@ class _OverViewState extends State<OverView> {
                         Container(
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              border: Border.all(color: Colors.black)
-                          ),
+                              border: Border.all(color: Colors.black)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Icon(
@@ -157,8 +155,7 @@ class _OverViewState extends State<OverView> {
                         Container(
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              border: Border.all(color: Colors.black)
-                          ),
+                              border: Border.all(color: Colors.black)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Icon(

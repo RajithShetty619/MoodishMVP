@@ -21,6 +21,8 @@ class _StarFeedbackState extends State<StarFeedback> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
+          primary: false,
+          physics: NeverScrollableScrollPhysics(),
           child: Column(
             children: <Widget>[
               Padding(

@@ -42,9 +42,6 @@ class _HomeTopTabsState extends State<HomeTopTabs>
               child: Container(
                 child: Column(
                   children: <Widget>[
-                    Expanded(
-                      child: Container(),
-                    ),
                     TabBar(
                       isScrollable: true,
                       unselectedLabelColor: Colors.grey[500],
@@ -102,7 +99,9 @@ class _HomeTopTabsState extends State<HomeTopTabs>
               rest: widget.rest,
             ),
             StarFeedback(widget.rest),
-            Gallery(restaurant: widget.rest,)
+            Gallery(
+              restaurant: widget.rest,
+            )
           ],
         ),
       ),

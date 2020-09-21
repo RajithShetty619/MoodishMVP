@@ -19,6 +19,8 @@ class _HomePageState extends State<HomePage> {
       child: SafeArea(
         child: Scaffold(
           body: ListView(
+            shrinkWrap: true,
+            primary: true,
             physics: BouncingScrollPhysics(),
             children: <Widget>[
               Stack(
@@ -35,7 +37,6 @@ class _HomePageState extends State<HomePage> {
                                     bottomLeft: Radius.circular(15)),
                                 image: DecorationImage(
                                     image: imageprovider
-
                                     /*  AssetImage('assets/${widget.imgName}') */,
                                     fit: BoxFit.cover)),
                             child: Padding(
@@ -97,7 +98,6 @@ class _HomePageState extends State<HomePage> {
                         child: Divider(
                           color: Colors.black,
                         )),
-
                     SizedBox(height: 5),
                     Padding(
                         padding: EdgeInsets.all(10),
@@ -105,7 +105,8 @@ class _HomePageState extends State<HomePage> {
                             alignment: Alignment.centerLeft,
                             child: Text(
                               '${widget.restaurant.cuisines}',
-                              style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
                             ))),
                     Padding(
                         padding: EdgeInsets.all(10),
@@ -113,7 +114,10 @@ class _HomePageState extends State<HomePage> {
                             alignment: Alignment.centerLeft,
                             child: Row(
                               children: <Widget>[
-                                Icon(Icons.location_on,size: 20,),
+                                Icon(
+                                  Icons.location_on,
+                                  size: 20,
+                                ),
                                 Text(widget.restaurant.restaurant_Location),
                               ],
                             ))),
@@ -123,13 +127,13 @@ class _HomePageState extends State<HomePage> {
                         children: <Widget>[
                           const SizedBox(width: 16.0),
                           Container(
-                              padding: const EdgeInsets.only(top: 5,bottom: 5,left: 10,right: 8),
+                              padding: const EdgeInsets.only(
+                                  top: 5, bottom: 5, left: 10, right: 8),
                               decoration: BoxDecoration(
                                   color: Colors.amber[700],
                                   borderRadius: BorderRadius.circular(60.0)),
                               child: Row(
                                 children: <Widget>[
-
                                   Text(widget.restaurant.rating),
                                   Icon(
                                     Icons.star,
@@ -166,14 +170,9 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.black,
                   )),
               Container(
-                  height: MediaQuery.of(context).size.height / 1.5,
-                  child: TabBarView(
-                    children: <Widget>[
-                      HomeTopTabs(
-                        rest: widget.restaurant,
-                      )
-                    ],
-                  ))
+                  child: HomeTopTabs(
+                rest: widget.restaurant,
+              ))
             ],
           ),
         ),
