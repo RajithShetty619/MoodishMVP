@@ -41,7 +41,7 @@ class _RestaurantReviewState extends State<RestaurantReview> {
                         left: 0,),
                     child: Text('Reviews',
                     style: TextStyle(
-                        fontSize: MediaQuery.of(context).size.height / 15,
+                        fontSize: 30,
                         fontWeight: FontWeight.bold,
                         color: Colors.black),),
                   ),

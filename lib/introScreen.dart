@@ -14,7 +14,7 @@ class _IntroScreenState extends State<IntroScreen> {
         image: ClipRRect(
           borderRadius: BorderRadius.circular(100),
           child: Padding(
-            padding: const EdgeInsets.only(top: 50),
+            padding: const EdgeInsets.only(top: 150),
             child: Image.asset(
               'assets/1.png',
             ),
@@ -27,7 +27,7 @@ class _IntroScreenState extends State<IntroScreen> {
         image: ClipRRect(
           borderRadius: BorderRadius.circular(100),
           child: Padding(
-            padding: const EdgeInsets.only(top: 50.0),
+            padding: const EdgeInsets.only(top: 150),
             child: Image.asset(
               'assets/1_1.png',
             ),
@@ -41,7 +41,7 @@ class _IntroScreenState extends State<IntroScreen> {
         image: ClipRRect(
           borderRadius: BorderRadius.circular(100),
           child: Padding(
-            padding: const EdgeInsets.only(top: 50.0),
+            padding: const EdgeInsets.only(top: 150),
             child: Image.asset(
               'assets/2.png',
             ),
@@ -54,7 +54,7 @@ class _IntroScreenState extends State<IntroScreen> {
         image: ClipRRect(
           borderRadius: BorderRadius.circular(100),
           child: Padding(
-            padding: const EdgeInsets.only(top: 50.0),
+            padding: const EdgeInsets.only(top: 150),
             child: Image.asset(
               'assets/2_1.png',
             ),
@@ -91,7 +91,7 @@ class _IntroScreenState extends State<IntroScreen> {
         ),
       ),
       onDone: () {
-        Navigator.pushReplacement(
+        Navigator.push(
             context, MaterialPageRoute(builder: (context) => Cuisine()));
       },
       pages: getPages(),
