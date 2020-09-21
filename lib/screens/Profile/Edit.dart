@@ -86,7 +86,7 @@ class _EditProfileState extends State<EditProfile> {
 
   @override
   Widget build(BuildContext context) {
-    String birth = '( none )';
+    String birth = ' none ';
     birthDate() async {
       var datePicked = await DatePicker.showSimpleDatePicker(
         context,
@@ -323,7 +323,7 @@ class _EditProfileState extends State<EditProfile> {
                           decoration: InputDecoration(
                             icon: Icon(Icons.edit),
                             labelText: 'Edit',
-                            hintText: _user['PhoneNo.'] ?? '( none )',
+                            hintText: _user['PhoneNo.'] ?? ' none ',
                           ),
                         ),
                         buttons: [
