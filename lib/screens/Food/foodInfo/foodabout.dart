@@ -80,13 +80,10 @@ class foodAbout extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 5.0,
-                  ),
-                   Row(
+                  Row(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Container(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -103,7 +100,7 @@ class foodAbout extends StatelessWidget {
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
-                              padding: EdgeInsets.all(16),
+                              padding: EdgeInsets.symmetric(horizontal: 10),
                               child: Container(
                                   width:
                                       MediaQuery.of(context).size.width / 3.5,
@@ -117,10 +114,10 @@ class foodAbout extends StatelessWidget {
                             padding: EdgeInsets.all(8.0), child: Text('empty')),
                     ],
                   ),
-                   Row(
+                  Row(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Container(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -137,7 +134,7 @@ class foodAbout extends StatelessWidget {
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
-                              padding: EdgeInsets.all(16),
+                              padding: EdgeInsets.symmetric(horizontal: 10),
                               child: Container(
                                   width:
                                       MediaQuery.of(context).size.width / 3.5,
@@ -151,10 +148,10 @@ class foodAbout extends StatelessWidget {
                             padding: EdgeInsets.all(8.0), child: Text('empty')),
                     ],
                   ),
-                   Row(
+                  Row(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Container(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -171,7 +168,7 @@ class foodAbout extends StatelessWidget {
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
-                              padding: EdgeInsets.all(16),
+                              padding: EdgeInsets.symmetric(horizontal: 10),
                               child: Container(
                                   width:
                                       MediaQuery.of(context).size.width / 3.5,
@@ -185,10 +182,10 @@ class foodAbout extends StatelessWidget {
                             padding: EdgeInsets.all(8.0), child: Text('empty')),
                     ],
                   ),
-                   Row(
+                  Row(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Container(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -205,7 +202,7 @@ class foodAbout extends StatelessWidget {
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
-                              padding: EdgeInsets.all(16),
+                              padding: EdgeInsets.symmetric(horizontal: 10),
                               child: Container(
                                   width:
                                       MediaQuery.of(context).size.width / 3.5,
@@ -325,7 +322,7 @@ class foodAbout extends StatelessWidget {
                         child: Container(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            'Preparation Time:',
+                            'Preparation Time',
                             style: TextStyle(
                               fontSize: 24,
                             ),
@@ -371,19 +368,17 @@ class foodAbout extends StatelessWidget {
                         ),
                       ),
                       Spacer(),
-                      if (foodList.cuisine == null)
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                              padding: EdgeInsets.all(16),
-                              child: Container(
-                                  width:
-                                      MediaQuery.of(context).size.width / 3.5,
-                                  child: Text(
-                                    foodList.cuisine,
-                                    overflow: TextOverflow.ellipsis,
-                                  ))),
-                        ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                            padding: EdgeInsets.all(16),
+                            child: Container(
+                                width: MediaQuery.of(context).size.width / 3.5,
+                                child: Text(
+                                  foodList.cuisine ?? '',
+                                  overflow: TextOverflow.ellipsis,
+                                ))),
+                      ),
                       if (foodList.cuisine == null)
                         Padding(
                             padding: EdgeInsets.all(8.0), child: Text('empty')),

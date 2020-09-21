@@ -25,6 +25,8 @@ class GeolocationRest {
       _permissionGranted = await location.requestPermission();
       if (_permissionGranted != PermissionStatus.granted) {
         print("yay");
+      } else {
+        return [];
       }
     }
 

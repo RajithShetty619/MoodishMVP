@@ -161,7 +161,7 @@ class _Food_InfoState extends State<Food_Info> {
                 ),
                 if (indx == 0)
                   Container(
-                      height: 700,
+                      height: MediaQuery.of(context).size.height / 1.5,
                       child: FoodAbout(
                         foodList: widget.foodList,
                       )),
@@ -171,7 +171,8 @@ class _Food_InfoState extends State<Food_Info> {
                       foodList: widget.foodList,
                     ),
                   ),
-                if (indx == 3) Container(child: FoodRest(foodList:widget.foodList)),
+                if (indx == 3)
+                  Container(child: FoodRest(foodList: widget.foodList)),
               ],
             ),
           ],

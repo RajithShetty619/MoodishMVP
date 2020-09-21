@@ -143,6 +143,7 @@ class _DeleteAccState extends State<DeleteAcc> {
       dynamic result = await Authenticate().deleteUser(_email, _password);
       Navigator.of(_keyLoader.currentContext, rootNavigator: true)
           .pop(result); //close the dialog
+
       return result;
     } catch (error) {
       print(error);

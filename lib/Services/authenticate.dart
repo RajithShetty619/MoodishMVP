@@ -27,11 +27,14 @@ class Authenticate {
       User user = _auth.currentUser;
       AuthCredential credentials =
           EmailAuthProvider.credential(email: email, password: password);
-      UserCredential result =
-          await user.reauthenticateWithCredential(credentials);
-      await DatabaseService(uid: result.user.uid)
-          .deleteuser(); // called from database class
-      await result.user.delete();
+      UserCredential result = await user
+          .reauthenticateWithCredential(credentials)
+          .catchError((e) => print(e));
+
+      if (result.user.uid != null) {
+        await DatabaseService(uid: result.user.uid).deleteuser();
+        await result.user.delete();
+      }
       return true;
     } catch (e) {
       print(e.toString());
