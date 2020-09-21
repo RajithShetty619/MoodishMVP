@@ -164,6 +164,10 @@ class _FoodFeedState extends State<FoodFeed> {
                       itemCount: mood.length,
                       shrinkWrap: true,
                       itemBuilder: (BuildContext itemContext, index) {
+                        switch ('${mood[index].mood[0].toUpperCase()}${mood[index].mood.substring(1)}') {
+                          case 'Anger': 'Angry';
+                            break;
+                        }
                         return GestureDetector(
                           onTap: () {
                             String _val = mood[index].mood;
