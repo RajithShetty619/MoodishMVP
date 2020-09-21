@@ -106,12 +106,13 @@ class _CuisineState extends State<Cuisine> {
                           print("pressesesesesesd5362");
                           dynamic _val = cuisine[index];
                           setState(() {
-                            i++;
                             if (cuisine[index].isSelected == true) {
                               pref.remove(cuisine[index].cuisine);
+                              
                             }
                             if (cuisine[index].isSelected == false) {
                               pref.add(_val.cuisine);
+                              i++;
                             }
                             print(pref);
                             print(pref.contains(_val.cuisine));

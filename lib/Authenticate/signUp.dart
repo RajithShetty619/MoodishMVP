@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:moodish_mvp/Services/authenticate.dart';
 import 'package:moodish_mvp/models/user.dart';
-import 'package:moodish_mvp/screens/mainScreen.dart';
 
 class SignUp extends StatefulWidget {
   @override
