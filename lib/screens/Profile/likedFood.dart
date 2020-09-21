@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/food_info.dart';
@@ -163,7 +164,17 @@ class _LikedFoodState extends State<LikedFood> {
                                                               size: 30,
                                                             ),
                                                             onPressed:
-                                                                () async {}),
+                                                                () async {
+                                                              await DatabaseService()
+                                                                  .disLikeTransction(
+                                                                      collection:
+                                                                          "food",
+                                                                      sr_no: foodList[
+                                                                              index]
+                                                                          .sr_no,
+                                                                      field:
+                                                                          "like");
+                                                            }),
                                                       ),
                                                     ),
                                                   ),
