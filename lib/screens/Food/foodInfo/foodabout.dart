@@ -3,8 +3,6 @@ import 'package:moodish_mvp/models/foodListModel.dart';
 //import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FoodAbout extends StatefulWidget {
-  
-
   FoodAbout({
     Key key,
     this.foodList,
@@ -35,12 +33,7 @@ class _FoodAboutState extends State<FoodAbout> {
 }
 
 class foodAbout extends StatelessWidget {
-  const foodAbout({
-    Key key,
-    this.foodList,
-    this.nutri
-
-  }) : super(key: key);
+  const foodAbout({Key key, this.foodList, this.nutri}) : super(key: key);
 
   final FoodListModel foodList;
   final nutri;
@@ -49,7 +42,6 @@ class foodAbout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        
         Stack(
           children: <Widget>[
             Padding(
@@ -71,30 +63,43 @@ class foodAbout extends StatelessWidget {
                   ),
                   SizedBox(height: 5),
                   Padding(
-                      padding: EdgeInsets.all(5.0),
-                      child: Text(foodList.description),
-                    ),
-                  SizedBox(height: 10.0),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Calories',
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
-                        textAlign: TextAlign.left,
-                      ),
-                    ),
+                    padding: EdgeInsets.all(5.0),
+                    child: Text(foodList.description),
                   ),
-                  SizedBox(height: 5),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 8),
-                      child: Text(foodList.calories),
-                    )
+                  SizedBox(height: 10.0),
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Calories:',
+                            style: TextStyle(
+                              fontSize: 24,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ),
+                      Spacer(),
+                      if (foodList.calories != null)
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                              padding: EdgeInsets.all(16),
+                              child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width / 3.5,
+                                  child: Text(
+                                    foodList.calories,
+                                    overflow: TextOverflow.ellipsis,
+                                  ))),
+                        ),
+                      if (foodList.calories == null)
+                        Padding(
+                            padding: EdgeInsets.all(8.0), child: Text('empty')),
+                    ],
                   ),
                   SizedBox(height: 10.0),
                   Padding(
@@ -134,7 +139,7 @@ class foodAbout extends StatelessWidget {
                             SizedBox(
                               height: 7.0,
                             ),
-                            Text('${foodList.carbohydrates} Carbs' )
+                            Text('${foodList.carbohydrates} Carbs')
                           ],
                         ),
                         SizedBox(
@@ -212,79 +217,114 @@ class foodAbout extends StatelessWidget {
                   SizedBox(
                     height: 10.0,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Preparation Time',
-                        style: TextStyle(
-                          fontSize: 30,
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Preparation Time:',
+                            style: TextStyle(
+                              fontSize: 24,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
                         ),
-                        textAlign: TextAlign.left,
                       ),
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                   if(foodList.preparation != null) 
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                        padding: EdgeInsets.only(left: 8),
-                        child:Text(foodList.time)),
-                  ),
-                  if(foodList.preparation == null)
-                  Padding(
-                      padding: EdgeInsets.all(5.0),
-                      child:Text('empty')),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Cuisine',
-                        style: TextStyle(
-                          fontSize: 30,
+                      Spacer(),
+                      if (foodList.time != null)
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                              padding: EdgeInsets.all(16),
+                              child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width / 3.5,
+                                  child: Text(
+                                    foodList.time,
+                                    overflow: TextOverflow.ellipsis,
+                                  ))),
                         ),
-                        textAlign: TextAlign.left,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                 Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                        padding: EdgeInsets.only(left: 8),
-                        child:Text(foodList.cuisine)),
+                      if (foodList.time == null)
+                        Padding(
+                            padding: EdgeInsets.all(8.0), child: Text('empty')),
+                    ],
                   ),
                   SizedBox(
                     height: 10.0,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Taste',
-                        style: TextStyle(
-                          fontSize: 30,
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Cuisine',
+                            style: TextStyle(
+                              fontSize: 24,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
                         ),
-                        textAlign: TextAlign.left,
                       ),
-                    ),
+                      Spacer(),
+                      if (foodList.cuisine == null)
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                              padding: EdgeInsets.all(16),
+                              child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width / 3.5,
+                                  child: Text(
+                                    foodList.cuisine,
+                                    overflow: TextOverflow.ellipsis,
+                                  ))),
+                        ),
+                      if (foodList.cuisine == null)
+                        Padding(
+                            padding: EdgeInsets.all(8.0), child: Text('empty')),
+                    ],
                   ),
-                  SizedBox(height: 5),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 8),
-                      child: Text(foodList.taste),
-                    )
+                  SizedBox(
+                    height: 10.0,
                   ),
-                  
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Taste',
+                            style: TextStyle(
+                              fontSize: 24,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ),
+                      Spacer(),
+                      if (foodList.taste != null)
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                              padding: EdgeInsets.all(16),
+                              child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width / 3.5,
+                                  child: Text(
+                                    foodList.taste,
+                                    overflow: TextOverflow.ellipsis,
+                                  ))),
+                        ),
+                      if (foodList.taste == null)
+                        Padding(
+                            padding: EdgeInsets.all(8.0), child: Text('empty')),
+                    ],
+                  ),
                 ],
               ),
             )
