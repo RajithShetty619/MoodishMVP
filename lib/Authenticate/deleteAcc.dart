@@ -98,9 +98,7 @@ class _DeleteAccState extends State<DeleteAcc> {
                         elevation: 6.0,
                         onPressed: () async {
                           if (_formKey.currentState.validate()) {
-                            _handleSubmit(context);
-                            dynamic result = await Authenticate()
-                                .deleteUser(_email, _password);
+                            dynamic result = await _handleSubmit(context);
                             if (result == null) {
                               setState(() => error = 'Wrong password or Email');
                             } else {
@@ -141,14 +139,15 @@ class _DeleteAccState extends State<DeleteAcc> {
     );
   }
 
-  Future<void> _handleSubmit(BuildContext context) async {
+  Future _handleSubmit(BuildContext context) async {
     try {
       Dialogs.showLoadingDialog(context, _keyLoader); //invoking login
-      await Authenticate().deleteUser(_email, _password);
+      dynamic result = await Authenticate().deleteUser(_email, _password);
       Navigator.of(_keyLoader.currentContext, rootNavigator: true)
-          .pop(); //close the dialog
+          .pop(result); //close the dialog
     } catch (error) {
       print(error);
+      return null;
     }
   }
 }

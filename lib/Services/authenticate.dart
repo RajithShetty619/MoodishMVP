@@ -26,7 +26,7 @@ class Authenticate {
     try {
       User user = _auth.currentUser;
       AuthCredential credentials =
-          await EmailAuthProvider.credential(email: email, password: password);
+          EmailAuthProvider.credential(email: email, password: password);
       UserCredential result =
           await user.reauthenticateWithCredential(credentials);
       await DatabaseService(uid: result.user.uid)

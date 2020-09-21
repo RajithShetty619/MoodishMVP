@@ -200,19 +200,12 @@ class _SignUpState extends State<SignUp> {
                                   if (_formKey.currentState.validate()) {
                                     // dynamic result =
                                     //     await _handleSubmit(context);
-                                    dynamic result =
-                                        await _handleSubmit(context);
-                                    if (result == null) {
-                                      setState(() => error =
-                                          'Email or Password is wrong!');
-                                      loading = false;
-                                    }
                                     if (_checkBoxValue == false) {
-                                      setState(() => err =
+                                      setState(() => error =
                                           'Please Accept the Terms and Conditions!');
                                       showDialog(
                                           context: context,
-                                          builder: (BuildContext context) {
+                                          builder: (BuildContext newcontext) {
                                             return Dialog(
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
@@ -229,13 +222,17 @@ class _SignUpState extends State<SignUp> {
                                                       padding:
                                                           const EdgeInsets.all(
                                                               10.0),
-                                                      child: Text(
-                                                        err,
-                                                        style: TextStyle(
-                                                            fontSize: 20,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color: Colors.red),
+                                                      child: Center(
+                                                        child: Text(
+                                                          error,
+                                                          style: TextStyle(
+                                                              fontSize: 20,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              color:
+                                                                  Colors.red),
+                                                        ),
                                                       ),
                                                     ),
                                                     SizedBox(
@@ -248,12 +245,12 @@ class _SignUpState extends State<SignUp> {
                                                         alignment: Alignment
                                                             .centerRight,
                                                         child: RaisedButton(
-                                                          onPressed: () =>
-                                                              Navigator.of(
+                                                          onPressed: () => Navigator
+                                                              /* .of(
                                                                       context,
                                                                       rootNavigator:
-                                                                          true)
-                                                                  .pop(),
+                                                                          true) */
+                                                              .pop(newcontext),
                                                           child: Text('ok'),
                                                         ),
                                                       ),
@@ -264,7 +261,15 @@ class _SignUpState extends State<SignUp> {
                                             );
                                           });
                                     } else {
-                                      Navigator.pop(context);
+                                      dynamic result =
+                                          await _handleSubmit(context);
+                                      if (result == null) {
+                                        setState(() =>
+                                            error = 'Email already exists');
+                                        loading = false;
+                                      } else {
+                                        Navigator.pop(context);
+                                      }
                                     }
                                   }
                                 },
@@ -303,10 +308,11 @@ class _SignUpState extends State<SignUp> {
     try {
       Dialogs.showLoadingDialog(context, _keyLoader); //invoking login
       dynamic result = await _auth.newRegister(_email, _name, _password);
-      Navigator.of(_keyLoader.currentContext, rootNavigator: true)
-          .pop(result); //close the dialog
+      Navigator.of(_keyLoader.currentContext, rootNavigator: false).pop();
+      return result; //close the dialog
     } catch (error) {
       print(error);
+      return null;
     }
   }
 }
