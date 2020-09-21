@@ -44,7 +44,7 @@ class _SettingsState extends State<Settings> {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.all(10.0),
+                padding: EdgeInsets.fromLTRB(10,10,10,0),
                 child: Divider(thickness: 2.0,),
               ),
               ListTile(
