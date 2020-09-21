@@ -24,6 +24,7 @@ class _RestaurantState extends State<Restaurant> {
   String location = 'Mumbai,Maharashtra';
   Geolocator geolocator = Geolocator();
   Widget error_loadIcon = Icon(Icons.error);
+  bool error_loading = false;
 
   loadRest() async {
     await GeolocationRest().getRestFromLocation().then((rest) {
@@ -82,30 +83,6 @@ class _RestaurantState extends State<Restaurant> {
   @override
   Widget build(BuildContext context) {
     SharedPreferences preferences;
-
-    // displayShowCase() async {
-    //   preferences = await SharedPreferences.getInstance();
-    //   bool showCaseVisibilityStstus = preferences.getBool("displayShowCase");
-    //   preferences.setBool('displayShowCase', false);
-    //   if(showCaseVisibilityStstus == null){
-    //     return true;
-    //   }
-    //   return false;
-    // }
-
-    // displayShowCase().then((status) {
-    //   if(status){
-    //      ShowCaseWidget.of(context).startShowCase([
-    //     _rest,
-    //   ]);
-    //   }
-    // });
-
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   ShowCaseWidget.of(context).startShowCase([
-    //     _rest,
-    //   ]);
-    // });
 
     return Container(
       child: SafeArea(
@@ -167,22 +144,26 @@ class _RestaurantState extends State<Restaurant> {
                           child: Center(
                             child: FlatButton.icon(
                                 onPressed: () async {
-                                  setState(() {
-                                    error_loadIcon = Icon(Icons.hourglass_full);
-                                  });
-
-                                  await errGeorest();
-
-                                  Future.delayed(
-                                      const Duration(milliseconds: 3000), () {
+                                  if (!error_loading) {
                                     setState(() {
-                                      error_loadIcon = Icon(Icons.error);
+                                      error_loadIcon =
+                                          Icon(Icons.hourglass_full);
+                                      error_loading = true;
                                     });
-                                  });
+
+                                    await errGeorest();
+
+                                    Future.delayed(
+                                        const Duration(milliseconds: 3000), () {
+                                      setState(() {
+                                        error_loadIcon = Icon(Icons.error);
+                                        error_loading = false;
+                                      });
+                                    });
+                                  }
                                 },
                                 icon: error_loadIcon,
-                                label: Text(error_loadIcon !=
-                                        Icon(Icons.hourglass_full)
+                                label: Text(!error_loading
                                     ? "Some error has occurred, please retry!"
                                     : "Retrying please wait.")),
                           ),

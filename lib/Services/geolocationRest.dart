@@ -17,14 +17,19 @@ class GeolocationRest {
 
       return listfromSnapshot(send);
     } catch (e) {
-      print(e.toString());
-      var data = await get(
-          "https://us-central1-moodishtest.cloudfunctions.net/returnRestaurants?lat=${position.latitude}&long=${position.longitude}");
-      if (data.body == "Error: could not handle the request") return [];
-      var info = await json.decode(data.body);
-      print(info);
-      List<dynamic> send = await json.decode(info["restaurants"]);
-      return listfromSnapshot(send);
+      try {
+        print(e.toString());
+        var data = await get(
+            "https://us-central1-moodishtest.cloudfunctions.net/returnRestaurants?lat=${position.latitude}&long=${position.longitude}");
+        if (data.body == "Error: could not handle the request") return [];
+        var info = await json.decode(data.body);
+        print(info);
+        List<dynamic> send = await json.decode(info["restaurants"]);
+        return listfromSnapshot(send);
+      } catch (e) {
+        print(e);
+        return [];
+      }
     }
   }
 

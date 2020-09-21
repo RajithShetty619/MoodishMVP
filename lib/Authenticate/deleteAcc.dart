@@ -101,6 +101,7 @@ class _DeleteAccState extends State<DeleteAcc> {
                         elevation: 6.0,
                         onPressed: () async {
                           if (_formKey.currentState.validate()) {
+                            _handleSubmit(context);
                             dynamic result =
                             await Authenticate().deleteUser(_email, _password);
                             if (result == null) {
@@ -143,6 +144,16 @@ class _DeleteAccState extends State<DeleteAcc> {
       ),
     );
   }
+  Future<void> _handleSubmit(BuildContext context) async {
+    try {
+      Dialogs.showLoadingDialog(context, _keyLoader); //invoking login
+      await Authenticate().deleteUser(_email, _password);
+      Navigator.of(_keyLoader.currentContext, rootNavigator: true)
+          .pop(); //close the dialog
+    } catch (error) {
+      print(error);
+    }
+  }
 }
 
 
@@ -159,5 +170,40 @@ Widget getImageAsset() {
     padding: EdgeInsets.only(top: 30.0, bottom: 25.0),
   );
 }
+
+
+class Dialogs {
+  static Future<void> showLoadingDialog(
+      BuildContext context, GlobalKey key) async {
+    return showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return new WillPopScope(
+              onWillPop: () async => false,
+              child: SimpleDialog(key: key, children: <Widget>[
+                Center(
+                  child: Column(children: [
+                    Text(
+                      'Wait a Moment...',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    SpinKitCircle(
+                      color: Colors.deepOrange,
+                      size: 50.0,
+                    ),
+                  ]),
+                )
+              ]));
+        });
+  }
+}
+
 
 
