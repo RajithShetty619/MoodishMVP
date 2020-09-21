@@ -198,7 +198,7 @@ class _FoodFeedState extends State<FoodFeed> {
                                 child: Align(
                                   alignment: Alignment.bottomCenter,
                                   child: Padding(
-                                    padding: const EdgeInsets.all(4.0),
+                                    padding: const EdgeInsets.all(8.0),
                                     child: Text(
                                       '${mood[index].mood[0].toUpperCase()}${mood[index].mood.substring(1)}',
                                       style: TextStyle(

@@ -156,7 +156,6 @@ class _FoodEverySituationState extends State<FoodEverySituation> {
                                       Border.all(color: Colors.white, width: 2),
                                   borderRadius: BorderRadius.circular(300),
                                 ),
-                              color: Colors.blue[300],
                               child: IconButton(
                                 icon: Icon(
                                   Icons.arrow_forward,
