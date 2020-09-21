@@ -158,7 +158,7 @@ class _FoodRestState extends State<FoodRest> {
           else {
             return Center(
               child: Container(
-                child: Text("more restaurants coming soon"),
+                child: Text("More restaurants coming soon"),
               ),
             );
           }
