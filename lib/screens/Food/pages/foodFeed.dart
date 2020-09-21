@@ -54,8 +54,8 @@ class _FoodFeedState extends State<FoodFeed> {
   bool _visible = true;
   List<GridTileBuilder> mood = [
     GridTileBuilder(image: 'happy-face.png', mood: 'happy', currentOpacity: 1),
-    GridTileBuilder(
-        image: 'healthy-face.png', mood: 'healthy', currentOpacity: 1),
+    // GridTileBuilder(
+    //     image: 'healthy-face.png', mood: 'healthy', currentOpacity: 1),
     GridTileBuilder(image: 'sad-face.png', mood: 'sad', currentOpacity: 1),
     GridTileBuilder(image: 'angry-face.png', mood: 'anger', currentOpacity: 1),
     GridTileBuilder(
@@ -164,9 +164,38 @@ class _FoodFeedState extends State<FoodFeed> {
                       itemCount: mood.length,
                       shrinkWrap: true,
                       itemBuilder: (BuildContext itemContext, index) {
-                        switch ('${mood[index].mood[0].toUpperCase()}${mood[index].mood.substring(1)}') {
-                          case 'Anger': 'Angry';
-                            break;
+                        switch (
+                            '${mood[index].mood[0].toUpperCase()}${mood[index].mood.substring(1)}') {
+                          // case 'Anger':
+                          // setState(() {
+                          //   moodSelection = "Angry";
+                          // });
+                          // break;
+                          // case 'Stress':
+                          // setState(() {
+                          //   moodSelection = "Stress";
+                          // });
+                          // break;
+                          // case 'Healthy':
+                          // setState(() {
+                          //   moodSelection = "Healthy";
+                          // });
+                          // break;
+                          // case 'Anger':
+                          // setState(() {
+                          //   moodSelection = "Angry";
+                          // });
+                          // break;
+                          // case 'Anger':
+                          // setState(() {
+                          //   moodSelection = "Angry";
+                          // });
+                          // break;
+                          // case 'Anger':
+                          // setState(() {
+                          //   moodSelection = "Angry";
+                          // });
+                          // break;
                         }
                         return GestureDetector(
                           onTap: () {
