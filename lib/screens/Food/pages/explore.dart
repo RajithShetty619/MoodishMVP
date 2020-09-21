@@ -91,7 +91,7 @@ class _ExploreState extends State<Explore> {
           field: ['cuisine', "deter"],
           value: ['indian', deter],
           deter: deter,
-          check: 0).then((future) {
+          check: check).then((future) {
         setState(() {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "tsp"));
         });
@@ -116,11 +116,22 @@ class _ExploreState extends State<Explore> {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t1"));
         });
       });
+      _dqtaste1.getFood(
+          field: ['taste', 'deter'],
+          value: getValue("t2", deter),
+          limit: 7,
+          deter: deter,
+          check: check).then((future) {
+        setState(() {
+          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t2"));
+        });
+      });
       // _dqsituation0.getFood(
       //     field: ['situation', "deter"],
       //     value: getValue("s0", deter),
       //     limit: 7,
-      //     deter: deter,
+      //     deter: deter,People are now paying for robot rides.
+
       //     check: check).then((future) {
       //   setState(() {
       //     BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s0"));

@@ -22,15 +22,13 @@ class _FoodRestState extends State<FoodRest> {
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           List<RestListModel> _rest = snapshot.data;
-          return ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              primary: false,
-              shrinkWrap: true,
-              itemCount: _rest.length,
-              itemBuilder: (context, index) {
-                print('###################################');
-                print(_rest.length);
-                if (_rest.length > 0) {
+          if (_rest != null)
+            return ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                primary: false,
+                shrinkWrap: true,
+                itemCount: _rest.length,
+                itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: GestureDetector(
@@ -156,10 +154,14 @@ class _FoodRestState extends State<FoodRest> {
                       ),
                     ),
                   );
-                } else {
-                  return Container();
-                }
-              });
+                });
+          else {
+            return Center(
+              child: Container(
+                child: Text("more restaurants coming soon"),
+              ),
+            );
+          }
         } else {
           return Center(
             child: SpinKitChasingDots(
