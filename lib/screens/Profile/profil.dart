@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/Services/database.dart';
+import 'package:share/share.dart';
 import '../../Services/authenticate.dart';
 import 'Edit.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -258,7 +259,7 @@ class _ProfileState extends State<Profile> {
                     color: Colors.grey.shade400,
                   ),
                   onTap: () {
-                    launch('https://snapinsight.net/contacts.pho');
+                    launch('https://snapinsight.net/contactus.php');
                   },
                 ),
                 Divider(),
@@ -280,7 +281,7 @@ class _ProfileState extends State<Profile> {
                       style: TextStyle(color: Colors.black38, fontSize: 24.0)),
                 ),
                 ListTile(
-                  title: Text("Send FeedBack's",
+                  title: Text("Send FeedBacks",
                       style: TextStyle(
                         color: Colors.black,
                       )),
@@ -303,6 +304,26 @@ class _ProfileState extends State<Profile> {
                   onTap: () {
                     launch(
                         'http://play.google.com/store/apps/details?id=net.moodish.snapinsight');
+                  },
+                ),
+                Divider(),
+                ListTile(
+                  title: Text("Share our App",
+                      style: TextStyle(
+                        color: Colors.black,
+                      )),
+                  trailing: Icon(
+                    Icons.keyboard_arrow_right,
+                    color: Colors.grey.shade400,
+                  ),
+                  onTap: () {
+                    final RenderBox box = context.findRenderObject();
+                    Share.share(
+                        'Moodish - Recipes and Restaurants discovery \nhttp://play.google.com/store/apps/details?id=net.moodish.snapinsight',
+                        subject:
+                            "http://play.google.com/store/apps/details?id=net.moodish.snapinsight",
+                        sharePositionOrigin:
+                            box.localToGlobal(Offset.zero) & box.size);
                   },
                 ),
                 Divider(),
