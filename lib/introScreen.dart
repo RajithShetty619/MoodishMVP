@@ -11,26 +11,28 @@ class _IntroScreenState extends State<IntroScreen> {
   List<PageViewModel> getPages() {
     return [
       PageViewModel(
-        image: ClipRRect(
-          borderRadius: BorderRadius.circular(100),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 150),
-            child: Image.asset(
-              'assets/1.png',
-            ),
+        image: Container(
+          decoration: BoxDecoration(),
+          margin: EdgeInsets.only(top: 20),
+          padding: const EdgeInsets.only(top: 5),
+          child: Image.asset(
+            'assets/1.png',
+            width: 150,
+            alignment: Alignment.bottomCenter,
+            fit: BoxFit.fitHeight,
           ),
         ),
         title: "Food For Mood",
         body: "Find food for every mood and a lot more in your feed",
       ),
       PageViewModel(
-        image: ClipRRect(
-          borderRadius: BorderRadius.circular(100),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 150),
-            child: Image.asset(
-              'assets/1_1.png',
-            ),
+        image: Padding(
+          padding: const EdgeInsets.only(top: 60),
+          child: Image.asset(
+            'assets/1.2.png',
+            width: 300.0,
+            alignment: Alignment.bottomCenter,
+            fit: BoxFit.cover,
           ),
         ),
         title: "Food Information",
@@ -38,26 +40,26 @@ class _IntroScreenState extends State<IntroScreen> {
             "Nutrional information to step-by-step guided recipes and top restaurants for it",
       ),
       PageViewModel(
-        image: ClipRRect(
-          borderRadius: BorderRadius.circular(100),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 150),
-            child: Image.asset(
-              'assets/2.png',
-            ),
+        image: Padding(
+          padding: const EdgeInsets.only(top: 40),
+          child: Image.asset(
+            'assets/2.png',
+            width: 300,
+            alignment: Alignment.bottomCenter,
+            fit: BoxFit.fitHeight,
           ),
         ),
         title: "Restaurants",
         body: "Find restaurants based on your location and other preferences",
       ),
       PageViewModel(
-        image: ClipRRect(
-          borderRadius: BorderRadius.circular(100),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 150),
-            child: Image.asset(
-              'assets/2_1.png',
-            ),
+        image: Padding(
+          padding: const EdgeInsets.only(top: 60),
+          child: Image.asset(
+            'assets/2.1.png',
+            width: 300,
+            alignment: Alignment.bottomCenter,
+            fit: BoxFit.fitHeight,
           ),
         ),
         title: "Information About Restaurants",
@@ -91,7 +93,7 @@ class _IntroScreenState extends State<IntroScreen> {
         ),
       ),
       onDone: () {
-        Navigator.push(
+        Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Cuisine()));
       },
       pages: getPages(),

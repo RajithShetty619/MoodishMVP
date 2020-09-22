@@ -105,15 +105,17 @@ class _CuisineState extends State<Cuisine> {
                         onTap: () {
                           print("pressesesesesesd5362");
                           dynamic _val = cuisine[index];
+
                           setState(() {
                             if (cuisine[index].isSelected == true) {
                               pref.remove(cuisine[index].cuisine);
-                              
+                              i--;
                             }
                             if (cuisine[index].isSelected == false) {
                               pref.add(_val.cuisine);
                               i++;
                             }
+                            print(i);
                             print(pref);
                             print(pref.contains(_val.cuisine));
                           });
@@ -228,22 +230,18 @@ class _CuisineState extends State<Cuisine> {
                               alignment: Alignment.center,
                               child: GestureDetector(
                                 onTap: () async {
-                                  if (i + 1 > 2) {
+                                  if (i + 1 > 3) {
                                     Box box =
                                         await Hive.openBox('preferenceBox');
                                     box.put('preference', pref);
                                     DatabaseService().savePreference();
-                                    // Navigator.push(context,
-                                    //     MaterialPageRoute(builder: (context) {
-                                    //   return FoodPreference();
-                                    // }));
                                     Navigator.pushReplacement(context,
                                         MaterialPageRoute(builder: (context) {
                                       return FoodPreference();
                                     }));
                                   } else
                                     setState(() {
-                                      err = 'Select ${2 - i + 1} more!';
+                                      err = 'Select ${3 - i} more!';
                                       print(i);
                                     });
                                 },

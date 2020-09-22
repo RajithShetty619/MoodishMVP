@@ -7,11 +7,9 @@ import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Services/betaCount.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
-import 'package:moodish_mvp/screens/Food/blocs/pollsbloc/pollsBloc.dart';
 import 'package:moodish_mvp/screens/Food/components/foodMood.dart';
 import 'package:moodish_mvp/screens/Food/components/maFeed.dart';
 import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
-import 'package:moodish_mvp/screens/Food/events/pollsEvent.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/foodft.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/polls.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/recipe.dart';
@@ -56,8 +54,8 @@ class _FoodFeedState extends State<FoodFeed> {
   bool _visible = true;
   List<GridTileBuilder> mood = [
     GridTileBuilder(image: 'happy-face.png', mood: 'happy', currentOpacity: 1),
-    GridTileBuilder(
-        image: 'healthy-face.png', mood: 'healthy', currentOpacity: 1),
+    // GridTileBuilder(
+    //     image: 'healthy-face.png', mood: 'healthy', currentOpacity: 1),
     GridTileBuilder(image: 'sad-face.png', mood: 'sad', currentOpacity: 1),
     GridTileBuilder(image: 'angry-face.png', mood: 'anger', currentOpacity: 1),
     GridTileBuilder(
@@ -166,13 +164,43 @@ class _FoodFeedState extends State<FoodFeed> {
                       itemCount: mood.length,
                       shrinkWrap: true,
                       itemBuilder: (BuildContext itemContext, index) {
-                        switch ('${mood[index].mood[0].toUpperCase()}${mood[index].mood.substring(1)}') {
-                          case 'Anger': 'Angry';
-                            break;
+                        switch (
+                            '${mood[index].mood[0].toUpperCase()}${mood[index].mood.substring(1)}') {
+                          // case 'Anger':
+                          // setState(() {
+                          //   moodSelection = "Angry";
+                          // });
+                          // break;
+                          // case 'Stress':
+                          // setState(() {
+                          //   moodSelection = "Stress";
+                          // });
+                          // break;
+                          // case 'Healthy':
+                          // setState(() {
+                          //   moodSelection = "Healthy";
+                          // });
+                          // break;
+                          // case 'Anger':
+                          // setState(() {
+                          //   moodSelection = "Angry";
+                          // });
+                          // break;
+                          // case 'Anger':
+                          // setState(() {
+                          //   moodSelection = "Angry";
+                          // });
+                          // break;
+                          // case 'Anger':
+                          // setState(() {
+                          //   moodSelection = "Angry";
+                          // });
+                          // break;
                         }
                         return GestureDetector(
                           onTap: () {
                             String _val = mood[index].mood;
+
                             data(context, _val);
                             Future.delayed(Duration(milliseconds: 400), () {
                               setState(() {
@@ -197,8 +225,8 @@ class _FoodFeedState extends State<FoodFeed> {
                                 height: 220.0,
                                 width: MediaQuery.of(context).size.width / 2.2,
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                   ),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
                                 child: Align(
                                   alignment: Alignment.bottomCenter,
                                   child: Padding(
@@ -235,6 +263,7 @@ class _FoodFeedState extends State<FoodFeed> {
                   children: <Widget>[
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.only(left: 7.0),
@@ -244,7 +273,6 @@ class _FoodFeedState extends State<FoodFeed> {
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.black, width: 2),
                               borderRadius: BorderRadius.circular(15),
-                              // color: Colors.blue[200],
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(5.0),
@@ -258,61 +286,87 @@ class _FoodFeedState extends State<FoodFeed> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 5)
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: 350,
-                        child: BlocConsumer<FoodBloc,
-                            Map<String, List<FoodListModel>>>(
-                          buildWhen: (Map<String, List<FoodListModel>> previous,
-                              Map<String, List<FoodListModel>> current) {
-                            return true;
-                          },
-                          listenWhen:
-                              (Map<String, List<FoodListModel>> previous,
-                                  Map<String, List<FoodListModel>> current) {
-                            if (current.length > previous.length) {
-                              return true;
-                            }
-                            return false;
-                          },
-                          builder: (BuildContext context, foodList) {
-                            if (foodList["0"].length < 1) {
-                              return Center(
-                                child: SpinKitFadingCircle(
-                                  color: Colors.blueAccent,
+                    Row(
+                      children: [
+                        RotatedBox(
+                          quarterTurns: 3,
+                          child: Container(
+                            margin: EdgeInsets.symmetric(
+                                horizontal: 7, vertical: 7),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                moodSelection != null
+                                    ? "${moodSelection[0].toUpperCase()}${moodSelection.substring(1)}"
+                                    : '',
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                              );
-                            }
-                            return Container(
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                scrollDirection: Axis.horizontal,
-                                itemCount: foodList["0"].length,
-                                itemBuilder: (BuildContext context, index) {
-                                  if (foodList["0"].length == 0)
-                                    return SpinKitChasingDots(
-                                      color: Colors.blueAccent,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              height: 350,
+                              child: BlocConsumer<FoodBloc,
+                                  Map<String, List<FoodListModel>>>(
+                                buildWhen: (Map<String, List<FoodListModel>>
+                                        previous,
+                                    Map<String, List<FoodListModel>> current) {
+                                  return true;
+                                },
+                                listenWhen: (Map<String, List<FoodListModel>>
+                                        previous,
+                                    Map<String, List<FoodListModel>> current) {
+                                  if (current.length > previous.length) {
+                                    return true;
+                                  }
+                                  return false;
+                                },
+                                builder: (BuildContext context, foodList) {
+                                  if (foodList["0"].length < 1) {
+                                    return Center(
+                                      child: SpinKitFadingCircle(
+                                        color: Colors.blueAccent,
+                                      ),
                                     );
-                                  return Mood_Food(
-                                    foodList: foodList["0"][index],
-                                    index: index,
-                                    listName: "0",
+                                  }
+                                  return Container(
+                                    child: ListView.builder(
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: foodList["0"].length,
+                                      itemBuilder:
+                                          (BuildContext context, index) {
+                                        if (foodList["0"].length == 0)
+                                          return SpinKitChasingDots(
+                                            color: Colors.blueAccent,
+                                          );
+                                        return Mood_Food(
+                                          foodList: foodList["0"][index],
+                                          index: index,
+                                          listName: "0",
+                                        );
+                                      },
+                                    ),
+                                  );
+                                },
+                                listener: (context, foodList) {
+                                  Scaffold.of(context).showSnackBar(
+                                    SnackBar(content: Text('Added!')),
                                   );
                                 },
                               ),
-                            );
-                          },
-                          listener: (context, foodList) {
-                            Scaffold.of(context).showSnackBar(
-                              SnackBar(content: Text('Added!')),
-                            );
-                          },
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10.0),
@@ -412,34 +466,34 @@ class _FoodFeedState extends State<FoodFeed> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 10, vertical: 1),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: <Widget>[
-                                    Text(
-                                      'Veg Only',
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                    SizedBox(width: 5),
-                                    CupertinoSwitch(
-                                      value: isSwitched,
-                                      onChanged: (val) {
-                                        setState(() {
-                                          isSwitched = val;
-                                        });
-                                        if (isSwitched == true) {
-                                          setState(() {
-                                            det = 0;
-                                          });
-                                        } else {
-                                          setState(() {
-                                            det = 2;
-                                          });
-                                        }
-                                        print(isSwitched);
-                                      },
-                                      trackColor: Colors.grey,
-                                      activeColor: Colors.lightGreen,
-                                    )
-                                  ]),
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: <Widget>[
+                                        Text(
+                                          'Veg Only',
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                        SizedBox(width: 5),
+                                        CupertinoSwitch(
+                                          value: isSwitched,
+                                          onChanged: (val) {
+                                            setState(() {
+                                              isSwitched = val;
+                                            });
+                                            if (isSwitched == true) {
+                                              setState(() {
+                                                det = 0;
+                                              });
+                                            } else {
+                                              setState(() {
+                                                det = 2;
+                                              });
+                                            }
+                                            print(isSwitched);
+                                          },
+                                          trackColor: Colors.grey,
+                                          activeColor: Colors.lightGreen,
+                                        )
+                                      ]),
                                 ),
                               ),
                               Container(
