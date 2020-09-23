@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
-import 'package:moodish_mvp/Authenticate/loading.dart';
 import 'package:moodish_mvp/Services/database.dart';
-import 'package:moodish_mvp/screens/Restaurants/cuisine.dart';
+import 'package:moodish_mvp/introScreen.dart';
 import 'package:moodish_mvp/screens/loadScreen.dart';
-import 'package:moodish_mvp/screens/mainScreen.dart';
 
 class ShowScreen extends StatefulWidget {
   @override
@@ -32,14 +30,14 @@ class _ShowScreenState extends State<ShowScreen> {
         if (snapShot.connectionState == ConnectionState.waiting) {
           return Scaffold(
             body: Center(
-              child: SpinKitHourGlass(
-                color: Colors.blueAccent,
+              child: SpinKitCircle(
+                color: Colors.deepOrange,
                 size: 50.0,
               ),
             ),
           );
         } else if (snapShot.data == null) {
-          return Cuisine();
+          return IntroScreen();
         }
         return LoadingScreen();
       },

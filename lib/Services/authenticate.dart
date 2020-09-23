@@ -15,26 +15,42 @@ class Authenticate {
     'email',
     'https://www.googleapis.com/auth/contacts.readonly',
   ]);
-  // User _userFromFirebase(User user) {
-  //   return user != null ? User(uid: user.uid) : null;
-  // }
 
-  Future<String> returnUid() async {
+  String returnUid() {
     User user = _auth.currentUser;
     String _uid = user.uid;
     return _uid;
   }
 
+  Future deleteUser(String email, String password) async {
+    try {
+      User user = _auth.currentUser;
+      AuthCredential credentials =
+          EmailAuthProvider.credential(email: email, password: password);
+      UserCredential result = await user
+          .reauthenticateWithCredential(credentials)
+          .catchError((e) => print(e));
+
+      if (result.user.uid != null) {
+        await DatabaseService(uid: result.user.uid).deleteuser();
+        await result.user.delete();
+      }
+      return true;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future<User> returnUser() async {
+    User user = _auth.currentUser;
+
+    return user;
+  }
+
   Stream<User> get onAuthChanged {
     return _auth.authStateChanges();
   }
-
-  // Future<String> getToken() async {
-  //   User user = await _auth.currentUser();
-  //   IdTokenResult _token = await user.getIdToken();
-  //   print(_token);
-  //   return _token.token;
-  // }
 
   Future newRegister(String email, String name, String password) async {
     try {
@@ -44,7 +60,7 @@ class Authenticate {
 
       await DatabaseService()
           .updateUserData(email: email, name: name, uid: user.uid);
-      return User;
+      return "success";
     } catch (e) {
       print(e.toString());
       return null;
@@ -133,9 +149,9 @@ class Authenticate {
 
   Future signOut() async {
     try {
+      await _auth.signOut();
       await Hive.openBox("preferenceBox").then((value) async {
         await value.clear();
-        await _auth.signOut();
       });
     } catch (e) {
       print(e.toString());

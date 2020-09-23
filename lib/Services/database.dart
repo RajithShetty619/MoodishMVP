@@ -1,23 +1,48 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Services/authenticate.dart';
 import 'package:moodish_mvp/Services/storage.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
-import 'package:moodish_mvp/models/name.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:moodish_mvp/models/restaurantsModel.dart';
 
 class DatabaseService {
   final CollectionReference userName =
       FirebaseFirestore.instance.collection('Username');
+  ////Delete user////////
+  final String uid;
 
-/* ///////////////////////////////////////////////////// save prefernce /////////////// */
+  DatabaseService({this.uid});
+  Future deleteuser() async {
+    return await userName.doc(uid).delete();
+  }
+
+/* /////////////////////////////////////////// rating&& reviews  /////////////////////////////////// */
+
+  Future<void> restRating({String sr_no, String review, double rating}) async {
+    if (review != null) {
+      dynamic user = await Authenticate().returnUser();
+      await FirebaseFirestore.instance
+          .collection("restaurants")
+          .doc(sr_no)
+          .collection("review")
+          .doc(user.uid)
+          .set({
+        "author_name": user.email,
+        "rating": rating.toString(),
+        "text": review
+      });
+    }
+  }
+
+///////////////////////////////////////////////////// save prefernce ///////////////
 
   Future<void> checkPreference() async {
     Box box = await Hive.openBox('preferenceBox');
     DocumentSnapshot userPref =
-        await userName.doc(await Authenticate().returnUid()).get();
+        await userName.doc(Authenticate().returnUid()).get();
     String deter = await userPref.data()["deter"];
     print(deter);
     dynamic cuisine = await userPref.data()['cuisine'];
@@ -31,7 +56,7 @@ class DatabaseService {
     String deter = await box.get('deter');
     List<String> cuisine = await box.get('preference');
     userName
-        .doc(await Authenticate().returnUid())
+        .doc(Authenticate().returnUid())
         .set({"cuisine": cuisine, "deter": deter}, SetOptions(merge: true));
   }
 
@@ -52,24 +77,65 @@ class DatabaseService {
         FirebaseFirestore.instance.collection(collection).doc(sr_no);
 
     if (food != null) {
-      String uid = await Authenticate().returnUid();
-      Map<String, dynamic> _food = {};
+      String uid = Authenticate().returnUid();
 
-      _food = {
-        'foodName': food.foodName,
-        'meal_type': food.meal_type,
-        'deter': food.deter
-      };
-
-      FirebaseFirestore.instance
-          .collection("username")
+      await FirebaseFirestore.instance
+          .collection("Username")
           .doc("$uid")
           .collection("data")
-          .doc("${food.mood}")
-          .set({food.sr_no: _food}, SetOptions(merge: true));
+          .doc("${food.sr_no}")
+          .set({
+        "foodName": food.foodName,
+        "deter": food.deter,
+        "cuisine": food.cuisine,
+        "meal_type": food.meal_type,
+        "images": food.images,
+        "description": food.description,
+        "recipe": food.recipe,
+        "ingredients": food.ingredients,
+        "servings": food.servings,
+        "time": food.time,
+        "nutrients": food.nutrients,
+        "taste": food.taste,
+        "situation": food.situation,
+        "preparation": food.preparation,
+        "calories": food.calories,
+        "fat": food.fat,
+        "carbohydrates": food.carbohydrates,
+        "protein": food.protein,
+        "mood": food.mood,
+        "restaurants": food.restaurants,
+        "delivery": food.delivery,
+        "sr_no": food.sr_no,
+        "timestamp": FieldValue.serverTimestamp()
+      }, SetOptions(merge: true));
     }
-    return documentReference.set({
+    await documentReference.set({
       field: FieldValue.increment(1) /* atomically increments data by 1 */
+    }, SetOptions(merge: true)).catchError((onError) => print(onError));
+  }
+
+  Future<void> disLikeTransction({
+    String collection,
+    String sr_no,
+    String field,
+    FoodListModel food,
+  }) async {
+    DocumentReference documentReference =
+        FirebaseFirestore.instance.collection(collection).doc(sr_no);
+
+    if (food != null) {
+      String uid = Authenticate().returnUid();
+
+      await FirebaseFirestore.instance
+          .collection("Username")
+          .doc("$uid")
+          .collection("data")
+          .doc("${food.sr_no}")
+          .delete();
+    }
+    await documentReference.set({
+      field: FieldValue.increment(-1) /* atomically increments data by 1 */
     }, SetOptions(merge: true)).catchError((onError) => print(onError));
   }
 /* ////////////////////////////////////////////////////////////////////// USERNAMEMETHODS ////////////////////////////////////////////////////////// */
@@ -81,7 +147,7 @@ class DatabaseService {
   /* user data edit function for eg:- func(field:'name',value:'xyz')  then name field is update in db */
   Future<void> editUserData({String field, String value}) async {
     return await userName
-        .doc(await Authenticate().returnUid())
+        .doc(Authenticate().returnUid())
         .set({field: value}, SetOptions(merge: true));
   }
 
@@ -89,7 +155,7 @@ class DatabaseService {
   Future<Map<String, dynamic>> returnUser() async {
     Map<String, dynamic> _data = {};
     DocumentSnapshot user =
-        await userName.doc(await Authenticate().returnUid()).get();
+        await userName.doc(Authenticate().returnUid()).get();
     user.data().forEach((key, value) {
       _data.putIfAbsent(key, () => value);
     });
@@ -101,7 +167,7 @@ class DatabaseService {
   Future uploadPhoto(File image) async {
     StorageReference storageReference = FirebaseStorage.instance
         .ref()
-        .child('user/' + await Authenticate().returnUid() + '/profilePhoto/');
+        .child('user/' + Authenticate().returnUid() + '/profilePhoto/');
     StorageUploadTask uploadTask = storageReference.putFile(image);
     await uploadTask.onComplete;
     print('File Uploaded');
@@ -110,12 +176,34 @@ class DatabaseService {
   Future<String> downloadPhoto() async {
     StorageReference storageReference = FirebaseStorage.instance
         .ref()
-        .child('user/' + await Authenticate().returnUid() + '/profilePhoto/');
+        .child('user/' + Authenticate().returnUid() + '/profilePhoto/');
     String _url = await storageReference.getDownloadURL();
     return _url;
   }
 
 /* ////////////////////////////////////////////////////////////////////// ResturantListMETHODS ////////////////////////////////////////////////////////// */
+
+  Future<List<RestListModel>> getRestFromList(List<String> list) async {
+    list = list
+        .map((e) => e
+            .split(" ")
+            .map((str) => '${str[0].toUpperCase()}${str.substring(1)}')
+            .join(" "))
+        .toList();
+    List<String> data = [];
+    for (int i = 0; i < 5; i++) {
+      data.add(list[i]);
+    }
+    print(data);
+    CollectionReference _ref =
+        FirebaseFirestore.instance.collection('restaurants');
+    Query q = _ref.where("Restaurant_Name", whereIn: data);
+    QuerySnapshot snapshot = await q.get();
+    print(snapshot.docs);
+    List<RestListModel> _rest =
+        await DatabaseService().listfromSnapshot(snapshot);
+    return _rest;
+  }
 
   Future<List<RestListModel>> listfromSnapshot(QuerySnapshot snapshot) async {
     return Future.wait(snapshot.docs.map((doc) async {
@@ -130,13 +218,14 @@ class DatabaseService {
           features: _docdata["Features"] ?? '',
           restaurant_Location: _docdata["Restaurant_Location"] ?? '',
           international_phone_number:
-              _docdata["International_phone_number"] ?? '',
+              _docdata["international_phone_number"] ?? '',
           rating: _docdata["rating"].toString() ?? '',
           website: _docdata["website"] ?? '',
           photo_url: _docdata["photo_url"] ?? '',
           reviews: _docdata["reviews"] ?? null,
           restaurant_Type: _docdata["Restaurant_Type"] ?? '',
-          sr_no: _docdata["sr_no"] ?? '');
+          sr_no: _docdata["sr_no"] ?? '',
+          address: _docdata["address"] ?? '');
     }).toList());
   }
 
@@ -147,8 +236,6 @@ class DatabaseService {
     return await FirebaseFirestore.instance.collection('food').doc(sr_no).get();
   }
 
-  Future<List<FoodListModel>> searchDocuments({dynamic data}) async {}
-
   /* converts snapshot from db into foodListModel */
   Future<List<FoodListModel>> listFromSnapshot(QuerySnapshot snapshot) async {
     /* Future wait is used to make sure each iteration
@@ -156,7 +243,7 @@ class DatabaseService {
     return Future.wait(snapshot.docs.map((doc) async {
       Map<String, dynamic> _docData = doc.data();
       /* convert image name to url from storage */
-      String _url = await Storage().getUrl(_docData["image"]);
+      String _url = await Storage().getUrl(_docData["food_item"]);
 
       List<String> _preparation = [];
       List<String> _ingredients = [];
@@ -172,13 +259,21 @@ class DatabaseService {
       /* initialized */
       i = 2;
       /* same reason as preparation */
-      _ingredients.add(_docData["ingredients"]);
+      _ingredients.add(_docData["ingredient"]);
       /* converting step1,step2..... to List of preparation */
       while (_docData["ingredient $i"] != null) {
         _ingredients.add(_docData["ingredient $i"]);
 
         ++i;
       }
+      List<String> _restaurants = [];
+      try {
+        _restaurants = (jsonDecode(_docData["restaurants"]) as List<dynamic>)
+            .cast<String>();
+      } catch (e) {
+        _restaurants = [];
+      }
+
       /* might look overwhelming but just 
       initialized constructor of FoodListModel */
       return FoodListModel(
@@ -187,26 +282,25 @@ class DatabaseService {
           cuisine:
               "${_docData['cuisine'][0].toUpperCase()}${_docData['cuisine'].substring(1)}" ??
                   '',
-          meal_type: _docData["meal_type"] ?? '',
+          meal_type: _docData["mealtype"] ?? '',
           images: _url ?? '',
           description: _docData["description"] ?? '',
           recipe: _docData["recipe"] ?? '',
           ingredients: _ingredients ?? '',
           servings: _docData["serving"] ?? '',
-          time: _docData["time"] ?? '',
+          time: _docData["timing"] ?? '',
           nutrients: _docData["nutrients"] ?? '',
           taste: _docData["taste"] ?? '',
           situation: _docData["situation"] ?? '',
           preparation: _preparation ?? '',
           calories: _docData["calories"] ?? '',
-          fat: _docData["fat"] ?? '',
+          fat: _docData["fats"] ?? '',
           carbohydrates: _docData["carbohydrates"] ?? '',
-          protein: _docData["protein"] ?? '',
+          protein: _docData["proteins"] ?? '',
           mood: _docData["mood"] ?? '',
-          restaurants: _docData["restaurants"] ?? '',
           delivery: _docData["delivery"] ?? '',
-          sr_no: _docData["sr_no"] ?? '');
-      // like: _docData["like"] ?? 0);
+          sr_no: _docData["sr_no"] ?? '',
+          restaurants: _restaurants ?? []);
     }).toList());
   }
 

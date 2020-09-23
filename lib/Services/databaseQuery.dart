@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hive/hive.dart';
+import 'package:moodish_mvp/Services/authenticate.dart';
 import 'package:moodish_mvp/models/factsModel.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/models/pollsModel.dart';
@@ -46,17 +47,18 @@ class DatabaseQuery {
     return await DatabaseService().listfromSnapshot(snapshot);
   }
 
-  Future<List<FoodListModel>> getFood(
-      {List<String> field,
-      List<dynamic> value,
-      int limit = 5,
-      int check = 0,
-      String mood,
-      bool recursive = false}) async {
+  Future<List<FoodListModel>> getFood({
+    List<String> field,
+    List<dynamic> value,
+    int limit = 5,
+    int check = 0,
+    String mood,
+    String deter,
+  }) async {
     List<String> _field = field;
     List<dynamic> _value = value;
     /* gets previous list saved by the name */
-    final _box = await Hive.openBox(listName + (mood ?? ''));
+    final _box = await Hive.openBox(listName + (mood ?? '') + (deter ?? ''));
     List<dynamic> _gfoodList = await _box.get(listName);
 
     /* condition satisfied when no list retrieved from memory
@@ -64,7 +66,7 @@ class DatabaseQuery {
     if (_gfoodList == null || check == 0) {
       Query _finalQuery = _ref.orderBy('description');
       /* last document to continue query from */
-      if (_gfoodList != null) if (_gfoodList.length != 0 && recursive == false)
+      if (_gfoodList != null) if (_gfoodList.length != 0)
         _lastDocument =
             _gfoodList.cast<FoodListModel>()[_gfoodList.length - 1].description;
 
@@ -86,14 +88,14 @@ class DatabaseQuery {
       List<FoodListModel> queryList =
           await DatabaseService().listFromSnapshot(snapshot);
       await _box.put(listName, queryList);
-      if (queryList.length < limit - 1) {
+      if (queryList.length < 5) {
+        await _box.put(listName, null);
         _finalQuery = _ref
             .orderBy('description')
             .where("deter", isEqualTo: "veg")
             .limit(limit);
         snapshot = await _finalQuery.get();
         queryList = await DatabaseService().listFromSnapshot(snapshot);
-        await _box.put(listName, null);
       }
       /* saving list for later use */
       return queryList;
@@ -106,13 +108,17 @@ class DatabaseQuery {
     }
   }
 
-  /* almost same working as getFood exceot it add to and existing list */
-  Future<List<FoodListModel>> getMoreFood(
-      {List<String> field, List<dynamic> value}) async {
+  /* almost same working as getFood except it add to and existing list */
+  Future<List<FoodListModel>> getMoreFood({
+    List<String> field,
+    List<dynamic> value,
+    String mood,
+    String deter,
+  }) async {
     List<String> _field = field;
     List<dynamic> _value = value;
     List<dynamic> _gfoodList = [];
-    final _box = Hive.box(listName);
+    final _box = await Hive.openBox(listName + (mood ?? '') + (deter ?? ''));
     _gfoodList = await _box.get(listName);
     _lastDocument =
         _gfoodList.cast<FoodListModel>()[_gfoodList.length - 1].description;
@@ -226,11 +232,11 @@ class DatabaseQuery {
     Box _box = await Hive.openBox('yesorno');
     dynamic end = _box.get('end');
 
-    Query y = yesorno.orderBy('Questions').startAfter([end]).limit(3);
+    Query y = yesorno.orderBy('Questions').startAfter([end]).limit(4);
     List<DocumentSnapshot> _snapshot =
         await y.get().then((value) => value.docs);
     if (_snapshot.length < 3) {
-      y = polls.orderBy('Questions').limit(3);
+      y = yesorno.orderBy('Questions').limit(4);
       _snapshot = await y.get().then((value) => value.docs);
     }
     // saving last this_that to be shown
@@ -272,5 +278,68 @@ class DatabaseQuery {
           factHeading: _docData['fact'],
           factStatment: _docData['factStatement']);
     }).toList();
+  }
+
+  Future<List<FoodListModel>> getLikedFood() async {
+    String uid = Authenticate().returnUid();
+    CollectionReference _ref = FirebaseFirestore.instance
+        .collection('Username')
+        .doc(uid)
+        .collection("data");
+
+    QuerySnapshot recent =
+        await _ref.orderBy('timestamp', descending: true).limit(6).get();
+
+    Future<List<FoodListModel>> listFromSnapshot(QuerySnapshot snapshot) async {
+      /* Future wait is used to make sure each iteration
+      of the map is awaited by the code */
+      return Future.wait(snapshot.docs.map((doc) async {
+        Map<String, dynamic> _docData = doc.data();
+        /* convert image name to url from storage */
+
+        List<String> _preparation = [];
+        List<String> _ingredients = [];
+
+        try {
+          var data = (_docData["preparation"] as List<dynamic>).cast<String>();
+          _preparation = data;
+          data = (_docData["preparation"] as List<dynamic>).cast<String>();
+          _ingredients = data;
+        } catch (E) {
+          print(E);
+        }
+
+        print(_preparation);
+        print(_ingredients);
+        return FoodListModel(
+            foodName: _docData["foodName"] ?? '',
+            deter: _docData["deter"] ?? '',
+            cuisine:
+                "${_docData['cuisine'][0].toUpperCase()}${_docData['cuisine'].substring(1)}" ??
+                    '',
+            meal_type: _docData["meal_type"] ?? '',
+            images: _docData['images'] ?? '',
+            description: _docData["description"] ?? '',
+            recipe: _docData["recipe"] ?? '',
+            ingredients: _ingredients ?? [],
+            servings: _docData["serving"] ?? '',
+            time: _docData["time"] ?? '',
+            nutrients: _docData["nutrients"] ?? '',
+            taste: _docData["taste"] ?? '',
+            situation: _docData["situation"] ?? '',
+            preparation: _preparation ?? [],
+            calories: _docData["calories"] ?? '',
+            fat: _docData["fat"] ?? '',
+            carbohydrates: _docData["carbohydrates"] ?? '',
+            protein: _docData["protein"] ?? '',
+            mood: _docData["mood"] ?? '',
+            delivery: _docData["delivery"] ?? '',
+            sr_no: _docData["sr_no"] ?? '');
+      }).toList());
+    }
+
+    List<FoodListModel> recentDocs = await listFromSnapshot(recent);
+
+    return recentDocs;
   }
 }

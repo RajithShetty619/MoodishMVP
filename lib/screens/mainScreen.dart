@@ -1,4 +1,3 @@
-import 'package:custom_navigator/custom_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/screens/Food/pages/foodHome.dart';
 import 'package:moodish_mvp/screens/Profile/profil.dart';
@@ -15,8 +14,6 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
-
-  GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   void _onItemTapped(int index) {
     setState(() {

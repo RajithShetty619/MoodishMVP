@@ -7,6 +7,7 @@ import 'package:moodish_mvp/models/factsModel.dart';
 import 'package:moodish_mvp/screens/Food/blocs/pollsbloc/pollsBloc.dart';
 import 'package:moodish_mvp/screens/Food/components/shareDialog.dart';
 import 'package:moodish_mvp/screens/Food/events/pollsEvent.dart';
+import 'package:share/share.dart';
 
 class FoodftTab extends StatefulWidget {
   @override
@@ -134,11 +135,19 @@ class _getListViewState extends State<getListView> {
                             size: 30,
                           ),
                     onPressed: () {
-                      setState(() {
-                        BlocProvider.of<PollBloc>(context)
-                            .add(PollEvent.like(widget.index));
-                        _like = true;
-                      });
+                      if (_like == false)
+                        setState(() {
+                          BlocProvider.of<PollBloc>(context)
+                              .add(PollEvent.like(widget.index));
+                          _like = true;
+                        });
+                      else {
+                        setState(() {
+                          BlocProvider.of<PollBloc>(context)
+                              .add(PollEvent.like(widget.index));
+                          _like = false;
+                        });
+                      }
                     },
                   ),
                   // IconButton(
@@ -154,8 +163,12 @@ class _getListViewState extends State<getListView> {
                       size: 25,
                     ),
                     onPressed: () async {
-                      final action = await Dialogs.yesAbortDialog(
-                          context, 'My title', 'My Body');
+                      final RenderBox box = context.findRenderObject();
+                      Share.share(
+                          '${widget.fact.factStatment} - \nhttp://play.google.com/store/apps/details?id=net.moodish.snapinsight',
+                          subject: widget.fact.factHeading,
+                          sharePositionOrigin:
+                              box.localToGlobal(Offset.zero) & box.size);
                     },
                   )
                 ],

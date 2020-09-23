@@ -2,18 +2,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moodish_mvp/screens/Food/events/pollsEvent.dart';
 
 class PollBloc extends Bloc<PollEvent, Map<String, List<dynamic>>> {
-  @override
-  // TODO: implement initialState
-  Map<String, List<dynamic>> get initialState => {
-        "p": [],
-        "choice": [0, 0, 0, 0],
-        "fft": [],
-        "like": [0, 0, 0, 0, 0],
-        "yn": [],
-        "yn_choice": [0, 0, 0, 0],
-        "tt": [],
-        "tt_choice": [0, 0, 0],
-      };
+  PollBloc()
+      : super({
+          "p": [],
+          "choice": [0, 0, 0, 0],
+          "fft": [],
+          "like": [0, 0, 0, 0, 0],
+          "yn": [],
+          "yn_choice": [0, 0, 0, 0],
+          "tt": [],
+          "tt_choice": [0, 0, 0],
+        });
 
   @override
   Stream<Map<String, List<dynamic>>> mapEventToState(PollEvent event) async* {

@@ -15,7 +15,10 @@ class _FoodHomeState extends State<FoodHome> {
     1: Text('Explore'),
   };
 
+  GlobalKey _tabs = GlobalKey();
+
   int grpValue = 0;
+  String name;
 
   bool _switch = false;
 
@@ -35,26 +38,8 @@ class _FoodHomeState extends State<FoodHome> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     _switch
-                        ? Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Text(
-                              'Hello Username,\n Hungry yet?',
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          )
-                        : Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Text(
-                              "${now.day}/${now.month}/${now.year},\n Hungry yet?",
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
+                        ? Container()
+                        : Container(),
                     Flexible(
                       flex: 1,
                       child: Container(
@@ -83,9 +68,7 @@ class _FoodHomeState extends State<FoodHome> {
             ),
             Expanded(
               child: IndexedStack(
-                index: _switch
-                    ? 0
-                    : 1, // switch between Foo and Bar based on condition
+                index: _switch ? 0 : 1,
                 children: [
                   Explore(),
                   FoodFeed(),

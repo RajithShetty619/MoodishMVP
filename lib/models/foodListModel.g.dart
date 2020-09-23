@@ -37,16 +37,16 @@ class FoodListModelAdapter extends TypeAdapter<FoodListModel> {
       carbohydrates: fields[17] as String,
       mood: fields[15] as String,
       protein: fields[18] as String,
-      restaurants: fields[19] as String,
+      restaurants: (fields[19] as List)?.cast<String>(),
       sr_no: fields[21] as String,
       like: fields[22] as int,
-    );
+    )..heart = fields[23] as bool;
   }
 
   @override
   void write(BinaryWriter writer, FoodListModel obj) {
     writer
-      ..writeByte(23)
+      ..writeByte(24)
       ..writeByte(0)
       ..write(obj.foodName)
       ..writeByte(1)
@@ -92,7 +92,9 @@ class FoodListModelAdapter extends TypeAdapter<FoodListModel> {
       ..writeByte(21)
       ..write(obj.sr_no)
       ..writeByte(22)
-      ..write(obj.like);
+      ..write(obj.like)
+      ..writeByte(23)
+      ..write(obj.heart);
   }
 
   @override

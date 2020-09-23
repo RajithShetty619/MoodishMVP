@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/Services/database.dart';
+import 'package:share/share.dart';
 import '../../Services/authenticate.dart';
 import 'Edit.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'settings.dart';
+import 'notificationSettings.dart';
+import 'likedFood.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -58,7 +61,7 @@ class _ProfileState extends State<Profile> {
               children: <Widget>[
                 InkWell(
                   onTap: () async {
-                    final _userdata = await Navigator.push(
+                    final data = await Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => EditProfile(
@@ -66,7 +69,8 @@ class _ProfileState extends State<Profile> {
                                   image: _image,
                                 )));
                     setState(() {
-                      userData = _userdata;
+                      userData = data["_user"];
+                      _image = data["_image"];
                     });
                   },
                   child: Padding(
@@ -136,117 +140,71 @@ class _ProfileState extends State<Profile> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    IconButton(
-                      icon: Icon(
-                        Icons.notifications,
-                        size: 50.0,
-                      ),
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext idcontext) {
-                              return Dialog(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: Container(
-                                  height: 135,
-                                  child: Column(
-                                    children: <Widget>[
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        'Coming Soon.......!',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.all(10),
-                                        child: Align(
-                                          alignment: Alignment.centerRight,
-                                          child: RaisedButton(
-                                            onPressed: () => Navigator.of(
-                                                    idcontext,
-                                                    rootNavigator: true)
-                                                .pop(),
-                                            child: Text('ok'),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              );
-                            });
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.group,
-                        size: 50,
-                      ),
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext idcontext) {
-                              return Dialog(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: Container(
-                                  height: 135,
-                                  child: Column(
-                                    children: <Widget>[
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        'Coming Soon.......!',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.all(10),
-                                        child: Align(
-                                          alignment: Alignment.centerRight,
-                                          child: RaisedButton(
-                                            onPressed: () => Navigator.of(
-                                                    idcontext,
-                                                    rootNavigator: true)
-                                                .pop(),
-                                            child: Text('ok'),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              );
-                            });
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.settings,
-                        size: 50,
-                      ),
-                      onPressed: () {
+                    GestureDetector(
+                      onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ProfileSetting()));
+                                builder: (context) => NotificationSettings()));
                       },
+                      child: Column(
+                        children: <Widget>[
+                          Icon(
+                            Icons.notifications,
+                            size: 40.0,
+                          ),
+                          Center(
+                              child: Text(
+                            'Notification',
+                            style: TextStyle(color: Colors.black),
+                          ))
+                        ],
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Settings(
+                                      user: userData,
+                                      image: _image,
+                                    )));
+                      },
+                      child: Column(
+                        children: <Widget>[
+                          Icon(
+                            Icons.settings,
+                            size: 40,
+                          ),
+                          Center(
+                              child: Text(
+                            'Settings',
+                            style: TextStyle(color: Colors.black),
+                          ))
+                        ],
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LikedFood()));
+                      },
+                      child: Column(
+                        children: <Widget>[
+                          Icon(
+                            Icons.favorite,
+                            size: 40,
+                          ),
+                          Center(
+                              child: Text(
+                            'Liked',
+                            style: TextStyle(color: Colors.black),
+                          ))
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -273,48 +231,7 @@ class _ProfileState extends State<Profile> {
                     color: Colors.grey.shade400,
                   ),
                   onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Dialog(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Container(
-                              height: 150.0,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Align(
-                                      alignment: Alignment.center,
-                                      child: Linkify(
-                                        onOpen: _onOpen,
-                                        text:
-                                            'You have got Questions? We have answers\nClick https://snapinsight.net/faq.php',
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 15.0,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: Align(
-                                      alignment: Alignment.centerRight,
-                                      child: RaisedButton(
-                                        onPressed: () =>
-                                            Navigator.of(context).pop(),
-                                        child: Text('ok'),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          );
-                        });
+                    launch('https://snapinsight.net/faq.php');
                   },
                 ),
                 Divider(),
@@ -328,48 +245,7 @@ class _ProfileState extends State<Profile> {
                     color: Colors.grey.shade400,
                   ),
                   onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Dialog(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Container(
-                              height: 150.0,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Align(
-                                      alignment: Alignment.center,
-                                      child: Linkify(
-                                        onOpen: _onOpen,
-                                        text:
-                                            'To View Terms And Conditions\nClick https://snapinsight.net/termsandconditions.php',
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 15.0,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: Align(
-                                      alignment: Alignment.centerRight,
-                                      child: RaisedButton(
-                                        onPressed: () =>
-                                            Navigator.of(context).pop(),
-                                        child: Text('ok'),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          );
-                        });
+                    launch('https://snapinsight.net/termsandconditions.php');
                   },
                 ),
                 Divider(),
@@ -383,48 +259,7 @@ class _ProfileState extends State<Profile> {
                     color: Colors.grey.shade400,
                   ),
                   onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Dialog(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Container(
-                              height: 150.0,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Align(
-                                      alignment: Alignment.center,
-                                      child: Linkify(
-                                        onOpen: _onOpen,
-                                        text:
-                                            'Contact Us?\nClick https://snapinsight.net/contacts.pho',
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 15.0,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: Align(
-                                      alignment: Alignment.centerRight,
-                                      child: RaisedButton(
-                                        onPressed: () =>
-                                            Navigator.of(context).pop(),
-                                        child: Text('ok'),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          );
-                        });
+                    launch('https://snapinsight.net/contactus.php');
                   },
                 ),
                 Divider(),
@@ -437,7 +272,9 @@ class _ProfileState extends State<Profile> {
                     Icons.keyboard_arrow_right,
                     color: Colors.grey.shade400,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    launch('https://snapinsight.net/moodish/restreg.php');
+                  },
                 ),
                 Divider(),
                 SizedBox(height: 5.0),
@@ -446,7 +283,7 @@ class _ProfileState extends State<Profile> {
                       style: TextStyle(color: Colors.black38, fontSize: 24.0)),
                 ),
                 ListTile(
-                  title: Text("Send FeedBack's",
+                  title: Text("Send FeedBack",
                       style: TextStyle(
                         color: Colors.black,
                       )),
@@ -466,7 +303,30 @@ class _ProfileState extends State<Profile> {
                     Icons.keyboard_arrow_right,
                     color: Colors.grey.shade400,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    launch(
+                        'http://play.google.com/store/apps/details?id=net.moodish.snapinsight');
+                  },
+                ),
+                Divider(),
+                ListTile(
+                  title: Text("Share our App",
+                      style: TextStyle(
+                        color: Colors.black,
+                      )),
+                  trailing: Icon(
+                    Icons.keyboard_arrow_right,
+                    color: Colors.grey.shade400,
+                  ),
+                  onTap: () {
+                    final RenderBox box = context.findRenderObject();
+                    Share.share(
+                        'Moodish - Recipes and Restaurants discovery \nhttp://play.google.com/store/apps/details?id=net.moodish.snapinsight',
+                        subject:
+                            "http://play.google.com/store/apps/details?id=net.moodish.snapinsight",
+                        sharePositionOrigin:
+                            box.localToGlobal(Offset.zero) & box.size);
+                  },
                 ),
                 Divider(),
 
@@ -482,45 +342,50 @@ class _ProfileState extends State<Profile> {
                 //   value: false,
                 //   onChanged: (val){},
                 //  ),
-                Container(
-                  height: 50,
-                  child: FlatButton(
-                    onPressed: () async {
-                      await Authenticate().signOut();
-                    },
-                    padding: EdgeInsets.all(0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: InkWell(
-                      child: Ink(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                            colors: [
-                              Colors.orange[900],
-                              Colors.orange,
-                              Colors.orange[900],
-                            ],
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 40,
+                    child: FlatButton(
+                      onPressed: () async {
+                        await Authenticate().signOut();
+                      },
+                      padding: EdgeInsets.all(0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: InkWell(
+                        child: Ink(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              colors: [
+                                Colors.white,
+                                Colors.white,
+                              ],
+                            ),
+                            borderRadius: BorderRadius.circular(6),
                           ),
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: FlatButton(
-                          onPressed: () async {
-                            await Authenticate().signOut();
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            constraints: BoxConstraints(
-                                minHeight: 50, maxWidth: double.infinity),
-                            child: Text(
-                              'Logout',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                          child: FlatButton(
+                            onPressed: () async {
+                              setState(() {
+                                Authenticate().signOut();
+                              });
+                            },
+                            child: Container(
+                              alignment: Alignment.centerLeft,
+                              constraints: BoxConstraints(
+                                  minHeight: 50, maxWidth: double.infinity),
+                              child: Text(
+                                'Logout',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.orange[600],
+                                ),
+                                textAlign: TextAlign.left,
                               ),
-                              textAlign: TextAlign.left,
                             ),
                           ),
                         ),
@@ -537,15 +402,15 @@ class _ProfileState extends State<Profile> {
   }
 }
 
-Future<void> _onOpen(LinkableElement link) async {
-  if (await canLaunch(link.url)) {
-    await launch(
-      link.url,
-      enableJavaScript: true,
-      forceSafariVC: false,
-      forceWebView: false,
-    );
-  } else {
-    throw 'Could not launch $link';
-  }
-}
+//Future<void> _onOpen(LinkableElement link) async {
+//  if (await canLaunch(link.url)) {
+//    await launch(
+//      link.url,
+//      enableJavaScript: true,
+//      forceSafariVC: false,
+//      forceWebView: false,
+//    );
+//  } else {
+//    throw 'Could not launch $link';
+//  }
+//}

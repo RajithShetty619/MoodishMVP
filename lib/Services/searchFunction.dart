@@ -2,9 +2,7 @@ import 'package:http/http.dart';
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/Services/storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'dart:convert';
-
 import 'package:moodish_mvp/models/foodListModel.dart';
 
 class SearchFunction {
@@ -39,10 +37,9 @@ class SearchFunction {
       of the map is awaited by the code */
     return Future.wait(snapshot.map((doc) async {
       dynamic _docData = doc;
-      print(_docData);
-      print("////////////////////////////////////////////////////");
       /* convert image name to url from storage */
-      String _url = await Storage().getUrl(_docData["image"]);
+      String _url = await Storage().getUrl(_docData["food_item"]);
+
       List<String> _preparation = [];
       List<String> _ingredients = [];
       int i = 2;
@@ -57,37 +54,48 @@ class SearchFunction {
       /* initialized */
       i = 2;
       /* same reason as preparation */
-      _ingredients.add(_docData["ingredients"]);
+      _ingredients.add(_docData["ingredient"]);
       /* converting step1,step2..... to List of preparation */
       while (_docData["ingredient $i"] != null) {
         _ingredients.add(_docData["ingredient $i"]);
+
         ++i;
       }
+      List<String> _restaurants = [];
+      try {
+        _restaurants = (jsonDecode(_docData["restaurants"]) as List<dynamic>)
+            .cast<String>();
+      } catch (e) {
+        _restaurants = [];
+      }
+
       /* might look overwhelming but just 
       initialized constructor of FoodListModel */
       return FoodListModel(
           foodName: _docData["food_item"] ?? '',
           deter: _docData["deter"] ?? '',
-          cuisine: _docData["cuisine"] ?? '',
-          meal_type: _docData["meal_type"] ?? '',
+          cuisine:
+              "${_docData['cuisine'][0].toUpperCase()}${_docData['cuisine'].substring(1)}" ??
+                  '',
+          meal_type: _docData["mealtype"] ?? '',
           images: _url ?? '',
           description: _docData["description"] ?? '',
           recipe: _docData["recipe"] ?? '',
           ingredients: _ingredients ?? '',
           servings: _docData["serving"] ?? '',
-          time: _docData["time"] ?? '',
+          time: _docData["timing"] ?? '',
           nutrients: _docData["nutrients"] ?? '',
           taste: _docData["taste"] ?? '',
           situation: _docData["situation"] ?? '',
           preparation: _preparation ?? '',
           calories: _docData["calories"] ?? '',
-          fat: _docData["fat"] ?? '',
+          fat: _docData["fats"] ?? '',
           carbohydrates: _docData["carbohydrates"] ?? '',
-          protein: _docData["protein"] ?? '',
+          protein: _docData["proteins"] ?? '',
           mood: _docData["mood"] ?? '',
-          restaurants: _docData["restaurants"] ?? '',
           delivery: _docData["delivery"] ?? '',
-          sr_no: _docData["sr_no"] ?? '');
+          sr_no: _docData["sr_no"] ?? '',
+          restaurants: _restaurants ?? []);
     }).toList());
   }
 
@@ -95,7 +103,7 @@ class SearchFunction {
     QuerySnapshot recent = await FirebaseFirestore.instance
         .collection('recent')
         .orderBy('timestamp', descending: true)
-        .limit(5)
+        .limit(6)
         .get();
     List<FoodListModel> recentDocs =
         await DatabaseService().listFromSnapshot(recent);

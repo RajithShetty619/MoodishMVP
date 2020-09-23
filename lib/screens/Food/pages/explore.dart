@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,8 +17,28 @@ import 'package:moodish_mvp/screens/Food/components/MealType.dart';
 import 'package:moodish_mvp/screens/Food/components/TodaySpecial.dart';
 import 'package:moodish_mvp/screens/Food/components/foodBG.dart';
 import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
-
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class KeysToBeInherited extends InheritedWidget {
+  final GlobalKey explore;
+
+  KeysToBeInherited({
+    this.explore,
+    Widget child,
+  }) : super(child: child);
+
+  static KeysToBeInherited of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType(
+        aspect: KeysToBeInherited);
+  }
+
+  @override
+  bool updateShouldNotify(InheritedWidget oldWidget) {
+    // TODO: implement updateShouldNotify
+    return true;
+  }
+}
 
 class Explore extends StatefulWidget {
   @override
@@ -24,6 +46,8 @@ class Explore extends StatefulWidget {
 }
 
 class _ExploreState extends State<Explore> {
+  GlobalKey _explore = GlobalKey();
+
   bool keepAlive = false;
 
   /* index used for situation */
@@ -33,7 +57,7 @@ class _ExploreState extends State<Explore> {
   /* dont remember mohit look into it :) */
   int _selected = 1;
   bool _getFoodCalled = false;
-
+  String _deter;
   /* constructor initialised with list name  */
   DatabaseQuery _dq = DatabaseQuery(listName: "0");
   DatabaseQuery _dqtsp = DatabaseQuery(listName: "tsp");
@@ -48,571 +72,573 @@ class _ExploreState extends State<Explore> {
   void initState() {
     super.initState();
     /* check to run it only once */
-    if (!_getFoodCalled) {
-      checkDate().then((check) {
-        _dqtsp.getFood(field: ['cuisine'], value: ['indian'], check: 0).then(
-            (future) {
+    checkDate().then((check) async {
+      Box _box = await Hive.openBox("preferenceBox");
+      String deter = _box.get("deter");
+
+      if (deter != "veg" && deter != "nonveg") {
+        Random random = new Random();
+        int randomNumber = random.nextInt(2);
+        if (randomNumber == 1)
+          deter = "veg";
+        else
+          deter = "nonveg";
+      }
+      setState(() {
+        _deter = deter;
+      });
+      _dqtsp.getFood(
+          field: ['cuisine', "deter"],
+          value: ['indian', deter],
+          deter: deter,
+          check: check).then((future) {
+        setState(() {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "tsp"));
         });
-        _dqtaste0.getFood(
-            field: ['taste'],
-            value: getValue("t0"),
-            limit: 7,
-            check: check).then((future) {
+      });
+      _dqtaste0.getFood(
+          field: ['taste', "deter"],
+          value: getValue("t0", deter),
+          limit: 7,
+          deter: deter,
+          check: check).then((future) {
+        setState(() {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t0"));
         });
-        _dqtaste1.getFood(
-            field: ['taste'],
-            value: getValue("t1"),
-            limit: 7,
-            check: check).then((future) {
+      });
+      _dqtaste1.getFood(
+          field: ['taste', 'deter'],
+          value: getValue("t1", deter),
+          limit: 7,
+          deter: deter,
+          check: check).then((future) {
+        setState(() {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t1"));
         });
-        /*  _dqtaste2.getFood(
-            field: ['taste'],
-            value: getValue("t2"),
-            limit: 7,
-            check: check).then((future) {
+      });
+      _dqtaste1.getFood(
+          field: ['taste', 'deter'],
+          value: getValue("t2", deter),
+          limit: 7,
+          deter: deter,
+          check: check).then((future) {
+        setState(() {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "t2"));
-        }); */
-        _dqsituation0.getFood(
-            field: ['situation'],
-            value: getValue("s0"),
-            limit: 7,
-            check: check).then((future) {
-          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s0"));
-        });
-        _dqsituation1.getFood(
-            field: ['situation'],
-            value: getValue("s1"),
-            limit: 7,
-            check: check).then((future) {
-          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s1"));
-        });
-        _dqsituation2.getFood(
-            field: ['situation'],
-            value: getValue("s2"),
-            limit: 7,
-            check: check).then((future) {
-          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s2"));
         });
       });
-      setState(() {
-        _getFoodCalled = true;
-      });
-    }
+      // _dqsituation0.getFood(
+      //     field: ['situation', "deter"],
+      //     value: getValue("s0", deter),
+      //     limit: 7,
+      //     deter: deter,People are now paying for robot rides.
+
+      //     check: check).then((future) {
+      //   setState(() {
+      //     BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s0"));
+      //   });
+      // });
+      // _dqsituation1.getFood(
+      //     field: ['situation', "deter"],
+      //     value: getValue("s1", deter),
+      //     limit: 7,
+      //     deter: deter,
+      //     check: check).then((future) {
+      //   setState(() {
+      //     BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s1"));
+      //   });
+      // });
+      // _dqsituation2.getFood(
+      //     field: ['situation', "deter"],
+      //     value: getValue("s2", deter),
+      //     limit: 7,
+      //     deter: deter,
+      //     check: check).then((future) {
+      //   setState(() {
+      //     BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "s2"));
+      //   });
+      // });
+    });
   }
 
   /* this function returns 0 if app opened on new day
     and zero if opened on the same day used to update data daily */
   Future<int> checkDate() async {
     Box _box = await Hive.openBox("date");
-    String saveDate = await _box.get("date");
+    String saveDate = await _box.get("date2");
     DateTime now = DateTime.now();
     String date = DateFormat('EEE, M/d/y').format(now);
     if (date == saveDate) {
-      return 0; //change to zero for testing purpose
+      return 1; //change to zero for testing purpose
     } else {
-      _box.put("date", date);
+      _box.put("date2", date);
       return 0;
     }
   }
 
   /* used to get value associated with list  */
-  List<dynamic> getValue(String _list) {
+  List<dynamic> getValue(String _list, String deter) {
     switch (_list) {
       case 't0':
-        return [
-          ["Savory"]
-        ];
+        return ["spicy", deter];
         break;
       case 't1':
-        return [
-          ["Sweet"]
-        ];
+        return ["sweet", deter];
         break;
-      // case 't2':
-      //   return [["Salty"]];
-      //   break;
+      case 't2':
+        return ["salty", deter];
+        break;
       case 's0':
-        return [
-          ["At Home"]
-        ];
+        return ["At Home", deter];
         break;
       case 's1':
-        return [
-          ["Romantic"]
-        ];
+        return ["Romantic", deter];
         break;
       case 's2':
-        return [
-          ["Easy"]
-        ];
+        return ["Easy", deter];
         break;
       default:
-        return ["Savory"];
+        return ["Savory", deter];
     }
   }
 
   bool _loadingData = false;
   @override
   Widget build(BuildContext context) {
+    SharedPreferences preferences;
+
+    // displayShowCase() async {
+    //   preferences = await SharedPreferences.getInstance();
+    //   bool showCaseVisibilityStstus = preferences.getBool("displayShowCase");
+    //   preferences.setBool('displayShowCase', false);
+    //   if(showCaseVisibilityStstus == null){
+    //     return true;
+    //   }
+    //   return false;
+    // }
+
+    // displayShowCase().then((status) {
+    //   if(status){
+    //      ShowCaseWidget.of(context).startShowCase([
+    //     _explore,
+    //   ]);
+    //   }
+    // });
+
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   ShowCaseWidget.of(context).startShowCase([
+    //     _explore,
+    //   ]);
+    // });
+
     // DateTime now = DateTime.now();
     // String day = DateFormat('MMMMEEEEd').format(now);
-    return Container(
-      child: SafeArea(
-        child: new Stack(
-          children: <Widget>[
-            CurvedShape(),
-            SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              child: Column(
-                children: <Widget>[
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Container(
-                        height: 380,
-                        // color: Colors.blue,
-                        child: Row(
-                          children: <Widget>[
-                            RotatedBox(
-                              quarterTurns: 3,
-                              child: Container(
-                                margin: EdgeInsets.symmetric(
-                                    horizontal: 7, vertical: 7),
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    "Today's Special",
-                                    style: TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
+    return KeysToBeInherited(
+      explore: _explore,
+      child: Container(
+        child: SafeArea(
+          child: new Stack(
+            children: <Widget>[
+              CurvedShape(),
+              SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: Column(
+                  children: <Widget>[
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Container(
+                          height: 380,
+                          // color: Colors.blue,
+                          child: Row(
+                            children: <Widget>[
+                              RotatedBox(
+                                quarterTurns: 3,
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(
+                                      horizontal: 7, vertical: 7),
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "Today's Special",
+                                      style: TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                            /* todays special list display widget */
-                            Expanded(
-                              child: BlocConsumer<FoodBloc,
-                                  Map<String, List<FoodListModel>>>(
-                                buildWhen: (Map<String, List<FoodListModel>>
-                                        previous,
-                                    Map<String, List<FoodListModel>> current) {
-                                  return true;
-                                },
-                                listenWhen: (Map<String, List<FoodListModel>>
-                                        previous,
-                                    Map<String, List<FoodListModel>> current) {
-                                  if (current.length > previous.length) {
+                              /* todays special list display widget */
+                              Expanded(
+                                child: BlocConsumer<FoodBloc,
+                                    Map<String, List<FoodListModel>>>(
+                                  buildWhen: (Map<String, List<FoodListModel>>
+                                          previous,
+                                      Map<String, List<FoodListModel>>
+                                          current) {
                                     return true;
-                                  }
-                                  return false;
-                                },
-                                builder: (BuildContext context, foodList) {
-                                  return Row(
-                                    children: <Widget>[
-                                      Expanded(
-                                        child: ListView.builder(
-                                          scrollDirection: Axis.horizontal,
-                                          itemCount: foodList["tsp"].length + 1,
-                                          itemBuilder:
-                                              (BuildContext context, index) {
-                                            if (foodList["tsp"].length != index)
-                                              return TodaySpecial(
-                                                foodList: foodList["tsp"]
-                                                    [index],
-                                              );
-                                            else {
-                                              return !_loadingData
-                                                  ? Center(
-                                                      child: IconButton(
-                                                          icon: Icon(
-                                                            Icons
-                                                                .arrow_forward_ios,
-                                                            size: 30,
-                                                            color: !_loadingData
-                                                                ? Colors
-                                                                    .blue[300]
-                                                                : Colors.black,
-                                                          ),
-                                                          onPressed: () async {
-                                                            setState(() {
-                                                              _loadingData =
-                                                                  true;
-                                                            });
-                                                            await _dqtsp
-                                                                .getMoreFood(
-                                                                    field: [
-                                                                  'taste'
-                                                                ],
-                                                                    value: [
-                                                                  'Sweet'
-                                                                ]).then(
-                                                                    (future) {
-                                                              BlocProvider.of<
-                                                                          FoodBloc>(
-                                                                      context)
-                                                                  .add(FoodEvent
-                                                                      .add(
-                                                                          future,
-                                                                          "tsp"));
+                                  },
+                                  listenWhen: (Map<String, List<FoodListModel>>
+                                          previous,
+                                      Map<String, List<FoodListModel>>
+                                          current) {
+                                    if (current.length > previous.length) {
+                                      return true;
+                                    }
+                                    return false;
+                                  },
+                                  builder: (BuildContext context, foodList) {
+                                    return Row(
+                                      children: <Widget>[
+                                        Expanded(
+                                          child: ListView.builder(
+                                            scrollDirection: Axis.horizontal,
+                                            itemCount:
+                                                foodList["tsp"].length + 1,
+                                            itemBuilder:
+                                                (BuildContext context, index) {
+                                              if (foodList["tsp"].length !=
+                                                  index)
+                                                return TodaySpecial(
+                                                  foodList: foodList["tsp"]
+                                                      [index],
+                                                  index: index,
+                                                  listName: "tsp",
+                                                );
+                                              else {
+                                                return !_loadingData
+                                                    ? Center(
+                                                        child: IconButton(
+                                                            icon: Icon(
+                                                              Icons
+                                                                  .arrow_forward_ios,
+                                                              size: 30,
+                                                              color: !_loadingData
+                                                                  ? Colors
+                                                                      .blue[300]
+                                                                  : Colors
+                                                                      .black,
+                                                            ),
+                                                            onPressed:
+                                                                () async {
                                                               setState(() {
                                                                 _loadingData =
-                                                                    false;
+                                                                    true;
                                                               });
-                                                            });
-                                                          }),
-                                                    )
-                                                  : Container(
-                                                      width: 50,
-                                                      child: Center(
-                                                        child:
-                                                            SpinKitFadingCircle(
-                                                                color: Colors
-                                                                    .blue[300],
-                                                                size: 30.0),
-                                                      ),
-                                                    );
-                                            }
-                                          },
+                                                              await _dqtsp
+                                                                  .getMoreFood(
+                                                                field: [
+                                                                  'cuisine',
+                                                                  "deter"
+                                                                ],
+                                                                value: [
+                                                                  'indian',
+                                                                  _deter
+                                                                ],
+                                                                deter: _deter,
+                                                              ).then((future) {
+                                                                BlocProvider.of<
+                                                                            FoodBloc>(
+                                                                        context)
+                                                                    .add(FoodEvent.add(
+                                                                        future,
+                                                                        "tsp"));
+                                                                setState(() {
+                                                                  _loadingData =
+                                                                      false;
+                                                                });
+                                                              });
+                                                            }),
+                                                      )
+                                                    : Container(
+                                                        width: 50,
+                                                        child: Center(
+                                                          child:
+                                                              SpinKitFadingCircle(
+                                                                  color: Colors
+                                                                          .blue[
+                                                                      300],
+                                                                  size: 30.0),
+                                                        ),
+                                                      );
+                                              }
+                                            },
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  );
-                                },
-                                listener: (context, foodList) {
-                                  Scaffold.of(context).showSnackBar(
-                                    SnackBar(content: Text('Added!')),
-                                  );
-                                },
+                                      ],
+                                    );
+                                  },
+                                  listener: (context, foodList) {
+                                    Scaffold.of(context).showSnackBar(
+                                      SnackBar(content: Text('Added!')),
+                                    );
+                                  },
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      /*  SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10.0),
-                        child: Container(
-                          width: 220.0,
-                          margin: EdgeInsets.all(10.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black, width: 2),
-                            borderRadius: BorderRadius.circular(15),
-                            // color: Colors.blue[200],
+                            ],
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Text(
-                              'Browse By Meal Type',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 20.0, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      Container(
-                        // color: Colors.grey[300],
-                        height: 180,
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: <Widget>[
-                            MealType(image: 'assets/img.jpg', types: 'breakfast'),
-                            MealType(image: 'assets/img.jpg', types: 'lunch'),
-                            MealType(image: 'assets/img.jpg', types: 'snacks'),
-                            MealType(image: 'assets/img.jpg', types: 'dinner'),
-                          ],
-                        ),
-                      ),  */
-                      SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10.0),
-                        child: Container(
-                          width: 220.0,
-                          margin: EdgeInsets.all(10.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black, width: 2),
-                            borderRadius: BorderRadius.circular(15),
-                            // color: Colors.blue[200],
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Text(
-                              'Food for Every Taste',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 20.0, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            GestureDetector(
-                              child: EveryTaste(
-                                title: "Savoury",
-                                // isActive: true,
-                                index: indxT,
-                                stIndex: 0,
-                                press: () {},
-                              ),
-                              onTap: () async {
-                                BetaCount().count(field: 'taste');
-                                setState(() {
-                                  indxT = 0;
-                                });
-                              },
-                            ),
-                            GestureDetector(
-                              child: EveryTaste(
-                                title: "Sweet",
-                                // isActive: true,
-                                index: indxT,
-                                stIndex: 1,
-                                press: () {},
-                              ),
-                              onTap: () async {
-                                BetaCount().count(field: 'taste');
-                                setState(() {
-                                  indxT = 1;
-                                });
-                              },
-                            ),
-                            /* GestureDetector(
-                              child: EveryTaste(
-                                title: "Salty",
-                                // isActive: true,
-                                index: indxT,
-                                stIndex: 2,
-                                press: () {},
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  indxT = 2;
-                                });
-                              },
-                            ), */
-                          ],
-                        ),
-                      ),
-                      // SizedBox(height: 20),
-                      Container(
-                        // color: Colors.grey[300],
-                        height: 300,
-                        child: BlocConsumer<FoodBloc,
-                            Map<String, List<FoodListModel>>>(
-                          buildWhen: (Map<String, List<FoodListModel>> previous,
-                              Map<String, List<FoodListModel>> current) {
-                            return true;
-                          },
-                          listenWhen:
-                              (Map<String, List<FoodListModel>> previous,
-                                  Map<String, List<FoodListModel>> current) {
-                            if (current.length > previous.length) {
-                              return true;
-                            }
-                            return false;
-                          },
-                          builder: (BuildContext context, foodList) {
-                            return Row(
-                              children: <Widget>[
-                                DataListView(foodList: foodList['t$indxT']),
-                              ],
-                            );
-                          },
-                          listener: (context, foodList) {
-                            Scaffold.of(context).showSnackBar(
-                              SnackBar(content: Text('Added!')),
-                            );
-                          },
-                          // child: ListView.builder(
-                          //   scrollDirection: Axis.horizontal,
-                          //   itemCount: 5,
-                          //   itemBuilder: (BuildContext context,int index) {
-                          //     return FoodEverySituation(
-                          //       image: 'assets/img.jpg',
-                          //       title: 'food1',
-                          //       desc: 'description'
-                          //     );
-                          //   }
-                          // ),
                         ),
 
-                        // child: ListView(
-                        //   scrollDirection: Axis.horizontal,
-                        //   children: <Widget>[
-                        //     FoodEveryTaste(
-                        //         image: 'assets/img.jpg',
-                        //         title: 'food1',
-                        //         desc: 'description'),
-                        //     FoodEveryTaste(
-                        //         image: 'assets/img.jpg',
-                        //         title: 'food2',
-                        //         desc: 'description'),
-                        //     FoodEveryTaste(
-                        //         image: 'assets/img.jpg',
-                        //         title: 'food3',
-                        //         desc: 'description'),
-                        //     FoodEveryTaste(
-                        //         image: 'assets/img.jpg',
-                        //         title: 'food4',
-                        //         desc: 'description'),
-                        //   ],
-                        // ),
-                      ),
-                      SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10.0),
-                        child: Container(
-                          width: 270.0,
-                          margin: EdgeInsets.all(10.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black, width: 2),
-                            borderRadius: BorderRadius.circular(15),
-                            // color: Colors.blue[200],
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Text(
-                              'Food for Every Situation',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 20.0, fontWeight: FontWeight.bold),
+                        SizedBox(height: 20),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10.0),
+                          child: Container(
+                            width: 220.0,
+                            margin: EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black, width: 2),
+                              borderRadius: BorderRadius.circular(15),
+                              // color: Colors.blue[200],
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Text(
+                                'Food for Every Taste',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            GestureDetector(
-                              child: EverySituation(
-                                title: 'At Home',
-                                // isActive: true,
-                                index: indx,
-                                stIndex: 0,
-                                press: () {},
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              GestureDetector(
+                                child: EveryTaste(
+                                  title: "Spicy",
+                                  // isActive: true,
+                                  index: indxT,
+                                  stIndex: 0,
+                                  press: () {},
+                                ),
+                                onTap: () async {
+                                  BetaCount().count(field: 'taste');
+                                  setState(() {
+                                    indxT = 0;
+                                  });
+                                },
                               ),
-                              onTap: () async {
-                                BetaCount().count(field: 'situation');
-                                setState(() {
-                                  indx = 0;
-                                });
-                              },
-                            ),
-                            GestureDetector(
-                              child: EverySituation(
-                                title: 'Romantic',
-                                // isActive: true,
-                                index: indx,
-                                stIndex: 1,
-                                press: () {},
+                              GestureDetector(
+                                child: EveryTaste(
+                                  title: "Sweet",
+                                  // isActive: true,
+                                  index: indxT,
+                                  stIndex: 1,
+                                  press: () {},
+                                ),
+                                onTap: () async {
+                                  BetaCount().count(field: 'taste');
+                                  setState(() {
+                                    indxT = 1;
+                                  });
+                                },
                               ),
-                              onTap: () async {
-                                BetaCount().count(field: 'situation');
-                                setState(() {
-                                  indx = 1;
-                                });
-                              },
-                            ),
-                            GestureDetector(
-                              child: EverySituation(
-                                title: 'Easy',
-                                // isActive: true,
-                                index: indx,
-                                stIndex: 2,
-                                press: () {},
+                              GestureDetector(
+                                child: EveryTaste(
+                                  title: "Salty",
+                                  // isActive: true,
+                                  index: indxT,
+                                  stIndex: 2,
+                                  press: () {},
+                                ),
+                                onTap: () async {
+                                  BetaCount().count(field: 'taste');
+                                  setState(() {
+                                    indxT = 2;
+                                  });
+                                },
                               ),
-                              onTap: () async {
-                                BetaCount().count(field: 'situation');
-                                setState(() {
-                                  indx = 2;
-                                });
-                              },
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      Container(
-                        height: 300,
-                        child: BlocConsumer<FoodBloc,
-                            Map<String, List<FoodListModel>>>(
-                          buildWhen: (Map<String, List<FoodListModel>> previous,
-                              Map<String, List<FoodListModel>> current) {
-                            return true;
-                          },
-                          listenWhen:
-                              (Map<String, List<FoodListModel>> previous,
-                                  Map<String, List<FoodListModel>> current) {
-                            if (current.length > previous.length) {
+                        // SizedBox(height: 20),
+                        Container(
+                          height: 300,
+                          child: BlocConsumer<FoodBloc,
+                              Map<String, List<FoodListModel>>>(
+                            buildWhen:
+                                (Map<String, List<FoodListModel>> previous,
+                                    Map<String, List<FoodListModel>> current) {
                               return true;
-                            }
-                            return false;
-                          },
-                          builder: (BuildContext context, foodList) {
-                            return Row(
-                              children: <Widget>[
-                                DataListView(foodList: foodList['s$indx']),
-                              ],
-                            );
-                          },
-                          listener: (context, foodList) {
-                            Scaffold.of(context).showSnackBar(
-                              SnackBar(content: Text('Added!')),
-                            );
-                          },
-                          // child: ListView.builder(
-                          //   scrollDirection: Axis.horizontal,
-                          //   itemCount: 5,
-                          //   itemBuilder: (BuildContext context,int index) {
-                          //     return FoodEverySituation(
-                          //       image: 'assets/img.jpg',
-                          //       title: 'food1',
-                          //       desc: 'description'
-                          //     );
-                          //   }
-                          // ),
+                            },
+                            listenWhen:
+                                (Map<String, List<FoodListModel>> previous,
+                                    Map<String, List<FoodListModel>> current) {
+                              if (current.length > previous.length) {
+                                return true;
+                              }
+                              return false;
+                            },
+                            builder: (BuildContext context, foodList) {
+                              return Row(
+                                children: <Widget>[
+                                  DataListView(
+                                    foodList: foodList['t$indxT'],
+                                    listName: "t$indxT",
+                                  ),
+                                ],
+                              );
+                            },
+                            listener: (context, foodList) {
+                              Scaffold.of(context).showSnackBar(
+                                SnackBar(content: Text('Added!')),
+                              );
+                            },
+                          ),
                         ),
-                        // child: ListView(
-                        //   scrollDirection: Axis.horizontal,
-                        //   children: <Widget>[
-                        //     FoodEverySituation(
-                        //         image: 'assets/img.jpg',
-                        //         title: 'food1',
-                        //         desc: 'description'),
-                        //     FoodEverySituation(
-                        //         image: 'assets/img.jpg',
-                        //         title: 'food2',
-                        //         desc: 'description'),
-                        //     FoodEverySituation(
-                        //         image: 'assets/img.jpg',
-                        //         title: 'food3',
-                        //         desc: 'description'),
-                        //     FoodEverySituation(
-                        //         image: 'assets/img.jpg',
-                        //         title: 'food4',
-                        //         desc: 'description'),
-                        //   ],
-                        // ),
-                      ),
-                    ],
-                  ),
-                ],
+                        SizedBox(height: 20),
+                        /* Padding(
+                          padding: const EdgeInsets.only(left: 10.0),
+                          child: Container(
+                            width: 270.0,
+                            margin: EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black, width: 2),
+                              borderRadius: BorderRadius.circular(15),
+                              // color: Colors.blue[200],
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Text(
+                                'Food for Every Situation',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              GestureDetector(
+                                child: EverySituation(
+                                  title: 'At Home',
+                                  // isActive: true,
+                                  index: indx,
+                                  stIndex: 0,
+                                  press: () {},
+                                ),
+                                onTap: () async {
+                                  BetaCount().count(field: 'situation');
+                                  setState(() {
+                                    indx = 0;
+                                  });
+                                },
+                              ),
+                              GestureDetector(
+                                child: EverySituation(
+                                  title: 'Romantic',
+                                  // isActive: true,
+                                  index: indx,
+                                  stIndex: 1,
+                                  press: () {},
+                                ),
+                                onTap: () async {
+                                  BetaCount().count(field: 'situation');
+                                  setState(() {
+                                    indx = 1;
+                                  });
+                                },
+                              ),
+                              GestureDetector(
+                                child: EverySituation(
+                                  title: 'Easy',
+                                  // isActive: true,
+                                  index: indx,
+                                  stIndex: 2,
+                                  press: () {},
+                                ),
+                                onTap: () async {
+                                  BetaCount().count(field: 'situation');
+                                  setState(() {
+                                    indx = 2;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          height: 300,
+                          child: BlocConsumer<FoodBloc,
+                              Map<String, List<FoodListModel>>>(
+                            buildWhen:
+                                (Map<String, List<FoodListModel>> previous,
+                                    Map<String, List<FoodListModel>> current) {
+                              return true;
+                            },
+                            listenWhen:
+                                (Map<String, List<FoodListModel>> previous,
+                                    Map<String, List<FoodListModel>> current) {
+                              if (current.length > previous.length) {
+                                return true;
+                              }
+                              return false;
+                            },
+                            builder: (BuildContext context, foodList) {
+                              return Row(
+                                children: <Widget>[
+                                  DataListView(foodList: foodList['s$indx']),
+                                ],
+                              );
+                            },
+                            listener: (context, foodList) {
+                              Scaffold.of(context).showSnackBar(
+                                SnackBar(content: Text('Added!')),
+                              );
+                            },
+                            // child: ListView.builder(
+                            //   scrollDirection: Axis.horizontal,
+                            //   itemCount: 5,
+                            //   itemBuilder: (BuildContext context,int index) {
+                            //     return FoodEverySituation(
+                            //       image: 'assets/img.jpg',
+                            //       title: 'food1',
+                            //       desc: 'description'
+                            //     );
+                            //   }
+                            // ),
+                          ),
+                          // child: ListView(
+                          //   scrollDirection: Axis.horizontal,
+                          //   children: <Widget>[
+                          //     FoodEverySituation(
+                          //         image: 'assets/img.jpg',
+                          //         title: 'food1',
+                          //         desc: 'description'),
+                          //     FoodEverySituation(
+                          //         image: 'assets/img.jpg',
+                          //         title: 'food2',
+                          //         desc: 'description'),
+                          //     FoodEverySituation(
+                          //         image: 'assets/img.jpg',
+                          //         title: 'food3',
+                          //         desc: 'description'),
+                          //     FoodEverySituation(
+                          //         image: 'assets/img.jpg',
+                          //         title: 'food4',
+                          //         desc: 'description'),
+                          //   ],
+                          // ),
+                        ), */
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -653,23 +679,32 @@ class _ExploreState extends State<Explore> {
   }
 }
 
-class DataListView extends StatelessWidget {
+class DataListView extends StatefulWidget {
   const DataListView({
     Key key,
     @required this.foodList,
+    @required this.listName,
   }) : super(key: key);
 
   final List<FoodListModel> foodList;
+  final String listName;
 
+  @override
+  _DataListViewState createState() => _DataListViewState();
+}
+
+class _DataListViewState extends State<DataListView> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: foodList.length,
+        itemCount: widget.foodList.length,
         itemBuilder: (BuildContext context, index) {
           return FoodEveryTaste(
-            foodList: foodList[index],
+            foodList: widget.foodList[index],
+            index: index,
+            listName: widget.listName,
           );
         },
       ),

@@ -13,6 +13,7 @@ class RestaurantReview extends StatefulWidget {
 class _RestaurantReviewState extends State<RestaurantReview> {
   List<String> review = [];
   List<String> rating = [];
+  var _textController = TextEditingController();
   var _rating;
   @override
   Widget build(BuildContext context) {
@@ -38,23 +39,12 @@ class _RestaurantReviewState extends State<RestaurantReview> {
                   alignment: Alignment.center,
                   child: Padding(
                     padding: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width / 12),
-                    child: RichText(
-                      text: TextSpan(
-                          text: 'Reviews',
-                          style: TextStyle(
-                              fontSize: MediaQuery.of(context).size.height / 12,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
-                          children: [
-                            TextSpan(
-                                text: '.',
-                                style: TextStyle(
-                                    fontSize: 80,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.pinkAccent))
-                          ]),
-                    ),
+                        left: 0,),
+                    child: Text('Reviews',
+                    style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),),
                   ),
                 ),
               ],
@@ -92,8 +82,15 @@ class _RestaurantReviewState extends State<RestaurantReview> {
                                     fontSize: 24,
                                     color: Colors.white),
                               ),
+                              widget.rest.rating=='5'?
                               Text(
-                                widget.rest.rating,
+                                '\u{02605}${widget.rest.rating}.0',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    color: Colors.white),
+                              ):                              Text(
+                                '\u{02605}${widget.rest.rating}',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
@@ -143,6 +140,7 @@ class _RestaurantReviewState extends State<RestaurantReview> {
                   Padding(
                     padding: const EdgeInsets.only(left: 5.0, right: 5.0),
                     child: TextField(
+                      controller: _textController,
                         maxLines: 5,
                         onChanged: (val) {
                           review.add(val);
@@ -174,6 +172,7 @@ class _RestaurantReviewState extends State<RestaurantReview> {
                           style: TextStyle(color: Color(0xffffffff)),
                         ),
                         onPressed: () {
+                          _textController.clear();
                           rating.add(_rating.toString());
                         },
                       ),
@@ -186,22 +185,25 @@ class _RestaurantReviewState extends State<RestaurantReview> {
                     ),
                   ),
                   ListView.builder(
-                      itemCount: 5,
+                      itemCount: widget.rest.reviews.length,
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
+                      primary: false,
                       itemBuilder: (context, index) {
                         return Card(
                             elevation: 1.0,
                             child: ListTile(
                               title: Row(
                                 children: <Widget>[
-                                  Text('Username'),
+                                  Text(widget.rest.reviews[index]
+                                      ["author_name"]),
                                   Spacer(),
-                                  Text('\u{02605}4.2'),
+                                  Text(
+                                      '\u{02605}${widget.rest.reviews[index]["rating"]}'),
                                 ],
                               ),
-                              subtitle: Text(
-                                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
+                              subtitle:
+                                  Text(widget.rest.reviews[index]["text"]),
                             ));
                       })
                 ],

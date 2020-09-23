@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:moodish_mvp/Authenticate/loading.dart';
 import 'package:moodish_mvp/Services/database.dart';
+import 'package:moodish_mvp/restartApp.dart';
 import 'package:moodish_mvp/screens/loadScreen.dart';
-import 'package:moodish_mvp/screens/mainScreen.dart';
 
 class FoodPreference extends StatefulWidget {
   int event;
@@ -19,205 +18,220 @@ class _FoodPreferenceState extends State<FoodPreference> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          if (widget.event == 1)
-            Navigator.of(context).pop();
-          else
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return LoadingScreen();
-            }));
-        },
-        backgroundColor: Colors.lightGreen,
-        child: Icon(Icons.chevron_right),
-      ),
-      body: Stack(
-        children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/Fdprefbg.jpg'),
-                    fit: BoxFit.cover)),
-          ),
-          SafeArea(
-            child: ListView(
-              physics: BouncingScrollPhysics(),
-              children: <Widget>[
-                Center(
-                  child: Text(
-                    'Food Preference',
+      body: SafeArea(
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Center(
+                child: RichText(
+                  text: TextSpan(
+                    text: 'Which do you favour more?',
                     style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 38,
-                        fontWeight: FontWeight.bold),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                        color: Colors.black),
                   ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Divider(
-                    thickness: 2,
-                    color: Colors.black,
-                  ),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 5,
-                ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: GestureDetector(
-                                onTap: () async {
-                                  setState(() {
-                                    showShadow1 = false;
-                                    showShadow2 = false;
-                                    showShadow3 = false;
-                                  });
-                                  Box box = await Hive.openBox('preferenceBox');
-                                  box.put('deter', 'Vegetarian');
-                                  DatabaseService().savePreference();
-                                  setState(() {
-                                    showShadow1 = true;
-                                  });
-                                },
-                                child: Container(
-                                  height: 120,
-                                  width: 120,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                          color: showShadow1
-                                              ? Colors.blue[900]
-                                              : Colors.transparent,
-                                          width: 4),
-                                      image: DecorationImage(
-                                          image: AssetImage('assets/veg.jpg'),
-                                          fit: BoxFit.cover)),
-                                ),
-                              ),
-                            ),
-                            Text(
-                              'Vegetarian',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black),
-                            )
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: GestureDetector(
-                                onTap: () async {
-                                  setState(() {
-                                    showShadow1 = false;
-                                    showShadow2 = false;
-                                    showShadow3 = false;
-                                  });
-                                  Box box = await Hive.openBox('preferenceBox');
-                                  box.put('deter', 'Non-Vegetarian');
-                                  DatabaseService().savePreference();
-                                  setState(() {
-                                    showShadow2 = true;
-                                  });
-                                },
-                                child: Container(
-                                  height: 120,
-                                  width: 120,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                          color: showShadow2
-                                              ? Colors.blue[900]
-                                              : Colors.transparent,
-                                          width: 4),
-                                      image: DecorationImage(
-                                          image:
-                                              AssetImage('assets/nonveg.jpg'),
-                                          fit: BoxFit.cover)),
-                                ),
-                              ),
-                            ),
-                            Text(
-                              'Non-Vegetarian',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black),
-                            )
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: GestureDetector(
-                                onTap: () async {
-                                  setState(() {
-                                    showShadow1 = false;
-                                    showShadow2 = false;
-                                    showShadow3 = false;
-                                  });
-                                  Box box = await Hive.openBox('preferenceBox');
-                                  box.put('deter', 'Veg&NonVeg');
-                                  DatabaseService().savePreference();
-                                  setState(() {
-                                    showShadow3 = true;
-                                  });
-                                },
-                                child: Container(
-                                  height: 120,
-                                  width: 120,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                          color: showShadow3
-                                              ? Colors.blue[900]
-                                              : Colors.transparent,
-                                          width: 4),
-                                      image: DecorationImage(
-                                          image: AssetImage(
-                                              'assets/vegnonveg.jpg'),
-                                          fit: BoxFit.cover)),
-                                ),
-                              ),
-                            ),
-                            Text(
-                              'Veg&Non-Veg',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black),
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Container(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'We will personalise the app primarily based on this.',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                      fontSize: 18.0,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w400),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 60,
+            ),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              physics: BouncingScrollPhysics(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: GestureDetector(
+                      onTap: () async {
+                        setState(() {
+                          showShadow1 = false;
+                          showShadow2 = false;
+                          showShadow3 = false;
+                        });
+                        Box box = await Hive.openBox('preferenceBox');
+                        box.put('deter', 'veg');
+                        DatabaseService().savePreference();
+                        setState(() {
+                          showShadow1 = true;
+                        });
+                      },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                            height: 95,
+                            width: 95,
+                            margin: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              border: showShadow1
+                                  ? Border.all(color: Colors.green, width: 2)
+                                  : Border.all(color: Colors.black, width: 2),
+                              borderRadius: BorderRadius.circular(250),
+                            ),
+                            child: Center(
+                                child: showShadow1
+                                    ? Text(
+                                        'veg',
+                                        style:
+                                            TextStyle(color: Colors.green[400]),
+                                      )
+                                    : Text('veg'))),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: GestureDetector(
+                      onTap: () async {
+                        setState(() {
+                          showShadow1 = false;
+                          showShadow2 = false;
+                          showShadow3 = false;
+                        });
+                        Box box = await Hive.openBox('preferenceBox');
+                        box.put('deter', 'nonveg');
+                        DatabaseService().savePreference();
+                        setState(() {
+                          showShadow2 = true;
+                        });
+                      },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                            height: 95,
+                            width: 95,
+                            margin: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              border: showShadow2
+                                  ? Border.all(color: Colors.red, width: 2)
+                                  : Border.all(color: Colors.black, width: 2),
+                              borderRadius: BorderRadius.circular(250),
+                            ),
+                            child: Center(
+                                child: showShadow2
+                                    ? Text(
+                                        'nonveg',
+                                        style:
+                                            TextStyle(color: Colors.redAccent),
+                                      )
+                                    : Text('nonveg'))),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: GestureDetector(
+                      onTap: () async {
+                        setState(() {
+                          showShadow1 = false;
+                          showShadow2 = false;
+                          showShadow3 = false;
+                        });
+                        Box box = await Hive.openBox('preferenceBox');
+                        box.put('deter', 'Veg &\nNonVeg');
+                        DatabaseService().savePreference();
+                        setState(() {
+                          showShadow3 = true;
+                        });
+                      },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Container(
+                            height: 95,
+                            width: 95,
+                            margin: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              border: showShadow3
+                                  ? Border.all(color: Colors.orange, width: 2)
+                                  : Border.all(color: Colors.black, width: 2),
+                              borderRadius: BorderRadius.circular(250),
+                            ),
+                            child: Center(
+                                child: showShadow3
+                                    ? Text(
+                                        'both',
+                                        style: TextStyle(color: Colors.orange),
+                                      )
+                                    : Text('both'))),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 60,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Center(
+                child: Text(
+                  "don't worry, You can change this later! ",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                      fontSize: 16.0,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w400),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: GestureDetector(
+                onTap: () async {
+                  if (widget.event == 1) {
+                    Box box = await Hive.openBox('preferenceBox');
+                    dynamic data = box.get('deter');
+                    Navigator.of(context).pop(data);
+                  } else {
+                    RestartWidget.restartApp(context);
+                    // Navigator.pushReplacement(context,
+                    //     MaterialPageRoute(builder: (context) {
+                    //   return LoadingScreen();
+                    // }));
+                  }
+                },
+                child: Container(
+                  width: 100,
+                  margin: EdgeInsets.all(10.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black, width: 2),
+                    borderRadius: BorderRadius.circular(15),
+                    // color: Colors.blue[200],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Text(
+                      'OK',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 20.0, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

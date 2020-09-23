@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:moodish_mvp/Authenticate/forgotPassword.dart';
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 
@@ -22,16 +23,22 @@ class _EditProfileState extends State<EditProfile> {
   Geolocator geolocator = Geolocator();
   ImageProvider image;
   getImage() async {
+    final fileImage = await ImagePicker.pickImage(source: ImageSource.gallery);
+    ImageProvider image = FileImage(fileImage);
+
+    // final Directory _dir = await getApplicationDocumentsDirectory();
+    // final String _path = _dir.path;
     setState(() {
       _image = image;
     });
+    DatabaseService().uploadPhoto(fileImage);
   }
 
   @override
   void initState() {
     super.initState();
 
-    data() {
+    data() async {
       try {
         setState(() {
           _image = widget.image;
@@ -53,6 +60,7 @@ class _EditProfileState extends State<EditProfile> {
         .then((Position position) {
       _currentPosition = position;
     });
+    print(position);
   }
 
   _getAddressFromLatLng() async {
@@ -69,6 +77,7 @@ class _EditProfileState extends State<EditProfile> {
             "${place.subLocality},${place.locality}-${place.postalCode}";
         _user['location'] = _currentAddress;
       });
+      print(_currentAddress);
       userData1.editUserData(field: 'location', value: _currentAddress);
     } catch (e) {
       print(e);
@@ -77,7 +86,7 @@ class _EditProfileState extends State<EditProfile> {
 
   @override
   Widget build(BuildContext context) {
-    String birth = '( none )';
+    String birth = ' none ';
     birthDate() async {
       var datePicked = await DatePicker.showSimpleDatePicker(
         context,
@@ -97,13 +106,12 @@ class _EditProfileState extends State<EditProfile> {
     }
 
     return WillPopScope(
-      onWillPop: () async {
-        Navigator.pop(context, _user);
+      onWillPop: () {
+        Navigator.pop(context, {"_user": _user, "_image": _image});
       },
       child: Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
             child: Column(
               children: <Widget>[
                 SizedBox(
@@ -123,8 +131,6 @@ class _EditProfileState extends State<EditProfile> {
                           width: 150,
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              border:
-                                  Border.all(color: Colors.grey[400], width: 1),
                               image: DecorationImage(
                                   image: _image == null
                                       ? AssetImage('assets/anonuser.png')
@@ -195,7 +201,7 @@ class _EditProfileState extends State<EditProfile> {
                       ),
                       Flexible(
                         child: Text(
-                          _user['name'] == null ? 'name' : _user['name'],
+                          _user['name'] ?? 'name',
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(fontSize: 20.0),
                         ),
@@ -309,15 +315,15 @@ class _EditProfileState extends State<EditProfile> {
                           keyboardType: TextInputType.number,
                           onChanged: (val) {
                             setState(() {
-                              _user['Phoneno.'] = val.toString();
+                              _user['PhoneNo.'] = val.toString();
                             });
                             userData1.editUserData(
-                                field: 'Phoneno.', value: _user['Phoneno.']);
+                                field: 'Phoneno.', value: _user['PhoneNo.']);
                           },
                           decoration: InputDecoration(
                             icon: Icon(Icons.edit),
                             labelText: 'Edit',
-                            hintText: _user['Phoneno.'] ?? '( none )',
+                            hintText: _user['PhoneNo.'] ?? ' none ',
                           ),
                         ),
                         buttons: [
@@ -345,7 +351,7 @@ class _EditProfileState extends State<EditProfile> {
                       ),
                       Flexible(
                         child: Text(
-                          _user['Phoneno.'] ?? '( none )',
+                          _user['PhoneNo.'] ?? ' none ',
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(fontSize: 20.0),
                         ),
@@ -363,6 +369,7 @@ class _EditProfileState extends State<EditProfile> {
                   onTap: () {
                     getCurrentLocation();
                     _getAddressFromLatLng();
+                    print(_currentAddress);
                   },
                   child: Row(
                     children: <Widget>[
@@ -417,7 +424,8 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.pop(context, _user);
+                        Navigator.pop(
+                            context, {"_user": _user, "_image": _image});
                       },
                     ),
                   ),

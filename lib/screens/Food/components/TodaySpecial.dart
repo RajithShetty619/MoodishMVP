@@ -1,30 +1,39 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moodish_mvp/Services/betaCount.dart';
+import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/Services/storage.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
+import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
 import 'package:moodish_mvp/screens/Food/components/shareDialog.dart';
-import 'package:moodish_mvp/screens/Food/components/stepSlider.dart';
+import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/food_info.dart';
+import 'package:moodish_mvp/screens/Food/pages/explore.dart';
 import 'package:moodish_mvp/test.dart';
 
 class TodaySpecial extends StatefulWidget {
   const TodaySpecial({
     Key key,
     this.foodList,
+    this.listName,
+    this.index,
   }) : super(key: key);
 
   final FoodListModel foodList;
+  final String listName;
+  final int index;
 
   @override
   _TodaySpecialState createState() => _TodaySpecialState();
 }
 
 class _TodaySpecialState extends State<TodaySpecial> {
-  bool _like = true;
+  bool _like = false;
 
   @override
   Widget build(BuildContext context) {
+    _like = widget.foodList.heart;
     return AspectRatio(
       aspectRatio: 0.9 / 1.2,
       child: GestureDetector(
@@ -74,7 +83,7 @@ class _TodaySpecialState extends State<TodaySpecial> {
                       Align(
                         alignment: Alignment.topRight,
                         child: IconButton(
-                          icon: _like
+                          icon: !_like
                               ? Icon(
                                   Icons.favorite_border,
                                   color: Colors.white,
@@ -86,13 +95,32 @@ class _TodaySpecialState extends State<TodaySpecial> {
                                   size: 30,
                                 ),
                           onPressed: () async {
-                            BetaCount().count(field: 'foodliked');
-                            if (_like != false)
-                              // final action = await Dialogs.yesAbortDialog(
-                              //     context, 'My title', 'My Body');
                             setState(() {
                               _like = !_like;
                             });
+                            if (_like) {
+                              setState(() {
+                                BlocProvider.of<FoodBloc>(context).add(
+                                    FoodEvent.like(
+                                        widget.index, widget.listName));
+                              });
+                              await DatabaseService().likeTransction(
+                                  food: widget.foodList,
+                                  sr_no: widget.foodList.sr_no,
+                                  collection: "food",
+                                  field: "like");
+                            } else {
+                              setState(() {
+                                BlocProvider.of<FoodBloc>(context).add(
+                                    FoodEvent.like(
+                                        widget.index, widget.listName));
+                              });
+                              await DatabaseService().disLikeTransction(
+                                  food: widget.foodList,
+                                  sr_no: widget.foodList.sr_no,
+                                  collection: "food",
+                                  field: "like");
+                            }
                           },
                         ),
                       ),

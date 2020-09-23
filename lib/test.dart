@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:geoflutterfire/geoflutterfire.dart';
-import 'package:http/http.dart';
+import 'package:moodish_mvp/Services/database.dart';
+import 'package:moodish_mvp/models/restaurantsModel.dart';
 
 class Test extends StatefulWidget {
   final String payload;
@@ -12,58 +12,53 @@ class Test extends StatefulWidget {
 }
 
 class _TestState extends State<Test> {
-  final geo = Geoflutterfire();
-  final _firestore = FirebaseFirestore.instance;
+  getRestFromList(List<String> list) async {
+    list = list
+        .map((e) => e
+            .split(" ")
+            .map((str) => '${str[0].toUpperCase()}${str.substring(1)}')
+            .join(" "))
+        .toList();
+    List<String> data = [];
+    for (int i = 0; i < 5; i++) {
+      data.add(list[i]);
+    }
+    print(data);
+    CollectionReference _ref =
+        FirebaseFirestore.instance.collection('restaurants');
+    Query q = _ref.where("Restaurant_Name", whereIn: data);
+    QuerySnapshot snapshot = await q.get();
+    print(snapshot.docs);
+    List<RestListModel> _rest =
+        await DatabaseService().listfromSnapshot(snapshot);
+    return _rest;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Second page - Payload:',
-            ),
-            const SizedBox(height: 8),
-            RaisedButton(
-              onPressed: () async {
-                // Create a geoFirePoint
-
-                var data = await get(
-                    "https://us-central1-moodishtest.cloudfunctions.net/returnRestaurants?lat=18.9580734&long=72.8322506");
-              },
-              child: Center(child: Text("press")),
-            ),
-          ],
-        ),
-      ),
+      body: FlatButton(
+          onPressed: () async {
+            List<String> data = [
+              "Pritam Da Dhaba",
+              "Gomantak",
+              "Angrezi Dhaba",
+              "Copper Chimney",
+              "Persian Darbar",
+              "Lucky Restaurant",
+              "Gulshan-e-Iran",
+              "Butter Chicken Factory",
+              "Papa Pancho Da Dhaba",
+              "Faham Restaurant & Lounge",
+              "Khyber",
+              "Hitchki",
+              "Light Of Bharat"
+            ];
+            await getRestFromList(data);
+          },
+          child: Center(
+            child: (Text("wow")),
+          )),
     );
-  }
-}
-
-class StreamHandling {
-  final geo = Geoflutterfire();
-  final _firestore = FirebaseFirestore.instance;
-
-  Stream<List<DocumentSnapshot>> getData() {
-    GeoFirePoint center =
-        geo.point(latitude: 19.0100664, longitude: 73.0371634);
-    var collectionReference = _firestore.collection('restaurants');
-    GeoFirePoint myLocation =
-        geo.point(latitude: 19.0100664, longitude: 73.0371634);
-
-    double radius = 3;
-
-    var stream = geo
-        .collection(collectionRef: collectionReference)
-        .within(center: center, radius: radius, field: 'g');
-    stream.listen((event) {
-      event.map((e) {
-        e.data().forEach((key, value) {
-          print(key);
-        });
-      });
-    });
-    return stream;
   }
 }

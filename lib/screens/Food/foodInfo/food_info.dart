@@ -1,12 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
-import 'package:moodish_mvp/screens/Food/foodInfo/foodDelivery.dart';
+import 'package:moodish_mvp/screens/Food/foodInfo/foodRest.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/foodabout.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/foodrecipe.dart';
-import 'package:moodish_mvp/screens/Food/foodInfo/restaurantTab.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/tabs_info.dart';
-import 'package:moodish_mvp/screens/Restaurants/restaurantCard/homepage.dart';
 
 class Food_Info extends StatefulWidget {
   const Food_Info({
@@ -24,42 +22,6 @@ class _Food_InfoState extends State<Food_Info> {
 
   @override
   Widget build(BuildContext context) {
-    List<_Restaurants> rest = [
-      _Restaurants(
-          image: 'downtown_china.jpg',
-          name: 'Downtown China',
-          desc:
-              'Casual Dining - Chinese, Thai, Asian, Seafood, Momos, Beverages, Desserts \nAndheri Lokhandwala, Andheri West'),
-      _Restaurants(
-          image: 'family_tree.jpg',
-          name: 'Family Tree',
-          desc:
-              'Casual Dining - Biryani, Chinese, North Indian, Pizza, South Indian, Desserts \nGhatkopar East'),
-      _Restaurants(
-          image: 'frozen_bottle.jpg',
-          name: 'Frozen Bottle',
-          desc:
-              'Beverage Shop, Dessert Parlor - Beverages, Desserts, Ice Cream \nMatunga East'),
-      _Restaurants(
-          image: 'irish_house.png',
-          name: 'The Irish House',
-          desc: 'Pub, Casual Dining - European, American \nLower Parel'),
-      _Restaurants(
-          image: 'Mainland_China.jpg',
-          name: 'Mainland China',
-          desc:
-              'Casual Dining - Chinese, Asian, Sushi, Japanese, Thai \nSakinaka'),
-      _Restaurants(
-          image: 'pop_tates.jpg',
-          name: 'Pop Tates',
-          desc:
-              'Bar, Casual Dining - Continental, Chinese, Italian, Beverages \nLower Parel'),
-      _Restaurants(
-          image: 'tipsy_gipsy.jpg',
-          name: 'Tipsy Gipsy',
-          desc:
-              'Bar, Casual Dining - Continental, Mediterranean, Italian \nVeera Desai Area'),
-    ];
     return Scaffold(
       body: SafeArea(
         child: ListView(
@@ -115,7 +77,6 @@ class _Food_InfoState extends State<Food_Info> {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           widget.foodList.foodName,
-
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 30.0,
@@ -181,26 +142,26 @@ class _Food_InfoState extends State<Food_Info> {
                           });
                         },
                       ),
-                      // GestureDetector(
-                      //   child: PageTab(
-                      //     title: 'Delivery',
-                      //     // isActive: true,
-                      //     index: indx,
-                      //     stIndex: 3,
-                      //     press: () {},
-                      //   ),
-                      //   onTap: () {
-                      //     setState(() {
-                      //       indx = 3;
-                      //     });
-                      //   },
-                      // ),
+                      GestureDetector(
+                        child: PageTab(
+                          title: 'Restaurant',
+                          // isActive: true,
+                          index: indx,
+                          stIndex: 3,
+                          press: () {},
+                        ),
+                        onTap: () {
+                          setState(() {
+                            indx = 3;
+                          });
+                        },
+                      ),
                     ],
                   ),
                 ),
                 if (indx == 0)
                   Container(
-                      height: 700,
+                      height: MediaQuery.of(context).size.height / 1.5,
                       child: FoodAbout(
                         foodList: widget.foodList,
                       )),
@@ -210,7 +171,8 @@ class _Food_InfoState extends State<Food_Info> {
                       foodList: widget.foodList,
                     ),
                   ),
-                if (indx == 3) Container(height: 800, child: FoodDelivery()),
+                if (indx == 3)
+                  Container(child: FoodRest(foodList: widget.foodList)),
               ],
             ),
           ],

@@ -3,8 +3,6 @@ import 'package:moodish_mvp/models/foodListModel.dart';
 //import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FoodAbout extends StatefulWidget {
-  
-
   FoodAbout({
     Key key,
     this.foodList,
@@ -35,12 +33,7 @@ class _FoodAboutState extends State<FoodAbout> {
 }
 
 class foodAbout extends StatelessWidget {
-  const foodAbout({
-    Key key,
-    this.foodList,
-    this.nutri
-
-  }) : super(key: key);
+  const foodAbout({Key key, this.foodList, this.nutri}) : super(key: key);
 
   final FoodListModel foodList;
   final nutri;
@@ -49,7 +42,6 @@ class foodAbout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        
         Stack(
           children: <Widget>[
             Padding(
@@ -63,7 +55,7 @@ class foodAbout extends StatelessWidget {
                       child: Text(
                         'Description',
                         style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 24,
                         ),
                         textAlign: TextAlign.left,
                       ),
@@ -71,30 +63,8 @@ class foodAbout extends StatelessWidget {
                   ),
                   SizedBox(height: 5),
                   Padding(
-                      padding: EdgeInsets.all(5.0),
-                      child: Text(foodList.description),
-                    ),
-                  SizedBox(height: 10.0),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Calories',
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
-                        textAlign: TextAlign.left,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 8),
-                      child: Text(foodList.calories),
-                    )
+                    padding: EdgeInsets.all(5.0),
+                    child: Text(foodList.description),
                   ),
                   SizedBox(height: 10.0),
                   Padding(
@@ -104,187 +74,353 @@ class foodAbout extends StatelessWidget {
                       child: Text(
                         'Nutrients',
                         style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 24,
                         ),
                         textAlign: TextAlign.left,
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        Column(
-                          children: <Widget>[
-                            Container(
-                              height: 80.0,
-                              width: 80.0,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  image: AssetImage('assets/${nutri[0]}'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Calories',
+                            style: TextStyle(
+                              fontSize: 18,
                             ),
-                            SizedBox(
-                              height: 7.0,
-                            ),
-                            Text('${foodList.carbohydrates} Carbs' )
-                          ],
+                            textAlign: TextAlign.left,
+                          ),
                         ),
-                        SizedBox(
-                          width: 20.0,
-                        ),
-                        Column(
-                          children: <Widget>[
-                            Container(
-                              height: 80.0,
-                              width: 80.0,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  image: AssetImage('assets/${nutri[1]}'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 7.0,
-                            ),
-                            Text('${foodList.protein} Protien')
-                          ],
-                        ),
-                        SizedBox(
-                          width: 20.0,
-                        ),
-                        Column(
-                          children: <Widget>[
-                            Container(
-                              height: 80.0,
-                              width: 80.0,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  image: AssetImage('assets/${nutri[2]}'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 7.0,
-                            ),
-                            Text('${foodList.fat} Fats')
-                          ],
-                        ),
-                        SizedBox(
-                          width: 20.0,
-                        ),
-                        // Column(
-                        //   children: <Widget>[
-                        //     Container(
-                        //       height: 80.0,
-                        //       width: 80.0,
-                        //       decoration: BoxDecoration(
-                        //         shape: BoxShape.circle,
-                        //         image: DecorationImage(
-                        //           image: AssetImage('assets/${nutri[3]}'),
-                        //           fit: BoxFit.cover,
-                        //         ),
-                        //       ),
-                        //     ),
-                        //     SizedBox(
-                        //       height: 7.0,
-                        //     ),
-                        //     Text('${foodList.calories} Sugar')
-                        //   ],
-                        // ),
-                        SizedBox(
-                          width: 20.0,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Preparation Time',
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
-                        textAlign: TextAlign.left,
                       ),
-                    ),
+                      Spacer(),
+                      if (foodList.calories != null)
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width / 3.5,
+                                  child: Text(
+                                    foodList.calories,
+                                    overflow: TextOverflow.ellipsis,
+                                  ))),
+                        ),
+                      if (foodList.calories == null)
+                        Padding(
+                            padding: EdgeInsets.all(8.0), child: Text('empty')),
+                    ],
                   ),
-                  SizedBox(height: 5),
-                   if(foodList.preparation != null) 
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                        padding: EdgeInsets.only(left: 8),
-                        child:Text(foodList.time)),
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Carbohydrates',
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ),
+                      Spacer(),
+                      if (foodList.carbohydrates != null)
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width / 3.5,
+                                  child: Text(
+                                    foodList.carbohydrates,
+                                    overflow: TextOverflow.ellipsis,
+                                  ))),
+                        ),
+                      if (foodList.carbohydrates == null)
+                        Padding(
+                            padding: EdgeInsets.all(8.0), child: Text('empty')),
+                    ],
                   ),
-                  if(foodList.preparation == null)
-                  Padding(
-                      padding: EdgeInsets.all(5.0),
-                      child:Text('empty')),
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Proteins',
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ),
+                      Spacer(),
+                      if (foodList.protein != null)
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width / 3.5,
+                                  child: Text(
+                                    foodList.protein,
+                                    overflow: TextOverflow.ellipsis,
+                                  ))),
+                        ),
+                      if (foodList.protein == null)
+                        Padding(
+                            padding: EdgeInsets.all(8.0), child: Text('empty')),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Fats',
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ),
+                      Spacer(),
+                      if (foodList.fat != null)
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width / 3.5,
+                                  child: Text(
+                                    foodList.fat,
+                                    overflow: TextOverflow.ellipsis,
+                                  ))),
+                        ),
+                      if (foodList.fat == null)
+                        Padding(
+                            padding: EdgeInsets.all(8.0), child: Text('empty')),
+                    ],
+                  ),
+                  // SingleChildScrollView(
+                  //   scrollDirection: Axis.horizontal,
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //     children: <Widget>[
+                  //       Column(
+                  //         children: <Widget>[
+                  //           Container(
+                  //             height: 80.0,
+                  //             width: 80.0,
+                  //             decoration: BoxDecoration(
+                  //               shape: BoxShape.circle,
+                  //               image: DecorationImage(
+                  //                 image: AssetImage('assets/${nutri[0]}'),
+                  //                 fit: BoxFit.cover,
+                  //               ),
+                  //             ),
+                  //           ),
+                  //           SizedBox(
+                  //             height: 7.0,
+                  //           ),
+                  //           Text('${foodList.carbohydrates} Carbs')
+                  //         ],
+                  //       ),
+                  //       SizedBox(
+                  //         width: 20.0,
+                  //       ),
+                  //       Column(
+                  //         children: <Widget>[
+                  //           Container(
+                  //             height: 80.0,
+                  //             width: 80.0,
+                  //             decoration: BoxDecoration(
+                  //               shape: BoxShape.circle,
+                  //               image: DecorationImage(
+                  //                 image: AssetImage('assets/${nutri[1]}'),
+                  //                 fit: BoxFit.cover,
+                  //               ),
+                  //             ),
+                  //           ),
+                  //           SizedBox(
+                  //             height: 7.0,
+                  //           ),
+                  //           Text('${foodList.protein} Protien')
+                  //         ],
+                  //       ),
+                  //       SizedBox(
+                  //         width: 20.0,
+                  //       ),
+                  //       Column(
+                  //         children: <Widget>[
+                  //           Container(
+                  //             height: 80.0,
+                  //             width: 80.0,
+                  //             decoration: BoxDecoration(
+                  //               shape: BoxShape.circle,
+                  //               image: DecorationImage(
+                  //                 image: AssetImage('assets/${nutri[2]}'),
+                  //                 fit: BoxFit.cover,
+                  //               ),
+                  //             ),
+                  //           ),
+                  //           SizedBox(
+                  //             height: 7.0,
+                  //           ),
+                  //           Text('${foodList.fat} Fats')
+                  //         ],
+                  //       ),
+                  //       SizedBox(
+                  //         width: 20.0,
+                  //       ),
+                  //       // Column(
+                  //       //   children: <Widget>[
+                  //       //     Container(
+                  //       //       height: 80.0,
+                  //       //       width: 80.0,
+                  //       //       decoration: BoxDecoration(
+                  //       //         shape: BoxShape.circle,
+                  //       //         image: DecorationImage(
+                  //       //           image: AssetImage('assets/${nutri[3]}'),
+                  //       //           fit: BoxFit.cover,
+                  //       //         ),
+                  //       //       ),
+                  //       //     ),
+                  //       //     SizedBox(
+                  //       //       height: 7.0,
+                  //       //     ),
+                  //       //     Text('${foodList.calories} Sugar')
+                  //       //   ],
+                  //       // ),
+                  //       SizedBox(
+                  //         width: 20.0,
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                   SizedBox(
                     height: 10.0,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Cuisine',
-                        style: TextStyle(
-                          fontSize: 30,
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Preparation Time',
+                            style: TextStyle(
+                              fontSize: 24,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
                         ),
-                        textAlign: TextAlign.left,
                       ),
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                 Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                        padding: EdgeInsets.only(left: 8),
-                        child:Text(foodList.cuisine)),
+                      Spacer(),
+                      if (foodList.time != null)
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                              padding: EdgeInsets.all(16),
+                              child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width / 3.5,
+                                  child: Text(
+                                    foodList.time,
+                                    overflow: TextOverflow.ellipsis,
+                                  ))),
+                        ),
+                      if (foodList.time == null)
+                        Padding(
+                            padding: EdgeInsets.all(8.0), child: Text('empty')),
+                    ],
                   ),
                   SizedBox(
                     height: 10.0,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Taste',
-                        style: TextStyle(
-                          fontSize: 30,
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Cuisine',
+                            style: TextStyle(
+                              fontSize: 24,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
                         ),
-                        textAlign: TextAlign.left,
                       ),
-                    ),
+                      Spacer(),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                            padding: EdgeInsets.all(16),
+                            child: Container(
+                                width: MediaQuery.of(context).size.width / 3.5,
+                                child: Text(
+                                  foodList.cuisine ?? '',
+                                  overflow: TextOverflow.ellipsis,
+                                ))),
+                      ),
+                      if (foodList.cuisine == null)
+                        Padding(
+                            padding: EdgeInsets.all(8.0), child: Text('empty')),
+                    ],
                   ),
-                  SizedBox(height: 5),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 8),
-                      child: Text(foodList.taste),
-                    )
+                  SizedBox(
+                    height: 10.0,
                   ),
-                  
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Taste',
+                            style: TextStyle(
+                              fontSize: 24,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ),
+                      Spacer(),
+                      if (foodList.taste != null)
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                              padding: EdgeInsets.all(16),
+                              child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width / 3.5,
+                                  child: Text(
+                                    foodList.taste,
+                                    overflow: TextOverflow.ellipsis,
+                                  ))),
+                        ),
+                      if (foodList.taste == null)
+                        Padding(
+                            padding: EdgeInsets.all(8.0), child: Text('empty')),
+                    ],
+                  ),
                 ],
               ),
             )
