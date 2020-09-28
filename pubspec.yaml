@@ -46,7 +46,6 @@ dependencies:
   cached_network_image: ^2.3.2+1 
   flutter_rating_bar: ^3.0.1+1
   rflutter_alert: ^1.0.8  
-  # image_picker: 0.6.3+4
   flutter_holo_date_picker: ^0.1.4
   cloud_functions: ^0.6.0 
   geolocator: ^5.3.2+2
