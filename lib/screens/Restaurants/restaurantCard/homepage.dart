@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:moodish_mvp/Services/authenticate.dart';
 import 'package:moodish_mvp/Services/betaCount.dart';
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/models/restaurantsModel.dart';
@@ -492,6 +493,8 @@ class _HomePageState extends State<HomePage> {
                                 child: Padding(
                                   padding: EdgeInsets.all(8),
                                   child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 3.2,
                                     child: RaisedButton(
                                       color: copyDelay
                                           ? Colors.green
@@ -516,9 +519,11 @@ class _HomePageState extends State<HomePage> {
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.all(3.0),
-                                            child: Icon(Icons.content_copy ,color: Colors.black, ),
+                                            child: Icon(
+                                              Icons.content_copy,
+                                              color: Colors.black,
+                                            ),
                                           ),
-                                          
                                           Text('Copy'),
                                         ],
                                       ),
@@ -892,7 +897,7 @@ class _HomePageState extends State<HomePage> {
                               padding:
                                   const EdgeInsets.only(left: 5.0, right: 5.0),
                               child: TextField(
-                                controller: _textController,
+                                  controller: _textController,
                                   maxLines: 5,
                                   onChanged: (val) {
                                     review = val;
@@ -958,6 +963,151 @@ class _HomePageState extends State<HomePage> {
                                             Spacer(),
                                             Text(
                                                 '\u{02605}${widget.restaurant.reviews[index]["rating"]}'),
+                                            IconButton(
+                                                icon: Icon(Icons.info_outline),
+                                                onPressed: () async {
+                                                  bool visible = false;
+                                                  String description = '';
+                                                  dynamic data =
+                                                      await showDialog(
+                                                    context: context,
+                                                    builder: (dialogcontext) {
+                                                      return AlertDialog(
+                                                        shape:
+                                                            RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                        ),
+                                                        title: Text(
+                                                            "Why do you want to report this?"),
+                                                        content: Column(
+                                                          children: [
+                                                            FlatButton(
+                                                                onPressed:
+                                                                    () async {
+                                                                  await DatabaseService()
+                                                                      .report(
+                                                                          rest: widget
+                                                                              .restaurant,
+                                                                          index:
+                                                                              index,
+                                                                          uid: Authenticate()
+                                                                              .returnUid())
+                                                                      .then(
+                                                                          (value) {
+                                                                    Navigator.pop(
+                                                                        dialogcontext,
+                                                                        "done");
+                                                                  });
+                                                                },
+                                                                child: Align(
+                                                                  child: Text(
+                                                                      "Its Spam"),
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .centerLeft,
+                                                                )),
+                                                            FlatButton(
+                                                                onPressed: () {
+                                                                  setState(() {
+                                                                    visible =
+                                                                        true;
+                                                                  });
+                                                                },
+                                                                child: Align(
+                                                                  child: Text(
+                                                                      "Other:"),
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .centerLeft,
+                                                                )),
+                                                            // if (visible)
+                                                            Column(
+                                                              children: [
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .fromLTRB(
+                                                                          15,
+                                                                          0.0,
+                                                                          5,
+                                                                          6),
+                                                                  child:
+                                                                      TextField(
+                                                                          onChanged:
+                                                                              (val) {
+                                                                            setState(() {
+                                                                              description = val;
+                                                                            });
+                                                                          },
+                                                                          decoration:
+                                                                              InputDecoration(
+                                                                            hintText:
+                                                                                'Describe why its inapropriate?',
+                                                                            enabledBorder:
+                                                                                OutlineInputBorder(
+                                                                              borderRadius: BorderRadius.circular(5.0),
+                                                                            ),
+                                                                            focusedBorder:
+                                                                                OutlineInputBorder(
+                                                                              borderRadius: BorderRadius.circular(30.0),
+                                                                            ),
+                                                                          )),
+                                                                ),
+                                                                Align(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .centerRight,
+                                                                  child:
+                                                                      RaisedButton(
+                                                                    onPressed:
+                                                                        () {
+                                                                      DatabaseService()
+                                                                          .report(
+                                                                              rest: widget.restaurant,
+                                                                              index: index,
+                                                                              description: description,
+                                                                              uid: Authenticate().returnUid())
+                                                                          .then((value) {
+                                                                        Navigator.pop(
+                                                                            dialogcontext,
+                                                                            "done");
+                                                                      });
+                                                                    },
+                                                                    child: Text(
+                                                                        "ok"),
+                                                                  ),
+                                                                )
+                                                              ],
+                                                            )
+                                                          ],
+                                                        ),
+                                                        actions: [
+                                                          FlatButton(
+                                                            onPressed: () {
+                                                              Navigator.pop(
+                                                                  dialogcontext);
+                                                            },
+                                                            child: Text(
+                                                              "Cancel",
+                                                              style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                              ),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      );
+                                                    },
+                                                  );
+                                                  if (data == "done") {
+                                                    Scaffold.of(context)
+                                                        .showSnackBar(SnackBar(
+                                                            content: Text(
+                                                                "Thank you for your feedback")));
+                                                  }
+                                                })
                                           ],
                                         ),
                                         subtitle: Text(widget

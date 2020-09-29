@@ -67,10 +67,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "d0"));
         });
       }),
-      GeolocationRest().getRestFromLocation().then((rest) {
-        BlocProvider.of<RestaurantBloc>(context)
-            .add(RestaurantEvent.add(rest, 'r1'));
-      }),
+      // GeolocationRest().getRestFromLocation().then((rest) {
+      //   BlocProvider.of<RestaurantBloc>(context)
+      //       .add(RestaurantEvent.add(rest, 'r1'));
+      // }),
       DatabaseQuery().getRest().then((rest) {
         BlocProvider.of<RestaurantBloc>(context)
             .add(RestaurantEvent.add(rest, 'r2'));
