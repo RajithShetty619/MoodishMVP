@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/Services/database.dart';
@@ -304,8 +306,9 @@ class _ProfileState extends State<Profile> {
                     color: Colors.grey.shade400,
                   ),
                   onTap: () {
-                    launch(
-                        'http://play.google.com/store/apps/details?id=net.moodish.snapinsight');
+                    launch(Platform.isIOS
+                        ? "https://apps.apple.com/us/app/id1527896738"
+                        : 'http://play.google.com/store/apps/details?id=net.moodish.snapinsight');
                   },
                 ),
                 Divider(),

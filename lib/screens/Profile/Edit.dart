@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/Authenticate/forgotPassword.dart';
 import 'package:moodish_mvp/Services/database.dart';
@@ -23,15 +25,17 @@ class _EditProfileState extends State<EditProfile> {
   Geolocator geolocator = Geolocator();
   ImageProvider image;
   getImage() async {
-    final fileImage = await ImagePicker.pickImage(source: ImageSource.gallery);
-    ImageProvider image = FileImage(fileImage);
+    final pickedFile =
+        await ImagePicker().getImage(source: ImageSource.gallery);
+    final File file = File(pickedFile.path);
+    ImageProvider image = FileImage(file);
 
     // final Directory _dir = await getApplicationDocumentsDirectory();
     // final String _path = _dir.path;
     setState(() {
       _image = image;
     });
-    DatabaseService().uploadPhoto(fileImage);
+    DatabaseService().uploadPhoto(file);
   }
 
   @override
