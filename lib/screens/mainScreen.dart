@@ -3,6 +3,7 @@ import 'package:moodish_mvp/screens/Food/pages/foodHome.dart';
 import 'package:moodish_mvp/screens/Profile/profil.dart';
 import 'package:moodish_mvp/screens/Restaurants/home.dart';
 import 'package:moodish_mvp/screens/Restaurants/mood.dart';
+import 'package:moodish_mvp/screens/Restaurants/restauranthome.dart';
 import 'package:moodish_mvp/screens/search/search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -70,7 +71,7 @@ class _MainScreenState extends State<MainScreen> {
           index: _selectedIndex,
           children: [
             FoodHome(),
-            Restaurant(),
+            RestaurantHome(),
             Search(),
             Profile(),
           ],
