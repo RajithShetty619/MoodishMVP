@@ -525,12 +525,68 @@ class _RestCardModelState extends State<RestCardModel> {
                                   ),
                                   Padding(
                                     padding:
-                                        const EdgeInsets.only(left: 5, top: 5),
+                                        const EdgeInsets.only(left: 10, top: 5),
                                     child: Text(
                                       'What people think the restaurant is best at.',
                                       style: TextStyle(fontSize: 16),
                                     ),
-                                  )
+                                  ),
+                                  SizedBox(height: 12),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 5),
+                                    child: Text(
+                                      'Place A Pick Up Order',
+                                      style: TextStyle(fontSize: 22),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                    const EdgeInsets.only(left: 10, top: 5),
+                                    child: Text(
+                                      'Order Menu',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                    const EdgeInsets.only(left: 10, top: 5),
+                                    child: Text(
+                                      'Current Status Of Your Order',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                  SizedBox(height: 12),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 5),
+                                    child: Text(
+                                      'Reserve Table For Dine Out',
+                                      style: TextStyle(fontSize: 22),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                    const EdgeInsets.only(left: 10, top: 5),
+                                    child: Text(
+                                      'Current Status For Dine Out',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                  SizedBox(height: 12),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 5),
+                                    child: Text(
+                                      'Offers Available By Restaurant',
+                                      style: TextStyle(fontSize: 22),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                    const EdgeInsets.only(left: 10, top: 5),
+                                    child: Text(
+                                      'Check the list of offers by restaurant',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                  ),
                                 ],
                               ),
                             )
