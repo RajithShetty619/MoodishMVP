@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:moodish_mvp/screens/Restaurants/addPicture.dart';
-import 'package:moodish_mvp/screens/Restaurants/restaurantReview.dart';
+import 'file:///C:/Users/varun/MoodishMVP/lib/screens/Restaurants/restaurantCard/addPicture.dart';
+import 'file:///C:/Users/varun/MoodishMVP/lib/screens/Restaurants/restaurantCard/restaurantReview.dart';
 
 class RestCardModel extends StatefulWidget {
   @override
@@ -198,140 +198,7 @@ class _RestCardModelState extends State<RestCardModel> {
             ),
             SliverList(
               delegate: SliverChildListDelegate([
-//                Stack(
-//                  alignment: Alignment.bottomCenter,
-//                  overflow: Overflow.visible,
-//                  children: <Widget>[
-//                    Container(
-//                      height: 250,
-//                      width: MediaQuery.of(context).size.width,
-//                      decoration: BoxDecoration(
-//                          borderRadius: BorderRadius.only(
-//                              bottomLeft: Radius.circular(60),
-//                              bottomRight: Radius.circular(60)),
-//                          image: DecorationImage(
-//                              image: AssetImage('assets/Coffee.jpg'),
-//                              fit: BoxFit.cover)),
-//                    ),
-//                    Positioned(
-//                      bottom: 185,
-//                      left: 275,
-//                      child: Container(
-//                        decoration: BoxDecoration(
-//                            shape: BoxShape.circle, color: Colors.white),
-//                        child: Padding(
-//                          padding: EdgeInsets.all(8),
-//                          child: Icon(
-//                            Icons.open_in_browser,
-//                            size: 30,
-//                          ),
-//                        ),
-//                      ),
-//                    ),
-//                    Positioned(
-//                      bottom: 185,
-//                      left: 335,
-//                      child: Container(
-//                        decoration: BoxDecoration(
-//                            shape: BoxShape.circle, color: Colors.white),
-//                        child: Padding(
-//                          padding: EdgeInsets.all(8),
-//                          child: Icon(
-//                            Icons.favorite_border,
-//                            size: 30,
-//                          ),
-//                        ),
-//                      ),
-//                    ),
-//                    Positioned(
-//                      top: 185,
-//                      child: Center(
-//                        child: Card(
-//                          elevation: 5,
-//                          shape: RoundedRectangleBorder(
-//                              borderRadius: BorderRadius.circular(25)),
-//                          child: Container(
-//                            width: MediaQuery.of(context).size.width / 1.2,
-//                            child: Column(
-//                              crossAxisAlignment: CrossAxisAlignment.start,
-//                              children: <Widget>[
-//                                Padding(
-//                                  padding: const EdgeInsets.only(left: 14.0, top: 10),
-//                                  child: Text(
-//                                    'Yauatcha',
-//                                    style: TextStyle(
-//                                        fontWeight: FontWeight.bold, fontSize: 26),
-//                                  ),
-//                                ),
-//                                Padding(
-//                                  padding: const EdgeInsets.only(left: 16.0, top: 1),
-//                                  child: Text(
-//                                    'Fine Dining, Cantonese, Chinese',
-//                                    style: TextStyle(
-//                                        fontSize: 15, color: Colors.grey[400]),
-//                                  ),
-//                                ),
-//                                Padding(
-//                                  padding:
-//                                  EdgeInsets.only(left: 8, right: 8, bottom: 5),
-//                                  child: Divider(
-//                                    thickness: 1.2,
-//                                  ),
-//                                ),
-//                                Row(
-//                                  mainAxisAlignment: MainAxisAlignment.start,
-//                                  children: <Widget>[
-//                                    SizedBox(
-//                                      width: 14,
-//                                    ),
-//                                    Row(
-//                                      children: <Widget>[
-//                                        Icon(
-//                                          Icons.star,
-//                                          size: 13,
-//                                          color: Colors.amber,
-//                                        ),
-//                                        Text(
-//                                          '4.5(289)',
-//                                          style: TextStyle(fontSize: 14),
-//                                        ),
-//                                      ],
-//                                    ),
-//                                    SizedBox(
-//                                      width: 15,
-//                                    ),
-//                                    Row(
-//                                      children: <Widget>[
-//                                        Icon(
-//                                          Icons.alarm,
-//                                          size: 14,
-//                                        ),
-//                                        Text(
-//                                          '15-20 mins',
-//                                          style: TextStyle(fontSize: 14),
-//                                        ),
-//                                      ],
-//                                    ),
-//                                    SizedBox(
-//                                      width: 15,
-//                                    ),
-//                                    Text(
-//                                      '\u20B9 Free',
-//                                      style: TextStyle(fontSize: 15),
-//                                    )
-//                                  ],
-//                                ),
-//                                SizedBox(
-//                                  height: 14,
-//                                )
-//                              ],
-//                            ),
-//                          ),
-//                        ),
-//                      ),
-//                    )
-//                  ],
-//                ),
+
                 SizedBox(
                   height: 60,
                 ),
@@ -531,7 +398,7 @@ class _RestCardModelState extends State<RestCardModel> {
                                       style: TextStyle(fontSize: 16),
                                     ),
                                   ),
-                                  SizedBox(height: 12),
+                                  SizedBox(height: 20),
                                   Padding(
                                     padding: const EdgeInsets.only(left: 5),
                                     child: Text(
@@ -555,7 +422,7 @@ class _RestCardModelState extends State<RestCardModel> {
                                       style: TextStyle(fontSize: 16),
                                     ),
                                   ),
-                                  SizedBox(height: 12),
+                                  SizedBox(height: 20),
                                   Padding(
                                     padding: const EdgeInsets.only(left: 5),
                                     child: Text(
@@ -571,7 +438,7 @@ class _RestCardModelState extends State<RestCardModel> {
                                       style: TextStyle(fontSize: 16),
                                     ),
                                   ),
-                                  SizedBox(height: 12),
+                                  SizedBox(height: 20),
                                   Padding(
                                     padding: const EdgeInsets.only(left: 5),
                                     child: Text(
