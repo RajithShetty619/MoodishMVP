@@ -13,7 +13,7 @@ class Wrapper extends StatelessWidget {
     if (onAuthChanged == null) {
       return SignIn();
     } else {
-      return Test();
+      return ShowScreen();
     }
   }
 }

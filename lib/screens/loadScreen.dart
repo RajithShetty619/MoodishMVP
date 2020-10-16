@@ -8,10 +8,10 @@ import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:intl/intl.dart';
 import 'package:moodish_mvp/Services/geolocationRest.dart';
 import 'package:moodish_mvp/screens/Food/events/restEvent.dart';
+import 'package:moodish_mvp/screens/Restaurants/restBloc/restBloc.dart';
 import 'package:moodish_mvp/screens/mainScreen.dart';
 import 'Food/blocs/bloc/foodBloc.dart';
 import 'Food/blocs/pollsbloc/pollsBloc.dart';
-import 'Food/blocs/restBloc/restBloc.dart';
 import 'Food/events/foodEvent.dart';
 import 'Food/events/pollsEvent.dart';
 
