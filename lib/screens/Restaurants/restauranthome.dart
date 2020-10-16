@@ -2,7 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:carousel_slider/carousel_options.dart';
-import 'package:moodish_mvp/screens/Restaurants/restCardModel.dart';
+import 'file:///C:/Users/varun/MoodishMVP/lib/screens/Restaurants/restaurantCard/restCardModel.dart';
 import 'package:moodish_mvp/screens/Restaurants/restCategoryModel.dart';
 
 class RestaurantHome extends StatefulWidget {

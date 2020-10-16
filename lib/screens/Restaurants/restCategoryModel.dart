@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:moodish_mvp/screens/Restaurants/restCardModel.dart';
+import 'file:///C:/Users/varun/MoodishMVP/lib/screens/Restaurants/restaurantCard/restCardModel.dart';
 
 class RestCategoryModel extends StatefulWidget {
   int event;
