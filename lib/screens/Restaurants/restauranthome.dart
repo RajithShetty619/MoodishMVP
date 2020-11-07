@@ -550,7 +550,7 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                               child: Padding(
                                 padding: EdgeInsets.only(left: 10, top: 10),
                                 child: Text(
-                                    'In the area? PLace your order and self-pick up while going home'),
+                                    'In the area? Place your order and self-pick up while going home'),
                               ),
                             )
                           ],
