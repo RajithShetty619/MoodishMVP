@@ -1,7 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:carousel_slider/carousel_options.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:moodish_mvp/Services/geolocationRest.dart';
+import 'package:moodish_mvp/models/restaurantsModel.dart';
+import 'package:moodish_mvp/screens/Restaurants/restBloc/restBloc.dart';
 import 'package:moodish_mvp/screens/Restaurants/restCategoryModel.dart';
 import 'package:moodish_mvp/screens/Restaurants/restaurantCard/restCardModel.dart';
 
@@ -12,6 +17,14 @@ class RestaurantHome extends StatefulWidget {
 
 class _RestaurantHomeState extends State<RestaurantHome> {
   double _currentIndex = 0;
+  int _totalIndex = 8;
+  @override
+  void initState() {
+    setState(() {
+      GeolocationRest().getRestFromLocation(context);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,123 +84,149 @@ class _RestaurantHomeState extends State<RestaurantHome> {
             SizedBox(
               height: 30,
             ),
-            CarouselSlider.builder(
-              itemCount: 5,
-              options: CarouselOptions(
-                autoPlay: false,
-                initialPage: 0,
-                onPageChanged: (index, reason) {
-                  setState(() {
-                    _currentIndex = index.toDouble();
-                  });
-                },
-                enableInfiniteScroll: false,
-                scrollDirection: Axis.horizontal,
-                scrollPhysics: BouncingScrollPhysics(),
-                enlargeCenterPage: true,
-              ),
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(left: 8, right: 8),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return RestCardModel();
-                      }));
+            BlocConsumer<RestaurantBloc, Map<String, List<RestListModel>>>(
+              buildWhen: (Map<String, List<RestListModel>> previous,
+                  Map<String, List<RestListModel>> current) {
+                return true;
+              },
+              listenWhen: (Map<String, List<RestListModel>> previous,
+                  Map<String, List<RestListModel>> current) {
+                if (current.length > previous.length) {
+                  return true;
+                }
+                return false;
+              },
+              listener: (context, state) {
+                // TODO: implement listener
+              },
+              builder: (context, restList) {
+                return CarouselSlider.builder(
+                  itemCount: restList["near"].length,
+                  options: CarouselOptions(
+                    autoPlay: false,
+                    initialPage: 0,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        _currentIndex = index.toDouble();
+                        _totalIndex = restList["near"].length;
+                      });
                     },
-                    child: Container(
-                      height: 215,
-                      width: 300,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          image: DecorationImage(
-                              image: AssetImage('assets/Coffee.jpg'),
-                              fit: BoxFit.cover)),
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 12),
-                          child: Container(
-                            height: 95,
-                            width: 240,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(30)),
+                    enableInfiniteScroll: false,
+                    scrollDirection: Axis.horizontal,
+                    scrollPhysics: BouncingScrollPhysics(),
+                    enlargeCenterPage: true,
+                  ),
+                  itemBuilder: (context, index) {
+                    RestListModel element = restList["near"][index];
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 8, right: 8),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return RestCardModel();
+                          }));
+                        },
+                        child: Container(
+                          height: 215,
+                          width: 300,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              image: DecorationImage(
+                                  image: CachedNetworkImageProvider(element
+                                              .photo_url !=
+                                          ''
+                                      ? element.photo_url
+                                      : 'https://firebasestorage.googleapis.com/v0/b/moodishtest.appspot.com/o/download.jpg?alt=media&token=b1c76ca1-9e73-4e20-8233-c3231469494f'),
+                                  fit: BoxFit.cover)),
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
                             child: Padding(
-                              padding: EdgeInsets.all(8),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
-                                    child: Text(
-                                      'Yauatcha',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 24),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 10.0, top: 1),
-                                    child: Text(
-                                      'Fine Dining,Cantonese,Chinese',
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          color: Colors.grey[400]),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                        left: 8, right: 8, bottom: 2),
-                                    child: Divider(
-                                      thickness: 1.2,
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
+                              padding: EdgeInsets.only(bottom: 12),
+                              child: Container(
+                                height: 95,
+                                width: 240,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(30)),
+                                child: Padding(
+                                  padding: EdgeInsets.all(8),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: <Widget>[
-                                      Row(
-                                        children: <Widget>[
-                                          Icon(
-                                            Icons.star,
-                                            size: 10,
-                                            color: Colors.amber,
-                                          ),
-                                          Text(
-                                            '4.5(289)',
-                                            style: TextStyle(fontSize: 12),
-                                          ),
-                                        ],
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 8.0),
+                                        child: Text(
+                                          element.restaurant_Name,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 24),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 10.0, top: 1),
+                                        child: Text(
+                                          element.cuisines,
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              color: Colors.grey[400]),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 8, right: 8, bottom: 2),
+                                        child: Divider(
+                                          thickness: 1.2,
+                                        ),
                                       ),
                                       Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
                                         children: <Widget>[
-                                          Icon(
-                                            Icons.alarm,
-                                            size: 10,
+                                          Row(
+                                            children: <Widget>[
+                                              Icon(
+                                                Icons.star,
+                                                size: 10,
+                                                color: Colors.amber,
+                                              ),
+                                              Text(
+                                                element.rating,
+                                                style: TextStyle(fontSize: 12),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: <Widget>[
+                                              Icon(
+                                                Icons.alarm,
+                                                size: 10,
+                                              ),
+                                              Text(
+                                                '15-20 mins',
+                                                style: TextStyle(fontSize: 12),
+                                              ),
+                                            ],
                                           ),
                                           Text(
-                                            '15-20 mins',
+                                            '\u20B9 Free',
                                             style: TextStyle(fontSize: 12),
-                                          ),
+                                          )
                                         ],
-                                      ),
-                                      Text(
-                                        '\u20B9 Free',
-                                        style: TextStyle(fontSize: 12),
                                       )
                                     ],
-                                  )
-                                ],
+                                  ),
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 );
               },
             ),
@@ -195,7 +234,7 @@ class _RestaurantHomeState extends State<RestaurantHome> {
               height: 25,
             ),
             DotsIndicator(
-              dotsCount: 5,
+              dotsCount: _totalIndex,
               position: _currentIndex,
               decorator: DotsDecorator(
                 size: const Size.square(9.0),

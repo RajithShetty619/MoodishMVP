@@ -4,7 +4,7 @@ import 'package:moodish_mvp/screens/Food/events/restEvent.dart';
 
 class RestaurantBloc
     extends Bloc<RestaurantEvent, Map<String, List<RestListModel>>> {
-  RestaurantBloc() : super({"r1": [], "r2": []});
+  RestaurantBloc() : super({"near": [], "r2": []});
 
   Stream<Map<String, List<RestListModel>>> mapEventToState(
       RestaurantEvent event) async* {
@@ -14,6 +14,11 @@ class RestaurantBloc
         if (event.restaurant != null) {
           newstate[event.listName].addAll(event.restaurant);
         }
+        yield newstate;
+        break;
+      case EventType.delete:
+        Map<String, List<RestListModel>> newstate = state;
+        newstate[event.listName] = [];
         yield newstate;
         break;
       default:

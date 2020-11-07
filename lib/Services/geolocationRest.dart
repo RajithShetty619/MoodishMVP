@@ -1,11 +1,15 @@
-import 'dart:convert';
-import 'package:geolocator/geolocator.dart';
-import 'package:http/http.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geoflutterfire/geoflutterfire.dart';
 import 'package:moodish_mvp/models/restaurantsModel.dart';
 import 'package:location/location.dart';
+import 'package:moodish_mvp/screens/Food/events/restEvent.dart';
+import 'package:moodish_mvp/screens/Restaurants/restBloc/restBloc.dart';
+import 'package:rxdart/rxdart.dart';
 
 class GeolocationRest {
-  Future<List<RestListModel>> getRestFromLocation() async {
+  Future<void> getRestFromLocation(BuildContext context) async {
     Location location = new Location();
 
     bool _serviceEnabled;
@@ -32,37 +36,37 @@ class GeolocationRest {
 
     _locationData = await location.getLocation();
 
-    // final position = await Geolocator().getCurrentPosition();
-    // print(position);
-    try {
-      var data = await get(
-          "https://us-central1-moodishtest.cloudfunctions.net/returnRestaurants?lat=${_locationData.latitude}&long=${_locationData.longitude}");
-      // if (data.body == "Error: could not handle the request") throw Error();
-      var info = await json.decode(data.body);
-      print(info);
-      List<dynamic> send = await json.decode(info["restaurants"]);
+    var collectionReference =
+        FirebaseFirestore.instance.collection('restaurants');
+    double radius_track = 0.5;
+    final radius = BehaviorSubject<double>.seeded(radius_track);
+    String field = 'g';
+    GeoFirePoint center = Geoflutterfire().point(
+        latitude: _locationData.latitude, longitude: _locationData.longitude);
+    Stream<List<DocumentSnapshot>> stream = radius.switchMap((rad) {
+      return Geoflutterfire()
+          .collection(collectionRef: collectionReference)
+          .within(center: center, radius: rad, field: field, strictMode: true);
+    });
 
-      return listfromSnapshot(send);
-    } catch (e) {
-      try {
-        print(e.toString());
-        var data = await get(
-            "https://us-central1-moodishtest.cloudfunctions.net/returnRestaurants?lat=${_locationData.latitude}&long=${_locationData.longitude}");
-        // if (data.body == "Error: could not handle the request") return [];
-        var info = await json.decode(data.body);
-        print(info);
-        List<dynamic> send = await json.decode(info["restaurants"]);
-        return listfromSnapshot(send);
-      } catch (e) {
-        print(e);
-        return [];
+    stream.listen((event) async {
+      List<RestListModel> list = listfromSnapshot(event);
+      print("QUERY RUNNS  $radius_track");
+      print(list.length);
+      if (list.length < 9 && radius_track < 10) {
+        radius_track = 0.25 + radius_track;
+        radius.add(radius_track);
+      } else {
+        radius.close();
+        BlocProvider.of<RestaurantBloc>(context)
+            .add(RestaurantEvent.add(list, "near"));
       }
-    }
+    });
   }
 
-  List<RestListModel> listfromSnapshot(List<dynamic> snapshot) {
+  List<RestListModel> listfromSnapshot(List<DocumentSnapshot> snapshot) {
     return snapshot.map((doc) {
-      Map<String, dynamic> _docdata = doc;
+      Map<String, dynamic> _docdata = doc.data();
       return RestListModel(
           restaurant_Name: _docdata["Restaurant_Name"] ?? '',
           cuisines: _docdata["Cuisines"] ?? '',
