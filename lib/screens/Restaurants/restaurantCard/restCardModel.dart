@@ -398,7 +398,7 @@ class _RestCardModelState extends State<RestCardModel> {
                                       style: TextStyle(fontSize: 16),
                                     ),
                                   ),
-                                  SizedBox(height: 20),
+                                  SizedBox(height: 30),
                                   Padding(
                                     padding: const EdgeInsets.only(left: 5),
                                     child: Text(
@@ -416,13 +416,13 @@ class _RestCardModelState extends State<RestCardModel> {
                                   ),
                                   Padding(
                                     padding:
-                                    const EdgeInsets.only(left: 10, top: 5),
+                                    const EdgeInsets.only(left: 10, ),
                                     child: Text(
                                       'Current Status Of Your Order',
                                       style: TextStyle(fontSize: 16),
                                     ),
                                   ),
-                                  SizedBox(height: 20),
+                                  SizedBox(height: 30),
                                   Padding(
                                     padding: const EdgeInsets.only(left: 5),
                                     child: Text(
@@ -438,7 +438,7 @@ class _RestCardModelState extends State<RestCardModel> {
                                       style: TextStyle(fontSize: 16),
                                     ),
                                   ),
-                                  SizedBox(height: 20),
+                                  SizedBox(height: 30),
                                   Padding(
                                     padding: const EdgeInsets.only(left: 5),
                                     child: Text(
@@ -448,7 +448,7 @@ class _RestCardModelState extends State<RestCardModel> {
                                   ),
                                   Padding(
                                     padding:
-                                    const EdgeInsets.only(left: 10, top: 5),
+                                    const EdgeInsets.only(left: 10, top: 5,bottom: 20),
                                     child: Text(
                                       'Check the list of offers by restaurant',
                                       style: TextStyle(fontSize: 16),
@@ -2274,7 +2274,9 @@ class Delegate extends SliverPersistentHeaderDelegate {
                         Align(
                           alignment: Alignment.topLeft,
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
                             child: Card(
                               elevation: 5,
                               shape: RoundedRectangleBorder(
