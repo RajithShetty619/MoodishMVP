@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'file:///C:/Users/varun/MoodishMVP/lib/screens/Restaurants/restaurantCard/addPicture.dart';
-import 'file:///C:/Users/varun/MoodishMVP/lib/screens/Restaurants/restaurantCard/restaurantReview.dart';
+import 'package:moodish_mvp/screens/Restaurants/restaurantCard/addPicture.dart';
+import 'package:moodish_mvp/screens/Restaurants/restaurantCard/restaurantReview.dart';
 
 class RestCardModel extends StatefulWidget {
   @override
@@ -198,7 +198,6 @@ class _RestCardModelState extends State<RestCardModel> {
             ),
             SliverList(
               delegate: SliverChildListDelegate([
-
                 SizedBox(
                   height: 60,
                 ),
@@ -398,7 +397,7 @@ class _RestCardModelState extends State<RestCardModel> {
                                       style: TextStyle(fontSize: 16),
                                     ),
                                   ),
-                                  SizedBox(height: 30),
+                                  SizedBox(height: 20),
                                   Padding(
                                     padding: const EdgeInsets.only(left: 5),
                                     child: Text(
@@ -408,7 +407,7 @@ class _RestCardModelState extends State<RestCardModel> {
                                   ),
                                   Padding(
                                     padding:
-                                    const EdgeInsets.only(left: 10, top: 5),
+                                        const EdgeInsets.only(left: 10, top: 5),
                                     child: Text(
                                       'Order Menu',
                                       style: TextStyle(fontSize: 16),
@@ -416,13 +415,13 @@ class _RestCardModelState extends State<RestCardModel> {
                                   ),
                                   Padding(
                                     padding:
-                                    const EdgeInsets.only(left: 10, ),
+                                        const EdgeInsets.only(left: 10, top: 5),
                                     child: Text(
                                       'Current Status Of Your Order',
                                       style: TextStyle(fontSize: 16),
                                     ),
                                   ),
-                                  SizedBox(height: 30),
+                                  SizedBox(height: 20),
                                   Padding(
                                     padding: const EdgeInsets.only(left: 5),
                                     child: Text(
@@ -432,13 +431,13 @@ class _RestCardModelState extends State<RestCardModel> {
                                   ),
                                   Padding(
                                     padding:
-                                    const EdgeInsets.only(left: 10, top: 5),
+                                        const EdgeInsets.only(left: 10, top: 5),
                                     child: Text(
                                       'Current Status For Dine Out',
                                       style: TextStyle(fontSize: 16),
                                     ),
                                   ),
-                                  SizedBox(height: 30),
+                                  SizedBox(height: 20),
                                   Padding(
                                     padding: const EdgeInsets.only(left: 5),
                                     child: Text(
@@ -448,7 +447,7 @@ class _RestCardModelState extends State<RestCardModel> {
                                   ),
                                   Padding(
                                     padding:
-                                    const EdgeInsets.only(left: 10, top: 5,bottom: 20),
+                                        const EdgeInsets.only(left: 10, top: 5),
                                     child: Text(
                                       'Check the list of offers by restaurant',
                                       style: TextStyle(fontSize: 16),
@@ -498,8 +497,8 @@ class _RestCardModelState extends State<RestCardModel> {
                               onPressed: () {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                      return RestaurantReview();
-                                    }));
+                                  return RestaurantReview();
+                                }));
                               },
                               color: Colors.white,
                               elevation: 5,
@@ -580,19 +579,29 @@ class _RestCardModelState extends State<RestCardModel> {
                                     Stack(
                                       overflow: Overflow.visible,
                                       children: <Widget>[
-                                        if(index==0)
+                                        if (index == 0)
                                           Positioned(
-                                            left: MediaQuery.of(context).size.width/1.9,
+                                            left: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                1.9,
                                             child: Padding(
-                                              padding: EdgeInsets.only(right: 10),
+                                              padding:
+                                                  EdgeInsets.only(right: 10),
                                               child: Container(
                                                 decoration: BoxDecoration(
                                                     shape: BoxShape.circle,
-                                                    border: Border.all(color: Colors.black)
-                                                ),
+                                                    border: Border.all(
+                                                        color: Colors.black)),
                                                 child: Padding(
                                                   padding: EdgeInsets.all(10),
-                                                  child: Text('i',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),),
+                                                  child: Text(
+                                                    'i',
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -605,27 +614,31 @@ class _RestCardModelState extends State<RestCardModel> {
                                               children: <Widget>[
                                                 Padding(
                                                   padding:
-                                                      const EdgeInsets.only(bottom: 5),
+                                                      const EdgeInsets.only(
+                                                          bottom: 5),
                                                   child: Text(
                                                     'User',
                                                     style: TextStyle(
-                                                        color: Colors.deepOrange),
+                                                        color:
+                                                            Colors.deepOrange),
                                                   ),
                                                 ),
-                                                SizedBox(width: 50,),
+                                                SizedBox(
+                                                  width: 50,
+                                                ),
                                               ],
                                             ),
                                             Padding(
-                                              padding:
-                                                  const EdgeInsets.only(bottom: 5),
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 5),
                                               child: Text(
                                                 'Username',
                                                 style: TextStyle(fontSize: 16),
                                               ),
                                             ),
                                             Padding(
-                                              padding:
-                                                  const EdgeInsets.only(bottom: 5),
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 5),
                                               child: Text(
                                                 'Dine out - Added 18 mins ago',
                                                 style: TextStyle(
@@ -634,8 +647,8 @@ class _RestCardModelState extends State<RestCardModel> {
                                               ),
                                             ),
                                             Padding(
-                                              padding:
-                                                  const EdgeInsets.only(bottom: 5),
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 5),
                                               child: Container(
                                                   width: MediaQuery.of(context)
                                                           .size
@@ -643,16 +656,25 @@ class _RestCardModelState extends State<RestCardModel> {
                                                       120,
                                                   child: Text(
                                                     'Hello this restaurant is amazing and the service is so good, I cant begin to say how much you will enjoy it here. Truly had a great experience here',
-                                                    style: TextStyle(fontSize: 13),
+                                                    style:
+                                                        TextStyle(fontSize: 13),
                                                   )),
                                             ),
                                             Row(
                                               children: <Widget>[
                                                 Padding(
-                                                  padding: EdgeInsets.only(top: 3,bottom: 3),
-                                                  child: Text('4.8',style: TextStyle(fontSize: 14),),
+                                                  padding: EdgeInsets.only(
+                                                      top: 3, bottom: 3),
+                                                  child: Text(
+                                                    '4.8',
+                                                    style:
+                                                        TextStyle(fontSize: 14),
+                                                  ),
                                                 ),
-                                                Icon(Icons.star,color: Colors.amber,)
+                                                Icon(
+                                                  Icons.star,
+                                                  color: Colors.amber,
+                                                )
                                               ],
                                             )
                                           ],
@@ -1011,8 +1033,8 @@ class _RestCardModelState extends State<RestCardModel> {
                               onPressed: () {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                      return AddPicture();
-                                    }));
+                                  return AddPicture();
+                                }));
                               },
                               color: Colors.white,
                               elevation: 5,
@@ -1206,8 +1228,8 @@ class _RestCardModelState extends State<RestCardModel> {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       image: DecorationImage(
-                                          image:
-                                              AssetImage('assets/Chocolate.jpg'),
+                                          image: AssetImage(
+                                              'assets/Chocolate.jpg'),
                                           fit: BoxFit.cover)),
                                 );
                               }),
@@ -1231,7 +1253,8 @@ class _RestCardModelState extends State<RestCardModel> {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       image: DecorationImage(
-                                          image: AssetImage('assets/Coffee.jpg'),
+                                          image:
+                                              AssetImage('assets/Coffee.jpg'),
                                           fit: BoxFit.cover)),
                                 );
                               }),
@@ -2208,7 +2231,7 @@ class Delegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    double condition =shrinkOffset/expandedHeight;
+    double condition = shrinkOffset / expandedHeight;
     // TODO: implement build
     return Stack(
       alignment: Alignment.bottomCenter,
@@ -2265,18 +2288,20 @@ class Delegate extends SliverPersistentHeaderDelegate {
                 Card(
                   elevation: 5,
                   shape: RoundedRectangleBorder(
-                      borderRadius: condition==1?BorderRadius.circular(50):BorderRadius.circular(25)),
+                      borderRadius: condition == 1
+                          ? BorderRadius.circular(50)
+                          : BorderRadius.circular(25)),
                   child: Row(
                     children: <Widget>[
-                      if(condition==1)
-                        SizedBox(width: 16,),
-                      if (condition== 1)
+                      if (condition == 1)
+                        SizedBox(
+                          width: 16,
+                        ),
+                      if (condition == 1)
                         Align(
                           alignment: Alignment.topLeft,
                           child: GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pop();
-                            },
+                            onTap: () {},
                             child: Card(
                               elevation: 5,
                               shape: RoundedRectangleBorder(
@@ -2337,12 +2362,13 @@ class Delegate extends SliverPersistentHeaderDelegate {
                                   children: <Widget>[
                                     Icon(
                                       Icons.star,
-                                      size: condition==1?12:13,
+                                      size: condition == 1 ? 12 : 13,
                                       color: Colors.amber,
                                     ),
                                     Text(
                                       '4.5(289)',
-                                      style: TextStyle(fontSize: condition==1?12: 14),
+                                      style: TextStyle(
+                                          fontSize: condition == 1 ? 12 : 14),
                                     ),
                                   ],
                                 ),
@@ -2353,11 +2379,12 @@ class Delegate extends SliverPersistentHeaderDelegate {
                                   children: <Widget>[
                                     Icon(
                                       Icons.alarm,
-                                      size: condition==1?12:14,
+                                      size: condition == 1 ? 12 : 14,
                                     ),
                                     Text(
                                       '15-20 mins',
-                                      style: TextStyle(fontSize: condition==1?12:14),
+                                      style: TextStyle(
+                                          fontSize: condition == 1 ? 12 : 14),
                                     ),
                                   ],
                                 ),
@@ -2366,15 +2393,18 @@ class Delegate extends SliverPersistentHeaderDelegate {
                                 ),
                                 Text(
                                   '\u20B9 Free',
-                                  style: TextStyle(fontSize: condition==1?12:15),
+                                  style: TextStyle(
+                                      fontSize: condition == 1 ? 12 : 15),
                                 )
                               ],
                             ),
-                            shrinkOffset/expandedHeight==1?
-                                SizedBox(height: 8,):
-                            SizedBox(
-                              height: 14,
-                            )
+                            shrinkOffset / expandedHeight == 1
+                                ? SizedBox(
+                                    height: 8,
+                                  )
+                                : SizedBox(
+                                    height: 14,
+                                  )
                           ],
                         ),
                       ),

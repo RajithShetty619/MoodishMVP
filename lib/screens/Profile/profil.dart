@@ -157,7 +157,7 @@ class _ProfileState extends State<Profile> {
                           ),
                           Center(
                               child: Text(
-                            'Notification',
+                            'Notifications',
                             style: TextStyle(color: Colors.black),
                           ))
                         ],
@@ -224,7 +224,7 @@ class _ProfileState extends State<Profile> {
                   onTap: () {},
                 ),
                 ListTile(
-                  title: Text("FAQ's",
+                  title: Text("FAQs",
                       style: TextStyle(
                         color: Colors.black,
                       )),
@@ -331,20 +331,7 @@ class _ProfileState extends State<Profile> {
                             box.localToGlobal(Offset.zero) & box.size);
                   },
                 ),
-                Divider(),
-
-                //  SwitchListTile(
-                //  title: Text("Email Notifications"),
-                // subtitle: Text("On"),
-                //  value: true,
-                //       onChanged: (val){},
-                //   ),
-                //    SwitchListTile(
-                //     title: Text("Push Notifications"),
-                //    subtitle: Text("Off"),
-                //   value: false,
-                //   onChanged: (val){},
-                //  ),
+                Divider(), 
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
@@ -404,16 +391,3 @@ class _ProfileState extends State<Profile> {
     );
   }
 }
-
-//Future<void> _onOpen(LinkableElement link) async {
-//  if (await canLaunch(link.url)) {
-//    await launch(
-//      link.url,
-//      enableJavaScript: true,
-//      forceSafariVC: false,
-//      forceWebView: false,
-//    );
-//  } else {
-//    throw 'Could not launch $link';
-//  }
-//}

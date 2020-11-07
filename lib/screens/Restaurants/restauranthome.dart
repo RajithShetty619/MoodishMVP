@@ -2,8 +2,8 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:carousel_slider/carousel_options.dart';
-import 'file:///C:/Users/varun/MoodishMVP/lib/screens/Restaurants/restaurantCard/restCardModel.dart';
 import 'package:moodish_mvp/screens/Restaurants/restCategoryModel.dart';
+import 'package:moodish_mvp/screens/Restaurants/restaurantCard/restCardModel.dart';
 
 class RestaurantHome extends StatefulWidget {
   @override
@@ -11,7 +11,7 @@ class RestaurantHome extends StatefulWidget {
 }
 
 class _RestaurantHomeState extends State<RestaurantHome> {
-  double _currentIndex=0;
+  double _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -90,11 +90,11 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                 return Padding(
                   padding: const EdgeInsets.only(left: 8, right: 8),
                   child: GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                            return RestCardModel();
-                          }));
+                        return RestCardModel();
+                      }));
                     },
                     child: Container(
                       height: 215,
@@ -129,12 +129,13 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                                     ),
                                   ),
                                   Padding(
-                                    padding:
-                                        const EdgeInsets.only(left: 10.0, top: 1),
+                                    padding: const EdgeInsets.only(
+                                        left: 10.0, top: 1),
                                     child: Text(
                                       'Fine Dining,Cantonese,Chinese',
                                       style: TextStyle(
-                                          fontSize: 12, color: Colors.grey[400]),
+                                          fontSize: 12,
+                                          color: Colors.grey[400]),
                                     ),
                                   ),
                                   Padding(
@@ -219,7 +220,9 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                     onTap: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return RestCategoryModel(event:1,);
+                        return RestCategoryModel(
+                          event: 1,
+                        );
                       }));
                     },
                     child: Column(
@@ -251,8 +254,10 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                     onTap: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                            return RestCategoryModel(event:2,);
-                          }));
+                        return RestCategoryModel(
+                          event: 2,
+                        );
+                      }));
                     },
                     child: Column(
                       children: <Widget>[
@@ -269,7 +274,8 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
-                                      image: AssetImage('assets/italianIcon.jpg'),
+                                      image:
+                                          AssetImage('assets/italianIcon.jpg'),
                                       fit: BoxFit.cover)),
                             ),
                           ),
@@ -288,8 +294,10 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                     onTap: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                            return RestCategoryModel(event:3,);
-                          }));
+                        return RestCategoryModel(
+                          event: 3,
+                        );
+                      }));
                     },
                     child: Column(
                       children: <Widget>[
@@ -326,8 +334,10 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                     onTap: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                            return RestCategoryModel(event:4,);
-                          }));
+                        return RestCategoryModel(
+                          event: 4,
+                        );
+                      }));
                     },
                     child: Column(
                       children: <Widget>[
@@ -344,7 +354,8 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
-                                      image: AssetImage('assets/dessetIcon.jpg'),
+                                      image:
+                                          AssetImage('assets/dessetIcon.jpg'),
                                       fit: BoxFit.cover)),
                             ),
                           ),
@@ -363,8 +374,10 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                     onTap: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                            return RestCategoryModel(event:5,);
-                          }));
+                        return RestCategoryModel(
+                          event: 5,
+                        );
+                      }));
                     },
                     child: Column(
                       children: <Widget>[
@@ -607,11 +620,11 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                         top: 5,
                         bottom: 5),
                     child: GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                              return RestCardModel();
-                            }));
+                          return RestCardModel();
+                        }));
                       },
                       child: Card(
                         elevation: 4,
@@ -644,7 +657,8 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                                     Text(
                                       'Mumbai Maharashtra',
                                       style: TextStyle(
-                                          color: Colors.grey[300], fontSize: 11),
+                                          color: Colors.grey[300],
+                                          fontSize: 11),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(
@@ -694,7 +708,8 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
                                       image: DecorationImage(
-                                          image: AssetImage('assets/Coffee.jpg'),
+                                          image:
+                                              AssetImage('assets/Coffee.jpg'),
                                           fit: BoxFit.cover)),
                                 )
                               ],

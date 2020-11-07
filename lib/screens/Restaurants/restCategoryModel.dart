@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/varun/MoodishMVP/lib/screens/Restaurants/restaurantCard/restCardModel.dart';
+import 'package:moodish_mvp/screens/Restaurants/restaurantCard/restCardModel.dart';
 
 class RestCategoryModel extends StatefulWidget {
   int event;
@@ -178,11 +178,11 @@ class _RestCategoryModelState extends State<RestCategoryModel> {
                           top: 5,
                           bottom: 5),
                       child: GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
-                                return RestCardModel();
-                              }));
+                            return RestCardModel();
+                          }));
                         },
                         child: Card(
                           elevation: 4,
@@ -193,10 +193,12 @@ class _RestCategoryModelState extends State<RestCategoryModel> {
                               padding: const EdgeInsets.only(
                                   left: 12, top: 8, bottom: 8, right: 5),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: <Widget>[
                                       Text(
                                         'Yauatcha',

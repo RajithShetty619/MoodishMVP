@@ -208,7 +208,7 @@ class DatabaseService {
             .join(" "))
         .toList();
     List<String> data = [];
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 5 && i < list.length; i++) {
       data.add(list[i]);
     }
     print(data);
