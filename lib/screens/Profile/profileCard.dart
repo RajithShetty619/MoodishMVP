@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:moodish_mvp/screens/Profile/Edit.dart';
 
 class ProfileCard extends StatefulWidget {
+
   @override
   _ProfileCardState createState() => _ProfileCardState();
 }
