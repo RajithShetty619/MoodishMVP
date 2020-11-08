@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/screens/Profile/Edit.dart';
 
 class ProfileCard extends StatefulWidget {
   @override
@@ -29,12 +30,17 @@ class _ProfileCardState extends State<ProfileCard> {
                   alignment: Alignment.topLeft,
                   child: Row(
                     children: [
-                      Padding(
-                        padding: EdgeInsets.only(top: 10,left: MediaQuery.of(context).size.width/25),
-                        child: Card(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(50))),
-                          elevation: 5,
-                          child: Padding(padding: EdgeInsets.all(8),child: Icon(Icons.arrow_back,size: 30,),),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.of(context).pop();
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 10,left: MediaQuery.of(context).size.width/25),
+                          child: Card(
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(50))),
+                            elevation: 5,
+                            child: Padding(padding: EdgeInsets.all(8),child: Icon(Icons.arrow_back,size: 30,),),
+                          ),
                         ),
                       ),
                       Spacer(),
@@ -44,10 +50,18 @@ class _ProfileCardState extends State<ProfileCard> {
                         child: Padding(padding: EdgeInsets.all(8),child: Icon(Icons.share,size: 30,),),
                       ),
                       SizedBox(width: MediaQuery.of(context).size.width/40,),
-                      Card(
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(50))),
-                        elevation: 5,
-                        child: Padding(padding: EdgeInsets.all(8),child: Icon(Icons.edit,size: 30,),),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EditProfile()));
+                        },
+                        child: Card(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(50))),
+                          elevation: 5,
+                          child: Padding(padding: EdgeInsets.all(8),child: Icon(Icons.edit,size: 30,),),
+                        ),
                       ),
                       SizedBox(width: MediaQuery.of(context).size.width/40,),
                     ],
@@ -103,79 +117,11 @@ class _ProfileCardState extends State<ProfileCard> {
                 SizedBox(
                   width: MediaQuery.of(context).size.width / 8,
                 ),
-                Container(
-                  height: 110,
-                  width: 115,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      color: Colors.grey[400]),
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Recipe - 15'),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text('Restaurant Review - 10'),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text('Points - 25')
-                      ],
-                    ),
-                  ),
-                )
               ],
             ),
           ),
           SizedBox(
             height: 28,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(30)),
-                    color: Colors.grey[400]),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'Add Recipe',
-                    style: TextStyle(color: Colors.grey[600]),
-                  ),
-                ),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(30)),
-                    color: Colors.grey[400]),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('Add Recipe',
-                      style: TextStyle(color: Colors.grey[600])),
-                ),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(30)),
-                    color: Colors.grey[400]),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('Add Recipe',
-                      style: TextStyle(color: Colors.grey[600])),
-                ),
-              )
-            ],
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 10, bottom: 20, right: 20, left: 20),
-            child: Divider(
-              thickness: 1.2,
-              color: Colors.grey[400],
-            ),
           ),
           Container(
             decoration:
@@ -194,7 +140,7 @@ class _ProfileCardState extends State<ProfileCard> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 5),
                           child: Text(
-                            'My Recipes',
+                            'Liked Recipes',
                             style: TextStyle(
                                 fontSize: _selected == 1
                                     ? MediaQuery.of(context).size.width / 20
@@ -255,76 +201,6 @@ class _ProfileCardState extends State<ProfileCard> {
                               )
                       ],
                     )),
-                GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _selected = 3;
-                      });
-                    },
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 5),
-                          child: Text('Liked Food',
-                              style: TextStyle(
-                                  fontSize: _selected == 3
-                                      ? MediaQuery.of(context).size.width / 28
-                                      : MediaQuery.of(context).size.width / 30,
-                                  color: _selected == 3
-                                      ? Colors.black87
-                                      : Colors.grey[500])),
-                        ),
-                        _selected == 3
-                            ? Container(
-                                height: 5,
-                                width: 60,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(20),
-                                      topRight: Radius.circular(20)),
-                                  color: Colors.black,
-                                ),
-                              )
-                            : Container(
-                                height: 5,
-                              )
-                      ],
-                    )),
-                GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _selected = 4;
-                      });
-                    },
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 5),
-                          child: Text('Liked Reataurants',
-                              style: TextStyle(
-                                  fontSize: _selected == 4
-                                      ? MediaQuery.of(context).size.width /28
-                                      : MediaQuery.of(context).size.width /30,
-                                  color: _selected == 4
-                                      ? Colors.black87
-                                      : Colors.grey[500])),
-                        ),
-                        _selected == 4
-                            ? Container(
-                                height: 5,
-                                width: 60,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(20),
-                                      topRight: Radius.circular(20)),
-                                  color: Colors.black,
-                                ),
-                              )
-                            : Container(
-                                height: 5,
-                              )
-                      ],
-                    ))
               ],
             ),
           ),
@@ -640,202 +516,7 @@ class _ProfileCardState extends State<ProfileCard> {
                     })
               ],
             ),
-          if (_selected == 3)
-            Column(
-              children: [
-                SizedBox(height: 10,),
-                ListView.builder(
-                    itemCount: 3,
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 15, right: 15),
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(20))),
-                          elevation: 5.0,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 10, left: 25, bottom: 10),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Aamras',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      'Indian',
-                                      style: TextStyle(color: Colors.grey[400]),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      'A Sweet in India',
-                                      style: TextStyle(color: Colors.grey[400]),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 8, bottom: 10),
-                                      child: Container(
-                                        color: Colors.black87,
-                                        height: 0.8,
-                                        width: 180,
-                                      ),
-                                    ),
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.fastfood,
-                                          size: 12,
-                                        ),
-                                        SizedBox(
-                                          width: 3,
-                                        ),
-                                        Text('273 Calories'),
-                                        SizedBox(
-                                          width: 12,
-                                        ),
-                                        Icon(
-                                          Icons.alarm,
-                                          size: 12,
-                                        ),
-                                        Text('15 mins')
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                              Spacer(),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 8),
-                                child: Container(
-                                  height: 110,
-                                  width: 110,
-                                  decoration: BoxDecoration(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
-                                      image: DecorationImage(
-                                          image:
-                                          AssetImage('assets/Coffee.jpg'),
-                                          fit: BoxFit.cover)),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
-                    })
-              ],
-            ),
-          if(_selected==4)
-            Column(
-              children: [
-                SizedBox(height: 10,),
-                ListView.builder(
-                    itemCount: 3,
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 15, right: 15),
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(20))),
-                          elevation: 5.0,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 10, left: 25, bottom: 10),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Aamras',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      'Indian',
-                                      style: TextStyle(color: Colors.grey[400]),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      'A Sweet in India',
-                                      style: TextStyle(color: Colors.grey[400]),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 8, bottom: 10),
-                                      child: Container(
-                                        color: Colors.black87,
-                                        height: 0.8,
-                                        width: 180,
-                                      ),
-                                    ),
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.fastfood,
-                                          size: 12,
-                                        ),
-                                        SizedBox(
-                                          width: 3,
-                                        ),
-                                        Text('273 Calories'),
-                                        SizedBox(
-                                          width: 12,
-                                        ),
-                                        Icon(
-                                          Icons.alarm,
-                                          size: 12,
-                                        ),
-                                        Text('15 mins')
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                              Spacer(),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 8),
-                                child: Container(
-                                  height: 110,
-                                  width: 110,
-                                  decoration: BoxDecoration(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
-                                      image: DecorationImage(
-                                          image:
-                                          AssetImage('assets/Coffee.jpg'),
-                                          fit: BoxFit.cover)),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
-                    })
-              ],
-            )
+
 
         ],
       ),

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/Services/database.dart';
+import 'package:moodish_mvp/screens/Profile/profileCard.dart';
 import 'package:share/share.dart';
 import '../../Services/authenticate.dart';
 import 'Edit.dart';
@@ -216,6 +217,25 @@ class _ProfileState extends State<Profile> {
                 Divider(
                   thickness: 2.0,
                 ),
+                ListTile(
+                  title: Text("My Profile",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20
+                      )),
+                  trailing: Icon(
+                    Icons.keyboard_arrow_right,
+                    color: Colors.grey.shade400,
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ProfileCard()));
+                  },
+                ),
+                Divider(),
+
                 ListTile(
                   title: Text(
                     "Help & Support",

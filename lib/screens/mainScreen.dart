@@ -73,7 +73,7 @@ class _MainScreenState extends State<MainScreen> {
             FoodHome(),
             RestaurantHome(),
             Search(),
-            ProfileCard(),
+            Profile(),
           ],
         )),
         bottomNavigationBar: BottomNavigationBar(
