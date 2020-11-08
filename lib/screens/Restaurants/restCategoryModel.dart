@@ -1,4 +1,13 @@
+import 'dart:ffi';
+
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:moodish_mvp/Services/geolocationRest.dart';
+import 'package:moodish_mvp/models/restaurantsModel.dart';
+import 'package:moodish_mvp/screens/Restaurants/restBloc/restBloc.dart';
 import 'package:moodish_mvp/screens/Restaurants/restaurantCard/restCardModel.dart';
 
 class RestCategoryModel extends StatefulWidget {
@@ -11,6 +20,33 @@ class RestCategoryModel extends StatefulWidget {
 }
 
 class _RestCategoryModelState extends State<RestCategoryModel> {
+  double _currentIndex = 0;
+  int _totalIndex = 8;
+
+  Future<void> futureBuilderFunction(int length, BuildContext context) async {
+    String cuisine;
+
+    switch (widget.event) {
+      case 1:
+        cuisine = "North Indian";
+        break;
+      case 2:
+        cuisine = "Italian";
+        break;
+      case 3:
+        cuisine = "Continental";
+        break;
+      case 4:
+        cuisine = "Desserts";
+        break;
+      case 5:
+        cuisine = "Fast Food";
+        break;
+      default:
+    }
+    return cuisine;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -166,120 +202,174 @@ class _RestCategoryModelState extends State<RestCategoryModel> {
               SizedBox(
                 height: 10,
               ),
-              ListView.builder(
-                  itemCount: 7,
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.width / 15,
-                          right: MediaQuery.of(context).size.width / 15,
-                          top: 5,
-                          bottom: 5),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return RestCardModel();
-                          }));
-                        },
-                        child: Card(
-                          elevation: 4,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Container(
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 12, top: 8, bottom: 8, right: 5),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text(
-                                        'Yauatcha',
-                                        style: TextStyle(
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.w400),
-                                      ),
-                                      Container(
-                                          width: 170,
-                                          child: Text(
-                                            'Fine Dining, Cantonese, Chinese',
-                                            style: TextStyle(
-                                                fontSize: 11,
-                                                color: Colors.grey[300]),
-                                          )),
-                                      Text(
-                                        'Mumbai Maharashtra',
-                                        style: TextStyle(
-                                            color: Colors.grey[300],
-                                            fontSize: 11),
-                                      ),
-                                      Padding(
+              BlocConsumer<RestaurantBloc, Map<String, List<RestListModel>>>(
+                buildWhen: (Map<String, List<RestListModel>> previous,
+                    Map<String, List<RestListModel>> current) {
+                  return true;
+                },
+                listenWhen: (Map<String, List<RestListModel>> previous,
+                    Map<String, List<RestListModel>> current) {
+                  if (current.length >= previous.length) {
+                    return true;
+                  }
+                  return false;
+                },
+                listener: (context, state) {
+                  // TODO: implement listener
+                },
+                builder: (context, restList) {
+                  print(restList["${widget.event}"].length.toString() +
+                      "${widget.event}");
+                  return FutureBuilder(
+                    future: futureBuilderFunction(
+                        restList["${widget.event}"].length, context),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done)
+                        return ListView.builder(
+                            itemCount: restList["${widget.event}"].length,
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              RestListModel element =
+                                  restList["${widget.event}"][index];
+                              return Padding(
+                                padding: EdgeInsets.only(
+                                    left:
+                                        MediaQuery.of(context).size.width / 15,
+                                    right:
+                                        MediaQuery.of(context).size.width / 15,
+                                    top: 5,
+                                    bottom: 5),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return RestCardModel(
+                                        restaurant: element,
+                                      );
+                                    }));
+                                  },
+                                  child: Card(
+                                    elevation: 4,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    child: Container(
+                                      child: Padding(
                                         padding: const EdgeInsets.only(
-                                            top: 10, bottom: 10),
-                                        child: Container(
-                                          height: 1,
-                                          width: 175,
-                                          color: Colors.grey,
+                                            left: 12,
+                                            top: 8,
+                                            bottom: 8,
+                                            right: 5),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: <Widget>[
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Text(
+                                                  element.restaurant_Name,
+                                                  style: TextStyle(
+                                                      fontSize: 24,
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                                ),
+                                                Container(
+                                                    width: 170,
+                                                    child: Text(
+                                                      element.restaurant_Type,
+                                                      style: TextStyle(
+                                                          fontSize: 11,
+                                                          color:
+                                                              Colors.grey[300]),
+                                                    )),
+                                                Text(
+                                                  element.restaurant_Location,
+                                                  style: TextStyle(
+                                                      color: Colors.grey[300],
+                                                      fontSize: 11),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 10, bottom: 10),
+                                                  child: Container(
+                                                    height: 1,
+                                                    width: 175,
+                                                    color: Colors.grey,
+                                                  ),
+                                                ),
+                                                Row(
+                                                  children: <Widget>[
+                                                    Icon(
+                                                      Icons.star,
+                                                      size: 10,
+                                                      color: Colors.amber,
+                                                    ),
+                                                    Text(
+                                                      element.rating,
+                                                      style: TextStyle(
+                                                          fontSize: 10),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 8,
+                                                    ),
+                                                    Icon(
+                                                      Icons.pin_drop,
+                                                      size: 10,
+                                                    ),
+                                                    Text(
+                                                      element
+                                                          .restaurant_Location,
+                                                      style: TextStyle(
+                                                          fontSize: 10),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 8,
+                                                    ),
+                                                    Text(
+                                                      element.price_level ?? '',
+                                                      style: TextStyle(
+                                                          fontSize: 10),
+                                                    )
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                            Container(
+                                              height: 100,
+                                              width: 100,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  image: DecorationImage(
+                                                      image:
+                                                          CachedNetworkImageProvider(
+                                                              element
+                                                                  .photo_url),
+                                                      fit: BoxFit.cover)),
+                                            )
+                                          ],
                                         ),
                                       ),
-                                      Row(
-                                        children: <Widget>[
-                                          Icon(
-                                            Icons.star,
-                                            size: 10,
-                                            color: Colors.amber,
-                                          ),
-                                          Text(
-                                            '4.5(289)',
-                                            style: TextStyle(fontSize: 10),
-                                          ),
-                                          SizedBox(
-                                            width: 8,
-                                          ),
-                                          Icon(
-                                            Icons.alarm,
-                                            size: 10,
-                                          ),
-                                          Text(
-                                            '15-20 mins',
-                                            style: TextStyle(fontSize: 10),
-                                          ),
-                                          SizedBox(
-                                            width: 8,
-                                          ),
-                                          Text(
-                                            '\u20B9 Free',
-                                            style: TextStyle(fontSize: 10),
-                                          )
-                                        ],
-                                      )
-                                    ],
+                                    ),
                                   ),
-                                  Container(
-                                    height: 100,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        image: DecorationImage(
-                                            image:
-                                                AssetImage('assets/Coffee.jpg'),
-                                            fit: BoxFit.cover)),
-                                  )
-                                ],
-                              ),
-                            ),
+                                ),
+                              );
+                            });
+                      else {
+                        return Center(
+                          child: SpinKitCircle(
+                            color: Colors.blueAccent,
                           ),
-                        ),
-                      ),
-                    );
-                  })
+                        );
+                      }
+                    },
+                  );
+                },
+              ),
             ],
           ),
         ),

@@ -24,6 +24,18 @@ class LoadingScreen extends StatefulWidget {
 
 class _LoadingScreenState extends State<LoadingScreen> {
   Future loadAllData() async {
+    await GeolocationRest()
+        .getRestFromLocation(context)
+        .then((value) => GeolocationRest()
+            .getRestFromLocationCuisine(context, "North Indian", "1"))
+        .then((value) => GeolocationRest()
+            .getRestFromLocationCuisine(context, "Italian", "2"))
+        .then((value) => GeolocationRest()
+            .getRestFromLocationCuisine(context, "Continental", "3"))
+        .then((value) => GeolocationRest()
+            .getRestFromLocationCuisine(context, "Desserts", "4"))
+        .then((value) => GeolocationRest()
+            .getRestFromLocationCuisine(context, "Fast Food", "5"));
     Box _box = await Hive.openBox("preferenceBox");
     String deter = _box.get("deter");
 
@@ -66,14 +78,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
             check: check).then((future) {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "d0"));
         });
-      }),
-      // GeolocationRest().getRestFromLocation().then((rest) {
-      //   BlocProvider.of<RestaurantBloc>(context)
-      //       .add(RestaurantEvent.add(rest, 'r1'));
-      // }),
-      DatabaseQuery().getRest().then((rest) {
-        BlocProvider.of<RestaurantBloc>(context)
-            .add(RestaurantEvent.add(rest, 'r2'));
       }),
     ]);
   }

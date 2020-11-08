@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/screens/Restaurants/restauranthome.dart';
 
@@ -11,10 +10,9 @@ class Test extends StatefulWidget {
 }
 
 class _TestState extends State<Test> {
+  double _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: RestaurantHome(),
-    );
+    return RestaurantHome();
   }
 }
