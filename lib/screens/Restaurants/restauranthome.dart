@@ -166,15 +166,19 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                                       Padding(
                                         padding:
                                             const EdgeInsets.only(left: 8.0),
-                                        child: Text(
-                                          element.restaurant_Name,
-                                          textHeightBehavior:
-                                              TextHeightBehavior(
-                                                  applyHeightToFirstAscent:
-                                                      true),
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 24),
+                                        child: Container(
+                                          width: 230,
+                                          child: Text(
+                                            element.restaurant_Name,
+                                            overflow: TextOverflow.ellipsis,
+                                            textHeightBehavior:
+                                                TextHeightBehavior(
+                                                    applyHeightToFirstAscent:
+                                                        true),
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: MediaQuery.of(context).size.width/20),
+                                          ),
                                         ),
                                       ),
                                       Padding(
@@ -555,11 +559,14 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
-                                        Text(
-                                          element.restaurant_Name,
-                                          style: TextStyle(
-                                              fontSize: 24,
-                                              fontWeight: FontWeight.w400),
+                                        Container(
+                                          width: 160,
+                                          child: Text(
+                                            element.restaurant_Name,
+                                            style: TextStyle(
+                                                fontSize: MediaQuery.of(context).size.width/20,
+                                                fontWeight: FontWeight.w400),
+                                          ),
                                         ),
                                         Container(
                                             width: 170,
