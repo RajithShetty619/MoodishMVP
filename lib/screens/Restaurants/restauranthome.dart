@@ -592,7 +592,7 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                                                   : element.cuisines,
                                               style: TextStyle(
                                                   fontSize: 11,
-                                                  color: Colors.grey[300]),
+                                                  color: Colors.grey[400]),
                                             )),
                                         // Text(
                                         //   element.restaurant_Location,
@@ -618,7 +618,7 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                                             ),
                                             Text(
                                               element.rating,
-                                              style: TextStyle(fontSize: 10),
+                                              style: TextStyle(fontSize: 12),
                                             ),
                                             SizedBox(
                                               width: 8,
@@ -629,7 +629,7 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                                             ),
                                             Text(
                                               element.restaurant_Location,
-                                              style: TextStyle(fontSize: 10),
+                                              style: TextStyle(fontSize: 12),
                                             ),
                                             SizedBox(
                                               width: 8,
