@@ -77,6 +77,7 @@ class _ProfileCardState extends State<ProfileCard> {
                     width: 120,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
+                      border: Border.all(color: Colors.black),
                       color: Colors.grey[400],
                     ),
                   ))
