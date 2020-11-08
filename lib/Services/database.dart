@@ -37,7 +37,8 @@ class DatabaseService {
     });
   }
 
-  Future<void> restRating({String sr_no, String review, double rating}) async {
+  Future<void> restRating(
+      {String sr_no, String review, double rating, String bestPart}) async {
     if (review != null) {
       dynamic user = await Authenticate().returnUser();
       await FirebaseFirestore.instance
