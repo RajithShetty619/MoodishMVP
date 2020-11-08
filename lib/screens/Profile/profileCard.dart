@@ -1,8 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/Services/databaseQuery.dart';
+import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Profile/Edit.dart';
 
 class ProfileCard extends StatefulWidget {
-
+  ImageProvider image;
+  Map<String, dynamic> user;
+  ProfileCard({this.user, this.image});
   @override
   _ProfileCardState createState() => _ProfileCardState();
 }
@@ -32,50 +37,81 @@ class _ProfileCardState extends State<ProfileCard> {
                   child: Row(
                     children: [
                       GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           Navigator.of(context).pop();
                         },
                         child: Padding(
-                          padding: EdgeInsets.only(top: 10,left: MediaQuery.of(context).size.width/25),
+                          padding: EdgeInsets.only(
+                              top: 10,
+                              left: MediaQuery.of(context).size.width / 25),
                           child: Card(
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(50))),
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(50))),
                             elevation: 5,
-                            child: Padding(padding: EdgeInsets.all(8),child: Icon(Icons.arrow_back,size: 30,),),
+                            child: Padding(
+                              padding: EdgeInsets.all(8),
+                              child: Icon(
+                                Icons.arrow_back,
+                                size: 30,
+                              ),
+                            ),
                           ),
                         ),
                       ),
                       Spacer(),
                       Card(
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(50))),
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(50))),
                         elevation: 5,
-                        child: Padding(padding: EdgeInsets.all(8),child: Icon(Icons.share,size: 30,),),
+                        child: Padding(
+                          padding: EdgeInsets.all(8),
+                          child: Icon(
+                            Icons.share,
+                            size: 30,
+                          ),
+                        ),
                       ),
-                      SizedBox(width: MediaQuery.of(context).size.width/40,),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 40,
+                      ),
                       GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => EditProfile()));
                         },
                         child: Card(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(50))),
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(50))),
                           elevation: 5,
-                          child: Padding(padding: EdgeInsets.all(8),child: Icon(Icons.edit,size: 30,),),
+                          child: Padding(
+                            padding: EdgeInsets.all(8),
+                            child: Icon(
+                              Icons.edit,
+                              size: 30,
+                            ),
+                          ),
                         ),
                       ),
-                      SizedBox(width: MediaQuery.of(context).size.width/40,),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 40,
+                      ),
                     ],
                   ),
                 ),
               ),
               Positioned(
                   top: 180,
-                  left: MediaQuery.of(context).size.width/12,
+                  left: MediaQuery.of(context).size.width / 12,
                   child: Container(
                     height: 120,
                     width: 120,
                     decoration: BoxDecoration(
+                      image: DecorationImage(image: widget.image),
                       shape: BoxShape.circle,
                       border: Border.all(color: Colors.black),
                       color: Colors.grey[400],
@@ -89,7 +125,7 @@ class _ProfileCardState extends State<ProfileCard> {
           Padding(
             padding: EdgeInsets.only(left: 170),
             child: Text(
-              'Username',
+              widget.user["name"],
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
             ),
           ),
@@ -104,15 +140,14 @@ class _ProfileCardState extends State<ProfileCard> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('The user bio goes here'),
+                      Text(widget.user["email"]),
                       SizedBox(
                         height: 7,
                       ),
-                      Text('The user bio goes here'),
+                      Text(widget.user["bio"] ?? ''),
                       SizedBox(
                         height: 7,
                       ),
-                      Text('The user bio goes here')
                     ],
                   ),
                 ),
@@ -225,10 +260,10 @@ class _ProfileCardState extends State<ProfileCard> {
                             style: TextStyle(
                                 fontSize: 21, fontWeight: FontWeight.bold),
                           ),
-                          Text(
-                            'Sorted by Cuisine',
-                            style: TextStyle(color: Colors.grey[400]),
-                          )
+                          // Text(
+                          //   'Sorted by Cuisine',
+                          //   style: TextStyle(color: Colors.grey[400]),
+                          // )
                         ],
                       ),
                     ),
@@ -248,98 +283,108 @@ class _ProfileCardState extends State<ProfileCard> {
                     )
                   ],
                 ),
-                ListView.builder(
-                    itemCount: 3,
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 15, right: 15),
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20))),
-                          elevation: 5.0,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 10, left: 25, bottom: 10),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Aamras',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      'Indian',
-                                      style: TextStyle(color: Colors.grey[400]),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      'A Sweet in India',
-                                      style: TextStyle(color: Colors.grey[400]),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 8, bottom: 10),
-                                      child: Container(
-                                        color: Colors.black87,
-                                        height: 0.8,
-                                        width: 180,
-                                      ),
-                                    ),
-                                    Row(
+                FutureBuilder(
+                  future: DatabaseQuery().getLikedFood(),
+                  initialData: [],
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    return ListView.builder(
+                        itemCount: snapshot.data.length,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          FoodListModel element = snapshot.data[index];
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 15, right: 15),
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20))),
+                              elevation: 5.0,
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 10, left: 25, bottom: 10),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Icon(
-                                          Icons.fastfood,
-                                          size: 12,
+                                        Text(
+                                          element.foodName,
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w500),
                                         ),
                                         SizedBox(
-                                          width: 3,
+                                          height: 5,
                                         ),
-                                        Text('273 Calories'),
-                                        SizedBox(
-                                          width: 12,
+                                        Text(
+                                          element.cuisine,
+                                          style: TextStyle(
+                                              color: Colors.grey[400]),
                                         ),
-                                        Icon(
-                                          Icons.alarm,
-                                          size: 12,
+                                        // SizedBox(
+                                        //   height: 5,
+                                        // ),
+                                        // Text(
+                                        //   'A Sweet in India',
+                                        //   style: TextStyle(
+                                        //       color: Colors.grey[400]),
+                                        // ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 8, bottom: 10),
+                                          child: Container(
+                                            color: Colors.black87,
+                                            height: 0.8,
+                                            width: 180,
+                                          ),
                                         ),
-                                        Text('15 mins')
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.fastfood,
+                                              size: 12,
+                                            ),
+                                            SizedBox(
+                                              width: 3,
+                                            ),
+                                            Text(element.calories),
+                                            SizedBox(
+                                              width: 12,
+                                            ),
+                                            Icon(
+                                              Icons.radio_button_checked,
+                                              size: 12,
+                                            ),
+                                            Text(element.deter)
+                                          ],
+                                        )
                                       ],
-                                    )
-                                  ],
-                                ),
+                                    ),
+                                  ),
+                                  Spacer(),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 8),
+                                    child: Container(
+                                      height: 110,
+                                      width: 110,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(20)),
+                                          image: DecorationImage(
+                                              image: CachedNetworkImageProvider(
+                                                  element.images),
+                                              fit: BoxFit.cover)),
+                                    ),
+                                  )
+                                ],
                               ),
-                              Spacer(),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 8),
-                                child: Container(
-                                  height: 110,
-                                  width: 110,
-                                  decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(20)),
-                                      image: DecorationImage(
-                                          image:
-                                              AssetImage('assets/Coffee.jpg'),
-                                          fit: BoxFit.cover)),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
-                    })
+                            ),
+                          );
+                        });
+                  },
+                ),
               ],
             ),
           if (_selected == 2)
@@ -518,8 +563,6 @@ class _ProfileCardState extends State<ProfileCard> {
                     })
               ],
             ),
-
-
         ],
       ),
     );
