@@ -225,10 +225,10 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                                               ),
                                             ],
                                           ),
-                                          Text(
-                                            '\u20B9 Free',
-                                            style: TextStyle(fontSize: 12),
-                                          )
+                                          // Text(
+                                          //   '\u20B9 Free',
+                                          //   style: TextStyle(fontSize: 12),
+                                          // )
                                         ],
                                       )
                                     ],
