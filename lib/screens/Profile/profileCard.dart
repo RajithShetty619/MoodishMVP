@@ -111,6 +111,7 @@ class _ProfileCardState extends State<ProfileCard> {
                     height: 120,
                     width: 120,
                     decoration: BoxDecoration(
+                      image: DecorationImage(image: widget.image),
                       shape: BoxShape.circle,
                       color: Colors.grey[400],
                     ),

@@ -282,7 +282,6 @@ class _RestCardModelState extends State<RestCardModel> {
                                         return MapView(
                                             widget.restaurant.address);
                                       }));
-                                      MapView(widget.restaurant.address);
                                     },
                                     child: Column(
                                       children: <Widget>[
@@ -416,6 +415,22 @@ class _RestCardModelState extends State<RestCardModel> {
                                         const EdgeInsets.only(left: 10, top: 5),
                                     child: Text(
                                       widget.restaurant.cuisines,
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                  ),
+                                  SizedBox(height: 20),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 5),
+                                    child: Text(
+                                      'Restaurant Type',
+                                      style: TextStyle(fontSize: 22),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.only(left: 10, top: 5),
+                                    child: Text(
+                                      widget.restaurant.restaurant_Type,
                                       style: TextStyle(fontSize: 16),
                                     ),
                                   ),
