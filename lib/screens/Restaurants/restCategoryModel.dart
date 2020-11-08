@@ -136,22 +136,22 @@ class _RestCategoryModelState extends State<RestCategoryModel> {
                 child: widget.event == 1
                     ? Text(
                         'Fine Dining',
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),
                       )
                     : widget.event == 2
                         ? Text(
                             'Italian',
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),
                           )
                         : widget.event == 3
                             ? Text(
                                 'Continental',
-                                style: TextStyle(fontSize: 20),
+                                style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),
                               )
                             : widget.event == 4
                                 ? Text(
                                     'Desserts',
-                                    style: TextStyle(fontSize: 20),
+                                    style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),
                                   )
                                 : widget.event == 5
                                     ? Text(
@@ -178,7 +178,7 @@ class _RestCategoryModelState extends State<RestCategoryModel> {
                         ),
                         Text(
                           'Sorted by Near You',
-                          style: TextStyle(color: Colors.grey[300]),
+                          style: TextStyle(color: Colors.grey[400]),
                         )
                       ],
                     ),

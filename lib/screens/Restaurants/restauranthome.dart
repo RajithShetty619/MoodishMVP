@@ -221,7 +221,7 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                                             children: <Widget>[
                                               Icon(
                                                 Icons.gps_fixed,
-                                                size: 10,
+                                                size: 12,
                                               ),
                                               Text(
                                                 element.restaurant_Location,
