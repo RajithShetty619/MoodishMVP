@@ -6,6 +6,7 @@ import 'package:moodish_mvp/models/restaurantsModel.dart';
 import 'package:location/location.dart';
 import 'package:moodish_mvp/screens/Food/events/restEvent.dart';
 import 'package:moodish_mvp/screens/Restaurants/restBloc/restBloc.dart';
+import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 
 class GeolocationRest {
@@ -51,7 +52,6 @@ class GeolocationRest {
 
     stream.listen((event) async {
       List<RestListModel> list = listfromSnapshot(event);
-      print("QUERY RUNNS  $radius_track");
       print(list.length);
       if (list.length < 9 && radius_track < 10) {
         radius_track = 0.25 + radius_track;
@@ -60,6 +60,62 @@ class GeolocationRest {
         radius.close();
         BlocProvider.of<RestaurantBloc>(context)
             .add(RestaurantEvent.add(list, "near"));
+        return null;
+      }
+    });
+  }
+
+  Future<void> getRestFromLocationCuisine(
+      BuildContext context, String cuisine_list, String listName) async {
+    Location location = new Location();
+
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
+    LocationData _locationData;
+
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        print("stingy");
+      }
+    }
+
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        print("yay");
+      }
+    }
+
+    _locationData = await location.getLocation();
+
+    var collectionReference = FirebaseFirestore.instance
+        .collection('restaurants')
+        .where("cuisine_list", arrayContainsAny: [cuisine_list]);
+    double radius_track = 0.5;
+    final radius = BehaviorSubject<double>.seeded(radius_track);
+    String field = 'g';
+    GeoFirePoint center = Geoflutterfire().point(
+        latitude: _locationData.latitude, longitude: _locationData.longitude);
+    Stream<List<DocumentSnapshot>> stream = radius.switchMap((rad) {
+      return Geoflutterfire()
+          .collection(collectionRef: collectionReference)
+          .within(center: center, radius: rad, field: field, strictMode: true);
+    });
+
+    stream.listen((event) async {
+      List<RestListModel> list = listfromSnapshot(event);
+      print(list.length);
+      if (list.length < 6 && radius_track < 30) {
+        radius_track = 0.25 + radius_track;
+        radius.add(radius_track);
+      } else {
+        radius.close();
+        BlocProvider.of<RestaurantBloc>(context)
+            .add(RestaurantEvent.add(list, listName));
+        return null;
       }
     });
   }

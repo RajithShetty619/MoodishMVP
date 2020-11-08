@@ -1,9 +1,17 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:moodish_mvp/Services/authenticate.dart';
+import 'package:moodish_mvp/Services/database.dart';
+import 'package:moodish_mvp/models/restaurantsModel.dart';
 import 'package:moodish_mvp/screens/Restaurants/restaurantCard/addPicture.dart';
+import 'package:moodish_mvp/screens/Restaurants/restaurantCard/mapview.dart';
 import 'package:moodish_mvp/screens/Restaurants/restaurantCard/restaurantReview.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RestCardModel extends StatefulWidget {
+  final RestListModel restaurant;
+  RestCardModel({this.restaurant});
   @override
   _RestCardModelState createState() => _RestCardModelState();
 }
@@ -16,6 +24,7 @@ class _RestCardModelState extends State<RestCardModel> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.restaurant.address);
     return Scaffold(
         bottomNavigationBar: BottomAppBar(
           child: Container(
@@ -194,7 +203,8 @@ class _RestCardModelState extends State<RestCardModel> {
           slivers: <Widget>[
             SliverPersistentHeader(
               pinned: true,
-              delegate: Delegate(expandedHeight: 250),
+              delegate:
+                  Delegate(expandedHeight: 250, restaurant: widget.restaurant),
             ),
             SliverList(
               delegate: SliverChildListDelegate([
@@ -215,7 +225,10 @@ class _RestCardModelState extends State<RestCardModel> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
                                 InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      launch(
+                                          'tel:${widget.restaurant.international_phone_number}');
+                                    },
                                     child: Column(
                                       children: <Widget>[
                                         Container(
@@ -238,7 +251,9 @@ class _RestCardModelState extends State<RestCardModel> {
                                   width: 20.0,
                                 ),
                                 InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      launch('${widget.restaurant.website}');
+                                    },
                                     child: Column(
                                       children: <Widget>[
                                         Container(
@@ -261,7 +276,14 @@ class _RestCardModelState extends State<RestCardModel> {
                                   width: 20.0,
                                 ),
                                 InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) {
+                                        return MapView(
+                                            widget.restaurant.address);
+                                      }));
+                                      MapView(widget.restaurant.address);
+                                    },
                                     child: Column(
                                       children: <Widget>[
                                         Container(
@@ -334,7 +356,7 @@ class _RestCardModelState extends State<RestCardModel> {
                                       child: Container(
                                           alignment: Alignment.centerLeft,
                                           child: Text(
-                                              'Raheja Tower, Bandra Kurla Complex, Bandra east, Mumbai, Maharashtra-400051',
+                                              widget.restaurant.address ?? '',
                                               style: TextStyle(fontSize: 16)))),
                                   Align(
                                     alignment: Alignment.centerLeft,
@@ -385,7 +407,7 @@ class _RestCardModelState extends State<RestCardModel> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 5),
                                     child: Text(
-                                      'What is Best here?',
+                                      'Cuisines',
                                       style: TextStyle(fontSize: 22),
                                     ),
                                   ),
@@ -393,66 +415,11 @@ class _RestCardModelState extends State<RestCardModel> {
                                     padding:
                                         const EdgeInsets.only(left: 10, top: 5),
                                     child: Text(
-                                      'What people think the restaurant is best at.',
+                                      widget.restaurant.cuisines,
                                       style: TextStyle(fontSize: 16),
                                     ),
                                   ),
                                   SizedBox(height: 20),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 5),
-                                    child: Text(
-                                      'Place A Pick Up Order',
-                                      style: TextStyle(fontSize: 22),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.only(left: 10, top: 5),
-                                    child: Text(
-                                      'Order Menu',
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.only(left: 10, top: 5),
-                                    child: Text(
-                                      'Current Status Of Your Order',
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                  ),
-                                  SizedBox(height: 20),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 5),
-                                    child: Text(
-                                      'Reserve Table For Dine Out',
-                                      style: TextStyle(fontSize: 22),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.only(left: 10, top: 5),
-                                    child: Text(
-                                      'Current Status For Dine Out',
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                  ),
-                                  SizedBox(height: 20),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 5),
-                                    child: Text(
-                                      'Offers Available By Restaurant',
-                                      style: TextStyle(fontSize: 22),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.only(left: 10, top: 5),
-                                    child: Text(
-                                      'Check the list of offers by restaurant',
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                  ),
                                 ],
                               ),
                             )
@@ -514,7 +481,7 @@ class _RestCardModelState extends State<RestCardModel> {
                           color: Colors.grey,
                         ),
                       ),
-                      Padding(
+                      /* Padding(
                         padding: EdgeInsets.only(left: 20, top: 2, right: 18),
                         child: Row(
                           children: <Widget>[
@@ -551,14 +518,16 @@ class _RestCardModelState extends State<RestCardModel> {
                           ],
                         ),
                       ),
+                       */
                       SizedBox(
                         height: 10,
                       ),
                       ListView.builder(
                           shrinkWrap: true,
-                          itemCount: 7,
+                          itemCount: widget.restaurant.reviews.length,
                           physics: NeverScrollableScrollPhysics(),
                           itemBuilder: (context, index) {
+                            dynamic element = widget.restaurant.reviews[index];
                             return Column(
                               children: <Widget>[
                                 Row(
@@ -567,45 +536,169 @@ class _RestCardModelState extends State<RestCardModel> {
                                       width: 10,
                                     ),
                                     Container(
-                                      height: 90,
-                                      width: 90,
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Colors.grey),
-                                    ),
+                                        height: 90,
+                                        width: 90,
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: CachedNetworkImageProvider(
+                                                    element[
+                                                        "profile_photo_url"])))),
                                     SizedBox(
                                       width: 10,
                                     ),
                                     Stack(
                                       overflow: Overflow.visible,
                                       children: <Widget>[
-                                        if (index == 0)
-                                          Positioned(
+                                        Positioned(
                                             left: MediaQuery.of(context)
                                                     .size
                                                     .width /
                                                 1.9,
-                                            child: Padding(
-                                              padding:
-                                                  EdgeInsets.only(right: 10),
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    border: Border.all(
-                                                        color: Colors.black)),
-                                                child: Padding(
-                                                  padding: EdgeInsets.all(10),
-                                                  child: Text(
-                                                    'i',
-                                                    style: TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
+                                            child: IconButton(
+                                                icon: Icon(Icons.info_outline),
+                                                onPressed: () async {
+                                                  bool visible = false;
+                                                  String description = '';
+                                                  dynamic data =
+                                                      await showDialog(
+                                                    context: context,
+                                                    builder: (dialogcontext) {
+                                                      return AlertDialog(
+                                                        shape:
+                                                            RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                        ),
+                                                        title: Text(
+                                                            "Why do you want to report this?"),
+                                                        content: Column(
+                                                          children: [
+                                                            FlatButton(
+                                                                onPressed:
+                                                                    () async {
+                                                                  await DatabaseService()
+                                                                      .report(
+                                                                          rest: widget
+                                                                              .restaurant,
+                                                                          index:
+                                                                              index,
+                                                                          uid: Authenticate()
+                                                                              .returnUid())
+                                                                      .then(
+                                                                          (value) {
+                                                                    Navigator.pop(
+                                                                        dialogcontext,
+                                                                        "done");
+                                                                  });
+                                                                },
+                                                                child: Align(
+                                                                  child: Text(
+                                                                      "Its Spam"),
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .centerLeft,
+                                                                )),
+                                                            FlatButton(
+                                                                onPressed: () {
+                                                                  setState(() {
+                                                                    visible =
+                                                                        true;
+                                                                  });
+                                                                },
+                                                                child: Align(
+                                                                  child: Text(
+                                                                      "Other:"),
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .centerLeft,
+                                                                )),
+                                                            // if (visible)
+                                                            Column(
+                                                              children: [
+                                                                Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .fromLTRB(
+                                                                          15,
+                                                                          0.0,
+                                                                          5,
+                                                                          6),
+                                                                  child:
+                                                                      TextField(
+                                                                          onChanged:
+                                                                              (val) {
+                                                                            setState(() {
+                                                                              description = val;
+                                                                            });
+                                                                          },
+                                                                          decoration:
+                                                                              InputDecoration(
+                                                                            hintText:
+                                                                                'Describe why its inapropriate?',
+                                                                            enabledBorder:
+                                                                                OutlineInputBorder(
+                                                                              borderRadius: BorderRadius.circular(5.0),
+                                                                            ),
+                                                                            focusedBorder:
+                                                                                OutlineInputBorder(
+                                                                              borderRadius: BorderRadius.circular(30.0),
+                                                                            ),
+                                                                          )),
+                                                                ),
+                                                                Align(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .centerRight,
+                                                                  child:
+                                                                      RaisedButton(
+                                                                    onPressed:
+                                                                        () {
+                                                                      DatabaseService()
+                                                                          .report(
+                                                                              rest: widget.restaurant,
+                                                                              index: index,
+                                                                              description: description,
+                                                                              uid: Authenticate().returnUid())
+                                                                          .then((value) {
+                                                                        Navigator.pop(
+                                                                            dialogcontext,
+                                                                            "done");
+                                                                      });
+                                                                    },
+                                                                    child: Text(
+                                                                        "ok"),
+                                                                  ),
+                                                                )
+                                                              ],
+                                                            )
+                                                          ],
+                                                        ),
+                                                        actions: [
+                                                          FlatButton(
+                                                            onPressed: () {
+                                                              Navigator.pop(
+                                                                  dialogcontext);
+                                                            },
+                                                            child: Text(
+                                                              "Cancel",
+                                                              style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                              ),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      );
+                                                    },
+                                                  );
+                                                  if (data == "done") {
+                                                    Scaffold.of(context)
+                                                        .showSnackBar(SnackBar(
+                                                            content: Text(
+                                                                "Thank you for your feedback")));
+                                                  }
+                                                })),
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -617,7 +710,7 @@ class _RestCardModelState extends State<RestCardModel> {
                                                       const EdgeInsets.only(
                                                           bottom: 5),
                                                   child: Text(
-                                                    'User',
+                                                    element["author_name"],
                                                     style: TextStyle(
                                                         color:
                                                             Colors.deepOrange),
@@ -632,7 +725,8 @@ class _RestCardModelState extends State<RestCardModel> {
                                               padding: const EdgeInsets.only(
                                                   bottom: 5),
                                               child: Text(
-                                                'Username',
+                                                element["author_nickname"] ??
+                                                    '',
                                                 style: TextStyle(fontSize: 16),
                                               ),
                                             ),
@@ -640,7 +734,8 @@ class _RestCardModelState extends State<RestCardModel> {
                                               padding: const EdgeInsets.only(
                                                   bottom: 5),
                                               child: Text(
-                                                'Dine out - Added 18 mins ago',
+                                                element[
+                                                    "relative_time_description"],
                                                 style: TextStyle(
                                                     fontSize: 12,
                                                     color: Colors.grey[400]),
@@ -655,7 +750,7 @@ class _RestCardModelState extends State<RestCardModel> {
                                                           .width -
                                                       120,
                                                   child: Text(
-                                                    'Hello this restaurant is amazing and the service is so good, I cant begin to say how much you will enjoy it here. Truly had a great experience here',
+                                                    element["text"],
                                                     style:
                                                         TextStyle(fontSize: 13),
                                                   )),
@@ -666,7 +761,8 @@ class _RestCardModelState extends State<RestCardModel> {
                                                   padding: EdgeInsets.only(
                                                       top: 3, bottom: 3),
                                                   child: Text(
-                                                    '4.8',
+                                                    element['rating']
+                                                        .toString(),
                                                     style:
                                                         TextStyle(fontSize: 14),
                                                   ),
@@ -2225,8 +2321,9 @@ class _RestCardModelState extends State<RestCardModel> {
 
 class Delegate extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
+  RestListModel restaurant;
 
-  Delegate({this.expandedHeight});
+  Delegate({this.expandedHeight, this.restaurant});
 
   @override
   Widget build(
@@ -2247,7 +2344,8 @@ class Delegate extends SliverPersistentHeaderDelegate {
                     bottomLeft: Radius.circular(60),
                     bottomRight: Radius.circular(60)),
                 image: DecorationImage(
-                    image: AssetImage('assets/Coffee.jpg'), fit: BoxFit.cover)),
+                    image: CachedNetworkImageProvider(restaurant.photo_url),
+                    fit: BoxFit.cover)),
           ),
         ),
         Positioned(
@@ -2328,7 +2426,7 @@ class Delegate extends SliverPersistentHeaderDelegate {
                               padding:
                                   const EdgeInsets.only(left: 14.0, top: 10),
                               child: Text(
-                                'Yauatcha',
+                                restaurant.restaurant_Name,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 26),
                               ),
@@ -2339,7 +2437,9 @@ class Delegate extends SliverPersistentHeaderDelegate {
                                     padding: const EdgeInsets.only(
                                         left: 16.0, top: 1),
                                     child: Text(
-                                      'Fine Dining, Cantonese, Chinese',
+                                      restaurant.restaurant_Type != 'nan'
+                                          ? restaurant.restaurant_Type
+                                          : restaurant.cuisines,
                                       style: TextStyle(
                                           fontSize: 15,
                                           color: Colors.grey[400]),
@@ -2366,7 +2466,7 @@ class Delegate extends SliverPersistentHeaderDelegate {
                                       color: Colors.amber,
                                     ),
                                     Text(
-                                      '4.5(289)',
+                                      restaurant.rating,
                                       style: TextStyle(
                                           fontSize: condition == 1 ? 12 : 14),
                                     ),
@@ -2378,11 +2478,11 @@ class Delegate extends SliverPersistentHeaderDelegate {
                                 Row(
                                   children: <Widget>[
                                     Icon(
-                                      Icons.alarm,
+                                      Icons.pin_drop,
                                       size: condition == 1 ? 12 : 14,
                                     ),
                                     Text(
-                                      '15-20 mins',
+                                      restaurant.restaurant_Location,
                                       style: TextStyle(
                                           fontSize: condition == 1 ? 12 : 14),
                                     ),
@@ -2391,11 +2491,11 @@ class Delegate extends SliverPersistentHeaderDelegate {
                                 SizedBox(
                                   width: 15,
                                 ),
-                                Text(
-                                  '\u20B9 Free',
-                                  style: TextStyle(
-                                      fontSize: condition == 1 ? 12 : 15),
-                                )
+                                // Text(
+                                //   '\u20B9 Free',
+                                //   style: TextStyle(
+                                //       fontSize: condition == 1 ? 12 : 15),
+                                // )
                               ],
                             ),
                             shrinkOffset / expandedHeight == 1

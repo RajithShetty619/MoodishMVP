@@ -4,7 +4,16 @@ import 'package:moodish_mvp/screens/Food/events/restEvent.dart';
 
 class RestaurantBloc
     extends Bloc<RestaurantEvent, Map<String, List<RestListModel>>> {
-  RestaurantBloc() : super({"near": [], "r2": []});
+  RestaurantBloc()
+      : super({
+          "near": [],
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": [],
+          "all": []
+        });
 
   Stream<Map<String, List<RestListModel>>> mapEventToState(
       RestaurantEvent event) async* {
