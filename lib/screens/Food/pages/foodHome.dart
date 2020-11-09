@@ -242,7 +242,7 @@ class _FoodHomeState extends State<FoodHome> {
                                         crossAxisSpacing: 5.0,
                                         mainAxisSpacing:
                                             MediaQuery.of(context).size.width /
-                                                4,
+                                                5,
                                       ),
                                       scrollDirection: Axis.horizontal,
                                       itemCount: feel.length,
@@ -482,28 +482,28 @@ class _FoodHomeState extends State<FoodHome> {
                         if (indexP == 0)
                           Flexible(
                             child: Container(
-                              height: MediaQuery.of(context).size.height / 2,
+                              height: MediaQuery.of(context).size.height / 1.7,
                               child: FoodftTab(),
                             ),
                           ),
                         if (indexP == 1 && numbr == 0)
                           Flexible(
                             child: Container(
-                              height: MediaQuery.of(context).size.height / 2,
+                              height: MediaQuery.of(context).size.height / 2.3,
                               child: PollTabs(),
                             ),
                           ),
                         if (indexP == 1 && numbr == 1)
                           Flexible(
                             child: Container(
-                              height: MediaQuery.of(context).size.height / 2,
+                              height: MediaQuery.of(context).size.height / 2.6,
                               child: YesNoTabs(),
                             ),
                           ),
                         if (indexP == 1 && numbr == 2)
                           Flexible(
                             child: Container(
-                              height: MediaQuery.of(context).size.height / 2,
+                              height: MediaQuery.of(context).size.height / 2.6,
                               child: This_ThatTabs(),
                             ),
                           ),
