@@ -31,6 +31,7 @@ class _FoodftTabState extends State<FoodftTab> {
       },
       builder: (BuildContext context, f_fact) {
         return ListView.builder(
+          scrollDirection: Axis.horizontal,
           shrinkWrap: true,
           primary: false,
           physics: NeverScrollableScrollPhysics(),
@@ -80,101 +81,104 @@ class _getListViewState extends State<getListView> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Card(
-          color: Colors.white,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 10.0,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    widget.fact.factHeading,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontSize: 20,
+      child: Container(
+        width: MediaQuery.of(context).size.width / 1.2,
+        child: Card(
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)),
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 10.0,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      widget.fact.factHeading,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 20,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    widget.fact.factStatment,
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.black,
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      widget.fact.factStatment,
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  IconButton(
-                    icon: !_like
-                        ? Icon(
-                            Icons.favorite_border,
-                            color: Colors.black,
-                            size: 30,
-                          )
-                        : Icon(
-                            Icons.favorite,
-                            color: Colors.red[700],
-                            size: 30,
-                          ),
-                    onPressed: () {
-                      if (_like == false)
-                        setState(() {
-                          BlocProvider.of<PollBloc>(context)
-                              .add(PollEvent.like(widget.index));
-                          _like = true;
-                        });
-                      else {
-                        setState(() {
-                          BlocProvider.of<PollBloc>(context)
-                              .add(PollEvent.like(widget.index));
-                          _like = false;
-                        });
-                      }
-                    },
-                  ),
-                  // IconButton(
-                  //   icon: Icon(
-                  //     Icons.add_circle_outline,
-                  //     size: 25,
-                  //   ),
-                  //   onPressed: () {},
-                  // ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.reply,
-                      size: 25,
+                SizedBox(
+                  height: 10.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    IconButton(
+                      icon: !_like
+                          ? Icon(
+                              Icons.favorite_border,
+                              color: Colors.black,
+                              size: 30,
+                            )
+                          : Icon(
+                              Icons.favorite,
+                              color: Colors.red[700],
+                              size: 30,
+                            ),
+                      onPressed: () {
+                        if (_like == false)
+                          setState(() {
+                            BlocProvider.of<PollBloc>(context)
+                                .add(PollEvent.like(widget.index));
+                            _like = true;
+                          });
+                        else {
+                          setState(() {
+                            BlocProvider.of<PollBloc>(context)
+                                .add(PollEvent.like(widget.index));
+                            _like = false;
+                          });
+                        }
+                      },
                     ),
-                    onPressed: () async {
-                      final RenderBox box = context.findRenderObject();
-                      Share.share(
-                          '${widget.fact.factStatment} - \nhttp://play.google.com/store/apps/details?id=net.moodish.snapinsight',
-                          subject: widget.fact.factHeading,
-                          sharePositionOrigin:
-                              box.localToGlobal(Offset.zero) & box.size);
-                    },
-                  )
-                ],
-              )
-            ],
-          )),
+                    // IconButton(
+                    //   icon: Icon(
+                    //     Icons.add_circle_outline,
+                    //     size: 25,
+                    //   ),
+                    //   onPressed: () {},
+                    // ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.reply,
+                        size: 25,
+                      ),
+                      onPressed: () async {
+                        final RenderBox box = context.findRenderObject();
+                        Share.share(
+                            '${widget.fact.factStatment} - \nhttp://play.google.com/store/apps/details?id=net.moodish.snapinsight',
+                            subject: widget.fact.factHeading,
+                            sharePositionOrigin:
+                                box.localToGlobal(Offset.zero) & box.size);
+                      },
+                    )
+                  ],
+                )
+              ],
+            )),
+      ),
     );
   }
 }

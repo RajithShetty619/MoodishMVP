@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 import 'dart:math' show cos, sqrt, asin;
 
 import 'package:location/location.dart';
@@ -17,7 +16,6 @@ class MapView extends StatefulWidget {
 class _MapViewState extends State<MapView> {
   CameraPosition _initialLocation = CameraPosition(target: LatLng(0.0, 0.0));
   GoogleMapController mapController;
-
   final Geolocator _geolocator = Geolocator();
 
   LocationData _currentPosition;
@@ -110,6 +108,17 @@ class _MapViewState extends State<MapView> {
         print("yay");
       }
     }
+
+    // await _geolocator.getCurrentPosition().then((Position position) async {
+    //   setState(() {
+    //     _currentPosition = position;
+
+    //     print('CURRENT POS: $_currentPosition');
+    //   });
+    //   await _getAddress();
+    // }).catchError((e) {
+    //   print(e);
+    // });
 
     await location.getLocation().then((LocationData position) async {
       setState(() {

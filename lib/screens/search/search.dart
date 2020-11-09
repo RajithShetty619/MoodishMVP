@@ -94,7 +94,7 @@ class _SearchState extends State<Search> {
             onItemFound: (FoodListModel food, int index) {
               return Container(
                   alignment: Alignment.topCenter,
-                  padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
+                  padding: EdgeInsets.fromLTRB(15, 20, 15, 40),
                   child: Center(child: TodaySpecial(foodList: food)));
             },
             onError: (e) {

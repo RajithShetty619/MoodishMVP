@@ -4,7 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/models/restaurantsModel.dart';
-import 'package:moodish_mvp/screens/Restaurants/restaurantCard/homepage.dart';
+import 'package:moodish_mvp/screens/Restaurants/restaurantCard/restCardModel.dart';
 import 'package:page_transition/page_transition.dart';
 
 class FoodRest extends StatefulWidget {
@@ -37,9 +37,7 @@ class _FoodRestState extends State<FoodRest> {
                             context,
                             PageTransition(
                                 type: PageTransitionType.rightToLeft,
-                                child: HomePage(
-                                  restaurant: _rest[index],
-                                )));
+                                child: RestCardModel()));
                       },
                       child: Card(
                         shape: RoundedRectangleBorder(

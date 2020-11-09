@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/screens/Food/nComponents/topRecipePage.dart';
 
 class TopRecipes extends StatelessWidget {
   const TopRecipes({
@@ -8,7 +9,10 @@ class TopRecipes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => FoodRecipePage()));
+      },
       child: Card(
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),

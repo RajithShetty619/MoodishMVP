@@ -7,7 +7,7 @@ import 'package:moodish_mvp/models/pollsModel.dart';
 import 'package:moodish_mvp/restartApp.dart';
 import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
 import 'package:moodish_mvp/screens/Food/blocs/pollsbloc/pollsBloc.dart';
-import 'package:moodish_mvp/screens/Food/blocs/restBloc/restBloc.dart';
+import 'package:moodish_mvp/screens/Restaurants/restBloc/restBloc.dart';
 import 'package:moodish_mvp/screens/wrapper.dart';
 import 'package:provider/provider.dart';
 import 'package:hive/hive.dart';

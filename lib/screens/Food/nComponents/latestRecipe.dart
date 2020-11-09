@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moodish_mvp/screens/Food/nComponents/latestRecipeInfo.dart';
 
 class LatestRecipes extends StatelessWidget {
   const LatestRecipes({
@@ -7,147 +8,153 @@ class LatestRecipes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(25))),
-      elevation: 5,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 10,
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 10),
-            child: Row(
-              children: [
-                Container(
-                  height: 65,
-                  width: 65,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      image: DecorationImage(
-                          image: AssetImage('assets/Coffee.jpg'),
-                          fit: BoxFit.cover)),
-                ),
-                SizedBox(
-                  width: 15,
-                ),
-                Container(
-                  height: 65,
-                  width: 65,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      image: DecorationImage(
-                          image: AssetImage('assets/Coffee.jpg'),
-                          fit: BoxFit.cover)),
-                ),
-                SizedBox(
-                  width: 15,
-                ),
-                Container(
-                  height: 65,
-                  width: 65,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      image: DecorationImage(
-                          image: AssetImage('assets/Coffee.jpg'),
-                          fit: BoxFit.cover)),
-                ),
-                SizedBox(
-                  width: 15,
-                ),
-                Container(
-                  height: 65,
-                  width: 65,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      image: DecorationImage(
-                          image: AssetImage('assets/Coffee.jpg'),
-                          fit: BoxFit.cover)),
-                )
-              ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => LatestRecipeInfo()));
+      },
+      child: Card(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(25))),
+        elevation: 5,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 10,
             ),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: Row(
-              children: [
-                Spacer(),
-                Container(
-                  height: 65,
-                  width: 65,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      image: DecorationImage(
-                          image: AssetImage('assets/Coffee.jpg'),
-                          fit: BoxFit.cover)),
-                ),
-                SizedBox(
-                  width: 15,
-                ),
-                Container(
-                  height: 65,
-                  width: 65,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      image: DecorationImage(
-                          image: AssetImage('assets/Coffee.jpg'),
-                          fit: BoxFit.cover)),
-                ),
-                SizedBox(
-                  width: 15,
-                ),
-                Container(
-                  height: 65,
-                  width: 65,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      image: DecorationImage(
-                          image: AssetImage('assets/Coffee.jpg'),
-                          fit: BoxFit.cover)),
-                ),
-                SizedBox(
-                  width: 15,
-                ),
-                Container(
-                  height: 65,
-                  width: 65,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      image: DecorationImage(
-                          image: AssetImage('assets/Coffee.jpg'),
-                          fit: BoxFit.cover)),
-                )
-              ],
+            Padding(
+              padding: EdgeInsets.only(left: 10),
+              child: Row(
+                children: [
+                  Container(
+                    height: 65,
+                    width: 65,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        image: DecorationImage(
+                            image: AssetImage('assets/Coffee.jpg'),
+                            fit: BoxFit.cover)),
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Container(
+                    height: 65,
+                    width: 65,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        image: DecorationImage(
+                            image: AssetImage('assets/Coffee.jpg'),
+                            fit: BoxFit.cover)),
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Container(
+                    height: 65,
+                    width: 65,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        image: DecorationImage(
+                            image: AssetImage('assets/Coffee.jpg'),
+                            fit: BoxFit.cover)),
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Container(
+                    height: 65,
+                    width: 65,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        image: DecorationImage(
+                            image: AssetImage('assets/Coffee.jpg'),
+                            fit: BoxFit.cover)),
+                  )
+                ],
+              ),
             ),
-          ),
-          SizedBox(
-            height: 25,
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              left: 20,
+            SizedBox(
+              height: 15,
             ),
-            child: Text(
-              'Latest Recipes',
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
+            Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: Row(
+                children: [
+                  Spacer(),
+                  Container(
+                    height: 65,
+                    width: 65,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        image: DecorationImage(
+                            image: AssetImage('assets/Coffee.jpg'),
+                            fit: BoxFit.cover)),
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Container(
+                    height: 65,
+                    width: 65,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        image: DecorationImage(
+                            image: AssetImage('assets/Coffee.jpg'),
+                            fit: BoxFit.cover)),
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Container(
+                    height: 65,
+                    width: 65,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        image: DecorationImage(
+                            image: AssetImage('assets/Coffee.jpg'),
+                            fit: BoxFit.cover)),
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Container(
+                    height: 65,
+                    width: 65,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        image: DecorationImage(
+                            image: AssetImage('assets/Coffee.jpg'),
+                            fit: BoxFit.cover)),
+                  )
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 20),
-            child: Text(
-              'Let\'s go down reading lane',
-              style: TextStyle(color: Colors.grey[500]),
+            SizedBox(
+              height: 25,
             ),
-          ),
-          SizedBox(
-            height: 20,
-          )
-        ],
+            Padding(
+              padding: EdgeInsets.only(
+                left: 20,
+              ),
+              child: Text(
+                'Latest Recipes',
+                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 20),
+              child: Text(
+                'Let\'s go down reading lane',
+                style: TextStyle(color: Colors.grey[500]),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            )
+          ],
+        ),
       ),
     );
   }

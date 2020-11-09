@@ -1,7 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:moodish_mvp/Services/betaCount.dart';
+import 'package:moodish_mvp/screens/Food/myFeed/foodft.dart';
+import 'package:moodish_mvp/screens/Food/myFeed/polls.dart';
 import 'package:moodish_mvp/screens/Food/nComponents/feel.dart';
+import 'package:moodish_mvp/screens/Food/nComponents/foodCard.dart';
 import 'package:moodish_mvp/screens/Food/nComponents/latestRecipe.dart';
 import 'package:moodish_mvp/screens/Food/nComponents/nFoodBg.dart';
 import 'package:moodish_mvp/screens/Food/nComponents/topRecipes.dart';
@@ -32,6 +37,19 @@ class _FoodHomeState extends State<FoodHome> {
   String greeting;
   int indxT = 0;
   int indexP = 0;
+  int numbr;
+
+  @override
+  void initState() {
+    super.initState();
+
+    Random random = new Random();
+    int randomNumber = random.nextInt(3);
+    setState(() {
+      numbr = randomNumber;
+      print(numbr);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +149,6 @@ class _FoodHomeState extends State<FoodHome> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            //inner cloumn for image and text
                             GestureDetector(
                               child: Feel(
                                 title: "Feeling",
@@ -176,159 +193,133 @@ class _FoodHomeState extends State<FoodHome> {
                             ),
                           ],
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                              child: Container(
-                                alignment: Alignment.topRight,
-                                child: Text(
-                                  'How do you Feel?',
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      fontSize: 18.0,
-                                      fontStyle: FontStyle.italic,
-                                      fontWeight: FontWeight.w400),
+                        if (indxT == 0) // Feeling
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                                child: Container(
+                                  alignment: Alignment.topRight,
+                                  child: Text(
+                                    'How do you Feel?',
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                        fontSize: 18.0,
+                                        fontStyle: FontStyle.italic,
+                                        fontWeight: FontWeight.w400),
+                                  ),
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 10.0,
-                            ),
-                            Flexible(
-                              child: Container(
-                                height:
-                                    MediaQuery.of(context).size.height / 2.5,
-                                child: GridView.builder(
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 3,
-                                      crossAxisSpacing: 1.0,
-                                      mainAxisSpacing: 1.0,
-                                    ),
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: feel.length,
-                                    shrinkWrap: true,
-                                    itemBuilder: (BuildContext context, index) {
-                                      return GestureDetector(
-                                        onTap: () {
-                                          print("pressesesesesesd5362");
-                                          dynamic _val = feel[index];
-                                          setState(() {
-                                            if (feel[index].isSelected ==
-                                                true) {
-                                              pref.remove(feel[index].feel);
-                                              i--;
-                                            }
-                                            if (feel[index].isSelected ==
-                                                false) {
-                                              pref.add(_val.feel);
-                                              i++;
-                                            }
-                                            print(i);
-                                            print(pref);
-                                            print(pref.contains(_val.feel));
-                                          });
-                                          setState(() {
-                                            feel[index].isSelected =
-                                                !feel[index].isSelected;
-                                          });
-                                        },
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          child: Container(
-                                              margin: EdgeInsets.all(8),
-                                              decoration: BoxDecoration(
-                                                border: feel[index].isSelected
-                                                    ? Border.all(
-                                                        color: Colors.orange,
-                                                        width: 2)
-                                                    : Border.all(
-                                                        color: Colors.black,
-                                                        width: 2),
-                                                borderRadius:
-                                                    BorderRadius.circular(250),
-                                              ),
-                                              child: Center(
-                                                  child: feel[index].isSelected
-                                                      ? Text(
-                                                          '${feel[index].feel}',
-                                                          style: TextStyle(
-                                                              color: Colors
-                                                                  .orange),
-                                                        )
-                                                      : Text(
-                                                          '${feel[index].feel}'))),
-                                        ),
-                                      );
-                                    }),
+                              SizedBox(
+                                height: 10.0,
+                              ),
+                              Flexible(
+                                child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.height / 2.5,
+                                  child: GridView.builder(
+                                      gridDelegate:
+                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 3,
+                                        crossAxisSpacing: 1.0,
+                                        mainAxisSpacing: 1.0,
+                                      ),
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: feel.length,
+                                      shrinkWrap: true,
+                                      itemBuilder:
+                                          (BuildContext context, index) {
+                                        return GestureDetector(
+                                          onTap: () {
+                                            print("pressesesesesesd5362");
+                                            dynamic _val = feel[index];
+                                            setState(() {
+                                              if (feel[index].isSelected ==
+                                                  true) {
+                                                pref.remove(feel[index].feel);
+                                                i--;
+                                              }
+                                              if (feel[index].isSelected ==
+                                                  false) {
+                                                pref.add(_val.feel);
+                                                i++;
+                                              }
+                                              print(i);
+                                              print(pref);
+                                              print(pref.contains(_val.feel));
+                                            });
+                                            setState(() {
+                                              feel[index].isSelected =
+                                                  !feel[index].isSelected;
+                                            });
+                                          },
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            child: Container(
+                                                margin: EdgeInsets.all(8),
+                                                decoration: BoxDecoration(
+                                                  border: feel[index].isSelected
+                                                      ? Border.all(
+                                                          color: Colors.orange,
+                                                          width: 2)
+                                                      : Border.all(
+                                                          color: Colors.black,
+                                                          width: 2),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          250),
+                                                ),
+                                                child: Center(
+                                                    child: feel[index]
+                                                            .isSelected
+                                                        ? Text(
+                                                            '${feel[index].feel}',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .orange),
+                                                          )
+                                                        : Text(
+                                                            '${feel[index].feel}'))),
+                                          ),
+                                        );
+                                      }),
+                                ),
+                              ),
+                            ],
+                          ),
+                        if (indxT == 1) //VegOnly
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Container(
+                              height: MediaQuery.of(context).size.height / 2.8,
+                              child: ListView.builder(
+                                itemCount: 3,
+                                scrollDirection: Axis.horizontal,
+                                shrinkWrap: true,
+                                primary: false,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemBuilder: (BuildContext context, int index) {
+                                  return FoodCrd();
+                                },
                               ),
                             ),
-                          ],
-                        )
-                        // Expanded(
-                        //   child: Padding(
-                        //     padding: const EdgeInsets.all(8.0),
-                        //     child: Container(
-                        //       height: 200,
-                        //       width: 200,
-                        //       color: Colors.grey[400],
-                        //       child: ListView.builder(
-                        //         itemCount: 3,
-                        //         scrollDirection: Axis.horizontal,
-                        //         itemBuilder: (BuildContext context, int index) {
-                        //           return GestureDetector(
-                        //             onTap: () {},
-                        //             child: Stack(
-                        //               children: [
-                        //                 Padding(
-                        //                   padding: const EdgeInsets.all(8.0),
-                        //                   child: Container(
-                        //                     height: 125,
-                        //                     width: 175,
-                        //                     decoration: BoxDecoration(
-                        //                         color: Colors.blueAccent,
-                        //                         borderRadius:
-                        //                             BorderRadius.circular(20),
-                        //                         image: DecorationImage(
-                        //                           image: AssetImage(
-                        //                               'assets/Coffee.jpg'),
-                        //                           fit: BoxFit.cover,
-                        //                         )),
-                        //                   ),
-                        //                 ),
-                        //                 Center(
-                        //                   child: Padding(
-                        //                     padding: const EdgeInsets.all(8.0),
-                        //                     child: Card(
-                        //                       color: Colors.yellow,
-                        //                       elevation: 2,
-                        //                     ),
-                        //                   ),
-                        //                 )
-                        //               ],
-                        //             ),
-                        //           );
-                        //         },
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
+                          ),
                       ],
                     ),
                   ),
                   Padding(
                     padding:
                         const EdgeInsets.only(left: 15, right: 15.0, top: 25),
-                    child: TopRecipes(),
+                    child: TopRecipes(), //TopRecipes Card
                   ),
                   Padding(
                     padding:
                         const EdgeInsets.only(left: 15, right: 15.0, top: 25),
-                    child: LatestRecipes(),
+                    child: LatestRecipes(), //Latest Recipes card
                   ),
                   SizedBox(
                     height: 20,
@@ -357,47 +348,77 @@ class _FoodHomeState extends State<FoodHome> {
                   ),
                   SizedBox(height: 10),
                   SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              //inner cloumn for image and text
-                              GestureDetector(
-                                child: Feel(
-                                  title: "Food For Thought",
-                                  // isActive: true,
-                                  index: indexP,
-                                  stIndex: 0,
-                                  press: () {},
-                                ),
-                                onTap: () async {
-                                  setState(() {
-                                    indexP = 0;
-                                  });
-                                },
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            //inner cloumn for image and text
+                            GestureDetector(
+                              child: Feel(
+                                title: "Food For Thought",
+                                // isActive: true,
+                                index: indexP,
+                                stIndex: 0,
+                                press: () {},
                               ),
-                              GestureDetector(
-                                child: Feel(
-                                  title: "Polls",
-                                  // isActive: true,
-                                  index: indexP,
-                                  stIndex: 1,
-                                  press: () {},
-                                ),
-                                onTap: () async {
-                                  setState(() {
-                                    indexP = 1;
-                                  });
-                                },
+                              onTap: () async {
+                                setState(() {
+                                  indexP = 0;
+                                });
+                              },
+                            ),
+                            GestureDetector(
+                              child: Feel(
+                                title: "Polls",
+                                // isActive: true,
+                                index: indexP,
+                                stIndex: 1,
+                                press: () {},
                               ),
-                            ],
+                              onTap: () async {
+                                setState(() {
+                                  indexP = 1;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                        if (indexP == 0)
+                          Flexible(
+                            child: Container(
+                              height: MediaQuery.of(context).size.height / 2,
+                              child: FoodftTab(),
+                            ),
                           ),
-                        ],
-                      )),
+                        if (indexP == 1 && numbr == 0)
+                          Flexible(
+                            child: Container(
+                              height: MediaQuery.of(context).size.height / 2,
+                              child: PollTabs(),
+                            ),
+                          ),
+                        if (indexP == 1 && numbr == 1)
+                          Flexible(
+                            child: Container(
+                              height: MediaQuery.of(context).size.height / 2,
+                              child: This_ThatTabs(),
+                            ),
+                          ),
+                        if (indexP == 1 && numbr == 2)
+                          Flexible(
+                            child: Container(
+                              height: MediaQuery.of(context).size.height / 2,
+                              child: YesNoTabs(),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),

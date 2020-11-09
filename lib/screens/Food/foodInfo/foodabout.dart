@@ -13,34 +13,12 @@ class FoodAbout extends StatefulWidget {
 }
 
 class _FoodAboutState extends State<FoodAbout> {
-  List<String> items = [
-    'Best Known For :',
-    'Cuisines Served :',
-    'Hygiene :',
-    'Offers :'
-  ];
-  List<String> nutri = ['Carbs.png', 'Protien.png', 'Fats.png', 'Sugar.png'];
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: foodAbout(
-        foodList: widget.foodList,
-        nutri: nutri,
-      ),
-    );
-  }
-}
-
-class foodAbout extends StatelessWidget {
-  const foodAbout({Key key, this.foodList, this.nutri}) : super(key: key);
-
-  final FoodListModel foodList;
-  final nutri;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
+    return ListView(
+      physics: NeverScrollableScrollPhysics(),
+      primary: false,
+      shrinkWrap: true,
       children: <Widget>[
         Stack(
           children: <Widget>[
@@ -64,7 +42,7 @@ class foodAbout extends StatelessWidget {
                   SizedBox(height: 5),
                   Padding(
                     padding: EdgeInsets.all(5.0),
-                    child: Text(foodList.description),
+                    child: Text(widget.foodList.description),
                   ),
                   SizedBox(height: 10.0),
                   Padding(
@@ -96,7 +74,7 @@ class foodAbout extends StatelessWidget {
                         ),
                       ),
                       Spacer(),
-                      if (foodList.calories != null)
+                      if (widget.foodList.calories != null)
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
@@ -105,11 +83,11 @@ class foodAbout extends StatelessWidget {
                                   width:
                                       MediaQuery.of(context).size.width / 3.5,
                                   child: Text(
-                                    foodList.calories,
+                                    widget.foodList.calories,
                                     overflow: TextOverflow.ellipsis,
                                   ))),
                         ),
-                      if (foodList.calories == null)
+                      if (widget.foodList.calories == null)
                         Padding(
                             padding: EdgeInsets.all(8.0), child: Text('empty')),
                     ],
@@ -130,7 +108,7 @@ class foodAbout extends StatelessWidget {
                         ),
                       ),
                       Spacer(),
-                      if (foodList.carbohydrates != null)
+                      if (widget.foodList.carbohydrates != null)
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
@@ -139,11 +117,11 @@ class foodAbout extends StatelessWidget {
                                   width:
                                       MediaQuery.of(context).size.width / 3.5,
                                   child: Text(
-                                    foodList.carbohydrates,
+                                    widget.foodList.carbohydrates,
                                     overflow: TextOverflow.ellipsis,
                                   ))),
                         ),
-                      if (foodList.carbohydrates == null)
+                      if (widget.foodList.carbohydrates == null)
                         Padding(
                             padding: EdgeInsets.all(8.0), child: Text('empty')),
                     ],
@@ -164,7 +142,7 @@ class foodAbout extends StatelessWidget {
                         ),
                       ),
                       Spacer(),
-                      if (foodList.protein != null)
+                      if (widget.foodList.protein != null)
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
@@ -173,11 +151,11 @@ class foodAbout extends StatelessWidget {
                                   width:
                                       MediaQuery.of(context).size.width / 3.5,
                                   child: Text(
-                                    foodList.protein,
+                                    widget.foodList.protein,
                                     overflow: TextOverflow.ellipsis,
                                   ))),
                         ),
-                      if (foodList.protein == null)
+                      if (widget.foodList.protein == null)
                         Padding(
                             padding: EdgeInsets.all(8.0), child: Text('empty')),
                     ],
@@ -198,7 +176,7 @@ class foodAbout extends StatelessWidget {
                         ),
                       ),
                       Spacer(),
-                      if (foodList.fat != null)
+                      if (widget.foodList.fat != null)
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
@@ -207,111 +185,15 @@ class foodAbout extends StatelessWidget {
                                   width:
                                       MediaQuery.of(context).size.width / 3.5,
                                   child: Text(
-                                    foodList.fat,
+                                    widget.foodList.fat,
                                     overflow: TextOverflow.ellipsis,
                                   ))),
                         ),
-                      if (foodList.fat == null)
+                      if (widget.foodList.fat == null)
                         Padding(
                             padding: EdgeInsets.all(8.0), child: Text('empty')),
                     ],
                   ),
-                  // SingleChildScrollView(
-                  //   scrollDirection: Axis.horizontal,
-                  //   child: Row(
-                  //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  //     children: <Widget>[
-                  //       Column(
-                  //         children: <Widget>[
-                  //           Container(
-                  //             height: 80.0,
-                  //             width: 80.0,
-                  //             decoration: BoxDecoration(
-                  //               shape: BoxShape.circle,
-                  //               image: DecorationImage(
-                  //                 image: AssetImage('assets/${nutri[0]}'),
-                  //                 fit: BoxFit.cover,
-                  //               ),
-                  //             ),
-                  //           ),
-                  //           SizedBox(
-                  //             height: 7.0,
-                  //           ),
-                  //           Text('${foodList.carbohydrates} Carbs')
-                  //         ],
-                  //       ),
-                  //       SizedBox(
-                  //         width: 20.0,
-                  //       ),
-                  //       Column(
-                  //         children: <Widget>[
-                  //           Container(
-                  //             height: 80.0,
-                  //             width: 80.0,
-                  //             decoration: BoxDecoration(
-                  //               shape: BoxShape.circle,
-                  //               image: DecorationImage(
-                  //                 image: AssetImage('assets/${nutri[1]}'),
-                  //                 fit: BoxFit.cover,
-                  //               ),
-                  //             ),
-                  //           ),
-                  //           SizedBox(
-                  //             height: 7.0,
-                  //           ),
-                  //           Text('${foodList.protein} Protien')
-                  //         ],
-                  //       ),
-                  //       SizedBox(
-                  //         width: 20.0,
-                  //       ),
-                  //       Column(
-                  //         children: <Widget>[
-                  //           Container(
-                  //             height: 80.0,
-                  //             width: 80.0,
-                  //             decoration: BoxDecoration(
-                  //               shape: BoxShape.circle,
-                  //               image: DecorationImage(
-                  //                 image: AssetImage('assets/${nutri[2]}'),
-                  //                 fit: BoxFit.cover,
-                  //               ),
-                  //             ),
-                  //           ),
-                  //           SizedBox(
-                  //             height: 7.0,
-                  //           ),
-                  //           Text('${foodList.fat} Fats')
-                  //         ],
-                  //       ),
-                  //       SizedBox(
-                  //         width: 20.0,
-                  //       ),
-                  //       // Column(
-                  //       //   children: <Widget>[
-                  //       //     Container(
-                  //       //       height: 80.0,
-                  //       //       width: 80.0,
-                  //       //       decoration: BoxDecoration(
-                  //       //         shape: BoxShape.circle,
-                  //       //         image: DecorationImage(
-                  //       //           image: AssetImage('assets/${nutri[3]}'),
-                  //       //           fit: BoxFit.cover,
-                  //       //         ),
-                  //       //       ),
-                  //       //     ),
-                  //       //     SizedBox(
-                  //       //       height: 7.0,
-                  //       //     ),
-                  //       //     Text('${foodList.calories} Sugar')
-                  //       //   ],
-                  //       // ),
-                  //       SizedBox(
-                  //         width: 20.0,
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
                   SizedBox(
                     height: 10.0,
                   ),
@@ -331,7 +213,7 @@ class foodAbout extends StatelessWidget {
                         ),
                       ),
                       Spacer(),
-                      if (foodList.time != null)
+                      if (widget.foodList.time != null)
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
@@ -340,11 +222,11 @@ class foodAbout extends StatelessWidget {
                                   width:
                                       MediaQuery.of(context).size.width / 3.5,
                                   child: Text(
-                                    foodList.time,
+                                    widget.foodList.time,
                                     overflow: TextOverflow.ellipsis,
                                   ))),
                         ),
-                      if (foodList.time == null)
+                      if (widget.foodList.time == null)
                         Padding(
                             padding: EdgeInsets.all(8.0), child: Text('empty')),
                     ],
@@ -375,11 +257,11 @@ class foodAbout extends StatelessWidget {
                             child: Container(
                                 width: MediaQuery.of(context).size.width / 3.5,
                                 child: Text(
-                                  foodList.cuisine ?? '',
+                                  widget.foodList.cuisine ?? '',
                                   overflow: TextOverflow.ellipsis,
                                 ))),
                       ),
-                      if (foodList.cuisine == null)
+                      if (widget.foodList.cuisine == null)
                         Padding(
                             padding: EdgeInsets.all(8.0), child: Text('empty')),
                     ],
@@ -403,7 +285,7 @@ class foodAbout extends StatelessWidget {
                         ),
                       ),
                       Spacer(),
-                      if (foodList.taste != null)
+                      if (widget.foodList.taste != null)
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
@@ -412,11 +294,11 @@ class foodAbout extends StatelessWidget {
                                   width:
                                       MediaQuery.of(context).size.width / 3.5,
                                   child: Text(
-                                    foodList.taste,
+                                    widget.foodList.taste,
                                     overflow: TextOverflow.ellipsis,
                                   ))),
                         ),
-                      if (foodList.taste == null)
+                      if (widget.foodList.taste == null)
                         Padding(
                             padding: EdgeInsets.all(8.0), child: Text('empty')),
                     ],

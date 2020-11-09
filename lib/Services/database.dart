@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Services/authenticate.dart';
 import 'package:moodish_mvp/Services/storage.dart';
@@ -21,6 +22,21 @@ class DatabaseService {
 
 /* /////////////////////////////////////////// rating&& reviews  /////////////////////////////////// */
 
+  Future<void> report(
+      {@required RestListModel rest,
+      String uid,
+      int index,
+      String description = "spam"}) async {
+    FirebaseFirestore.instance
+        .collection('reports')
+        .doc(rest.restaurant_Name)
+        .set({
+      "uid": uid,
+      "review": rest.reviews[index],
+      "description": description ?? 'not given'
+    });
+  }
+
   Future<void> restRating({String sr_no, String review, double rating}) async {
     if (review != null) {
       dynamic user = await Authenticate().returnUser();
@@ -30,6 +46,7 @@ class DatabaseService {
           .collection("review")
           .doc(user.uid)
           .set({
+        "uid": user.uid,
         "author_name": user.email,
         "rating": rating.toString(),
         "text": review
@@ -191,7 +208,7 @@ class DatabaseService {
             .join(" "))
         .toList();
     List<String> data = [];
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 5 && i < list.length; i++) {
       data.add(list[i]);
     }
     print(data);
