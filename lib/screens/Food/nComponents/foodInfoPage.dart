@@ -17,7 +17,8 @@ class FoodInfoCard extends StatefulWidget {
 
 class _FoodInfoCardState extends State<FoodInfoCard> {
   int _selected = 1;
-  bool readMore = false;
+  bool readMoreIng = false;
+  bool readMorePrep = false;
 
   @override
   Widget build(BuildContext context) {
@@ -133,7 +134,7 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                                 Padding(
                                   padding: EdgeInsets.only(top: 30, left: 35),
                                   child: Text(
-                                    '5 Seed Moon Cake',
+                                    widget.foodList.foodName,
                                     style: TextStyle(
                                         fontSize: 28,
                                         fontWeight: FontWeight.w600),
@@ -143,7 +144,7 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                                   padding: EdgeInsets.only(
                                       top: 5, left: 35, right: 40),
                                   child: Text(
-                                    'Lorem ipsum dolor sit amet, incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex  consequat. Dui in reprehenderit in voluptate pariatur. laborum.',
+                                    widget.foodList.description,
                                     style: TextStyle(
                                         fontSize: 12, color: Colors.grey),
                                   ),
@@ -174,7 +175,7 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                                                     shape: BoxShape.circle),
                                                 child: Center(
                                                   child: Text(
-                                                    'Indian',
+                                                    widget.foodList.cuisine,
                                                     style: TextStyle(
                                                         color: Colors.orange,
                                                         fontSize: 12),
@@ -199,52 +200,54 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                                         ),
                                       ),
                                     ),
-                                    Padding(
-                                      padding:
-                                          EdgeInsets.only(top: 5, right: 8),
-                                      child: Card(
-                                        elevation: 5,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(50)),
-                                        ),
-                                        child: Container(
-                                          height: 110,
-                                          width: 62,
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                height: 55,
-                                                decoration: BoxDecoration(
-                                                    color: Colors.black87,
-                                                    shape: BoxShape.circle),
-                                                child: Center(
-                                                  child: Text(
-                                                    'Happy',
-                                                    style: TextStyle(
-                                                        color: Colors.orange,
-                                                        fontSize: 12),
+                                    if (widget.foodList.mood != null ||
+                                        widget.foodList.mood == '')
+                                      Padding(
+                                        padding:
+                                            EdgeInsets.only(top: 5, right: 8),
+                                        child: Card(
+                                          elevation: 5,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50)),
+                                          ),
+                                          child: Container(
+                                            height: 110,
+                                            width: 62,
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  height: 55,
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.black87,
+                                                      shape: BoxShape.circle),
+                                                  child: Center(
+                                                    child: Text(
+                                                      widget.foodList.mood,
+                                                      style: TextStyle(
+                                                          color: Colors.orange,
+                                                          fontSize: 12),
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                height: 15,
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsets.all(8),
-                                                child: Text(
-                                                  'Mood',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 12),
+                                                SizedBox(
+                                                  height: 15,
                                                 ),
-                                              )
-                                            ],
+                                                Padding(
+                                                  padding: EdgeInsets.all(8),
+                                                  child: Text(
+                                                    'Mood',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 12),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
                                     Padding(
                                       padding:
                                           EdgeInsets.only(top: 5, right: 8),
@@ -266,7 +269,7 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                                                     shape: BoxShape.circle),
                                                 child: Center(
                                                   child: Text(
-                                                    '75 mins',
+                                                    widget.foodList.time,
                                                     style: TextStyle(
                                                         color: Colors.orange,
                                                         fontSize: 11),
@@ -291,38 +294,40 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                                         ),
                                       ),
                                     ),
-                                    Column(
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsets.only(top: 5, left: 10),
-                                          child: Text(
-                                            'Servings',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w600,
-                                                color: Colors.grey[600]),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 15, top: 10),
-                                          child: Container(
-                                            height: 50,
-                                            width: 50,
-                                            decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: Colors.black87),
-                                            child: Center(
-                                              child: Text(
-                                                '10',
-                                                style: TextStyle(
-                                                    color: Colors.orange),
-                                              ),
+                                    if (widget.foodList.servings != null ||
+                                        widget.foodList.servings == '')
+                                      Column(
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 5, left: 10),
+                                            child: Text(
+                                              'Servings',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w600,
+                                                  color: Colors.grey[600]),
                                             ),
                                           ),
-                                        )
-                                      ],
-                                    )
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                left: 15, top: 10),
+                                            child: Container(
+                                              height: 50,
+                                              width: 50,
+                                              decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: Colors.black87),
+                                              child: Center(
+                                                child: Text(
+                                                  widget.foodList.servings,
+                                                  style: TextStyle(
+                                                      color: Colors.orange),
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      )
                                   ],
                                 ),
                                 SizedBox(
@@ -422,7 +427,7 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                                               padding: EdgeInsets.only(
                                                   bottom: 3, top: 15),
                                               child: Text(
-                                                '330',
+                                                widget.foodList.calories,
                                                 style: TextStyle(
                                                     fontSize: 19.5,
                                                     fontWeight:
@@ -433,7 +438,7 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                                               padding:
                                                   EdgeInsets.only(bottom: 3),
                                               child: Text(
-                                                '45g',
+                                                widget.foodList.carbohydrates,
                                                 style: TextStyle(
                                                     fontSize: 19.5,
                                                     fontWeight:
@@ -444,7 +449,7 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                                               padding:
                                                   EdgeInsets.only(bottom: 3),
                                               child: Text(
-                                                '5g',
+                                                widget.foodList.protein,
                                                 style: TextStyle(
                                                     fontSize: 19.5,
                                                     fontWeight:
@@ -455,7 +460,7 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                                               padding:
                                                   EdgeInsets.only(bottom: 3),
                                               child: Text(
-                                                '16g',
+                                                widget.foodList.fat,
                                                 style: TextStyle(
                                                     fontSize: 19.5,
                                                     fontWeight:
@@ -533,11 +538,12 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                                             widget.foodList.ingredients.length,
                                         itemBuilder:
                                             (BuildContext context, int index) {
-                                          if (index == 5 && readMore == false)
+                                          if (index == 5 &&
+                                              readMoreIng == false)
                                             return GestureDetector(
                                               onTap: () {
                                                 setState(() {
-                                                  readMore = true;
+                                                  readMoreIng = true;
                                                 });
                                               },
                                               child: Align(
@@ -555,7 +561,7 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                                               ),
                                             );
                                           else if (index < 5 ||
-                                              readMore == true) {
+                                              readMoreIng == true) {
                                             return Padding(
                                               padding: EdgeInsets.only(
                                                   top: 5, bottom: 5),
