@@ -37,7 +37,7 @@ class _FoodHomeState extends State<FoodHome> {
   int indxT = 0;
   int indexP = 0;
   int numbr = 2;
-  Map<String, dynamic> userData={};
+  Map<String, dynamic> userData = {};
 
   @override
   void initState() {
@@ -49,12 +49,13 @@ class _FoodHomeState extends State<FoodHome> {
       numbr = randomNumber;
       print(numbr);
     });
-    data() async{
+    data() async {
       Box box = await Hive.openBox('Userdata');
       setState(() {
         userData = box.get('userdata');
       });
     }
+
     data();
   }
 
@@ -239,7 +240,9 @@ class _FoodHomeState extends State<FoodHome> {
                                           SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 3,
                                         crossAxisSpacing: 5.0,
-                                        mainAxisSpacing: MediaQuery.of(context).size.width/4,
+                                        mainAxisSpacing:
+                                            MediaQuery.of(context).size.width /
+                                                4,
                                       ),
                                       scrollDirection: Axis.horizontal,
                                       itemCount: feel.length,
@@ -354,7 +357,7 @@ class _FoodHomeState extends State<FoodHome> {
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Container(
-                              height: MediaQuery.of(context).size.height / 2.5,
+                              height: MediaQuery.of(context).size.height / 2,
                               child: BlocConsumer<FoodBloc,
                                   Map<String, List<FoodListModel>>>(
                                 buildWhen: (Map<String, List<FoodListModel>>
@@ -421,15 +424,15 @@ class _FoodHomeState extends State<FoodHome> {
                           style: TextStyle(
                               fontSize: 22, fontWeight: FontWeight.bold),
                         ),
-                        // Padding(
-                        //   padding: const EdgeInsets.only(left: 8.0),
-                        //   child: FlatButton.icon(
-                        //     textColor: Colors.orange,
-                        //     onPressed: () {},
-                        //     label: Text('See more'),
-                        //     icon: Icon(Icons.arrow_forward),
-                        //   ),
-                        // )
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: FlatButton.icon(
+                            textColor: Colors.orange,
+                            onPressed: () {},
+                            label: Text('See more'),
+                            icon: Icon(Icons.arrow_forward),
+                          ),
+                        )
                       ],
                     ),
                   ),
@@ -439,7 +442,7 @@ class _FoodHomeState extends State<FoodHome> {
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Column(
@@ -487,30 +490,21 @@ class _FoodHomeState extends State<FoodHome> {
                           Flexible(
                             child: Container(
                               height: MediaQuery.of(context).size.height / 2,
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 10.0),
-                                child: PollTabs(),
-                              ),
+                              child: PollTabs(),
                             ),
                           ),
                         if (indexP == 1 && numbr == 1)
                           Flexible(
                             child: Container(
                               height: MediaQuery.of(context).size.height / 2,
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 10.0),
-                                child: YesNoTabs(),
-                              ),
+                              child: YesNoTabs(),
                             ),
                           ),
                         if (indexP == 1 && numbr == 2)
                           Flexible(
                             child: Container(
                               height: MediaQuery.of(context).size.height / 2,
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 10.0),
-                                child: This_ThatTabs(),
-                              ),
+                              child: This_ThatTabs(),
                             ),
                           ),
                       ],
