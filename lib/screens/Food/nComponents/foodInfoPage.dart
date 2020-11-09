@@ -1,9 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
+import 'package:moodish_mvp/models/restaurantsModel.dart';
 import 'package:moodish_mvp/screens/Food/components/StepByStep.dart';
 import 'package:moodish_mvp/screens/Food/nComponents/bottomtabNav.dart';
+import 'package:moodish_mvp/screens/Restaurants/restaurantCard/restCardModel.dart';
+import 'package:page_transition/page_transition.dart';
 
 class FoodInfoCard extends StatefulWidget {
   final FoodListModel foodList;
@@ -348,408 +353,577 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                                 SizedBox(
                                   height: 30,
                                 ),
-                                Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  child: Row(
+                                /////////
+                                if(_selected==1)
+                                  Column(
                                     children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(left: 22),
-                                        child: Text(
-                                          'Nutrients',
-                                          style: TextStyle(
-                                              fontSize: 26,
-                                              fontWeight: FontWeight.w400),
-                                        ),
-                                      ),
-                                      Spacer(),
-                                      Padding(
-                                        padding: EdgeInsets.only(right: 35),
-                                        child: Icon(
-                                          Icons.add_circle_outline,
-                                          size: 28,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 35),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                      Container(
+                                        width: MediaQuery.of(context).size.width,
+                                        child: Row(
                                           children: [
                                             Padding(
-                                              padding: EdgeInsets.only(
-                                                  bottom: 3, top: 15),
+                                              padding: EdgeInsets.only(left: 22),
                                               child: Text(
-                                                'Calories',
+                                                'Nutrients',
                                                 style: TextStyle(
-                                                    fontSize: 19.5,
-                                                    fontWeight:
-                                                        FontWeight.w500),
+                                                    fontSize: 26,
+                                                    fontWeight: FontWeight.w400),
                                               ),
                                             ),
+                                            Spacer(),
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.only(bottom: 3),
-                                              child: Text(
-                                                'Carbohydrates',
-                                                style: TextStyle(
-                                                    fontSize: 19.5,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(bottom: 3),
-                                              child: Text(
-                                                'Protien',
-                                                style: TextStyle(
-                                                    fontSize: 19.5,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(bottom: 3),
-                                              child: Text(
-                                                'Fats',
-                                                style: TextStyle(
-                                                    fontSize: 19.5,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Spacer(),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 35),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                  bottom: 3, top: 15),
-                                              child: Text(
-                                                widget.foodList.calories,
-                                                style: TextStyle(
-                                                    fontSize: 19.5,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(bottom: 3),
-                                              child: Text(
-                                                widget.foodList.carbohydrates,
-                                                style: TextStyle(
-                                                    fontSize: 19.5,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(bottom: 3),
-                                              child: Text(
-                                                widget.foodList.protein,
-                                                style: TextStyle(
-                                                    fontSize: 19.5,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(bottom: 3),
-                                              child: Text(
-                                                widget.foodList.fat,
-                                                style: TextStyle(
-                                                    fontSize: 19.5,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(left: 22),
-                                          child: Container(
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: Colors.orange,
-                                                      width: 2.5),
-                                                  borderRadius:
-                                                      BorderRadius.circular(5)),
+                                              padding: EdgeInsets.only(right: 35),
                                               child: Icon(
-                                                Icons.list,
-                                                size: 30,
-                                                color: Colors.orange,
-                                              )),
-                                        ),
-                                        SizedBox(
-                                          width: 15,
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Ingredients',
-                                              style: TextStyle(
-                                                  fontSize: 26,
-                                                  fontWeight: FontWeight.w400),
-                                            ),
-                                            Text(
-                                              'A checklist before you can start cooking',
-                                              style: TextStyle(
-                                                  color: Colors.grey[600]),
-                                            ),
+                                                Icons.add_circle_outline,
+                                                size: 28,
+                                              ),
+                                            )
                                           ],
-                                        )
-                                      ],
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 20,
-                                          left: 22,
-                                          right: 22,
-                                          bottom: 15),
-                                      child: Divider(
-                                        thickness: 1.5,
-                                        color: Colors.black87,
+                                        ),
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 22),
-                                      child: ListView.builder(
-                                        shrinkWrap: true,
-                                        primary: false,
-                                        physics: NeverScrollableScrollPhysics(),
-                                        itemCount:
-                                            widget.foodList.ingredients.length,
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-                                          if (index == 5 &&
-                                              readMoreIng == false)
-                                            return GestureDetector(
-                                              onTap: () {
-                                                setState(() {
-                                                  readMoreIng = true;
-                                                });
-                                              },
-                                              child: Align(
-                                                alignment:
-                                                    Alignment.centerRight,
-                                                child: Padding(
-                                                  padding: EdgeInsets.only(
-                                                      right: 20),
-                                                  child: Text(
-                                                    '...read more',
-                                                    style:
-                                                        TextStyle(fontSize: 18),
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          else if (index < 5 ||
-                                              readMoreIng == true) {
-                                            return Padding(
-                                              padding: EdgeInsets.only(
-                                                  top: 5, bottom: 5),
-                                              child: Text(
-                                                widget.foodList
-                                                    .ingredients[index],
-                                                style: TextStyle(fontSize: 18),
-                                              ),
-                                            );
-                                          }
-                                        },
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 30,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
+                                      Container(
+                                        width: MediaQuery.of(context).size.width,
+                                        child: Row(
                                           children: [
                                             Padding(
                                               padding:
-                                                  EdgeInsets.only(left: 22),
-                                              child: Container(
-                                                  child: Icon(
-                                                Icons.radio_button_unchecked,
-                                                size: 30,
-                                                color: Colors.orange,
-                                              )),
-                                            ),
-                                            SizedBox(
-                                              width: 15,
-                                            ),
-                                            GestureDetector(
-                                              onTap: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            StepByStep(
-                                                              foodList: widget
-                                                                  .foodList,
-                                                            )));
-                                              },
+                                              const EdgeInsets.only(left: 35),
                                               child: Column(
                                                 crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                                 children: [
-                                                  Text(
-                                                    'Directions',
-                                                    style: TextStyle(
-                                                        fontSize: 24.5,
-                                                        fontWeight:
-                                                            FontWeight.w400),
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        bottom: 3, top: 15),
+                                                    child: Text(
+                                                      'Calories',
+                                                      style: TextStyle(
+                                                          fontSize: 19.5,
+                                                          fontWeight:
+                                                          FontWeight.w500),
+                                                    ),
                                                   ),
-                                                  Text(
-                                                    'Cook better with step by step guide',
-                                                    style: TextStyle(
-                                                        color:
-                                                            Colors.grey[600]),
+                                                  Padding(
+                                                    padding:
+                                                    EdgeInsets.only(bottom: 3),
+                                                    child: Text(
+                                                      'Carbohydrates',
+                                                      style: TextStyle(
+                                                          fontSize: 19.5,
+                                                          fontWeight:
+                                                          FontWeight.w500),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                    EdgeInsets.only(bottom: 3),
+                                                    child: Text(
+                                                      'Protien',
+                                                      style: TextStyle(
+                                                          fontSize: 19.5,
+                                                          fontWeight:
+                                                          FontWeight.w500),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                    EdgeInsets.only(bottom: 3),
+                                                    child: Text(
+                                                      'Fats',
+                                                      style: TextStyle(
+                                                          fontSize: 19.5,
+                                                          fontWeight:
+                                                          FontWeight.w500),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Spacer(),
+                                            Padding(
+                                              padding:
+                                              const EdgeInsets.only(right: 35),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                                children: [
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        bottom: 3, top: 15),
+                                                    child: Text(
+                                                      widget.foodList.calories,
+                                                      style: TextStyle(
+                                                          fontSize: 19.5,
+                                                          fontWeight:
+                                                          FontWeight.w500),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                    EdgeInsets.only(bottom: 3),
+                                                    child: Text(
+                                                      widget.foodList.carbohydrates,
+                                                      style: TextStyle(
+                                                          fontSize: 19.5,
+                                                          fontWeight:
+                                                          FontWeight.w500),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                    EdgeInsets.only(bottom: 3),
+                                                    child: Text(
+                                                      widget.foodList.protein,
+                                                      style: TextStyle(
+                                                          fontSize: 19.5,
+                                                          fontWeight:
+                                                          FontWeight.w500),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                    EdgeInsets.only(bottom: 3),
+                                                    child: Text(
+                                                      widget.foodList.fat,
+                                                      style: TextStyle(
+                                                          fontSize: 19.5,
+                                                          fontWeight:
+                                                          FontWeight.w500),
+                                                    ),
                                                   ),
                                                 ],
                                               ),
                                             )
                                           ],
                                         ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 10,
-                                              bottom: 10,
-                                              left: 22,
-                                              right: 22),
-                                          child: Divider(
-                                            thickness: 1.2,
-                                            color: Colors.black87,
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsets.only(left: 22),
+                                                child: Container(
+                                                    decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color: Colors.orange,
+                                                            width: 2.5),
+                                                        borderRadius:
+                                                        BorderRadius.circular(5)),
+                                                    child: Icon(
+                                                      Icons.list,
+                                                      size: 30,
+                                                      color: Colors.orange,
+                                                    )),
+                                              ),
+                                              SizedBox(
+                                                width: 15,
+                                              ),
+                                              Column(
+                                                crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'Ingredients',
+                                                    style: TextStyle(
+                                                        fontSize: 26,
+                                                        fontWeight: FontWeight.w400),
+                                                  ),
+                                                  Text(
+                                                    'A checklist before you can start cooking',
+                                                    style: TextStyle(
+                                                        color: Colors.grey[600]),
+                                                  ),
+                                                ],
+                                              )
+                                            ],
                                           ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 25),
-                                          child: ListView.builder(
-                                              physics:
-                                                  NeverScrollableScrollPhysics(),
-                                              itemCount: widget
-                                                  .foodList.preparation.length,
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 20,
+                                                left: 22,
+                                                right: 22,
+                                                bottom: 15),
+                                            child: Divider(
+                                              thickness: 1.5,
+                                              color: Colors.black87,
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 22),
+                                            child: ListView.builder(
                                               shrinkWrap: true,
-                                              itemBuilder: (context, index) {
+                                              primary: false,
+                                              physics: NeverScrollableScrollPhysics(),
+                                              itemCount:
+                                              widget.foodList.ingredients.length,
+                                              itemBuilder:
+                                                  (BuildContext context, int index) {
                                                 if (index == 5 &&
-                                                    readMorePrep == false)
+                                                    readMoreIng == false)
                                                   return GestureDetector(
                                                     onTap: () {
                                                       setState(() {
-                                                        readMorePrep = true;
+                                                        readMoreIng = true;
                                                       });
                                                     },
                                                     child: Align(
                                                       alignment:
-                                                          Alignment.centerRight,
+                                                      Alignment.centerRight,
                                                       child: Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                right: 20),
+                                                        padding: EdgeInsets.only(
+                                                            right: 20),
                                                         child: Text(
                                                           '...read more',
-                                                          style: TextStyle(
-                                                              fontSize: 18),
+                                                          style:
+                                                          TextStyle(fontSize: 18),
                                                         ),
                                                       ),
                                                     ),
                                                   );
                                                 else if (index < 5 ||
-                                                    readMorePrep == true) {
-                                                  return Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        'Step ${index + 1}',
-                                                        style: TextStyle(
-                                                            fontSize: 22),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 5,
-                                                      ),
-                                                      Text(
-                                                        widget.foodList
-                                                            .preparation[index],
-                                                        style: TextStyle(
-                                                            fontSize: 12,
-                                                            color: Colors.grey),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 10,
-                                                      )
-                                                    ],
+                                                    readMoreIng == true) {
+                                                  return Padding(
+                                                    padding: EdgeInsets.only(
+                                                        top: 5, bottom: 5),
+                                                    child: Text(
+                                                      widget.foodList
+                                                          .ingredients[index],
+                                                      style: TextStyle(fontSize: 18),
+                                                    ),
                                                   );
                                                 }
-                                                //   return Column(
-                                                //     crossAxisAlignment:
-                                                //         CrossAxisAlignment.start,
-                                                //     children: [
-                                                //       Text(
-                                                //         'Step ${index + 1}',
-                                                //         style: TextStyle(
-                                                //             fontSize: 22),
-                                                //       ),
-                                                //       SizedBox(
-                                                //         height: 5,
-                                                //       ),
-                                                //       Text(
-                                                //         widget.foodList
-                                                //             .preparation[index],
-                                                //         style: TextStyle(
-                                                //             fontSize: 12,
-                                                //             color: Colors.grey),
-                                                //       ),
-                                                //       SizedBox(
-                                                //         height: 10,
-                                                //       )
-                                                //     ],
-                                                //   );
-                                              }),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                )
+                                              },
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 30,
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                    EdgeInsets.only(left: 22),
+                                                    child: Container(
+                                                        child: Icon(
+                                                          Icons.radio_button_unchecked,
+                                                          size: 30,
+                                                          color: Colors.orange,
+                                                        )),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 15,
+                                                  ),
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  StepByStep(
+                                                                    foodList: widget
+                                                                        .foodList,
+                                                                  )));
+                                                    },
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          'Directions',
+                                                          style: TextStyle(
+                                                              fontSize: 24.5,
+                                                              fontWeight:
+                                                              FontWeight.w400),
+                                                        ),
+                                                        Text(
+                                                          'Cook better with step by step guide',
+                                                          style: TextStyle(
+                                                              color:
+                                                              Colors.grey[600]),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    top: 10,
+                                                    bottom: 10,
+                                                    left: 22,
+                                                    right: 22),
+                                                child: Divider(
+                                                  thickness: 1.2,
+                                                  color: Colors.black87,
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding:
+                                                const EdgeInsets.only(left: 25),
+                                                child: ListView.builder(
+                                                    physics:
+                                                    NeverScrollableScrollPhysics(),
+                                                    itemCount: widget
+                                                        .foodList.preparation.length,
+                                                    shrinkWrap: true,
+                                                    itemBuilder: (context, index) {
+                                                      if (index == 5 &&
+                                                          readMorePrep == false)
+                                                        return GestureDetector(
+                                                          onTap: () {
+                                                            setState(() {
+                                                              readMorePrep = true;
+                                                            });
+                                                          },
+                                                          child: Align(
+                                                            alignment:
+                                                            Alignment.centerRight,
+                                                            child: Padding(
+                                                              padding:
+                                                              EdgeInsets.only(
+                                                                  right: 20),
+                                                              child: Text(
+                                                                '...read more',
+                                                                style: TextStyle(
+                                                                    fontSize: 18),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        );
+                                                      else if (index < 5 ||
+                                                          readMorePrep == true) {
+                                                        return Column(
+                                                          crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                          children: [
+                                                            Text(
+                                                              'Step ${index + 1}',
+                                                              style: TextStyle(
+                                                                  fontSize: 22),
+                                                            ),
+                                                            SizedBox(
+                                                              height: 5,
+                                                            ),
+                                                            Text(
+                                                              widget.foodList
+                                                                  .preparation[index],
+                                                              style: TextStyle(
+                                                                  fontSize: 12,
+                                                                  color: Colors.grey),
+                                                            ),
+                                                            SizedBox(
+                                                              height: 10,
+                                                            )
+                                                          ],
+                                                        );
+                                                      }
+                                                      //   return Column(
+                                                      //     crossAxisAlignment:
+                                                      //         CrossAxisAlignment.start,
+                                                      //     children: [
+                                                      //       Text(
+                                                      //         'Step ${index + 1}',
+                                                      //         style: TextStyle(
+                                                      //             fontSize: 22),
+                                                      //       ),
+                                                      //       SizedBox(
+                                                      //         height: 5,
+                                                      //       ),
+                                                      //       Text(
+                                                      //         widget.foodList
+                                                      //             .preparation[index],
+                                                      //         style: TextStyle(
+                                                      //             fontSize: 12,
+                                                      //             color: Colors.grey),
+                                                      //       ),
+                                                      //       SizedBox(
+                                                      //         height: 10,
+                                                      //       )
+                                                      //     ],
+                                                      //   );
+                                                    }),
+                                              ),
+                                              SizedBox(
+                                                height: 20,
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                if(_selected==2)
+                                  Column(
+                                    children: [
+                                      FutureBuilder(
+                                        future: DatabaseService().getRestFromList(widget.foodList.restaurants),
+                                        builder: (BuildContext context, AsyncSnapshot snapshot) {
+                                          if (snapshot.connectionState == ConnectionState.done) {
+                                            List<RestListModel> _rest = snapshot.data;
+                                            if (_rest != null)
+                                              return ListView.builder(
+                                                  physics: NeverScrollableScrollPhysics(),
+                                                  primary: false,
+                                                  shrinkWrap: true,
+                                                  itemCount: _rest.length,
+                                                  itemBuilder: (context, index) {
+                                                    return Padding(
+                                                      padding: const EdgeInsets.all(10.0),
+                                                      child: GestureDetector(
+                                                        onTap: () {
+                                                          Navigator.push(
+                                                              context,
+                                                              PageTransition(
+                                                                  type: PageTransitionType.rightToLeft,
+                                                                  child: RestCardModel()));
+                                                        },
+                                                        child: Card(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius: BorderRadius.circular(20.0)),
+                                                          child: Row(
+                                                            children: <Widget>[
+                                                              CachedNetworkImage(
+                                                                imageUrl: _rest[index].photo_url,
+                                                                imageBuilder: (context, imageProvider) {
+                                                                  return Container(
+                                                                    height: 120,
+                                                                    width: 110,
+                                                                    decoration: BoxDecoration(
+                                                                      borderRadius: BorderRadius.circular(20),
+                                                                      image: DecorationImage(
+                                                                          image: imageProvider,
+                                                                          fit: BoxFit.cover),
+                                                                    ),
+                                                                  );
+                                                                },
+                                                              ),
+                                                              Column(
+                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                children: <Widget>[
+                                                                  Row(
+                                                                    mainAxisAlignment:
+                                                                    MainAxisAlignment.spaceBetween,
+                                                                    children: <Widget>[
+                                                                      Align(
+                                                                        alignment: Alignment.centerLeft,
+                                                                        child: Container(
+                                                                          width:
+                                                                          MediaQuery.of(context).size.width -
+                                                                              190,
+                                                                          child: Padding(
+                                                                            padding: EdgeInsets.all(8),
+                                                                            child: Align(
+                                                                              alignment: Alignment.centerLeft,
+                                                                              child: Text(
+                                                                                _rest[index].restaurant_Name,
+                                                                                overflow: TextOverflow.ellipsis,
+                                                                                style: TextStyle(
+                                                                                    fontSize: 18,
+                                                                                    fontWeight: FontWeight.bold),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                      Padding(
+                                                                        padding: const EdgeInsets.only(
+                                                                            left: 8, bottom: 8),
+                                                                        child: Row(
+                                                                          children: <Widget>[
+                                                                            Icon(
+                                                                              Icons.star,
+                                                                              size: 18,
+                                                                            ),
+                                                                            _rest[index].rating == '5'
+                                                                                ? Text(
+                                                                              '${_rest[index].rating}.0',
+                                                                              style:
+                                                                              TextStyle(fontSize: 12),
+                                                                            )
+                                                                                : Text(
+                                                                              _rest[index].rating,
+                                                                              style:
+                                                                              TextStyle(fontSize: 12),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  Align(
+                                                                    alignment: Alignment.centerLeft,
+                                                                    child: Container(
+                                                                      width:
+                                                                      MediaQuery.of(context).size.width - 145,
+                                                                      child: Padding(
+                                                                        padding: const EdgeInsets.all(8),
+                                                                        child: Text(
+                                                                          _rest[index].cuisines,
+                                                                          maxLines: 3,
+                                                                          overflow: TextOverflow.ellipsis,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                  Container(
+                                                                    child: Padding(
+                                                                      padding: const EdgeInsets.all(8.0),
+                                                                      child: Align(
+                                                                        alignment: Alignment.centerLeft,
+                                                                        child: Row(
+                                                                          children: <Widget>[
+                                                                            Icon(
+                                                                              Icons.location_on,
+                                                                              size: 20,
+                                                                            ),
+                                                                            Text(
+                                                                                _rest[index].restaurant_Location),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  });
+                                            else {
+                                              return Center(
+                                                child: Container(
+                                                  child: Text("More restaurants coming soon"),
+                                                ),
+                                              );
+                                            }
+                                          } else {
+                                            return Center(
+                                              child: SpinKitChasingDots(
+                                                color: Colors.orange,
+                                              ),
+                                            );
+                                          }
+                                        },
+                                      )
+                                    ],
+                                  ),
+                                if(_selected==3)
+                                  Column(
+                                    children: [
+                                      Container(height: 200,)
+                                    ],
+                                  )
                               ],
                             ),
                           ),
