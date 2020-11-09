@@ -88,7 +88,7 @@ class DatabaseQuery {
       List<FoodListModel> queryList =
           await DatabaseService().listFromSnapshot(snapshot);
       await _box.put(listName, queryList);
-      if (queryList.length < 5) {
+      if (queryList.length < 3) {
         await _box.put(listName, null);
         _finalQuery = _ref
             .orderBy('description')

@@ -242,7 +242,7 @@ class _FoodHomeState extends State<FoodHome> {
                                         crossAxisSpacing: 5.0,
                                         mainAxisSpacing:
                                             MediaQuery.of(context).size.width /
-                                                4,
+                                                5,
                                       ),
                                       scrollDirection: Axis.horizontal,
                                       itemCount: feel.length,

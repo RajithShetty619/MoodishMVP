@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
+import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:intl/intl.dart';
 import 'package:moodish_mvp/Services/geolocationRest.dart';
@@ -35,10 +36,13 @@ class _LoadingScreenState extends State<LoadingScreen> {
         .then((value) => GeolocationRest()
             .getRestFromLocationCuisine(context, "Fast Food", "5"));
     Box _box = await Hive.openBox("preferenceBox");
+    await DatabaseService().returnUser();
     String deter = _box.get("deter");
     List<dynamic> cuisine = _box.get("preference");
     String tod = timeOfTheDay();
     String cuisine_sel = cuisine[Random().nextInt(cuisine.length)];
+
+    cuisine_sel = cuisine_sel[0].toLowerCase() + cuisine_sel.substring(1);
 
     if (deter != "veg" && deter != "nonveg") {
       Random random = new Random();
@@ -64,16 +68,16 @@ class _LoadingScreenState extends State<LoadingScreen> {
         BlocProvider.of<PollBloc>(context).add(PollEvent.add(fact, 'fft'));
       }),
       DatabaseQuery(listName: 'tod').getFood(
-        field: ['mealtype', 'deter'],
-        value: ["breakfast", deter],
-        limit: 7,
+        field: ["mealtype"],
+        value: ["side dish"],
+        limit: 5,
       ).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "tod"));
       }),
       checkDate().then((check) async {
         DatabaseQuery(listName: 'craving').getFood(
             field: ['cuisine'],
-            value: [cuisine_sel],
+            value: ['indian'],
             limit: 7,
             check: 0).then((future) {
           BlocProvider.of<FoodBloc>(context)
