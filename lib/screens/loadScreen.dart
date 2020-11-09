@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
+import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:intl/intl.dart';
 import 'package:moodish_mvp/Services/geolocationRest.dart';
@@ -38,6 +39,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     String deter = _box.get("deter");
     List<dynamic> cuisine = _box.get("preference");
     String tod = timeOfTheDay();
+    await DatabaseService().returnUser();
     String cuisine_sel = cuisine[Random().nextInt(cuisine.length)];
 
     if (deter != "veg" && deter != "nonveg") {
