@@ -2236,7 +2236,9 @@ class Delegate extends SliverPersistentHeaderDelegate {
                         Align(
                           alignment: Alignment.topLeft,
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
                             child: Card(
                               elevation: 5,
                               shape: RoundedRectangleBorder(
