@@ -337,6 +337,51 @@ class _FoodHomeState extends State<FoodHome> {
                               ),
                             ),
                           ),
+                        if (indxT == 2) //Trending
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Container(
+                              height: MediaQuery.of(context).size.height / 2,
+                              child: BlocConsumer<FoodBloc,
+                                  Map<String, List<FoodListModel>>>(
+                                buildWhen: (Map<String, List<FoodListModel>>
+                                        previous,
+                                    Map<String, List<FoodListModel>> current) {
+                                  return true;
+                                },
+                                listenWhen: (Map<String, List<FoodListModel>>
+                                        previous,
+                                    Map<String, List<FoodListModel>> current) {
+                                  if (current.length > previous.length) {
+                                    return true;
+                                  }
+                                  return false;
+                                },
+                                builder: (BuildContext context, foodList) {
+                                  return Container(
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      shrinkWrap: true,
+                                      primary: false,
+                                      physics: NeverScrollableScrollPhysics(),
+                                      itemCount: foodList["trend"].length,
+                                      itemBuilder:
+                                          (BuildContext context, index) {
+                                        return FoodCrd(
+                                          foodList: foodList["trend"][index],
+                                        );
+                                      },
+                                    ),
+                                  );
+                                },
+                                listener: (context, foodList) {
+                                  Scaffold.of(context).showSnackBar(
+                                    SnackBar(content: Text('Added!')),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
                       ],
                     ),
                   ),
