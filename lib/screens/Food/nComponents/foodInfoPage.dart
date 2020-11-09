@@ -717,9 +717,9 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
 // class Delegate extends SliverPersistentHeaderDelegate {
 //   final double expandedHeight;
 //   RestListModel restaurant;
-
+//
 //   Delegate({this.expandedHeight, this.restaurant});
-
+//
 //   @override
 //   Widget build(
 //       BuildContext context, double shrinkOffset, bool overlapsContent) {
@@ -913,15 +913,15 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
 //       ],
 //     );
 //   }
-
+//
 //   @override
 //   // TODO: implement maxExtent
 //   double get maxExtent => 250;
-
+//
 //   @override
 //   // TODO: implement minExtent
 //   double get minExtent => 120;
-
+//
 //   @override
 //   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
 // }
