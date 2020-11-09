@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
+import 'package:moodish_mvp/screens/Food/components/StepByStep.dart';
 import 'package:moodish_mvp/screens/Food/nComponents/bottomtabNav.dart';
 
 class FoodInfoCard extends StatefulWidget {
@@ -16,6 +17,7 @@ class FoodInfoCard extends StatefulWidget {
 
 class _FoodInfoCardState extends State<FoodInfoCard> {
   int _selected = 1;
+  bool readMore = false;
 
   @override
   Widget build(BuildContext context) {
@@ -523,131 +525,48 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(left: 22),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                                top: 5, bottom: 5),
-                                            child: Text(
-                                              '50g Salted Butter',
-                                              style: TextStyle(fontSize: 18),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 100, bottom: 10),
-                                            child: Divider(
-                                              thickness: 1.2,
-                                              color: Colors.black87,
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                                top: 5, bottom: 5),
-                                            child: Text(
-                                              '1 Vanilla Pod',
-                                              style: TextStyle(fontSize: 18),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 100, bottom: 10),
-                                            child: Divider(
-                                                thickness: 1.2,
-                                                color: Colors.black87),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                                top: 5, bottom: 5),
-                                            child: Text(
-                                              'Custard',
-                                              style: TextStyle(fontSize: 18),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 100, bottom: 10),
-                                            child: Divider(
-                                                thickness: 1.2,
-                                                color: Colors.black87),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                                top: 5, bottom: 5),
-                                            child: Text(
-                                              '150ml Milk',
-                                              style: TextStyle(fontSize: 18),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 100, bottom: 10),
-                                            child: Divider(
-                                                thickness: 1.2,
-                                                color: Colors.black87),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                                top: 5, bottom: 5),
-                                            child: Text(
-                                              'Scrapped seeds',
-                                              style: TextStyle(fontSize: 18),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 100, bottom: 10),
-                                            child: Divider(
-                                                thickness: 1.2,
-                                                color: Colors.black87),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                                top: 5, bottom: 5),
-                                            child: Text(
-                                              '50g Suet',
-                                              style: TextStyle(fontSize: 18),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 100, bottom: 10),
-                                            child: Divider(
-                                                thickness: 1.2,
-                                                color: Colors.black87),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                                top: 5, bottom: 5),
-                                            child: Text(
-                                              '250g Salts',
-                                              style: TextStyle(fontSize: 18),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 100, bottom: 10),
-                                            child: Divider(
-                                                thickness: 1.2,
-                                                color: Colors.black87),
-                                          ),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                          Align(
-                                            alignment: Alignment.centerRight,
-                                            child: Padding(
-                                              padding:
-                                                  EdgeInsets.only(right: 20),
+                                      child: ListView.builder(
+                                        shrinkWrap: true,
+                                        primary: false,
+                                        physics: NeverScrollableScrollPhysics(),
+                                        itemCount:
+                                            widget.foodList.ingredients.length,
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          if (index == 5 && readMore == false)
+                                            return GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  readMore = true;
+                                                });
+                                              },
+                                              child: Align(
+                                                alignment:
+                                                    Alignment.centerRight,
+                                                child: Padding(
+                                                  padding: EdgeInsets.only(
+                                                      right: 20),
+                                                  child: Text(
+                                                    '...read more',
+                                                    style:
+                                                        TextStyle(fontSize: 18),
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          else if (index < 5 ||
+                                              readMore == true) {
+                                            return Padding(
+                                              padding: EdgeInsets.only(
+                                                  top: 5, bottom: 5),
                                               child: Text(
-                                                '...read more',
+                                                widget.foodList
+                                                    .ingredients[index],
                                                 style: TextStyle(fontSize: 18),
                                               ),
-                                            ),
-                                          )
-                                        ],
+                                            );
+                                          }
+                                        },
                                       ),
                                     ),
                                     SizedBox(
@@ -672,23 +591,36 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                                             SizedBox(
                                               width: 15,
                                             ),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Directions',
-                                                  style: TextStyle(
-                                                      fontSize: 24.5,
-                                                      fontWeight:
-                                                          FontWeight.w400),
-                                                ),
-                                                Text(
-                                                  'Cook better with step by step guide',
-                                                  style: TextStyle(
-                                                      color: Colors.grey[600]),
-                                                ),
-                                              ],
+                                            GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            StepByStep(
+                                                              foodList: widget
+                                                                  .foodList,
+                                                            )));
+                                              },
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'Directions',
+                                                    style: TextStyle(
+                                                        fontSize: 24.5,
+                                                        fontWeight:
+                                                            FontWeight.w400),
+                                                  ),
+                                                  Text(
+                                                    'Cook better with step by step guide',
+                                                    style: TextStyle(
+                                                        color:
+                                                            Colors.grey[600]),
+                                                  ),
+                                                ],
+                                              ),
                                             )
                                           ],
                                         ),
@@ -709,7 +641,8 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                                           child: ListView.builder(
                                               physics:
                                                   NeverScrollableScrollPhysics(),
-                                              itemCount: 5,
+                                              itemCount: widget
+                                                  .foodList.preparation.length,
                                               shrinkWrap: true,
                                               itemBuilder: (context, index) {
                                                 return Column(
@@ -725,7 +658,8 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                                                       height: 5,
                                                     ),
                                                     Text(
-                                                      'Lorem ipsum dolor sit amet, incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex  consequat. Dui in reprehenderit in voluptate pariatur. laborum.',
+                                                      widget.foodList
+                                                          .preparation[index],
                                                       style: TextStyle(
                                                           fontSize: 12,
                                                           color: Colors.grey),
