@@ -651,44 +651,82 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                                                   .foodList.preparation.length,
                                               shrinkWrap: true,
                                               itemBuilder: (context, index) {
-                                                return Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Step ${index + 1}',
-                                                      style: TextStyle(
-                                                          fontSize: 22),
+                                                if (index == 5 &&
+                                                    readMorePrep == false)
+                                                  return GestureDetector(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        readMorePrep = true;
+                                                      });
+                                                    },
+                                                    child: Align(
+                                                      alignment:
+                                                          Alignment.centerRight,
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                right: 20),
+                                                        child: Text(
+                                                          '...read more',
+                                                          style: TextStyle(
+                                                              fontSize: 18),
+                                                        ),
+                                                      ),
                                                     ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
-                                                    Text(
-                                                      widget.foodList
-                                                          .preparation[index],
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          color: Colors.grey),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    )
-                                                  ],
-                                                );
+                                                  );
+                                                else if (index < 5 ||
+                                                    readMorePrep == true) {
+                                                  return Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        'Step ${index + 1}',
+                                                        style: TextStyle(
+                                                            fontSize: 22),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 5,
+                                                      ),
+                                                      Text(
+                                                        widget.foodList
+                                                            .preparation[index],
+                                                        style: TextStyle(
+                                                            fontSize: 12,
+                                                            color: Colors.grey),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10,
+                                                      )
+                                                    ],
+                                                  );
+                                                }
+                                                //   return Column(
+                                                //     crossAxisAlignment:
+                                                //         CrossAxisAlignment.start,
+                                                //     children: [
+                                                //       Text(
+                                                //         'Step ${index + 1}',
+                                                //         style: TextStyle(
+                                                //             fontSize: 22),
+                                                //       ),
+                                                //       SizedBox(
+                                                //         height: 5,
+                                                //       ),
+                                                //       Text(
+                                                //         widget.foodList
+                                                //             .preparation[index],
+                                                //         style: TextStyle(
+                                                //             fontSize: 12,
+                                                //             color: Colors.grey),
+                                                //       ),
+                                                //       SizedBox(
+                                                //         height: 10,
+                                                //       )
+                                                //     ],
+                                                //   );
                                               }),
-                                        ),
-                                        SizedBox(
-                                          height: 30,
-                                        ),
-                                        Align(
-                                          alignment: Alignment.centerRight,
-                                          child: Padding(
-                                            padding: EdgeInsets.only(right: 25),
-                                            child: Text(
-                                              '...read more',
-                                              style: TextStyle(fontSize: 18),
-                                            ),
-                                          ),
                                         ),
                                         SizedBox(
                                           height: 20,
