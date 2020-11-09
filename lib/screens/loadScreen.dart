@@ -75,7 +75,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       checkDate().then((check) async {
         DatabaseQuery(listName: 'craving').getFood(
             field: ['cuisine'],
-            value: [cuisine_sel],
+            value: ['indian'],
             limit: 7,
             check: 0).then((future) {
           BlocProvider.of<FoodBloc>(context)
