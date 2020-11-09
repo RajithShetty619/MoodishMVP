@@ -40,6 +40,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     String deter = _box.get("deter");
     List<dynamic> cuisine = _box.get("preference");
     String tod = timeOfTheDay();
+    await DatabaseService().returnUser();
     String cuisine_sel = cuisine[Random().nextInt(cuisine.length)];
 
     cuisine_sel = cuisine_sel[0].toLowerCase() + cuisine_sel.substring(1);

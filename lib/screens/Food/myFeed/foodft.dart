@@ -122,6 +122,7 @@ class _getListViewState extends State<getListView> {
                 SizedBox(
                   height: 10.0,
                 ),
+                Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
