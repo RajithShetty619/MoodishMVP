@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
+import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:intl/intl.dart';
 import 'package:moodish_mvp/Services/geolocationRest.dart';
@@ -38,7 +39,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
             .getRestFromLocationCuisine(context, "Fast Food", "5"));
     Box _box = await Hive.openBox("preferenceBox");
     String deter = _box.get("deter");
-
+    await DatabaseService().returnUser();
     if (deter != "veg" && deter != "nonveg") {
       Random random = new Random();
       int randomNumber = random.nextInt(2);

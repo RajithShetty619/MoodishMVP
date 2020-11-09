@@ -172,14 +172,16 @@ class DatabaseService {
   }
 
   /* used to display name and email in profile */
-  Future<Map<String, dynamic>> returnUser() async {
+  Future<void> returnUser() async {
     Map<String, dynamic> _data = {};
     DocumentSnapshot user =
         await userName.doc(Authenticate().returnUid()).get();
     user.data().forEach((key, value) {
       _data.putIfAbsent(key, () => value);
     });
-    return _data;
+    Hive.openBox('Userdata');
+    Box box= Hive.box('Userdata');
+    box.put('userdata',_data);
   }
 
 /* ////////////////////////////////////////////////////////////////////////  upload PHOTOMETHOD///////////////////////////////////////////////////// */
