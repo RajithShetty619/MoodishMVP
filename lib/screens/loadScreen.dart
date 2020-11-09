@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hive/hive.dart';
+import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:intl/intl.dart';
 import 'package:moodish_mvp/Services/geolocationRest.dart';
@@ -35,6 +36,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
         .then((value) => GeolocationRest()
             .getRestFromLocationCuisine(context, "Fast Food", "5"));
     Box _box = await Hive.openBox("preferenceBox");
+    await DatabaseService().returnUser();
     String deter = _box.get("deter");
     List<dynamic> cuisine = _box.get("preference");
     String tod = timeOfTheDay();

@@ -35,8 +35,8 @@ class _ProfileState extends State<Profile> {
       } catch (e) {
         print(e);
       }
-      Box box = Hive.box('Userdata');
-      Map<String, dynamic> _userData =  box.get('userdata');
+      Box box = await Hive.openBox('Userdata');
+      Map<String, dynamic> _userData = box.get('userdata');
       setState(() {
         userData = _userData;
       });

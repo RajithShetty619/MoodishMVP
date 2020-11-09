@@ -103,32 +103,6 @@ class _FoodFeedState extends State<FoodFeed> {
 
   bool isSwitched = false;
 
-  data(BuildContext dataContext, String mood) async {
-    Box _box = await Hive.openBox("preferenceBox");
-    String deter = _box.get("deter");
-
-    if (deter != "veg" && deter != "nonveg") {
-      Random random = new Random();
-      int randomNumber = random.nextInt(2);
-      if (randomNumber == 1)
-        deter = "veg";
-      else
-        deter = "nonveg";
-    }
-    _dq.getFood(
-        field: ['mood', 'deter'],
-        value: [mood, deter],
-        limit: 7,
-        mood: mood,
-        deter: deter,
-        check: 0).then((future) {
-      setState(() {
-        moodSelection = mood;
-        BlocProvider.of<FoodBloc>(dataContext).add(FoodEvent.add(future, "0"));
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return IndexedStack(
@@ -201,7 +175,7 @@ class _FoodFeedState extends State<FoodFeed> {
                           onTap: () {
                             String _val = mood[index].mood;
 
-                            data(context, _val);
+                            // data(context, _val);
                             Future.delayed(Duration(milliseconds: 400), () {
                               setState(() {
                                 _visible = false;
