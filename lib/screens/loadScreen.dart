@@ -40,6 +40,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
     String tod = timeOfTheDay();
     String cuisine_sel = cuisine[Random().nextInt(cuisine.length)];
 
+    cuisine_sel = cuisine_sel[0].toLowerCase() + cuisine_sel.substring(1);
+
     if (deter != "veg" && deter != "nonveg") {
       Random random = new Random();
       int randomNumber = random.nextInt(2);
@@ -64,9 +66,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
         BlocProvider.of<PollBloc>(context).add(PollEvent.add(fact, 'fft'));
       }),
       DatabaseQuery(listName: 'tod').getFood(
-        field: ['mealtype', 'deter'],
-        value: ["breakfast", deter],
-        limit: 7,
+        field: ["mealtype"],
+        value: ["side dish"],
+        limit: 5,
       ).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "tod"));
       }),
