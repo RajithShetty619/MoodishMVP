@@ -664,7 +664,7 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                                                   EdgeInsets.only(left: 22),
                                               child: Container(
                                                   child: Icon(
-                                                Icons.play_circle_fill_rounded,
+                                                Icons.radio_button_unchecked,
                                                 size: 30,
                                                 color: Colors.orange,
                                               )),
