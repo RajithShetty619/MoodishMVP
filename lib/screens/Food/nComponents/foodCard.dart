@@ -20,7 +20,11 @@ class _FoodCrdState extends State<FoodCrd> {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => FoodInfoCard()));
+            context,
+            MaterialPageRoute(
+                builder: (context) => FoodInfoCard(
+                      foodList: widget.foodList,
+                    )));
       },
       child: Padding(
         padding: const EdgeInsets.only(right: 10.0),
