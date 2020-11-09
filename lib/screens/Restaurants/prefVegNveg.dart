@@ -202,12 +202,12 @@ class _FoodPreferenceState extends State<FoodPreference> {
                     Box box = await Hive.openBox('preferenceBox');
                     dynamic data = box.get('deter');
                     Navigator.of(context).pop(data);
-                  } else {
-                    RestartWidget.restartApp(context);
-                    // Navigator.pushReplacement(context,
-                    //     MaterialPageRoute(builder: (context) {
-                    //   return LoadingScreen();
-                    // }));
+                    // } else {
+                    //   RestartWidget.restartApp(context);
+                    //   // Navigator.pushReplacement(context,
+                    //   //     MaterialPageRoute(builder: (context) {
+                    //   //   return LoadingScreen();
+                    //   // }));
                   }
                 },
                 child: Container(
