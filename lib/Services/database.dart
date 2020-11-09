@@ -153,10 +153,10 @@ class DatabaseService {
           .collection("data")
           .doc("${food.sr_no}")
           .delete();
-    }
-    await documentReference.set({
-      field: FieldValue.increment(-1) /* atomically increments data by 1 */
-    }, SetOptions(merge: true)).catchError((onError) => print(onError));
+    } else
+      await documentReference.set({
+        field: FieldValue.increment(-1) /* atomically increments data by 1 */
+      }, SetOptions(merge: true)).catchError((onError) => print(onError));
   }
 /* ////////////////////////////////////////////////////////////////////// USERNAMEMETHODS ////////////////////////////////////////////////////////// */
 
@@ -355,7 +355,7 @@ class DatabaseService {
 
 /* //////////////////////////////////////////////////// THIS_THAT METHOD///////////////////////////////////// */
 
-//   Future<void> like_this_that({String option,String like}) async {
+//   Future<void> like_this_that({String option,String like}) async {  [Malgudi, Teepee's Fresh Food, New Priti, Super, Neelam's Pride]
 //     print(''+ option);
 //     DocumentReference _that = Firestore.instance.collection('this_that')
 //   }

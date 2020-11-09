@@ -152,6 +152,16 @@ class DatabaseQuery {
     }
   }
 
+  Future<List<FoodListModel>> getTrending() async {
+    QuerySnapshot trend = await FirebaseFirestore.instance
+        .collection('food')
+        .orderBy("like", descending: true)
+        .limit(6)
+        .get();
+
+    return await DatabaseService().listFromSnapshot(trend);
+  }
+
   //builds query by stacking 'where(_field,_value)' statement behind each ohter
   Query recQuery(List<String> _field, List<dynamic> _value, Query q) {
     Query _query = q;

@@ -19,6 +19,7 @@ class _ProfileCardState extends State<ProfileCard> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
+        physics: BouncingScrollPhysics(),
         children: [
           Stack(
             overflow: Overflow.visible,
@@ -113,6 +114,7 @@ class _ProfileCardState extends State<ProfileCard> {
                     decoration: BoxDecoration(
                       image: DecorationImage(image: widget.image),
                       shape: BoxShape.circle,
+                      border: Border.all(color: Colors.black,width: 0.8),
                       color: Colors.grey[400],
                     ),
                   ))

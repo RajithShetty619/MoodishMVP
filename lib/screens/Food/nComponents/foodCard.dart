@@ -9,7 +9,6 @@ class FoodCrd extends StatefulWidget {
     Key key,
     this.foodList,
   }) : super(key: key);
-
   @override
   _FoodCrdState createState() => _FoodCrdState();
 }
@@ -78,15 +77,15 @@ class _FoodCrdState extends State<FoodCrd> {
                                   height: 3,
                                 ),
                                 Text(
-                                  'American Cake',
+                                  widget.foodList.cuisine,
                                   style: TextStyle(
                                       fontSize: 13, color: Colors.grey[400]),
                                 ),
                                 SizedBox(
                                   height: 3,
                                 ),
-                                Text(
-                                    'Red Velvet Cake, the queen of all layer cakes',
+                                Text(widget.foodList.description,
+                                    overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                         fontSize: 12, color: Colors.grey[400])),
                                 Padding(
@@ -109,7 +108,7 @@ class _FoodCrdState extends State<FoodCrd> {
                                       SizedBox(
                                         width: 3,
                                       ),
-                                      Text('273 Calories',
+                                      Text(widget.foodList.calories,
                                           style: TextStyle(fontSize: 12)),
                                       SizedBox(
                                         width: 12,
@@ -118,7 +117,7 @@ class _FoodCrdState extends State<FoodCrd> {
                                         Icons.alarm,
                                         size: 12,
                                       ),
-                                      Text('15 mins',
+                                      Text(widget.foodList.time,
                                           style: TextStyle(fontSize: 12))
                                     ],
                                   ),

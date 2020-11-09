@@ -78,6 +78,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
             check: check).then((future) {
           BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "d0"));
         });
+        DatabaseQuery(listName: 'trend').getTrending().then((future) {
+          BlocProvider.of<FoodBloc>(context)
+              .add(FoodEvent.add(future, "trend"));
+        });
       }),
     ]);
   }

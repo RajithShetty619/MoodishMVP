@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 
@@ -18,7 +17,8 @@ class FoodBloc extends Bloc<FoodEvent, Map<String, List<FoodListModel>>> {
           "d0": [],
           "d1": [],
           "d2": [],
-          "search": []
+          "search": [],
+          "trend": []
         });
   @override
   Stream<Map<String, List<FoodListModel>>> mapEventToState(

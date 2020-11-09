@@ -355,13 +355,13 @@ class _FoodRecipeState extends State<FoodRecipe> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 onPressed: () async {
-                  BetaCount().count(field: "step by step");
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => PageViewer1(
-                                foodList: widget.foodList,
-                              )));
+                  // BetaCount().count(field: "step by step");
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => PageViewer1(
+                  //               foodList: widget.foodList,
+                  //             )));
 
                   // showDialog(
                   //     context: context,
