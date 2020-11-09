@@ -348,7 +348,7 @@ class _FoodHomeState extends State<FoodHome> {
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Container(
-                              height: MediaQuery.of(context).size.height / 2,
+                              height: MediaQuery.of(context).size.height / 2.5,
                               child: BlocConsumer<FoodBloc,
                                   Map<String, List<FoodListModel>>>(
                                 buildWhen: (Map<String, List<FoodListModel>>
@@ -415,15 +415,15 @@ class _FoodHomeState extends State<FoodHome> {
                           style: TextStyle(
                               fontSize: 22, fontWeight: FontWeight.bold),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: FlatButton.icon(
-                            textColor: Colors.orange,
-                            onPressed: () {},
-                            label: Text('See more'),
-                            icon: Icon(Icons.arrow_forward),
-                          ),
-                        )
+                        // Padding(
+                        //   padding: const EdgeInsets.only(left: 8.0),
+                        //   child: FlatButton.icon(
+                        //     textColor: Colors.orange,
+                        //     onPressed: () {},
+                        //     label: Text('See more'),
+                        //     icon: Icon(Icons.arrow_forward),
+                        //   ),
+                        // )
                       ],
                     ),
                   ),
@@ -433,7 +433,7 @@ class _FoodHomeState extends State<FoodHome> {
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Column(
@@ -481,21 +481,30 @@ class _FoodHomeState extends State<FoodHome> {
                           Flexible(
                             child: Container(
                               height: MediaQuery.of(context).size.height / 2,
-                              child: PollTabs(),
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 10.0),
+                                child: PollTabs(),
+                              ),
                             ),
                           ),
                         if (indexP == 1 && numbr == 1)
                           Flexible(
                             child: Container(
                               height: MediaQuery.of(context).size.height / 2,
-                              child: YesNoTabs(),
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 10.0),
+                                child: YesNoTabs(),
+                              ),
                             ),
                           ),
                         if (indexP == 1 && numbr == 2)
                           Flexible(
                             child: Container(
                               height: MediaQuery.of(context).size.height / 2,
-                              child: This_ThatTabs(),
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 10.0),
+                                child: This_ThatTabs(),
+                              ),
                             ),
                           ),
                       ],
