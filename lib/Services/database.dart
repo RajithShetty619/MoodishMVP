@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -8,6 +9,7 @@ import 'package:moodish_mvp/Services/storage.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:moodish_mvp/models/restaurantsModel.dart';
+import 'package:http/http.dart';
 
 class DatabaseService {
   final CollectionReference userName =
@@ -328,6 +330,26 @@ class DatabaseService {
     DocumentReference _poll =
         FirebaseFirestore.instance.collection('polls').doc(sr_no);
     _poll.set({opt: like}, SetOptions(merge: true));
+  }
+/* /////////////////////////////////////////////////////api  method ///////////////////////////////////////////// */
+
+  Future<void> restRecommendApi({String rest_name}) async {
+    var dat = jsonEncode([rest_name]);
+    var data = await post(
+        'https://snapinsight-test.herokuapp.com/predict_restaurant',
+        headers: {'Content-Type': 'application/json'},
+        body: dat);
+    List<dynamic> datadd = jsonDecode(data.body);
+
+    while (datadd.length > 5) {
+      datadd.removeAt(Random().nextInt(datadd.length));
+    }
+    print(datadd);
+    Query q = FirebaseFirestore.instance
+        .collection('restaurants')
+        .where("Restaurant_Name", whereIn: datadd);
+    QuerySnapshot qs = await q.get();
+    return await listfromSnapshot(qs);
   }
 }
 
