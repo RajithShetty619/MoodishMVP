@@ -136,22 +136,22 @@ class _RestCategoryModelState extends State<RestCategoryModel> {
                 child: widget.event == 1
                     ? Text(
                         'Fine Dining',
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),
                       )
                     : widget.event == 2
                         ? Text(
                             'Italian',
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),
                           )
                         : widget.event == 3
                             ? Text(
                                 'Continental',
-                                style: TextStyle(fontSize: 20),
+                                style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),
                               )
                             : widget.event == 4
                                 ? Text(
                                     'Desserts',
-                                    style: TextStyle(fontSize: 20),
+                                    style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),
                                   )
                                 : widget.event == 5
                                     ? Text(
@@ -178,7 +178,7 @@ class _RestCategoryModelState extends State<RestCategoryModel> {
                         ),
                         Text(
                           'Sorted by Near You',
-                          style: TextStyle(color: Colors.grey[300]),
+                          style: TextStyle(color: Colors.grey[400]),
                         )
                       ],
                     ),
@@ -269,12 +269,15 @@ class _RestCategoryModelState extends State<RestCategoryModel> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: <Widget>[
-                                                Text(
-                                                  element.restaurant_Name,
-                                                  style: TextStyle(
-                                                      fontSize: 24,
-                                                      fontWeight:
-                                                          FontWeight.w400),
+                                                Container(
+                                                  width: 160,
+                                                  child: Text(
+                                                    element.restaurant_Name,
+                                                    style: TextStyle(
+                                                        fontSize: MediaQuery.of(context).size.width/20,
+                                                        fontWeight:
+                                                            FontWeight.w400),
+                                                  ),
                                                 ),
                                                 Container(
                                                     width: 170,
@@ -283,12 +286,12 @@ class _RestCategoryModelState extends State<RestCategoryModel> {
                                                       style: TextStyle(
                                                           fontSize: 11,
                                                           color:
-                                                              Colors.grey[300]),
+                                                              Colors.grey[400]),
                                                     )),
                                                 Text(
                                                   element.restaurant_Location,
                                                   style: TextStyle(
-                                                      color: Colors.grey[300],
+                                                      color: Colors.grey[400],
                                                       fontSize: 11),
                                                 ),
                                                 Padding(
@@ -311,7 +314,7 @@ class _RestCategoryModelState extends State<RestCategoryModel> {
                                                     Text(
                                                       element.rating,
                                                       style: TextStyle(
-                                                          fontSize: 10),
+                                                          fontSize: 12),
                                                     ),
                                                     SizedBox(
                                                       width: 8,
@@ -324,7 +327,7 @@ class _RestCategoryModelState extends State<RestCategoryModel> {
                                                       element
                                                           .restaurant_Location,
                                                       style: TextStyle(
-                                                          fontSize: 10),
+                                                          fontSize: 12),
                                                     ),
                                                     SizedBox(
                                                       width: 8,

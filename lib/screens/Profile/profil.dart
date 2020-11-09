@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:moodish_mvp/Services/database.dart';
+import 'package:moodish_mvp/screens/Profile/profileCard.dart';
 import 'package:share/share.dart';
 import '../../Services/authenticate.dart';
 import 'Edit.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_linkify/flutter_linkify.dart';
 import 'settings.dart';
 import 'notificationSettings.dart';
 import 'likedFood.dart';
@@ -134,7 +134,6 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 20.0),
                 Divider(
                   thickness: 2.0,
@@ -216,6 +215,24 @@ class _ProfileState extends State<Profile> {
                 Divider(
                   thickness: 2.0,
                 ),
+                ListTile(
+                  title: Text("My Profile",
+                      style: TextStyle(color: Colors.black, fontSize: 20)),
+                  trailing: Icon(
+                    Icons.keyboard_arrow_right,
+                    color: Colors.grey.shade400,
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ProfileCard(
+                                  user: userData,
+                                  image: _image,
+                                )));
+                  },
+                ),
+                Divider(),
                 ListTile(
                   title: Text(
                     "Help & Support",
@@ -331,7 +348,7 @@ class _ProfileState extends State<Profile> {
                             box.localToGlobal(Offset.zero) & box.size);
                   },
                 ),
-                Divider(), 
+                Divider(),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(

@@ -124,122 +124,137 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                   ),
                   itemBuilder: (context, index) {
                     RestListModel element = restList["near"][index];
-                    return Padding(
-                      padding: const EdgeInsets.only(left: 8, right: 8),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return RestCardModel(
-                              restaurant: element,
-                            );
-                          }));
-                        },
-                        child: Container(
-                          height: 215,
-                          width: 300,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              image: DecorationImage(
-                                  image: CachedNetworkImageProvider(element
-                                              .photo_url !=
-                                          ''
-                                      ? element.photo_url
-                                      : 'https://firebasestorage.googleapis.com/v0/b/moodishtest.appspot.com/o/download.jpg?alt=media&token=b1c76ca1-9e73-4e20-8233-c3231469494f'),
-                                  fit: BoxFit.cover)),
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Padding(
-                              padding: EdgeInsets.only(bottom: 12),
-                              child: Container(
-                                height: 95,
-                                width: 240,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(30)),
-                                child: Padding(
-                                  padding: EdgeInsets.all(8),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 8.0),
-                                        child: Text(
-                                          element.restaurant_Name,
-                                          textHeightBehavior:
-                                              TextHeightBehavior(
-                                                  applyHeightToFirstAscent:
-                                                      true),
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 24),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 10.0, top: 1),
-                                        child: Text(
-                                          element.restaurant_Type ??
-                                              element.cuisines ??
-                                              '',
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              color: Colors.grey[400]),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 8, right: 8, bottom: 2),
-                                        child: Divider(
-                                          thickness: 1.2,
-                                        ),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: <Widget>[
-                                          Row(
-                                            children: <Widget>[
-                                              Icon(
-                                                Icons.star,
-                                                size: 10,
-                                                color: Colors.amber,
-                                              ),
-                                              Text(
-                                                element.rating,
-                                                style: TextStyle(fontSize: 12),
-                                              ),
-                                            ],
+                    if (restList["near"].length < 1) {
+                      return Center(
+                        child: Text("Sorry no restaurants found near you"),
+                      );
+                    } else
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 8, right: 8),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return RestCardModel(
+                                restaurant: element,
+                              );
+                            }));
+                          },
+                          child: Container(
+                            height: 215,
+                            width: 300,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                image: DecorationImage(
+                                    image: CachedNetworkImageProvider(element
+                                                .photo_url !=
+                                            ''
+                                        ? element.photo_url
+                                        : 'https://firebasestorage.googleapis.com/v0/b/moodishtest.appspot.com/o/download.jpg?alt=media&token=b1c76ca1-9e73-4e20-8233-c3231469494f'),
+                                    fit: BoxFit.cover)),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Padding(
+                                padding: EdgeInsets.only(bottom: 12),
+                                child: Container(
+                                  height: 95,
+                                  width: 240,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(30)),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 8.0),
+                                          child: Container(
+                                            width: 230,
+                                            child: Text(
+                                              element.restaurant_Name,
+                                              overflow: TextOverflow.ellipsis,
+                                              textHeightBehavior:
+                                                  TextHeightBehavior(
+                                                      applyHeightToFirstAscent:
+                                                          true),
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .width /
+                                                          20),
+                                            ),
                                           ),
-                                          Row(
-                                            children: <Widget>[
-                                              Icon(
-                                                Icons.gps_fixed,
-                                                size: 10,
-                                              ),
-                                              Text(
-                                                element.restaurant_Location,
-                                                style: TextStyle(fontSize: 12),
-                                              ),
-                                            ],
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 10.0, top: 1),
+                                          child: Text(
+                                            element.restaurant_Type ??
+                                                element.cuisines ??
+                                                '',
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                color: Colors.grey[400]),
                                           ),
-                                          Text(
-                                            '\u20B9 Free',
-                                            style: TextStyle(fontSize: 12),
-                                          )
-                                        ],
-                                      )
-                                    ],
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 8, right: 8, bottom: 2),
+                                          child: Divider(
+                                            thickness: 1.2,
+                                          ),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: <Widget>[
+                                            Row(
+                                              children: <Widget>[
+                                                Icon(
+                                                  Icons.star,
+                                                  size: 10,
+                                                  color: Colors.amber,
+                                                ),
+                                                Text(
+                                                  element.rating,
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: <Widget>[
+                                                Icon(
+                                                  Icons.gps_fixed,
+                                                  size: 10,
+                                                ),
+                                                Text(
+                                                  element.restaurant_Location,
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ],
+                                            ),
+                                            // Text(
+                                            //   '\u20B9 Free',
+                                            //   style: TextStyle(fontSize: 12),
+                                            // )
+                                          ],
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    );
+                      );
                   },
                 );
               },
@@ -536,7 +551,9 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                           onTap: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return RestCardModel();
+                              return RestCardModel(
+                                restaurant: restList["all"][index],
+                              );
                             }));
                           },
                           child: Card(
@@ -555,11 +572,17 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
-                                        Text(
-                                          element.restaurant_Name,
-                                          style: TextStyle(
-                                              fontSize: 24,
-                                              fontWeight: FontWeight.w400),
+                                        Container(
+                                          width: 160,
+                                          child: Text(
+                                            element.restaurant_Name,
+                                            style: TextStyle(
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    20,
+                                                fontWeight: FontWeight.w400),
+                                          ),
                                         ),
                                         Container(
                                             width: 170,
@@ -569,7 +592,7 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                                                   : element.cuisines,
                                               style: TextStyle(
                                                   fontSize: 11,
-                                                  color: Colors.grey[300]),
+                                                  color: Colors.grey[400]),
                                             )),
                                         // Text(
                                         //   element.restaurant_Location,
@@ -595,7 +618,7 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                                             ),
                                             Text(
                                               element.rating,
-                                              style: TextStyle(fontSize: 10),
+                                              style: TextStyle(fontSize: 12),
                                             ),
                                             SizedBox(
                                               width: 8,
@@ -606,7 +629,7 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                                             ),
                                             Text(
                                               element.restaurant_Location,
-                                              style: TextStyle(fontSize: 10),
+                                              style: TextStyle(fontSize: 12),
                                             ),
                                             SizedBox(
                                               width: 8,
