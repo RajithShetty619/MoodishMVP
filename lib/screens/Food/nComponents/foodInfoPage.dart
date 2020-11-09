@@ -9,7 +9,7 @@ class FoodInfoCard extends StatefulWidget {
   final FoodListModel foodList;
   const FoodInfoCard({
     Key key,
-    this.foodList,
+    @required this.foodList,
   }) : super(key: key);
   @override
   _FoodInfoCardState createState() => _FoodInfoCardState();

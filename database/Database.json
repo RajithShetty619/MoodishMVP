@@ -26,7 +26,7 @@
             "ingredient 7": "1 pinch Baking soda\\n",
             "ingredient 8": "2 tbsp Lemon juice\\n",
             "ingredient 9": "1/2 tsp Dry pudina powder",
-            "serving": " 10 ",
+            "serving": "10 ",
             "timing": "50 mins",
             "calories": "666 Calories",
             "fats": "22g",
@@ -78,12 +78,12 @@
             "situation": "At Home",
             "cuisine": "indian",
             "deter": "veg",
-            "description": "Shrikhand has been referred to as \"Shikhrini\" in the Sanskrit literature. According to Jashbhai B. Prajappati and Baboo M. Nair, it originated in ancient Indian state Maharashtra, around 400 B.C.E",
+            "description": "Shrikhand has been referred to as \"Shikhrini\"in the Sanskrit literature. According to Jashbhai B. Prajappati and Baboo M. Nair, it originated in ancient Indian state Maharashtra, around 400 B.C.E",
             "mealtype": "Desert",
             "sr_no": "1"
         },
         {
-            "restaurants": " [\"Blue Park\",\"sardar pav bhaji',\"Famous pav bhaji\",'manohar pav bhaji',\"cannon pav bhaji\",\"lisha pav bhaji\"]",
+            "restaurants": "[\"Blue Park\",\"sardar pav bhaji',\"Famous pav bhaji\",'manohar pav bhaji',\"cannon pav bhaji\",\"lisha pav bhaji\"]",
             "food_item": "Pav Bhaji",
             "mood": "sluggish",
             "mood1": "anger",
@@ -180,7 +180,7 @@
             "sr_no": "3"
         },
         {
-            "restaurants": " [\"Babu Vada Pav\",\"laxman om vada pav\",\"aram vada pav\",\"babu vada pav\",\"vidharva vada pav\",\"parleshwar vada pav\",anand vada pav\"]",
+            "restaurants": "[\"Babu Vada Pav\",\"laxman om vada pav\",\"aram vada pav\",\"babu vada pav\",\"vidharva vada pav\",\"parleshwar vada pav\",anand vada pav\"]",
             "food_item": "Chessy aloo vada",
             "mood": "happy",
             "mood1": "sluggish",
@@ -239,7 +239,7 @@
             "sr_no": "4"
         },
         {
-            "restaurants": " [\"Mamledar Misal\",\"jagtap muneri misal pav\",\"marutirao missalwale\",\"the house of misal\",'martand misal\"]",
+            "restaurants": "[\"Mamledar Misal\",\"jagtap muneri misal pav\",\"marutirao missalwale\",\"the house of misal\",'martand misal\"]",
             "food_item": "misal pav",
             "mood": "happy",
             "mood1": "angry",
@@ -364,7 +364,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "the word amti literally means tangy with the combination of spice and sweetness. the tangy taste is mainly due addition of kokum, sweetness from jaggery and spice is from the goda masala. it is ideally served with plain rice jeera rice for lunch and dinner.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "7"
         },
         {
@@ -399,7 +399,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "They are very easy to make and make a good accompaniment to lentil or any Indian vegetable-based curry dish. They are heaty and good to have during winters or cold climate.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "8"
         },
         {
@@ -557,7 +557,7 @@
             "ingredient 14": "2 to 4 tablespoon oil",
             "ingredient 15": "2 cups water",
             "ingredient 16": "salt as required",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "1 hr 5 mins",
             "calories": "221 kcal",
             "fats": "13g",
@@ -567,7 +567,7 @@
             "situation": "At Home",
             "cuisine": "indian",
             "deter": "veg",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "12"
         },
         {
@@ -769,7 +769,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "Bombil fry is a crunchy and spicy fish recipe that is easy and simple to make.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "16"
         },
         {
@@ -820,7 +820,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Crisp & crunchy snack for Diwali festival. chakli is a deep-fried snack made from rice flour, gram flour, wheat flour or a mixture of lentil flours.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "17"
         },
         {
@@ -1106,7 +1106,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Kala vatana amti is a no onion no garlic coconut based black peas curry",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "24"
         },
         {
@@ -1142,7 +1142,7 @@
             "ingredient 10": "2 to 3 tablespoons coriander leaves (cilantro leaves)",
             "ingredient 11": "lemon juice as required",
             "ingredient 12": "grated coconut as required",
-            "serving": "2 serving",
+            "serving": "2",
             "timing": "30 min",
             "calories": "397 kcal",
             "fats": "20g",
@@ -1189,7 +1189,7 @@
             "ingredient 12": "¼ teaspoon sugar or add as required",
             "ingredient 13": "1 to 2 tablespoons chopped coriander leaves (cilantro leaves)",
             "ingredient 23": "g",
-            "serving": "2 serving",
+            "serving": "2",
             "timing": "15 min",
             "calories": "216 kcal",
             "fats": "11g",
@@ -1200,7 +1200,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Maharashtrian kadhi is a quick yogurt and gram flour based sauce or kadhi made without pakoras. Tempered with spices and a bit sweet. It is best served with some steamed rice and makes for a simple summer meal.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "26"
         },
         {
@@ -1410,7 +1410,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Masala bhat is a spicy and aromatic one-pot traditional rice recipe with veggies from the Maharashtrian cuisine.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "31"
         },
         {
@@ -1455,7 +1455,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Masala rice is a medium hot spicy rice dish made with leftover rice.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "32"
         },
         {
@@ -1527,7 +1527,7 @@
             "ingredient 4": "¼ tsp salt",
             "ingredient 5": "½ tsp ghee",
             "ingredient 6": "1 cup rice flour, fine",
-            "serving": "8 serving",
+            "serving": "8",
             "timing": "40 min",
             "calories": "195 kcal",
             "fats": "4.4g",
@@ -1621,7 +1621,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "This is a warm and lightly spiced aloo sabji or bhaji with hints of coriander, ginger and other Indian spices. This sabji goes very well with pooris or chapatis.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "36"
         },
         {
@@ -1653,7 +1653,7 @@
             "ingredient 12": "water to knead",
             "ingredient 13": "¼ cup  wheat flour / atta",
             "ingredient 14": "oil / ghee for roasting",
-            "serving": "8 serving",
+            "serving": "8",
             "timing": "1 hour 10 min",
             "calories": "195 kcal",
             "fats": "6.3g",
@@ -1703,7 +1703,7 @@
             "ingredient 17": "pinch chaat masala",
             "ingredient 18": "¼ onion",
             "ingredient 19": "few coriander leaves",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "45 min",
             "calories": "471 kcal",
             "fats": "18.4g",
@@ -1785,7 +1785,7 @@
             "ingredient 9": "½ to 1 teaspoon lemon juice or as required (optional)",
             "ingredient 10": "3 tablespoon peanut oil or ghee",
             "ingredient 11": "rock salt (sendha namak) as required",
-            "serving": "3 serving",
+            "serving": "3",
             "timing": "25 min",
             "calories": "539 kcal",
             "fats": "26g",
@@ -1834,7 +1834,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Serve the Sabudana thalipeeth with any falahari chutney or raita. I served with dahi aloo and tamarind dates chutney. The dahi wale aloo were made with cashew yogurt.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "41"
         },
         {
@@ -1906,7 +1906,7 @@
             "ingredient 12": "1 Cinnamon Stick",
             "ingredient 13": "1/2 Star Annise",
             "ingredient 14": "2 Cloves 3 Black Peppercorns",
-            "serving": "2 serving",
+            "serving": "2",
             "timing": "65 min",
             "calories": "303 kcal",
             "fats": "26.7g",
@@ -1917,7 +1917,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "A spicy Kolhapuri dish prepared by using Mutton Stock. Very very aromatic with the use of fresh spices. Gets perfect blends of flavors and taste as its being prepared with mutton stock. Its very very spicy, it could be hair raise for mild eaters",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "43"
         },
         {
@@ -1969,7 +1969,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Kovakkai rice is a spiced and aromatic one pot rice recipe made with tendli or ivy gourds. A delicious rice recipe from the Maharashtrian cuisine.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "44"
         },
         {
@@ -2022,7 +2022,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Vangi bath is a delicious recipe of brinjal rice from the Karnataka cuisine. This Vangi bath recipe makes use of vangi bath masala powder and tamarind pulp as two of the main ingredients.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "45"
         },
         {
@@ -2076,7 +2076,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Maharashtrian varan bhaat recipe - delicious lentil stew or dal made with pigeon pea lentils and served with rice.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "46"
         },
         {
@@ -2127,7 +2127,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Maharashtrian goda masala recipe - an aromatic spice blend unique to Maharashtrian cuisine.",
-            "mealtype": "side Dish",
+            "mealtype": "side dish",
             "sr_no": "47"
         },
         {
@@ -2178,7 +2178,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Corn cutlet are crisp melt in the mouth corn patties made with mashed potatoes and stuffed with a spicy corn filling.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "48"
         },
         {
@@ -2228,7 +2228,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "A traditional Malvani black peas recipe also known as kala vatana rassa or kala vatana sambar",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "49"
         },
         {
@@ -2286,7 +2286,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Alu vadi also known as patra or pathrode is a delicious dish of colocasia or taro root leaves smeared with spiced, sweet and tangy gram flour paste and steamed to be tempered later",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "50"
         },
         {
@@ -2340,7 +2340,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "This Restaurant Style Paneer Tikka is a popular and delicious tandoori snack where paneer (Indian cottage cheese cubes) are marinated in a spiced yogurt-based marinade, arranged on skewers and grilled in the oven.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "51"
         },
         {
@@ -2390,7 +2390,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Dahi puri also known as dahi batata puri is a delicious, yummy, chatpata chaat snack from Mumbai. It is sweet, sour, tangy, spicy and crispy chaat.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "52"
         },
         {
@@ -2435,7 +2435,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Khaman dhokla or khaman as its called is a savory steamed cake made from gram flour.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "53"
         },
         {
@@ -2545,7 +2545,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Crisp and thin, Methi Khakhra is popularly made in Gujarati and rajsthan households. Make it and you will surely get addicted to this snack. Here is how to make it.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "55"
         },
         {
@@ -2573,7 +2573,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Bhakri has its origin in Maharashtrian cuisine, it is an integral part of Gujarati as well as Goan cuisine. Traditionally, it is made with jowar flour",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "56"
         },
         {
@@ -2612,7 +2612,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Lachha Paratha or Lachedar Paratha is a popular flatbread from all over India, made from whole wheat flour.",
-            "mealtype": "Breakfast",
+            "mealtype": "breakfast",
             "sr_no": "57"
         },
         {
@@ -2661,7 +2661,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Garlic naan is Indian leavened flatbread made with wheat flours and spiced with garlic.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "58"
         },
         {
@@ -2700,7 +2700,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "A crispy shallow fried paratha with keema stuffing makes for an excellent breakfast idea and a brunch too",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "59"
         },
         {
@@ -2745,7 +2745,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Medu vada are crisp and fried dough nuts made from black grams, herbs, coconut and spices. These urad dal vada are also known as Garelu in Andhra, Uzhunnu Vada in Kerala and Medhu Vadai in Tamil Nadu. ",
-            "mealtype": "Breakfast",
+            "mealtype": "breakfast",
             "sr_no": "60"
         },
         {
@@ -2781,7 +2781,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "This easy Indian butter chicken recipe makes Indian food a synch! This creamy tomato sauce is similar to chicken tikka masala, but maybe even better!",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "61"
         },
         {
@@ -2819,7 +2819,7 @@
             "ingredient 13": "4 slices beetroot, thinly sliced (canned / cooked beetroot)",
             "ingredient 14": "4 slices onion, thinly sliced",
             "ingredient 15": "2 tsp tomato sauce for garnishing",
-            "serving": "1serving",
+            "serving": "1",
             "timing": "9 min",
             "calories": "307 kcal",
             "fats": "7g",
@@ -2830,7 +2830,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "mumbai veg sandwich was hugely popularised by the street road vendors, however today it is served in posh restaurants too.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "62"
         },
         {
@@ -2871,7 +2871,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "Bheja fry is a classic recipe made with goat brain and freshly grounded masala spices enhancing the taste even more",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "63"
         },
         {
@@ -2916,7 +2916,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "it can be even served with dosa recipes or even stuff it inside dosa to make it masala dosa recipe.",
-            "mealtype": "side Dish",
+            "mealtype": "side dish",
             "sr_no": "64"
         },
         {
@@ -2946,7 +2946,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Bun maska is a Maharashtrian staple and has made its way through numerous Indian households due to its comfort food quality.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "65"
         },
         {
@@ -2979,7 +2979,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "Who doesn't like chicken and given a combination of easy to assemble and homemade chicken mayo roll, you can't ask for anything more delicious and absolutely mouth watering.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "66"
         },
         {
@@ -3020,7 +3020,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "A very easy to make buttery crab recipe with the dominant flavors of garlic, chillies and black pepper.",
-            "mealtype": "side Dish",
+            "mealtype": "side dish",
             "sr_no": "67"
         },
         {
@@ -3103,7 +3103,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "a popular Indian curry which is best enjoyed with plain rice or Indian breads like paratha and roti.",
-            "mealtype": "side Dish",
+            "mealtype": "side dish",
             "sr_no": "69"
         },
         {
@@ -3156,7 +3156,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "This Spicy Pomfret masala fry is easy to cook, truly delicious with an amazing marinade that makes it wonderfully lip-smacking! The flavors are not only on the surface it is in-depth!",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "70"
         },
         {
@@ -3205,7 +3205,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "Egg Bhurji is a spicy and flavourful Indian style scrambled eggs recipe that is quite famous in the streets of Northern and Western India.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "71"
         },
         {
@@ -3252,7 +3252,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "A traditional bengali preparation of prawns with coconut cream",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "72"
         },
         {
@@ -3294,7 +3294,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "Chilli egg is different side dish for dinner and lunch.Yummy chilli egg dish have different tasty and colorful dish.",
-            "mealtype": "side Dish",
+            "mealtype": "side dish",
             "sr_no": "73"
         },
         {
@@ -3339,7 +3339,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "A popular dish known as Dum ka chicken, is a very rich, aromatic and flavourful dish, chicken cooked in its own juices combined with lot of spices, almonds and cream in slow cooking method.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "74"
         },
         {
@@ -3370,7 +3370,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "This mini quiche recipe is a go to favorite quiche recipe for breakfast, brunch, a light dinner, showers, and parties! Make ahead for easy entertaining or breakfast!",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "75"
         },
         {
@@ -3446,7 +3446,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "Tender chicken curry in a thick gravy of poppy seeds and grated coconut.",
-            "mealtype": "side Dish",
+            "mealtype": "side dish",
             "sr_no": "77"
         },
         {
@@ -3469,7 +3469,7 @@
             "ingredient 4": "1/2 tsp Garam masala powder",
             "ingredient 5": "2 tsp tandoori masala",
             "ingredient 6": "2 tsp Oil",
-            "serving": "3 serving",
+            "serving": "3",
             "timing": "30 min",
             "calories": "132 kcal",
             "fats": "4g",
@@ -3519,10 +3519,10 @@
             "proteins": "13g",
             "taste": "spicy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "nonveg",
             "description": "Chicken fried rice is the comfort dish of Chinese food. It's been around for a very long time and is also common in East, Southeast, and South Asian cuisines.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "79"
         },
         {
@@ -3566,7 +3566,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "Chicken Biryani is a dish that has spread across a wide swath of South Asia, reaching as far west as Iraq and as far east as Indonesia",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "80"
         },
         {
@@ -3632,7 +3632,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Mumbai style vegetable dum biryani recipe ",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "81"
         },
         {
@@ -3684,7 +3684,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Trying to get more vegetables in your diet? Try this vegetarian one pot meal of pulao. Use the vegetables that you like most, like peas, potatoes, and green beans. Make this simple recipe that packs a punch of flavor!",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "82"
         },
         {
@@ -4023,7 +4023,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "This restaurant style dal tadka is a smooth and creamy dal tempered with Indian spices with a smoky charcoal flavor.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "89"
         },
         {
@@ -4075,7 +4075,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Kadai mushroom is cooked button mushrooms in a semi dry gravy of spiced and tangy tomato sauce along with juliennes of green bell pepper.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "90"
         },
         {
@@ -4128,7 +4128,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "In this delicious instant pot kadai mushroom gravy, white button mushrooms & bell peppers are cooked in a spiced onion-tomato based gravy in the instant pot.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "91"
         },
         {
@@ -4167,10 +4167,10 @@
             "proteins": "8g",
             "taste": "salty",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "This is an easy to prepare spicy and tasty mushroom chilli recipe. This is a popular indo Chinese starter snack.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "92"
         },
         {
@@ -4223,7 +4223,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "This aloo gobi masala is a rich, creamy and delicious curry dish made with potatoes, cauliflower, spices and herbs in a makhani gravy.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "93"
         },
         {
@@ -4258,7 +4258,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Rumali roti are thin soft rotis and can be folded like a handkerchief. Hence the name rumali or roomali roti. The word 'rumal' means handkerchief in hindi language.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "94"
         },
         {
@@ -4304,7 +4304,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Peanut rice is a tasty South Indian rice variety made with roasted peanut powder, lentils and spices. ",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "95"
         },
         {
@@ -4347,7 +4347,7 @@
             "ingredient 13": "½ tablespoon ghee (clarified butter)",
             "ingredient 14": "1 cup vermicelli - 75 grams (semiya or seviyan)",
             "ingredient 15": "1.5 tablespoons ghee",
-            "serving": "3 serving",
+            "serving": "3",
             "timing": "1 hour",
             "calories": "356 kcal",
             "fats": "1g",
@@ -4358,7 +4358,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Vermicelli biryani is a delicious biryani variety made with seviyan.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "96"
         },
         {
@@ -4398,7 +4398,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "Varhadi Chicken is traditional Maharashtrian recipe. This is popular for its spicy and hot taste. Do try this flavourful curry at home.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "97"
         },
         {
@@ -4406,7 +4406,7 @@
             "food_item": "Saoji Mutton Curry",
             "mood": "happy",
             "recipe": "It was playing on my mind for a while to recreate this dish once again but I was not getting the right composition of the masala used to make this mutton. I chanced to get a ready made pack of Saoji Masala with the key ingredients already fried and packed, I decided to give it a try.",
-            "preparation": " Heat 1tbsps oil in a non stick pan. Add coriander seeds, shahi jeera, black cardamoms, green cardamoms, dried chillies cloves, black peppercorns, cinnamon, bay leaf, poppy seeds,dried coconut slices and stone flower. Mix and sauté till fragrant. Then add jowar flour and sauté for 1 minute.",
+            "preparation": "Heat 1tbsps oil in a non stick pan. Add coriander seeds, shahi jeera, black cardamoms, green cardamoms, dried chillies cloves, black peppercorns, cinnamon, bay leaf, poppy seeds,dried coconut slices and stone flower. Mix and sauté till fragrant. Then add jowar flour and sauté for 1 minute.",
             "step 2": "Heat 1 tablespoons oil pan and cook onion slice on gold brown colour. Transfer the spices and onion in grinder jar add ginger and garlic make smooth paste. Add water if require.",
             "step 3": "Add 1 tablespoons oil in pressure cooker.Add mutton and turmeric and some salt and sauté for 2 minutes.Cover and cook till 6 - 7whistlesz",
             "step 4": "In big pan heat 2 tablespoons oil. Add ground paste and mix well and cook for 2 minutes. Red chilli powder and salt.",
@@ -4438,7 +4438,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "Saoji Mutton is popular in the entire maharashtra and is a very popular dish of Nagpurites",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "98"
         },
         {
@@ -4475,7 +4475,7 @@
             "ingredient 18": "Lemon 1/2",
             "ingredient 19": "Fresh coriander leaves chopped 1 tablespoon",
             "ingredient 20": "Fresh coriander sprigs for garnish",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "1 hour",
             "calories": "256 kcal",
             "fats": "14g",
@@ -4486,7 +4486,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "Spicy dish from indian subcontinent",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "99"
         },
         {
@@ -4522,7 +4522,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "Cooked and served in a clay pot, which maintains moistness in the meat during baking and retains heat while serving, this succulent, tender chicken is irresistible.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "100"
         },
         {
@@ -4569,7 +4569,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "The yoghurt makes the gravy thick which helps coat all the chicken pieces evenly. Tailor the heat your requirement by using a little less of the whole red chillies and the chilli powder. Like any other meat dish, if this is made a little in advance the taste develops and is much nicer.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "101"
         },
         {
@@ -4612,7 +4612,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "A spicy one-dish vegetarian dinner with curry flavors. Vegetable kottu roti is traditional Sri Lankan street food.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "102"
         },
         {
@@ -4653,7 +4653,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "A super healthy one pot meal with rice, broken wheat and lentils. This is a pure bliss when served hot on any given day",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "103"
         },
         {
@@ -4694,7 +4694,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "Malai Chicken or Murgh Malaiwala is easy to make yet very delicious preparation of chicken",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "104"
         },
         {
@@ -4737,7 +4737,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "Murghi Aur Masoor Dal Recipe is a high protein dish that is a perfect blend of masoor dal and chicken to make a rich and flavourful curry. Serve it along with phulkas and salad for a complete meal.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "105"
         },
         {
@@ -4777,7 +4777,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "Chicken Steak Recipe With Pan Roasted Vegetables & Potato Mash is a complete meal in itself. flavoursome chicken served with herbed vegetables that are pan roasted along with velvety smooth mashed potatoes. Great to be served to your family on a holiday.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "106"
         },
         {
@@ -4815,7 +4815,7 @@
             "ingredient 17": "Sesame oil 1 teaspoon",
             "ingredient 18": "Spring onions thinly sliced 2-3",
             "ingredient 19": "Rice noodles fried 1 cup",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "1 hour",
             "calories": "225 kcal",
             "fats": "6g",
@@ -4826,7 +4826,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "This Chicken Stir Fry Recipe is so much better than takeout! The chicken and vegetables in a garlic ginger soy sauce with honey is the perfect balance of sweet and savory.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "107"
         },
         {
@@ -4860,7 +4860,7 @@
             "ingredient 16": "Maizeflour 2 teaspoons",
             "ingredient 17": "Garam masala powder 1 teaspoon",
             "ingredient 18": "White butter 1-2 tables for garnish",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "1 hr10 min",
             "calories": "518 kcal",
             "fats": "33g",
@@ -4871,7 +4871,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "This is also a dish that is easily prepared in advance by making the curry sauce recipe ahead of time and then cooking the full recipe with chicken and additional spices in small batches.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "108"
         },
         {
@@ -4904,7 +4904,7 @@
             "ingredient 15": "cupChopped fresh coriander leaves for garnish",
             "ingredient 16": "Onion rings to serve",
             "ingredient 17": "Lemon wedges to serve",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "50 mn",
             "calories": "500 kcal",
             "fats": "18g",
@@ -4915,7 +4915,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "Chicken do pyaza literally means chicken with double onions! This ultimate chicken do pyaza curry with double the onion makes your day doubly happier!",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "109"
         },
         {
@@ -4960,7 +4960,7 @@
             "ingredient 20": "Hard boiled eggs peeled 6-8",
             "ingredient 21": "Cumin powder 1 teaspoon",
             "ingredient 22": "Garam masala powder 1 teaspoon",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "4 hour",
             "calories": "203 kcal",
             "fats": "15g",
@@ -4971,7 +4971,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "Murgh musallam, a masala coated whole chicken, is a perfect party dish that takes very little effort to make in an instant pot.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "110"
         },
         {
@@ -5014,7 +5014,7 @@
             "ingredient 19": "Green chillies for garnish 3+",
             "ingredient 20": "Tomato wedges for garnish",
             "ingredient 21": "Lemon wedges for garnish",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "8 hour",
             "calories": "304 kcal",
             "fats": "10g",
@@ -5025,7 +5025,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "Murgh Kabuli comes from Afghanistan and they’re known for their mild creamy preparations using yoghurt,cream,aromatic spices, nuts and poppy seeds.This recipe does not use onion and that saves a ton of time and effort. Its a great recipe for a crowd and tastes as amazing as it looks",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "111"
         },
         {
@@ -5057,7 +5057,7 @@
             "ingredient 11": "Mozzarella cheese grated 3/4 cup",
             "ingredient 12": "Processed cheese grated 1/2 cup",
             "ingredient 13": "Fresh curly parsley sprig for garnish",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "1 hour",
             "calories": "514 kcal",
             "fats": "28g",
@@ -5068,7 +5068,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "This lasagna uses a simple noodle replacement that once it's covered in meat and cheese, feels just like pasta. It's the comforting dish you no longer have to crave. ",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "112"
         },
         {
@@ -5089,7 +5089,7 @@
             "ingredient 9": "Ginger strips for garnish",
             "ingredient 10": "Fresh coriander sprig for garnish",
             "ingredient 11": "Lemon wedge to serve",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "1 hr 30 min",
             "calories": "166 kcal",
             "fats": "10h",
@@ -5100,7 +5100,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "This main dish recipe is extremely delicious. It can be made on any occasions like buffets or family dinners.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "113"
         },
         {
@@ -5135,7 +5135,7 @@
             "ingredient 16": "Yogurt 1 cup",
             "ingredient 17": "Fresh coriander sprigs to serve",
             "ingredient 18": "Steamed rice",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "1 hour",
             "calories": "294 kcal",
             "fats": "15g",
@@ -5146,7 +5146,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "Mutton gravy cooked in this oil has a lovely smooky taste. ",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "114"
         },
         {
@@ -5187,7 +5187,7 @@
             "ingredient 20": "Split red lentil (dhuli masoor dal) soaked and drained 1/4 cup",
             "ingredient 21": "Split pigeon pea (dhuli tuvar dal) soaked and drained 1/4 cup",
             "ingredient 22": "Split Bengal gram (chana dal) soaked and drained 1/4 cup",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "8 hour",
             "calories": "252 kcal",
             "fats": "6g",
@@ -5198,7 +5198,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "It is rich in protein and carbohydrates,thus aided a number of famine affected people who would otherwise have died.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "115"
         },
         {
@@ -5228,7 +5228,7 @@
             "ingredient 13": "Sugar 1 teaspoon",
             "ingredient 14": "Pavs to serve",
             "ingredient 15": "Fired potato wedges for garnish",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "1 hour",
             "calories": "360 kcal",
             "fats": "15g",
@@ -5239,7 +5239,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "Mutton Vindaloo is a traditional and tasty Goan recipe made with lamb meat in vinegar and spices.,Serve the vindaloo along with steamed rice or pav to make a perfect dinner.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "116"
         },
         {
@@ -5275,7 +5275,7 @@
             "ingredient 16": "Boiled egg half for garnish",
             "ingredient 17": "Salad to serve",
             "ingredient 18": "Papad to serve",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "1 hr 10 min",
             "calories": "578 kcal",
             "fats": "21g",
@@ -5286,7 +5286,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "Mutton Pulao Recipe is an amazing pulao recipe made with mutton and rice,This is a variation to the mutton tahari recipe",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "117"
         },
         {
@@ -5323,7 +5323,7 @@
             "ingredient 17": "Salt to taste",
             "ingredient 18": "Tamarind pulp 2 teaspoons",
             "ingredient 19": "Parsi brown rice to serve",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "1 hr 30 min",
             "calories": "337 kcal",
             "fats": "3g",
@@ -5334,7 +5334,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "Dhansak Mutton is a quintessential Parsi recipe which is cooked on special occasions and festivals.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "118"
         },
         {
@@ -5372,7 +5372,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Arhar dal prepared with raw tarty mango is very different and scrumptious in taste. Raw mangoes are available in market before Holi festival. This tarty dal recipe can be prepared during this time. ",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "119"
         },
         {
@@ -5416,7 +5416,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "Egg tadka dal is a a majorly popular and one of the most loved dish in India especially in Bengal and Punjab. It is mostly prepared in dhabas i.e. Indian road side small food stalls; do not mistake dhaba as restaurants.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "120"
         },
         {
@@ -5460,7 +5460,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Famous Rajasthani panchratna dal made from five lentils.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "121"
         },
         {
@@ -5479,7 +5479,7 @@
             "ingredient 5": "Cumin seeds 1/2 teaspoon",
             "ingredient 6": "Dried red chillies 2-3",
             "ingredient 7": "Fresh coriander leaves chopped 1 tablespoon + for garnish",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "1 hour",
             "calories": "70 kcal",
             "fats": "2g",
@@ -5490,7 +5490,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Masoor Dal is a popular lentil based dish from the North Indian Cuisine and is often made in Indian homes.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "122"
         },
         {
@@ -5520,7 +5520,7 @@
             "ingredient 14": "Curry leaves 7-8",
             "ingredient 15": "Red chilli powder 1/2",
             "ingredient 16": "Fresh coriander sprig to garnish",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "45 min",
             "calories": "235 kcal",
             "fats": "5g",
@@ -5531,7 +5531,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "A simple but delicious and spicy urad dal or black lentil dahl is the perfect dish to spice up a weeknight or weekend dinner",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "123"
         },
         {
@@ -5563,7 +5563,7 @@
             "ingredient 14": "Salt to taste",
             "ingredient 15": "Fresh coriander leaves chopped 2 tablespoons + to garnish",
             "ingredient 16": "Lemon wedges to serve",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "1 hour",
             "calories": "242 kcal",
             "fats": "26g",
@@ -5574,7 +5574,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "it is not only served and consumed as a savoury snack but also as a complete meal by itself for lunch and dinner. obviously due to the myriad options and to cater to the different taste, there different types to the typical one and paneer pav bhaji recipe is one such option",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "124"
         },
         {
@@ -5603,7 +5603,7 @@
             "ingredient 11": "Olive oil as required",
             "ingredient 12": "Orange slices for garnish",
             "ingredient 13": "Salad to serve",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "1 hour",
             "calories": "280 kcal",
             "fats": "12g",
@@ -5614,7 +5614,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "the perfect fish for the grill​ and easily can become a personal favorite. It can be a bit of a splurge, but this recipe makes it worth the price.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "125"
         },
         {
@@ -5641,7 +5641,7 @@
             "ingredient 9": "Red chilli powder 1 tablespoon",
             "ingredient 10": "Ambe mohor rice soaked for 10-15 minutes 1/2 cup",
             "ingredient 11": "Garam masala powder 1 teaspoon",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "50 min",
             "calories": "412 kcal",
             "fats": "18g",
@@ -5652,7 +5652,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "Fish head curry is immensely popular in Malaysia and Singapore. With South Indian origins, it uses a combination of various spices and ingredients to create its well accepted delectable taste.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "126"
         },
         {
@@ -5683,7 +5683,7 @@
             "ingredient 12": "Coriander powder 1 1/2 teaspoons",
             "ingredient 13": "Garam masala powder 1 1/2 teaspoons",
             "ingredient 14": "Fresh coriander leaves chopped 2 tablespoons",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "8 hours",
             "calories": "112 kcal",
             "fats": "5g",
@@ -5694,7 +5694,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "This dal is called as amritsari dal as its quite a popular dal made and served by a Dhaba (roadside eatery) outside the golden temple in amritsar, Punjab.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "127"
         },
         {
@@ -5734,7 +5734,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "A traditional tempering adds punch to this peppy green garlic toovar dal, which is a must-try during the spring season when green garlic is available. Tips for the hare lehsun toovar dal recipe",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "128"
         },
         {
@@ -5772,7 +5772,7 @@
             "ingredient 19": "Ginger strips for garnish",
             "ingredient 20": "Fresh coriander leaves chopped for garnish",
             "ingredient 21": "Rumali roti to serve",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "1 hour",
             "calories": "214 kcal",
             "fats": "14g",
@@ -5783,7 +5783,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "This mixed vegetable curry is a simple, homely and tasty recipe of mix vegetables made in North Indian style. ",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "129"
         },
         {
@@ -5815,7 +5815,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "matar malai is a delicious North Indian curry made with fenugreek leaves, peas and cream",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "130"
         },
         {
@@ -5863,7 +5863,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Chana biryani is an aromatic, spiced and a delicious dum cooked and layered biryani made with white chickpeas.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "131"
         },
         {
@@ -5881,7 +5881,7 @@
             "ingredient 5": "Salt to taste",
             "ingredient 6": "Scraped coconut fresh 2 tablespoons",
             "ingredient 7": "Fresh coriander leaves chopped 1 tablespoon",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "20 min",
             "calories": "144 kcal",
             "fats": "9g",
@@ -5892,7 +5892,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Vangyache bharit is an easy recipe made with baingan or aubergines. One of the very popular Indian recipe with baingan is baingan bhartha and it is made in different ways regionally in India.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "132"
         },
         {
@@ -5925,7 +5925,7 @@
             "ingredient 12": "Salt to taste",
             "ingredient 13": "Onions Chopped to serve",
             "ingredient 14": "Green chillies Slit to serve",
-            "serving": "2 serving",
+            "serving": "2",
             "timing": "40 min",
             "calories": "458 kcal",
             "fats": "20g",
@@ -5936,7 +5936,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Pitla is a traditional Maharashtrian curry made with besan (gram flour) and onions. A spicy base of ginger-garlic-green-chillies and onions is cooked with gram flour and water until thick.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "133"
         },
         {
@@ -5972,7 +5972,7 @@
             "ingredient 16": "Refined flour (maida) 2 tablespoons",
             "ingredient 17": "Black peppercorns crushed 5-6",
             "ingredient 18": "Salt to taste",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "2 hour",
             "calories": "346 kcal",
             "fats": "23g",
@@ -5983,7 +5983,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Kothimbir vadi is a delicious savory crisp snack made with gram flour (besan), coriander leaves and spices.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "134"
         },
         {
@@ -6027,7 +6027,7 @@
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "Sangameshwar is a taluka in the Konkan region falling in the Ratnagiri district and has a food history when it comes to spicy coastal food, happening on the sangam of the two rivers Sonavi and Shastri.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "135"
         },
         {
@@ -6079,7 +6079,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Paneer masala curry is one of the unique curry which gives a delicious taste as well as non-spicy, which can be eaten by any person or children.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "136"
         },
         {
@@ -6112,7 +6112,7 @@
             "situation": "At Home",
             "cuisine": "indian",
             "deter": "veg",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "137"
         },
         {
@@ -6150,7 +6150,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Dahi ke aloo is an easy and delicious recipe of potatoes simmered in curd sauce.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "138"
         },
         {
@@ -6190,7 +6190,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Badami paneer is a high protein North Indian curry that is humble enough for your everyday meal and luxurious enough for treating your guests with something special.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "139"
         },
         {
@@ -6228,7 +6228,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Aloo bharta is instantly prepared recipe made of boiled potatoes and spices, a specialty from Northern India.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "140"
         },
         {
@@ -6271,7 +6271,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Aloo ki sabzi (spiced potato curry) is another dhaba favorite. Most the these dhabas have their own way of making it but one this is for sure, they are all delicious and spicy!",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "141"
         },
         {
@@ -6310,7 +6310,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Mushroom do pyaza is button mushrooms cooked in a semi dry gravy of double the amount of onions.",
-            "mealtype": "Main course",
+            "mealtype": "Main Course",
             "sr_no": "142"
         },
         {
@@ -6341,7 +6341,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Besan ki barfi is a traditional Indian sweet of a rich and decadent barfi made with gram flour, sugar and ghee. ",
-            "mealtype": "desert",
+            "mealtype": "dessert",
             "sr_no": "143"
         },
         {
@@ -6376,7 +6376,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "A Sindhi favourite, Singhar ji Mithai as it is traditionally known, is popular with just about everyone else as well.",
-            "mealtype": "desert",
+            "mealtype": "dessert",
             "sr_no": "144"
         },
         {
@@ -6414,7 +6414,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "This crisp and flaky gujiya is made with khoya or mawa. Gujiya is a popular North Indian sweet of a crisp, flaky pastry filled with a sweet khoya and dry fruits stuffing. Khoya or mawa is evaporated milk solids. ",
-            "mealtype": "desert",
+            "mealtype": "dessert",
             "sr_no": "145"
         },
         {
@@ -6447,7 +6447,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Easy, quick and tasty recipe of carrot burfi",
-            "mealtype": "desert",
+            "mealtype": "dessert",
             "sr_no": "146"
         },
         {
@@ -6482,7 +6482,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Deliciously yummy Aate ki pinni is a traditional Punjabi sweet made with whole wheat flour, semolina, and dry nuts.",
-            "mealtype": "desert",
+            "mealtype": "dessert",
             "sr_no": "147"
         },
         {
@@ -6510,7 +6510,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Instant Paan Coconut Ladoo, filled with gulkand is an easy Indian sweet for Diwali! You need only 15 minutes to make these!",
-            "mealtype": "desert",
+            "mealtype": "dessert",
             "sr_no": "148"
         },
         {
@@ -6545,7 +6545,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "the paneer jalebi as we all love the sweets but how it sounds when it was made at home and with healthy ingredient paneer so friends trust me it was amazing in taste and healthy for us",
-            "mealtype": "desert",
+            "mealtype": "dessert",
             "sr_no": "149"
         },
         {
@@ -6577,7 +6577,7 @@
             "cuisine": "indian",
             "deter": "veg",
             "description": "Laddoo is a sweet, which is often associated with festivals and special occasions. Of all the laddoos, Motichoor Laddoo is the one that you can easily find in all the sweet shops and is loved by everyone.",
-            "mealtype": "desert",
+            "mealtype": "dessert",
             "sr_no": "150"
         },
         {
@@ -6614,7 +6614,7 @@
             "cuisine": "Italian",
             "deter": "veg",
             "description": "It's made from the leftover khichdi... It's healthy and yummy",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "151"
         },
         {
@@ -6978,7 +6978,7 @@
             "cuisine": "Italian",
             "deter": "veg",
             "description": "Tiramisu is a famous italian dessert. the Tiramisu recipe shared here is an easy tiramisu recipe made without eggs and alcohol. ",
-            "mealtype": "desert",
+            "mealtype": "dessert",
             "sr_no": "160"
         },
         {
@@ -7065,7 +7065,7 @@
             "cuisine": "Italian",
             "deter": "veg",
             "description": "That of course also includes how to make Gnocchi. I have been told to use just flour and potatoes, or use  some milk instead. But the best way I found is flour, potatoes and an egg",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "162"
         },
         {
@@ -7133,7 +7133,7 @@
             "cuisine": "Italian",
             "deter": "nonveg",
             "description": "Quick and easy spaghetti recipe with Italian sausage. The tomato-based sauce gets its seasoning from the sweet and spicy sausages. Our favorite way to make spaghetti!",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "164"
         },
         {
@@ -7168,7 +7168,7 @@
             "cuisine": "Italian",
             "deter": "nonveg",
             "description": "This holiday-worthy recipe was inspired by bread pudding and ended up somewhere between a strata, a gratin, and a traditional Thanksgiving stuffing.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "165"
         },
         {
@@ -7194,7 +7194,7 @@
             "ingredient 8": "Parmesan cheese powder 1 tablespoon",
             "ingredient 9": "Crushed black peppercorns to taste",
             "ingredient 10": "Basil leaves 5-6",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "40 min",
             "calories": "70 kcal",
             "fats": "4g",
@@ -7238,7 +7238,7 @@
             "ingredient 12": "Refined flour (maida) 1 cup",
             "ingredient 13": "Bread crumbs 1 cup",
             "ingredient 14": "Mozzarella cheese cut into small cubes 100 grams",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "3 hours",
             "calories": "360 kcal",
             "fats": "12g",
@@ -7286,7 +7286,7 @@
             "cuisine": "Italian",
             "deter": "veg",
             "description": "This gorgeous candy is very easy, but it does take a while to make--mostly standing at the stove and stirring. But it's worth it for the gorgeous nut-studded, amazingly textured final product.",
-            "mealtype": "desert",
+            "mealtype": "dessert",
             "sr_no": "168"
         },
         {
@@ -7310,7 +7310,7 @@
             "cuisine": "Italian",
             "deter": "veg",
             "description": "The formula for pasta seems oh-so-obvious. Water + pasta = dinner — right? But sometimes the supposedly simplest things prove to be the trickiest.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "169"
         },
         {
@@ -7358,7 +7358,7 @@
             "cuisine": "Italian",
             "deter": "veg",
             "description": "Deliciously fresh tomato sauce created with the best vegetables in season and fresh herbs, all tossed with pasta for a perfect spring/summer dish. Vegetable Garden Pasta can also be made any time of year when you are craving fresh vegetables!",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "170"
         },
         {
@@ -7393,7 +7393,7 @@
             "cuisine": "Italian",
             "deter": "veg",
             "description": "Nothing screams summer quite like bruschetta. We know it may sound strange, but rubbing the toasted bread with garlic will help impart tons of flavor into your tiny toasts. Top them with simply marinated tomatoes for the ultimate summer snack.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "171"
         },
         {
@@ -7498,7 +7498,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "A hearty pasta packed with vegetables, this supper is finished in 20 minutes flat. Sautéed leaks and shrimp combined with a touch of cream, lemon zest, and a handful of spinach serve as the sauce, which offers a mild, fresh flavor but proves easy to throw together",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "174"
         },
         {
@@ -7540,7 +7540,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "To plate the Herbed Spaghetti With Cheese Balls In Tomato Basil Sauce, in a bowl, spoon the spaghetti and spoon some tomato basil sauce. Place the Cheesy Veg balls on top and serve hot. ",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "175"
         },
         {
@@ -7575,7 +7575,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "add the tomatoes to the spinach along with the chopped parsley, cheese and the pine nuts. Return the gnocchi to the pan and toss everything together. Serve immediately with some freshly cracked pepper and more grated cheese.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "176"
         },
         {
@@ -7617,7 +7617,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "Classic lasagna, as much as we adore it, can be extremely time-consuming. These roll-ups come together in no time and couldn't be more delicious",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "177"
         },
         {
@@ -7651,7 +7651,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "Noteworthy changes in Italian cuisine happened with the discovery of the New World and the introduction of potatoes, tomatoes, bell peppers and maize, which are now an integral part of this cuisine.  Italian cuisine is known for its regional diversity each with a distinct taste.  This cuisine today is probably one of the most popular in the world.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "178"
         },
         {
@@ -7691,7 +7691,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "My favourite vegetarian meal, this Pumpkin Lasagne is a plant powered, delicious delight. Even though it has a few layers, it really is simple to make and worth every minute of prep.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "179"
         },
         {
@@ -7720,7 +7720,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "This bread goes great with any Italian or Mediterranean meal. I've also cut the bread into smaller pieces and served it as an appetizer.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "180"
         },
         {
@@ -7751,7 +7751,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "This alfredo pasta is amazingly silky smooth. It's so rich and creamy, you'll swoon until the very last bite. The truffle butter and cheese has a mild",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "181"
         },
         {
@@ -7784,7 +7784,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "An Italian rice ball made with white wine risotto, and a gooey mozzarella center. Fantastic for lunch or dinner - can be frozen.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "182"
         },
         {
@@ -7859,7 +7859,7 @@
             "cuisine": "italian",
             "deter": "nonveg",
             "description": "A Vibrant Pesto Sauce, Mozzarella, Chicken. And A Sprinkle Of Pine Nuts. This Pesto Chicken Pizza Is Fresh, Flavorful And Absolutely Perfect For Summer!",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "184"
         },
         {
@@ -7925,7 +7925,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "The olives look beautiful in a simple mason jar with the bay leaves pressed against the glass and garlic, chiles and other seasonings scattered throughout",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "186"
         },
         {
@@ -7996,7 +7996,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "Historically a coastal fried seafood side, hush puppies should be so good that once they hit the table no one eats anything else. Instead, they’re often the last to leave, borne away in their greasy plastic baskets after the rest of the food is gone.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "188"
         },
         {
@@ -8067,7 +8067,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "Ever wondered why the phrase “say cheese” is used just before a photograph is clicked? Simply because ‘cheese’ makes one smile! Not only the word but cheese as a food makes a lot of palates happy",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "190"
         },
         {
@@ -8137,7 +8137,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "Delicious cookies that taste like brownies",
-            "mealtype": "desert",
+            "mealtype": "dessert",
             "sr_no": "192"
         },
         {
@@ -8328,7 +8328,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "Zuccotto is a traditional Italian frozen dessert with sponge and liqueur that is said to have been inspired by the Duomo in Florence.",
-            "mealtype": "desert",
+            "mealtype": "dessert",
             "sr_no": "197"
         },
         {
@@ -8368,7 +8368,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "Make the time to stir carefully during cooking to make this vegetarian Italian rice pot super creamy",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "198"
         },
         {
@@ -8402,7 +8402,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "A traditional biscotti recipe. Great for dunking in coffee or tea.",
-            "mealtype": "desert",
+            "mealtype": "dessert",
             "sr_no": "199"
         },
         {
@@ -8477,7 +8477,7 @@
             "cuisine": "italian",
             "deter": "nonveg",
             "description": "Italian cuisine has developed through centuries of social and political changes, with roots stretching to antiquity.  Italian cuisine is simple and a number of dishes having only four to eight ingredients.  They rely mostly on the quality of ingredients rather than elaborate preparation.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "201"
         },
         {
@@ -8517,7 +8517,7 @@
             "cuisine": "italian",
             "deter": "nonveg",
             "description": "The magic starts with sautéed shallot and garlic to give the sauce a robust and subtly sweet base. In the meantime, roast up some red peppers until soft, charred and delicious. This will give your sauce that gorgeous orange hue and creamy texture.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "202"
         },
         {
@@ -8582,7 +8582,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "The magic starts with sautéed shallot and garlic to give the sauce a robust and subtly sweet base. In the meantime, roast up some red peppers until soft, charred and delicious. This will give your sauce that gorgeous orange hue and creamy texture.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "204"
         },
         {
@@ -8647,7 +8647,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "Fresh cherry tomato pasta is a dish I make all year long.  It’s crazy-easy and so loaded with flavor that everyone raves over it! Sometimes the simplest dishes make the best meals.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "206"
         },
         {
@@ -8679,7 +8679,7 @@
             "cuisine": "italian",
             "deter": "nonveg",
             "description": "This One Pot Creamy Cajun Chicken Pasta is incredibly easy to make, so it’s perfect for weeknight dinners.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "207"
         },
         {
@@ -8709,7 +8709,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "This easy mushroom pasta with garlic sauce is sure to be a hit. Creamy garlic parmesan sauce and sautéed mushrooms make this a filling and delicious weeknight recipe. ",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "208"
         },
         {
@@ -8748,7 +8748,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "Pistou is an olive oil—based basil sauce from the south of France that closely resembles Ligurian pesto. There's only one way to make true pistou—by hand",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "209"
         },
         {
@@ -8819,7 +8819,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "A rustic stew demands a crusty baguette for sopping up whatever is left in the bowl. A fresh pesto is the ideal spread here. You can use walnuts or almonds in place of pine nuts and spinach or even parsley in place of the basil.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "211"
         },
         {
@@ -8890,7 +8890,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "A rustic stew demands a crusty baguette for sopping up whatever is left in the bowl. A fresh pesto is the ideal spread here. You can use walnuts or almonds in place of pine nuts and spinach or even parsley in place of the basil.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "213"
         },
         {
@@ -8934,7 +8934,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "These Sundried Tomato Polenta Bites are a beautiful appetizer to serve at a holiday party.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "214"
         },
         {
@@ -9044,7 +9044,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "If you have any meatless-meal skeptics in your life, this lasagna will change their mind. I’m sure of it.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "217"
         },
         {
@@ -9086,7 +9086,7 @@
             "cuisine": "italian",
             "deter": "nonveg",
             "description": "Noteworthy changes in Italian cuisine happened with the discovery of the New World and the introduction of potatoes, tomatoes, bell peppers and maize, which are now an integral part of this cuisine",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "218"
         },
         {
@@ -9119,7 +9119,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "As delicious and comforting as they are, you can go beyond the traditional spaghetti and baked pasta dishes.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "219"
         },
         {
@@ -9157,7 +9157,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "Such a quick and easy dinner, just throw it all in a roasting tray and into the oven.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "220"
         },
         {
@@ -9192,7 +9192,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "Strawberry Tiramisu, a fast and easy no bake Dessert. Made with fresh strawberries, cream and mascarpone. No coffee or liqueur makes this the perfect dessert for everyone. An Italian Classic!",
-            "mealtype": "desert",
+            "mealtype": "dessert",
             "sr_no": "221"
         },
         {
@@ -9241,7 +9241,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "Make our easy veggie lasagne using just a handful of ingredients. This classic Italian-style pasta bake is sure to become a family favourite",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "222"
         },
         {
@@ -9287,7 +9287,7 @@
             "cuisine": "italian",
             "deter": "nonveg",
             "description": "I just never really liked the only-meat toppings this style offers.  Funny…since that’s pretty much the main reason why Dustin loves it. Add some breakfast bacon and maybe some salami and he’s in heaven.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "223"
         },
         {
@@ -9317,7 +9317,7 @@
             "cuisine": "italian",
             "deter": "nonveg",
             "description": "Vibrant red bell pepper pasta sauce, made with roasted red bell peppers, garlic, onion, sage, anchovies, tomato paste, red wine, paprika, Parmesan",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "224"
         },
         {
@@ -9351,7 +9351,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "Meanwhile, in a large skillet over medium-high heat, heat oil until hot but not smoking. Cook tomatoes, onion, garlic, oregano, salt, and pepper 8 minutes or until tomatoes start to break down.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "225"
         },
         {
@@ -9413,7 +9413,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "A delicious homemade calzone that's perfect for the ultimate cosy night. This hearty and warming folded pizza will not disappoint; stuffed with an unbeatable combination of mozzarella, mushrooms and spinach.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "227"
         },
         {
@@ -9445,7 +9445,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "Add the baked ricotta and the basil, season with salt and freshly ground black pepper and serve immediately",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "228"
         },
         {
@@ -9476,7 +9476,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "Take a couple of basic ingredients from the pantry — dry spaghetti, extra-virgin olive oil, fresh garlic, red pepper flakes — and together they become one of the simplest yet most satisfying pasta dishes on the planet.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "229"
         },
         {
@@ -9515,7 +9515,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "However, gnocchi can just as easily be served as a main course, preceded or followed by a light green salad. The servings here are for gnocchi served as a main course.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "230"
         },
         {
@@ -9523,7 +9523,7 @@
             "food_item": "Risotto Verde",
             "mood": "sad",
             "mood1": "sluggish",
-            "recipe": "It's low calorie and a great way to feed a crowd. Full of seasonal summer veg this dish has under 450 calories per serving",
+            "recipe": "It's low calorie and a great way to feed a crowd. Full of seasonal summer veg this dish has under 450 calories per",
             "preparation": "Heat oil in non stick pan, add garlic and sauté till light brown.",
             "step 2": "Add spring onions, leek and rice, mix well and sauté for 3-4 minutes.",
             "step 3": "Add ½ cup wine and stir to mix. Cook for 2 minutes and add remaining wine. Stir and cook for another 2 minutes.",
@@ -9595,7 +9595,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "The hearty texture, rustic appearance and savory flavor make this yeast bread a winner with dinner guests time and time again. Nothing can compare to the heavenly aroma while it bakes.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "232"
         },
         {
@@ -9625,7 +9625,7 @@
             "cuisine": "italian",
             "deter": "veg",
             "description": "Rich, earthy sauce that clings to penne pasta to make a hearty, meatless meal. Stir pesto into freshly cooked penne pasta, add to the top of crostini, or use as a dip for Italian-seasoned pita crisps.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "233"
         },
         {
@@ -9665,10 +9665,10 @@
             "proteins": "7g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Bread pakora is a popular North Indian snack of bread fritters. Bread slices are stuffed with spiced mashed potatoes filling, batter-coated and then deep-fried.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "234"
         },
         {
@@ -9707,10 +9707,10 @@
             "proteins": "27g",
             "taste": "spicy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Stir-fried shrimp and vegetables and an Asian sauce make for a fun and quick pasta dinner",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "235"
         },
         {
@@ -9756,10 +9756,10 @@
             "proteins": "12g",
             "taste": "spicy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "nonveg",
             "description": "Place fried rice in a serving plate and make a well in the center. Pour hot gravy in the center, and spread fried noodles and chopped spring onions. Serve hot",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "236"
         },
         {
@@ -9799,10 +9799,10 @@
             "proteins": "7g",
             "taste": "spicy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "this super-savory vegetarian tofu and mushroom stir-fry is a flavor-packed meal served with your choice of rice or noodles",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "237"
         },
         {
@@ -9844,10 +9844,10 @@
             "proteins": "27g",
             "taste": "tangy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Cooked garlic becomes wonderfully nutty in flavor. Hence what seems to be a huge quantity in this recipe. Just a wonderful dish, this, when the stew is mixed with the noodles and baked!",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "238"
         },
         {
@@ -9883,7 +9883,7 @@
             "proteins": "44g",
             "taste": "spicy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "nonveg",
             "description": "Serve on a shallow platter garnished with spring onion curls.",
             "mealtype": "main course",
@@ -9918,7 +9918,7 @@
             "proteins": "30g",
             "taste": "spicy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "nonveg",
             "description": "Mild flavored, flaky fish fillets. Any number of different types of fish will work, and you can increase the recipe easily. Try halibut, cod, salmon, red snapper, trout, etc. Serve with a white and wild rice blend.",
             "mealtype": "main course",
@@ -9953,10 +9953,10 @@
             "proteins": "10g",
             "taste": "spicy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "nonveg",
             "description": "These crispy appetizers are a favorite in my family. The flavorsome herbs in this recipe, as well as the chile, give the wontons a nice kick.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "241"
         },
         {
@@ -9990,7 +9990,7 @@
             "proteins": "0g",
             "taste": "spicy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "These stuffed potatoes are then coated with Chinese hot garlic gravy. And then sprinkled with freshly chopped spring onions. So it's a pretty easy recipe that you can prepare at your home at any time.",
             "mealtype": "main course",
@@ -10033,7 +10033,7 @@
             "proteins": "30g",
             "taste": "spicy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "nonveg",
             "description": "We love Hunan Chicken, paired with Chicken Lo Mein or Classic Chinese Chow Mein and Crab Rangoon this recipe makes for an easy Chinese takeout meal at home!",
             "mealtype": "main course",
@@ -10071,7 +10071,7 @@
             "proteins": "3g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Chilli Basil Vegetables (Gravy) is delicious gravy full of flavors. Fresh basil is the high point of this gravy dish.",
             "mealtype": "main course",
@@ -10095,7 +10095,7 @@
             "ingredient 3": "Green pear 1/2",
             "ingredient 4": "Vanilla ice-cream 3 scoops",
             "ingredient 5": "black sesame seeds (kale til) for sprink",
-            "ingredient 23": " ",
+            "ingredient 23": "",
             "serving": "4 ",
             "timing": "20 min",
             "calories": "219 kcal",
@@ -10104,10 +10104,10 @@
             "proteins": "5g",
             "taste": "sweet",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Serve them with a big scoop of vanilla ice cream and see your guests wipe off the plates. ",
-            "mealtype": "desert",
+            "mealtype": "dessert",
             "sr_no": "245"
         },
         {
@@ -10141,7 +10141,7 @@
             "proteins": "9g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "the fried rice recipe is generally made with egg omelette and choice meat added to it with finely chopped veggies. it makes it a complete meal and balanced diet meal in the south-east asian cuisine",
             "mealtype": "main course",
@@ -10176,7 +10176,7 @@
             "proteins": "5g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Add in spring onions and toss once. Serve with pulav or anything.",
             "mealtype": "main course",
@@ -10209,10 +10209,10 @@
             "proteins": "8g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "traditionally spring roll recipes are native to chinese cuisine and is mainly prepared with cabbage leaves. these savoury rolls are mainly served as appetizer with along with fried rice or noodles soup recipe.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "248"
         },
         {
@@ -10252,10 +10252,10 @@
             "proteins": "20g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "nonveg",
             "description": "This pan-fried tofu is a really easy way to make tofu. By pan-frying it, you get a nice, slightly crispy texture on it and then dip it in this awesome sauce.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "249"
         },
         {
@@ -10281,10 +10281,10 @@
             "proteins": "11g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Think of mild-flavored, juicy bok choy as an invitation to experiment in the kitchen. It's especially good with earthy mushrooms. Thoroughly drying the bok choy before cooking ensures that you don't end up with a watery sauce.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "250"
         },
         {
@@ -10319,7 +10319,7 @@
             "proteins": "26g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "In a flat bottomed frying pan, heat the oil over medium heat, and shallow fry the green beans. Roll the beans around slowly until they start to look wrinkly and slightly crisp. Use a slotted spoon to remove them to a plate and set aside.",
             "mealtype": "main course",
@@ -10352,10 +10352,10 @@
             "proteins": "50g",
             "taste": "sweet",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Very easy. Very elegant. Very tasty. This is a versatile recipe that you can alter any way you want. Use your choice of fruit or berries.",
-            "mealtype": "desert",
+            "mealtype": "dessert",
             "sr_no": "252"
         },
         {
@@ -10382,7 +10382,7 @@
             "proteins": "23g",
             "taste": "spicy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Butter garlic crabs is a dish I learnt from my sister-in-law. But this is a dish which is inspired from butter garlic prawns which is made in Goan beach side shacks",
             "mealtype": "main course",
@@ -10419,10 +10419,10 @@
             "proteins": "172g",
             "taste": "spicy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "There are variety of ways in which noodles can be made like hakka noodles, egg noodles, veg noodles etc. If you want a spicier version of noodles, then there are szechuan noodles.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "254"
         },
         {
@@ -10461,7 +10461,7 @@
             "proteins": "97g",
             "taste": "spicy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "nonveg",
             "description": "Chilli Fish is one of amma’s specialty Indo-Chinese Recipes. ",
             "mealtype": "main course",
@@ -10501,7 +10501,7 @@
             "proteins": "5g",
             "taste": "sweet and sour",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Stir in the mango puree and coconut milk and reheat. Season to taste with salt and pepper and serve in bowls.",
             "mealtype": "main course",
@@ -10538,7 +10538,7 @@
             "proteins": "21g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "nonveg",
             "description": "it is really a recipe catered to the eater because if you want your soup sweeter - add more sugar. If you want your bean curd sheets to break up into finer pieces - cook it longer. Be aware though. If you could this too long, the bean curd sheets will break down so much that it will melt away into something that just looks like soy milk ",
             "mealtype": "soups",
@@ -10571,10 +10571,10 @@
             "proteins": "175g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "This particular preparation is Indo-Chinese in origin, and it is made by tossing boiled Hakka noodles and stir-fried vegetables in a flavorful Chinese sauce",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "258"
         },
         {
@@ -10606,7 +10606,7 @@
             "proteins": "25g",
             "taste": "spicy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "nonveg",
             "description": "After steaming, discard the water release by the fish on the plate, which has a ‘fishy’ smell. Transfer the fish to a serving plate.",
             "mealtype": "main course",
@@ -10630,7 +10630,7 @@
             "ingredient 4": "Honey 2 tablespoons",
             "ingredient 5": "Cornflour 2 teaspoons",
             "ingredient 6": "Oil for deep-frying",
-            "serving": "4 serving",
+            "serving": "4",
             "timing": "30 min",
             "calories": "943 kcal",
             "fats": "130g",
@@ -10638,10 +10638,10 @@
             "proteins": "120g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Serve them with a big scoop of vanilla ice cream and see your guests wipe off the plates",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "260"
         },
         {
@@ -10677,10 +10677,10 @@
             "proteins": "170g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "nonveg",
             "description": "These fried dumplings are a nice weekend project that can be streamlined if you make the filling ahead of time.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "261"
         },
         {
@@ -10720,10 +10720,10 @@
             "proteins": "23g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "nonveg",
             "description": "A Delicious slider chicken burger recipe, Served on whole wheat buns.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "262"
         },
         {
@@ -10757,10 +10757,10 @@
             "proteins": "192g",
             "taste": "tangy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "nonveg",
             "description": "Honey garlic chicken wings are absolutely delicious. They’re sweet and sticky and the perfect addition to any appetizer plate. These chicken wings are oven baked until crispy and then coated with a honey garlic sauce.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "263"
         },
         {
@@ -10790,7 +10790,7 @@
             "proteins": "90g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Fresh garden peas combine with a hint of basil for a delightfully light spring soup. A unique mushroom drizzle adds extra depth to this beautiful creation.",
             "mealtype": "soups",
@@ -10837,7 +10837,7 @@
             "proteins": "10g",
             "taste": "tangy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Vegetables In Chilli Honey Sesame  Recipe is an delicious Indo Chinese party appetizer made with baby potatoes.  Crispy on the outside and soft on the inside, coated with delicious saucy sweet and spicy flavours makes a perfect side dish along with a asian meal.",
             "mealtype": "main course",
@@ -10881,7 +10881,7 @@
             "proteins": "110g",
             "taste": "tangy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "nonveg",
             "description": "Cut wings into 3 sections; discard wing tip sections. Place chicken in a 4-qt. slow cooker. In a small bowl, combine the remaining ingredients. Pour over chicken; stir until coated. Cover and cook on low 5-6 hours or until chicken juices run clear. If desired, serve with ranch dressing and celery stalks.",
             "mealtype": "main course",
@@ -10915,7 +10915,7 @@
             "proteins": "30g",
             "taste": "tangy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "A great vegetarian dish as part of a Chinese banquet or just a nice midweek supper on its own with steamed rice.",
             "mealtype": "main course",
@@ -10942,7 +10942,7 @@
             "proteins": "55g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Here's some yummy, Chinese dim sum you can make, either plain without meat fillings, or with meat fillings",
             "mealtype": "break fast",
@@ -10979,7 +10979,7 @@
             "proteins": "15g",
             "taste": "spicy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Give this lip smacking spicy indo chinese vegetables in szechuan a try for a weekend lunch or dinner. Serve along with fried rice or hakka noodles to make a complete and satisfying meal.",
             "mealtype": "main course",
@@ -11049,7 +11049,7 @@
             "proteins": "10g",
             "taste": "tangy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "A crunchy salad that is topped with sour cream and a light drizzle of tabasco sauce that adds zing to this delicious taco.",
             "mealtype": "salad",
@@ -11086,7 +11086,7 @@
             "proteins": "28g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "This sweet and tangy stir-fry is super simple to prepare. Serve it with rice, noodles or even quinoa to make it a full meal",
             "mealtype": "main course",
@@ -11119,7 +11119,7 @@
             "proteins": "43g",
             "taste": "spicy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Green beans stir fried with ginger, onions, garlic and a little soy sauce",
             "mealtype": "main course",
@@ -11152,10 +11152,10 @@
             "proteins": "6g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Fusion cuisine is one that combines elements of different culinary traditions. Cuisines of this type are not categorized according to any one particular cuisine style and have played a part in a number of innovations.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "274"
         },
         {
@@ -11185,7 +11185,7 @@
             "proteins": "13g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "These soups replenished our bodies with water and salt (along with vitamins and protein), and since the heat meant lower appetites, it was easier to eat.",
             "mealtype": "soups",
@@ -11224,7 +11224,7 @@
             "proteins": "84g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Egg drop rice is an easy Chinese favorite and a delicious dinner .",
             "mealtype": "main course",
@@ -11233,7 +11233,7 @@
         {
             "restaurants": "['MRP - My Regular Place','Hardeep Punjab','Gymkhana 91 Bar & Kitchen','Yauatcha','Cafe Trofima','Plum by Bent Chair','Hakkasan']",
             "food_item": "Five Spice Mushroom Rice",
-            "recipe": "This dish is a delicate blend of flavours & textures that may not appeal to all, but its a \"must\" for those who like experiment.",
+            "recipe": "This dish is a delicate blend of flavours & textures that may not appeal to all, but its a \"must\"for those who like experiment.",
             "preparation": "Heat 1 tbsp oil in a rice cooker. Add rice, vegetable stock and salt and mix. Cover and cook till ½ done. Heat 2 tbsps oil in a non stick wok. Slice spring onion bulbs and add and sauté for 1 minute. Chop spring onion greens. Add ginger and garlic to the pan and mix.",
             "step 2": "Add button mushrooms, toss and sauté for 2 minutes. Roughly chop dried mushrooms. Add salt, pepper powder, soya sauce and chopped dried mushrooms and toss. Add five-spice powder and mix well. Add spring onion greens reserving some for garnishing. Mix well and sauté for 3-4 minutes.",
             "step 3": "Take out some cooked rice in a bowl. Spread cooked mushrooms over the rice in the cooker and spread rice from bowl on top. Drizzle sesame oil, cover and cook till fully done. Garnish with reserved spring onion greens and serve hot.",
@@ -11258,7 +11258,7 @@
             "proteins": "17g",
             "taste": "tangy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Aromatic Chinese style spice rice made with mix vegetables and 5 spice powders. A gluten-free and vegan recipe.",
             "mealtype": "main course",
@@ -11291,7 +11291,7 @@
             "proteins": "13g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "nonveg",
             "description": "Prawns, prawns and more of prawns. A wide variety of small crustaceans, tiny relatives of the lobster, are known as prawns.",
             "mealtype": "main course",
@@ -11334,7 +11334,7 @@
             "proteins": "17g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "nonveg",
             "description": "Be a kid or a teenage or an adult or an oldie, chicken lovers trend all over the world at all times! One meat that is a favourite of all beyond belief! When cooked, it can be presented in many guises. ",
             "mealtype": "main course",
@@ -11373,7 +11373,7 @@
             "proteins": "17g",
             "taste": "spicy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "nonveg",
             "description": "Be a kid or a teenage or an adult or an oldie, chicken lovers trend all over the world at all times! One meat that is a favourite of all beyond belief! When cooked, it can be presented in many guises. ",
             "mealtype": "main course",
@@ -11410,7 +11410,7 @@
             "proteins": "38g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Some other accounts of the history of Chinese cuisine takes the beginning to the Chinese stone age. However today Chinese cuisine enjoys the distinction of being the most popular in the world.",
             "mealtype": "soups",
@@ -11452,7 +11452,7 @@
             "proteins": "3g",
             "taste": "sour",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "it is fast food or a street food recipe served as appetizer or starter just before an indo chinese or north indian meal.",
             "mealtype": "soups",
@@ -11498,10 +11498,10 @@
             "proteins": "1g",
             "taste": "spicy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Veg momos are steamed dumplings stuffed with a lightly spiced vegetable filling. A popular chinees recipe.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "283"
         },
         {
@@ -11545,10 +11545,10 @@
             "proteins": "1g",
             "taste": "spicy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "soya momos are steamed dumplings stuffed with a lightly spiced vegetable filling. A popular chinees recipe.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "284"
         },
         {
@@ -11591,10 +11591,10 @@
             "proteins": "1g",
             "taste": "spicy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Chilli Cheese Mushroom Momo Recipe is a momo filled with creamy and spicy chilli mushrooms. These momos make a great appetizer for parties.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "285"
         },
         {
@@ -11627,10 +11627,10 @@
             "proteins": "2g",
             "taste": "spicy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "fried momos are fried dumplings stuffed with a lightly spiced vegetable filling. A popular chinees recipe.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "286"
         },
         {
@@ -11661,7 +11661,7 @@
             "proteins": "140g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "nonveg",
             "description": "Transfer the chicken to a serving bowl and serve hot with plain rice or fried rice.",
             "mealtype": "main course",
@@ -11695,7 +11695,7 @@
             "proteins": "2g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Some other accounts of the history of Chinese cuisine takes the beginning to the Chinese stone age. However today Chinese cuisine enjoys the distinction of being the most popular in the world.",
             "mealtype": "soups",
@@ -11728,7 +11728,7 @@
             "proteins": "19g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Spicy Chinese Sichuan Green Beans are the perfect easy side dish to your favorite Chinese meal and they’re a breeze to make with just a few ingredients",
             "mealtype": "main course",
@@ -11766,7 +11766,7 @@
             "proteins": "8g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "nonveg",
             "description": "Popcorn shrimp make a nice appetizer or side dish for both adults and children. Best served with cocktail sauce.",
             "mealtype": "main course",
@@ -11804,7 +11804,7 @@
             "proteins": "5g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Meet your new favourite mushroom recipe! Rice infused with earthy mushroom flavour tossed through with caramelised mushrooms, this Mushroom Rice is worthy of being a meal by itself.  ",
             "mealtype": "main course",
@@ -11842,7 +11842,7 @@
             "proteins": "35g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Some other accounts of the history of Chinese cuisine takes the beginning to the Chinese stone age. However today Chinese cuisine enjoys the distinction of being the most popular in the world.",
             "mealtype": "main course",
@@ -11880,7 +11880,7 @@
             "proteins": "56g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "This is one of those comfort food dishes that you make when a serious takeout craving hits, but you still want to cook at home to save a few calories and dollars.",
             "mealtype": "main course",
@@ -11918,10 +11918,10 @@
             "proteins": "43g",
             "taste": "mild",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "This simple noodle and vegetable dish is an easy way to disguise leftover vegetables (and even leftover chicken or meat) into a tasty meal.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "294"
         },
         {
@@ -11957,7 +11957,7 @@
             "proteins": "97g",
             "taste": "spicy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "nonveg",
             "description": "Pan Fried Fish is a thing of beauty, with its beautiful crispy golden crust and juicy flesh inside. It’s a super quick dinner because cooking fish fillets on the stove takes less than 5 minutes!",
             "mealtype": "main course",
@@ -11993,10 +11993,10 @@
             "proteins": "80g",
             "taste": "spicy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "nonveg",
             "description": "Chili Crab is a seafood dish that I enjoy with lots of rice. This dish is composed of crab (Mud Crab is originally used) cooked in sweet and spicy sauce.",
-            "mealtype": "snack",
+            "mealtype": "Snack",
             "sr_no": "296"
         },
         {
@@ -12029,7 +12029,7 @@
             "proteins": "51g",
             "taste": "tangy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "veg",
             "description": "Some other accounts of the history of Chinese cuisine takes the beginning to the Chinese stone age. However today Chinese cuisine enjoys the distinction of being the most popular in the world.",
             "mealtype": "main course",
@@ -12068,7 +12068,7 @@
             "proteins": "50g",
             "taste": "spicy",
             "situation": "At Home",
-            "cuisine": "chinees",
+            "cuisine": "chinese",
             "deter": "nonveg",
             "description": "Chilli Fish is one of amma’s specialty Indo-Chinese Recipes",
             "mealtype": "main course",

@@ -20,11 +20,9 @@ void main() async {
   Hive.registerAdapter<PollsModel>(PollsModelAdapter());
 
   runApp(
-    RestartWidget(
-      child: MaterialApp(
-        home: MyApp(),
-        debugShowCheckedModeBanner: false,
-      ),
+    MaterialApp(
+      home: MyApp(),
+      debugShowCheckedModeBanner: false,
     ),
   );
 }

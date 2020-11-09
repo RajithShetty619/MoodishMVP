@@ -18,7 +18,9 @@ class FoodBloc extends Bloc<FoodEvent, Map<String, List<FoodListModel>>> {
           "d1": [],
           "d2": [],
           "search": [],
-          "trend": []
+          "trend": [],
+          "tod": [],
+          "craving": []
         });
   @override
   Stream<Map<String, List<FoodListModel>>> mapEventToState(
