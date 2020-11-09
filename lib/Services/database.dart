@@ -179,8 +179,7 @@ class DatabaseService {
     user.data().forEach((key, value) {
       _data.putIfAbsent(key, () => value);
     });
-    Hive.openBox('Userdata');
-    Box box= Hive.box('Userdata');
+    Box box= await Hive.openBox('Userdata');
     box.put('userdata',_data);
   }
 

@@ -53,7 +53,9 @@ class _RestaurantHomeState extends State<RestaurantHome> {
     return position;
   }
   @override
-  void initState() {
+  void initState() async{
+    await getCurrentLocation();
+    await _getAddressFromLatLng();
     setState(() {
       DatabaseQuery().getRest().then((rest) {
         BlocProvider.of<RestaurantBloc>(context)
@@ -85,8 +87,11 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                       ),
                       GestureDetector(
                         onTap: () async{
-                          await getCurrentLocation();
                           await _getAddressFromLatLng();
+                          Scaffold.of(context)
+                              .showSnackBar(SnackBar(
+                              content: Text(
+                                  "Location has been Updated")));
                         },
                         child: Text.rich(TextSpan(
                             style: TextStyle(

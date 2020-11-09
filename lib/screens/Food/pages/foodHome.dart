@@ -40,6 +40,7 @@ class _FoodHomeState extends State<FoodHome> {
   int indxT = 0;
   int indexP = 0;
   int numbr = 2;
+  Map<String, dynamic> userData;
 
   @override
   void initState() {
@@ -51,6 +52,11 @@ class _FoodHomeState extends State<FoodHome> {
       numbr = randomNumber;
       print(numbr);
     });
+    data() async{
+      Box box = await Hive.openBox('Userdata');
+       userData = box.get('userdata');
+    }
+    data();
   }
 
   @override
@@ -78,9 +84,7 @@ class _FoodHomeState extends State<FoodHome> {
         greeting = 'Night Snacks';
       });
     }
-    Hive.openBox('Userdata');
-    var box = Hive.box('Userdata');
-    Map<String, dynamic> userData = box.get('userdata');
+
     return Scaffold(
       body: SafeArea(
         child: Stack(
