@@ -126,7 +126,7 @@ class _RestCardModelState extends State<RestCardModel> {
                           child: Column(
                             children: <Widget>[
                               Text(
-                                'Menu',
+                                'Similar Restaurant',
                                 style: _selected == 3
                                     ? TextStyle(
                                         fontSize: 20,
@@ -137,7 +137,7 @@ class _RestCardModelState extends State<RestCardModel> {
                               _selected == 3
                                   ? Container(
                                       height: 5,
-                                      width: 45,
+                                      width: 55,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.only(
                                             topLeft: Radius.circular(20),
@@ -153,45 +153,6 @@ class _RestCardModelState extends State<RestCardModel> {
                         ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _selected = 4;
-                        });
-                      },
-                      child: Container(
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
-                          child: Column(
-                            children: <Widget>[
-                              Text(
-                                'Gallery',
-                                style: _selected == 4
-                                    ? TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w500)
-                                    : TextStyle(
-                                        fontSize: 19, color: Colors.grey),
-                              ),
-                              _selected == 4
-                                  ? Container(
-                                      height: 5,
-                                      width: 45,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(20),
-                                            topRight: Radius.circular(20)),
-                                        color: Colors.black,
-                                      ),
-                                    )
-                                  : Container(
-                                      height: 5,
-                                    )
-                            ],
-                          ),
-                        ),
-                      ),
-                    )
                   ],
                 ),
               ),
@@ -813,317 +774,428 @@ class _RestCardModelState extends State<RestCardModel> {
                       future: DatabaseService().restRecommendApi(
                           rest_name: widget.restaurant.restaurant_Name),
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
-                        /* 
-                        /
-                        /
-                        //
-                        /
-                        /
-                        /
-                        /
-                        /
-                        /
-                        /
-                        /
-                        //
-                        /
-                        /
-                         */
-                        return;
+                       return ListView.builder(
+                            itemCount: snapshot.data.length,
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              RestListModel element = snapshot.data[index];
+                              return Padding(
+                                padding: EdgeInsets.only(
+                                    left: MediaQuery.of(context).size.width / 15,
+                                    right: MediaQuery.of(context).size.width / 15,
+                                    top: 5,
+                                    bottom: 5),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                          return RestCardModel(
+                                            restaurant: element,
+                                          );
+                                        }));
+                                  },
+                                  child: Card(
+                                    elevation: 4,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20)),
+                                    child: Container(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 12, top: 8, bottom: 8, right: 5),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                          children: <Widget>[
+                                            Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Container(
+                                                  width: 160,
+                                                  child: Text(
+                                                    element.restaurant_Name,
+                                                    style: TextStyle(
+                                                        fontSize: MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                            20,
+                                                        fontWeight: FontWeight.w400),
+                                                  ),
+                                                ),
+                                                Container(
+                                                    width: 170,
+                                                    child: Text(
+                                                      element.restaurant_Type != 'nan'
+                                                          ? element.restaurant_Type
+                                                          : element.cuisines,
+                                                      style: TextStyle(
+                                                          fontSize: 11,
+                                                          color: Colors.grey[400]),
+                                                    )),
+                                                // Text(
+                                                //   element.restaurant_Location,
+                                                //   style: TextStyle(
+                                                //       color: Colors.grey[300],
+                                                //       fontSize: 11),
+                                                // ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      top: 10, bottom: 10),
+                                                  child: Container(
+                                                    height: 1,
+                                                    width: 175,
+                                                    color: Colors.grey,
+                                                  ),
+                                                ),
+                                                Row(
+                                                  children: <Widget>[
+                                                    Icon(
+                                                      Icons.star,
+                                                      size: 10,
+                                                      color: Colors.amber,
+                                                    ),
+                                                    Text(
+                                                      element.rating,
+                                                      style: TextStyle(fontSize: 12),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 8,
+                                                    ),
+                                                    Icon(
+                                                      Icons.pin_drop,
+                                                      size: 10,
+                                                    ),
+                                                    Text(
+                                                      element.restaurant_Location,
+                                                      style: TextStyle(fontSize: 12),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 8,
+                                                    ),
+                                                    // Text(
+                                                    //   '\u20B9 Free',
+                                                    //   style: TextStyle(fontSize: 10),
+                                                    // )
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                            Container(
+                                              height: 100,
+                                              width: 100,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                  BorderRadius.circular(20),
+                                                  image: DecorationImage(
+                                                      image: CachedNetworkImageProvider(
+                                                          element.photo_url),
+                                                      fit: BoxFit.cover)),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+
+                            });
+
                       },
                     ),
                   ),
-                if (_selected == 4)
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Row(
-                          children: <Widget>[
-                            Icon(
-                              Icons.star,
-                              color: Colors.amber,
-                              size: 40,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  'Gallery',
-                                  style: TextStyle(
-                                      fontSize:
-                                          MediaQuery.of(context).size.width /
-                                              18,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                Text(
-                                  'Discover the restaurants visually',
-                                  style: TextStyle(
-                                      color: Colors.grey[400], fontSize: 12),
-                                )
-                              ],
-                            ),
-                            Spacer(),
-                            RaisedButton(
-                              onPressed: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return AddPicture();
-                                }));
-                              },
-                              color: Colors.white,
-                              elevation: 5,
-                              child: Text('Add a Picture'),
-                            )
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            top: 10, right: 20, left: 20, bottom: 10),
-                        child: Divider(
-                          thickness: 1,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: SingleChildScrollView(
-                          physics: NeverScrollableScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      _selectPhoto = 1;
-                                    });
-                                  },
-                                  child: Container(
-                                    child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          5, 10, 5, 0),
-                                      child: Column(
-                                        children: <Widget>[
-                                          Text(
-                                            'All',
-                                            style: _selectPhoto == 1
-                                                ? TextStyle(
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.w500)
-                                                : TextStyle(
-                                                    fontSize: 19,
-                                                    color: Colors.grey),
-                                          ),
-                                          _selectPhoto == 1
-                                              ? Container(
-                                                  height: 5,
-                                                  width: 45,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                            topLeft: Radius
-                                                                .circular(20),
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    20)),
-                                                    color: Colors.black,
-                                                  ),
-                                                )
-                                              : Container(
-                                                  height: 5,
-                                                )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      _selectPhoto = 2;
-                                    });
-                                  },
-                                  child: Container(
-                                    child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          5, 10, 5, 0),
-                                      child: Column(
-                                        children: <Widget>[
-                                          Text(
-                                            'Ambience',
-                                            style: _selectPhoto == 2
-                                                ? TextStyle(
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.w500)
-                                                : TextStyle(
-                                                    fontSize: 19,
-                                                    color: Colors.grey),
-                                          ),
-                                          _selectPhoto == 2
-                                              ? Container(
-                                                  height: 5,
-                                                  width: 45,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                            topLeft: Radius
-                                                                .circular(20),
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    20)),
-                                                    color: Colors.black,
-                                                  ),
-                                                )
-                                              : Container(
-                                                  height: 5,
-                                                )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      _selectPhoto = 3;
-                                    });
-                                  },
-                                  child: Container(
-                                    child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          5, 10, 5, 0),
-                                      child: Column(
-                                        children: <Widget>[
-                                          Text(
-                                            'Food',
-                                            style: _selectPhoto == 3
-                                                ? TextStyle(
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.w500)
-                                                : TextStyle(
-                                                    fontSize: 19,
-                                                    color: Colors.grey),
-                                          ),
-                                          _selectPhoto == 3
-                                              ? Container(
-                                                  height: 5,
-                                                  width: 45,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                            topLeft: Radius
-                                                                .circular(20),
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    20)),
-                                                    color: Colors.black,
-                                                  ),
-                                                )
-                                              : Container(
-                                                  height: 5,
-                                                )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      if (_selectPhoto == 1)
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: GridView.builder(
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      crossAxisSpacing: 5,
-                                      mainAxisSpacing: 10),
-                              itemCount: 6,
-                              physics: NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  height: 150,
-                                  width: 100,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      image: DecorationImage(
-                                          image: AssetImage(
-                                              'assets/Chocolate.jpg'),
-                                          fit: BoxFit.cover)),
-                                );
-                              }),
-                        ),
-                      if (_selectPhoto == 2)
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: GridView.builder(
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      crossAxisSpacing: 5,
-                                      mainAxisSpacing: 10),
-                              itemCount: 6,
-                              physics: NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  height: 150,
-                                  width: 100,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      image: DecorationImage(
-                                          image:
-                                              AssetImage('assets/Coffee.jpg'),
-                                          fit: BoxFit.cover)),
-                                );
-                              }),
-                        ),
-                      if (_selectPhoto == 3)
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: GridView.builder(
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      crossAxisSpacing: 5,
-                                      mainAxisSpacing: 10),
-                              itemCount: 6,
-                              physics: NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  height: 150,
-                                  width: 100,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      image: DecorationImage(
-                                          image: AssetImage('assets/img.jpg'),
-                                          fit: BoxFit.cover)),
-                                );
-                              }),
-                        )
-                    ],
-                  )
+//                if (_selected == 4) New Code commented
+//                  Column(
+//                    crossAxisAlignment: CrossAxisAlignment.start,
+//                    children: <Widget>[
+//                      Padding(
+//                        padding: const EdgeInsets.all(10.0),
+//                        child: Row(
+//                          children: <Widget>[
+//                            Icon(
+//                              Icons.star,
+//                              color: Colors.amber,
+//                              size: 40,
+//                            ),
+//                            SizedBox(
+//                              width: 5,
+//                            ),
+//                            Column(
+//                              crossAxisAlignment: CrossAxisAlignment.start,
+//                              children: <Widget>[
+//                                Text(
+//                                  'Gallery',
+//                                  style: TextStyle(
+//                                      fontSize:
+//                                          MediaQuery.of(context).size.width /
+//                                              18,
+//                                      fontWeight: FontWeight.w500),
+//                                ),
+//                                Text(
+//                                  'Discover the restaurants visually',
+//                                  style: TextStyle(
+//                                      color: Colors.grey[400], fontSize: 12),
+//                                )
+//                              ],
+//                            ),
+//                            Spacer(),
+//                            RaisedButton(
+//                              onPressed: () {
+//                                Navigator.push(context,
+//                                    MaterialPageRoute(builder: (context) {
+//                                  return AddPicture();
+//                                }));
+//                              },
+//                              color: Colors.white,
+//                              elevation: 5,
+//                              child: Text('Add a Picture'),
+//                            )
+//                          ],
+//                        ),
+//                      ),
+//                      Padding(
+//                        padding: EdgeInsets.only(
+//                            top: 10, right: 20, left: 20, bottom: 10),
+//                        child: Divider(
+//                          thickness: 1,
+//                        ),
+//                      ),
+//                      Padding(
+//                        padding: const EdgeInsets.only(left: 20),
+//                        child: SingleChildScrollView(
+//                          physics: NeverScrollableScrollPhysics(),
+//                          scrollDirection: Axis.horizontal,
+//                          child: Container(
+//                            width: MediaQuery.of(context).size.width,
+//                            child: Row(
+//                              mainAxisAlignment: MainAxisAlignment.start,
+//                              children: <Widget>[
+//                                GestureDetector(
+//                                  onTap: () {
+//                                    setState(() {
+//                                      _selectPhoto = 1;
+//                                    });
+//                                  },
+//                                  child: Container(
+//                                    child: Padding(
+//                                      padding: const EdgeInsets.fromLTRB(
+//                                          5, 10, 5, 0),
+//                                      child: Column(
+//                                        children: <Widget>[
+//                                          Text(
+//                                            'All',
+//                                            style: _selectPhoto == 1
+//                                                ? TextStyle(
+//                                                    fontSize: 20,
+//                                                    fontWeight: FontWeight.w500)
+//                                                : TextStyle(
+//                                                    fontSize: 19,
+//                                                    color: Colors.grey),
+//                                          ),
+//                                          _selectPhoto == 1
+//                                              ? Container(
+//                                                  height: 5,
+//                                                  width: 45,
+//                                                  decoration: BoxDecoration(
+//                                                    borderRadius:
+//                                                        BorderRadius.only(
+//                                                            topLeft: Radius
+//                                                                .circular(20),
+//                                                            topRight:
+//                                                                Radius.circular(
+//                                                                    20)),
+//                                                    color: Colors.black,
+//                                                  ),
+//                                                )
+//                                              : Container(
+//                                                  height: 5,
+//                                                )
+//                                        ],
+//                                      ),
+//                                    ),
+//                                  ),
+//                                ),
+//                                SizedBox(
+//                                  width: 20,
+//                                ),
+//                                GestureDetector(
+//                                  onTap: () {
+//                                    setState(() {
+//                                      _selectPhoto = 2;
+//                                    });
+//                                  },
+//                                  child: Container(
+//                                    child: Padding(
+//                                      padding: const EdgeInsets.fromLTRB(
+//                                          5, 10, 5, 0),
+//                                      child: Column(
+//                                        children: <Widget>[
+//                                          Text(
+//                                            'Ambience',
+//                                            style: _selectPhoto == 2
+//                                                ? TextStyle(
+//                                                    fontSize: 20,
+//                                                    fontWeight: FontWeight.w500)
+//                                                : TextStyle(
+//                                                    fontSize: 19,
+//                                                    color: Colors.grey),
+//                                          ),
+//                                          _selectPhoto == 2
+//                                              ? Container(
+//                                                  height: 5,
+//                                                  width: 45,
+//                                                  decoration: BoxDecoration(
+//                                                    borderRadius:
+//                                                        BorderRadius.only(
+//                                                            topLeft: Radius
+//                                                                .circular(20),
+//                                                            topRight:
+//                                                                Radius.circular(
+//                                                                    20)),
+//                                                    color: Colors.black,
+//                                                  ),
+//                                                )
+//                                              : Container(
+//                                                  height: 5,
+//                                                )
+//                                        ],
+//                                      ),
+//                                    ),
+//                                  ),
+//                                ),
+//                                SizedBox(
+//                                  width: 20,
+//                                ),
+//                                GestureDetector(
+//                                  onTap: () {
+//                                    setState(() {
+//                                      _selectPhoto = 3;
+//                                    });
+//                                  },
+//                                  child: Container(
+//                                    child: Padding(
+//                                      padding: const EdgeInsets.fromLTRB(
+//                                          5, 10, 5, 0),
+//                                      child: Column(
+//                                        children: <Widget>[
+//                                          Text(
+//                                            'Food',
+//                                            style: _selectPhoto == 3
+//                                                ? TextStyle(
+//                                                    fontSize: 20,
+//                                                    fontWeight: FontWeight.w500)
+//                                                : TextStyle(
+//                                                    fontSize: 19,
+//                                                    color: Colors.grey),
+//                                          ),
+//                                          _selectPhoto == 3
+//                                              ? Container(
+//                                                  height: 5,
+//                                                  width: 45,
+//                                                  decoration: BoxDecoration(
+//                                                    borderRadius:
+//                                                        BorderRadius.only(
+//                                                            topLeft: Radius
+//                                                                .circular(20),
+//                                                            topRight:
+//                                                                Radius.circular(
+//                                                                    20)),
+//                                                    color: Colors.black,
+//                                                  ),
+//                                                )
+//                                              : Container(
+//                                                  height: 5,
+//                                                )
+//                                        ],
+//                                      ),
+//                                    ),
+//                                  ),
+//                                )
+//                              ],
+//                            ),
+//                          ),
+//                        ),
+//                      ),
+//                      SizedBox(
+//                        height: 15,
+//                      ),
+//                      if (_selectPhoto == 1)
+//                        Padding(
+//                          padding: const EdgeInsets.all(8.0),
+//                          child: GridView.builder(
+//                              gridDelegate:
+//                                  SliverGridDelegateWithFixedCrossAxisCount(
+//                                      crossAxisCount: 2,
+//                                      crossAxisSpacing: 5,
+//                                      mainAxisSpacing: 10),
+//                              itemCount: 6,
+//                              physics: NeverScrollableScrollPhysics(),
+//                              shrinkWrap: true,
+//                              itemBuilder: (context, index) {
+//                                return Container(
+//                                  height: 150,
+//                                  width: 100,
+//                                  decoration: BoxDecoration(
+//                                      borderRadius: BorderRadius.circular(10),
+//                                      image: DecorationImage(
+//                                          image: AssetImage(
+//                                              'assets/Chocolate.jpg'),
+//                                          fit: BoxFit.cover)),
+//                                );
+//                              }),
+//                        ),
+//                      if (_selectPhoto == 2)
+//                        Padding(
+//                          padding: const EdgeInsets.all(8.0),
+//                          child: GridView.builder(
+//                              gridDelegate:
+//                                  SliverGridDelegateWithFixedCrossAxisCount(
+//                                      crossAxisCount: 2,
+//                                      crossAxisSpacing: 5,
+//                                      mainAxisSpacing: 10),
+//                              itemCount: 6,
+//                              physics: NeverScrollableScrollPhysics(),
+//                              shrinkWrap: true,
+//                              itemBuilder: (context, index) {
+//                                return Container(
+//                                  height: 150,
+//                                  width: 100,
+//                                  decoration: BoxDecoration(
+//                                      borderRadius: BorderRadius.circular(10),
+//                                      image: DecorationImage(
+//                                          image:
+//                                              AssetImage('assets/Coffee.jpg'),
+//                                          fit: BoxFit.cover)),
+//                                );
+//                              }),
+//                        ),
+//                      if (_selectPhoto == 3)
+//                        Padding(
+//                          padding: const EdgeInsets.all(8.0),
+//                          child: GridView.builder(
+//                              gridDelegate:
+//                                  SliverGridDelegateWithFixedCrossAxisCount(
+//                                      crossAxisCount: 2,
+//                                      crossAxisSpacing: 5,
+//                                      mainAxisSpacing: 10),
+//                              itemCount: 6,
+//                              physics: NeverScrollableScrollPhysics(),
+//                              shrinkWrap: true,
+//                              itemBuilder: (context, index) {
+//                                return Container(
+//                                  height: 150,
+//                                  width: 100,
+//                                  decoration: BoxDecoration(
+//                                      borderRadius: BorderRadius.circular(10),
+//                                      image: DecorationImage(
+//                                          image: AssetImage('assets/img.jpg'),
+//                                          fit: BoxFit.cover)),
+//                                );
+//                              }),
+//                        )
+//                    ],
+//                  ) End new code
               ]),
             )
           ],
@@ -2089,34 +2161,56 @@ class Delegate extends SliverPersistentHeaderDelegate {
                 image: DecorationImage(
                     image: CachedNetworkImageProvider(restaurant.photo_url),
                     fit: BoxFit.cover)),
-          ),
-        ),
-        Positioned(
-          bottom: 185,
-          left: 275,
-          child: Container(
-            decoration:
-                BoxDecoration(shape: BoxShape.circle, color: Colors.white),
-            child: Padding(
-              padding: EdgeInsets.all(8),
-              child: Icon(
-                Icons.open_in_browser,
-                size: 30,
-              ),
-            ),
-          ),
-        ),
-        Positioned(
-          bottom: 185,
-          left: 335,
-          child: Container(
-            decoration:
-                BoxDecoration(shape: BoxShape.circle, color: Colors.white),
-            child: Padding(
-              padding: EdgeInsets.all(8),
-              child: Icon(
-                Icons.favorite_border,
-                size: 30,
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: EdgeInsets.only(left: 15,top: 30),
+                child: Row(
+                  children: [
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.of(context).pop();
+                      },
+                      child: Container(
+                        decoration:
+                        BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+                        child: Padding(
+                          padding: EdgeInsets.all(8),
+                          child: Icon(
+                            Icons.arrow_back,
+                            size: 30,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                    Container(
+                      decoration:
+                      BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+                      child: Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Icon(
+                          Icons.open_in_browser,
+                          size: 30,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 8,),
+                    Container(
+                      decoration:
+                      BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+                      child: Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Icon(
+                          Icons.favorite_border,
+                          size: 30,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 15,)
+
+                  ],
+                ),
               ),
             ),
           ),
