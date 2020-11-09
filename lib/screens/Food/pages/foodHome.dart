@@ -9,6 +9,7 @@ import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/foodft.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/polls.dart';
+import 'package:moodish_mvp/screens/Food/nComponents/RecommSeemore.dart';
 import 'package:moodish_mvp/screens/Food/nComponents/feel.dart';
 import 'package:moodish_mvp/screens/Food/nComponents/foodCard.dart';
 import 'package:moodish_mvp/screens/Food/nComponents/latestRecipe.dart';
@@ -141,7 +142,12 @@ class _FoodHomeState extends State<FoodHome> {
                           padding: const EdgeInsets.only(left: 8.0),
                           child: FlatButton.icon(
                             textColor: Colors.orange,
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SeeMoreRecipes()));
+                            },
                             label: Text('See more'),
                             icon: Icon(Icons.arrow_forward),
                           ),
@@ -151,6 +157,7 @@ class _FoodHomeState extends State<FoodHome> {
                   ),
                   SizedBox(height: 10),
                   SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -306,7 +313,7 @@ class _FoodHomeState extends State<FoodHome> {
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Container(
-                              height: MediaQuery.of(context).size.height / 2,
+                              height: MediaQuery.of(context).size.height / 2.5,
                               child: BlocConsumer<FoodBloc,
                                   Map<String, List<FoodListModel>>>(
                                 buildWhen: (Map<String, List<FoodListModel>>
@@ -432,6 +439,7 @@ class _FoodHomeState extends State<FoodHome> {
                   ),
                   SizedBox(height: 10),
                   SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       mainAxisSize: MainAxisSize.min,

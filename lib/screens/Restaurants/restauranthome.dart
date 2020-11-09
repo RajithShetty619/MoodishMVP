@@ -706,7 +706,6 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                         ),
                       );
                     });
-                ;
               },
             ),
             // FutureBuilder<List<RestListModel>>(
