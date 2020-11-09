@@ -37,7 +37,7 @@ class _FoodHomeState extends State<FoodHome> {
   int indxT = 0;
   int indexP = 0;
   int numbr = 2;
-  Map<String, dynamic> userData={};
+  Map<String, dynamic> userData = {};
 
   @override
   void initState() {
@@ -49,12 +49,13 @@ class _FoodHomeState extends State<FoodHome> {
       numbr = randomNumber;
       print(numbr);
     });
-    data() async{
+    data() async {
       Box box = await Hive.openBox('Userdata');
       setState(() {
         userData = box.get('userdata');
       });
     }
+
     data();
   }
 
@@ -239,7 +240,9 @@ class _FoodHomeState extends State<FoodHome> {
                                           SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 3,
                                         crossAxisSpacing: 5.0,
-                                        mainAxisSpacing: MediaQuery.of(context).size.width/4,
+                                        mainAxisSpacing:
+                                            MediaQuery.of(context).size.width /
+                                                4,
                                       ),
                                       scrollDirection: Axis.horizontal,
                                       itemCount: feel.length,
