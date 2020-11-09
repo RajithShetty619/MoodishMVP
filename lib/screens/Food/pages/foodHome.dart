@@ -40,7 +40,7 @@ class _FoodHomeState extends State<FoodHome> {
   int indxT = 0;
   int indexP = 0;
   int numbr = 2;
-  Map<String, dynamic> userData;
+  Map<String, dynamic> userData={};
 
   @override
   void initState() {
@@ -54,7 +54,9 @@ class _FoodHomeState extends State<FoodHome> {
     });
     data() async{
       Box box = await Hive.openBox('Userdata');
-       userData = box.get('userdata');
+      setState(() {
+        userData = box.get('userdata');
+      });
     }
     data();
   }

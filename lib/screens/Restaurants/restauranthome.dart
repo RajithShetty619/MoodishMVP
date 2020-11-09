@@ -53,9 +53,12 @@ class _RestaurantHomeState extends State<RestaurantHome> {
     return position;
   }
   @override
-  void initState() async{
-    await getCurrentLocation();
-    await _getAddressFromLatLng();
+  void initState() {
+    data()async{
+      await getCurrentLocation();
+      await _getAddressFromLatLng();
+    }
+    data();
     setState(() {
       DatabaseQuery().getRest().then((rest) {
         BlocProvider.of<RestaurantBloc>(context)

@@ -23,6 +23,21 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.pop(context);
+        },
+        backgroundColor: Colors.white,
+        child: Padding(
+          padding: EdgeInsets.all(5),
+          child: Icon(
+            Icons.arrow_back,
+            size: 32,
+            color: Colors.black,
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
       bottomNavigationBar: BottomAppBar(
         child: Container(
           height: 50,
@@ -95,30 +110,30 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                                     widget.foodList.images),
                                 fit: BoxFit.cover)),
                       ),
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Padding(
-                          padding: EdgeInsets.only(right: 15, top: 10),
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: Card(
-                              elevation: 8,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30))),
-                              child: Padding(
-                                padding: EdgeInsets.all(5),
-                                child: Icon(
-                                  Icons.arrow_back,
-                                  size: 32,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+//                      Align(
+//                        alignment: Alignment.topLeft,
+//                        child: Padding(
+//                          padding: EdgeInsets.only(right: 15, top: 10),
+//                          child: GestureDetector(
+//                            onTap: () {
+//                              Navigator.pop(context);
+//                            },
+//                            child: Card(
+//                              elevation: 8,
+//                              shape: RoundedRectangleBorder(
+//                                  borderRadius:
+//                                      BorderRadius.all(Radius.circular(30))),
+//                              child: Padding(
+//                                padding: EdgeInsets.all(5),
+//                                child: Icon(
+//                                  Icons.arrow_back,
+//                                  size: 32,
+//                                ),
+//                              ),
+//                            ),
+//                          ),
+//                        ),
+//                      ),
                       Positioned(
                         top: 200,
                         child: Card(
