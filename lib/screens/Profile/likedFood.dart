@@ -13,6 +13,7 @@ class LikedFood extends StatefulWidget {
 
 class _LikedFoodState extends State<LikedFood> {
   List<FoodListModel> foodList;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,6 +104,7 @@ class _LikedFoodState extends State<LikedFood> {
                                           imageUrl: foodList[index].images,
                                           imageBuilder:
                                               (context, imageProvider) {
+                                            bool likeState = true;
                                             return Container(
                                               margin: EdgeInsets.symmetric(
                                                   horizontal: 10, vertical: 5),
@@ -160,20 +162,27 @@ class _LikedFoodState extends State<LikedFood> {
                                                             icon: Icon(
                                                               Icons.favorite,
                                                               color:
-                                                                  Colors.white,
+                                                                  Colors.pink,
                                                               size: 30,
                                                             ),
                                                             onPressed:
                                                                 () async {
-                                                              await DatabaseService()
-                                                                  .disLikeTransction(
-                                                                      collection:
-                                                                          "food",
-                                                                      sr_no: foodList[
-                                                                              index]
-                                                                          .sr_no,
-                                                                      field:
-                                                                          "like");
+                                                              await DatabaseService().disLikeTransction(
+                                                                  food: foodList[
+                                                                      index],
+                                                                  collection:
+                                                                      "food",
+                                                                  sr_no: foodList[
+                                                                          index]
+                                                                      .sr_no,
+                                                                  field:
+                                                                      "like");
+                                                              Scaffold.of(
+                                                                      context)
+                                                                  .showSnackBar(
+                                                                      SnackBar(
+                                                                          content:
+                                                                              Text("Food will be removed from the list!")));
                                                             }),
                                                       ),
                                                     ),

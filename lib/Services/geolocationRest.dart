@@ -107,7 +107,6 @@ class GeolocationRest {
 
     stream.listen((event) async {
       List<RestListModel> list = listfromSnapshot(event);
-      print(list.length);
       if (list.length < 6 && radius_track < 30) {
         radius_track = 0.25 + radius_track;
         radius.add(radius_track);

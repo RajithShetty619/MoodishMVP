@@ -39,6 +39,7 @@ class _PollTabsState extends State<PollTabs> {
       },
       builder: (BuildContext context, pollList) {
         return ListView.builder(
+          scrollDirection: Axis.horizontal,
           shrinkWrap: true,
           primary: false,
           physics: NeverScrollableScrollPhysics(),
@@ -79,6 +80,7 @@ class _This_ThatTabsState extends State<This_ThatTabs> {
       },
       builder: (BuildContext context, thislist) {
         return ListView.builder(
+          scrollDirection: Axis.horizontal,
           shrinkWrap: true,
           primary: false,
           physics: NeverScrollableScrollPhysics(),
@@ -122,6 +124,7 @@ class _YesNoTabsState extends State<YesNoTabs> {
       },
       builder: (BuildContext context, yesno) {
         return ListView.builder(
+          scrollDirection: Axis.horizontal,
           shrinkWrap: true,
           primary: false,
           physics: NeverScrollableScrollPhysics(),
@@ -171,6 +174,7 @@ class _YesNoListState extends State<YesNoList> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: MediaQuery.of(context).size.width / 1.5,
       child: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Polls(
@@ -214,7 +218,6 @@ class _YesNoListState extends State<YesNoList> {
         ),
       ),
     );
-   
   }
 }
 
@@ -252,6 +255,7 @@ class _GetListViewState extends State<GetListView> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: MediaQuery.of(context).size.width / 1.5,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Polls(
@@ -326,6 +330,7 @@ class _GetListView1State extends State<GetListView1> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: MediaQuery.of(context).size.width / 1.5,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Polls(
