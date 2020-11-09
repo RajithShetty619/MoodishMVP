@@ -7,8 +7,6 @@ import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:intl/intl.dart';
 import 'package:moodish_mvp/Services/geolocationRest.dart';
-import 'package:moodish_mvp/screens/Food/events/restEvent.dart';
-import 'package:moodish_mvp/screens/Restaurants/restBloc/restBloc.dart';
 import 'package:moodish_mvp/screens/mainScreen.dart';
 import 'Food/blocs/bloc/foodBloc.dart';
 import 'Food/blocs/pollsbloc/pollsBloc.dart';
@@ -38,6 +36,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
             .getRestFromLocationCuisine(context, "Fast Food", "5"));
     Box _box = await Hive.openBox("preferenceBox");
     String deter = _box.get("deter");
+    List<dynamic> cuisine = _box.get("preference");
+    String tod = timeOfTheDay();
+    String cuisine_sel = cuisine[Random().nextInt(cuisine.length)];
 
     if (deter != "veg" && deter != "nonveg") {
       Random random = new Random();
@@ -49,7 +50,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
     }
     DatabaseQuery _dqtaste2 = DatabaseQuery(listName: "d2");
     DatabaseQuery _dqtaste0 = DatabaseQuery(listName: "d0");
-    DatabaseQuery _dqtaste1 = DatabaseQuery(listName: "d1");
     await Future.wait([
       DatabaseQuery(listName: 'p').getPoll().then((poll) {
         BlocProvider.of<PollBloc>(context).add(PollEvent.add(poll, 'p'));
@@ -63,7 +63,22 @@ class _LoadingScreenState extends State<LoadingScreen> {
       DatabaseQuery(listName: 'fft').getFact().then((fact) {
         BlocProvider.of<PollBloc>(context).add(PollEvent.add(fact, 'fft'));
       }),
+      DatabaseQuery(listName: 'tod').getFood(
+        field: ['mealtype', 'deter'],
+        value: ["breakfast", deter],
+        limit: 7,
+      ).then((future) {
+        BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "tod"));
+      }),
       checkDate().then((check) async {
+        DatabaseQuery(listName: 'craving').getFood(
+            field: ['cuisine'],
+            value: [cuisine_sel],
+            limit: 7,
+            check: 0).then((future) {
+          BlocProvider.of<FoodBloc>(context)
+              .add(FoodEvent.add(future, "craving"));
+        });
         _dqtaste2.getFood(
             field: ['cuisine'],
             value: ['indian'],
@@ -84,6 +99,36 @@ class _LoadingScreenState extends State<LoadingScreen> {
         });
       }),
     ]);
+  }
+
+  String timeOfTheDay() {
+    DateTime now = DateTime.now();
+    DateTime morn = DateTime.parse("2000-05-04 06:00:04Z");
+    DateTime aftr = DateTime.parse("2000-05-04 12:00:04Z");
+    DateTime even = DateTime.parse("2000-05-04 16:00:04Z");
+    DateTime night = DateTime.parse("2000-05-04 20:00:04Z");
+    if (now.hour <= aftr.hour && now.hour >= morn.hour) {
+      // setState(() {
+      //   greeting = 'Morning';
+      //   print(greeting);
+      // });
+      return "breakfast";
+    } else if (now.hour <= even.hour && now.hour >= aftr.hour) {
+      // setState(() {
+      //   greeting = 'AfterNoon';
+      // });
+      return "main course";
+    } else if (now.hour <= night.hour && now.hour >= even.hour) {
+      // setState(() {
+      //   greeting = 'Evening';
+      // });
+      return "Snack";
+    } else {
+      // setState(() {
+      //   greeting = 'Night Snacks';
+      // });
+      return "side dish";
+    }
   }
 
   Future<int> checkDate() async {

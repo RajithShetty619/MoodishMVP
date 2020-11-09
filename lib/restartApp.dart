@@ -1,41 +1,41 @@
-import 'package:flutter/material.dart';
-import 'package:moodish_mvp/main.dart';
+// import 'package:flutter/material.dart';
+// import 'package:moodish_mvp/main.dart';
 
-void main() {
-  runApp(
-    RestartWidget(
-      child: MyApp(),
-    ),
-  );
-}
+// void main() {
+//   runApp(
+//     RestartWidget(
+//       child: MyApp(),
+//     ),
+//   );
+// }
 
-class RestartWidget extends StatefulWidget {
-  RestartWidget({this.child});
+// class RestartWidget extends StatefulWidget {
+//   RestartWidget({this.child});
 
-  final Widget child;
+//   final Widget child;
 
-  static void restartApp(BuildContext context) {
-    context.findAncestorStateOfType<_RestartWidgetState>().restartApp();
-  }
+//   static void restartApp(BuildContext context) {
+//     context.findAncestorStateOfType<_RestartWidgetState>().restartApp();
+//   }
 
-  @override
-  _RestartWidgetState createState() => _RestartWidgetState();
-}
+//   @override
+//   _RestartWidgetState createState() => _RestartWidgetState();
+// }
 
-class _RestartWidgetState extends State<RestartWidget> {
-  Key key = UniqueKey();
+// class _RestartWidgetState extends State<RestartWidget> {
+//   Key key = UniqueKey();
 
-  void restartApp() {
-    setState(() {
-      key = UniqueKey();
-    });
-  }
+//   void restartApp() {
+//     setState(() {
+//       key = UniqueKey();
+//     });
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return KeyedSubtree(
-      key: key,
-      child: widget.child,
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return KeyedSubtree(
+//       key: key,
+//       child: widget.child,
+//     );
+//   }
+// }

@@ -1,4 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:moodish_mvp/models/foodListModel.dart';
+import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
 import 'package:moodish_mvp/screens/Food/nComponents/foodInfoPage.dart';
 
 class FoodRecipePage extends StatefulWidget {
@@ -80,100 +84,114 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
             SizedBox(
               height: 20,
             ),
-            ListView.builder(
-              itemCount: 5,
-              shrinkWrap: true,
-              primary: false,
-              physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => FoodInfoCard()));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20, bottom: 10),
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 90,
-                          width: 90,
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(30)),
-                              image: DecorationImage(
-                                  image: AssetImage('assets/Coffee.jpg'),
-                                  fit: BoxFit.cover)),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+            BlocConsumer<FoodBloc, Map<String, List<FoodListModel>>>(
+              listener: (context, state) {
+                // TODO: implement listener
+              },
+              builder: (context, foodList) {
+                return ListView.builder(
+                  itemCount: foodList["tod"].length,
+                  shrinkWrap: true,
+                  primary: false,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => FoodInfoCard(
+                                      foodList: foodList["tod"][index],
+                                    )));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20, bottom: 10),
+                        child: Row(
                           children: [
-                            Text(
-                              'Aamras',
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.w500),
-                            ),
-                            Text(
-                              'Indian',
-                              style: TextStyle(color: Colors.grey[500]),
-                            ),
                             Container(
-                              height: 0.8,
-                              width: MediaQuery.of(context).size.width / 2.5,
-                              color: Colors.grey[400],
+                              height: 90,
+                              width: 90,
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(30)),
+                                  image: DecorationImage(
+                                      image: CachedNetworkImageProvider(
+                                          foodList["tod"][index].images),
+                                      fit: BoxFit.cover)),
                             ),
                             SizedBox(
-                              height: 5,
+                              width: 10,
                             ),
-                            Row(
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Icon(
-                                  Icons.fastfood,
-                                  size: 12,
+                                Text(
+                                  foodList["tod"][index].foodName,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                Text(
+                                  foodList["tod"][index].cuisine,
+                                  style: TextStyle(color: Colors.grey[500]),
+                                ),
+                                Container(
+                                  height: 0.8,
+                                  width:
+                                      MediaQuery.of(context).size.width / 2.5,
+                                  color: Colors.grey[400],
                                 ),
                                 SizedBox(
-                                  width: 3,
+                                  height: 5,
                                 ),
-                                Text('273 Calories',
-                                    style: TextStyle(fontSize: 13)),
-                                SizedBox(
-                                  width: 12,
-                                ),
-                                Icon(
-                                  Icons.alarm,
-                                  size: 12,
-                                ),
-                                Text('15 mins', style: TextStyle(fontSize: 13))
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.fastfood,
+                                      size: 12,
+                                    ),
+                                    SizedBox(
+                                      width: 3,
+                                    ),
+                                    Text(foodList["tod"][index].calories,
+                                        style: TextStyle(fontSize: 13)),
+                                    SizedBox(
+                                      width: 12,
+                                    ),
+                                    Icon(
+                                      Icons.alarm,
+                                      size: 12,
+                                    ),
+                                    Text(foodList["tod"][index].time ?? '--',
+                                        style: TextStyle(fontSize: 13))
+                                  ],
+                                )
                               ],
+                            ),
+                            Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 32),
+                              child: Container(
+                                height: 25,
+                                width: 60,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black87),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20))),
+                                child: Center(
+                                    child: Text(
+                                  'Cook',
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500),
+                                )),
+                              ),
                             )
                           ],
                         ),
-                        Spacer(),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 32),
-                          child: Container(
-                            height: 25,
-                            width: 60,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.black87),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20))),
-                            child: Center(
-                                child: Text(
-                              'Cook',
-                              style: TextStyle(
-                                  fontSize: 12, fontWeight: FontWeight.w500),
-                            )),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+                      ),
+                    );
+                  },
                 );
               },
             ),
@@ -215,100 +233,115 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
             SizedBox(
               height: 20,
             ),
-            ListView.builder(
-              itemCount: 5,
-              shrinkWrap: true,
-              primary: false,
-              physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => FoodInfoCard()));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20, bottom: 10),
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 90,
-                          width: 90,
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(30)),
-                              image: DecorationImage(
-                                  image: AssetImage('assets/Coffee.jpg'),
-                                  fit: BoxFit.cover)),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+            BlocConsumer<FoodBloc, Map<String, List<FoodListModel>>>(
+              listener: (context, state) {
+                // TODO: implement listener
+              },
+              builder: (context, foodList) {
+                return ListView.builder(
+                  itemCount: 5,
+                  shrinkWrap: true,
+                  primary: false,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => FoodInfoCard(
+                                      foodList: foodList["craving"][index],
+                                    )));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20, bottom: 10),
+                        child: Row(
                           children: [
-                            Text(
-                              'Aamras',
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.w500),
-                            ),
-                            Text(
-                              'Indian',
-                              style: TextStyle(color: Colors.grey[500]),
-                            ),
                             Container(
-                              height: 0.8,
-                              width: MediaQuery.of(context).size.width / 2.5,
-                              color: Colors.grey[400],
+                              height: 90,
+                              width: 90,
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(30)),
+                                  image: DecorationImage(
+                                      image: CachedNetworkImageProvider(
+                                          foodList["craving"][index].images),
+                                      fit: BoxFit.cover)),
                             ),
                             SizedBox(
-                              height: 5,
+                              width: 10,
                             ),
-                            Row(
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Icon(
-                                  Icons.fastfood,
-                                  size: 12,
+                                Text(
+                                  foodList["craving"][index].foodName,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                Text(
+                                  foodList["craving"][index].cuisine,
+                                  style: TextStyle(color: Colors.grey[500]),
+                                ),
+                                Container(
+                                  height: 0.8,
+                                  width:
+                                      MediaQuery.of(context).size.width / 2.5,
+                                  color: Colors.grey[400],
                                 ),
                                 SizedBox(
-                                  width: 3,
+                                  height: 5,
                                 ),
-                                Text('273 Calories',
-                                    style: TextStyle(fontSize: 13)),
-                                SizedBox(
-                                  width: 12,
-                                ),
-                                Icon(
-                                  Icons.alarm,
-                                  size: 12,
-                                ),
-                                Text('15 mins', style: TextStyle(fontSize: 13))
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.fastfood,
+                                      size: 12,
+                                    ),
+                                    SizedBox(
+                                      width: 3,
+                                    ),
+                                    Text(foodList["craving"][index].calories,
+                                        style: TextStyle(fontSize: 13)),
+                                    SizedBox(
+                                      width: 12,
+                                    ),
+                                    Icon(
+                                      Icons.alarm,
+                                      size: 12,
+                                    ),
+                                    Text(
+                                        foodList["craving"][index].time ?? '--',
+                                        style: TextStyle(fontSize: 13))
+                                  ],
+                                )
                               ],
+                            ),
+                            Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 32),
+                              child: Container(
+                                height: 25,
+                                width: 60,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black87),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20))),
+                                child: Center(
+                                    child: Text(
+                                  'Cook',
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500),
+                                )),
+                              ),
                             )
                           ],
                         ),
-                        Spacer(),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 32),
-                          child: Container(
-                            height: 25,
-                            width: 60,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.black87),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20))),
-                            child: Center(
-                                child: Text(
-                              'Cook',
-                              style: TextStyle(
-                                  fontSize: 12, fontWeight: FontWeight.w500),
-                            )),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+                      ),
+                    );
+                  },
                 );
               },
             )
