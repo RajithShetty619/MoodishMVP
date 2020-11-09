@@ -32,6 +32,7 @@ class _FoodHomeState extends State<FoodHome> {
   ];
   bool isSelected = false;
   int i = 0;
+  int _visible = 0;
   List<String> pref = [];
   String greeting;
   int indxT = 0;
@@ -232,79 +233,144 @@ class _FoodHomeState extends State<FoodHome> {
                                 height: 10.0,
                               ),
                               Flexible(
-                                child: Container(
-                                  height:
-                                      MediaQuery.of(context).size.height / 2.5,
-                                  child: GridView.builder(
-                                      gridDelegate:
-                                          SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 3,
-                                        crossAxisSpacing: 5.0,
-                                        mainAxisSpacing:
-                                            MediaQuery.of(context).size.width /
-                                                5,
-                                      ),
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: feel.length,
-                                      shrinkWrap: true,
-                                      itemBuilder:
-                                          (BuildContext context, index) {
-                                        return GestureDetector(
-                                          onTap: () {
-                                            print("pressesesesesesd5362");
-                                            dynamic _val = feel[index];
-                                            setState(() {
-                                              if (feel[index].isSelected ==
-                                                  true) {
-                                                pref.remove(feel[index].feel);
-                                                i--;
-                                              }
-                                              if (feel[index].isSelected ==
-                                                  false) {
-                                                pref.add(_val.feel);
-                                                i++;
-                                              }
-                                              print(i);
-                                              print(pref);
-                                              print(pref.contains(_val.feel));
-                                            });
-                                            setState(() {
-                                              feel[index].isSelected =
-                                                  !feel[index].isSelected;
-                                            });
-                                          },
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            child: Container(
-                                                margin: EdgeInsets.all(8),
-                                                decoration: BoxDecoration(
-                                                  border: feel[index].isSelected
-                                                      ? Border.all(
-                                                          color: Colors.orange,
-                                                          width: 2)
-                                                      : Border.all(
-                                                          color: Colors.black,
-                                                          width: 2),
+                                child: i == _visible
+                                    ? Container(
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                2.5,
+                                        child: GridView.builder(
+                                            gridDelegate:
+                                                SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 3,
+                                              crossAxisSpacing: 5.0,
+                                              mainAxisSpacing:
+                                                  MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                            ),
+                                            scrollDirection: Axis.horizontal,
+                                            itemCount: feel.length,
+                                            shrinkWrap: true,
+                                            itemBuilder:
+                                                (BuildContext context, index) {
+                                              return GestureDetector(
+                                                onTap: () {
+                                                  print("pressesesesesesd5362");
+                                                  dynamic _val = feel[index];
+                                                  setState(() {
+                                                    if (feel[index]
+                                                            .isSelected ==
+                                                        true) {
+                                                      pref.remove(
+                                                          feel[index].feel);
+                                                      i--;
+                                                    }
+                                                    if (feel[index]
+                                                            .isSelected ==
+                                                        false) {
+                                                      pref.add(_val.feel);
+                                                      i++;
+                                                    }
+                                                    print(i);
+                                                    print(pref);
+                                                    print(pref
+                                                        .contains(_val.feel));
+                                                  });
+                                                  setState(() {
+                                                    feel[index].isSelected =
+                                                        !feel[index].isSelected;
+                                                  });
+                                                },
+                                                child: ClipRRect(
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          250),
-                                                ),
-                                                child: Center(
-                                                    child: feel[index]
-                                                            .isSelected
-                                                        ? Text(
-                                                            '${feel[index].feel}',
-                                                            style: TextStyle(
+                                                      BorderRadius.circular(20),
+                                                  child: Container(
+                                                      margin: EdgeInsets.all(8),
+                                                      decoration: BoxDecoration(
+                                                        border: feel[index]
+                                                                .isSelected
+                                                            ? Border.all(
                                                                 color: Colors
-                                                                    .orange),
-                                                          )
-                                                        : Text(
-                                                            '${feel[index].feel}'))),
-                                          ),
-                                        );
-                                      }),
-                                ),
+                                                                    .orange,
+                                                                width: 2)
+                                                            : Border.all(
+                                                                color: Colors
+                                                                    .black,
+                                                                width: 2),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(250),
+                                                      ),
+                                                      child: Center(
+                                                          child: feel[index]
+                                                                  .isSelected
+                                                              ? Text(
+                                                                  '${feel[index].feel}',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .orange),
+                                                                )
+                                                              : Text(
+                                                                  '${feel[index].feel}'))),
+                                                ),
+                                              );
+                                            }),
+                                      )
+                                    : Container(
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                2.5,
+                                        child: BlocConsumer<FoodBloc,
+                                            Map<String, List<FoodListModel>>>(
+                                          buildWhen: (Map<String,
+                                                      List<FoodListModel>>
+                                                  previous,
+                                              Map<String, List<FoodListModel>>
+                                                  current) {
+                                            return true;
+                                          },
+                                          listenWhen: (Map<String,
+                                                      List<FoodListModel>>
+                                                  previous,
+                                              Map<String, List<FoodListModel>>
+                                                  current) {
+                                            if (current.length >
+                                                previous.length) {
+                                              return true;
+                                            }
+                                            return false;
+                                          },
+                                          builder:
+                                              (BuildContext context, foodList) {
+                                            return Container(
+                                              child: ListView.builder(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                shrinkWrap: true,
+                                                primary: false,
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
+                                                itemCount:
+                                                    foodList["trend"].length,
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        index) {
+                                                  return FoodCrd(
+                                                    foodList: foodList["trend"]
+                                                        [index],
+                                                  );
+                                                },
+                                              ),
+                                            );
+                                          },
+                                          listener: (context, foodList) {
+                                            Scaffold.of(context).showSnackBar(
+                                              SnackBar(content: Text('Added!')),
+                                            );
+                                          },
+                                        ),
+                                      ),
                               ),
                             ],
                           ),
