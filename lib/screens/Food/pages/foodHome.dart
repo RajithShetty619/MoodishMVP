@@ -25,14 +25,10 @@ class _FoodHomeState extends State<FoodHome> {
   List<GridTileBuilder> feel = [
     GridTileBuilder(feel: 'Happy', isSelected: false),
     GridTileBuilder(feel: 'Stressed', isSelected: false),
-    GridTileBuilder(feel: 'Lazy', isSelected: false),
-    GridTileBuilder(feel: 'Fast Food', isSelected: false),
     GridTileBuilder(feel: 'Angry', isSelected: false),
     GridTileBuilder(feel: 'Sad', isSelected: false),
-    GridTileBuilder(feel: 'Bored', isSelected: false),
-    GridTileBuilder(feel: 'Snacky', isSelected: false),
-    GridTileBuilder(feel: 'Desserty', isSelected: false),
     GridTileBuilder(feel: 'Healthy', isSelected: false),
+    GridTileBuilder(feel: 'Sluggish', isSelected: false),
   ];
   bool isSelected = false;
   int i = 0;
@@ -242,8 +238,8 @@ class _FoodHomeState extends State<FoodHome> {
                                       gridDelegate:
                                           SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 3,
-                                        crossAxisSpacing: 1.0,
-                                        mainAxisSpacing: 1.0,
+                                        crossAxisSpacing: 5.0,
+                                        mainAxisSpacing: MediaQuery.of(context).size.width/4,
                                       ),
                                       scrollDirection: Axis.horizontal,
                                       itemCount: feel.length,
