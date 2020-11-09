@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Services/betaCount.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
@@ -40,6 +41,7 @@ class _FoodHomeState extends State<FoodHome> {
   int indxT = 0;
   int indexP = 0;
   int numbr = 2;
+  Map<String, dynamic> userData={};
 
   @override
   void initState() {
@@ -51,6 +53,13 @@ class _FoodHomeState extends State<FoodHome> {
       numbr = randomNumber;
       print(numbr);
     });
+    data() async{
+      Box box = await Hive.openBox('Userdata');
+      setState(() {
+        userData = box.get('userdata');
+      });
+    }
+    data();
   }
 
   @override
@@ -78,6 +87,7 @@ class _FoodHomeState extends State<FoodHome> {
         greeting = 'Night Snacks';
       });
     }
+
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -99,7 +109,7 @@ class _FoodHomeState extends State<FoodHome> {
                               padding:
                                   const EdgeInsets.only(left: 5.0, bottom: 4),
                               child: Text(
-                                'hello user, ',
+                                'Hello ${userData['name'] ?? 'name'}, ',
                                 style: TextStyle(
                                   fontSize: 16,
                                 ),

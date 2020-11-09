@@ -7,6 +7,7 @@ import 'package:moodish_mvp/screens/Profile/profileCard.dart';
 import 'package:share/share.dart';
 import '../../Services/authenticate.dart';
 import 'Edit.dart';
+import 'package:hive/hive.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'settings.dart';
 import 'notificationSettings.dart';
@@ -34,7 +35,8 @@ class _ProfileState extends State<Profile> {
       } catch (e) {
         print(e);
       }
-      Map<String, dynamic> _userData = await DatabaseService().returnUser();
+      Box box = Hive.box('Userdata');
+      Map<String, dynamic> _userData =  box.get('userdata');
       setState(() {
         userData = _userData;
       });
