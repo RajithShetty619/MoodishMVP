@@ -5,6 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/Services/geolocationRest.dart';
 import 'package:moodish_mvp/models/restaurantsModel.dart';
@@ -21,6 +22,36 @@ class RestaurantHome extends StatefulWidget {
 class _RestaurantHomeState extends State<RestaurantHome> {
   double _currentIndex = 0;
   int _totalIndex = 8;
+  String location = 'Mumbai,Maharashtra west ';
+  Geolocator geolocator = Geolocator();
+  Position _currentPosition;
+  _getAddressFromLatLng() async {
+    try {
+      setState(() {
+        location = 'Wait a Moment...';
+      });
+      List<Placemark> p = await geolocator.placemarkFromCoordinates(
+          _currentPosition.latitude, _currentPosition.longitude);
+      Placemark place = p[0];
+
+      setState(() {
+        location = "${place.subLocality},${place.locality}-${place.postalCode}";
+      });
+      print(location);
+    } catch (e) {
+      print(e);
+    }
+  }
+  getCurrentLocation() async {
+    geolocator.isLocationServiceEnabled();
+    final position = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+        .then((Position position) {
+      _currentPosition = position;
+    });
+    print(position);
+    return position;
+  }
   @override
   void initState() {
     setState(() {
@@ -52,21 +83,27 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                         'Your Address',
                         style: TextStyle(color: Colors.blue[900]),
                       ),
-                      Text.rich(TextSpan(
-                          style: TextStyle(
-                            fontSize: 18,
-                          ),
-                          children: [
-                            TextSpan(
-                                text: 'Mumbai,Maharashtra west ',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 20)),
-                            WidgetSpan(
-                                child: Icon(
-                              Icons.edit,
-                              size: 17,
-                            ))
-                          ]))
+                      GestureDetector(
+                        onTap: () async{
+                          await getCurrentLocation();
+                          await _getAddressFromLatLng();
+                        },
+                        child: Text.rich(TextSpan(
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
+                            children: [
+                              TextSpan(
+                                  text: location,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold, fontSize: 20)),
+                              WidgetSpan(
+                                  child: Icon(
+                                Icons.edit,
+                                size: 17,
+                              ))
+                            ])),
+                      )
                     ],
                   ),
                 ),
