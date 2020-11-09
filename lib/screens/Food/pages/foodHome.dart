@@ -123,7 +123,7 @@ class _FoodHomeState extends State<FoodHome> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Recommanded Recipes',
+                          'Recommended Recipes',
                           style: TextStyle(
                               fontSize: 22, fontWeight: FontWeight.bold),
                         ),
@@ -296,7 +296,7 @@ class _FoodHomeState extends State<FoodHome> {
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Container(
-                              height: MediaQuery.of(context).size.height / 2.5,
+                              height: MediaQuery.of(context).size.height / 2,
                               child: BlocConsumer<FoodBloc,
                                   Map<String, List<FoodListModel>>>(
                                 buildWhen: (Map<String, List<FoodListModel>>
