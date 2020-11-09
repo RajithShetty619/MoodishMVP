@@ -29,7 +29,7 @@ class _FoodCrdState extends State<FoodCrd> {
       child: Padding(
         padding: const EdgeInsets.only(right: 10.0),
         child: Container(
-          width: MediaQuery.of(context).size.width / 1.8,
+          width: MediaQuery.of(context).size.width / 1.7,
           child: Card(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
@@ -42,7 +42,7 @@ class _FoodCrdState extends State<FoodCrd> {
                   overflow: Overflow.visible,
                   children: [
                     Container(
-                      width: 220,
+                      width: 215,
                       height: 200,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(
