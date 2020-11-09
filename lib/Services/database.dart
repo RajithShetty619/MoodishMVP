@@ -153,10 +153,10 @@ class DatabaseService {
           .collection("data")
           .doc("${food.sr_no}")
           .delete();
-    }
-    await documentReference.set({
-      field: FieldValue.increment(-1) /* atomically increments data by 1 */
-    }, SetOptions(merge: true)).catchError((onError) => print(onError));
+    } else
+      await documentReference.set({
+        field: FieldValue.increment(-1) /* atomically increments data by 1 */
+      }, SetOptions(merge: true)).catchError((onError) => print(onError));
   }
 /* ////////////////////////////////////////////////////////////////////// USERNAMEMETHODS ////////////////////////////////////////////////////////// */
 
