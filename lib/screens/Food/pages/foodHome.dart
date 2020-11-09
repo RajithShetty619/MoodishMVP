@@ -13,8 +13,6 @@ import 'package:moodish_mvp/screens/Food/nComponents/foodCard.dart';
 import 'package:moodish_mvp/screens/Food/nComponents/latestRecipe.dart';
 import 'package:moodish_mvp/screens/Food/nComponents/nFoodBg.dart';
 import 'package:moodish_mvp/screens/Food/nComponents/topRecipes.dart';
-import 'package:moodish_mvp/screens/Food/pages/explore.dart';
-import 'package:moodish_mvp/screens/Food/pages/foodFeed.dart';
 
 class FoodHome extends StatefulWidget {
   @override
@@ -40,7 +38,7 @@ class _FoodHomeState extends State<FoodHome> {
   String greeting;
   int indxT = 0;
   int indexP = 0;
-  int numbr;
+  int numbr = 2;
 
   @override
   void initState() {
@@ -437,14 +435,14 @@ class _FoodHomeState extends State<FoodHome> {
                           Flexible(
                             child: Container(
                               height: MediaQuery.of(context).size.height / 2,
-                              child: This_ThatTabs(),
+                              child: YesNoTabs(),
                             ),
                           ),
                         if (indexP == 1 && numbr == 2)
                           Flexible(
                             child: Container(
                               height: MediaQuery.of(context).size.height / 2,
-                              child: YesNoTabs(),
+                              child: This_ThatTabs(),
                             ),
                           ),
                       ],
