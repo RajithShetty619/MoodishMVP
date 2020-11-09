@@ -84,6 +84,7 @@ class _This_ThatTabsState extends State<This_ThatTabs> {
           shrinkWrap: true,
           primary: false,
           physics: NeverScrollableScrollPhysics(),
+          itemCount: thislist['tt'].length,
           itemBuilder: (BuildContext context, index) {
             return GetListView(
                 this_that: thislist['tt'][index],
