@@ -2,7 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moodish_mvp/Services/betaCount.dart';
+import 'package:moodish_mvp/models/foodListModel.dart';
+import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/foodft.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/polls.dart';
 import 'package:moodish_mvp/screens/Food/nComponents/feel.dart';
@@ -293,15 +296,43 @@ class _FoodHomeState extends State<FoodHome> {
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Container(
-                              height: MediaQuery.of(context).size.height / 2.8,
-                              child: ListView.builder(
-                                itemCount: 3,
-                                scrollDirection: Axis.horizontal,
-                                shrinkWrap: true,
-                                primary: false,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemBuilder: (BuildContext context, int index) {
-                                  return FoodCrd();
+                              height: MediaQuery.of(context).size.height / 2.5,
+                              child: BlocConsumer<FoodBloc,
+                                  Map<String, List<FoodListModel>>>(
+                                buildWhen: (Map<String, List<FoodListModel>>
+                                        previous,
+                                    Map<String, List<FoodListModel>> current) {
+                                  return true;
+                                },
+                                listenWhen: (Map<String, List<FoodListModel>>
+                                        previous,
+                                    Map<String, List<FoodListModel>> current) {
+                                  if (current.length > previous.length) {
+                                    return true;
+                                  }
+                                  return false;
+                                },
+                                builder: (BuildContext context, foodList) {
+                                  return Container(
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      shrinkWrap: true,
+                                      primary: false,
+                                      physics: NeverScrollableScrollPhysics(),
+                                      itemCount: foodList["d0"].length,
+                                      itemBuilder:
+                                          (BuildContext context, index) {
+                                        return FoodCrd(
+                                          foodList: foodList["d0"][index],
+                                        );
+                                      },
+                                    ),
+                                  );
+                                },
+                                listener: (context, foodList) {
+                                  Scaffold.of(context).showSnackBar(
+                                    SnackBar(content: Text('Added!')),
+                                  );
                                 },
                               ),
                             ),
