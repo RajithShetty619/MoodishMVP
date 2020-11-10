@@ -163,22 +163,29 @@ class _FoodHomeState extends State<FoodHome> {
                         Text(
                           'Recommended Recipes',
                           style: TextStyle(
-                              fontSize: MediaQuery.of(context).size.width/20, fontWeight: FontWeight.bold),
+                              fontSize: MediaQuery.of(context).size.width/20.3, fontWeight: FontWeight.bold),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: FlatButton.icon(
-                            textColor: Colors.orange,
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SeeMoreRecipes(
-                                            user: userData['name'],
-                                          )));
-                            },
-                            label: Text('See more'),
-                            icon: Icon(Icons.arrow_forward),
+                        InkWell(
+                          splashColor: Colors.orange[300],
+                          onTap: (){
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SeeMoreRecipes(
+                                      user: userData['name'],
+                                    )));
+                          },
+                          child: Container(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  Text('See more',style: TextStyle(color: Colors.orange,fontSize: 17),),
+                                  SizedBox(width: 3,),
+                                  Icon(Icons.arrow_forward,color: Colors.orange,size: 18,),
+                                ],
+                              ),
+                            ),
                           ),
                         )
                       ],
