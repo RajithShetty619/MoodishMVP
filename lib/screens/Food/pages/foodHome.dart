@@ -166,7 +166,7 @@ class _FoodHomeState extends State<FoodHome> {
                               fontSize: MediaQuery.of(context).size.width/20.3, fontWeight: FontWeight.bold),
                         ),
                         InkWell(
-                          splashColor: Colors.orange[300],
+                          splashColor: Color.fromARGB(255, 254, 197, 140),
                           onTap: (){
                             Navigator.push(
                                 context,
