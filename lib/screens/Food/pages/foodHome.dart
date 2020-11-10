@@ -156,14 +156,14 @@ class _FoodHomeState extends State<FoodHome> {
                     height: 30,
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(30, 25, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(25, 25, 0, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           'Recommended Recipes',
                           style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.bold),
+                              fontSize: MediaQuery.of(context).size.width/20, fontWeight: FontWeight.bold),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0),
