@@ -25,7 +25,7 @@ const geofirestore = require("geofirestore");
 
 exports.helloWorld = functions.https.onRequest((request, response) => {
 
-    let _dataArray = [
+    let _dataArray =[
         {
             "food_item": "aloo bhujia",
             "mood": "Stressed",
@@ -202,7 +202,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "indian",
             "deter": "veg",
             "description": "Pathravade, a masterpiece from the Konkan and Mangalorean cuisine. Pathravade is prepared using colocasia leaves. The leaves are smeared with a spicy, tangy rice and coconut paste.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "3"
         },
         {
@@ -318,7 +318,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "indian",
             "deter": "veg",
             "description": "Misal pav can be had as a breakfast, snack or as a brunch. Its a delicious and wholesome meal, especially if the pav (buns) is made from wheat flour or if you could make your own healthy bread.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "5"
         },
         {
@@ -648,7 +648,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "indian",
             "deter": "veg",
             "description": "Bhelpuri is a crispy, sweet, tangy, spicy mixture of many edibles.This bhel puri is easy to make and includes quick recipes for the 3 chutneys that are added in a bhel puri. ",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "13"
         },
         {
@@ -700,7 +700,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "indian",
             "deter": "veg",
             "description": "Bhelpuri is a crispy, sweet, tangy, spicy mixture of many edibles.This bhel puri is easy to make and includes quick recipes for the 3 chutneys that are added in a bhel puri. ",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "14"
         },
         {
@@ -756,7 +756,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "indian",
             "deter": "veg",
             "description": "Bhelpuri is a crispy, sweet, tangy, spicy mixture of many edibles.This bhel puri is easy to make and includes quick recipes for the 3 chutneys that are added in a bhel puri. ",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "15"
         },
         {
@@ -846,7 +846,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "indian",
             "deter": "veg",
             "description": "Crisp & crunchy snack for Diwali festival. chakli is a deep-fried snack made from rice flour, gram flour, wheat flour or a mixture of lentil flours.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "17"
         },
         {
@@ -1179,7 +1179,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "indian",
             "deter": "veg",
             "description": "Poha is a popular Maharashtrian breakfast recipe made from red or white flattened rice, herbs and spices. The popular variation of poha recipes are made by including either potato or onion or both potatoes and onion.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "25"
         },
         {
@@ -1343,7 +1343,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
         },
         {
             "restaurants": "[\"Modakam\",\"metkut\",\"aaswad\",\"siddhi vinayak refreshment\",\"kath n ghat\",\"amey',khadpe's\"]",
-            "food_item": "Mango modak",
+            "food_item": "Mango Modak",
             "mood": "Stressed",
             "recipe": "These modaks are prepared with fresh mango pulp, khoya (evaporated milk solids), sugar and flavored with cardamom powder. These modaks are delicious, rich, melt in the mouth and with a lovely taste of mangoes.",
             "preparation": "Rinse and then peel mangoes. Chop them. ",
@@ -1822,7 +1822,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "indian",
             "deter": "veg",
             "description": "Sabudana ki khichdi Is usually made during fasting days like Navratri or mahashivratri or Ekadashi. It is an easy snack and is a good recipe to be made during fasting days but it requires little experience to get the perfect nonsticky texture in the sabudana pearls",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "40"
         },
         {
@@ -1860,7 +1860,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "indian",
             "deter": "veg",
             "description": "Serve the Sabudana thalipeeth with any falahari chutney or raita. I served with dahi aloo and tamarind dates chutney. The dahi wale aloo were made with cashew yogurt.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "41"
         },
         {
@@ -2204,7 +2204,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "indian",
             "deter": "veg",
             "description": "Corn cutlet are crisp melt in the mouth corn patties made with mashed potatoes and stuffed with a spicy corn filling.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "48"
         },
         {
@@ -2312,7 +2312,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "indian",
             "deter": "veg",
             "description": "Alu vadi also known as patra or pathrode is a delicious dish of colocasia or taro root leaves smeared with spiced, sweet and tangy gram flour paste and steamed to be tempered later",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "50"
         },
         {
@@ -2366,7 +2366,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "indian",
             "deter": "veg",
             "description": "This Restaurant Style Paneer Tikka is a popular and delicious tandoori snack where paneer (Indian cottage cheese cubes) are marinated in a spiced yogurt-based marinade, arranged on skewers and grilled in the oven.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "51"
         },
         {
@@ -2416,7 +2416,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "indian",
             "deter": "veg",
             "description": "Dahi puri also known as dahi batata puri is a delicious, yummy, chatpata chaat snack from Mumbai. It is sweet, sour, tangy, spicy and crispy chaat.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "52"
         },
         {
@@ -2461,7 +2461,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "indian",
             "deter": "veg",
             "description": "Khaman dhokla or khaman as its called is a savory steamed cake made from gram flour.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "53"
         },
         {
@@ -2571,7 +2571,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "indian",
             "deter": "veg",
             "description": "Crisp and thin, Methi Khakhra is popularly made in Gujarati and rajsthan households. Make it and you will surely get addicted to this snack. Here is how to make it.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "55"
         },
         {
@@ -2856,7 +2856,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "indian",
             "deter": "veg",
             "description": "mumbai veg sandwich was hugely popularised by the street road vendors, however today it is served in posh restaurants too.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "62"
         },
         {
@@ -2972,7 +2972,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "indian",
             "deter": "veg",
             "description": "Bun maska is a Maharashtrian staple and has made its way through numerous Indian households due to its comfort food quality.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "65"
         },
         {
@@ -3005,7 +3005,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "Who doesn't like chicken and given a combination of easy to assemble and homemade chicken mayo roll, you can't ask for anything more delicious and absolutely mouth watering.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "66"
         },
         {
@@ -3044,7 +3044,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "taste": "spicy",
             "situation": "At Home",
             "cuisine": "indian",
-            "deter": "veg",
+            "deter": "nonveg",
             "description": "A very easy to make buttery crab recipe with the dominant flavors of garlic, chillies and black pepper.",
             "mealtype": "side dish",
             "sr_no": "67"
@@ -3396,7 +3396,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "indian",
             "deter": "nonveg",
             "description": "This mini quiche recipe is a go to favorite quiche recipe for breakfast, brunch, a light dinner, showers, and parties! Make ahead for easy entertaining or breakfast!",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "75"
         },
         {
@@ -3548,7 +3548,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "chinese",
             "deter": "nonveg",
             "description": "Chicken fried rice is the comfort dish of Chinese food. It's been around for a very long time and is also common in East, Southeast, and South Asian cuisines.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "79"
         },
         {
@@ -3658,7 +3658,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "indian",
             "deter": "veg",
             "description": "Mumbai style vegetable dum biryani recipe",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "81"
         },
         {
@@ -4196,7 +4196,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "chinese",
             "deter": "veg",
             "description": "This is an easy to prepare spicy and tasty mushroom chilli recipe. This is a popular indo Chinese starter snack.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "92"
         },
         {
@@ -5600,7 +5600,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "indian",
             "deter": "veg",
             "description": "it is not only served and consumed as a savoury snack but also as a complete meal by itself for lunch and dinner. obviously due to the myriad options and to cater to the different taste, there different types to the typical one and paneer pav bhaji recipe is one such option",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "124"
         },
         {
@@ -5962,7 +5962,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "indian",
             "deter": "veg",
             "description": "Pitla is a traditional Maharashtrian curry made with besan (gram flour) and onions. A spicy base of ginger-garlic-green-chillies and onions is cooked with gram flour and water until thick.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "133"
         },
         {
@@ -6640,7 +6640,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "Italian",
             "deter": "veg",
             "description": "It's made from the leftover khichdi... It's healthy and yummy",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "151"
         },
         {
@@ -7091,7 +7091,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "Italian",
             "deter": "veg",
             "description": "That of course also includes how to make Gnocchi. I have been told to use just flour and potatoes, or use  some milk instead. But the best way I found is flour, potatoes and an egg",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "162"
         },
         {
@@ -7159,7 +7159,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "Italian",
             "deter": "nonveg",
             "description": "Quick and easy spaghetti recipe with Italian sausage. The tomato-based sauce gets its seasoning from the sweet and spicy sausages. Our favorite way to make spaghetti!",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "164"
         },
         {
@@ -7194,7 +7194,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "Italian",
             "deter": "nonveg",
             "description": "This holiday-worthy recipe was inspired by bread pudding and ended up somewhere between a strata, a gratin, and a traditional Thanksgiving stuffing.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "165"
         },
         {
@@ -7336,7 +7336,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "Italian",
             "deter": "veg",
             "description": "The formula for pasta seems oh-so-obvious. Water + pasta = dinner — right? But sometimes the supposedly simplest things prove to be the trickiest.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "169"
         },
         {
@@ -7384,7 +7384,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "Italian",
             "deter": "veg",
             "description": "Deliciously fresh tomato sauce created with the best vegetables in season and fresh herbs, all tossed with pasta for a perfect spring/summer dish. Vegetable Garden Pasta can also be made any time of year when you are craving fresh vegetables!",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "170"
         },
         {
@@ -7419,7 +7419,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "Italian",
             "deter": "veg",
             "description": "Nothing screams summer quite like bruschetta. We know it may sound strange, but rubbing the toasted bread with garlic will help impart tons of flavor into your tiny toasts. Top them with simply marinated tomatoes for the ultimate summer snack.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "171"
         },
         {
@@ -7524,7 +7524,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "A hearty pasta packed with vegetables, this supper is finished in 20 minutes flat. Sautéed leaks and shrimp combined with a touch of cream, lemon zest, and a handful of spinach serve as the sauce, which offers a mild, fresh flavor but proves easy to throw together",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "174"
         },
         {
@@ -7566,7 +7566,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "To plate the Herbed Spaghetti With Cheese Balls In Tomato Basil Sauce, in a bowl, spoon the spaghetti and spoon some tomato basil sauce. Place the Cheesy Veg balls on top and serve hot. ",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "175"
         },
         {
@@ -7601,7 +7601,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "add the tomatoes to the spinach along with the chopped parsley, cheese and the pine nuts. Return the gnocchi to the pan and toss everything together. Serve immediately with some freshly cracked pepper and more grated cheese.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "176"
         },
         {
@@ -7643,7 +7643,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "Classic lasagna, as much as we adore it, can be extremely time-consuming. These roll-ups come together in no time and couldn't be more delicious",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "177"
         },
         {
@@ -7677,7 +7677,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "Noteworthy changes in Italian cuisine happened with the discovery of the New World and the introduction of potatoes, tomatoes, bell peppers and maize, which are now an integral part of this cuisine.  Italian cuisine is known for its regional diversity each with a distinct taste.  This cuisine today is probably one of the most popular in the world.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "178"
         },
         {
@@ -7717,7 +7717,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "My favourite vegetarian meal, this Pumpkin Lasagne is a plant powered, delicious delight. Even though it has a few layers, it really is simple to make and worth every minute of prep.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "179"
         },
         {
@@ -7746,7 +7746,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "This bread goes great with any Italian or Mediterranean meal. I've also cut the bread into smaller pieces and served it as an appetizer.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "180"
         },
         {
@@ -7777,7 +7777,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "This alfredo pasta is amazingly silky smooth. It's so rich and creamy, you'll swoon until the very last bite. The truffle butter and cheese has a mild",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "181"
         },
         {
@@ -7810,7 +7810,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "An Italian rice ball made with white wine risotto, and a gooey mozzarella center. Fantastic for lunch or dinner - can be frozen.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "182"
         },
         {
@@ -7885,7 +7885,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "nonveg",
             "description": "A Vibrant Pesto Sauce, Mozzarella, Chicken. And A Sprinkle Of Pine Nuts. This Pesto Chicken Pizza Is Fresh, Flavorful And Absolutely Perfect For Summer!",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "184"
         },
         {
@@ -7951,7 +7951,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "The olives look beautiful in a simple mason jar with the bay leaves pressed against the glass and garlic, chiles and other seasonings scattered throughout",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "186"
         },
         {
@@ -8022,7 +8022,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "Historically a coastal fried seafood side, hush puppies should be so good that once they hit the table no one eats anything else. Instead, they’re often the last to leave, borne away in their greasy plastic baskets after the rest of the food is gone.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "188"
         },
         {
@@ -8093,7 +8093,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "Ever wondered why the phrase “say cheese” is used just before a photograph is clicked? Simply because ‘cheese’ makes one smile! Not only the word but cheese as a food makes a lot of palates happy",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "190"
         },
         {
@@ -8394,7 +8394,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "Make the time to stir carefully during cooking to make this vegetarian Italian rice pot super creamy",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "198"
         },
         {
@@ -8503,7 +8503,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "nonveg",
             "description": "Italian cuisine has developed through centuries of social and political changes, with roots stretching to antiquity.  Italian cuisine is simple and a number of dishes having only four to eight ingredients.  They rely mostly on the quality of ingredients rather than elaborate preparation.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "201"
         },
         {
@@ -8543,7 +8543,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "nonveg",
             "description": "The magic starts with sautéed shallot and garlic to give the sauce a robust and subtly sweet base. In the meantime, roast up some red peppers until soft, charred and delicious. This will give your sauce that gorgeous orange hue and creamy texture.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "202"
         },
         {
@@ -8608,7 +8608,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "The magic starts with sautéed shallot and garlic to give the sauce a robust and subtly sweet base. In the meantime, roast up some red peppers until soft, charred and delicious. This will give your sauce that gorgeous orange hue and creamy texture.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "204"
         },
         {
@@ -8673,7 +8673,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "Fresh cherry tomato pasta is a dish I make all year long.  It’s crazy-easy and so loaded with flavor that everyone raves over it! Sometimes the simplest dishes make the best meals.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "206"
         },
         {
@@ -8705,7 +8705,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "nonveg",
             "description": "This One Pot Creamy Cajun Chicken Pasta is incredibly easy to make, so it’s perfect for weeknight dinners.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "207"
         },
         {
@@ -8735,7 +8735,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "This easy mushroom pasta with garlic sauce is sure to be a hit. Creamy garlic parmesan sauce and sautéed mushrooms make this a filling and delicious weeknight recipe. ",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "208"
         },
         {
@@ -8774,7 +8774,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "Pistou is an olive oil—based basil sauce from the south of France that closely resembles Ligurian pesto. There's only one way to make true pistou—by hand",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "209"
         },
         {
@@ -8845,7 +8845,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "A rustic stew demands a crusty baguette for sopping up whatever is left in the bowl. A fresh pesto is the ideal spread here. You can use walnuts or almonds in place of pine nuts and spinach or even parsley in place of the basil.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "211"
         },
         {
@@ -8916,7 +8916,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "213"
         },
         {
@@ -8960,7 +8960,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "These Sundried Tomato Polenta Bites are a beautiful appetizer to serve at a holiday party.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "214"
         },
         {
@@ -9070,7 +9070,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "If you have any meatless-meal skeptics in your life, this lasagna will change their mind. I’m sure of it.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "217"
         },
         {
@@ -9112,7 +9112,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "nonveg",
             "description": "Noteworthy changes in Italian cuisine happened with the discovery of the New World and the introduction of potatoes, tomatoes, bell peppers and maize, which are now an integral part of this cuisine",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "218"
         },
         {
@@ -9145,7 +9145,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "As delicious and comforting as they are, you can go beyond the traditional spaghetti and baked pasta dishes.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "219"
         },
         {
@@ -9183,7 +9183,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "Such a quick and easy dinner, just throw it all in a roasting tray and into the oven.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "220"
         },
         {
@@ -9267,7 +9267,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "Make our easy veggie lasagne using just a handful of ingredients. This classic Italian-style pasta bake is sure to become a family favourite",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "222"
         },
         {
@@ -9313,7 +9313,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "nonveg",
             "description": "I just never really liked the only-meat toppings this style offers.  Funny…since that’s pretty much the main reason why Dustin loves it. Add some breakfast bacon and maybe some salami and he’s in heaven.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "223"
         },
         {
@@ -9343,7 +9343,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "nonveg",
             "description": "Vibrant red bell pepper pasta sauce, made with roasted red bell peppers, garlic, onion, sage, anchovies, tomato paste, red wine, paprika, Parmesan",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "224"
         },
         {
@@ -9377,7 +9377,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "Meanwhile, in a large skillet over medium-high heat, heat oil until hot but not smoking. Cook tomatoes, onion, garlic, oregano, salt, and pepper 8 minutes or until tomatoes start to break down.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "225"
         },
         {
@@ -9439,7 +9439,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "A delicious homemade calzone that's perfect for the ultimate cosy night. This hearty and warming folded pizza will not disappoint; stuffed with an unbeatable combination of mozzarella, mushrooms and spinach.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "227"
         },
         {
@@ -9471,7 +9471,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "Add the baked ricotta and the basil, season with salt and freshly ground black pepper and serve immediately",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "228"
         },
         {
@@ -9502,7 +9502,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "Take a couple of basic ingredients from the pantry — dry spaghetti, extra-virgin olive oil, fresh garlic, red pepper flakes — and together they become one of the simplest yet most satisfying pasta dishes on the planet.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "229"
         },
         {
@@ -9541,7 +9541,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "However, gnocchi can just as easily be served as a main course, preceded or followed by a light green salad. The servings here are for gnocchi served as a main course.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "230"
         },
         {
@@ -9621,7 +9621,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "The hearty texture, rustic appearance and savory flavor make this yeast bread a winner with dinner guests time and time again. Nothing can compare to the heavenly aroma while it bakes.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "232"
         },
         {
@@ -9651,7 +9651,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "italian",
             "deter": "veg",
             "description": "Rich, earthy sauce that clings to penne pasta to make a hearty, meatless meal. Stir pesto into freshly cooked penne pasta, add to the top of crostini, or use as a dip for Italian-seasoned pita crisps.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "233"
         },
         {
@@ -9694,7 +9694,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "chinese",
             "deter": "veg",
             "description": "Bread pakora is a popular North Indian snack of bread fritters. Bread slices are stuffed with spiced mashed potatoes filling, batter-coated and then deep-fried.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "234"
         },
         {
@@ -9736,7 +9736,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "chinese",
             "deter": "veg",
             "description": "Stir-fried shrimp and vegetables and an Asian sauce make for a fun and quick pasta dinner",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "235"
         },
         {
@@ -9785,7 +9785,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "chinese",
             "deter": "nonveg",
             "description": "Place fried rice in a serving plate and make a well in the center. Pour hot gravy in the center, and spread fried noodles and chopped spring onions. Serve hot",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "236"
         },
         {
@@ -9828,7 +9828,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "chinese",
             "deter": "veg",
             "description": "this super-savory vegetarian tofu and mushroom stir-fry is a flavor-packed meal served with your choice of rice or noodles",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "237"
         },
         {
@@ -9873,7 +9873,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "chinese",
             "deter": "veg",
             "description": "Cooked garlic becomes wonderfully nutty in flavor. Hence what seems to be a huge quantity in this recipe. Just a wonderful dish, this, when the stew is mixed with the noodles and baked!",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "238"
         },
         {
@@ -9982,7 +9982,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "chinese",
             "deter": "nonveg",
             "description": "These crispy appetizers are a favorite in my family. The flavorsome herbs in this recipe, as well as the chile, give the wontons a nice kick.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "241"
         },
         {
@@ -10238,7 +10238,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "chinese",
             "deter": "veg",
             "description": "traditionally spring roll recipes are native to chinese cuisine and is mainly prepared with cabbage leaves. these savoury rolls are mainly served as appetizer with along with fried rice or noodles soup recipe.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "248"
         },
         {
@@ -10281,7 +10281,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "chinese",
             "deter": "nonveg",
             "description": "This pan-fried tofu is a really easy way to make tofu. By pan-frying it, you get a nice, slightly crispy texture on it and then dip it in this awesome sauce.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "249"
         },
         {
@@ -10310,7 +10310,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "chinese",
             "deter": "veg",
             "description": "Think of mild-flavored, juicy bok choy as an invitation to experiment in the kitchen. It's especially good with earthy mushrooms. Thoroughly drying the bok choy before cooking ensures that you don't end up with a watery sauce.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "250"
         },
         {
@@ -10448,7 +10448,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "chinese",
             "deter": "veg",
             "description": "There are variety of ways in which noodles can be made like hakka noodles, egg noodles, veg noodles etc. If you want a spicier version of noodles, then there are szechuan noodles.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "254"
         },
         {
@@ -10600,7 +10600,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "chinese",
             "deter": "veg",
             "description": "This particular preparation is Indo-Chinese in origin, and it is made by tossing boiled Hakka noodles and stir-fried vegetables in a flavorful Chinese sauce",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "258"
         },
         {
@@ -10667,7 +10667,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "chinese",
             "deter": "veg",
             "description": "Serve them with a big scoop of vanilla ice cream and see your guests wipe off the plates",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "260"
         },
         {
@@ -10706,7 +10706,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "chinese",
             "deter": "nonveg",
             "description": "These fried dumplings are a nice weekend project that can be streamlined if you make the filling ahead of time.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "261"
         },
         {
@@ -10749,7 +10749,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "chinese",
             "deter": "nonveg",
             "description": "A Delicious slider chicken burger recipe, Served on whole wheat buns.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "262"
         },
         {
@@ -10786,7 +10786,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "chinese",
             "deter": "nonveg",
             "description": "Honey garlic chicken wings are absolutely delicious. They’re sweet and sticky and the perfect addition to any appetizer plate. These chicken wings are oven baked until crispy and then coated with a honey garlic sauce.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "263"
         },
         {
@@ -11181,7 +11181,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "chinese",
             "deter": "veg",
             "description": "Fusion cuisine is one that combines elements of different culinary traditions. Cuisines of this type are not categorized according to any one particular cuisine style and have played a part in a number of innovations.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "274"
         },
         {
@@ -11527,7 +11527,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "chinese",
             "deter": "veg",
             "description": "Veg momos are steamed dumplings stuffed with a lightly spiced vegetable filling. A popular chinees recipe.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "283"
         },
         {
@@ -11574,7 +11574,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "chinese",
             "deter": "veg",
             "description": "soya momos are steamed dumplings stuffed with a lightly spiced vegetable filling. A popular chinees recipe.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "284"
         },
         {
@@ -11620,7 +11620,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "chinese",
             "deter": "veg",
             "description": "Chilli Cheese Mushroom Momo Recipe is a momo filled with creamy and spicy chilli mushrooms. These momos make a great appetizer for parties.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "285"
         },
         {
@@ -11656,7 +11656,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "chinese",
             "deter": "veg",
             "description": "fried momos are fried dumplings stuffed with a lightly spiced vegetable filling. A popular chinees recipe.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "286"
         },
         {
@@ -11947,7 +11947,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "chinese",
             "deter": "veg",
             "description": "This simple noodle and vegetable dish is an easy way to disguise leftover vegetables (and even leftover chicken or meat) into a tasty meal.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "294"
         },
         {
@@ -12022,7 +12022,7 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
             "cuisine": "chinese",
             "deter": "nonveg",
             "description": "Chili Crab is a seafood dish that I enjoy with lots of rice. This dish is composed of crab (Mud Crab is originally used) cooked in sweet and spicy sauce.",
-            "mealtype": "Snack",
+            "mealtype": "snack",
             "sr_no": "296"
         },
         {
