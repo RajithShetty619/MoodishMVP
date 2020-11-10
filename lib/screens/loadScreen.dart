@@ -53,7 +53,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
       else
         deter = "nonveg";
     }
-    // DatabaseQuery _dqtaste2 = DatabaseQuery(listName: "d2");
     DatabaseQuery _dqtaste0 = DatabaseQuery(listName: "d0");
     await Future.wait([
       DatabaseQuery(listName: 'p').getPoll().then((poll) {
@@ -71,6 +70,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       DatabaseQuery(listName: 'tod').getFood(
         field: ["mealtype"],
         value: [tod],
+        mood: tod,
         limit: 5,
       ).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "tod"));
@@ -78,8 +78,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
       checkDate().then((check) async {
         DatabaseQuery(listName: 'craving').getFood(
             field: ['cuisine'],
-            value: ['indian'],
+            value: [cuisine_sel],
             limit: 7,
+            mood: cuisine_sel,
             check: 0).then((future) {
           BlocProvider.of<FoodBloc>(context)
               .add(FoodEvent.add(future, "craving"));
@@ -129,7 +130,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       // setState(() {
       //   greeting = 'Evening';
       // });
-      return "Snack";
+      return "snack";
     } else {
       // setState(() {
       //   greeting = 'Night Snacks';

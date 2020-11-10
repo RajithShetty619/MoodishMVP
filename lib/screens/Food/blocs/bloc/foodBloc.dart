@@ -43,6 +43,11 @@ class FoodBloc extends Bloc<FoodEvent, Map<String, List<FoodListModel>>> {
         }
         yield newstate;
         break;
+      case EventType.delete:
+        Map<String, List<FoodListModel>> newstate = state;
+        newstate[event.listName] = [];
+        yield newstate;
+        break;
       default:
         throw Exception("event not found $event");
     }

@@ -1,8 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
+import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 import 'package:moodish_mvp/screens/Food/nComponents/foodInfoPage.dart';
 
 class FoodRecipePage extends StatefulWidget {
@@ -11,8 +14,6 @@ class FoodRecipePage extends StatefulWidget {
 }
 
 class _FoodRecipePageState extends State<FoodRecipePage> {
-  String cuisine = 'Indian';
-  String mealtype = 'Breakfast';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,14 +64,31 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                   children: [
                     Row(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: Text(
-                            'Time of the day',
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.grey[600],
-                                fontWeight: FontWeight.w500),
+                        GestureDetector(
+                          onTap: () async {
+                            DatabaseQuery(listName: 'tod').getFood(
+                              field: ["mealtype"],
+                              value: ["todo"],
+                              mood: "tod",
+                              limit: 5,
+                            ).then((future) {
+                              setState(() {
+                                BlocProvider.of<FoodBloc>(context)
+                                    .add(FoodEvent.delete("tod"));
+                                BlocProvider.of<FoodBloc>(context)
+                                    .add(FoodEvent.add(future, "tod"));
+                              });
+                            });
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 20),
+                            child: Text(
+                              'Time of the day',
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.grey[600],
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                         ),
                         Spacer(),
@@ -78,7 +96,7 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                           padding: EdgeInsets.only(right: 20),
                           child: Row(
                             children: [
-                              Text(foodList["tod"][0].meal_type,
+                              Text("breakfast" ?? '',
                                   style: TextStyle(
                                       fontSize: 18,
                                       color: Colors.grey[600],
@@ -99,112 +117,124 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                       primary: false,
                       physics: NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => FoodInfoCard(
-                                          listName: "tod",
-                                          index: index,
-                                          foodList: foodList["tod"][index],
-                                        )));
-                          },
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 20, bottom: 10),
-                            child: Row(
-                              children: [
-                                Container(
-                                  height: 90,
-                                  width: 90,
-                                  decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(30)),
-                                      image: DecorationImage(
-                                          image: CachedNetworkImageProvider(
-                                              foodList["tod"][index].images),
-                                          fit: BoxFit.cover)),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width /
-                                          2.55,
-                                      child: Text(
-                                        foodList["tod"][index].foodName,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                    ),
-                                    Text(
-                                      foodList["tod"][index].cuisine,
-                                      style: TextStyle(color: Colors.grey[500]),
-                                    ),
-                                    Container(
-                                      height: 0.8,
-                                      width: MediaQuery.of(context).size.width /
-                                          2.5,
-                                      color: Colors.grey[400],
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.fastfood,
-                                          size: 12,
-                                        ),
-                                        SizedBox(
-                                          width: 3,
-                                        ),
-                                        Text(foodList["tod"][index].calories,
-                                            style: TextStyle(fontSize: 13)),
-                                        SizedBox(
-                                          width: 12,
-                                        ),
-                                        Icon(
-                                          Icons.alarm,
-                                          size: 12,
-                                        ),
-                                        Text(
-                                            foodList["tod"][index].time ?? '--',
-                                            style: TextStyle(fontSize: 13))
-                                      ],
-                                    )
-                                  ],
-                                ),
-                                Spacer(),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 32),
-                                  child: Container(
-                                    height: 25,
-                                    width: 60,
+                        if (foodList["tod"].length != 0)
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => FoodInfoCard(
+                                            listName: "tod",
+                                            index: index,
+                                            foodList: foodList["tod"][index],
+                                          )));
+                            },
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 20, bottom: 10),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    height: 90,
+                                    width: 90,
                                     decoration: BoxDecoration(
-                                        border:
-                                            Border.all(color: Colors.black87),
                                         borderRadius: BorderRadius.all(
-                                            Radius.circular(20))),
-                                    child: Center(
-                                        child: Text(
-                                      'Cook',
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w500),
-                                    )),
+                                            Radius.circular(30)),
+                                        image: DecorationImage(
+                                            image: CachedNetworkImageProvider(
+                                                foodList["tod"][index].images),
+                                            fit: BoxFit.cover)),
                                   ),
-                                )
-                              ],
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                2.55,
+                                        child: Text(
+                                          foodList["tod"][index].foodName,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ),
+                                      Text(
+                                        foodList["tod"][index].cuisine,
+                                        style:
+                                            TextStyle(color: Colors.grey[500]),
+                                      ),
+                                      Container(
+                                        height: 0.8,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                2.5,
+                                        color: Colors.grey[400],
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.fastfood,
+                                            size: 12,
+                                          ),
+                                          SizedBox(
+                                            width: 3,
+                                          ),
+                                          Text(foodList["tod"][index].calories,
+                                              style: TextStyle(fontSize: 13)),
+                                          SizedBox(
+                                            width: 12,
+                                          ),
+                                          Icon(
+                                            Icons.alarm,
+                                            size: 12,
+                                          ),
+                                          Text(
+                                              foodList["tod"][index].time ??
+                                                  '--',
+                                              style: TextStyle(fontSize: 13))
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 32),
+                                    child: Container(
+                                      height: 25,
+                                      width: 60,
+                                      decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: Colors.black87),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(20))),
+                                      child: Center(
+                                          child: Text(
+                                        'Cook',
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500),
+                                      )),
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                        );
+                          );
+                        else
+                          return Center(
+                            child: SpinKitCircle(
+                              color: Colors.blueAccent,
+                            ),
+                          );
                       },
                     ),
                   ],
