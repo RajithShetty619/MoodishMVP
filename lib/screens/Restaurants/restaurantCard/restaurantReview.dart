@@ -274,31 +274,35 @@ class _RestaurantReviewState extends State<RestaurantReview> {
                     ),
                   ],
                 ),
-                GestureDetector(
-                  onTap: () async {
-                    if (!submitted) {
-                      setState(() {
-                        submitted = true;
-                      });
-                      await DatabaseService().restRating(
-                          review: _text,
-                          rest: widget.restaurant,
-                          rating: rating_number,
-                          bestPart: '');
-                      Navigator.pop(context);
-                    }
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        border: Border.all(color: Colors.orange[700]),
-                        color: !submitted ? Colors.orange : Colors.transparent),
+                SizedBox(height: 20,),
+                Center(
+                  child: GestureDetector(
+                    onTap: () async {
+                      if (!submitted) {
+                        setState(() {
+                          submitted = true;
+                        });
+                        await DatabaseService().restRating(
+                            review: _text,
+                            rest: widget.restaurant,
+                            rating: rating_number,
+                            bestPart: '');
+                        Navigator.pop(context);
+                      }
+                    },
                     child: Container(
-                      child: Center(
-                        child: Text(
-                          "Submit",
-                          style: TextStyle(fontSize: 30),
+                      height: 30,
+                      width: 100,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          border: Border.all(color: Colors.orange[700]),
+                          color: !submitted ? Colors.orange : Colors.transparent),
+                      child: Container(
+                        child: Center(
+                          child: Text(
+                            "Submit",
+                            style: TextStyle(fontSize: 20),
+                          ),
                         ),
                       ),
                     ),

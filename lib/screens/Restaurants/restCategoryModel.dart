@@ -145,41 +145,22 @@ class _RestCategoryModelState extends State<RestCategoryModel> {
               SizedBox(
                 height: 16,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15, top: 8),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'All Restaurants',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          'Sorted by Near You',
-                          style: TextStyle(color: Colors.grey[400]),
-                        )
-                      ],
+              Padding(
+                padding: const EdgeInsets.only(left: 22, top: 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'All Restaurants',
+                      style: TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(right: 15, top: 8),
-                    child: Container(
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.black)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Icon(
-                            Icons.tune,
-                            size: 24,
-                          ),
-                        )),
-                  )
-                ],
+                    Text(
+                      'Sorted by Near You',
+                      style: TextStyle(color: Colors.grey[400]),
+                    )
+                  ],
+                ),
               ),
               SizedBox(
                 height: 10,

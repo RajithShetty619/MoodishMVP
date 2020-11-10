@@ -7,6 +7,8 @@ import 'package:moodish_mvp/screens/Food/nComponents/foodBg2.dart';
 import 'package:moodish_mvp/screens/Food/nComponents/foodInfoPage.dart';
 
 class SeeMoreRecipes extends StatefulWidget {
+  String user;
+  SeeMoreRecipes({this.user});
   @override
   _SeeMoreRecipesState createState() => _SeeMoreRecipesState();
 }
@@ -83,7 +85,7 @@ class _SeeMoreRecipesState extends State<SeeMoreRecipes> {
                                 padding:
                                     const EdgeInsets.only(left: 5.0, bottom: 4),
                                 child: Text(
-                                  'hello user, ',
+                                  'Hello ${widget.user}, ',
                                   style: TextStyle(
                                     fontSize: 16,
                                   ),
