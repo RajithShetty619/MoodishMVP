@@ -123,59 +123,62 @@ class _getListViewState extends State<getListView> {
                   height: 10.0,
                 ),
                 Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    IconButton(
-                      icon: !_like
-                          ? Icon(
-                              Icons.favorite_border,
-                              color: Colors.black,
-                              size: 30,
-                            )
-                          : Icon(
-                              Icons.favorite,
-                              color: Colors.red[700],
-                              size: 30,
-                            ),
-                      onPressed: () {
-                        if (_like == false)
-                          setState(() {
-                            BlocProvider.of<PollBloc>(context)
-                                .add(PollEvent.like(widget.index));
-                            _like = true;
-                          });
-                        else {
-                          setState(() {
-                            BlocProvider.of<PollBloc>(context)
-                                .add(PollEvent.like(widget.index));
-                            _like = false;
-                          });
-                        }
-                      },
-                    ),
-                    // IconButton(
-                    //   icon: Icon(
-                    //     Icons.add_circle_outline,
-                    //     size: 25,
-                    //   ),
-                    //   onPressed: () {},
-                    // ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.reply,
-                        size: 25,
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      IconButton(
+                        icon: !_like
+                            ? Icon(
+                                Icons.favorite_border,
+                                color: Colors.black,
+                                size: 30,
+                              )
+                            : Icon(
+                                Icons.favorite,
+                                color: Colors.red[700],
+                                size: 30,
+                              ),
+                        onPressed: () {
+                          if (_like == false)
+                            setState(() {
+                              BlocProvider.of<PollBloc>(context)
+                                  .add(PollEvent.like(widget.index));
+                              _like = true;
+                            });
+                          else {
+                            setState(() {
+                              BlocProvider.of<PollBloc>(context)
+                                  .add(PollEvent.like(widget.index));
+                              _like = false;
+                            });
+                          }
+                        },
                       ),
-                      onPressed: () async {
-                        final RenderBox box = context.findRenderObject();
-                        Share.share(
-                            '${widget.fact.factStatment} - \nhttp://play.google.com/store/apps/details?id=net.moodish.snapinsight',
-                            subject: widget.fact.factHeading,
-                            sharePositionOrigin:
-                                box.localToGlobal(Offset.zero) & box.size);
-                      },
-                    )
-                  ],
+                      // IconButton(
+                      //   icon: Icon(
+                      //     Icons.add_circle_outline,
+                      //     size: 25,
+                      //   ),
+                      //   onPressed: () {},
+                      // ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.reply,
+                          size: 25,
+                        ),
+                        onPressed: () async {
+                          final RenderBox box = context.findRenderObject();
+                          Share.share(
+                              '${widget.fact.factStatment} - \nhttp://play.google.com/store/apps/details?id=net.moodish.snapinsight',
+                              subject: widget.fact.factHeading,
+                              sharePositionOrigin:
+                                  box.localToGlobal(Offset.zero) & box.size);
+                        },
+                      )
+                    ],
+                  ),
                 )
               ],
             )),

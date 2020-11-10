@@ -282,6 +282,64 @@ class _EditProfileState extends State<EditProfile> {
                 ),
                 InkWell(
                   onTap: () {
+                    Alert(
+                        context: context,
+                        title: 'Bio',
+                        content: TextField(
+                          maxLines: 5,
+                          onChanged: (val) {
+                            setState(() {
+                              _user['Bio'] = val;
+                            });
+                            userData1.editUserData(
+                                field: 'Bio', value: _user['Bio']);
+                          },
+                          decoration: InputDecoration(
+                            icon: Icon(Icons.edit),
+                            labelText: 'Edit',
+                            hintText: _user['Bio'] ?? 'Bio',
+                          ),
+                        ),
+                        buttons: [
+                          DialogButton(
+                            onPressed: () =>
+                                Navigator.of(context, rootNavigator: true)
+                                    .pop(),
+                            child: Text(
+                              "Save",
+                              style:
+                              TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                          )
+                        ]).show();
+                  },
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Text(
+                          'Bio :',
+                          style: TextStyle(
+                              fontSize: 22.0, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Flexible(
+                        child: Text(
+                          _user['Bio'] ?? 'Bio',
+                          style: TextStyle(fontSize: 20.0),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: Divider(
+                    thickness: 2.0,
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
                     birthDate();
                   },
                   child: Row(
