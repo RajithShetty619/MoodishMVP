@@ -5,8 +5,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Services/betaCount.dart';
+import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
+import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/foodft.dart';
 import 'package:moodish_mvp/screens/Food/myFeed/polls.dart';
 import 'package:moodish_mvp/screens/Food/nComponents/RecommSeemore.dart';
@@ -58,6 +60,32 @@ class _FoodHomeState extends State<FoodHome> {
     }
 
     data();
+  }
+
+  moodGet(BuildContext dataContext, String mood) async {
+    Box _box = await Hive.openBox("preferenceBox");
+    String deter = _box.get("deter");
+
+    if (deter != "veg" && deter != "nonveg") {
+      Random random = new Random();
+      int randomNumber = random.nextInt(2);
+      if (randomNumber == 1)
+        deter = "veg";
+      else
+        deter = "nonveg";
+    }
+    DatabaseQuery(listName: "mood").getFood(
+        field: ['mood'],
+        value: [mood],
+        limit: 7,
+        mood: mood,
+        deter: deter,
+        check: 0).then((future) {
+      setState(() {
+        BlocProvider.of<FoodBloc>(dataContext)
+            .add(FoodEvent.add(future, "mood"));
+      });
+    });
   }
 
   @override
@@ -321,52 +349,65 @@ class _FoodHomeState extends State<FoodHome> {
                                         height:
                                             MediaQuery.of(context).size.height /
                                                 2.5,
-                                        child: BlocConsumer<FoodBloc,
-                                            Map<String, List<FoodListModel>>>(
-                                          buildWhen: (Map<String,
-                                                      List<FoodListModel>>
-                                                  previous,
-                                              Map<String, List<FoodListModel>>
-                                                  current) {
-                                            return true;
-                                          },
-                                          listenWhen: (Map<String,
-                                                      List<FoodListModel>>
-                                                  previous,
-                                              Map<String, List<FoodListModel>>
-                                                  current) {
-                                            if (current.length >
-                                                previous.length) {
-                                              return true;
-                                            }
-                                            return false;
-                                          },
-                                          builder:
-                                              (BuildContext context, foodList) {
-                                            return Container(
-                                              child: ListView.builder(
-                                                scrollDirection:
-                                                    Axis.horizontal,
-                                                shrinkWrap: true,
-                                                primary: false,
-                                                physics:
-                                                    NeverScrollableScrollPhysics(),
-                                                itemCount:
-                                                    foodList["trend"].length,
-                                                itemBuilder:
-                                                    (BuildContext context,
-                                                        index) {
-                                                  return FoodCrd(
-                                                    foodList: foodList["trend"]
-                                                        [index],
-                                                  );
-                                                },
-                                              ),
-                                            );
-                                          },
-                                          listener: (context, foodList) {
-                                            Scaffold.of(context).showSnackBar(
-                                              SnackBar(content: Text('Added!')),
+                                        child: FutureBuilder(
+                                          future: moodGet(context, pref[0]),
+                                          builder: (BuildContext context,
+                                              AsyncSnapshot snapshot) {
+                                            return BlocConsumer<
+                                                FoodBloc,
+                                                Map<String,
+                                                    List<FoodListModel>>>(
+                                              buildWhen: (Map<String,
+                                                          List<FoodListModel>>
+                                                      previous,
+                                                  Map<String,
+                                                          List<FoodListModel>>
+                                                      current) {
+                                                return true;
+                                              },
+                                              listenWhen: (Map<String,
+                                                          List<FoodListModel>>
+                                                      previous,
+                                                  Map<String,
+                                                          List<FoodListModel>>
+                                                      current) {
+                                                if (current.length >
+                                                    previous.length) {
+                                                  return true;
+                                                }
+                                                return false;
+                                              },
+                                              builder: (BuildContext context,
+                                                  foodList) {
+                                                return Container(
+                                                  child: ListView.builder(
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                    shrinkWrap: true,
+                                                    primary: false,
+                                                    physics:
+                                                        NeverScrollableScrollPhysics(),
+                                                    itemCount:
+                                                        foodList["mood"].length,
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            index) {
+                                                      return FoodCrd(
+                                                        foodList:
+                                                            foodList["mood"]
+                                                                [index],
+                                                      );
+                                                    },
+                                                  ),
+                                                );
+                                              },
+                                              listener: (context, foodList) {
+                                                Scaffold.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                      content: Text('Added!')),
+                                                );
+                                              },
                                             );
                                           },
                                         ),

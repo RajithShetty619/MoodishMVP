@@ -70,7 +70,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       }),
       DatabaseQuery(listName: 'tod').getFood(
         field: ["mealtype"],
-        value: ["side dish"],
+        value: [tod],
         limit: 5,
       ).then((future) {
         BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "tod"));

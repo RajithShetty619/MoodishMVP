@@ -179,8 +179,8 @@ class DatabaseService {
     user.data().forEach((key, value) {
       _data.putIfAbsent(key, () => value);
     });
-    Box box= await Hive.openBox('Userdata');
-    box.put('userdata',_data);
+    Box box = await Hive.openBox('Userdata');
+    box.put('userdata', _data);
   }
 
 /* ////////////////////////////////////////////////////////////////////////  upload PHOTOMETHOD///////////////////////////////////////////////////// */
@@ -351,6 +351,25 @@ class DatabaseService {
         .where("Restaurant_Name", whereIn: datadd);
     QuerySnapshot qs = await q.get();
     return await listfromSnapshot(qs);
+  }
+
+  Future<List<FoodListModel>> restRecommendApiFood({String foodName}) async {
+    var dat = jsonEncode(foodName);
+    var data = await post('https://snapinsight-test.herokuapp.com/item',
+        headers: {'Content-Type': 'application/json'}, body: dat);
+    List<dynamic> datadd = jsonDecode(data.body);
+
+    while (datadd.length > 5) {
+      datadd.removeAt(Random().nextInt(datadd.length));
+    }
+    print(datadd);
+    Query q = FirebaseFirestore.instance
+        .collection('food')
+        .where("food_item", whereIn: datadd);
+    QuerySnapshot qs = await q.get();
+    List<FoodListModel> food = await listFromSnapshot(qs);
+    print(food);
+    return food;
   }
 }
 

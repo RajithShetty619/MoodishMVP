@@ -42,6 +42,7 @@ class _RestaurantHomeState extends State<RestaurantHome> {
       print(e);
     }
   }
+
   getCurrentLocation() async {
     geolocator.isLocationServiceEnabled();
     final position = await Geolocator()
@@ -52,12 +53,14 @@ class _RestaurantHomeState extends State<RestaurantHome> {
     print(position);
     return position;
   }
+
   @override
   void initState() {
-    data()async{
+    data() async {
       await getCurrentLocation();
       await _getAddressFromLatLng();
     }
+
     data();
     setState(() {
       DatabaseQuery().getRest().then((rest) {
@@ -89,12 +92,10 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                         style: TextStyle(color: Colors.blue[900]),
                       ),
                       GestureDetector(
-                        onTap: () async{
+                        onTap: () async {
                           await _getAddressFromLatLng();
-                          Scaffold.of(context)
-                              .showSnackBar(SnackBar(
-                              content: Text(
-                                  "Location has been Updated")));
+                          Scaffold.of(context).showSnackBar(SnackBar(
+                              content: Text("Location has been Updated")));
                         },
                         child: Text.rich(TextSpan(
                             style: TextStyle(
@@ -104,7 +105,8 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                               TextSpan(
                                   text: location,
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold, fontSize: 20)),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20)),
                               WidgetSpan(
                                   child: Icon(
                                 Icons.edit,
@@ -556,20 +558,6 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                     ],
                   ),
                 ),
-                // Padding(
-                //   padding: EdgeInsets.only(right: 15, top: 8),
-                //   child: Container(
-                //       decoration: BoxDecoration(
-                //           shape: BoxShape.circle,
-                //           border: Border.all(color: Colors.black)),
-                //       child: Padding(
-                //         padding: const EdgeInsets.all(3.0),
-                //         child: Icon(
-                //           Icons.tune,
-                //           size: 24,
-                //         ),
-                //       )),
-                // )
               ],
             ),
             SizedBox(
