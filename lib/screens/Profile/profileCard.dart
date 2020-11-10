@@ -5,6 +5,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
+import 'package:moodish_mvp/screens/Food/nComponents/foodInfoPage.dart';
 import 'package:moodish_mvp/screens/Profile/Edit.dart';
 
 class ProfileCard extends StatefulWidget {
@@ -328,96 +329,115 @@ class _ProfileCardState extends State<ProfileCard> {
                               return Padding(
                                 padding:
                                     const EdgeInsets.only(left: 15, right: 15),
-                                child: Card(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(20))),
-                                  elevation: 5.0,
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 10, left: 25, bottom: 10),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              width: MediaQuery.of(context).size.width/2,
-                                              child: Text(
-                                                element.foodName,
-                                                overflow: TextOverflow.ellipsis,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => FoodInfoCard(
+                                                foodList: element,
+                                                listName: "like",
+                                                index: 0)));
+                                  },
+                                  child: Card(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20))),
+                                    elevation: 5.0,
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 10, left: 25, bottom: 10),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    2,
+                                                child: Text(
+                                                  element.foodName,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              Text(
+                                                element.cuisine,
                                                 style: TextStyle(
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight.w500),
+                                                    color: Colors.grey[400]),
                                               ),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              element.cuisine,
-                                              style: TextStyle(
-                                                  color: Colors.grey[400]),
-                                            ),
-                                            // SizedBox(
-                                            //   height: 5,
-                                            // ),
-                                            // Text(
-                                            //   'A Sweet in India',
-                                            //   style: TextStyle(
-                                            //       color: Colors.grey[400]),
-                                            // ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 8, bottom: 10),
-                                              child: Container(
-                                                color: Colors.black87,
-                                                height: 0.8,
-                                                width: MediaQuery.of(context).size.width/2.2,
+                                              // SizedBox(
+                                              //   height: 5,
+                                              // ),
+                                              // Text(
+                                              //   'A Sweet in India',
+                                              //   style: TextStyle(
+                                              //       color: Colors.grey[400]),
+                                              // ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 8, bottom: 10),
+                                                child: Container(
+                                                  color: Colors.black87,
+                                                  height: 0.8,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      2.2,
+                                                ),
                                               ),
-                                            ),
-                                            Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.fastfood,
-                                                  size: 12,
-                                                ),
-                                                SizedBox(
-                                                  width: 3,
-                                                ),
-                                                Text(element.calories),
-                                                SizedBox(
-                                                  width: 12,
-                                                ),
-                                                Icon(
-                                                  Icons.radio_button_checked,
-                                                  size: 12,
-                                                ),
-                                                Text(element.deter)
-                                              ],
-                                            )
-                                          ],
+                                              Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.fastfood,
+                                                    size: 12,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 3,
+                                                  ),
+                                                  Text(element.calories),
+                                                  SizedBox(
+                                                    width: 12,
+                                                  ),
+                                                  Icon(
+                                                    Icons.radio_button_checked,
+                                                    size: 12,
+                                                  ),
+                                                  Text(element.deter)
+                                                ],
+                                              )
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                      Spacer(),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 8),
-                                        child: Container(
-                                          height: 110,
-                                          width: 110,
-                                          decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(20)),
-                                              image: DecorationImage(
-                                                  image:
-                                                      CachedNetworkImageProvider(
-                                                          element.images),
-                                                  fit: BoxFit.cover)),
-                                        ),
-                                      )
-                                    ],
+                                        Spacer(),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 8),
+                                          child: Container(
+                                            height: 110,
+                                            width: 110,
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(20)),
+                                                image: DecorationImage(
+                                                    image:
+                                                        CachedNetworkImageProvider(
+                                                            element.images),
+                                                    fit: BoxFit.cover)),
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               );
