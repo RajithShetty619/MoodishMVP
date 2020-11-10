@@ -8,6 +8,7 @@ import 'package:moodish_mvp/models/restaurantsModel.dart';
 import 'package:moodish_mvp/screens/Restaurants/restaurantCard/addPicture.dart';
 import 'package:moodish_mvp/screens/Restaurants/restaurantCard/mapview.dart';
 import 'package:moodish_mvp/screens/Restaurants/restaurantCard/restaurantReview.dart';
+import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class RestCardModel extends StatefulWidget {
@@ -2223,14 +2224,24 @@ class Delegate extends SliverPersistentHeaderDelegate {
                       ),
                     ),
                     Spacer(),
-                    Container(
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle, color: Colors.white),
-                      child: Padding(
-                        padding: EdgeInsets.all(8),
-                        child: Icon(
-                          Icons.open_in_browser,
-                          size: 30,
+                    GestureDetector(
+                      onTap: () async {
+                        final RenderBox box = context.findRenderObject();
+                        Share.share(
+                            '${restaurant.restaurant_Name} - \nhttp://play.google.com/store/apps/details?id=net.moodish.snapinsight',
+                            subject: restaurant.address,
+                            sharePositionOrigin:
+                                box.localToGlobal(Offset.zero) & box.size);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.white),
+                        child: Padding(
+                          padding: EdgeInsets.all(8),
+                          child: Icon(
+                            Icons.open_in_browser,
+                            size: 30,
+                          ),
                         ),
                       ),
                     ),

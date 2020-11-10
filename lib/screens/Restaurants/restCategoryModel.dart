@@ -14,7 +14,7 @@ class RestCategoryModel extends StatefulWidget {
   int event;
   String location;
 
-  RestCategoryModel({this.event,this.location});
+  RestCategoryModel({this.event, this.location});
 
   @override
   _RestCategoryModelState createState() => _RestCategoryModelState();
@@ -70,11 +70,9 @@ class _RestCategoryModelState extends State<RestCategoryModel> {
                             style: TextStyle(color: Colors.blue[900]),
                           ),
                           GestureDetector(
-                            onTap: (){
-                              Scaffold.of(context)
-                                  .showSnackBar(SnackBar(
-                                  content: Text(
-                                      "Location has been Updated")));
+                            onTap: () {
+                              Scaffold.of(context).showSnackBar(SnackBar(
+                                  content: Text("Location has been Updated")));
                             },
                             child: Text.rich(TextSpan(
                                 style: TextStyle(
@@ -116,7 +114,7 @@ class _RestCategoryModelState extends State<RestCategoryModel> {
                           ),
                         ),
                       ),
-                      Padding(
+                      /*  Padding(
                         padding: EdgeInsets.only(right: 10, top: 10),
                         child: GestureDetector(
                           onTap: () {},
@@ -134,6 +132,7 @@ class _RestCategoryModelState extends State<RestCategoryModel> {
                           ),
                         ),
                       )
+                     */
                     ],
                   )
                 ],
@@ -144,7 +143,7 @@ class _RestCategoryModelState extends State<RestCategoryModel> {
               Center(
                 child: widget.event == 1
                     ? Text(
-                        'Fine Dining',
+                        'North Indian',
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.w500),
                       )
