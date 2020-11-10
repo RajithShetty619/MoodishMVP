@@ -136,11 +136,12 @@ class _SeeMoreRecipesState extends State<SeeMoreRecipes> {
                   },
                   builder: (context, foodList) {
                     return ListView.builder(
-                        itemCount: foodList["d2"].length,
+                        itemCount: foodList["recomrecipe"].length,
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
-                          FoodListModel element = foodList["d2"][index];
+                          FoodListModel element =
+                              foodList["recomrecipe"][index];
                           return Padding(
                             padding: EdgeInsets.only(
                                 left: MediaQuery.of(context).size.width / 20,
@@ -152,7 +153,7 @@ class _SeeMoreRecipesState extends State<SeeMoreRecipes> {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
                                   return FoodInfoCard(
-                                    foodList: foodList["d2"][index],
+                                    foodList: foodList["recomrecipe"][index],
                                   );
                                 }));
                               },

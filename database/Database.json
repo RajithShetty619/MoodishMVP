@@ -944,7 +944,7 @@
         },
         {
             "restaurants": "[\"Modakam\",\"metkut\",\"aaswad\",\"siddhi vinayak refreshment\",\"kath n ghat\",\"amey',khadpe's\"]",
-            "food_item": "Fried modak",
+            "food_item": "Fried Modak",
             "mood": "Happy",
             "recipe": "Fried modak as the name suggests is a fried version of the steamed modak and much easier to make than the steamed version",
             "preparation": "With the ingredients mentioned for the outer covering, make a smooth dough.",
@@ -987,7 +987,7 @@
         },
         {
             "restaurants": "[\"Mangoes Mumbai\",\"shreeji aamrus\",\"pancham puriwala\",\"golden star thali\",\"sheetal diary\"]",
-            "food_item": "Gond Ka Sharbat",
+            "food_item": "Gond ka Sharbat",
             "recipe": "A summer cooling drink is this gond ka sharbat. The gond used here is katira gond which has cooling properties and is an edible gum. Katira gond is also known as tragacanth in english and badam pisin in south India.",
             "preparation": "Rinse and then add 2 teaspoons gond katira in a Large bowl. remember that just a few teaspoons of gond katira when soaked in water will give a bowl full of jelly like gond.",
             "step 2": "Add 2 cups water. Cover and allow gond katira to soak in water overnight or for 8 to 9 hours. If the size of the edible gums are large, then break them in a mortar-pestle to get smaller sizes",
@@ -1019,7 +1019,7 @@
         },
         {
             "restaurants": "[\"Health Juice Centre\",\"soam\",\"oye cake\",\"pratap the dhabha\",\"sher e punjab\",\"govinda's retaurant\",\"urban street cafe\"]",
-            "food_item": "Jal Jeera",
+            "food_item": "Jal jeera",
             "recipe": "It is very cooling and is an ideal drink for hot Indian summers. Apart from cooling properties jal jeera is also used as an appetizer because of its digestive properties.",
             "preparation": "Soak 1 tablespoon tightly packed tamarind in ¼ cup hot water for about 20 minutes.",
             "step 2": "Rinse ⅓ cup fresh mint leaves well with water. Drain all the water. Add the mint leaves in a small grinder jar. Only use the mint leaves. Do not add the stems as then the jal jeera can become bitter.",
@@ -8889,7 +8889,7 @@
             "situation": "At Home",
             "cuisine": "italian",
             "deter": "veg",
-            "description": "A rustic stew demands a crusty baguette for sopping up whatever is left in the bowl. A fresh pesto is the ideal spread here. You can use walnuts or almonds in place of pine nuts and spinach or even parsley in place of the basil.",
+            "description": "",
             "mealtype": "Snack",
             "sr_no": "213"
         },

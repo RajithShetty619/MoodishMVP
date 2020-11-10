@@ -109,48 +109,6 @@ class DatabaseQuery {
   }
 
   /* almost same working as getFood except it add to and existing list */
-  Future<List<FoodListModel>> getMoreFood({
-    List<String> field,
-    List<dynamic> value,
-    String mood,
-    String deter,
-  }) async {
-    List<String> _field = field;
-    List<dynamic> _value = value;
-    List<dynamic> _gfoodList = [];
-    final _box = await Hive.openBox(listName + (mood ?? '') + (deter ?? ''));
-    _gfoodList = await _box.get(listName);
-    _lastDocument =
-        _gfoodList.cast<FoodListModel>()[_gfoodList.length - 1].description;
-
-    if (dataExists) {
-      print("getMoreFood");
-      Query _finalQuery = _ref.orderBy('description');
-
-      if (_value[_value.length - 1].runtimeType != String) {
-        dynamic _v = _value.removeLast();
-        _finalQuery = _finalQuery.where(_field.removeLast(), whereIn: _v);
-      }
-
-      _finalQuery = recQuery(_field, _value, _finalQuery)
-          .startAfter([_lastDocument]).limit(4);
-
-      QuerySnapshot snapshot = await _finalQuery.get();
-      List<FoodListModel> queryList =
-          await DatabaseService().listFromSnapshot(snapshot);
-      _lastDocument = queryList[queryList.length - 1].description;
-      if (snapshot.docs.length == 0) {
-        dataExists = false;
-        print("no data");
-      }
-
-      await _box.put(listName, _gfoodList + queryList);
-
-      return queryList;
-    } else {
-      return [];
-    }
-  }
 
   Future<List<FoodListModel>> getTrending() async {
     QuerySnapshot trend = await FirebaseFirestore.instance
@@ -318,9 +276,6 @@ class DatabaseQuery {
         } catch (E) {
           print(E);
         }
-
-        print(_preparation);
-        print(_ingredients);
         return FoodListModel(
             foodName: _docData["foodName"] ?? '',
             deter: _docData["deter"] ?? '',
@@ -353,3 +308,46 @@ class DatabaseQuery {
     return recentDocs;
   }
 }
+
+/* Future<List<FoodListModel>> getMoreFood({
+    List<String> field,
+    List<dynamic> value,
+    String mood,
+    String deter,
+  }) async {
+    List<String> _field = field;
+    List<dynamic> _value = value;
+    List<dynamic> _gfoodList = [];
+    final _box = await Hive.openBox(listName + (mood ?? '') + (deter ?? ''));
+    _gfoodList = await _box.get(listName);
+    _lastDocument =
+        _gfoodList.cast<FoodListModel>()[_gfoodList.length - 1].description;
+
+    if (dataExists) {
+      print("getMoreFood");
+      Query _finalQuery = _ref.orderBy('description');
+
+      if (_value[_value.length - 1].runtimeType != String) {
+        dynamic _v = _value.removeLast();
+        _finalQuery = _finalQuery.where(_field.removeLast(), whereIn: _v);
+      }
+
+      _finalQuery = recQuery(_field, _value, _finalQuery)
+          .startAfter([_lastDocument]).limit(4);
+
+      QuerySnapshot snapshot = await _finalQuery.get();
+      List<FoodListModel> queryList =
+          await DatabaseService().listFromSnapshot(snapshot);
+      _lastDocument = queryList[queryList.length - 1].description;
+      if (snapshot.docs.length == 0) {
+        dataExists = false;
+        print("no data");
+      }
+
+      await _box.put(listName, _gfoodList + queryList);
+
+      return queryList;
+    } else {
+      return [];
+    }
+  } */

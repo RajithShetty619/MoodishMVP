@@ -117,7 +117,7 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                     ],
                   ),
                 ),
-                Padding(
+                /* Padding(
                   padding: EdgeInsets.only(right: 15, top: 10),
                   child: Card(
                     elevation: 8,
@@ -131,7 +131,7 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                       ),
                     ),
                   ),
-                )
+                ) */
               ],
             ),
             SizedBox(

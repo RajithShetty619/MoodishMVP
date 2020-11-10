@@ -224,14 +224,18 @@ class _ProfileState extends State<Profile> {
                     Icons.keyboard_arrow_right,
                     color: Colors.grey.shade400,
                   ),
-                  onTap: () {
-                    Navigator.push(
+                  onTap: () async {
+                    final data = await Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => ProfileCard(
                                   user: userData,
                                   image: _image,
                                 )));
+                    setState(() {
+                      userData = data["user"];
+                      _image = data["image"];
+                    });
                   },
                 ),
                 Divider(),

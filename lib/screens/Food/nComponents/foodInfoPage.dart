@@ -808,7 +808,11 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                                                                 type: PageTransitionType
                                                                     .rightToLeft,
                                                                 child:
-                                                                    RestCardModel()));
+                                                                    RestCardModel(
+                                                                  restaurant:
+                                                                      _rest[
+                                                                          index],
+                                                                )));
                                                       },
                                                       child: Card(
                                                         shape: RoundedRectangleBorder(

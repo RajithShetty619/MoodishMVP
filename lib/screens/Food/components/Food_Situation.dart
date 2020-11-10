@@ -7,6 +7,7 @@ import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
 import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/food_info.dart';
+import 'package:moodish_mvp/screens/Food/nComponents/foodInfoPage.dart';
 
 class FoodEverySituation extends StatefulWidget {
   const FoodEverySituation({
@@ -36,9 +37,8 @@ class _FoodEverySituationState extends State<FoodEverySituation> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => Food_Info(
-                        foodList: widget.foodList,
-                      )));
+                  builder: (context) =>
+                      FoodInfoCard(foodList: widget.foodList)));
         },
         child: Stack(
           children: <Widget>[
@@ -134,6 +134,8 @@ class _FoodEverySituationState extends State<FoodEverySituation> {
                             alignment: Alignment.bottomLeft,
                             child: Text(
                               widget.foodList.foodName,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 24,

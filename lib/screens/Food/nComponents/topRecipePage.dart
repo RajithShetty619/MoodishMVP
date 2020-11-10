@@ -276,6 +276,7 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                               children: [
                                 Text(
                                   foodList["craving"][index].foodName,
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w500),

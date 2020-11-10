@@ -8,9 +8,9 @@ import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Services/betaCount.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
-import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart'; 
-import 'package:moodish_mvp/screens/Food/components/Every_Taste.dart'; 
-import 'package:moodish_mvp/screens/Food/components/Food_Taste.dart'; 
+import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
+import 'package:moodish_mvp/screens/Food/components/Every_Taste.dart';
+import 'package:moodish_mvp/screens/Food/components/Food_Taste.dart';
 import 'package:moodish_mvp/screens/Food/components/TodaySpecial.dart';
 import 'package:moodish_mvp/screens/Food/components/foodBG.dart';
 import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
@@ -325,29 +325,29 @@ class _ExploreState extends State<Explore> {
                                                                 _loadingData =
                                                                     true;
                                                               });
-                                                              await _dqtsp
-                                                                  .getMoreFood(
-                                                                field: [
-                                                                  'cuisine',
-                                                                  "deter"
-                                                                ],
-                                                                value: [
-                                                                  'indian',
-                                                                  _deter
-                                                                ],
-                                                                deter: _deter,
-                                                              ).then((future) {
-                                                                BlocProvider.of<
-                                                                            FoodBloc>(
-                                                                        context)
-                                                                    .add(FoodEvent.add(
-                                                                        future,
-                                                                        "tsp"));
-                                                                setState(() {
-                                                                  _loadingData =
-                                                                      false;
-                                                                });
-                                                              });
+                                                              // await _dqtsp
+                                                              //     .getMoreFood(
+                                                              //   field: [
+                                                              //     'cuisine',
+                                                              //     "deter"
+                                                              //   ],
+                                                              //   value: [
+                                                              //     'indian',
+                                                              //     _deter
+                                                              //   ],
+                                                              //   deter: _deter,
+                                                              // ).then((future) {
+                                                              //   BlocProvider.of<
+                                                              //               FoodBloc>(
+                                                              //           context)
+                                                              //       .add(FoodEvent.add(
+                                                              //           future,
+                                                              //           "tsp"));
+                                                              //   setState(() {
+                                                              //     _loadingData =
+                                                              //         false;
+                                                              //   });
+                                                              // });
                                                             }),
                                                       )
                                                     : Container(

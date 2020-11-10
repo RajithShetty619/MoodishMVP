@@ -38,7 +38,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     Box _box = await Hive.openBox("preferenceBox");
     await DatabaseService().returnUser();
     String deter = _box.get("deter");
-    List<dynamic> cuisine = _box.get("preference");
+    List<dynamic> cuisine = ["chinese", "mexican", "indian", "italian"];
     String tod = timeOfTheDay();
     await DatabaseService().returnUser();
     String cuisine_sel = cuisine[Random().nextInt(cuisine.length)];
@@ -53,7 +53,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       else
         deter = "nonveg";
     }
-    DatabaseQuery _dqtaste2 = DatabaseQuery(listName: "d2");
+    // DatabaseQuery _dqtaste2 = DatabaseQuery(listName: "d2");
     DatabaseQuery _dqtaste0 = DatabaseQuery(listName: "d0");
     await Future.wait([
       DatabaseQuery(listName: 'p').getPoll().then((poll) {
@@ -84,12 +84,14 @@ class _LoadingScreenState extends State<LoadingScreen> {
           BlocProvider.of<FoodBloc>(context)
               .add(FoodEvent.add(future, "craving"));
         });
-        _dqtaste2.getFood(
-            field: ['cuisine'],
-            value: ['indian'],
+        DatabaseQuery(listName: 'recomrecipe').getFood(
+            field: ['cuisine', 'deter'],
+            value: [cuisine_sel, deter],
             limit: 7,
+            mood: cuisine_sel,
             check: check).then((future) {
-          BlocProvider.of<FoodBloc>(context).add(FoodEvent.add(future, "d2"));
+          BlocProvider.of<FoodBloc>(context)
+              .add(FoodEvent.add(future, "recomrecipe"));
         });
         _dqtaste0.getFood(
             field: ['cuisine', 'deter'],
