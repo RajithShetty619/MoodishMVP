@@ -33,6 +33,14 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
   bool _like = false;
   bool readMoreIng = false;
   bool readMorePrep = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+      _like = widget.foodList.heart;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
