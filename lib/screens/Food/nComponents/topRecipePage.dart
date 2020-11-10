@@ -16,6 +16,8 @@ class FoodRecipePage extends StatefulWidget {
 class _FoodRecipePageState extends State<FoodRecipePage> {
   String mealType;
   String cuisine;
+  int i_mt = 0;
+  int i_cui = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,23 +95,30 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                                 color: Colors.grey[600],
                               ),
                               onChanged: (String newValue_1) async {
-                                setState(() {
-                                  mealType = newValue_1;
-                                });
-
-                                DatabaseQuery(listName: 'tod').getFood(
-                                  field: ["mealtype"],
-                                  value: [newValue_1],
-                                  mood: newValue_1,
-                                  limit: 5,
-                                ).then((future) {
+                                if (i_mt < 3) {
                                   setState(() {
-                                    BlocProvider.of<FoodBloc>(context)
-                                        .add(FoodEvent.delete("tod"));
-                                    BlocProvider.of<FoodBloc>(context)
-                                        .add(FoodEvent.add(future, "tod"));
+                                    mealType = newValue_1;
+                                    i_mt++;
                                   });
-                                });
+
+                                  DatabaseQuery(listName: 'tod').getFood(
+                                    field: ["mealtype"],
+                                    value: [newValue_1],
+                                    mood: newValue_1,
+                                    limit: 5,
+                                  ).then((future) {
+                                    setState(() {
+                                      BlocProvider.of<FoodBloc>(context)
+                                          .add(FoodEvent.delete("tod"));
+                                      BlocProvider.of<FoodBloc>(context)
+                                          .add(FoodEvent.add(future, "tod"));
+                                    });
+                                  });
+                                } else {
+                                  Scaffold.of(context).showSnackBar(SnackBar(
+                                      content: Text(
+                                          "cannot change meal-type more than thrice")));
+                                }
                               },
                               items: <String>[
                                 'breakfast',
@@ -301,23 +310,29 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                                 color: Colors.grey[600],
                               ),
                               onChanged: (String newValue) async {
-                                setState(() {
-                                  cuisine = newValue;
-                                });
-
-                                DatabaseQuery(listName: 'craving').getFood(
-                                    field: ['cuisine'],
-                                    value: [newValue],
-                                    limit: 7,
-                                    mood: newValue,
-                                    check: 0).then((future) {
+                                if (i_cui < 3) {
                                   setState(() {
-                                    BlocProvider.of<FoodBloc>(context)
-                                        .add(FoodEvent.delete("craving"));
-                                    BlocProvider.of<FoodBloc>(context)
-                                        .add(FoodEvent.add(future, "craving"));
+                                    cuisine = newValue;
+                                    i_cui++;
                                   });
-                                });
+                                  DatabaseQuery(listName: 'craving').getFood(
+                                      field: ['cuisine'],
+                                      value: [newValue],
+                                      limit: 7,
+                                      mood: newValue,
+                                      check: 0).then((future) {
+                                    setState(() {
+                                      BlocProvider.of<FoodBloc>(context)
+                                          .add(FoodEvent.delete("craving"));
+                                      BlocProvider.of<FoodBloc>(context).add(
+                                          FoodEvent.add(future, "craving"));
+                                    });
+                                  });
+                                } else {
+                                  Scaffold.of(context).showSnackBar(SnackBar(
+                                      content: Text(
+                                          "Cannot change cuisine more than thrice")));
+                                }
                               },
                               items: <String>[
                                 "chinese",
