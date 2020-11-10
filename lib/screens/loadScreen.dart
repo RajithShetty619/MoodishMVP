@@ -129,7 +129,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       // setState(() {
       //   greeting = 'Evening';
       // });
-      return "Snack";
+      return "snack";
     } else {
       // setState(() {
       //   greeting = 'Night Snacks';
