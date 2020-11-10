@@ -95,7 +95,12 @@ class _SearchState extends State<Search> {
               return Container(
                   alignment: Alignment.topCenter,
                   padding: EdgeInsets.fromLTRB(15, 20, 15, 40),
-                  child: Center(child: TodaySpecial(foodList: food)));
+                  child: Center(
+                      child: FoodEverySituation(
+                    foodList: food,
+                    index: index,
+                    listName: "search",
+                  )));
             },
             onError: (e) {
               print(e);

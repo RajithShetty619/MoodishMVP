@@ -9,6 +9,7 @@ import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
 import 'package:moodish_mvp/screens/Food/components/shareDialog.dart';
 import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/food_info.dart';
+import 'package:moodish_mvp/screens/Food/nComponents/foodCard.dart';
 import 'package:moodish_mvp/screens/Food/pages/explore.dart';
 import 'package:moodish_mvp/test.dart';
 
@@ -41,7 +42,9 @@ class _TodaySpecialState extends State<TodaySpecial> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => Food_Info(
+                  builder: (context) => FoodCrd(
+                        index: widget.index,
+                        listName: widget.listName,
                         foodList: widget.foodList,
                       )));
         },
