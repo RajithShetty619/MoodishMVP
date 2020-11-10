@@ -23,7 +23,9 @@ class _FoodCrdState extends State<FoodCrd> {
             context,
             MaterialPageRoute(
                 builder: (context) => FoodInfoCard(
+                      index: widget.index,
                       foodList: widget.foodList,
+                      listName: widget.listName,
                     )));
       },
       child: Padding(
