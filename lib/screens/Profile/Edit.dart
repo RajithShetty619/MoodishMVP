@@ -297,7 +297,7 @@ class _EditProfileState extends State<EditProfile> {
                           decoration: InputDecoration(
                             icon: Icon(Icons.edit),
                             labelText: 'Edit',
-                            hintText: _user['Bio'] ?? 'Bio',
+                            hintText: _user['Bio'] ?? 'none',
                           ),
                         ),
                         buttons: [
@@ -308,7 +308,7 @@ class _EditProfileState extends State<EditProfile> {
                             child: Text(
                               "Save",
                               style:
-                              TextStyle(color: Colors.white, fontSize: 20),
+                                  TextStyle(color: Colors.white, fontSize: 20),
                             ),
                           )
                         ]).show();

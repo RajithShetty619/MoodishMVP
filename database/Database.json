@@ -1317,7 +1317,7 @@
         },
         {
             "restaurants": "[\"Modakam\",\"metkut\",\"aaswad\",\"siddhi vinayak refreshment\",\"kath n ghat\",\"amey',khadpe's\"]",
-            "food_item": "Mango modak",
+            "food_item": "Mango Modak",
             "mood": "Stressed",
             "recipe": "These modaks are prepared with fresh mango pulp, khoya (evaporated milk solids), sugar and flavored with cardamom powder. These modaks are delicious, rich, melt in the mouth and with a lovely taste of mangoes.",
             "preparation": "Rinse and then peel mangoes. Chop them. ",
@@ -3018,7 +3018,7 @@
             "taste": "spicy",
             "situation": "At Home",
             "cuisine": "indian",
-            "deter": "veg",
+            "deter": "nonveg",
             "description": "A very easy to make buttery crab recipe with the dominant flavors of garlic, chillies and black pepper.",
             "mealtype": "side dish",
             "sr_no": "67"

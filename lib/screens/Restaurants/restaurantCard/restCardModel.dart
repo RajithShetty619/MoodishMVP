@@ -442,7 +442,9 @@ class _RestCardModelState extends State<RestCardModel> {
                               onPressed: () {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return RestaurantReview();
+                                  return RestaurantReview(
+                                    restaurant: widget.restaurant,
+                                  );
                                 }));
                               },
                               color: Colors.white,
