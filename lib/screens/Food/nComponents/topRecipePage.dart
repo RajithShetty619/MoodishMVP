@@ -14,6 +14,8 @@ class FoodRecipePage extends StatefulWidget {
 }
 
 class _FoodRecipePageState extends State<FoodRecipePage> {
+  String mealType;
+  String cuisine;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,50 +66,64 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                   children: [
                     Row(
                       children: [
-                        GestureDetector(
-                          onTap: () async {
-                            DatabaseQuery(listName: 'tod').getFood(
-                              field: ["mealtype"],
-                              value: ["todo"],
-                              mood: "tod",
-                              limit: 5,
-                            ).then((future) {
-                              setState(() {
-                                BlocProvider.of<FoodBloc>(context)
-                                    .add(FoodEvent.delete("tod"));
-                                BlocProvider.of<FoodBloc>(context)
-                                    .add(FoodEvent.add(future, "tod"));
-                              });
-                            });
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Text(
-                              'Time of the day',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.grey[600],
-                                  fontWeight: FontWeight.w500),
-                            ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20),
+                          child: Text(
+                            'Time of the day',
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.grey[600],
+                                fontWeight: FontWeight.w500),
                           ),
                         ),
                         Spacer(),
                         Padding(
                           padding: EdgeInsets.only(right: 20),
-                          child: Row(
-                            children: [
-                              Text("breakfast" ?? '',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.grey[600],
-                                      fontWeight: FontWeight.w500)),
-                              Icon(
-                                Icons.arrow_drop_down,
-                                size: 25,
+                          child: Row(children: [
+                            DropdownButton<String>(
+                              value: mealType ??
+                                  foodList["tod"][0].meal_type ??
+                                  'snacks',
+                              icon: Icon(Icons.arrow_drop_down),
+                              iconSize: 24,
+                              elevation: 16,
+                              style: TextStyle(color: Colors.grey[600]),
+                              underline: Container(
+                                height: 2,
                                 color: Colors.grey[600],
-                              )
-                            ],
-                          ),
+                              ),
+                              onChanged: (String newValue_1) async {
+                                setState(() {
+                                  mealType = newValue_1;
+                                });
+
+                                DatabaseQuery(listName: 'tod').getFood(
+                                  field: ["mealtype"],
+                                  value: [newValue_1],
+                                  mood: newValue_1,
+                                  limit: 5,
+                                ).then((future) {
+                                  setState(() {
+                                    BlocProvider.of<FoodBloc>(context)
+                                        .add(FoodEvent.delete("tod"));
+                                    BlocProvider.of<FoodBloc>(context)
+                                        .add(FoodEvent.add(future, "tod"));
+                                  });
+                                });
+                              },
+                              items: <String>[
+                                'breakfast',
+                                'side dish',
+                                'snack',
+                                'main course'
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                            ),
+                          ]),
                         )
                       ],
                     ),
@@ -266,20 +282,55 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                         Spacer(),
                         Padding(
                           padding: EdgeInsets.only(right: 20),
-                          child: Row(
-                            children: [
-                              Text(foodList["craving"][0].cuisine,
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.grey[600],
-                                      fontWeight: FontWeight.w500)),
-                              Icon(
-                                Icons.arrow_drop_down,
-                                size: 25,
+                          child: Row(children: [
+                            DropdownButton<String>(
+                              value: cuisine ??
+                                  foodList["craving"][0]
+                                          .cuisine[0]
+                                          .toLowerCase() +
+                                      foodList["craving"][0]
+                                          .cuisine
+                                          .substring(1) ??
+                                  'indian',
+                              icon: Icon(Icons.arrow_drop_down),
+                              iconSize: 24,
+                              elevation: 16,
+                              style: TextStyle(color: Colors.grey[600]),
+                              underline: Container(
+                                height: 2,
                                 color: Colors.grey[600],
-                              )
-                            ],
-                          ),
+                              ),
+                              onChanged: (String newValue) async {
+                                setState(() {
+                                  cuisine = newValue;
+                                });
+
+                                DatabaseQuery(listName: 'craving').getFood(
+                                    field: ['cuisine'],
+                                    value: [newValue],
+                                    limit: 7,
+                                    mood: newValue,
+                                    check: 0).then((future) {
+                                  setState(() {
+                                    BlocProvider.of<FoodBloc>(context)
+                                        .add(FoodEvent.delete("craving"));
+                                    BlocProvider.of<FoodBloc>(context)
+                                        .add(FoodEvent.add(future, "craving"));
+                                  });
+                                });
+                              },
+                              items: <String>[
+                                "chinese",
+                                "indian",
+                                "italian"
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                            ),
+                          ]),
                         )
                       ],
                     ),

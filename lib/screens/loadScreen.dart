@@ -38,7 +38,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     Box _box = await Hive.openBox("preferenceBox");
     await DatabaseService().returnUser();
     String deter = _box.get("deter");
-    List<dynamic> cuisine = ["chinese", "mexican", "indian", "italian"];
+    List<dynamic> cuisine = ["chinese", "indian", "italian"];
     String tod = timeOfTheDay();
     await DatabaseService().returnUser();
     String cuisine_sel = cuisine[Random().nextInt(cuisine.length)];
