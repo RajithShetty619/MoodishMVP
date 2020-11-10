@@ -11,8 +11,6 @@ class FoodRecipePage extends StatefulWidget {
 }
 
 class _FoodRecipePageState extends State<FoodRecipePage> {
-  String mealtype = "Breakfast";
-  String cuisine = "Indian";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,16 +66,16 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                   padding: EdgeInsets.only(right: 20),
                   child: Row(
                     children: [
-                      Text(mealtype,
+                      Text('Breakfast',
                           style: TextStyle(
                               fontSize: 18,
                               color: Colors.grey[600],
                               fontWeight: FontWeight.w500)),
-                      // Icon(
-                      //   Icons.arrow_drop_down,
-                      //   size: 25,
-                      //   color: Colors.grey[600],
-                      // )
+                      Icon(
+                        Icons.arrow_drop_down,
+                        size: 25,
+                        color: Colors.grey[600],
+                      )
                     ],
                   ),
                 )
@@ -91,9 +89,6 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                 // TODO: implement listener
               },
               builder: (context, foodList) {
-                setState(() {
-                  mealtype = foodList["tod"][0].meal_type;
-                });
                 return ListView.builder(
                   itemCount: foodList["tod"].length,
                   shrinkWrap: true,
@@ -132,12 +127,15 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  foodList["tod"][index].foodName,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500),
+                                Container(
+                                  width: MediaQuery.of(context).size.width / 2.55,
+                                  child: Text(
+                                    foodList["tod"][index].foodName,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500),
+                                  ),
                                 ),
                                 Text(
                                   foodList["tod"][index].cuisine,
@@ -223,16 +221,16 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                   padding: EdgeInsets.only(right: 20),
                   child: Row(
                     children: [
-                      Text(cuisine,
+                      Text('Indian',
                           style: TextStyle(
                               fontSize: 18,
                               color: Colors.grey[600],
                               fontWeight: FontWeight.w500)),
-                      // Icon(
-                      //   Icons.arrow_drop_down,
-                      //   size: 25,
-                      //   color: Colors.grey[600],
-                      // )
+                      Icon(
+                        Icons.arrow_drop_down,
+                        size: 25,
+                        color: Colors.grey[600],
+                      )
                     ],
                   ),
                 )
@@ -246,9 +244,6 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                 // TODO: implement listener
               },
               builder: (context, foodList) {
-                setState(() {
-                  cuisine = foodList["craving"][0].cuisine;
-                });
                 return ListView.builder(
                   itemCount: 5,
                   shrinkWrap: true,
@@ -261,7 +256,7 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => FoodInfoCard(
-                                      listName: "craving",
+                                      listName: "carving",
                                       index: index,
                                       foodList: foodList["craving"][index],
                                     )));
@@ -287,12 +282,15 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  foodList["craving"][index].foodName,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500),
+                                Container(
+                            width: MediaQuery.of(context).size.width / 2.55,
+                                  child: Text(
+                                    foodList["craving"][index].foodName,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500),
+                                  ),
                                 ),
                                 Text(
                                   foodList["craving"][index].cuisine,

@@ -57,84 +57,53 @@ class _RestCategoryModelState extends State<RestCategoryModel> {
           child: ListView(
             physics: BouncingScrollPhysics(),
             children: <Widget>[
-              Stack(
+              Row(
                 children: <Widget>[
-                  Center(
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(10, 32, 10, 0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            'Your Address',
-                            style: TextStyle(color: Colors.blue[900]),
+                  Padding(
+                    padding: EdgeInsets.only(left: 10, top: 10),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Card(
+                        elevation: 5,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30)),
+                        child: Padding(
+                          padding: EdgeInsets.all(7),
+                          child: Icon(
+                            Icons.arrow_back,
+                            size: 32,
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              Scaffold.of(context).showSnackBar(SnackBar(
-                                  content: Text("Location has been Updated")));
-                            },
-                            child: Text.rich(TextSpan(
-                                style: TextStyle(
-                                  fontSize: 18,
-                                ),
-                                children: [
-                                  TextSpan(text: widget.location),
-                                  WidgetSpan(
-                                      child: Icon(
-                                    Icons.edit,
-                                    size: 17,
-                                  ))
-                                ])),
-                          )
-                        ],
+                        ),
                       ),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(left: 10, top: 10),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Card(
-                            elevation: 5,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                            child: Padding(
-                              padding: EdgeInsets.all(7),
-                              child: Icon(
-                                Icons.arrow_back,
-                                size: 32,
-                              ),
-                            ),
-                          ),
+                  SizedBox(width: 20,),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 32, 10, 0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          'Your Address',
+                          style: TextStyle(color: Colors.blue[900]),
                         ),
-                      ),
-                      /*  Padding(
-                        padding: EdgeInsets.only(right: 10, top: 10),
-                        child: GestureDetector(
-                          onTap: () {},
-                          child: Card(
-                            elevation: 5,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                            child: Padding(
-                              padding: EdgeInsets.all(7),
-                              child: Icon(
-                                Icons.search,
-                                size: 32,
-                              ),
+                        Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Scaffold.of(context).showSnackBar(SnackBar(
+                                    content: Text("Location has been Updated")));
+                              },
+                              child: Text(widget.location,style: TextStyle(fontSize: 18),),
                             ),
-                          ),
-                        ),
-                      )
-                     */
-                    ],
-                  )
+                            Icon(Icons.edit)
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
                 ],
               ),
               SizedBox(
