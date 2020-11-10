@@ -11,10 +11,9 @@ class FoodRecipePage extends StatefulWidget {
 }
 
 class _FoodRecipePageState extends State<FoodRecipePage> {
+  String dropdownValue = 'snacks';
   @override
   Widget build(BuildContext context) {
-    String dropdownValue = 'snacks';
-
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
@@ -84,10 +83,9 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                             //         fontWeight: FontWeight.w500)),
                             DropdownButton<String>(
                               value: dropdownValue,
-                              icon: Icon(Icons.arrow_downward_rounded),
+                              icon: Icon(Icons.arrow_drop_down),
                               iconSize: 24,
                               elevation: 16,
-                              style: TextStyle(color: Colors.deepPurple),
                               underline: Container(
                                 height: 2,
                                 color: Colors.deepPurpleAccent,

@@ -267,13 +267,13 @@ class _FoodHomeState extends State<FoodHome> {
                                 children: [
                                   Container(
                                     height: MediaQuery.of(context).size.height /
-                                        2.5,
+                                        2.8,
                                     child: GridView.builder(
                                         gridDelegate:
                                             SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 2,
-                                          crossAxisSpacing: 2.0,
-                                          mainAxisSpacing: 2,
+                                          crossAxisSpacing: 1.0,
+                                          mainAxisSpacing: 1,
                                         ),
                                         scrollDirection: Axis.horizontal,
                                         itemCount: feel.length,
@@ -334,7 +334,8 @@ class _FoodHomeState extends State<FoodHome> {
                                                                       .orange),
                                                             )
                                                           : Text(
-                                                              '${feel[index].feel}',style: TextStyle(
+                                                              '${feel[index].feel}',
+                                                              style: TextStyle(
                                                                 fontSize: 20,
                                                               )))),
                                             ),
@@ -513,8 +514,8 @@ class _FoodHomeState extends State<FoodHome> {
                     padding: const EdgeInsets.fromLTRB(30, 25, 0, 0),
                     child: Text(
                       'Are You Bored?',
-                      style: TextStyle(
-                          fontSize: 22, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     ),
                   ),
                   SizedBox(height: 10),
