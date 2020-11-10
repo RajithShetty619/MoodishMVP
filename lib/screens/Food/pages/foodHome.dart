@@ -163,26 +163,38 @@ class _FoodHomeState extends State<FoodHome> {
                         Text(
                           'Recommended Recipes',
                           style: TextStyle(
-                              fontSize: MediaQuery.of(context).size.width/20.3, fontWeight: FontWeight.bold),
+                              fontSize:
+                                  MediaQuery.of(context).size.width / 20.3,
+                              fontWeight: FontWeight.bold),
                         ),
                         InkWell(
                           splashColor: Color.fromARGB(255, 254, 197, 140),
-                          onTap: (){
+                          onTap: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => SeeMoreRecipes(
-                                      user: userData['name'],
-                                    )));
+                                          user: userData['name'],
+                                        )));
                           },
                           child: Container(
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
                                 children: [
-                                  Text('See more',style: TextStyle(color: Colors.orange,fontSize: 17),),
-                                  SizedBox(width: 3,),
-                                  Icon(Icons.arrow_forward,color: Colors.orange,size: 18,),
+                                  Text(
+                                    'See more',
+                                    style: TextStyle(
+                                        color: Colors.orange, fontSize: 17),
+                                  ),
+                                  SizedBox(
+                                    width: 3,
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward,
+                                    color: Colors.orange,
+                                    size: 18,
+                                  ),
                                 ],
                               ),
                             ),
@@ -355,7 +367,7 @@ class _FoodHomeState extends State<FoodHome> {
                                   Container(
                                       height:
                                           MediaQuery.of(context).size.height /
-                                              2.5,
+                                              2.8,
                                       child: BlocConsumer<FoodBloc,
                                           Map<String, List<FoodListModel>>>(
                                         buildWhen:
