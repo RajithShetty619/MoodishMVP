@@ -20,6 +20,13 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   ImageProvider _image;
+  final Uri _emailLaunchUri = Uri(
+      scheme: 'mailto',
+      path: 'snapinsight0@gmail.com',
+      queryParameters: {
+        'subject': 'Feedback\tand\tSuggestion\tfor\tMoodish!'
+      }
+  );
   Map<String, dynamic> userData = {};
   @override
   void initState() {
@@ -316,7 +323,9 @@ class _ProfileState extends State<Profile> {
                     Icons.keyboard_arrow_right,
                     color: Colors.grey.shade400,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    launch(_emailLaunchUri.toString());
+                  },
                 ),
                 Divider(),
                 ListTile(

@@ -156,14 +156,14 @@ class _FoodHomeState extends State<FoodHome> {
                     height: 30,
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(30, 25, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(25, 25, 0, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           'Recommended Recipes',
                           style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.bold),
+                              fontSize: MediaQuery.of(context).size.width/20, fontWeight: FontWeight.bold),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0),
@@ -173,7 +173,9 @@ class _FoodHomeState extends State<FoodHome> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => SeeMoreRecipes()));
+                                      builder: (context) => SeeMoreRecipes(
+                                            user: userData['name'],
+                                          )));
                             },
                             label: Text('See more'),
                             icon: Icon(Icons.arrow_forward),
@@ -243,21 +245,22 @@ class _FoodHomeState extends State<FoodHome> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                                child: Container(
-                                  alignment: Alignment.topRight,
-                                  child: Text(
-                                    'How do you Feel?',
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontStyle: FontStyle.italic,
-                                        fontWeight: FontWeight.w400),
+                              if (i == 0)
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                                  child: Container(
+                                    alignment: Alignment.topRight,
+                                    child: Text(
+                                      'How do you Feel?',
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                          fontSize: 18.0,
+                                          fontStyle: FontStyle.italic,
+                                          fontWeight: FontWeight.w400),
+                                    ),
                                   ),
                                 ),
-                              ),
                               SizedBox(
                                 height: 10.0,
                               ),

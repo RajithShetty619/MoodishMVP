@@ -120,30 +120,6 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                                       widget.foodList.images),
                                   fit: BoxFit.cover)),
                         ),
-//                      Align(
-//                        alignment: Alignment.topLeft,
-//                        child: Padding(
-//                          padding: EdgeInsets.only(right: 15, top: 10),
-//                          child: GestureDetector(
-//                            onTap: () {
-//                              Navigator.pop(context);
-//                            },
-//                            child: Card(
-//                              elevation: 8,
-//                              shape: RoundedRectangleBorder(
-//                                  borderRadius:
-//                                      BorderRadius.all(Radius.circular(30))),
-//                              child: Padding(
-//                                padding: EdgeInsets.all(5),
-//                                child: Icon(
-//                                  Icons.arrow_back,
-//                                  size: 32,
-//                                ),
-//                              ),
-//                            ),
-//                          ),
-//                        ),
-//                      ),
                         Column(
                           children: [
                             SizedBox(
@@ -230,8 +206,8 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                                             ),
                                           ),
                                         ),
-                                        if (widget.foodList.mood != null ||
-                                            widget.foodList.mood == '')
+                                        if (widget.foodList.mood != null &&
+                                            widget.foodList.mood != '')
                                           Padding(
                                             padding: EdgeInsets.only(
                                                 top: 5, right: 8),
@@ -1037,13 +1013,184 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                                         ],
                                       ),
                                     if (_selected == 3)
-                                      Column(
-                                        children: [
-                                          Container(
-                                            height: 200,
-                                          )
-                                        ],
-                                      )
+                                      FutureBuilder(
+                                        future: DatabaseService()
+                                            .restRecommendApiFood(
+                                                foodName:
+                                                    widget.foodList.foodName),
+                                        builder: (BuildContext context,
+                                            AsyncSnapshot snapshot) {
+                                          if (snapshot.connectionState ==
+                                              ConnectionState.done) if (snapshot
+                                                  .data !=
+                                              null)
+                                            return ListView.builder(
+                                                itemCount: snapshot.data.length,
+                                                shrinkWrap: true,
+                                                primary: false,
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
+                                                  FoodListModel food =
+                                                      snapshot.data[index];
+                                                  return GestureDetector(
+                                                    onTap: () {
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  FoodInfoCard(
+                                                                    listName:
+                                                                        "null",
+                                                                    index:
+                                                                        index,
+                                                                    foodList:
+                                                                        food,
+                                                                  )));
+                                                    },
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 20,
+                                                              bottom: 10),
+                                                      child: Row(
+                                                        children: [
+                                                          Container(
+                                                            height: 90,
+                                                            width: 90,
+                                                            decoration: BoxDecoration(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            30)),
+                                                                image: DecorationImage(
+                                                                    image: CachedNetworkImageProvider(food
+                                                                        .images),
+                                                                    fit: BoxFit
+                                                                        .cover)),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 10,
+                                                          ),
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                food.foodName,
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        20,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500),
+                                                              ),
+                                                              Text(
+                                                                food.cuisine,
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                            .grey[
+                                                                        500]),
+                                                              ),
+                                                              Container(
+                                                                height: 0.8,
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    2.5,
+                                                                color: Colors
+                                                                    .grey[400],
+                                                              ),
+                                                              SizedBox(
+                                                                height: 5,
+                                                              ),
+                                                              Row(
+                                                                children: [
+                                                                  Icon(
+                                                                    Icons
+                                                                        .fastfood,
+                                                                    size: 12,
+                                                                  ),
+                                                                  SizedBox(
+                                                                    width: 3,
+                                                                  ),
+                                                                  Text(
+                                                                      food
+                                                                          .calories,
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              13)),
+                                                                  SizedBox(
+                                                                    width: 12,
+                                                                  ),
+                                                                  Icon(
+                                                                    Icons.alarm,
+                                                                    size: 12,
+                                                                  ),
+                                                                  Text(
+                                                                      food.time ??
+                                                                          '--',
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              13))
+                                                                ],
+                                                              )
+                                                            ],
+                                                          ),
+                                                          Spacer(),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    right: 32),
+                                                            child: Container(
+                                                              height: 25,
+                                                              width: 60,
+                                                              decoration: BoxDecoration(
+                                                                  border: Border.all(
+                                                                      color: Colors
+                                                                          .black87),
+                                                                  borderRadius:
+                                                                      BorderRadius.all(
+                                                                          Radius.circular(
+                                                                              20))),
+                                                              child: Center(
+                                                                  child: Text(
+                                                                'Cook',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500),
+                                                              )),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  );
+                                                });
+                                          else
+                                            return Center(
+                                              child: Text(
+                                                  "No food items to recommend"),
+                                            );
+                                          else
+                                            return Center(
+                                              child: SpinKitCircle(
+                                                color: Colors.blueAccent,
+                                              ),
+                                            );
+                                        },
+                                      ),
                                   ],
                                 ),
                               ),

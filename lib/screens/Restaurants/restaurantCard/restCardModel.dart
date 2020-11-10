@@ -268,7 +268,14 @@ class _RestCardModelState extends State<RestCardModel> {
                                   width: 20.0,
                                 ),
                                 InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      final RenderBox box = context.findRenderObject();
+                                      Share.share(
+                                          '${widget.restaurant.restaurant_Name} - \nhttp://play.google.com/store/apps/details?id=net.moodish.snapinsight',
+                                          subject: widget.restaurant.address,
+                                          sharePositionOrigin:
+                                          box.localToGlobal(Offset.zero) & box.size);
+                                    },
                                     child: Column(
                                       children: <Widget>[
                                         Container(
@@ -786,152 +793,144 @@ class _RestCardModelState extends State<RestCardModel> {
                               physics: NeverScrollableScrollPhysics(),
                               itemBuilder: (context, index) {
                                 RestListModel element = snapshot.data[index];
-                                if (element.address !=
-                                    widget.restaurant.address)
-                                  return Padding(
-                                    padding: EdgeInsets.only(
-                                        left:
-                                            MediaQuery.of(context).size.width /
-                                                15,
-                                        right:
-                                            MediaQuery.of(context).size.width /
-                                                15,
-                                        top: 5,
-                                        bottom: 5),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(context,
-                                            MaterialPageRoute(
-                                                builder: (context) {
-                                          return RestCardModel(
-                                            restaurant: element,
-                                          );
-                                        }));
-                                      },
-                                      child: Card(
-                                        elevation: 4,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(20)),
-                                        child: Container(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 12,
-                                                top: 8,
-                                                bottom: 8,
-                                                right: 5),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: <Widget>[
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: <Widget>[
-                                                    Container(
-                                                      width: 160,
+
+                                return Padding(
+                                  padding: EdgeInsets.only(
+                                      left: MediaQuery.of(context).size.width /
+                                          15,
+                                      right: MediaQuery.of(context).size.width /
+                                          15,
+                                      top: 5,
+                                      bottom: 5),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) {
+                                        return RestCardModel(
+                                          restaurant: element,
+                                        );
+                                      }));
+                                    },
+                                    child: Card(
+                                      elevation: 4,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      child: Container(
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 12,
+                                              top: 8,
+                                              bottom: 8,
+                                              right: 5),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: <Widget>[
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  Container(
+                                                    width: 160,
+                                                    child: Text(
+                                                      element.restaurant_Name,
+                                                      style: TextStyle(
+                                                          fontSize: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
+                                                              20,
+                                                          fontWeight:
+                                                              FontWeight.w400),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                      width: 170,
                                                       child: Text(
-                                                        element.restaurant_Name,
+                                                        element.restaurant_Type !=
+                                                                'nan'
+                                                            ? element
+                                                                .restaurant_Type
+                                                            : element.cuisines,
                                                         style: TextStyle(
-                                                            fontSize: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width /
-                                                                20,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w400),
-                                                      ),
+                                                            fontSize: 11,
+                                                            color: Colors
+                                                                .grey[400]),
+                                                      )),
+                                                  // Text(
+                                                  //   element.restaurant_Location,
+                                                  //   style: TextStyle(
+                                                  //       color: Colors.grey[300],
+                                                  //       fontSize: 11),
+                                                  // ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 10,
+                                                            bottom: 10),
+                                                    child: Container(
+                                                      height: 1,
+                                                      width: 175,
+                                                      color: Colors.grey,
                                                     ),
-                                                    Container(
-                                                        width: 170,
-                                                        child: Text(
-                                                          element.restaurant_Type !=
-                                                                  'nan'
-                                                              ? element
-                                                                  .restaurant_Type
-                                                              : element
-                                                                  .cuisines,
-                                                          style: TextStyle(
-                                                              fontSize: 11,
-                                                              color: Colors
-                                                                  .grey[400]),
-                                                        )),
-                                                    // Text(
-                                                    //   element.restaurant_Location,
-                                                    //   style: TextStyle(
-                                                    //       color: Colors.grey[300],
-                                                    //       fontSize: 11),
-                                                    // ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              top: 10,
-                                                              bottom: 10),
-                                                      child: Container(
-                                                        height: 1,
-                                                        width: 175,
-                                                        color: Colors.grey,
+                                                  ),
+                                                  Row(
+                                                    children: <Widget>[
+                                                      Icon(
+                                                        Icons.star,
+                                                        size: 10,
+                                                        color: Colors.amber,
                                                       ),
-                                                    ),
-                                                    Row(
-                                                      children: <Widget>[
-                                                        Icon(
-                                                          Icons.star,
-                                                          size: 10,
-                                                          color: Colors.amber,
-                                                        ),
-                                                        Text(
-                                                          element.rating,
-                                                          style: TextStyle(
-                                                              fontSize: 12),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 8,
-                                                        ),
-                                                        Icon(
-                                                          Icons.pin_drop,
-                                                          size: 10,
-                                                        ),
-                                                        Text(
-                                                          element
-                                                              .restaurant_Location,
-                                                          style: TextStyle(
-                                                              fontSize: 12),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 8,
-                                                        ),
-                                                        // Text(
-                                                        //   '\u20B9 Free',
-                                                        //   style: TextStyle(fontSize: 10),
-                                                        // )
-                                                      ],
-                                                    )
-                                                  ],
-                                                ),
-                                                Container(
-                                                  height: 100,
-                                                  width: 100,
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              20),
-                                                      image: DecorationImage(
-                                                          image:
-                                                              CachedNetworkImageProvider(
-                                                                  element
-                                                                      .photo_url),
-                                                          fit: BoxFit.cover)),
-                                                )
-                                              ],
-                                            ),
+                                                      Text(
+                                                        element.rating,
+                                                        style: TextStyle(
+                                                            fontSize: 12),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 8,
+                                                      ),
+                                                      Icon(
+                                                        Icons.pin_drop,
+                                                        size: 10,
+                                                      ),
+                                                      Text(
+                                                        element
+                                                            .restaurant_Location,
+                                                        style: TextStyle(
+                                                            fontSize: 12),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 8,
+                                                      ),
+                                                      // Text(
+                                                      //   '\u20B9 Free',
+                                                      //   style: TextStyle(fontSize: 10),
+                                                      // )
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                              Container(
+                                                height: 100,
+                                                width: 100,
+                                                decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius
+                                                        .circular(20),
+                                                    image: DecorationImage(
+                                                        image:
+                                                            CachedNetworkImageProvider(
+                                                                element
+                                                                    .photo_url),
+                                                        fit: BoxFit.cover)),
+                                              )
+                                            ],
                                           ),
                                         ),
                                       ),
                                     ),
-                                  );
+                                  ),
+                                );
                               });
                         else
                           return Center(
@@ -2224,31 +2223,6 @@ class Delegate extends SliverPersistentHeaderDelegate {
                           ),
                         ),
                       ),
-                    ),
-                    Spacer(),
-                    GestureDetector(
-                      onTap: () async {
-                        final RenderBox box = context.findRenderObject();
-                        Share.share(
-                            '${restaurant.restaurant_Name} - \nhttp://play.google.com/store/apps/details?id=net.moodish.snapinsight',
-                            subject: restaurant.address,
-                            sharePositionOrigin:
-                                box.localToGlobal(Offset.zero) & box.size);
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: Colors.white),
-                        child: Padding(
-                          padding: EdgeInsets.all(8),
-                          child: Icon(
-                            Icons.open_in_browser,
-                            size: 30,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 8,
                     ),
                     // Container(
                     //   decoration: BoxDecoration(
