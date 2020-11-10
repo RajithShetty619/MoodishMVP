@@ -511,24 +511,10 @@ class _FoodHomeState extends State<FoodHome> {
                   // ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(30, 25, 0, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Are You Bored?',
-                          style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.bold),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: FlatButton.icon(
-                            textColor: Colors.orange,
-                            onPressed: () {},
-                            label: Text('See more'),
-                            icon: Icon(Icons.arrow_forward),
-                          ),
-                        )
-                      ],
+                    child: Text(
+                      'Are You Bored?',
+                      style: TextStyle(
+                          fontSize: 22, fontWeight: FontWeight.bold),
                     ),
                   ),
                   SizedBox(height: 10),
