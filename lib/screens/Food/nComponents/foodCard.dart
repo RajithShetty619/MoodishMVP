@@ -44,8 +44,8 @@ class _FoodCrdState extends State<FoodCrd> {
                   overflow: Overflow.visible,
                   children: [
                     Container(
-                      width: 215,
-                      height: 200,
+                      width: MediaQuery.of(context).size.width / 1.8,
+                      height: MediaQuery.of(context).size.height / 3.8,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(30),
@@ -59,10 +59,10 @@ class _FoodCrdState extends State<FoodCrd> {
                     Positioned(
                       top: 160,
                       child: Container(
-                        width: 215,
-                        height: 140,
+                        width: MediaQuery.of(context).size.width / 1.8,
+                        height: MediaQuery.of(context).size.height / 5.45,
                         child: Card(
-                          elevation: 0,
+                          elevation: 0.5,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
                                   topRight: Radius.circular(30),
