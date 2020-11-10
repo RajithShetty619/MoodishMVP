@@ -335,6 +335,7 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                           MaterialPageRoute(builder: (context) {
                         return RestCategoryModel(
                           event: 1,
+                          location: location,
                         );
                       }));
                     },
@@ -369,6 +370,7 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                           MaterialPageRoute(builder: (context) {
                         return RestCategoryModel(
                           event: 2,
+                          location: location,
                         );
                       }));
                     },
@@ -409,6 +411,7 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                           MaterialPageRoute(builder: (context) {
                         return RestCategoryModel(
                           event: 3,
+                          location: location,
                         );
                       }));
                     },
@@ -449,6 +452,7 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                           MaterialPageRoute(builder: (context) {
                         return RestCategoryModel(
                           event: 4,
+                          location: location,
                         );
                       }));
                     },
@@ -489,6 +493,7 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                           MaterialPageRoute(builder: (context) {
                         return RestCategoryModel(
                           event: 5,
+                          location: location,
                         );
                       }));
                     },

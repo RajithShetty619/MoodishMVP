@@ -12,8 +12,9 @@ import 'package:moodish_mvp/screens/Restaurants/restaurantCard/restCardModel.dar
 
 class RestCategoryModel extends StatefulWidget {
   int event;
+  String location;
 
-  RestCategoryModel({this.event});
+  RestCategoryModel({this.event,this.location});
 
   @override
   _RestCategoryModelState createState() => _RestCategoryModelState();
@@ -68,18 +69,26 @@ class _RestCategoryModelState extends State<RestCategoryModel> {
                             'Your Address',
                             style: TextStyle(color: Colors.blue[900]),
                           ),
-                          Text.rich(TextSpan(
-                              style: TextStyle(
-                                fontSize: 18,
-                              ),
-                              children: [
-                                TextSpan(text: 'Mumbai,Maharashtra west '),
-                                WidgetSpan(
-                                    child: Icon(
-                                  Icons.edit,
-                                  size: 17,
-                                ))
-                              ]))
+                          GestureDetector(
+                            onTap: (){
+                              Scaffold.of(context)
+                                  .showSnackBar(SnackBar(
+                                  content: Text(
+                                      "Location has been Updated")));
+                            },
+                            child: Text.rich(TextSpan(
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                                children: [
+                                  TextSpan(text: widget.location),
+                                  WidgetSpan(
+                                      child: Icon(
+                                    Icons.edit,
+                                    size: 17,
+                                  ))
+                                ])),
+                          )
                         ],
                       ),
                     ),
