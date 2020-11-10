@@ -304,8 +304,8 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                                             ),
                                           ),
                                         ),
-                                        if (widget.foodList.servings != null ||
-                                            widget.foodList.servings == '')
+                                        if (widget.foodList.servings != null &&
+                                            widget.foodList.servings != '')
                                           Column(
                                             children: [
                                               Padding(
