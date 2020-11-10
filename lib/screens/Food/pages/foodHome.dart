@@ -173,7 +173,7 @@ class _FoodHomeState extends State<FoodHome> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => SeeMoreRecipes()));
+                                      builder: (context) => SeeMoreRecipes(user: userData['name'],)));
                             },
                             label: Text('See more'),
                             icon: Icon(Icons.arrow_forward),

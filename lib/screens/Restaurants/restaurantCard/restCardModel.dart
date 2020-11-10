@@ -268,7 +268,14 @@ class _RestCardModelState extends State<RestCardModel> {
                                   width: 20.0,
                                 ),
                                 InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      final RenderBox box = context.findRenderObject();
+                                      Share.share(
+                                          '${widget.restaurant.restaurant_Name} - \nhttp://play.google.com/store/apps/details?id=net.moodish.snapinsight',
+                                          subject: widget.restaurant.address,
+                                          sharePositionOrigin:
+                                          box.localToGlobal(Offset.zero) & box.size);
+                                    },
                                     child: Column(
                                       children: <Widget>[
                                         Container(
@@ -2216,31 +2223,6 @@ class Delegate extends SliverPersistentHeaderDelegate {
                           ),
                         ),
                       ),
-                    ),
-                    Spacer(),
-                    GestureDetector(
-                      onTap: () async {
-                        final RenderBox box = context.findRenderObject();
-                        Share.share(
-                            '${restaurant.restaurant_Name} - \nhttp://play.google.com/store/apps/details?id=net.moodish.snapinsight',
-                            subject: restaurant.address,
-                            sharePositionOrigin:
-                                box.localToGlobal(Offset.zero) & box.size);
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: Colors.white),
-                        child: Padding(
-                          padding: EdgeInsets.all(8),
-                          child: Icon(
-                            Icons.open_in_browser,
-                            size: 30,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 8,
                     ),
                     // Container(
                     //   decoration: BoxDecoration(
