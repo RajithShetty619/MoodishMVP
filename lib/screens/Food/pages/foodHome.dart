@@ -334,7 +334,9 @@ class _FoodHomeState extends State<FoodHome> {
                                                                       .orange),
                                                             )
                                                           : Text(
-                                                              '${feel[index].feel}'))),
+                                                              '${feel[index].feel}',style: TextStyle(
+                                                                fontSize: 20,
+                                                              )))),
                                             ),
                                           );
                                         }),
