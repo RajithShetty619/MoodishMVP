@@ -270,13 +270,13 @@ class _FoodHomeState extends State<FoodHome> {
                                 children: [
                                   Container(
                                     height: MediaQuery.of(context).size.height /
-                                        2.5,
+                                        2.8,
                                     child: GridView.builder(
                                         gridDelegate:
                                             SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 2,
-                                          crossAxisSpacing: 2.0,
-                                          mainAxisSpacing: 2,
+                                          crossAxisSpacing: 1.0,
+                                          mainAxisSpacing: 1,
                                         ),
                                         scrollDirection: Axis.horizontal,
                                         itemCount: feel.length,

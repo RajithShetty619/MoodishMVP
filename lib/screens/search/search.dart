@@ -117,9 +117,10 @@ class _SearchState extends State<Search> {
               color: Colors.grey[100],
             ),
             loader: Center(
-                child: SpinKitFadingCircle(
-              color: Colors.blueAccent,
-            )),
+              child: SpinKitCircle(
+                color: Colors.deepOrange,
+              ),
+            ),
             searchBarStyle: SearchBarStyle(
               backgroundColor: Colors.grey[400],
               padding: EdgeInsets.only(
