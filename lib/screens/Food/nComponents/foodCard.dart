@@ -43,48 +43,44 @@ class _FoodCrdState extends State<FoodCrd> {
                         topRight: Radius.circular(30),
                         bottomLeft: Radius.circular(30)),
                     image: DecorationImage(
-                        image: CachedNetworkImageProvider(
-                            widget.foodList.images),
+                        image:
+                            CachedNetworkImageProvider(widget.foodList.images),
                         fit: BoxFit.fill)),
               ),
               Positioned(
                 top: 150,
                 child: Container(
                   width: MediaQuery.of(context).size.width / 1.8,
-                  height: MediaQuery.of(context).size.height/5,
-
+                  height: MediaQuery.of(context).size.height / 5.5,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                      color: Colors.white,
                       borderRadius: BorderRadius.only(
                           topRight: Radius.circular(30),
                           bottomLeft: Radius.circular(30)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey,
-                        blurRadius: 5
-                      )
-                    ]
-                  ),
+                      boxShadow: [
+                        BoxShadow(color: Colors.grey, blurRadius: 5)
+                      ]),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Text(
                           widget.foodList.foodName,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500),
+                              fontSize: 18, fontWeight: FontWeight.w500),
                         ),
                         SizedBox(
                           height: 3,
                         ),
                         Text(
                           widget.foodList.cuisine,
-                          style: TextStyle(
-                              fontSize: 13, color: Colors.grey[400]),
+                          style:
+                              TextStyle(fontSize: 13, color: Colors.grey[400]),
                         ),
                         SizedBox(
                           height: 3,

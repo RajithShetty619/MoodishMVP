@@ -5,6 +5,7 @@ import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/screens/Food/foodInfo/food_info.dart';
+import 'package:moodish_mvp/screens/Food/nComponents/foodCard.dart';
 
 class LikedFood extends StatefulWidget {
   @override
@@ -249,7 +250,9 @@ class _LikedFoodState extends State<LikedFood> {
                                                                     context,
                                                                     MaterialPageRoute(
                                                                         builder: (context) =>
-                                                                            Food_Info(
+                                                                            FoodCrd(
+                                                                              index: 0,
+                                                                              listName: "like",
                                                                               foodList: foodList[index],
                                                                             )));
                                                               },
@@ -268,114 +271,6 @@ class _LikedFoodState extends State<LikedFood> {
                                     ),
                                   ),
                                 );
-                                // Padding(
-                                //   padding: const EdgeInsets.all(3.0),
-                                //   child: Stack(
-                                //     children: <Widget>[
-                                //       GestureDetector(
-                                //         onTap: () {
-                                //           Navigator.push(
-                                //               context,
-                                //               MaterialPageRoute(
-                                //                   builder: (context) =>
-                                //                       Food_Info(
-                                //                         foodList:
-                                //                             foodList[index],
-                                //                       )));
-                                //         },
-                                //         child: CachedNetworkImage(
-                                //           imageUrl: foodList[index].images,
-                                //           imageBuilder:
-                                //               (context, imageProvider) {
-                                //             return Container(
-                                //               margin: EdgeInsets.symmetric(
-                                //                   horizontal: 10, vertical: 5),
-                                //               decoration: BoxDecoration(
-                                //                   borderRadius:
-                                //                       BorderRadius.circular(20),
-                                //                   image: DecorationImage(
-                                //                     image: imageProvider,
-                                //                     fit: BoxFit.cover,
-                                //                   )),
-                                //             );
-                                //           },
-                                //         ),
-                                //       ),
-                                //       Positioned(
-                                //         top: 173,
-                                //         child: Column(
-                                //           crossAxisAlignment:
-                                //               CrossAxisAlignment.start,
-                                //           children: <Widget>[
-                                //             Padding(
-                                //               padding: EdgeInsets.all(10),
-                                //               child: Container(
-                                //                 width: 245,
-                                //                 child: Text(
-                                //                   foodList[index].foodName,
-                                //                   style: TextStyle(
-                                //                       fontSize:
-                                //                           MediaQuery.of(context)
-                                //                                   .size
-                                //                                   .width /
-                                //                               20,
-                                //                       fontWeight:
-                                //                           FontWeight.bold,
-                                //                       color: Colors.white),
-                                //                 ),
-                                //               ),
-                                //             ),
-                                //             Padding(
-                                //               padding: const EdgeInsets.only(
-                                //                   left: 12.0),
-                                //               child: Text(
-                                //                 foodList[index].cuisine, //
-                                //                 style: TextStyle(
-                                //                     fontSize:
-                                //                         MediaQuery.of(context)
-                                //                                 .size
-                                //                                 .width /
-                                //                             19,
-                                //                     color: Colors.white),
-                                //               ),
-                                //             )
-                                //           ],
-                                //         ),
-                                //       ),
-                                //       Positioned(
-                                //         left: 215,
-                                //         top: 10,
-                                //         child: Padding(
-                                //           padding: EdgeInsets.all(10),
-                                //           child: Icon(
-                                //             Icons.favorite,
-                                //             color: Colors.pink,
-                                //             size: 30,
-                                //           ),
-                                //         ),
-                                //       ),
-                                //       Positioned(
-                                //         top: 210,
-                                //         left: 215,
-                                //         child: Padding(
-                                //           padding: EdgeInsets.all(10),
-                                //           child: Container(
-                                //             decoration: BoxDecoration(
-                                //                 shape: BoxShape.circle,
-                                //                 border: Border.all(
-                                //                     color: Colors.white,
-                                //                     width: 2)),
-                                //             child: Icon(
-                                //               Icons.chevron_right,
-                                //               size: 30,
-                                //               color: Colors.white,
-                                //             ),
-                                //           ),
-                                //         ),
-                                //       )
-                                //     ],
-                                //   ),
-                                // );
                               }),
                         ),
                       );
