@@ -28,7 +28,7 @@ class _FoodCrdState extends State<FoodCrd> {
       child: Padding(
         padding: const EdgeInsets.only(right: 10.0),
         child: Container(
-          width: MediaQuery.of(context).size.width / 1.7,
+          width: MediaQuery.of(context).size.width / 1.8,
           child: Card(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
@@ -55,9 +55,10 @@ class _FoodCrdState extends State<FoodCrd> {
                     Positioned(
                       top: 160,
                       child: Container(
-                        width: 220,
+                        width: 215,
                         height: 140,
                         child: Card(
+                          elevation: 0,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
                                   topRight: Radius.circular(30),
