@@ -353,7 +353,7 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                       height: 20,
                     ),
                     ListView.builder(
-                      itemCount: 5,
+                      itemCount: foodList["craving"].length,
                       shrinkWrap: true,
                       primary: false,
                       physics: NeverScrollableScrollPhysics(),
