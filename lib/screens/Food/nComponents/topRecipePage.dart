@@ -11,10 +11,10 @@ class FoodRecipePage extends StatefulWidget {
 }
 
 class _FoodRecipePageState extends State<FoodRecipePage> {
-  String cuisine = 'Indian';
-  String mealtype = 'Breakfast';
   @override
   Widget build(BuildContext context) {
+    String dropdownValue = 'snacks';
+
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
@@ -76,20 +76,40 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                         Spacer(),
                         Padding(
                           padding: EdgeInsets.only(right: 20),
-                          child: Row(
-                            children: [
-                              Text(foodList["tod"][0].meal_type,
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.grey[600],
-                                      fontWeight: FontWeight.w500)),
-                              Icon(
-                                Icons.arrow_drop_down,
-                                size: 25,
-                                color: Colors.grey[600],
-                              )
-                            ],
-                          ),
+                          child: Row(children: [
+                            // Text(foodList["tod"][0].meal_type,
+                            //     style: TextStyle(
+                            //         fontSize: 18,
+                            //         color: Colors.grey[600],
+                            //         fontWeight: FontWeight.w500)),
+                            DropdownButton<String>(
+                              value: dropdownValue,
+                              icon: Icon(Icons.arrow_downward_rounded),
+                              iconSize: 24,
+                              elevation: 16,
+                              style: TextStyle(color: Colors.deepPurple),
+                              underline: Container(
+                                height: 2,
+                                color: Colors.deepPurpleAccent,
+                              ),
+                              onChanged: (String newValue) {
+                                setState(() {
+                                  dropdownValue = newValue;
+                                });
+                              },
+                              items: <String>[
+                                'breakfast',
+                                'side dish',
+                                'snacks',
+                                'main course'
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                            ),
+                          ]),
                         )
                       ],
                     ),
@@ -111,8 +131,8 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                                         )));
                           },
                           child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 20, bottom: 10),
+                            padding: const EdgeInsets.only(
+                                left: 20, bottom: 10, top: 10),
                             child: Row(
                               children: [
                                 Container(
