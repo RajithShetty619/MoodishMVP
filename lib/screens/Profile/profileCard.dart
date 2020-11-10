@@ -342,11 +342,15 @@ class _ProfileCardState extends State<ProfileCard> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Text(
-                                              element.foodName,
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w500),
+                                            Container(
+                                              width: MediaQuery.of(context).size.width/2,
+                                              child: Text(
+                                                element.foodName,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    fontWeight: FontWeight.w500),
+                                              ),
                                             ),
                                             SizedBox(
                                               height: 5,
@@ -370,7 +374,7 @@ class _ProfileCardState extends State<ProfileCard> {
                                               child: Container(
                                                 color: Colors.black87,
                                                 height: 0.8,
-                                                width: 180,
+                                                width: MediaQuery.of(context).size.width/2.2,
                                               ),
                                             ),
                                             Row(
