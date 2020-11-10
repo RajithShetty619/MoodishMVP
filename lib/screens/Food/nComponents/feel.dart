@@ -42,11 +42,11 @@ class _FeelState extends State<Feel> {
                 style: widget.stIndex == widget.index
                     ? TextStyle(
                         color: Colors.orange,
-                        fontSize: 18,
+                        fontSize: 22,
                         fontWeight: FontWeight.bold)
                     : TextStyle(
                         color: Colors.black,
-                        fontSize: 18,
+                        fontSize: 22,
                         fontWeight: FontWeight.bold)),
           ),
         ],
