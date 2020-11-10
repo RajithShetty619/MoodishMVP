@@ -173,7 +173,7 @@ class _RestaurantHomeState extends State<RestaurantHome> {
                     RestListModel element = restList["near"][index];
                     if (restList["near"].length < 1) {
                       return Center(
-                        child: Text("Sorry no restaurants found near you"),
+                        child: Text("Sorry, No restaurants found near you"),
                       );
                     } else
                       return Padding(
