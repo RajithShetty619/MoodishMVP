@@ -1,7 +1,3 @@
-import 'dart:ffi';
-
-import 'package:hive/hive.dart';
-
 class RestListModel {
   final String restaurant_Name;
   final String cuisines;
@@ -17,6 +13,7 @@ class RestListModel {
   final List<dynamic> reviews;
   final String sr_no;
   final String address;
+  final bool like;
 
   RestListModel(
       {this.restaurant_Name,
@@ -32,7 +29,8 @@ class RestListModel {
       this.photo_url,
       this.sr_no,
       this.reviews,
-      this.address});
+      this.address,
+      this.like});
   /* 
    AFTER ANY CHANGES OR ANY ERROR IN THIS FILE, RUN THIS COMMAND
 run command: flutter packages pub run build_runner build --delete-conflicting-outputs

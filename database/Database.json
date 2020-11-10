@@ -181,7 +181,7 @@
         },
         {
             "restaurants": "[\"Babu Vada Pav\",\"laxman om vada pav\",\"aram vada pav\",\"babu vada pav\",\"vidharva vada pav\",\"parleshwar vada pav\",anand vada pav\"]",
-            "food_item": "Chessy aloo vada",
+            "food_item": "Cheesy aloo vada",
             "mood": "happy",
             "mood1": "sluggish",
             "recipe": "So what exactly is a Vada Pav? Vada = deep fried potato patties and pav = burger buns. You can say it’s kind of a potato sandwich or burger but what makes it so special is all the chutneys that go with it!",
@@ -328,7 +328,7 @@
         },
         {
             "restaurants": "[\"Trupti restaurants\",\"kokani katta\",\"]",
-            "food_item": "amti recipe",
+            "food_item": "Amti dal",
             "mood": "happy",
             "recipe": "Basically a traditional maharashtrian style dal recipe  prepared with toor dal / pigeon pea lentil.in other words the combination of sweet, sour, spice and tangy taste makes it unique and specific to marathi cuisine.",
             "preparation": "firstly, in a large kadai heat 1 tbsp ghee and saute 1 tsp mustard, ½ tsp jeera, pinch of hing and few curry leaves",
@@ -664,7 +664,7 @@
             "ingredient 15": "a few chopped coriander leaves",
             "ingredient 16": "2 to 3 puri or papdi",
             "serving": "3 ",
-            "timing": "30 min ",
+            "timing": "30 min",
             "calories": "153kcal",
             "fats": "3g",
             "carbohydrates": "27g",
@@ -774,7 +774,7 @@
         },
         {
             "restaurants": "Chakli Art",
-            "food_item": "Chakli ",
+            "food_item": "Chakli",
             "recipe": "Chakli is a deep fried snack made from rice flour, gram flour, wheat flour or a mixture of lentil flours. They are also known as Murukku in south.",
             "preparation": "First take the rice flour and gram flour in a bowl.",
             "step 2": "Add the carom seeds, cumin seeds, sesame seeds, turmeric powder, red chili powder, asafoetida and salt.",
@@ -904,7 +904,7 @@
         },
         {
             "restaurants": "[\"Modakam\",\"metkut\",\"aaswad\",\"siddhi vinayak refreshment\",\"kath n ghat\",\"amey',khadpe's\"]",
-            "food_item": "Coconut ladoo ",
+            "food_item": "Coconut ladoo",
             "mood": "happy",
             "recipe": "Coconut ladoo with condensed milk (photo above) –  this is a quick & instant 15-minute recipe of making coconut ladoo with fresh coconut, condensed milk (milkmaid) and cardamom powder. This is an easy recipe, gets done quickly and can be made even by a newbie in cooking.",
             "preparation": "Heat 1 teaspoon ghee in a frying pan or kadai. Keep flame to a low.",
@@ -1645,7 +1645,7 @@
             "ingredient 4": "1 tsp  oil",
             "ingredient 5": "1 cup jaggery / gud",
             "ingredient 6": "¼ tsp jaiphal powder",
-            "ingredient 7": "¼ tsp cardamom powder ",
+            "ingredient 7": "¼ tsp cardamom powder",
             "ingredient 8": "2 cup wheat flour / atta",
             "ingredient 9": "½ cup maida / plain flour",
             "ingredient 10": "¼ tsp  turmeric",
@@ -1698,7 +1698,7 @@
             "ingredient 12": "3 tsp green chutney",
             "ingredient 13": "3 tsp tamarind chutney / imli-chutney",
             "ingredient 14": "salt to taste",
-            "ingredient 15": "generous pinch kashmiri red chili powder ",
+            "ingredient 15": "generous pinch kashmiri red chili powder",
             "ingredient 16": "pinch cumin powder / jeera powder",
             "ingredient 17": "pinch chaat masala",
             "ingredient 18": "¼ onion",
@@ -2233,7 +2233,7 @@
         },
         {
             "restaurants": "[\"Vadera Sweets & Savouries\",\"krishna sweets\"]",
-            "food_item": "Alu vadi or patra ",
+            "food_item": "Alu vadi or patra",
             "mood": "happy",
             "mood1": "anger",
             "recipe": "To make patra, the taro root leaves are smeared with a sweet, spicy and tangy besan or gram flour paste and stacked upon each other They are then rolled and steamed. The steamed rolls are then tempered or fried.",
@@ -2578,7 +2578,7 @@
         },
         {
             "restaurants": "[\"Pratap The Dhaba\",\"Dum & Curry\",\"Masala Library\",\"Tanatan\",\"Papa Pancho Da Dhaba\",\"Butter Chicken Factory\",\"Paratha World\",\"Curry Me Up\",\"90 Ft Above\",\"Chenab\",\"Royale Masterchef Finedine and Bar\",\"Chakh Le The Street Food\",\"Khyber\",\"Biryani Hazir Ho\",\"The Goose & Gridiron\"]",
-            "food_item": "Lachha paratha ",
+            "food_item": "Lachha paratha",
             "mood": "happy",
             "recipe": "Its also called as Paratwala paratha. in Punjabi “parat” means layer and layers can be seen on the paratha when it gets cooked. Its South Indian counterpart is the Parotta Which is made from all purpose flour and eggs.",
             "preparation": "In a bowl or vessel take 2 cups whole wheat flour along with salt as per taste.",
@@ -3631,7 +3631,7 @@
             "situation": "At Home",
             "cuisine": "indian",
             "deter": "veg",
-            "description": "Mumbai style vegetable dum biryani recipe ",
+            "description": "Mumbai style vegetable dum biryani recipe",
             "mealtype": "Snack",
             "sr_no": "81"
         },
@@ -3735,7 +3735,7 @@
         },
         {
             "restaurants": "[\"Paratha Saratha - Extra Stuffed\",\"Paratha Saratha - Extra Stuffed\",\"Paratha Saratha - Extra Stuffed\",\"Chai Pe Charcha\",\"Oye Kiddan\",\"Lassi Te Parrontthe\",\"Prithvi Cafe\",\"Times Of Paratha\",\"Guru Kripa\",\"Paratha House\",\"The Food Boxz\",\"Taste Of Punjab\",\"Paratha Express\",\"Papa Pancho Da Dhaba\",\"Paratha Corner\",\"Chakh Le The Street Food\",\"Bimal Paratha House\",\"Crystal\"]",
-            "food_item": "Aloo paratha ",
+            "food_item": "Aloo paratha",
             "mood": "happy",
             "mood1": "sad",
             "recipe": "Aloo paratha is One of the most popular paratha recipe from Punjab, India. This delicious Punjabi aloo paratha is one of the most loved breakfast at any place",
@@ -3883,7 +3883,7 @@
         },
         {
             "restaurants": "[\"Paratha Saratha - Extra Stuffed\",\"Paratha Saratha - Extra Stuffed\",\"Paratha Saratha - Extra Stuffed\",\"Chai Pe Charcha\",\"Oye Kiddan\",\"Lassi Te Parrontthe\",\"Prithvi Cafe\",\"Times Of Paratha\",\"Guru Kripa\",\"Paratha House\",\"The Food Boxz\",\"Taste Of Punjab\",\"Paratha Express\",\"Papa Pancho Da Dhaba\",\"Paratha Corner\",\"Chakh Le The Street Food\",\"Bimal Paratha House\",\"Crystal\"]",
-            "food_item": "Palak paratha ",
+            "food_item": "Palak paratha",
             "mood": "happy",
             "mood1": "sad",
             "recipe": "Palak paratha or spinach paratha Is another excellent variation of paratha where you can include some healthy greens in the paratha.",
@@ -3935,7 +3935,7 @@
         },
         {
             "restaurants": "[\"Paratha Saratha - Extra Stuffed\",\"Paratha Saratha - Extra Stuffed\",\"Paratha Saratha - Extra Stuffed\",\"Chai Pe Charcha\",\"Oye Kiddan\",\"Lassi Te Parrontthe\",\"Prithvi Cafe\",\"Times Of Paratha\",\"Guru Kripa\",\"Paratha House\",\"The Food Boxz\",\"Taste Of Punjab\",\"Paratha Express\",\"Papa Pancho Da Dhaba\",\"Paratha Corner\",\"Chakh Le The Street Food\",\"Bimal Paratha House\",\"Crystal\"]",
-            "food_item": "Onion paratha ",
+            "food_item": "Onion paratha",
             "mood": "happy",
             "mood1": "sad",
             "recipe": "Onion paratha or pyaaz ka paratha is one of the popular and tasty paratha variety made in punjbai homes for breakfast. the translation of onion paratha in english would be  – whole wheat flat bread stuffed with spiced onions ",
@@ -4699,7 +4699,7 @@
         },
         {
             "restaurants": "[\"Tandoor Tawa Aur Karahi\",\"Chaap Ki Chhap\",\"Khana Padhai Aur Masti\",\"Neel Ki Biryani\",\"Maa Ki Khichdi\",\"Vishnuji Ki Rasoi\",\"Ghar Ki Rasoi\",\"Pritam Da Dhaba\"]",
-            "food_item": "Murgh aur Masoor ki Dal ",
+            "food_item": "Murgh aur Masoor ki Dal",
             "mood": "happy",
             "mood1": "sad",
             "recipe": "Murghi Aur Masoor Dal Recipe is a Bombay Style Chicken dal, essentially a rich and delicious curry made from a blend of chicken and whole masoor dal. This dish has a whole lot of flavor captured in just one pot. The addition spices has created complex flavors in the dish.",
@@ -5495,7 +5495,7 @@
         },
         {
             "restaurants": "[\"Beeji Ki Rasoi\",\"Chaap Ki Chhap\",\"Sukoon Ki Chai\",\"Maa Ki Khichdi\",\"Mummy Ki Rasoi\",\"Ghar Ki Baat\",\"Vishnuji Ki Rasoi\"]",
-            "food_item": "Urad Dal ",
+            "food_item": "Urad Dal",
             "recipe": "Serve with brown rice or white rice and a simple vegetable stir-fry for a nutritious meal that -- warning -- may lead to everyone licking their plates.",
             "preparation": "Take Urad Dal in a large bowl, wash it 2-3 times with sufficient water.",
             "step 2": "Put the dal into a pressure cooker, add sufficient water, cover the cooker and cook under pressure till 3-4 whistles are given out. Allow the pressure to be released completely.",
@@ -5536,7 +5536,7 @@
         },
         {
             "restaurants": "[\"Sardar Pav bhaji\",\"Birju's Pav Bhaji\",\"Pav Bhaji King\",\"Balaji Pav Bhaji Centre\",\"Ashok Vada Pav Stall\",\"Mahalaxmi Pav Bhaji\",\"Maruti Pav Bhaji\",\"Lachhu Pav Bhaji\",\"Maa Anjani Pav Bhaji Centre\",\"Cannon Pav Bhaji\",\"Bhagwati Pav Bhaji\",\"Pack-A-Pav\"]",
-            "food_item": "Paneer Khada Pav Bhaji ",
+            "food_item": "Paneer Khada Pav Bhaji",
             "mood": "sluggish",
             "mood1": "anger",
             "recipe": "the recipe is made with the same set of vegetables and spices as the traditional one but is topped with grated paneer. it is an ideal alternative to the popular pav bhaji and can be served as a party starter or as an appetiser with choice of bread.",
@@ -5579,7 +5579,7 @@
         },
         {
             "restaurants": "[\"Utsav- The Barbeque Restaurant\",\"UBQ by Barbeque Nation\",\"Barbeque & Biryani\",\"Koliwada Chicken & Fish Fry Corner\"]",
-            "food_item": "Barbeque Fish ",
+            "food_item": "Barbeque Fish",
             "mood": "happy",
             "recipe": "The marinade combines Sambal chili paste with soy sauce, ginger, brown sugar, and garlic. You will want to let those flavors sink in before this salmon takes a quick trip over a hot grill.  ",
             "preparation": "Preheat the oven at 200˚C.",
@@ -6084,7 +6084,7 @@
         },
         {
             "restaurants": "[\"Beeji Ki Rasoi\",\"Chaap Ki Chhap\",\"Sukoon Ki Chai\",\"Neel Ki Biryani\",\"Maa Ki Khichdi\"]",
-            "food_item": "Lehsun Ki Sabji ",
+            "food_item": "Lehsun Ki Sabji",
             "mood": "anger",
             "preparation": "Heat 2 tbsps mustard oil in a non-stick pan until it begins to smoke. Add garlic cloves and sauté till golden brown. Take it off the flame and keep aside.",
             "step 2": "Heat remaining mustard oil in another non-stick pan until it begins to smoke. Add cumin seeds and let them change colour. Add onion, mix and sauté till translucent. Add tomato, mix and saute for 1 minute. Add green chilli, mix and saute till tomatoes are soft.",
@@ -6381,7 +6381,7 @@
         },
         {
             "restaurants": "[\"shree gangour sweets\",\"chandu halwai grant road\",\"m n mithaiwala\",\"punjabi sweet house and restaurants\",\"adarsh mithai mandir\",\"vyanjan\",\"tharu sweets\",\"sindhu sweets\",\"jhama sweets ghatkopar east\"]",
-            "food_item": "Vegan Gujiya ",
+            "food_item": "Vegan Gujiya",
             "mood": "happy",
             "recipe": "Gujiya do resemble empanadas and very much popular in north India, especially during Holi festival. Its not they are made only during Holi. They are also made during Diwali.",
             "preparation": "To make coconut butter, take desiccated coconut in a blender jar. Blend till it turns into a smooth paste, scraping the sides in between",
@@ -6419,7 +6419,7 @@
         },
         {
             "restaurants": "[\"shree gangour sweets\",\"chandu halwai grant road\",\"m n mithaiwala\",\"punjabi sweet house and restaurants\",\"adarsh mithai mandir\",\"vyanjan\",\"tharu sweets\",\"sindhu sweets\",\"jhama sweets ghatkopar east\"]",
-            "food_item": "Gajar Burfi ",
+            "food_item": "Gajar Burfi",
             "mood": "stress",
             "recipe": "Red Delhi carrots are in season now and time to make various carrot based recipes like carrot halwa, Gajar ka murabba. ",
             "preparation": "Grease a barfi tray with a little ghee and set aside.",
@@ -6877,7 +6877,7 @@
         },
         {
             "restaurants": "[\"celini\",\"mezzo mezzo\",\"botticino\",\"prego\",\"mia cucina\",\"gustoso\",\"little italy\",\"cincin mumbai'\",\"quatrro ristorante\",\"olio novotel\",\"romano's\",\"out of the blue\"]",
-            "food_item": "Deep Pan Pizza ",
+            "food_item": "Deep Pan Pizza",
             "mood": "sluggish",
             "recipe": "It was in Chicago that deep dish style pizza was created. The first deep dish pizza is believed to have been created by Ike Sewell and Ric Riccardo in 1943 at their restaurant Pizzeria Uno (but the origin is debated). ",
             "preparation": "Preheat the oven at 200˚C.",
@@ -6914,7 +6914,7 @@
         },
         {
             "restaurants": "[\"celini\",\"mezzo mezzo\",\"botticino\",\"prego\",\"mia cucina\",\"gustoso\",\"little italy\",\"cincin mumbai'\",\"quatrro ristorante\",\"olio novotel\",\"romano's\",\"out of the blue\"]",
-            "food_item": "Cappuccino Cooler ",
+            "food_item": "Cappuccino Cooler",
             "mood": "happy",
             "mood1": "anger",
             "recipe": "In a blender, combine coffee, ice cream and chocolate syrup. Blend until smooth. Pour over crushed ice. Garnish with a dollop of whipped cream and serve.",
@@ -8179,7 +8179,7 @@
         },
         {
             "restaurants": "[\"celini\",\"mezzo mezzo\",\"botticino\",\"prego\",\"mia cucina\",\"gustoso\",\"little italy\",\"cincin mumbai'\",\"quatrro ristorante\",\"olio novotel\",\"romano's\",\"out of the blue\"]",
-            "food_item": "Spaghetti With Olive Oil, Garlic And Chilli ",
+            "food_item": "Spaghetti With Olive Oil, Garlic And Chilli",
             "recipe": "Sometimes simple food is the best and this 5 ingredient spaghetti aglio e olio wonderfully combines the flavours of garlic, chilli and fresh parsley to deliver a mouthwatering meal with minimum fuss.",
             "preparation": "Cook spaghetti in sufficient salted boiling water to which one tablespoon of oil has been added till almost done (al dente. Drain refresh and keep aside.",
             "step 2": "Heat olive oil in a pan, add garlic and sauté on medium heat for half a minute. Add crushed red chillies and crushed peppercorns and continue to sauté for another half a minute.",
@@ -8248,7 +8248,7 @@
         },
         {
             "restaurants": "[\"celini\",\"mezzo mezzo\",\"botticino\",\"prego\",\"mia cucina\",\"gustoso\",\"little italy\",\"cincin mumbai'\",\"quatrro ristorante\",\"olio novotel\",\"romano's\",\"out of the blue\"]",
-            "food_item": "Chicken Scallopini ",
+            "food_item": "Chicken Scallopini",
             "mood": "sluggish",
             "recipe": "The white wine sauce with capers complements the flavor of the lemon juice, and makes a great topping for wild rice.",
             "preparation": "Slice each chicken breast into two. In a bowl mix together two tablespoons olive oil, salt, parsley, thyme and black pepper powder.",
@@ -9049,7 +9049,7 @@
         },
         {
             "restaurants": "[\"celini\",\"mezzo mezzo\",\"botticino\",\"prego\",\"mia cucina\",\"gustoso\",\"little italy\",\"cincin mumbai'\",\"quatrro ristorante\",\"olio novotel\",\"romano's\",\"out of the blue\"]",
-            "food_item": "Wholesome Spaghetti ",
+            "food_item": "Wholesome Spaghetti",
             "mood": "sluggish",
             "recipe": "Italian cuisine has developed through centuries of social and political changes, with roots stretching to antiquity.  Italian cuisine is simple and a number of dishes having only four to eight ingredients.  They rely mostly on the quality of ingredients rather than elaborate preparation.",
             "preparation": "Boil spaghetti in sufficient quantity of salted water till al dente. Drain, apply oil and keep aside. Marinate chicken pieces in Worcestershire sauce. Heat equal quantities of olive oil in two separate pans. Add garlic to both the pans and sauté. Add marinated chicken to one pan and sauté for five minutes.",
@@ -9246,7 +9246,7 @@
         },
         {
             "restaurants": "[\"celini\",\"mezzo mezzo\",\"botticino\",\"prego\",\"mia cucina\",\"gustoso\",\"little italy\",\"cincin mumbai'\",\"quatrro ristorante\",\"olio novotel\",\"romano's\",\"out of the blue\"]",
-            "food_item": "Sausage Pizza ",
+            "food_item": "Sausage Pizza",
             "mood": "happy",
             "mood1": "sluggish",
             "recipe": "A homemade Italian Sausage and Pepperoni Pizza recipe with sweet Italian sausage and real sliced pepperoni plus a recipe for homemade pizza dough and tomato sauce.",
@@ -9852,7 +9852,7 @@
         },
         {
             "restaurants": "[\"Icy Spicy Restaurant\",\"Jim - Me's Kitchen\",\"Cantonese\",\"The Oriental Blossom - Marine Plaza\",\"Wok Hei\",\"Stone Oven\",\"5 Spice\"]",
-            "food_item": "Cantonese Chicken ",
+            "food_item": "Cantonese Chicken",
             "recipe": "Prepare the chicken by cutting the breast and thigh portions into 5 x 7.5cm (2 x 3\") pieces. Cut the wings into 3 portions and discard the end tips. Keep the drumsticks whole. Heat the oil in a large frying pan, add the chicken and stir fry for 10 minutes or until well browned. Drain off the excess oil.",
             "preparation": "Heat ½ tablespoon oil in a non-stick wok. Add noodles and sauté for half a minute. Add bean sprouts and mix. Add spring onion greens, soy sauce and mix well.",
             "step 2": "Add salt and ½ teaspoon pepper powder and mix well. Cook for a minute.",
@@ -9961,7 +9961,7 @@
         },
         {
             "restaurants": "[\"Khow Chow\",\"Facing East\",\"5 Spice\",\"Peco Peco\",\"China Bistro\",\"Gypsy Chinese\",\"Yauatcha\",\"Mainland China\",\"Ming Yang - Taj Lands End\",\"Stir Fry Grill\",\"Uncle's Kitchen\",\"Hakkasan\",\"Ling's Pavilion\"]",
-            "food_item": "Potatoes in Hot Garlic Sauce ",
+            "food_item": "Potatoes in Hot Garlic Sauce",
             "mood": "happy",
             "mood1": "sluggish",
             "recipe": "Stuffed potato in chilli garlic sauce is a simple Chinese dish. Slices of potatoes with cottage cheese filling are dipped into a batter and then fried",
@@ -10041,7 +10041,7 @@
         },
         {
             "restaurants": "[\"Khow Chow\",\"Facing East\",\"5 Spice\",\"Peco Peco\",\"China Bistro\",\"Gypsy Chinese\",\"Yauatcha\",\"Mainland China\",\"Ming Yang - Taj Lands End\",\"Stir Fry Grill\",\"Uncle's Kitchen\",\"Hakkasan\",\"Ling's Pavilion\"]",
-            "food_item": "Stir Fried Vegetables with Fried Basil ",
+            "food_item": "Stir Fried Vegetables with Fried Basil",
             "recipe": "I love to use fresh herbs and it cannot be fresher than this as I have plucked basil and spinach from my balcony just a few minutes before cooking.",
             "preparation": "Heat oil in a non-stick pan, add garlic and sauté till golden. Add button mushrooms and shimeji mushrooms and toss.",
             "step 2": "Add baby corn and chanterelle mushrooms and toss. Add salt and pepper powder and mix well.",
@@ -10509,7 +10509,7 @@
         },
         {
             "restaurants": "[\"Khow Chow\",\"Facing East\",\"5 Spice\",\"Peco Peco\",\"China Bistro\",\"Gypsy Chinese\",\"Yauatcha\",\"Mainland China\",\"Ming Yang - Taj Lands End\",\"Stir Fry Grill\",\"Uncle's Kitchen\",\"Hakkasan\",\"Ling's Pavilion\"]",
-            "food_item": "Beancurd Egg Drop Soup ",
+            "food_item": "Beancurd Egg Drop Soup",
             "mood": "happy",
             "mood1": "sad",
             "recipe": "All you need is some chicken stock (home made if possible), one block of firm tofu, two eggs, some minced garlic and ginger, and your standard seasoning (salt & pepper). To get a thick soup, you will need corn starch. And for the finishing touch, some sesame oil and thinly sliced scallions.",
@@ -10614,7 +10614,7 @@
         },
         {
             "restaurants": "[\"Khow Chow\",\"Facing East\",\"5 Spice\",\"Peco Peco\",\"China Bistro\",\"Gypsy Chinese\",\"Yauatcha\",\"Mainland China\",\"Ming Yang - Taj Lands End\",\"Stir Fry Grill\",\"Uncle's Kitchen\",\"Hakkasan\",\"Ling's Pavilion\"]",
-            "food_item": "Milkmaid Darsaan ",
+            "food_item": "Milkmaid Darsaan",
             "mood": "happy",
             "mood1": "sad",
             "recipe": "these Crispy Sesame Honey Noodles Recipe or Darsaan as called in the local language are a delicious option for you.",
@@ -10798,7 +10798,7 @@
         },
         {
             "restaurants": "[\"Khow Chow\",\"Facing East\",\"5 Spice\",\"Peco Peco\",\"China Bistro\",\"Gypsy Chinese\",\"Yauatcha\",\"Mainland China\",\"Ming Yang - Taj Lands End\",\"Stir Fry Grill\",\"Uncle's Kitchen\",\"Hakkasan\",\"Ling's Pavilion\"]",
-            "food_item": "Bundles Of Vegetables In Chilli Honey Sesame ",
+            "food_item": "Bundles Of Vegetables In Chilli Honey Sesame",
             "mood": "happy",
             "mood1": "stress",
             "recipe": "Give this absolutely lip smacking recipe of Honey Chilli Sesame Potatoes, that has a perfect blend of asian flavours and makes a great side dish along with some Hakka Noodles and Vegetable Fried Rice.",
@@ -11669,7 +11669,7 @@
         },
         {
             "restaurants": "[\"Khow Chow\",\"Facing East\",\"5 Spice\",\"Peco Peco\",\"China Bistro\",\"Gypsy Chinese\",\"Yauatcha\",\"Mainland China\",\"Ming Yang - Taj Lands End\",\"Stir Fry Grill\",\"Uncle's Kitchen\",\"Hakkasan\",\"Ling's Pavilion\"]",
-            "food_item": "Chilli Orange Wonton Soup ",
+            "food_item": "Chilli Orange Wonton Soup",
             "mood": "angry",
             "recipe": "Each Chinese dish reflects a balance of taste, texture, aroma and colour. Be it sweet, sour, pungent, hot, salty or spicy – all the six basic flavours are incorporated deftly in all Chinese dishes.",
             "preparation": "Cut the wonton wrappers into four pieces each. Place them on a flat surface. Dampen the edges all around. Place a little chilli sauce in the centre of each wonton piece.",
@@ -12001,7 +12001,7 @@
         },
         {
             "restaurants": "[\"Khow Chow\",\"Facing East\",\"5 Spice\",\"Peco Peco\",\"China Bistro\",\"Gypsy Chinese\",\"Yauatcha\",\"Mainland China\",\"Ming Yang - Taj Lands End\",\"Stir Fry Grill\",\"Uncle's Kitchen\",\"Hakkasan\",\"Ling's Pavilion\"]",
-            "food_item": "Beancurd With French Beans And Hoisin Sauce ",
+            "food_item": "Beancurd With French Beans And Hoisin Sauce",
             "mood": "happy",
             "mood1": "angry",
             "recipe": "Each Chinese dish reflects a balance of taste, texture, aroma and colour. Be it sweet, sour, pungent, hot, salty or spicy – all the six basic flavours are incorporated deftly in all Chinese dishes.",
@@ -12037,7 +12037,7 @@
         },
         {
             "restaurants": "[\"Quan-Pan Asian\",\"Grandmama's Cafe\",\"Jai Hind Lunch Home\",\"El Mercado\",\"Cafe Moshe's\",\"Indigo Delicatessen\",\"The Finch\",\"Shamiana - The Taj Mahal Palace\",\"Royal China\",\"Cafe Free India\",\"Ming Yang - Taj Lands End\",\"The Sassy Spoon\"]",
-            "food_item": "Chilli Garlic Fish Rice ",
+            "food_item": "Chilli Garlic Fish Rice",
             "recipe": "firstly if you do not have access to the sauce, you can use homemade too. basically, take equal proportions of garlic and red chillies and ground it to a coarse paste.",
             "preparation": "Add chilli paste, salt and half tablespoon soy sauce to the fish pieces and mix. Add one tablespoon cornflour and mix well.",
             "step 2": "Heat one and a half tablespoons oil in a non stick pan. Add the fish pieces and shallow fry, turning sides till done.",
