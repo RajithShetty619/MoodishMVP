@@ -68,6 +68,7 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                   GestureDetector(
                     onTap: () {
                       setState(() {
+                        readMorePrep=false;
                         _selected = 2;
                       });
                     },
@@ -100,7 +101,7 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
         child: Column(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * 2,
+              height: readMorePrep==true? MediaQuery.of(context).size.height * 2.52:_selected==2?MediaQuery.of(context).size.height * 1.7:MediaQuery.of(context).size.height * 2,
               child: Stack(
                 alignment: Alignment.topLeft,
                 overflow: Overflow.visible,
@@ -346,7 +347,7 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                             SizedBox(
                               height: 30,
                             ),
-                            /////////
+                            ////////////////////////////////////////////////////////////////////////////////////////////
                             if (_selected == 1)
                               Column(
                                 children: [
