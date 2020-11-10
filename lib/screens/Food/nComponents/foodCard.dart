@@ -48,6 +48,7 @@ class _FoodCrdState extends State<FoodCrd> {
                       height: 200,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(30),
                               topRight: Radius.circular(30),
                               bottomLeft: Radius.circular(30)),
                           image: DecorationImage(
