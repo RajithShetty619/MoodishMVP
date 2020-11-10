@@ -91,9 +91,7 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                 // TODO: implement listener
               },
               builder: (context, foodList) {
-                setState(() {
-                  mealtype = foodList["tod"][0].meal_type;
-                });
+                mealtype = foodList["tod"][0].meal_type;
                 return ListView.builder(
                   itemCount: foodList["tod"].length,
                   shrinkWrap: true,
@@ -246,9 +244,7 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                 // TODO: implement listener
               },
               builder: (context, foodList) {
-                setState(() {
-                  cuisine = foodList["craving"][0].cuisine;
-                });
+                cuisine = foodList["craving"][0].cuisine;
                 return ListView.builder(
                   itemCount: 5,
                   shrinkWrap: true,
