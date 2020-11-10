@@ -101,6 +101,8 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => FoodInfoCard(
+                                      listName: "tod",
+                                      index: index,
                                       foodList: foodList["tod"][index],
                                     )));
                       },
@@ -250,6 +252,8 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => FoodInfoCard(
+                                      listName: "carving",
+                                      index: index,
                                       foodList: foodList["craving"][index],
                                     )));
                       },

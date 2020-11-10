@@ -378,6 +378,8 @@ class _FoodHomeState extends State<FoodHome> {
                                                   (BuildContext context,
                                                       index) {
                                                 return FoodCrd(
+                                                  index: index,
+                                                  listName: "mood",
                                                   foodList: foodList["mood"]
                                                       [index],
                                                 );
@@ -426,6 +428,8 @@ class _FoodHomeState extends State<FoodHome> {
                                       itemBuilder:
                                           (BuildContext context, index) {
                                         return FoodCrd(
+                                          listName: "d0",
+                                          index: index,
                                           foodList: foodList["d0"][index],
                                         );
                                       },
@@ -471,6 +475,8 @@ class _FoodHomeState extends State<FoodHome> {
                                       itemBuilder:
                                           (BuildContext context, index) {
                                         return FoodCrd(
+                                          listName: "trend",
+                                          index: index,
                                           foodList: foodList["trend"][index],
                                         );
                                       },

@@ -69,10 +69,12 @@ class _LatestRecipeInfoState extends State<LatestRecipeInfo> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => FoodInfoCard()));
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => FoodInfoCard(
+
+                    //         )));
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20, bottom: 10),

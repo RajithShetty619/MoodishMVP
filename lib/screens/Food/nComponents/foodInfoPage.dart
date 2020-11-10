@@ -1,22 +1,29 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:moodish_mvp/Services/betaCount.dart';
 import 'package:moodish_mvp/Services/database.dart';
 import 'package:moodish_mvp/models/foodListModel.dart';
 import 'package:moodish_mvp/models/restaurantsModel.dart';
+import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
 import 'package:moodish_mvp/screens/Food/components/StepByStep.dart';
+import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 import 'package:moodish_mvp/screens/Food/nComponents/bottomtabNav.dart';
 import 'package:moodish_mvp/screens/Restaurants/restaurantCard/restCardModel.dart';
 import 'package:page_transition/page_transition.dart';
 
 class FoodInfoCard extends StatefulWidget {
   final FoodListModel foodList;
-  const FoodInfoCard({
-    Key key,
-    @required this.foodList,
-  }) : super(key: key);
+  final String listName;
+  final int index;
+  const FoodInfoCard(
+      {Key key,
+      @required this.foodList,
+      @required this.listName,
+      @required this.index})
+      : super(key: key);
   @override
   _FoodInfoCardState createState() => _FoodInfoCardState();
 }
@@ -1089,6 +1096,27 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                       setState(() {
                         _like = !_like;
                       });
+                      if (_like) {
+                        setState(() {
+                          BlocProvider.of<FoodBloc>(context).add(
+                              FoodEvent.like(widget.index, widget.listName));
+                        });
+                        await DatabaseService().likeTransction(
+                            food: widget.foodList,
+                            sr_no: widget.foodList.sr_no,
+                            collection: "food",
+                            field: "like");
+                      } else {
+                        setState(() {
+                          BlocProvider.of<FoodBloc>(context).add(
+                              FoodEvent.like(widget.index, widget.listName));
+                        });
+                        await DatabaseService().disLikeTransction(
+                            food: widget.foodList,
+                            sr_no: widget.foodList.sr_no,
+                            collection: "food",
+                            field: "like");
+                      }
                     },
                   ),
                 ),

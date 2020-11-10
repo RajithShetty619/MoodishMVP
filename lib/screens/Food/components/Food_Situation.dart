@@ -37,8 +37,11 @@ class _FoodEverySituationState extends State<FoodEverySituation> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      FoodInfoCard(foodList: widget.foodList)));
+                  builder: (context) => FoodInfoCard(
+                        foodList: widget.foodList,
+                        index: widget.index,
+                        listName: widget.listName,
+                      )));
         },
         child: Stack(
           children: <Widget>[

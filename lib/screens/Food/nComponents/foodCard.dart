@@ -5,10 +5,11 @@ import 'package:moodish_mvp/screens/Food/nComponents/foodInfoPage.dart';
 
 class FoodCrd extends StatefulWidget {
   final FoodListModel foodList;
-  const FoodCrd({
-    Key key,
-    this.foodList,
-  }) : super(key: key);
+  final int index;
+  final String listName;
+  const FoodCrd(
+      {Key key, this.foodList, @required this.index, @required this.listName})
+      : super(key: key);
   @override
   _FoodCrdState createState() => _FoodCrdState();
 }
@@ -22,7 +23,9 @@ class _FoodCrdState extends State<FoodCrd> {
             context,
             MaterialPageRoute(
                 builder: (context) => FoodInfoCard(
+                      index: widget.index,
                       foodList: widget.foodList,
+                      listName: widget.listName,
                     )));
       },
       child: Padding(

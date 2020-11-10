@@ -153,7 +153,9 @@ class _SeeMoreRecipesState extends State<SeeMoreRecipes> {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
                                   return FoodInfoCard(
+                                    index: index,
                                     foodList: foodList["recomrecipe"][index],
+                                    listName: "recomrecipe",
                                   );
                                 }));
                               },
