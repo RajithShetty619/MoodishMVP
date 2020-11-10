@@ -30,7 +30,7 @@ class _FoodHomeState extends State<FoodHome> {
     GridTileBuilder(feel: 'Stressed', isSelected: false),
     GridTileBuilder(feel: 'Angry', isSelected: false),
     GridTileBuilder(feel: 'Sad', isSelected: false),
-    GridTileBuilder(feel: 'Healthy', isSelected: false),
+    // GridTileBuilder(feel: 'Healthy', isSelected: false),
     GridTileBuilder(feel: 'Sluggish', isSelected: false),
   ];
   bool isSelected = false;
@@ -497,14 +497,14 @@ class _FoodHomeState extends State<FoodHome> {
                         const EdgeInsets.only(left: 15, right: 15.0, top: 25),
                     child: TopRecipes(), //TopRecipes Card
                   ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(left: 15, right: 15.0, top: 25),
-                    child: LatestRecipes(), //Latest Recipes card
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
+                  // Padding(
+                  //   padding:
+                  //       const EdgeInsets.only(left: 15, right: 15.0, top: 25),
+                  //   child: LatestRecipes(), //Latest Recipes card
+                  // ),
+                  // SizedBox(
+                  //   height: 20,
+                  // ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(30, 25, 0, 0),
                     child: Row(

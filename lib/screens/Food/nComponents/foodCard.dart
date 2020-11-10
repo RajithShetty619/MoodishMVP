@@ -69,6 +69,7 @@ class _FoodCrdState extends State<FoodCrd> {
                               children: [
                                 Text(
                                   widget.foodList.foodName,
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w500),
