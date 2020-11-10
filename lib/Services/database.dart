@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:moodish_mvp/Services/authenticate.dart';
@@ -40,21 +41,59 @@ class DatabaseService {
   }
 
   Future<void> restRating(
-      {String sr_no, String review, double rating, String bestPart}) async {
+      {String review,
+      double rating,
+      String bestPart,
+      RestListModel rest}) async {
     if (review != null) {
-      dynamic user = await Authenticate().returnUser();
+      User user = await Authenticate().returnUser();
+      String user_photo = await FirebaseStorage()
+          .ref()
+          .child('user')
+          .child(user.uid + "/profilePhoto")
+          .getDownloadURL()
+          .catchError((e) {
+        return '';
+      });
       await FirebaseFirestore.instance
           .collection("restaurants")
-          .doc(sr_no)
-          .collection("review")
+          .doc(rest.sr_no)
+          .collection("reviews")
           .doc(user.uid)
           .set({
         "uid": user.uid,
         "author_name": user.email,
+        "author_url": user_photo,
         "rating": rating.toString(),
-        "text": review
+        "text": review,
+        "timestamp": FieldValue.serverTimestamp()
+      });
+      await FirebaseFirestore.instance
+          .collection("Username")
+          .doc(user.uid)
+          .collection("reviews")
+          .doc(rest.sr_no)
+          .set({
+        "restaurant_Name": rest.restaurant_Name,
+        "restaurant_Location": rest.restaurant_Location,
+        "rating": rating.toString(),
+        "text": review,
+        "timestamp": FieldValue.serverTimestamp()
+      }).catchError((e) {
+        print(e);
       });
     }
+  }
+
+  Future<List<DocumentSnapshot>> getReviews() async {
+    User user = await Authenticate().returnUser();
+    QuerySnapshot qs = await FirebaseFirestore.instance
+        .collection("Username")
+        .doc(user.uid)
+        .collection("reviews")
+        .get();
+    List<DocumentSnapshot> ds = qs.docs;
+    return ds;
   }
 
 ///////////////////////////////////////////////////// save prefernce ///////////////

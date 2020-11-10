@@ -19,7 +19,6 @@ class Storage {
       String url = _url;
       return url;
     } catch (e) {
-      print('path is probably wrong blame the database :/');
       return "https://firebasestorage.googleapis.com/v0/b/moodishtest.appspot.com/o/error-image-generic.png?alt=media&token=462d1ab9-ff67-40d9-ae25-8388720dc89b";
     }
   }

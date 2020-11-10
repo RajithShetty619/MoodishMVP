@@ -127,11 +127,15 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  foodList["tod"][index].foodName,
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500),
+                                Container(
+                                  width: MediaQuery.of(context).size.width / 2.55,
+                                  child: Text(
+                                    foodList["tod"][index].foodName,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500),
+                                  ),
                                 ),
                                 Text(
                                   foodList["tod"][index].cuisine,
@@ -278,12 +282,15 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  foodList["craving"][index].foodName,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500),
+                                Container(
+                            width: MediaQuery.of(context).size.width / 2.55,
+                                  child: Text(
+                                    foodList["craving"][index].foodName,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500),
+                                  ),
                                 ),
                                 Text(
                                   foodList["craving"][index].cuisine,

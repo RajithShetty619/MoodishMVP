@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:moodish_mvp/Services/databaseQuery.dart';
-import 'package:moodish_mvp/Services/geolocationRest.dart';
 import 'package:moodish_mvp/models/restaurantsModel.dart';
 import 'package:moodish_mvp/screens/Food/events/restEvent.dart';
 import 'package:moodish_mvp/screens/Restaurants/restBloc/restBloc.dart';
@@ -59,15 +57,15 @@ class _RestaurantHomeState extends State<RestaurantHome> {
     data() async {
       await getCurrentLocation();
       await _getAddressFromLatLng();
+      await DatabaseQuery().getRest().then((rest) {
+        setState(() {
+          BlocProvider.of<RestaurantBloc>(context)
+              .add(RestaurantEvent.add(rest, 'all'));
+        });
+      });
     }
 
     data();
-    setState(() {
-      DatabaseQuery().getRest().then((rest) {
-        BlocProvider.of<RestaurantBloc>(context)
-            .add(RestaurantEvent.add(rest, 'all'));
-      });
-    });
     super.initState();
   }
 
