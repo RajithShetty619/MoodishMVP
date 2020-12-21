@@ -33,8 +33,7 @@ class _FoodftTabState extends State<FoodftTab> {
         return ListView.builder(
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
-          primary: false,
-          physics: NeverScrollableScrollPhysics(),
+          physics: BouncingScrollPhysics(),
           itemCount: f_fact['fft'].length,
           itemBuilder: (BuildContext context, index) {
             return getListView(

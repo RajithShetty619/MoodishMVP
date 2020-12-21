@@ -41,7 +41,6 @@ class _PollTabsState extends State<PollTabs> {
         return ListView.builder(
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
-          primary: false,
           physics: NeverScrollableScrollPhysics(),
           itemCount: pollList['p'].length,
           itemBuilder: (BuildContext context, index) {
@@ -82,7 +81,6 @@ class _This_ThatTabsState extends State<This_ThatTabs> {
         return ListView.builder(
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
-          primary: false,
           physics: NeverScrollableScrollPhysics(),
           itemCount: thislist['tt'].length,
           itemBuilder: (BuildContext context, index) {
@@ -126,7 +124,6 @@ class _YesNoTabsState extends State<YesNoTabs> {
         return ListView.builder(
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
-          primary: false,
           physics: NeverScrollableScrollPhysics(),
           itemCount: yesno['yn'].length,
           itemBuilder: (BuildContext context, index) {

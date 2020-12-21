@@ -156,7 +156,7 @@ class _FoodHomeState extends State<FoodHome> {
                     height: 30,
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(25, 25, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(20, 25, 0, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -204,63 +204,61 @@ class _FoodHomeState extends State<FoodHome> {
                     ),
                   ),
                   SizedBox(height: 10),
-                  SingleChildScrollView(
-                    physics: BouncingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        //outer column for alignment
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            GestureDetector(
-                              child: Feel(
-                                title: "Feeling",
-                                // isActive: true,
-                                index: indxT,
-                                stIndex: 0,
-                                press: () {},
-                              ),
-                              onTap: () async {
-                                setState(() {
-                                  indxT = 0;
-                                });
-                              },
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      //outer column for alignment
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          GestureDetector(
+                            child: Feel(
+                              title: "Feeling",
+                              // isActive: true,
+                              index: indxT,
+                              stIndex: 0,
+                              press: () {},
                             ),
-                            GestureDetector(
-                              child: Feel(
-                                title: "Veg Only",
-                                // isActive: true,
-                                index: indxT,
-                                stIndex: 1,
-                                press: () {},
-                              ),
-                              onTap: () async {
-                                setState(() {
-                                  indxT = 1;
-                                });
-                              },
+                            onTap: () async {
+                              setState(() {
+                                indxT = 0;
+                              });
+                            },
+                          ),
+                          GestureDetector(
+                            child: Feel(
+                              title: "Veg Only",
+                              // isActive: true,
+                              index: indxT,
+                              stIndex: 1,
+                              press: () {},
                             ),
-                            GestureDetector(
-                              child: Feel(
-                                title: "Trending",
-                                // isActive: true,
-                                index: indxT,
-                                stIndex: 2,
-                                press: () {},
-                              ),
-                              onTap: () async {
-                                setState(() {
-                                  indxT = 2;
-                                });
-                              },
+                            onTap: () async {
+                              setState(() {
+                                indxT = 1;
+                              });
+                            },
+                          ),
+                          GestureDetector(
+                            child: Feel(
+                              title: "Trending",
+                              // isActive: true,
+                              index: indxT,
+                              stIndex: 2,
+                              press: () {},
                             ),
-                          ],
-                        ),
-                        if (indxT == 0) // Feeling
-                          Column(
+                            onTap: () async {
+                              setState(() {
+                                indxT = 2;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                      if (indxT == 0) // Feeling
+                        Expanded(
+                          child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -269,10 +267,10 @@ class _FoodHomeState extends State<FoodHome> {
                                   padding:
                                       const EdgeInsets.fromLTRB(10, 10, 10, 0),
                                   child: Container(
-                                    alignment: Alignment.topRight,
+                                    alignment: Alignment.topLeft,
                                     child: Text(
                                       'How do you Feel?',
-                                      textAlign: TextAlign.start,
+                                      textAlign: TextAlign.left,
                                       style: TextStyle(
                                           fontSize: 18.0,
                                           fontStyle: FontStyle.italic,
@@ -298,6 +296,7 @@ class _FoodHomeState extends State<FoodHome> {
                                           mainAxisSpacing: 1,
                                         ),
                                         scrollDirection: Axis.horizontal,
+                                        physics: BouncingScrollPhysics(),
                                         itemCount: feel.length,
                                         shrinkWrap: true,
                                         itemBuilder:
@@ -422,10 +421,14 @@ class _FoodHomeState extends State<FoodHome> {
                               )),
                             ],
                           ),
-                        if (indxT == 1) //VegOnly
-                          Padding(
+                        ),
+                      //VegOnly
+                      if (indxT == 1)
+                        Expanded(
+                          child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Container(
+                              margin: EdgeInsets.all(5),
                               height: MediaQuery.of(context).size.height / 2.5,
                               child: BlocConsumer<FoodBloc,
                                   Map<String, List<FoodListModel>>>(
@@ -447,8 +450,7 @@ class _FoodHomeState extends State<FoodHome> {
                                     child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
                                       shrinkWrap: true,
-                                      primary: false,
-                                      physics: NeverScrollableScrollPhysics(),
+                                      physics: BouncingScrollPhysics(),
                                       itemCount: foodList["d0"].length,
                                       itemBuilder:
                                           (BuildContext context, index) {
@@ -469,10 +471,13 @@ class _FoodHomeState extends State<FoodHome> {
                               ),
                             ),
                           ),
-                        if (indxT == 2) //Trending
-                          Padding(
+                        ),
+                      if (indxT == 2) //Trending
+                        Expanded(
+                          child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Container(
+                              margin: EdgeInsets.all(5),
                               height: MediaQuery.of(context).size.height / 2.5,
                               child: BlocConsumer<FoodBloc,
                                   Map<String, List<FoodListModel>>>(
@@ -494,8 +499,7 @@ class _FoodHomeState extends State<FoodHome> {
                                     child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
                                       shrinkWrap: true,
-                                      primary: false,
-                                      physics: NeverScrollableScrollPhysics(),
+                                      physics: BouncingScrollPhysics(),
                                       itemCount: foodList["trend"].length,
                                       itemBuilder:
                                           (BuildContext context, index) {
@@ -516,8 +520,8 @@ class _FoodHomeState extends State<FoodHome> {
                               ),
                             ),
                           ),
-                      ],
-                    ),
+                        ),
+                    ],
                   ),
                   Padding(
                     padding:
@@ -533,7 +537,7 @@ class _FoodHomeState extends State<FoodHome> {
                   //   height: 20,
                   // ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(30, 25, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(20, 25, 0, 0),
                     child: Text(
                       'Are You Bored?',
                       style:
@@ -541,78 +545,90 @@ class _FoodHomeState extends State<FoodHome> {
                     ),
                   ),
                   SizedBox(height: 10),
-                  SingleChildScrollView(
-                    physics: BouncingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            //inner cloumn for image and text
-                            GestureDetector(
-                              child: Feel(
-                                title: "Food For Thought",
-                                // isActive: true,
-                                index: indexP,
-                                stIndex: 0,
-                                press: () {},
-                              ),
-                              onTap: () async {
-                                setState(() {
-                                  indexP = 0;
-                                });
-                              },
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          //inner cloumn for image and text
+                          GestureDetector(
+                            child: Feel(
+                              title: "Food For Thought",
+                              // isActive: true,
+                              index: indexP,
+                              stIndex: 0,
+                              press: () {},
                             ),
-                            GestureDetector(
-                              child: Feel(
-                                title: "Polls",
-                                // isActive: true,
-                                index: indexP,
-                                stIndex: 1,
-                                press: () {},
-                              ),
-                              onTap: () async {
-                                setState(() {
-                                  indexP = 1;
-                                });
-                              },
+                            onTap: () async {
+                              setState(() {
+                                indexP = 0;
+                              });
+                            },
+                          ),
+                          GestureDetector(
+                            child: Feel(
+                              title: "Polls",
+                              // isActive: true,
+                              index: indexP,
+                              stIndex: 1,
+                              press: () {},
                             ),
-                          ],
-                        ),
-                        if (indexP == 0)
-                          Flexible(
+                            onTap: () async {
+                              setState(() {
+                                indexP = 1;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                      if (indexP == 0)
+                        Expanded(
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            physics: BouncingScrollPhysics(),
                             child: Container(
                               height: MediaQuery.of(context).size.height / 1.7,
                               child: FoodftTab(),
                             ),
                           ),
-                        if (indexP == 1 && numbr == 0)
-                          Flexible(
+                        ),
+                      if (indexP == 1 && numbr == 0)
+                        Expanded(
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            physics: BouncingScrollPhysics(),
                             child: Container(
-                              height: MediaQuery.of(context).size.height / 2.3,
+                              height: MediaQuery.of(context).size.height / 2.1,
                               child: PollTabs(),
                             ),
                           ),
-                        if (indexP == 1 && numbr == 1)
-                          Flexible(
+                        ),
+                      if (indexP == 1 && numbr == 1)
+                        Expanded(
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            physics: BouncingScrollPhysics(),
                             child: Container(
                               height: MediaQuery.of(context).size.height / 2.6,
                               child: YesNoTabs(),
                             ),
                           ),
-                        if (indexP == 1 && numbr == 2)
-                          Flexible(
+                        ),
+                      if (indexP == 1 && numbr == 2)
+                        Expanded(
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            physics: BouncingScrollPhysics(),
                             child: Container(
                               height: MediaQuery.of(context).size.height / 2.6,
                               child: This_ThatTabs(),
                             ),
                           ),
-                      ],
-                    ),
+                        ),
+                    ],
                   ),
                 ],
               ),

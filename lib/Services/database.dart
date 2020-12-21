@@ -15,6 +15,7 @@ import 'package:http/http.dart';
 class DatabaseService {
   final CollectionReference userName =
       FirebaseFirestore.instance.collection('Username');
+
   ////Delete user////////
   final String uid;
 
