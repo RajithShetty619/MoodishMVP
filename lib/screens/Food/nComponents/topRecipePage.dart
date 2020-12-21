@@ -279,6 +279,7 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                                     fontWeight: FontWeight.w500),
                               ),
                             ),
+<<<<<<< HEAD
                             Spacer(),
                             Padding(
                               padding: EdgeInsets.only(right: 20),
@@ -338,6 +339,51 @@ class _FoodRecipePageState extends State<FoodRecipePage> {
                                       child: Text(value),
                                     );
                                   }).toList(),
+=======
+                          ]),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    ListView.builder(
+                      itemCount: foodList["craving"].length,
+                      shrinkWrap: true,
+                      primary: false,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => FoodInfoCard(
+                                          listName: "carving",
+                                          index: index,
+                                          foodList: foodList["craving"][index],
+                                        )));
+                          },
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(left: 20, bottom: 10),
+                            child: Row(
+                              children: [
+                                Container(
+                                  height: 90,
+                                  width: 90,
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(30)),
+                                      image: DecorationImage(
+                                          image: CachedNetworkImageProvider(
+                                              foodList["craving"][index]
+                                                  .images),
+                                          fit: BoxFit.cover)),
+                                ),
+                                SizedBox(
+                                  width: 10,
+>>>>>>> 4fc5c83dda7b301d50ec1e8806ec5f90810d93aa
                                 ),
                               ]),
                             )

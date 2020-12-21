@@ -23,10 +23,7 @@ class _ProfileState extends State<Profile> {
   final Uri _emailLaunchUri = Uri(
       scheme: 'mailto',
       path: 'snapinsight0@gmail.com',
-      queryParameters: {
-        'subject': 'Feedback\tand\tSuggestion\tfor\tMoodish!'
-      }
-  );
+      queryParameters: {'subject': 'Feedback\tand\tSuggestion\tfor\tMoodish!'});
   Map<String, dynamic> userData = {};
   @override
   void initState() {
