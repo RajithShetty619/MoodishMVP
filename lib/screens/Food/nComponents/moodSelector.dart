@@ -223,6 +223,7 @@ class _RadialAnimationState extends State<RadialAnimation> {
   _buildButton(double angle, {Color color, String text, BuildContext context}) {
     // String mood = InheritMenu.of(context).mood;
     final double rad = radians(angle);
+    bool tapped = false;
     return Transform(
       transform: Matrix4.identity()
         ..translate((widget.translation.value) * cos(rad),
@@ -234,13 +235,15 @@ class _RadialAnimationState extends State<RadialAnimation> {
           heroTag: null,
           child: Text(text),
           backgroundColor: color,
-          onPressed: () {
-            // setState(() {
-            //   mood = text;
-            // });
-            Navigator.pop(context, text);
-
+          onPressed: () async {
+            setState(() {
+              tapped = true;
+            });
             _close();
+            Navigator.pop(
+              context,
+              text,
+            );
           },
         ),
       ),
