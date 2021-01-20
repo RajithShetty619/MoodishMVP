@@ -551,7 +551,7 @@ class TopCard extends StatelessWidget {
                     ),
                   )
                 ],
-              )
+              ),
             ],
           ),
           ClipRRect(
