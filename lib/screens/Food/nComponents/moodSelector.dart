@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+import 'package:moodish_mvp/Services/databaseQuery.dart';
+import 'package:moodish_mvp/screens/Food/blocs/bloc/foodBloc.dart';
+import 'package:moodish_mvp/screens/Food/events/foodEvent.dart';
 import 'dart:math';
 import 'package:vector_math/vector_math.dart' show radians;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -33,6 +38,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // }
 
 class MenuSelector extends StatefulWidget {
+  final bool tapped;
+  final int val;
+
+  const MenuSelector({Key key, this.tapped, this.val}) : super(key: key);
   @override
   _MenuSelectorState createState() => _MenuSelectorState();
 }
@@ -40,71 +49,71 @@ class MenuSelector extends StatefulWidget {
 class _MenuSelectorState extends State<MenuSelector> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Align(
-                    alignment: Alignment.topLeft,
-                    child: FloatingActionButton(
-                      heroTag: null,
-                      backgroundColor: Colors.white,
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.all(5),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Icon(
-                            Icons.arrow_back,
-                            size: 32,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10.0),
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Mood Selector',
-                      style:
-                          TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                )
-              ],
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height * .6,
-              width: MediaQuery.of(context).size.width,
-              child: RadialMenu(),
-            ),
-            // Padding(
-            //   padding: const EdgeInsets.only(top: 20.0),
-            //   child: Text(
-            //     'Selected Mood : ',
-            //     style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
-            //   ),
-            // )
-          ],
+    return Column(
+      children: [
+        // Row(
+        //   children: [
+        //     Padding(
+        //       padding: const EdgeInsets.all(8.0),
+        //       child: Align(
+        //         alignment: Alignment.topLeft,
+        //         child: FloatingActionButton(
+        //           heroTag: null,
+        //           backgroundColor: Colors.white,
+        //           onPressed: () {
+        //             Navigator.pop(context);
+        //           },
+        //           child: Padding(
+        //             padding: EdgeInsets.all(5),
+        //             child: GestureDetector(
+        //               onTap: () {
+        //                 Navigator.pop(context);
+        //               },
+        //               child: Icon(
+        //                 Icons.arrow_back,
+        //                 size: 32,
+        //                 color: Colors.black,
+        //               ),
+        //             ),
+        //           ),
+        //         ),
+        //       ),
+        //     ),
+        //     Padding(
+        //       padding: const EdgeInsets.only(left: 10.0),
+        //       child: Align(
+        //         alignment: Alignment.center,
+        //         child: Text(
+        //           'Mood Selector',
+        //           style:
+        //               TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
+        //         ),
+        //       ),
+        //     )
+        //   ],
+        // ),
+        Container(
+          height: MediaQuery.of(context).size.height * .33,
+          width: MediaQuery.of(context).size.width,
+          child: RadialMenu(tapped: widget.tapped, i: widget.val),
         ),
-      ),
+        // Padding(
+        //   padding: const EdgeInsets.only(top: 20.0),
+        //   child: Text(
+        //     'Selected Mood : ',
+        //     style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
+        //   ),
+        // )
+      ],
     );
   }
 }
 
 class RadialMenu extends StatefulWidget {
+  final bool tapped;
+  final int i;
+
+  const RadialMenu({Key key, this.tapped, this.i}) : super(key: key);
   @override
   _RadialMenuState createState() => _RadialMenuState();
 }
@@ -124,12 +133,14 @@ class _RadialMenuState extends State<RadialMenu>
   Widget build(BuildContext context) {
     return RadialAnimation(
       controller: controller,
+      tapped: widget.tapped,
+      i: widget.i,
     );
   }
 }
 
 class RadialAnimation extends StatefulWidget {
-  RadialAnimation({Key key, this.controller})
+  RadialAnimation({Key key, this.controller, this.tapped, this.i})
       : scale = Tween<double>(
           begin: 1.6,
           end: 0.0,
@@ -158,6 +169,8 @@ class RadialAnimation extends StatefulWidget {
         super(key: key);
 
   final AnimationController controller;
+  bool tapped;
+  int i;
   final Animation<double> scale;
   final Animation<double> translation;
   final Animation<double> rotation;
@@ -167,6 +180,32 @@ class RadialAnimation extends StatefulWidget {
 }
 
 class _RadialAnimationState extends State<RadialAnimation> {
+  moodGet(BuildContext dataContext, String mood) async {
+    Box _box = await Hive.openBox("preferenceBox");
+    String deter = _box.get("deter");
+
+    if (deter != "veg" && deter != "nonveg") {
+      Random random = new Random();
+      int randomNumber = random.nextInt(2);
+      if (randomNumber == 1)
+        deter = "veg";
+      else
+        deter = "nonveg";
+    }
+    DatabaseQuery(listName: "mood").getFood(
+        field: ['mood'],
+        value: [mood],
+        limit: 7,
+        mood: mood,
+        deter: deter,
+        check: 0).then((future) {
+      setState(() {
+        BlocProvider.of<FoodBloc>(dataContext)
+            .add(FoodEvent.add(future, "mood"));
+      });
+    });
+  }
+
   build(context) {
     return AnimatedBuilder(
       animation: widget.controller,
@@ -177,15 +216,30 @@ class _RadialAnimationState extends State<RadialAnimation> {
             alignment: Alignment.center,
             children: [
               _buildButton(18,
-                  color: Colors.purple, text: 'Happy', context: context),
+                  color: Colors.purple,
+                  text: 'Happy',
+                  context: context,
+                  tapped: widget.tapped),
               _buildButton(90,
-                  color: Colors.indigo, text: 'Stressed', context: context),
+                  color: Colors.indigo,
+                  text: 'Stressed',
+                  context: context,
+                  tapped: widget.tapped),
               _buildButton(162,
-                  color: Colors.green, text: 'Sad', context: context),
+                  color: Colors.green,
+                  text: 'Sad',
+                  context: context,
+                  tapped: widget.tapped),
               _buildButton(234,
-                  color: Colors.yellow, text: 'Sluggish', context: context),
+                  color: Colors.yellow,
+                  text: 'Sluggish',
+                  context: context,
+                  tapped: widget.tapped),
               _buildButton(306,
-                  color: Colors.orange, text: 'Angry', context: context),
+                  color: Colors.orange,
+                  text: 'Angry',
+                  context: context,
+                  tapped: widget.tapped),
               Transform.scale(
                 scale: widget.scale.value - 1.6,
                 child: FloatingActionButton(
@@ -220,10 +274,11 @@ class _RadialAnimationState extends State<RadialAnimation> {
     );
   }
 
-  _buildButton(double angle, {Color color, String text, BuildContext context}) {
+  _buildButton(double angle,
+      {Color color, String text, BuildContext context, bool tapped}) {
     // String mood = InheritMenu.of(context).mood;
     final double rad = radians(angle);
-    bool tapped = false;
+
     return Transform(
       transform: Matrix4.identity()
         ..translate((widget.translation.value) * cos(rad),
@@ -240,10 +295,12 @@ class _RadialAnimationState extends State<RadialAnimation> {
               tapped = true;
             });
             _close();
-            Navigator.pop(
-              context,
-              text,
-            );
+            print(tapped);
+            if (tapped == true) {
+              await moodGet(context, text);
+              widget.i++;
+              return widget.i;
+            }
           },
         ),
       ),
