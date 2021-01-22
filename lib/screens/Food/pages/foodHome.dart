@@ -44,6 +44,7 @@ class _FoodHomeState extends State<FoodHome> {
   int numbr = 2;
   Map<String, dynamic> userData = {};
   String mood;
+  bool tapped = false;
 
   @override
   void initState() {
@@ -317,13 +318,8 @@ class _FoodHomeState extends State<FoodHome> {
                                           MediaQuery.of(context).size.height /
                                               2.8,
                                       child: Center(
-                                        child: GestureDetector(
-                                            onTap: () {
-                                              _awaitReturnValueFromSecondScreen(
-                                                  context);
-                                            },
-                                            child: Text(
-                                                'Click here to select Your feeling')),
+                                        child: MenuSelector(
+                                            tapped: tapped, val: i),
                                       ),
                                       // child: GridView.builder(
                                       //     gridDelegate:
