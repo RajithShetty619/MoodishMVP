@@ -40,8 +40,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class MenuSelector extends StatefulWidget {
   final bool tapped;
   final int val;
+  final Function(int, String) callback;
 
-  const MenuSelector({Key key, this.tapped, this.val}) : super(key: key);
+  const MenuSelector({Key key, this.tapped, this.val, this.callback})
+      : super(key: key);
   @override
   _MenuSelectorState createState() => _MenuSelectorState();
 }
@@ -95,7 +97,8 @@ class _MenuSelectorState extends State<MenuSelector> {
         Container(
           height: MediaQuery.of(context).size.height * .33,
           width: MediaQuery.of(context).size.width,
-          child: RadialMenu(tapped: widget.tapped, i: widget.val),
+          child: RadialMenu(
+              tapped: widget.tapped, i: widget.val, callback: widget.callback),
         ),
         // Padding(
         //   padding: const EdgeInsets.only(top: 20.0),
@@ -112,8 +115,10 @@ class _MenuSelectorState extends State<MenuSelector> {
 class RadialMenu extends StatefulWidget {
   final bool tapped;
   final int i;
+  final Function(int, String) callback;
 
-  const RadialMenu({Key key, this.tapped, this.i}) : super(key: key);
+  const RadialMenu({Key key, this.tapped, this.i, this.callback})
+      : super(key: key);
   @override
   _RadialMenuState createState() => _RadialMenuState();
 }
@@ -135,12 +140,14 @@ class _RadialMenuState extends State<RadialMenu>
       controller: controller,
       tapped: widget.tapped,
       i: widget.i,
+      callback: widget.callback,
     );
   }
 }
 
 class RadialAnimation extends StatefulWidget {
-  RadialAnimation({Key key, this.controller, this.tapped, this.i})
+  RadialAnimation(
+      {Key key, this.controller, this.tapped, this.i, this.callback})
       : scale = Tween<double>(
           begin: 1.6,
           end: 0.0,
@@ -169,6 +176,7 @@ class RadialAnimation extends StatefulWidget {
         super(key: key);
 
   final AnimationController controller;
+  final Function(int, String) callback;
   bool tapped;
   int i;
   final Animation<double> scale;
@@ -180,32 +188,6 @@ class RadialAnimation extends StatefulWidget {
 }
 
 class _RadialAnimationState extends State<RadialAnimation> {
-  moodGet(BuildContext dataContext, String mood) async {
-    Box _box = await Hive.openBox("preferenceBox");
-    String deter = _box.get("deter");
-
-    if (deter != "veg" && deter != "nonveg") {
-      Random random = new Random();
-      int randomNumber = random.nextInt(2);
-      if (randomNumber == 1)
-        deter = "veg";
-      else
-        deter = "nonveg";
-    }
-    DatabaseQuery(listName: "mood").getFood(
-        field: ['mood'],
-        value: [mood],
-        limit: 7,
-        mood: mood,
-        deter: deter,
-        check: 0).then((future) {
-      setState(() {
-        BlocProvider.of<FoodBloc>(dataContext)
-            .add(FoodEvent.add(future, "mood"));
-      });
-    });
-  }
-
   build(context) {
     return AnimatedBuilder(
       animation: widget.controller,
@@ -297,9 +279,9 @@ class _RadialAnimationState extends State<RadialAnimation> {
             _close();
             print(tapped);
             if (tapped == true) {
-              await moodGet(context, text);
+              // await moodGet(context, text);
               widget.i++;
-              return widget.i;
+              widget.callback(widget.i, text);
             }
           },
         ),

@@ -66,27 +66,34 @@ class _FoodHomeState extends State<FoodHome> {
     data();
   }
 
-  void _awaitReturnValueFromSecondScreen(BuildContext context) async {
-    // start the SecondScreen and wait for it to finish with a result
-    final result = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => MenuSelector(),
-        ));
+  // void _awaitReturnValueFromSecondScreen(BuildContext context) async {
+  //   // start the SecondScreen and wait for it to finish with a result
+  //   final result = await Navigator.push(
+  //       context,
+  //       MaterialPageRoute(
+  //         builder: (context) => MenuSelector(),
+  //       ));
 
-    // after the SecondScreen result comes back update the Text widget with it
-    setState(() {
-      mood = result;
+  //   // after the SecondScreen result comes back update the Text widget with it
+  //   setState(() {
+  //     mood = result;
+  //   });
+  //   print("*************$mood");
+  //   if (mood != null) {
+  //     moodGet(context, mood);
+  //     i++;
+  //   } else {
+  //     setState(() {
+  //       i = 0;
+  //     });
+  //   }
+  // }
+// using call back to change the Index of IndexedStack after selecting mood
+  void callback(newI, mood) async {
+    moodGet(context, mood);
+    setState(() async {
+      i = newI;
     });
-    print("*************$mood");
-    if (mood != null) {
-      moodGet(context, mood);
-      i++;
-    } else {
-      setState(() {
-        i = 0;
-      });
-    }
   }
 
   moodGet(BuildContext dataContext, String mood) async {
@@ -319,7 +326,9 @@ class _FoodHomeState extends State<FoodHome> {
                                               2.8,
                                       child: Center(
                                         child: MenuSelector(
-                                            tapped: tapped, val: i),
+                                            tapped: tapped,
+                                            val: i,
+                                            callback: callback),
                                       ),
                                       // child: GridView.builder(
                                       //     gridDelegate:
@@ -397,63 +406,66 @@ class _FoodHomeState extends State<FoodHome> {
                                       //     }),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Container(
-                                        height:
-                                            MediaQuery.of(context).size.height /
-                                                2.5,
-                                        child: BlocConsumer<FoodBloc,
-                                            Map<String, List<FoodListModel>>>(
-                                          buildWhen: (Map<String,
-                                                      List<FoodListModel>>
-                                                  previous,
-                                              Map<String, List<FoodListModel>>
-                                                  current) {
-                                            return true;
-                                          },
-                                          listenWhen: (Map<String,
-                                                      List<FoodListModel>>
-                                                  previous,
-                                              Map<String, List<FoodListModel>>
-                                                  current) {
-                                            if (current.length >
-                                                previous.length) {
+                                  if (i != 0)
+                                    Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              2.5,
+                                          child: BlocConsumer<FoodBloc,
+                                              Map<String, List<FoodListModel>>>(
+                                            buildWhen: (Map<String,
+                                                        List<FoodListModel>>
+                                                    previous,
+                                                Map<String, List<FoodListModel>>
+                                                    current) {
                                               return true;
-                                            }
-                                            return false;
-                                          },
-                                          builder:
-                                              (BuildContext context, foodList) {
-                                            return Container(
-                                              child: ListView.builder(
-                                                scrollDirection:
-                                                    Axis.horizontal,
-                                                shrinkWrap: true,
-                                                physics:
-                                                    BouncingScrollPhysics(),
-                                                itemCount:
-                                                    foodList["mood"].length,
-                                                itemBuilder:
-                                                    (BuildContext context,
-                                                        index) {
-                                                  return FoodCrd(
-                                                    index: index,
-                                                    listName: "mood",
-                                                    foodList: foodList["mood"]
-                                                        [index],
-                                                  );
-                                                },
-                                              ),
-                                            );
-                                          },
-                                          listener: (context, foodList) {
-                                            Scaffold.of(context).showSnackBar(
-                                              SnackBar(content: Text('Added!')),
-                                            );
-                                          },
-                                        )),
-                                  ),
+                                            },
+                                            listenWhen: (Map<String,
+                                                        List<FoodListModel>>
+                                                    previous,
+                                                Map<String, List<FoodListModel>>
+                                                    current) {
+                                              if (current.length >
+                                                  previous.length) {
+                                                return true;
+                                              }
+                                              return false;
+                                            },
+                                            builder: (BuildContext context,
+                                                foodList) {
+                                              return Container(
+                                                child: ListView.builder(
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  shrinkWrap: true,
+                                                  physics:
+                                                      BouncingScrollPhysics(),
+                                                  itemCount:
+                                                      foodList["mood"].length,
+                                                  itemBuilder:
+                                                      (BuildContext context,
+                                                          index) {
+                                                    return FoodCrd(
+                                                      index: index,
+                                                      listName: "mood",
+                                                      foodList: foodList["mood"]
+                                                          [index],
+                                                    );
+                                                  },
+                                                ),
+                                              );
+                                            },
+                                            listener: (context, foodList) {
+                                              Scaffold.of(context).showSnackBar(
+                                                SnackBar(
+                                                    content: Text('Added!')),
+                                              );
+                                            },
+                                          )),
+                                    ),
                                 ],
                               )),
                             ],
