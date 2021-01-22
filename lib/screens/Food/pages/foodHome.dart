@@ -16,6 +16,7 @@ import 'package:moodish_mvp/screens/Food/nComponents/RecommSeemore.dart';
 import 'package:moodish_mvp/screens/Food/nComponents/feel.dart';
 import 'package:moodish_mvp/screens/Food/nComponents/foodCard.dart';
 import 'package:moodish_mvp/screens/Food/nComponents/latestRecipe.dart';
+import 'package:moodish_mvp/screens/Food/nComponents/moodSelector.dart';
 import 'package:moodish_mvp/screens/Food/nComponents/nFoodBg.dart';
 import 'package:moodish_mvp/screens/Food/nComponents/topRecipes.dart';
 
@@ -42,6 +43,7 @@ class _FoodHomeState extends State<FoodHome> {
   int indexP = 0;
   int numbr = 2;
   Map<String, dynamic> userData = {};
+  String mood;
 
   @override
   void initState() {
@@ -61,6 +63,29 @@ class _FoodHomeState extends State<FoodHome> {
     }
 
     data();
+  }
+
+  void _awaitReturnValueFromSecondScreen(BuildContext context) async {
+    // start the SecondScreen and wait for it to finish with a result
+    final result = await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MenuSelector(),
+        ));
+
+    // after the SecondScreen result comes back update the Text widget with it
+    setState(() {
+      mood = result;
+    });
+    print("*************$mood");
+    if (mood != null) {
+      moodGet(context, mood);
+      i++;
+    } else {
+      setState(() {
+        i = 0;
+      });
+    }
   }
 
   moodGet(BuildContext dataContext, String mood) async {
@@ -285,138 +310,154 @@ class _FoodHomeState extends State<FoodHome> {
                                   child: IndexedStack(
                                 index: i,
                                 children: [
-                                  Container(
-                                    height: MediaQuery.of(context).size.height /
-                                        2.8,
-                                    child: GridView.builder(
-                                        gridDelegate:
-                                            SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 2,
-                                          crossAxisSpacing: 1.0,
-                                          mainAxisSpacing: 1,
-                                        ),
-                                        scrollDirection: Axis.horizontal,
-                                        physics: BouncingScrollPhysics(),
-                                        itemCount: feel.length,
-                                        shrinkWrap: true,
-                                        itemBuilder:
-                                            (BuildContext context, index) {
-                                          return GestureDetector(
-                                            onTap: () {
-                                              print("pressesesesesesd5362");
-                                              dynamic _val = feel[index];
-                                              setState(() {
-                                                if (feel[index].isSelected ==
-                                                    true) {
-                                                  pref.remove(feel[index].feel);
-                                                  i--;
-                                                }
-                                                if (feel[index].isSelected ==
-                                                    false) {
-                                                  moodGet(context, _val.feel);
-                                                  pref.add(_val.feel);
-                                                  i++;
-                                                }
-                                                print(i);
-                                                print(pref);
-                                                print(pref.contains(_val.feel));
-                                              });
-                                              setState(() {
-                                                feel[index].isSelected =
-                                                    !feel[index].isSelected;
-                                              });
-                                            },
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              child: Container(
-                                                  margin: EdgeInsets.all(8),
-                                                  decoration: BoxDecoration(
-                                                    border: feel[index]
-                                                            .isSelected
-                                                        ? Border.all(
-                                                            color:
-                                                                Colors.orange,
-                                                            width: 2)
-                                                        : Border.all(
-                                                            color: Colors.black,
-                                                            width: 2),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            250),
-                                                  ),
-                                                  child: Center(
-                                                      child: feel[index]
-                                                              .isSelected
-                                                          ? Text(
-                                                              '${feel[index].feel}',
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .orange),
-                                                            )
-                                                          : Text(
-                                                              '${feel[index].feel}',
-                                                              style: TextStyle(
-                                                                fontSize: 20,
-                                                              )))),
-                                            ),
-                                          );
-                                        }),
-                                  ),
-                                  Container(
+                                  Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Container(
                                       height:
                                           MediaQuery.of(context).size.height /
                                               2.8,
-                                      child: BlocConsumer<FoodBloc,
-                                          Map<String, List<FoodListModel>>>(
-                                        buildWhen:
-                                            (Map<String, List<FoodListModel>>
-                                                    previous,
-                                                Map<String, List<FoodListModel>>
-                                                    current) {
-                                          return true;
-                                        },
-                                        listenWhen:
-                                            (Map<String, List<FoodListModel>>
-                                                    previous,
-                                                Map<String, List<FoodListModel>>
-                                                    current) {
-                                          if (current.length >
-                                              previous.length) {
+                                      child: Center(
+                                        child: GestureDetector(
+                                            onTap: () {
+                                              _awaitReturnValueFromSecondScreen(
+                                                  context);
+                                            },
+                                            child: Text(
+                                                'Click here to select Your feeling')),
+                                      ),
+                                      // child: GridView.builder(
+                                      //     gridDelegate:
+                                      //         SliverGridDelegateWithFixedCrossAxisCount(
+                                      //       crossAxisCount: 2,
+                                      //       crossAxisSpacing: 1.0,
+                                      //       mainAxisSpacing: 1,
+                                      //     ),
+                                      //     scrollDirection: Axis.horizontal,
+                                      //     physics: BouncingScrollPhysics(),
+                                      //     itemCount: feel.length,
+                                      //     shrinkWrap: true,
+                                      //     itemBuilder:
+                                      //         (BuildContext context, index) {
+                                      //       return GestureDetector(
+                                      //         onTap: () {
+                                      //           print("pressesesesesesd5362");
+                                      //           dynamic _val = feel[index];
+                                      //           setState(() {
+                                      //             if (feel[index].isSelected ==
+                                      //                 true) {
+                                      //               pref.remove(feel[index].feel);
+                                      //               i--;
+                                      //             }
+                                      //             if (feel[index].isSelected ==
+                                      //                 false) {
+                                      //               moodGet(context, _val.feel);
+                                      //               pref.add(_val.feel);
+                                      //               i++;
+                                      //             }
+                                      //             print(i);
+                                      //             print(pref);
+                                      //             print(pref.contains(_val.feel));
+                                      //           });
+                                      //           setState(() {
+                                      //             feel[index].isSelected =
+                                      //                 !feel[index].isSelected;
+                                      //           });
+                                      //         },
+                                      //         child: ClipRRect(
+                                      //           borderRadius:
+                                      //               BorderRadius.circular(20),
+                                      //           child: Container(
+                                      //               margin: EdgeInsets.all(8),
+                                      //               decoration: BoxDecoration(
+                                      //                 border: feel[index]
+                                      //                         .isSelected
+                                      //                     ? Border.all(
+                                      //                         color:
+                                      //                             Colors.orange,
+                                      //                         width: 2)
+                                      //                     : Border.all(
+                                      //                         color: Colors.black,
+                                      //                         width: 2),
+                                      //                 borderRadius:
+                                      //                     BorderRadius.circular(
+                                      //                         250),
+                                      //               ),
+                                      //               child: Center(
+                                      //                   child: feel[index]
+                                      //                           .isSelected
+                                      //                       ? Text(
+                                      //                           '${feel[index].feel}',
+                                      //                           style: TextStyle(
+                                      //                               color: Colors
+                                      //                                   .orange),
+                                      //                         )
+                                      //                       : Text(
+                                      //                           '${feel[index].feel}',
+                                      //                           style: TextStyle(
+                                      //                             fontSize: 20,
+                                      //                           )))),
+                                      //         ),
+                                      //       );
+                                      //     }),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Container(
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                2.5,
+                                        child: BlocConsumer<FoodBloc,
+                                            Map<String, List<FoodListModel>>>(
+                                          buildWhen: (Map<String,
+                                                      List<FoodListModel>>
+                                                  previous,
+                                              Map<String, List<FoodListModel>>
+                                                  current) {
                                             return true;
-                                          }
-                                          return false;
-                                        },
-                                        builder:
-                                            (BuildContext context, foodList) {
-                                          return Container(
-                                            child: ListView.builder(
-                                              scrollDirection: Axis.horizontal,
-                                              shrinkWrap: true,
-                                              primary: false,
-                                              physics:
-                                                  NeverScrollableScrollPhysics(),
-                                              itemCount:
-                                                  foodList["mood"].length,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      index) {
-                                                return FoodCrd(
-                                                  index: index,
-                                                  listName: "mood",
-                                                  foodList: foodList["mood"]
-                                                      [index],
-                                                );
-                                              },
-                                            ),
-                                          );
-                                        },
-                                        listener: (context, foodList) {
-                                          Scaffold.of(context).showSnackBar(
-                                            SnackBar(content: Text('Added!')),
-                                          );
-                                        },
-                                      )),
+                                          },
+                                          listenWhen: (Map<String,
+                                                      List<FoodListModel>>
+                                                  previous,
+                                              Map<String, List<FoodListModel>>
+                                                  current) {
+                                            if (current.length >
+                                                previous.length) {
+                                              return true;
+                                            }
+                                            return false;
+                                          },
+                                          builder:
+                                              (BuildContext context, foodList) {
+                                            return Container(
+                                              child: ListView.builder(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                shrinkWrap: true,
+                                                physics:
+                                                    BouncingScrollPhysics(),
+                                                itemCount:
+                                                    foodList["mood"].length,
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        index) {
+                                                  return FoodCrd(
+                                                    index: index,
+                                                    listName: "mood",
+                                                    foodList: foodList["mood"]
+                                                        [index],
+                                                  );
+                                                },
+                                              ),
+                                            );
+                                          },
+                                          listener: (context, foodList) {
+                                            Scaffold.of(context).showSnackBar(
+                                              SnackBar(content: Text('Added!')),
+                                            );
+                                          },
+                                        )),
+                                  ),
                                 ],
                               )),
                             ],
