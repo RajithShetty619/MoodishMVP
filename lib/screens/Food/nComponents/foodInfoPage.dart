@@ -123,7 +123,7 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                         Column(
                           children: [
                             SizedBox(
-                              height: 205,
+                              height: 190,
                             ),
                             Card(
                               elevation: 5,
@@ -1203,76 +1203,82 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
                 ),
               ],
             ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: FloatingActionButton(
-                heroTag: null,
-                backgroundColor: Colors.white,
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Padding(
-                  padding: EdgeInsets.all(5),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Icon(
-                      Icons.arrow_back,
-                      size: 32,
-                      color: Colors.black,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: FloatingActionButton(
+                  heroTag: null,
+                  backgroundColor: Colors.white,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.all(5),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        Icons.arrow_back,
+                        size: 32,
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-            Align(
-              alignment: Alignment.topRight,
-              child: FloatingActionButton(
-                backgroundColor: Colors.white,
-                heroTag: null,
-                onPressed: () {},
-                child: Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: IconButton(
-                    icon: !_like
-                        ? Icon(
-                            Icons.favorite_border,
-                            color: Colors.black,
-                            size: 25,
-                          )
-                        : Icon(
-                            Icons.favorite,
-                            color: Colors.red,
-                            size: 30,
-                          ),
-                    onPressed: () async {
-                      BetaCount().count(field: 'foodliked');
-                      setState(() {
-                        _like = !_like;
-                      });
-                      if (_like) {
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Align(
+                alignment: Alignment.topRight,
+                child: FloatingActionButton(
+                  backgroundColor: Colors.white,
+                  heroTag: null,
+                  onPressed: () {},
+                  child: Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: IconButton(
+                      icon: !_like
+                          ? Icon(
+                              Icons.favorite_border,
+                              color: Colors.black,
+                              size: 25,
+                            )
+                          : Icon(
+                              Icons.favorite,
+                              color: Colors.red,
+                              size: 30,
+                            ),
+                      onPressed: () async {
+                        BetaCount().count(field: 'foodliked');
                         setState(() {
-                          BlocProvider.of<FoodBloc>(context).add(
-                              FoodEvent.like(widget.index, widget.listName));
+                          _like = !_like;
                         });
-                        await DatabaseService().likeTransction(
-                            food: widget.foodList,
-                            sr_no: widget.foodList.sr_no,
-                            collection: "food",
-                            field: "like");
-                      } else {
-                        setState(() {
-                          BlocProvider.of<FoodBloc>(context).add(
-                              FoodEvent.like(widget.index, widget.listName));
-                        });
-                        await DatabaseService().disLikeTransction(
-                            food: widget.foodList,
-                            sr_no: widget.foodList.sr_no,
-                            collection: "food",
-                            field: "like");
-                      }
-                    },
+                        if (_like) {
+                          setState(() {
+                            BlocProvider.of<FoodBloc>(context).add(
+                                FoodEvent.like(widget.index, widget.listName));
+                          });
+                          await DatabaseService().likeTransction(
+                              food: widget.foodList,
+                              sr_no: widget.foodList.sr_no,
+                              collection: "food",
+                              field: "like");
+                        } else {
+                          setState(() {
+                            BlocProvider.of<FoodBloc>(context).add(
+                                FoodEvent.like(widget.index, widget.listName));
+                          });
+                          await DatabaseService().disLikeTransction(
+                              food: widget.foodList,
+                              sr_no: widget.foodList.sr_no,
+                              collection: "food",
+                              field: "like");
+                        }
+                      },
+                    ),
                   ),
                 ),
               ),
@@ -1284,214 +1290,198 @@ class _FoodInfoCardState extends State<FoodInfoCard> {
   }
 }
 
-// class Delegate extends SliverPersistentHeaderDelegate {
-//   final double expandedHeight;
-//   RestListModel restaurant;
-//
-//   Delegate({this.expandedHeight, this.restaurant});
-//
-//   @override
-//   Widget build(
-//       BuildContext context, double shrinkOffset, bool overlapsContent) {
-//     double condition = shrinkOffset / expandedHeight;
-//     // TODO: implement build
-//     return Stack(
-//       alignment: Alignment.bottomCenter,
-//       overflow: Overflow.visible,
-//       children: <Widget>[
-//         Opacity(
-//           opacity: (1 - shrinkOffset / expandedHeight),
-//           child: Container(
-//             height: 250,
-//             width: MediaQuery.of(context).size.width,
-//             decoration: BoxDecoration(
-//                 borderRadius: BorderRadius.only(
-//                     bottomLeft: Radius.circular(60),
-//                     bottomRight: Radius.circular(60)),
-//                 image: DecorationImage(
-//                     image: CachedNetworkImageProvider(restaurant.photo_url),
-//                     fit: BoxFit.cover)),
-//           ),
-//         ),
-//         Positioned(
-//           bottom: 185,
-//           left: 275,
-//           child: Container(
-//             decoration:
-//                 BoxDecoration(shape: BoxShape.circle, color: Colors.white),
-//             child: Padding(
-//               padding: EdgeInsets.all(8),
-//               child: Icon(
-//                 Icons.open_in_browser,
-//                 size: 30,
-//               ),
-//             ),
-//           ),
-//         ),
-//         Positioned(
-//           bottom: 185,
-//           left: 335,
-//           child: Container(
-//             decoration:
-//                 BoxDecoration(shape: BoxShape.circle, color: Colors.white),
-//             child: Padding(
-//               padding: EdgeInsets.all(8),
-//               child: Icon(
-//                 Icons.favorite_border,
-//                 size: 30,
-//               ),
-//             ),
-//           ),
-//         ),
-//         Positioned(
-//           top: expandedHeight - shrinkOffset < 50 ? 30 : 185 - shrinkOffset,
-//           child: Center(
-//             child: Row(
-//               children: <Widget>[
-//                 Card(
-//                   elevation: 5,
-//                   shape: RoundedRectangleBorder(
-//                       borderRadius: condition == 1
-//                           ? BorderRadius.circular(50)
-//                           : BorderRadius.circular(25)),
-//                   child: Row(
-//                     children: <Widget>[
-//                       if (condition == 1)
-//                         SizedBox(
-//                           width: 16,
-//                         ),
-//                       if (condition == 1)
-//                         Align(
-//                           alignment: Alignment.topLeft,
-//                           child: GestureDetector(
-//                             onTap: () {},
-//                             child: Card(
-//                               elevation: 5,
-//                               shape: RoundedRectangleBorder(
-//                                 borderRadius: BorderRadius.circular(30),
-//                               ),
-//                               child: Padding(
-//                                 padding: EdgeInsets.all(5),
-//                                 child: Icon(
-//                                   Icons.arrow_back,
-//                                   size: 35,
-//                                 ),
-//                               ),
-//                             ),
-//                           ),
-//                         ),
-//                       Container(
-//                         width: shrinkOffset / expandedHeight == 1
-//                             ? MediaQuery.of(context).size.width / 1.3
-//                             : MediaQuery.of(context).size.width / 1.2,
-//                         child: Column(
-//                           crossAxisAlignment: CrossAxisAlignment.start,
-//                           children: <Widget>[
-//                             Padding(
-//                               padding:
-//                                   const EdgeInsets.only(left: 14.0, top: 10),
-//                               child: Text(
-//                                 restaurant.restaurant_Name,
-//                                 style: TextStyle(
-//                                     fontWeight: FontWeight.bold, fontSize: 26),
-//                               ),
-//                             ),
-//                             condition == 1
-//                                 ? Container()
-//                                 : Padding(
-//                                     padding: const EdgeInsets.only(
-//                                         left: 16.0, top: 1),
-//                                     child: Text(
-//                                       restaurant.restaurant_Type != 'nan'
-//                                           ? restaurant.restaurant_Type
-//                                           : restaurant.cuisines,
-//                                       style: TextStyle(
-//                                           fontSize: 15,
-//                                           color: Colors.grey[400]),
-//                                     ),
-//                                   ),
-//                             Padding(
-//                               padding:
-//                                   EdgeInsets.only(left: 8, right: 8, bottom: 5),
-//                               child: Divider(
-//                                 thickness: 1.2,
-//                               ),
-//                             ),
-//                             Row(
-//                               mainAxisAlignment: MainAxisAlignment.start,
-//                               children: <Widget>[
-//                                 SizedBox(
-//                                   width: 14,
-//                                 ),
-//                                 Row(
-//                                   children: <Widget>[
-//                                     Icon(
-//                                       Icons.star,
-//                                       size: condition == 1 ? 12 : 13,
-//                                       color: Colors.amber,
-//                                     ),
-//                                     Text(
-//                                       restaurant.rating,
-//                                       style: TextStyle(
-//                                           fontSize: condition == 1 ? 12 : 14),
-//                                     ),
-//                                   ],
-//                                 ),
-//                                 SizedBox(
-//                                   width: 15,
-//                                 ),
-//                                 Row(
-//                                   children: <Widget>[
-//                                     Icon(
-//                                       Icons.pin_drop,
-//                                       size: condition == 1 ? 12 : 14,
-//                                     ),
-//                                     Text(
-//                                       restaurant.restaurant_Location,
-//                                       style: TextStyle(
-//                                           fontSize: condition == 1 ? 12 : 14),
-//                                     ),
-//                                   ],
-//                                 ),
-//                                 SizedBox(
-//                                   width: 15,
-//                                 ),
-//                                 // Text(
-//                                 //   '\u20B9 Free',
-//                                 //   style: TextStyle(
-//                                 //       fontSize: condition == 1 ? 12 : 15),
-//                                 // )
-//                               ],
-//                             ),
-//                             shrinkOffset / expandedHeight == 1
-//                                 ? SizedBox(
-//                                     height: 8,
-//                                   )
-//                                 : SizedBox(
-//                                     height: 14,
-//                                   )
-//                           ],
-//                         ),
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//         )
-//       ],
-//     );
-//   }
-//
-//   @override
-//   // TODO: implement maxExtent
-//   double get maxExtent => 250;
-//
-//   @override
-//   // TODO: implement minExtent
-//   double get minExtent => 120;
-//
-//   @override
-//   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
-// }
+class Delegate extends SliverPersistentHeaderDelegate {
+  final double expandedHeight;
+  FoodListModel foodList;
+
+  Delegate({this.expandedHeight, this.foodList});
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    double condition = shrinkOffset / expandedHeight;
+    // TODO: implement build
+    return Stack(
+      alignment: Alignment.bottomCenter,
+      overflow: Overflow.visible,
+      children: <Widget>[
+        Opacity(
+          opacity: (1 - shrinkOffset / expandedHeight),
+          child: Container(
+            height: 300,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: CachedNetworkImageProvider(foodList.images),
+                    fit: BoxFit.cover)),
+          ),
+        ),
+        Positioned(
+          bottom: 185,
+          left: 275,
+          child: Container(
+            decoration:
+                BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+            child: Padding(
+              padding: EdgeInsets.all(8),
+              child: Icon(
+                Icons.open_in_browser,
+                size: 30,
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 185,
+          left: 335,
+          child: Container(
+            decoration:
+                BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+            child: Padding(
+              padding: EdgeInsets.all(8),
+              child: Icon(
+                Icons.favorite_border,
+                size: 30,
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          top: expandedHeight - shrinkOffset < 50 ? 30 : 185 - shrinkOffset,
+          child: Center(
+            child: Row(
+              children: <Widget>[
+                Card(
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: condition == 1
+                          ? BorderRadius.circular(50)
+                          : BorderRadius.circular(25)),
+                  child: Row(
+                    children: <Widget>[
+                      if (condition == 1)
+                        SizedBox(
+                          width: 16,
+                        ),
+                      if (condition == 1)
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: Card(
+                              elevation: 5,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.all(5),
+                                child: Icon(
+                                  Icons.arrow_back,
+                                  size: 35,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      Container(
+                        width: shrinkOffset / expandedHeight == 1
+                            ? MediaQuery.of(context).size.width / 1.3
+                            : MediaQuery.of(context).size.width / 1.2,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 14.0, top: 10),
+                              child: Text(
+                                foodList.foodName,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 26),
+                              ),
+                            ),
+
+                            Padding(
+                              padding:
+                                  EdgeInsets.only(left: 8, right: 8, bottom: 5),
+                              child: Divider(
+                                thickness: 1.2,
+                              ),
+                            ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.start,
+                            //   children: <Widget>[
+                            //     SizedBox(
+                            //       width: 14,
+                            //     ),
+                            //     Row(
+                            //       children: <Widget>[
+                            //         Icon(
+                            //           Icons.star,
+                            //           size: condition == 1 ? 12 : 13,
+                            //           color: Colors.amber,
+                            //         ),
+                            //         Text(
+                            //           restaurant.rating,
+                            //           style: TextStyle(
+                            //               fontSize: condition == 1 ? 12 : 14),
+                            //         ),
+                            //       ],
+                            //     ),
+                            //     SizedBox(
+                            //       width: 15,
+                            //     ),
+                            //     Row(
+                            //       children: <Widget>[
+                            //         Icon(
+                            //           Icons.pin_drop,
+                            //           size: condition == 1 ? 12 : 14,
+                            //         ),
+                            //         Text(
+                            //           restaurant.restaurant_Location,
+                            //           style: TextStyle(
+                            //               fontSize: condition == 1 ? 12 : 14),
+                            //         ),
+                            //       ],
+                            //     ),
+                            //     SizedBox(
+                            //       width: 15,
+                            //     ),
+                            //     // Text(
+                            //     //   '\u20B9 Free',
+                            //     //   style: TextStyle(
+                            //     //       fontSize: condition == 1 ? 12 : 15),
+                            //     // )
+                            //   ],
+                            // ),
+                            shrinkOffset / expandedHeight == 1
+                                ? SizedBox(
+                                    height: 8,
+                                  )
+                                : SizedBox(
+                                    height: 14,
+                                  )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  @override
+  // TODO: implement maxExtent
+  double get maxExtent => 250;
+
+  @override
+  // TODO: implement minExtent
+  double get minExtent => 120;
+
+  @override
+  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
+}
