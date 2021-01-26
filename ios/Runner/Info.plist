@@ -38,11 +38,11 @@
 	<key>NSCameraUsageDescription</key>
 	<string>To let user capture his/her profile picture.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>This app needs access to location when open and in the background.</string>
+	<string>Your location is used to find restaurants near you</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>This app needs access to location when in the background.</string>
+	<string>Your location is used to find restaurants near you</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app needs access to location when open.</string>
+	<string>Your location is used to find restaurants near you</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>To let the user choose his/her profile picture from library.</string>
 	<key>UIBackgroundModes</key>

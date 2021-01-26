@@ -260,7 +260,7 @@ class _ProfileState extends State<Profile> {
                     color: Colors.grey.shade400,
                   ),
                   onTap: () {
-                    launch('https://snapinsight.net/faq.php');
+                    launch('https://augrade.com/faq.php');
                   },
                 ),
                 Divider(),
@@ -274,7 +274,7 @@ class _ProfileState extends State<Profile> {
                     color: Colors.grey.shade400,
                   ),
                   onTap: () {
-                    launch('https://snapinsight.net/termsandconditions.php');
+                    launch('https://snapinsight.net/termsNconditions');
                   },
                 ),
                 Divider(),
@@ -288,24 +288,24 @@ class _ProfileState extends State<Profile> {
                     color: Colors.grey.shade400,
                   ),
                   onTap: () {
-                    launch('https://snapinsight.net/contactus.php');
+                    launch('https://snapinsight.net/contact');
                   },
                 ),
                 Divider(),
-                ListTile(
-                  title: Text("Own a Rest?",
-                      style: TextStyle(
-                        color: Colors.black,
-                      )),
-                  trailing: Icon(
-                    Icons.keyboard_arrow_right,
-                    color: Colors.grey.shade400,
-                  ),
-                  onTap: () {
-                    launch('https://snapinsight.net/moodish/restreg.php');
-                  },
-                ),
-                Divider(),
+                // ListTile(
+                //   title: Text("Own a Rest?",
+                //       style: TextStyle(
+                //         color: Colors.black,
+                //       )),
+                //   trailing: Icon(
+                //     Icons.keyboard_arrow_right,
+                //     color: Colors.grey.shade400,
+                //   ),
+                //   onTap: () {
+                //     launch('https://snapinsight.net/moodish/restreg.php');
+                //   },
+                // ),
+                // Divider(),
                 SizedBox(height: 5.0),
                 ListTile(
                   title: Text("About",
